@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses", "Konfidence.BaseClasses\Konfidence.BaseClasses.csproj", "{D71A4677-79C7-443B-900D-218FBCFE8728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers", "Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj", "{D60A1063-3897-44FA-97F5-85A9C25B1F8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDataBaseClasses", "Konfidence.BaseDataBaseClasses\Konfidence.BaseDataBaseClasses.csproj", "{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseThreadClasses", "Konfidence.BaseThreadClasses\Konfidence.BaseThreadClasses.csproj", "{536AED59-A354-4905-AFC9-6FF981B06413}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseHelper", "Konfidence.BaseHelper\Konfidence.BaseHelper.csproj", "{687FBFF3-F978-48F9-BF2B-AF242FC8214C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWindowComponents", "Konfidence.BaseWindowComponents\Konfidence.BaseWindowComponents.csproj", "{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWindowForms", "Konfidence.BaseWindowForms\Konfidence.BaseWindowForms.csproj", "{0D53566A-235C-47C3-8DE0-60538050FD9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.UtilHelper", "Konfidence.UtilHelper\Konfidence.UtilHelper.csproj", "{BAD05CC5-FB06-4B17-8089-67CF420159B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongNameKey", "{5509EDEF-3EA1-4BBA-905A-34C9C89004C0}"
+	ProjectSection(SolutionItems) = preProject
+		Konfidence.nl.snk = Konfidence.nl.snk
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Designpatterns", "Konfidence.Designpatterns\Konfidence.Designpatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Konfidence.BaseClasses\\Konfidence.BaseClasses.csproj
+		SccProjectName1 = Konfidence.BaseClasses
+		SccLocalPath1 = Konfidence.BaseClasses
+		SccProjectUniqueName2 = Konfidence.BaseDataBaseClasses\\Konfidence.BaseDataBaseClasses.csproj
+		SccProjectName2 = Konfidence.BaseDataBaseClasses
+		SccLocalPath2 = Konfidence.BaseDataBaseClasses
+		SccProjectUniqueName3 = Konfidence.BaseHelper\\Konfidence.BaseHelper.csproj
+		SccProjectName3 = Konfidence.BaseHelper
+		SccLocalPath3 = Konfidence.BaseHelper
+		SccProjectUniqueName4 = Konfidence.BaseThreadClasses\\Konfidence.BaseThreadClasses.csproj
+		SccProjectName4 = Konfidence.BaseThreadClasses
+		SccLocalPath4 = Konfidence.BaseThreadClasses
+		SccProjectUniqueName5 = Konfidence.BaseUserControlHelpers\\Konfidence.BaseUserControlHelpers.csproj
+		SccProjectName5 = Konfidence.BaseUserControlHelpers
+		SccLocalPath5 = Konfidence.BaseUserControlHelpers
+		SccProjectUniqueName6 = Konfidence.BaseWindowComponents\\Konfidence.BaseWindowComponents.csproj
+		SccProjectName6 = Konfidence.BaseWindowComponents
+		SccLocalPath6 = Konfidence.BaseWindowComponents
+		SccProjectUniqueName7 = Konfidence.BaseWindowForms\\Konfidence.BaseWindowForms.csproj
+		SccProjectName7 = Konfidence.BaseWindowForms
+		SccLocalPath7 = Konfidence.BaseWindowForms
+		SccProjectUniqueName8 = Konfidence.Designpatterns\\Konfidence.Designpatterns.csproj
+		SccProjectName8 = Konfidence.Designpatterns
+		SccLocalPath8 = Konfidence.Designpatterns
+		SccProjectUniqueName9 = Konfidence.UtilHelper\\Konfidence.UtilHelper.csproj
+		SccProjectName9 = Konfidence.UtilHelper
+		SccLocalPath9 = Konfidence.UtilHelper
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D71A4677-79C7-443B-900D-218FBCFE8728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71A4677-79C7-443B-900D-218FBCFE8728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D71A4677-79C7-443B-900D-218FBCFE8728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71A4677-79C7-443B-900D-218FBCFE8728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60A1063-3897-44FA-97F5-85A9C25B1F8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60A1063-3897-44FA-97F5-85A9C25B1F8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60A1063-3897-44FA-97F5-85A9C25B1F8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60A1063-3897-44FA-97F5-85A9C25B1F8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536AED59-A354-4905-AFC9-6FF981B06413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536AED59-A354-4905-AFC9-6FF981B06413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536AED59-A354-4905-AFC9-6FF981B06413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536AED59-A354-4905-AFC9-6FF981B06413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687FBFF3-F978-48F9-BF2B-AF242FC8214C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687FBFF3-F978-48F9-BF2B-AF242FC8214C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687FBFF3-F978-48F9-BF2B-AF242FC8214C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687FBFF3-F978-48F9-BF2B-AF242FC8214C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
