@@ -1,0 +1,521 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using Konfidence.Base;
+using Microsoft.Practices.EnterpriseLibrary.Data;
+
+namespace Konfidence.BaseData
+{
+	public enum KeyType
+	{
+		Primary,
+		Foreign
+	}
+	
+	public class BaseDataItem: BaseItem
+	{
+		public const string BaseLanguage = "NL";
+		public bool WithLanguage = false;
+
+		private string _DeleteStoredProcedure = string.Empty;
+		private string _SaveStoredProcedure = string.Empty;
+
+        internal BaseHost _DataHost = null;   // _DataHost is used by the GetFieldXXXX methods
+		internal Dictionary<string, object> _PropertyDictionary = null;
+
+		private string _AutoIdField = string.Empty;
+		private int _Id;
+
+		private string _ServiceName = string.Empty;
+
+		private List<ParameterObject> _ParameterObjectList = new List<ParameterObject>();
+		private string _DataBaseName = string.Empty;
+
+		public /* internal */ class ParameterObject
+		{
+			private string _Field;
+			private DbType _DbType;
+			private object _Value;
+
+			public ParameterObject()
+			{}
+
+            public ParameterObject(string field, DbType dbType, object value)
+			{
+				Field = field;
+				DbType = dbType;
+				Value = value;
+			}
+
+			#region ParameterObject properties
+			public string Field
+			{
+				get { return _Field; }
+				set { _Field = value; }
+			}
+
+            public DbType DbType
+			{
+				get
+				{
+					return _DbType;
+				}
+				set
+				{
+					_DbType = value;
+				}
+			}
+
+			public object Value
+			{
+				get { return _Value; }
+				set { _Value = value; }
+			}
+			#endregion
+		}
+
+		public BaseDataItem()
+		{
+			InitializeDataItem();
+            AfterInitializeDataItem();
+		}
+
+		internal void SetKey(int id)
+		{
+			_Id = id;
+		}
+
+		internal void SetProperties(Dictionary<string, object> propertyDictionary)
+		{
+			_PropertyDictionary = propertyDictionary;
+
+			GetData();
+
+			_PropertyDictionary = null;
+		}
+
+		internal void GetProperties(List<ParameterObject> properties)
+		{
+			_ParameterObjectList = properties;
+
+			SetData();
+
+			_ParameterObjectList = null;
+		}
+
+
+		#region properties
+		protected string DataBaseName
+		{
+			get
+			{
+				return _DataBaseName;
+			}
+			set
+			{
+				_DataBaseName = value;
+			}
+		}
+
+		protected string ServiceName
+		{
+			get
+			{
+				return _ServiceName;
+			}
+			set
+			{
+				_ServiceName = value;
+			}
+		}
+
+		internal protected string AutoIdField
+		{
+			get
+			{
+				return _AutoIdField;
+			}
+			set
+			{
+				_AutoIdField = value;
+			}
+		}
+
+		internal protected int Id
+		{
+			get
+			{
+				return _Id;
+			}
+		}
+
+		internal protected string DeleteStoredProcedure
+		{
+			get
+			{
+				return _DeleteStoredProcedure;
+			}
+			set
+			{
+				 _DeleteStoredProcedure = value;
+			}
+		}
+
+        internal protected string SaveStoredProcedure
+		{
+			get
+			{
+				 return _SaveStoredProcedure;
+			}
+			set
+			{
+				 _SaveStoredProcedure = value;
+			}
+		}
+
+		public bool IsNew
+		{
+			get
+			{
+				if (_Id == 0)
+				{
+					return true;
+				}
+				return false;
+			}
+		}
+
+		#endregion
+		
+		#region GetField Methods
+
+		internal protected void GetKey()
+		{
+			if (_AutoIdField.Length > 0)
+			{
+				_Id = GetFieldInt32(_AutoIdField);
+			}
+		}
+
+		protected Int32 GetFieldInt32(string fieldName)
+		{
+			if (IsAssigned(_PropertyDictionary))
+			{
+				return (Int32)_PropertyDictionary[fieldName];
+			}
+			else
+			{
+				if (IsAssigned(_DataHost))
+				{
+					return _DataHost.GetFieldInt32(fieldName);
+				}
+			}
+
+			throw (new Exception("GetFieldInt32: dataHost/_PropertyDictionary is not assigned"));
+		}
+
+		protected string GetFieldString(string fieldName)
+		{
+			if (IsAssigned(_PropertyDictionary))
+			{
+				return _PropertyDictionary[fieldName] as string;
+			}
+			else
+			{
+				if (IsAssigned(_DataHost))
+				{
+					return _DataHost.GetFieldString(fieldName);
+				}
+			}
+
+			throw (new Exception("GetFieldString: dataHost/_PropertyDictionary  is not assigned"));
+		}
+
+		protected bool GetFieldBool(string fieldName)
+		{
+			if (IsAssigned(_PropertyDictionary))
+			{
+				return (bool)_PropertyDictionary[fieldName];
+			}
+			else
+			{
+				if (IsAssigned(_DataHost))
+				{
+					return _DataHost.GetFieldBool(fieldName);
+				}
+			}
+
+			throw (new Exception("GetFieldBool: dataHost/_PropertyDictionary  is not assigned"));
+		}
+
+		protected DateTime GetFieldDateTime(string fieldName)
+		{
+			if (IsAssigned(_PropertyDictionary))
+			{
+				return (DateTime)_PropertyDictionary[fieldName];
+			}
+			else
+			{
+				if (IsAssigned(_DataHost))
+				{
+					return _DataHost.GetFieldDateTime(fieldName);
+				}
+			}
+
+			throw (new Exception("GetFieldDateTime: dataHost/_PropertyDictionary  is not assigned"));
+		}
+		#endregion
+
+		#region SetField Methods
+		protected void SetField(string fieldName, int value)
+		{
+            AddInParameter(fieldName, DbType.Int32, value);
+		}
+
+		protected void SetField(string fieldName, string value)
+		{
+            AddInParameter(fieldName, DbType.String, value);
+		}
+
+		protected void SetField(string fieldName, bool value)
+		{
+            AddInParameter(fieldName, DbType.Boolean, value);
+		}
+
+		protected void SetField(string fieldName, DateTime value)
+		{
+			if (value > DateTime.MinValue)
+			{
+                AddInParameter(fieldName, DbType.DateTime, value);
+			}
+			else
+			{
+                AddInParameter(fieldName, DbType.DateTime, null);
+			}
+		}
+		#endregion
+
+		#region SetParameter Methods
+		protected void SetParameter(string fieldName, int value)
+		{
+			SetField(fieldName, value);
+		}
+
+		protected void SetParameter(string fieldName, string value)
+		{
+			SetField(fieldName, value);
+		}
+
+		protected void SetParameter(string fieldName, bool value)
+		{
+			SetField(fieldName, value);
+		}
+
+		protected void SetParameter(string fieldName, DateTime value)
+		{
+			SetField(fieldName, value);
+		}
+
+        protected void SetParameterList(List<ParameterObject> parameterObjectList)
+        {
+            _ParameterObjectList = parameterObjectList;
+        }
+		#endregion
+
+		protected virtual void InitializeDataItem()
+		{
+			// NOP
+		}
+
+        protected virtual void AfterInitializeDataItem()
+        {
+            // NOP
+        }
+
+        internal protected BaseHost GetHost()
+        {
+            return HostFactory.GetHost(_ServiceName, _DataBaseName);
+        }
+
+		protected void GetItem(string storedProcedure)
+		{
+			GetItem(storedProcedure, 0);
+		}
+
+        protected void GetItem(List<BaseDataItem.ParameterObject> ParameterList)
+        {
+            if (ParameterList.Count > 0)
+            {
+                string storedProcedure = string.Empty;
+
+                ParameterObject storedProcedureObject = ParameterList[0];
+
+                if (storedProcedureObject.Field.Equals("StoredProcedure"))
+                {
+                    storedProcedure = storedProcedureObject.Value as string;
+                }
+
+                if (ParameterList.Count > 1)
+                {
+                    ParameterList = ParameterList.GetRange(1, ParameterList.Count - 1);
+
+                    SetParameterList(ParameterList);
+                }
+
+                GetItem(storedProcedure);
+            }
+        }
+
+		protected void GetItem(string storedProcedure, int autoKeyId)
+		{
+            BaseHost dataHost = GetHost();
+
+			_DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
+
+            dataHost.GetItem(this, storedProcedure, _AutoIdField, autoKeyId);
+
+            _Id = dataHost.Id;
+
+			_DataHost = null;
+		}
+
+        protected virtual void BeforeSave()
+        {
+            // NOP
+        }
+
+		public void Save()
+		{
+            BeforeSave();
+
+			if (!IsValidDataItem())
+			{
+				return;
+			}
+
+            BaseHost dataHost = GetHost();
+
+			dataHost.Save(this, SaveStoredProcedure, AutoIdField, _Id);
+
+			_Id = dataHost.Id;
+		}
+
+		public void Delete()
+		{
+            BaseHost dataHost = GetHost();
+
+			dataHost.Delete(DeleteStoredProcedure, AutoIdField, _Id);
+
+			_Id = 0;
+		}
+		  
+		protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
+		{
+            BaseHost dataHost = GetHost();
+
+			return dataHost.ExecuteCommand(storedProcedure, parameters);
+		}
+
+		protected internal int ExecuteTextCommand(string textCommand)
+		{
+            BaseHost dataHost = GetHost();
+
+			return dataHost.ExecuteTextCommand(textCommand);
+		}
+
+		protected internal bool TableExists(string tableName)
+		{
+            BaseHost dataHost = GetHost();
+
+			return dataHost.TableExists(tableName);
+		}
+
+		protected internal bool ViewExists(string viewName)
+		{
+            BaseHost dataHost = GetHost();
+
+			return dataHost.ViewExists(viewName);
+		}
+
+		internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand, int autoKeyId)
+		{
+			if (autoKeyId > 0)
+			{
+                database.AddInParameter(dbCommand, AutoIdField, DbType.Int32, autoKeyId);
+			}
+			else
+			{
+				SetQueryParameters(storedProcedure);
+				
+				if (_ParameterObjectList.Count == 0)
+				{
+					// throw (new Exception("No parameters provided."));  // TODO: throw required maken
+				}
+
+				foreach (ParameterObject parameterObject in _ParameterObjectList)
+				{
+					database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+				}
+
+				_ParameterObjectList.Clear();
+			}
+		}
+
+		internal List<ParameterObject> SetItemData()
+		{
+			SetData();
+
+            return SetParameterData();
+
+            //List<ParameterObject> parameterObjectList = new List<ParameterObject>();
+            //foreach (ParameterObject parameterObject in _ParameterObjectList)
+            //{
+            //    parameterObjectList.Add(parameterObject);
+            //}
+
+            //_ParameterObjectList.Clear();
+
+            //return parameterObjectList;
+		}
+
+        internal List<ParameterObject> SetParameterData()
+        {
+            List<ParameterObject> parameterObjectList = new List<ParameterObject>();
+            foreach (ParameterObject parameterObject in _ParameterObjectList)
+            {
+                parameterObjectList.Add(parameterObject);
+            }
+
+            _ParameterObjectList.Clear();
+
+            return parameterObjectList;
+        }
+
+        private void AddInParameter(string field, DbType dbType, object value)
+		{
+			_ParameterObjectList.Add(new ParameterObject(field, dbType , value));
+		}
+
+		protected internal virtual void GetData()
+		{
+			// NOP
+			throw new NotImplementedException();
+		}
+
+		protected virtual void SetData()
+		{
+			// NOP
+		}
+
+		protected virtual void SetQueryParameters(string storedProcedure)
+		{
+			// NOP
+		}
+
+		protected virtual bool IsValidDataItem()
+		{
+			return true;
+		}
+	}
+}
