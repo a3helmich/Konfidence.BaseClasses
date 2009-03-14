@@ -58,17 +58,13 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Konfidence.BaseHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Projects\References\Konfidence.BaseHelper.dll</HintPath>
-    </Reference>
     <Reference Include="Konfidence.Designpatterns, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a8725b94b5e739a1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Projects\References\Konfidence.Designpatterns.dll</HintPath>
+      <HintPath>..\Konfidence.Designpatterns\bin\Debug\Konfidence.Designpatterns.dll</HintPath>
     </Reference>
     <Reference Include="Konfidence.UtilHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Projects\References\Konfidence.UtilHelper.dll</HintPath>
+      <HintPath>..\Konfidence.UtilHelper\obj\Debug\Konfidence.UtilHelper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -169,6 +165,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Konfidence.nl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseHelper\Konfidence.BaseHelper.csproj">
+      <Project>{687FBFF3-F978-48F9-BF2B-AF242FC8214C}</Project>
+      <Name>Konfidence.BaseHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <PropertyGroup>
