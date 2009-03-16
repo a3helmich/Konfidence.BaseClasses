@@ -24,9 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongName
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Designpatterns", "Konfidence.Designpatterns\Konfidence.Designpatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.RegistrationClasses", "..\KonfidenceRegistration\KonfidenceRegistrationClasses\Konfidence.RegistrationClasses.csproj", "{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/
 		SccLocalPath0 = .
@@ -57,6 +59,9 @@ Global
 		SccProjectUniqueName9 = Konfidence.UtilHelper\\Konfidence.UtilHelper.csproj
 		SccProjectName9 = Konfidence.UtilHelper
 		SccLocalPath9 = Konfidence.UtilHelper
+		SccProjectUniqueName10 = ..\\KonfidenceRegistration\\KonfidenceRegistrationClasses\\Konfidence.RegistrationClasses.csproj
+		SccProjectName10 = ../KonfidenceRegistration/KonfidenceRegistrationClasses
+		SccLocalPath10 = ..\\KonfidenceRegistration\\KonfidenceRegistrationClasses
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +104,10 @@ Global
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
