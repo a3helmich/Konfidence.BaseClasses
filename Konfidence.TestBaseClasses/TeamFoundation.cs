@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Konfidence.TeamFoundation;
 
 namespace Konfidence.TestBaseClasses
 {
@@ -60,11 +61,19 @@ namespace Konfidence.TestBaseClasses
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestGetGlobalPermissions()
         {
-            //
-            // TODO: Add test logic	here
-            //
+            Permissions tfsPermissions = new Permissions("tfs.konfidence.nl");
+
+            List<string> globalPermissions = tfsPermissions.GetGlobalPermissions();
+        }
+
+        [TestMethod]
+        public void TestGetItemPermissions()
+        {
+            Permissions tfsPermissions = new Permissions("tfs.konfidence.nl");
+
+            List<string> itemPermissions = tfsPermissions.GetItemPermissions("$/Konfidence/BaseClasses");
         }
     }
 }

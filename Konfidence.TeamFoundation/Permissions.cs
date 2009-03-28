@@ -50,5 +50,21 @@ namespace Konfidence.TeamFoundation
 
             _Tfs.EnsureAuthenticated();
         }
+
+        private void CheckOut(string sourceItem)
+        {
+
+            Authenticate();
+
+            VersionControlServer vcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
+
+            //vcServer.
+
+            Item SourceControlItem = vcServer.GetItem(sourceItem);
+
+            SourceControlItem.DownloadFile("");
+
+
+        }
     }
 }
