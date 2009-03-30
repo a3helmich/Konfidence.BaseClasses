@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.VersionControl.Client;
+using System.Xml;
+using Konfidence.TeamFoundation.Project;
 
 namespace Konfidence.TeamFoundation
 {
@@ -59,16 +61,27 @@ namespace Konfidence.TeamFoundation
 
             //SourceControlItem.DownloadFile("");
 
-            //Workspace ws = _VcServer.GetWorkspace(@"c:\projects\konfidence\baseclasses");
-            Workspace ws = _VcServer.GetWorkspace("XPBASEVS2008", "Administrator");
+            Workspace ws = _VcServer.GetWorkspace(@"c:\projects\konfidence\baseclasses");
+            //Workspace ws = _VcServer.GetWorkspace("XPBASEVS2008", "Administrator");
 
-            //ws.SetLock(@"c:\projects\konfidence\baseclasses\Konfidence.TeamFoundation.csproj", LockLevel.None);
             int countertje = ws.PendEdit(fileName);
-            //ws.Undo(@"c:\projects\konfidence\baseclasses\Konfidence.TeamFoundation.csproj");
 
-            PendingChange[] pendingChangeList = ws.GetPendingChanges(fileName);
+            if (countertje > 0)
+            {
+                PendingChange[] pendingChangeList = ws.GetPendingChanges(fileName);
 
-            ws.CheckIn(pendingChangeList, "dit is een test met de TF library");
+                ProjectXmlDocument projectXmlDocument = new ProjectXmlDocument();
+                projectXmlDocument.Load(fileName);
+
+                ProjectReferenceGenerator projectReference = new ProjectReferenceGenerator(projectXmlDocument);
+
+                if (projectReference.Changed)
+                {
+                    projectXmlDocument.Save(fileName);
+                }
+
+                ws.CheckIn(pendingChangeList, "dit is een test met de TF library");
+            }
 
         }
     }

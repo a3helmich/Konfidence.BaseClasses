@@ -1,10 +1,9 @@
 ﻿using System.Xml;
-using DataItemGeneratorClasses.HelperClasses;
 using Konfidence.Base;
 
-namespace DataItemGeneratorClasses.ProjectGenerator
+namespace Konfidence.TeamFoundation.Project
 {
-    class ProjectBaseGenerator: BaseItem
+    public class ProjectBaseGenerator: BaseItem
     {
         private ProjectXmlDocument _XmlDocument;
         private XmlElement _Root;

@@ -52,7 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Permissions.cs" />
+    <Compile Include="Project\ProjectBaseGenerator.cs" />
+    <Compile Include="Project\ProjectReferenceGenerator.cs" />
+    <Compile Include="Project\ProjectXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
+      <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
+      <Name>Konfidence.BaseClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

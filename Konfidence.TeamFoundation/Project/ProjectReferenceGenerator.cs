@@ -1,85 +1,48 @@
 ﻿using System.Xml;
 using System.Collections.Generic;
-using DataItemGeneratorClasses.HelperClasses;
 
-namespace DataItemGeneratorClasses.ProjectGenerator
+namespace  Konfidence.TeamFoundation.Project
 {
-    class ProjectReferenceGenerator: ProjectBaseGenerator
+    public class ProjectReferenceGenerator: ProjectBaseGenerator
     {
+        private bool _Changed = false;
+
+        public bool Changed
+        {
+            get { return _Changed; }
+        }
+
         private XmlNode _ReferenceItemGroup = null;
-        private ProjectAssemblyItemDictionary _ProjectAssemblyItemDictionary = null;
 
         public ProjectReferenceGenerator(ProjectXmlDocument xmlDocument) : base(xmlDocument)
         {
             _ReferenceItemGroup = GetItemGroup("reference");
 
-            Initialize();
-
             Execute();
         }
 
-        private void Initialize()
-        {
-            _ProjectAssemblyItemDictionary = new ProjectAssemblyItemDictionary();
-
-            CleanProjectAssemblyDictionary();
-
-            if (_ProjectAssemblyItemDictionary.Count > 0)
-            {
-                XmlDocument.Changed = true;
-            }
-        }
-
         private void Execute()
-        {
-            foreach (ProjectAssemblyItem assemblyItem in _ProjectAssemblyItemDictionary.Values)
-            {
-                XmlElement referenceElement = CreateElement("Reference");
-
-                _ReferenceItemGroup.AppendChild(referenceElement);
-
-                if (!string.IsNullOrEmpty(assemblyItem.SpecificVersionElement))
-                {
-                    XmlElement specificVersionElement = CreateElement("SpecificVersion");
-
-                    referenceElement.AppendChild(specificVersionElement);
-
-                    specificVersionElement.InnerText = assemblyItem.SpecificVersionElement;
-                }
-
-                if (!string.IsNullOrEmpty(assemblyItem.HintPathElement))
-                {
-                    XmlElement hintPathElement = CreateElement("HintPath");
-
-                    referenceElement.AppendChild(hintPathElement);
-
-                    hintPathElement.InnerText = assemblyItem.HintPathElement;
-                }
-
-                if (!string.IsNullOrEmpty(assemblyItem.IncludeAttribute))
-                {
-                    XmlAttribute includeAttribute = XmlDocument.CreateAttribute("Include");
-
-                    referenceElement.Attributes.Append(includeAttribute);
-
-                    includeAttribute.InnerText = assemblyItem.IncludeAttribute;
-                }
-            }
-        }
-
-        private void CleanProjectAssemblyDictionary()
         {
             XmlNodeList referenceNodeList = _ReferenceItemGroup.SelectNodes("p:Reference", XmlNamespaceManager);
 
             foreach (XmlNode referenceNode in referenceNodeList)
             {
-                string[] assemblyText = referenceNode.Attributes["Include"].InnerText.Split(',');
+                XmlNode hintPath = referenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager);
 
-                string assemblyName = assemblyText[0].Trim();
+                string hintpathText = hintPath.InnerText;
 
-                if (_ProjectAssemblyItemDictionary.FindAssembly(assemblyName))
+                if (!hintpathText.StartsWith(@"c:\"))
                 {
-                    _ProjectAssemblyItemDictionary.Remove(assemblyName);
+                    if (hintpathText.Contains(@"\References\"))
+                    {
+                        int referenceIndex = hintpathText.IndexOf(@"\References\");
+                        hintpathText = hintpathText.Substring(referenceIndex);
+                        hintpathText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
+
+                        hintPath.InnerText = hintpathText;
+
+                        _Changed = true;
+                    }
                 }
             }
         }
