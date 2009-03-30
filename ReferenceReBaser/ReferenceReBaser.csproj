@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="Konfidence.BaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Konfidence.BaseClasses.dll</HintPath>
+      <HintPath>c:\projects\References\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
