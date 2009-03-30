@@ -11,21 +11,29 @@ namespace Konfidence.TeamFoundation
     {
         private string _TfsServer = string.Empty;
         private TeamFoundationServer _Tfs;
+        private VersionControlServer _VcServer;
 
         public Permissions(string tfsServer)
         {
             _TfsServer = tfsServer;
         }
 
+        private void TfsInitialize()
+        {
+            _Tfs = new TeamFoundationServer(_TfsServer, new UICredentialsProvider());
+
+            _Tfs.EnsureAuthenticated();
+
+            _VcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
+        }
+
         public List<string> GetGlobalPermissions()
         {
             List<string> globalPermissions = new List<string>();
 
-            Authenticate();
+            TfsInitialize();
 
-            VersionControlServer vcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
-
-            globalPermissions.AddRange(vcServer.GetEffectiveGlobalPermissions(_Tfs.AuthenticatedUserName));
+            globalPermissions.AddRange(_VcServer.GetEffectiveGlobalPermissions(_Tfs.AuthenticatedUserName));
 
             return globalPermissions;
         }
@@ -34,36 +42,33 @@ namespace Konfidence.TeamFoundation
         {
             List<string> itemPermissions = new List<string>();
 
-            Authenticate();
+            TfsInitialize();
 
-            VersionControlServer vcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
-
-            itemPermissions.AddRange(vcServer.GetEffectivePermissions(_Tfs.AuthenticatedUserName, sourceItem));
+            itemPermissions.AddRange(_VcServer.GetEffectivePermissions(_Tfs.AuthenticatedUserName, sourceItem));
 
             return itemPermissions;
 
         }
 
-        private void Authenticate()
+        public void CheckOut(string sourceItem)
         {
-            _Tfs = new TeamFoundationServer(_TfsServer, new UICredentialsProvider());
+            string fileName = @"C:\Projects\Konfidence\BaseClasses\ReferenceReBaser\ReferenceReBaser.csproj"; 
+            TfsInitialize();
 
-            _Tfs.EnsureAuthenticated();
-        }
+            //Item SourceControlItem = _VcServer.GetItem(sourceItem);
 
-        private void CheckOut(string sourceItem)
-        {
+            //SourceControlItem.DownloadFile("");
 
-            Authenticate();
+            //Workspace ws = _VcServer.GetWorkspace(@"c:\projects\konfidence\baseclasses");
+            Workspace ws = _VcServer.GetWorkspace("XPBASEVS2008", "Administrator");
 
-            VersionControlServer vcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
+            //ws.SetLock(@"c:\projects\konfidence\baseclasses\Konfidence.TeamFoundation.csproj", LockLevel.None);
+            int countertje = ws.PendEdit(fileName);
+            //ws.Undo(@"c:\projects\konfidence\baseclasses\Konfidence.TeamFoundation.csproj");
 
-            //vcServer.
+            PendingChange[] pendingChangeList = ws.GetPendingChanges(fileName);
 
-            Item SourceControlItem = vcServer.GetItem(sourceItem);
-
-            SourceControlItem.DownloadFile("");
-
+            ws.CheckIn(pendingChangeList, "dit is een test met de TF library");
 
         }
     }

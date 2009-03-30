@@ -75,5 +75,13 @@ namespace Konfidence.TestBaseClasses
 
             List<string> itemPermissions = tfsPermissions.GetItemPermissions("$/Konfidence/BaseClasses");
         }
+
+        [TestMethod]
+        public void TestCheckOut()
+        {
+            Permissions tfsPermissions = new Permissions("tfs.konfidence.nl");
+
+            tfsPermissions.CheckOut("");
+        }
     }
 }
