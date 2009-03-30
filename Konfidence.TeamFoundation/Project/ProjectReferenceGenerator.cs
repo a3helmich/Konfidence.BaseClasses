@@ -29,19 +29,23 @@ namespace  Konfidence.TeamFoundation.Project
             {
                 XmlNode hintPath = referenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager);
 
-                string hintpathText = hintPath.InnerText;
-
-                if (!hintpathText.StartsWith(@"c:\"))
+                if (IsAssigned(hintPath))
                 {
-                    if (hintpathText.Contains(@"\References\"))
+
+                    string hintpathText = hintPath.InnerText;
+
+                    if (!hintpathText.StartsWith(@"c:\"))
                     {
-                        int referenceIndex = hintpathText.IndexOf(@"\References\");
-                        hintpathText = hintpathText.Substring(referenceIndex);
-                        hintpathText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
+                        if (hintpathText.Contains(@"\References\"))
+                        {
+                            int referenceIndex = hintpathText.IndexOf(@"\References\");
+                            hintpathText = hintpathText.Substring(referenceIndex);
+                            hintpathText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
 
-                        hintPath.InnerText = hintpathText;
+                            hintPath.InnerText = hintpathText;
 
-                        _Changed = true;
+                            _Changed = true;
+                        }
                     }
                 }
             }
