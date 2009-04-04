@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Konfidence.ReferenceReBaserApp
 {
@@ -13,6 +14,7 @@ namespace Konfidence.ReferenceReBaserApp
             if (args.Length == 0)
             {
                 Console.WriteLine("geen solution folder op de commandline meegegeven!");
+                Debug.WriteLine("geen solution folder op de commandline meegegeven!");
             }
             else
             {
