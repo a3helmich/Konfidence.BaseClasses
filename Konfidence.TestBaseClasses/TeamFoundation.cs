@@ -93,5 +93,15 @@ namespace Konfidence.TestBaseClasses
                 throw new Exception("Bestand kan niet worden uitgechecked!");
             }
         }
+
+        [TestMethod]
+        public void TestReferenceRebaser()
+        {
+            ReferenceReBaser reBaser = new ReferenceReBaser();
+
+            string basePath = @"C:\Projects\Konfidence\BaseClasses\";
+
+            reBaser.ReBaseProjects(basePath);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Konfidence.TeamFoundation
     {
         private string _TfsServer = string.Empty;
         private TeamFoundationServer _Tfs = null;
-        private VersionControlServer _VcServer;
+        private VersionControlServer _VcServer = null;
 
         private List<string> _CheckOutList = new List<string>();
 
