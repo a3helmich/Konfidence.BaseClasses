@@ -6,14 +6,18 @@ using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.VersionControl.Client;
 using System.Xml;
 using Konfidence.TeamFoundation.Project;
+using Konfidence.Base;
+using System.IO;
 
 namespace Konfidence.TeamFoundation
 {
-    public class Permissions
+    public class Permissions: BaseItem
     {
         private string _TfsServer = string.Empty;
-        private TeamFoundationServer _Tfs;
+        private TeamFoundationServer _Tfs = null;
         private VersionControlServer _VcServer;
+
+        private List<string> _CheckOutList = new List<string>();
 
         public Permissions(string tfsServer)
         {
@@ -22,11 +26,14 @@ namespace Konfidence.TeamFoundation
 
         private void TfsInitialize()
         {
-            _Tfs = new TeamFoundationServer(_TfsServer, new UICredentialsProvider());
+            if (!IsAssigned(_Tfs))
+            {
+                _Tfs = new TeamFoundationServer(_TfsServer, new UICredentialsProvider());
 
-            _Tfs.EnsureAuthenticated();
+                _Tfs.EnsureAuthenticated();
 
-            _VcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
+                _VcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
+            }
         }
 
         public List<string> GetGlobalPermissions()
@@ -52,24 +59,107 @@ namespace Konfidence.TeamFoundation
 
         }
 
-        public void CheckOut(string sourceItem)
+        private bool FindCheckOut(string fileName)
         {
-            string fileName = @"C:\Projects\Konfidence\BaseClasses\ReferenceReBaser\ReferenceReBaser.csproj"; 
+            foreach (string file in _CheckOutList)
+            {
+                if (file.Equals(fileName))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private Workspace GetWorkSpace(string fileName)
+        {
+            string workSpacePath = Path.GetDirectoryName(fileName);
+
+            return _VcServer.GetWorkspace(workSpacePath); 
+        }
+
+        public bool IsCheckedOut(string fileName)
+        {
             TfsInitialize();
 
-            //Item SourceControlItem = _VcServer.GetItem(sourceItem);
+            Workspace ws = GetWorkSpace(fileName);
 
-            //SourceControlItem.DownloadFile("");
+            PendingChange[] pendingChangeList = ws.GetPendingChanges(fileName);
 
-            Workspace ws = _VcServer.GetWorkspace(@"c:\projects\konfidence\baseclasses");
-            //Workspace ws = _VcServer.GetWorkspace("XPBASEVS2008", "Administrator");
-
-            int countertje = ws.PendEdit(fileName);
-
-            if (countertje > 0)
+            if (pendingChangeList.Length > 0)
             {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CheckOut(string fileName)
+        {
+            if (!IsCheckedOut(fileName))
+            {
+                TfsInitialize();
+
+                Workspace ws = GetWorkSpace(fileName);
+
+                int checkOutCount = ws.PendEdit(fileName);
+
+                if (checkOutCount > 0)
+                {
+                    _CheckOutList.Add(fileName);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool Undo(string fileName)
+        {
+            if (FindCheckOut(fileName))
+            {
+                TfsInitialize();
+
+                Workspace ws = GetWorkSpace(fileName);
+
+                ws.Undo(fileName);
+
+                _CheckOutList.Remove(fileName);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CheckIn(string fileName)
+        {
+            if (FindCheckOut(fileName))
+            {
+                TfsInitialize();
+
+                Workspace ws = GetWorkSpace(fileName);
+
                 PendingChange[] pendingChangeList = ws.GetPendingChanges(fileName);
 
+                ws.CheckIn(pendingChangeList, "dit is een test met de TF library");
+
+                _CheckOutList.Remove(fileName);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public void TestCheckOut(string sourceItem)
+        {
+            string fileName = @"C:\Projects\Konfidence\BaseClasses\ReferenceReBaser\ReferenceReBaser.csproj";
+
+            if (CheckOut(fileName))
+            {
                 ProjectXmlDocument projectXmlDocument = new ProjectXmlDocument();
                 projectXmlDocument.Load(fileName);
 
@@ -78,11 +168,14 @@ namespace Konfidence.TeamFoundation
                 if (projectReference.Changed)
                 {
                     projectXmlDocument.Save(fileName);
+
+                    CheckIn(fileName);
                 }
-
-                ws.CheckIn(pendingChangeList, "dit is een test met de TF library");
+                else
+                {
+                    Undo(fileName);
+                }
             }
-
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Konfidence.TeamFoundation;
+using System.IO;
 
 namespace Konfidence.TestBaseClasses
 {
@@ -81,7 +82,16 @@ namespace Konfidence.TestBaseClasses
         {
             Permissions tfsPermissions = new Permissions("tfs.konfidence.nl");
 
-            tfsPermissions.CheckOut("");
+            string testFile = @"C:\Projects\Konfidence\BaseClasses\Konfidence.TestBaseClasses\TestData\CheckOutClass.cs";
+
+            if (tfsPermissions.CheckOut(testFile))
+            {
+                tfsPermissions.Undo(testFile);
+            }
+            else
+            {
+                throw new Exception("Bestand kan niet worden uitgechecked!");
+            }
         }
     }
 }

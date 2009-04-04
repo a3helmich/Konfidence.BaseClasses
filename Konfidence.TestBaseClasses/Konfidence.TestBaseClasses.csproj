@@ -40,12 +40,19 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamFoundation.cs" />
+    <Compile Include="TestData\CheckOutClass.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
+      <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
+      <Name>Konfidence.BaseClasses</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj">
       <Project>{99B3193A-0739-4586-A379-138176C425A7}</Project>
       <Name>Konfidence.TeamFoundation</Name>
