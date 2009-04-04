@@ -154,28 +154,5 @@ namespace Konfidence.TeamFoundation
             return false;
         }
 
-        public void TestCheckOut(string sourceItem)
-        {
-            string fileName = @"C:\Projects\Konfidence\BaseClasses\ReferenceReBaser\ReferenceReBaser.csproj";
-
-            if (CheckOut(fileName))
-            {
-                ProjectXmlDocument projectXmlDocument = new ProjectXmlDocument();
-                projectXmlDocument.Load(fileName);
-
-                ProjectReferenceGenerator projectReference = new ProjectReferenceGenerator(projectXmlDocument);
-
-                if (projectReference.Changed)
-                {
-                    projectXmlDocument.Save(fileName);
-
-                    CheckIn(fileName);
-                }
-                else
-                {
-                    Undo(fileName);
-                }
-            }
-        }
     }
 }
