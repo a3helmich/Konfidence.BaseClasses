@@ -265,7 +265,24 @@ namespace Konfidence.BaseData
 
 			throw (new Exception("GetFieldDateTime: dataHost/_PropertyDictionary  is not assigned"));
 		}
-		#endregion
+
+        protected Decimal GetFieldDecimal(string fieldName)
+        {
+            if (IsAssigned(_PropertyDictionary))
+            {
+                return (Decimal)_PropertyDictionary[fieldName];
+            }
+            else
+            {
+                if (IsAssigned(_DataHost))
+                {
+                    return _DataHost.GetFieldDecimal(fieldName);
+                }
+            }
+
+            throw (new Exception("GetFieldDecimal: dataHost/_PropertyDictionary  is not assigned"));
+        }
+        #endregion
 
 		#region SetField Methods
 		protected void SetField(string fieldName, int value)
@@ -294,7 +311,12 @@ namespace Konfidence.BaseData
                 AddInParameter(fieldName, DbType.DateTime, null);
 			}
 		}
-		#endregion
+
+        protected void SetField(string fieldName, Decimal value)
+        {
+            AddInParameter(fieldName, DbType.Decimal, value);
+        }
+        #endregion
 
 		#region SetParameter Methods
 		protected void SetParameter(string fieldName, int value)

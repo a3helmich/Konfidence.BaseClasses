@@ -62,7 +62,19 @@ namespace Konfidence.BaseData
 
 			return _DataReader.GetDateTime(fieldOrdinal);
 		}
-		#endregion
+
+        internal override Decimal GetFieldDecimal(string fieldName)
+        {
+            int fieldOrdinal = GetOrdinal(fieldName);
+
+            if (_DataReader.IsDBNull(fieldOrdinal))
+            {
+                return 0;
+            }
+
+            return _DataReader.GetDecimal(fieldOrdinal);
+        }
+        #endregion
 
 		internal override void Save(BaseDataItem dataItem, string saveStoredProcedure, string autoIdField, int id)
 		{

@@ -121,5 +121,10 @@ namespace Konfidence.BaseData
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+        internal virtual Decimal GetFieldDecimal(string fieldName)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

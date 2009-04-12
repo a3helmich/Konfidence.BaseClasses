@@ -45,6 +45,11 @@ namespace Konfidence.BaseData
 		{
 			return base.GetFieldDateTime(fieldName);
 		}
+
+        internal override Decimal GetFieldDecimal(string fieldName)
+        {
+            return base.GetFieldDecimal(fieldName);
+        }
 #endregion
 
 		internal override void Save(BaseDataItem dataItem, string saveStoredProcedure, string autoIdField, int id)
