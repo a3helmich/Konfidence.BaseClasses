@@ -9,6 +9,7 @@ namespace Konfidence.BaseData.Schema
         private bool _IsPrimaryKey = false;
         private bool _IsAutoUpdated = false;
         private bool _IsDefaulted = false;
+        private bool _IsInternal = false;
 
         private string _Name = string.Empty;
         private int _OrdinalPosition = 0;
@@ -16,7 +17,7 @@ namespace Konfidence.BaseData.Schema
         private string _ColumnDefault = string.Empty;
 
         //private bool _IsNullable = false;
-        private string _CharacterMaximumLength= string.Empty;
+        private string _CharacterMaximumLength = string.Empty;
         //private int _CharacterOctetLength = 0;
         //private int _NumericPrecision = 0;
         //private int _NumericPrecisionRadix = 0;
@@ -38,6 +39,12 @@ namespace Konfidence.BaseData.Schema
         {
             get { return _IsAutoUpdated; }
             set { _IsAutoUpdated = value; }
+        }
+
+        public bool IsInternal
+        {
+            get { return _IsInternal; }
+            set { _IsInternal = value; }
         }
 
         public bool IsPrimaryKey

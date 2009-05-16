@@ -109,8 +109,7 @@ namespace Konfidence.BaseData.Schema
             {
                 switch (columnDataItem.Name.ToLower())
                 {
-                    case "changed":
-                    case "changetime":
+                    case "sysupdatetime":
                         columnDataItem.IsAutoUpdated = true;
                         break;
                 }
@@ -122,10 +121,20 @@ namespace Konfidence.BaseData.Schema
             {
                 switch (columnDataItem.Name.ToLower())
                 {
-                    case "created":
-                    case "changetime":
-                    case "createtime":
+                    case "sysinserttime":
+                    case "sysupdatetime":
                         columnDataItem.IsDefaulted = true;
+                        break;
+                }
+            }
+
+            // DataItem specific fields not available to for developers
+            foreach (ColumnDataItem columnDataItem in _ColumnDataItemList)
+            {
+                switch (columnDataItem.Name.ToLower())
+                {
+                    case "syslock":
+                        columnDataItem.IsInternal = true;
                         break;
                 }
             }
