@@ -109,6 +109,7 @@ namespace Konfidence.BaseData.Schema
             {
                 switch (columnDataItem.Name.ToLower())
                 {
+                    case "sysinserttime":
                     case "sysupdatetime":
                         columnDataItem.IsAutoUpdated = true;
                         break;
