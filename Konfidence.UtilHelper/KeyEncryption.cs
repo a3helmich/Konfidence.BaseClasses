@@ -197,9 +197,9 @@ namespace Konfidence.UtilHelper.Encryption
             base.InitializeEncryption();
         }
 
-        public void Delete()
+        public bool Delete()
         {
-            DeleteKeyFromContainer();
+            return DeleteKeyFromContainer();
         }
     }
 
@@ -393,7 +393,7 @@ namespace Konfidence.UtilHelper.Encryption
             }
         }
 
-        protected void DeleteKeyFromContainer()
+        protected bool DeleteKeyFromContainer()
         {
             try
             {
@@ -409,10 +409,14 @@ namespace Konfidence.UtilHelper.Encryption
                 _RsaProvider.Clear();
 
                 _RsaProvider = null;
+
+                return true;
             }
             catch (CryptographicException e)
             {
                 Debug.WriteLine("Encryption: UtilHelper.DeleteKeyFromContainer(...) unable to delete key - " + e.Message);
+
+                return false;
             }
         }
 

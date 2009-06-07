@@ -24,8 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongName
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Designpatterns", "Konfidence.Designpatterns\Konfidence.Designpatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.RegistrationClasses", "..\KonfidenceRegistration\KonfidenceRegistrationClasses\Konfidence.RegistrationClasses.csproj", "{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundation", "Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj", "{99B3193A-0739-4586-A379-138176C425A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TestBaseClasses", "Konfidence.TestBaseClasses\Konfidence.TestBaseClasses.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
@@ -45,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceReBaser", "Referen
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 14
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/
 		SccLocalPath0 = .
@@ -76,18 +74,15 @@ Global
 		SccProjectUniqueName9 = Konfidence.UtilHelper\\Konfidence.UtilHelper.csproj
 		SccProjectName9 = Konfidence.UtilHelper
 		SccLocalPath9 = Konfidence.UtilHelper
-		SccProjectUniqueName10 = ..\\KonfidenceRegistration\\KonfidenceRegistrationClasses\\Konfidence.RegistrationClasses.csproj
-		SccProjectName10 = ../KonfidenceRegistration/KonfidenceRegistrationClasses
-		SccLocalPath10 = ..\\KonfidenceRegistration\\KonfidenceRegistrationClasses
-		SccProjectUniqueName11 = Konfidence.TeamFoundation\\Konfidence.TeamFoundation.csproj
-		SccProjectName11 = Konfidence.TeamFoundation
-		SccLocalPath11 = Konfidence.TeamFoundation
-		SccProjectUniqueName12 = Konfidence.TestBaseClasses\\Konfidence.TestBaseClasses.csproj
-		SccProjectName12 = Konfidence.TestBaseClasses
-		SccLocalPath12 = Konfidence.TestBaseClasses
-		SccProjectUniqueName13 = ReferenceReBaser\\ReferenceReBaser.csproj
-		SccProjectName13 = ReferenceReBaser
-		SccLocalPath13 = ReferenceReBaser
+		SccProjectUniqueName10 = Konfidence.TeamFoundation\\Konfidence.TeamFoundation.csproj
+		SccProjectName10 = Konfidence.TeamFoundation
+		SccLocalPath10 = Konfidence.TeamFoundation
+		SccProjectUniqueName11 = Konfidence.TestBaseClasses\\Konfidence.TestBaseClasses.csproj
+		SccProjectName11 = Konfidence.TestBaseClasses
+		SccLocalPath11 = Konfidence.TestBaseClasses
+		SccProjectUniqueName12 = ReferenceReBaser\\ReferenceReBaser.csproj
+		SccProjectName12 = ReferenceReBaser
+		SccLocalPath12 = ReferenceReBaser
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses.vsmdi
@@ -133,10 +128,6 @@ Global
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B646DCCE-2721-46E9-B9ED-8A5515B3E9ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99B3193A-0739-4586-A379-138176C425A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{99B3193A-0739-4586-A379-138176C425A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99B3193A-0739-4586-A379-138176C425A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
