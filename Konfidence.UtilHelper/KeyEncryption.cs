@@ -400,7 +400,7 @@ namespace Konfidence.UtilHelper.Encryption
                 // if a rsaprovider exists, make non persistent, clear it and nullify --> the key is deleted
 
                 if (_RsaProvider == null)
-                    return;
+                    return false;
 
                 // Delete the key entry in the container.
                 _RsaProvider.PersistKeyInCsp = false;
