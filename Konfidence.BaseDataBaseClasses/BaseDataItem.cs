@@ -365,7 +365,7 @@ namespace Konfidence.BaseData
 			GetItem(storedProcedure, 0);
 		}
 
-        protected void GetItem(List<BaseDataItem.ParameterObject> ParameterList)
+        internal protected void GetItem(List<BaseDataItem.ParameterObject> ParameterList)
         {
             if (ParameterList.Count > 0)
             {
