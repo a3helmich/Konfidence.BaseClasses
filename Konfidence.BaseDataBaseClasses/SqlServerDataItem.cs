@@ -59,10 +59,10 @@ namespace Konfidence.BaseData
             }
         }
 
-        public SqlServerDataItem(List<BaseDataItem.ParameterObject> ParameterList)
-        {
-            GetItem(ParameterList);
-        }
+        //public SqlServerDataItem(List<BaseDataItem.ParameterObject> ParameterList)
+        //{
+        //    GetItem(ParameterList);
+        //}
 
         protected override void InitializeDataItem()
         {

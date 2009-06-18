@@ -365,29 +365,29 @@ namespace Konfidence.BaseData
 			GetItem(storedProcedure, 0);
 		}
 
-        internal protected void GetItem(List<BaseDataItem.ParameterObject> ParameterList)
-        {
-            if (ParameterList.Count > 0)
-            {
-                string storedProcedure = string.Empty;
+        //internal protected void GetItem(List<BaseDataItem.ParameterObject> ParameterList)
+        //{
+        //    if (ParameterList.Count > 0)
+        //    {
+        //        string storedProcedure = string.Empty;
 
-                ParameterObject storedProcedureObject = ParameterList[0];
+        //        ParameterObject storedProcedureObject = ParameterList[0];
 
-                if (storedProcedureObject.Field.Equals("StoredProcedure"))
-                {
-                    storedProcedure = storedProcedureObject.Value as string;
-                }
+        //        if (storedProcedureObject.Field.Equals("StoredProcedure"))
+        //        {
+        //            storedProcedure = storedProcedureObject.Value as string;
+        //        }
 
-                if (ParameterList.Count > 1)
-                {
-                    ParameterList = ParameterList.GetRange(1, ParameterList.Count - 1);
+        //        if (ParameterList.Count > 1)
+        //        {
+        //            ParameterList = ParameterList.GetRange(1, ParameterList.Count - 1);
 
-                    SetParameterList(ParameterList);
-                }
+        //            SetParameterList(ParameterList);
+        //        }
 
-                GetItem(storedProcedure);
-            }
-        }
+        //        GetItem(storedProcedure);
+        //    }
+        //}
 
 		protected void GetItem(string storedProcedure, int autoKeyId)
 		{

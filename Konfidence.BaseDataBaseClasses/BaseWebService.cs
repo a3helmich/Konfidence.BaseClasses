@@ -159,9 +159,9 @@ namespace Konfidence.BaseData
 			return BaseItem.IsAssigned(assignedObject);
 		}
 
-        protected void LoadParameterList(BaseDataItem dataItem, List<BaseDataItem.ParameterObject> ParameterList)
-        {
-            dataItem.GetItem(ParameterList);
-        }
+        //protected void LoadParameterList(BaseDataItem dataItem, List<BaseDataItem.ParameterObject> ParameterList)
+        //{
+        //    dataItem.GetItem(ParameterList);
+        //}
 	}
 }
