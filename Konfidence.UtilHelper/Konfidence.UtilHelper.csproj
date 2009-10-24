@@ -58,14 +58,6 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Konfidence.BaseClasses\bin\Debug\Konfidence.BaseClasses.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.Designpatterns, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a8725b94b5e739a1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Konfidence.Designpatterns\bin\Debug\Konfidence.Designpatterns.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
@@ -99,6 +91,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Konfidence.nl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
+      <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
+      <Name>Konfidence.BaseClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.Designpatterns\Konfidence.Designpatterns.csproj">
+      <Project>{3D3FD6C6-3583-4047-B960-EF45030FBDE2}</Project>
+      <Name>Konfidence.Designpatterns</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <PropertyGroup>
