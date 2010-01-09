@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Designpatterns",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundation", "Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj", "{99B3193A-0739-4586-A379-138176C425A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TestBaseClasses", "Konfidence.TestBaseClasses\Konfidence.TestBaseClasses.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClassesTest", "Konfidence.TestBaseClasses\Konfidence.BaseClassesTest.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FAC7656-5009-4A8F-8383-F9488538224F}"
 	ProjectSection(SolutionItems) = preProject
@@ -77,12 +77,12 @@ Global
 		SccProjectUniqueName10 = Konfidence.TeamFoundation\\Konfidence.TeamFoundation.csproj
 		SccProjectName10 = Konfidence.TeamFoundation
 		SccLocalPath10 = Konfidence.TeamFoundation
-		SccProjectUniqueName11 = Konfidence.TestBaseClasses\\Konfidence.TestBaseClasses.csproj
-		SccProjectName11 = Konfidence.TestBaseClasses
-		SccLocalPath11 = Konfidence.TestBaseClasses
-		SccProjectUniqueName12 = ReferenceReBaser\\ReferenceReBaser.csproj
-		SccProjectName12 = ReferenceReBaser
-		SccLocalPath12 = ReferenceReBaser
+		SccProjectUniqueName11 = ReferenceReBaser\\ReferenceReBaser.csproj
+		SccProjectName11 = ReferenceReBaser
+		SccLocalPath11 = ReferenceReBaser
+		SccProjectUniqueName12 = Konfidence.TestBaseClasses\\Konfidence.BaseClassesTest.csproj
+		SccProjectName12 = Konfidence.TestBaseClasses
+		SccLocalPath12 = Konfidence.TestBaseClasses
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses.vsmdi
