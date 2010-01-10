@@ -6,7 +6,7 @@ namespace Konfidence.Security.Encryption
 {
     /// <summary>
     /// Summary description for ClientKeyEncryption.
-    /// the Client needs to figure out what the maximumkey size is for the OS it is running on
+    /// the Client needs to figure out what the maximumkey size is for the OS it is running on.
     /// the ClientKeyEncryption does this, the ServerKeyEncryption doesn't
     /// </summary>
     public class ClientKeyEncryption : ServerKeyEncryption
