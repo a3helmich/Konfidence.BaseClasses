@@ -22,163 +22,163 @@ namespace Konfidence.UtilHelper.Encryption
     //    }
     //}
 
-    public class Encoder : BaseItem, IDisposable
-    {
-        private EncoderDecoder _Encoder = null;
-        private bool _Disposed = false;
+    //public class Encoder : BaseItem, IDisposable
+    //{
+    //    private EncoderDecoder _Encoder = null;
+    //    private bool _Disposed = false;
 
-        public Encoder(string publicKey)
-        {
-            _Encoder = new EncoderDecoder();
+    //    public Encoder(string publicKey)
+    //    {
+    //        _Encoder = new EncoderDecoder();
 
-            _Encoder.ReadKey(publicKey);
-        }
+    //        _Encoder.ReadKey(publicKey);
+    //    }
 
-        public int KeySize
-        {
-            get
-            {
-                return _Encoder.RsaProvider.KeySize;
-            }
-        }
+    //    public int KeySize
+    //    {
+    //        get
+    //        {
+    //            return _Encoder.RsaProvider.KeySize;
+    //        }
+    //    }
 
-        public ArrayList Encrypt(string rawData)
-        {
-            ArrayList byteList = null;
+    //    public ArrayList Encrypt(string rawData)
+    //    {
+    //        ArrayList byteList = null;
 
-            if (IsAssigned(rawData))
-            {
-                byteList = new ArrayList();
+    //        if (IsAssigned(rawData))
+    //        {
+    //            byteList = new ArrayList();
 
-                string partialString = rawData;
+    //            string partialString = rawData;
 
-                while (partialString.Length > _Encoder.PackageSize)
-                {
-                    string partialStringBlock = partialString.Substring(0, _Encoder.PackageSize);
+    //            while (partialString.Length > _Encoder.PackageSize)
+    //            {
+    //                string partialStringBlock = partialString.Substring(0, _Encoder.PackageSize);
 
-                    byteList.Add(GetEnryptedDataBlock(partialStringBlock));
+    //                byteList.Add(GetEnryptedDataBlock(partialStringBlock));
 
-                    partialString = GetNextPartialString(partialString, _Encoder.PackageSize);
-                }
+    //                partialString = GetNextPartialString(partialString, _Encoder.PackageSize);
+    //            }
 
-                byteList.Add(GetEnryptedDataBlock(partialString));
-            }
+    //            byteList.Add(GetEnryptedDataBlock(partialString));
+    //        }
 
-            return byteList;
-        }
+    //        return byteList;
+    //    }
 
-        private byte[] GetEnryptedDataBlock(string partialString)
-        {
-            ASCIIEncoding asciiEncoding = new ASCIIEncoding();
+    //    private byte[] GetEnryptedDataBlock(string partialString)
+    //    {
+    //        ASCIIEncoding asciiEncoding = new ASCIIEncoding();
 
-            byte[] byteData = asciiEncoding.GetBytes(partialString);
+    //        byte[] byteData = asciiEncoding.GetBytes(partialString);
 
-            byte[] encryptedData = _Encoder.RsaProvider.Encrypt(byteData, false);
+    //        byte[] encryptedData = _Encoder.RsaProvider.Encrypt(byteData, false);
 
-            return encryptedData;
-        }
+    //        return encryptedData;
+    //    }
 
-        private string GetNextPartialString(string fullString, int packageSize)
-        {
-            return fullString.Substring(packageSize, fullString.Length - packageSize);
-        }
+    //    private string GetNextPartialString(string fullString, int packageSize)
+    //    {
+    //        return fullString.Substring(packageSize, fullString.Length - packageSize);
+    //    }
 
 
-        #region IDisposable Members
+    //    #region IDisposable Members
 
-        public void Dispose()
-        {
-            Dispose(true);
+    //    public void Dispose()
+    //    {
+    //        Dispose(true);
 
-            GC.SuppressFinalize(this);
-        }
+    //        GC.SuppressFinalize(this);
+    //    }
 
-        protected virtual void Dispose(bool disposing)
-        {
+    //    protected virtual void Dispose(bool disposing)
+    //    {
 
-            if (!this._Disposed)
-            {
-                if (_Encoder != null)
-                {
-                    _Encoder.Clear(); // resources vrijgeven.
+    //        if (!this._Disposed)
+    //        {
+    //            if (_Encoder != null)
+    //            {
+    //                _Encoder.Clear(); // resources vrijgeven.
 
-                    _Encoder = null;
-                }
-            }
-            _Disposed = true;
+    //                _Encoder = null;
+    //            }
+    //        }
+    //        _Disposed = true;
 
-        }
+    //    }
 
-        #endregion
+    //    #endregion
 
-    }
+    //}
 
-    public class Decoder : IDisposable
-    {
-        private EncoderDecoder _Decoder = null;
-        private bool _Disposed = false;
+    //public class Decoder : IDisposable
+    //{
+    //    private EncoderDecoder _Decoder = null;
+    //    private bool _Disposed = false;
 
-        public Decoder(string privateKey)
-        {
-            _Decoder = new EncoderDecoder();
+    //    public Decoder(string privateKey)
+    //    {
+    //        _Decoder = new EncoderDecoder();
 
-            _Decoder.ReadKey(privateKey);
-        }
+    //        _Decoder.ReadKey(privateKey);
+    //    }
 
-        public string Decrypt(ArrayList encryptedArrayList)
-        {
-            object[] encryptedData = encryptedArrayList.ToArray();
+    //    public string Decrypt(ArrayList encryptedArrayList)
+    //    {
+    //        object[] encryptedData = encryptedArrayList.ToArray();
 
-            ASCIIEncoding asciiEncoding = new ASCIIEncoding();
-            ArrayList encryptedDataList = new ArrayList();
-            StringBuilder rawData = new StringBuilder();
+    //        ASCIIEncoding asciiEncoding = new ASCIIEncoding();
+    //        ArrayList encryptedDataList = new ArrayList();
+    //        StringBuilder rawData = new StringBuilder();
 
-            foreach (object objectItem in encryptedData)
-            {
-                encryptedDataList.Add(objectItem);
-            }
+    //        foreach (object objectItem in encryptedData)
+    //        {
+    //            encryptedDataList.Add(objectItem);
+    //        }
 
-            foreach (byte[] byteData in encryptedDataList)
-            {
-                byte[] decryptedByteData;
+    //        foreach (byte[] byteData in encryptedDataList)
+    //        {
+    //            byte[] decryptedByteData;
 
-                decryptedByteData = _Decoder.RsaProvider.Decrypt(byteData, false);
+    //            decryptedByteData = _Decoder.RsaProvider.Decrypt(byteData, false);
 
-                rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
-            }
+    //            rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
+    //        }
 
-            encryptedDataList.Clear();
+    //        encryptedDataList.Clear();
 
-            return rawData.ToString();
-        }
+    //        return rawData.ToString();
+    //    }
 
-        #region IDisposable Members
+    //    #region IDisposable Members
 
-        public void Dispose()
-        {
-            Dispose(true);
+    //    public void Dispose()
+    //    {
+    //        Dispose(true);
 
-            GC.SuppressFinalize(this);
-        }
+    //        GC.SuppressFinalize(this);
+    //    }
 
-        protected virtual void Dispose(bool disposing)
-        {
+    //    protected virtual void Dispose(bool disposing)
+    //    {
 
-            if (!this._Disposed)
-            {
-                if (_Decoder != null)
-                {
-                    _Decoder.Clear(); // resources vrijgeven.
+    //        if (!this._Disposed)
+    //        {
+    //            if (_Decoder != null)
+    //            {
+    //                _Decoder.Clear(); // resources vrijgeven.
 
-                    _Decoder = null;
-                }
-            }
-            _Disposed = true;
+    //                _Decoder = null;
+    //            }
+    //        }
+    //        _Disposed = true;
 
-        }
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+    //}
 
     ///// <summary>
     ///// Summary description for ClientKeyEncryption.
