@@ -368,7 +368,20 @@ namespace Konfidence.UtilHelper.Encryption
 
                 if (_RsaProvider == null)
                 {
-                    _RsaProvider = new RSACryptoServiceProvider(_MaxBytes * 8, cp);
+                    try
+                    {
+                        _RsaProvider = new RSACryptoServiceProvider(_MaxBytes * 8, cp);
+                    }
+                    catch (CryptographicException e)
+                    {
+                        //if (e.Message.ToLower.StartsWith("object already exixts"))
+                        //{
+                        //}
+                        //else
+                        {
+                            throw e;
+                        }
+                    }
                 }
 
                 if (_MaxBytes > 0 && _RsaProvider.KeySize != _MaxBytes * 8) 
