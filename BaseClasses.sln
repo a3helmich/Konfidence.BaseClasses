@@ -41,9 +41,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceReBaser", "Referen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClassesTest", "Konfidence.BaseClassesTest\Konfidence.BaseClassesTest.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{EA37BC31-3523-495C-A0A0-3828065EE218}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/
 		SccLocalPath0 = .
@@ -83,6 +85,9 @@ Global
 		SccProjectUniqueName12 = Konfidence.BaseClassesTest\\Konfidence.BaseClassesTest.csproj
 		SccProjectName12 = Konfidence.BaseClassesTest
 		SccLocalPath12 = Konfidence.BaseClassesTest
+		SccProjectUniqueName13 = Konfidence.Security\\Konfidence.Security.csproj
+		SccProjectName13 = Konfidence.Security
+		SccLocalPath13 = Konfidence.Security
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +142,10 @@ Global
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA37BC31-3523-495C-A0A0-3828065EE218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA37BC31-3523-495C-A0A0-3828065EE218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA37BC31-3523-495C-A0A0-3828065EE218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA37BC31-3523-495C-A0A0-3828065EE218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
