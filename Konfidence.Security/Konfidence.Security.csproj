@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Encryption\EncoderDecoder.cs" />
     <Compile Include="Encryption\KeyEncryption.cs" />
+    <Compile Include="Encryption\ServerKeyEncryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
