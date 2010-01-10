@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Text;
 using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
@@ -25,6 +26,7 @@ namespace Konfidence.Security.Encryption
         // keysize, dit lijkt te voldoen, moet verder uitgezocht
         private int _MaxBytes = 0; // default voor de serverside
 
+        #region properties
         public RSACryptoServiceProvider RsaProvider
         {
             get { return _RsaProvider; }
@@ -61,6 +63,7 @@ namespace Konfidence.Security.Encryption
                 return _MaxBytes / 2;
             }
         }
+        #endregion properties
 
         public ServerKeyEncryption(int keySize, string containerName)
         {

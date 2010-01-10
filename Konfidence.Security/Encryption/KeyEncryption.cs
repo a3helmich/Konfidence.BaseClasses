@@ -180,29 +180,29 @@ namespace Konfidence.UtilHelper.Encryption
         #endregion
     }
 
-    /// <summary>
-    /// Summary description for ClientKeyEncryption.
-    /// the Client needs to figure out what the maximumkey size is for the OS it is running on
-    /// the ClientKeyEncryption does this, the ServerKeyEncryption doesn't
-    /// </summary>
-    public class ClientKeyEncryption : ServerKeyEncryption
-    {
-        public ClientKeyEncryption(string containerName) : base(0, containerName)
-        {
-        }
+    ///// <summary>
+    ///// Summary description for ClientKeyEncryption.
+    ///// the Client needs to figure out what the maximumkey size is for the OS it is running on
+    ///// the ClientKeyEncryption does this, the ServerKeyEncryption doesn't
+    ///// </summary>
+    //public class ClientKeyEncryption : ServerKeyEncryption
+    //{
+    //    public ClientKeyEncryption(string containerName) : base(0, containerName)
+    //    {
+    //    }
 
-        protected override void InitializeEncryption() 
-        {
-            SetIsClient(true);
+    //    protected override void InitializeEncryption() 
+    //    {
+    //        SetIsClient(true);
 
-            base.InitializeEncryption();
-        }
+    //        base.InitializeEncryption();
+    //    }
 
-        public bool Delete()
-        {
-            return DeleteKeyFromContainer();
-        }
-    }
+    //    public bool Delete()
+    //    {
+    //        return DeleteKeyFromContainer();
+    //    }
+    //}
 
     //public class ServerKeyEncryption : BaseItem, IDisposable
     //{
