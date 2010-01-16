@@ -20,7 +20,9 @@ namespace Konfidence.ReferenceReBaserApp
         {
             overviewListBox.DataSource = overviewList;
 
-            Show();
+            if (ShowDialog() == DialogResult.OK)
+            {
+            }
         }
     }
 }

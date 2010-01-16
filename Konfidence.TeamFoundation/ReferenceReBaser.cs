@@ -87,7 +87,7 @@ namespace Konfidence.TeamFoundation
                     }
                     else
                     {
-                        projectReference.undo(fileName);
+                        //projectReference.undo(fileName);
                     }
                 }
             }
