@@ -34,7 +34,7 @@ namespace Konfidence.TeamFoundation
 
         public void Dispose()
         {
-                _TfsPermissions.Undo(_FileName);
+                _TfsPermissions.CheckIn(_FileName);
         }
 
         #endregion

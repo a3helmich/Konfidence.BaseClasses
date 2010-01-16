@@ -85,6 +85,10 @@ namespace Konfidence.TeamFoundation
 
                         projectXmlDocument.Save(fileName);
                     }
+                    else
+                    {
+                        projectReference.undo(fileName);
+                    }
                 }
             }
         }
