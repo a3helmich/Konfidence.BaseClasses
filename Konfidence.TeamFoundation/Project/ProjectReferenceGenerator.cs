@@ -7,10 +7,17 @@ namespace  Konfidence.TeamFoundation.Project
     {
         private bool _Changed = false;
 
+        private List<string> _ChangeList = new List<string>();
+
         #region simple properties
         public bool Changed
         {
             get { return _Changed; }
+        }
+
+        public List<string> ChangeList
+        {
+            get { return _ChangeList; }
         }
         #endregion simple properties
 
@@ -24,7 +31,7 @@ namespace  Konfidence.TeamFoundation.Project
             }
         }
 
-        // for each refence that has a relative path, replace the path with an absolute one.
+        // for each refence that has a relative path, replace that path with an absolute one.
         private void Execute(XmlNode referenceItemGroup)
         {
             XmlNodeList referenceNodeList = referenceItemGroup.SelectNodes("p:Reference", XmlNamespaceManager);
@@ -35,7 +42,6 @@ namespace  Konfidence.TeamFoundation.Project
 
                 if (IsAssigned(hintPath))
                 {
-
                     string hintpathText = hintPath.InnerText;
 
                     if (!hintpathText.StartsWith(@"c:\"))
@@ -43,10 +49,12 @@ namespace  Konfidence.TeamFoundation.Project
                         if (hintpathText.Contains(@"\References\"))
                         {
                             int referenceIndex = hintpathText.IndexOf(@"\References\");
-                            hintpathText = hintpathText.Substring(referenceIndex);
-                            hintpathText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
 
-                            hintPath.InnerText = hintpathText;
+                            hintpathText = hintpathText.Substring(referenceIndex);
+
+                            _ChangeList.Add(hintpathText);
+
+                            hintPath.InnerText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
 
                             _Changed = true;
                         }
