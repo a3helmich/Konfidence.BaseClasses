@@ -7,7 +7,7 @@
     <ProjectGuid>{3D3FD6C6-3583-4047-B960-EF45030FBDE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.Designpatterns</RootNamespace>
+    <RootNamespace>Konfidence.DesignPatterns</RootNamespace>
     <AssemblyName>Konfidence.Designpatterns</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>DesignPatterns.snk</AssemblyOriginatorKeyFile>
@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SingletonPattern.cs" />
     <Compile Include="Singleton\ISingleton.cs" />
     <Compile Include="Singleton\SingletonException.cs" />
+    <Compile Include="Singleton\SingletonFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DesignPatterns.snk" />

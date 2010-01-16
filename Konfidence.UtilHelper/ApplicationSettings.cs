@@ -1,7 +1,7 @@
 using System.IO;
 using System.Xml;
 using Konfidence.DesignPatterns;
-using Konfidence.Designpatterns.Singleton;
+using Konfidence.DesignPatterns.Singleton;
 
 namespace Konfidence.UtilHelper
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Konfidence.Designpatterns.Singleton
+namespace Konfidence.DesignPatterns.Singleton
 {
     public interface ISingleton
     {
