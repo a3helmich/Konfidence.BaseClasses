@@ -13,6 +13,10 @@ namespace Konfidence.ReferenceReBaserApp
             ReferenceReBaser reBaser = new ReferenceReBaser();
 
             reBaser.ReBaseProjects(solutionFolder);
+
+            ChangesForm changesForm = new ChangesForm();
+
+            changesForm.ShowList(reBaser.OverviewList);
         }
     }
 }

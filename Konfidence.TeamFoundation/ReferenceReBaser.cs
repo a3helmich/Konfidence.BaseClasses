@@ -13,6 +13,12 @@ namespace Konfidence.TeamFoundation
     public class ReferenceReBaser : BaseItem
     {
         private TfsPermissions _TfsPermissions = new TfsPermissions("tfs.konfidence.nl");
+        private List<string> _OverviewList = new List<string>();
+
+        public List<string> OverviewList
+        {
+            get { return _OverviewList; }
+        }
 
         public ReferenceReBaser()
         {
@@ -41,6 +47,8 @@ namespace Konfidence.TeamFoundation
             List<string> projectFileList = new List<string>();
 
             projectFileList.AddRange(Directory.GetFiles(basePath, "*.csproj", SearchOption.AllDirectories));
+
+            _OverviewList.Clear();
 
             foreach (string projectFile in projectFileList)
             {
@@ -73,6 +81,8 @@ namespace Konfidence.TeamFoundation
 
                     if (projectReference.Changed)
                     {
+                        _OverviewList.AddRange(projectReference.ChangeList);
+
                         projectXmlDocument.Save(fileName);
                     }
                 }

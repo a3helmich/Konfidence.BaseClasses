@@ -8,7 +8,7 @@
     <ProjectGuid>{195292BF-209C-423C-ABB1-6AC884122F22}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.ReferenceReBaser</RootNamespace>
+    <RootNamespace>Konfidence.ReferenceReBaserApp</RootNamespace>
     <AssemblyName>ReferenceReBaser</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -39,6 +39,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -49,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangesForm.Designer.cs">
+      <DependentUpon>ChangesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainReferenceReBaser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +70,11 @@
       <Project>{99B3193A-0739-4586-A379-138176C425A7}</Project>
       <Name>Konfidence.TeamFoundation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ChangesForm.resx">
+      <DependentUpon>ChangesForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
