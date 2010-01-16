@@ -64,7 +64,7 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void TestGetGlobalPermissions()
         {
-            Permissions tfsPermissions = new Permissions("tfs.konfidence.nl");
+            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl");
 
             List<string> globalPermissions = tfsPermissions.GetGlobalPermissions();
         }
@@ -72,7 +72,7 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void TestGetItemPermissions()
         {
-            Permissions tfsPermissions = new Permissions("tfs.konfidence.nl");
+            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl");
 
             List<string> itemPermissions = tfsPermissions.GetItemPermissions("$/Konfidence/BaseClasses");
         }
@@ -80,7 +80,7 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void TestCheckOut()
         {
-            Permissions tfsPermissions = new Permissions("tfs.konfidence.nl");
+            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl");
 
             string testFile = @"C:\Projects\Konfidence\BaseClasses\Konfidence.TestBaseClasses\TestData\CheckOutClass.cs";
 
