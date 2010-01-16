@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongName
 		Konfidence.nl.snk = Konfidence.nl.snk
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Designpatterns", "Konfidence.Designpatterns\Konfidence.Designpatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.DesignPatterns", "Konfidence.Designpatterns\Konfidence.DesignPatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundation", "Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj", "{99B3193A-0739-4586-A379-138176C425A7}"
 EndProject

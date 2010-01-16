@@ -96,9 +96,9 @@
       <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
       <Name>Konfidence.BaseClasses</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.Designpatterns\Konfidence.Designpatterns.csproj">
+    <ProjectReference Include="..\Konfidence.Designpatterns\Konfidence.DesignPatterns.csproj">
       <Project>{3D3FD6C6-3583-4047-B960-EF45030FBDE2}</Project>
-      <Name>Konfidence.Designpatterns</Name>
+      <Name>Konfidence.DesignPatterns</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />

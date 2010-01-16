@@ -7,10 +7,6 @@ using Konfidence.Designpatterns.Singleton;
 namespace Konfidence.DesignPatterns
 {
 
-    internal class SingletonException : Exception
-    {
-        public SingletonException(string message) : base(message) { }
-    }
 
     public class SingletonFactory
     {

@@ -167,9 +167,9 @@
       <Project>{687FBFF3-F978-48F9-BF2B-AF242FC8214C}</Project>
       <Name>Konfidence.BaseHelper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.Designpatterns\Konfidence.Designpatterns.csproj">
+    <ProjectReference Include="..\Konfidence.Designpatterns\Konfidence.DesignPatterns.csproj">
       <Project>{3D3FD6C6-3583-4047-B960-EF45030FBDE2}</Project>
-      <Name>Konfidence.Designpatterns</Name>
+      <Name>Konfidence.DesignPatterns</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.UtilHelper\Konfidence.UtilHelper.csproj">
       <Project>{BAD05CC5-FB06-4B17-8089-67CF420159B9}</Project>
