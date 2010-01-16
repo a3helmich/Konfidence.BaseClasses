@@ -2,13 +2,10 @@ using System;
 using System.Reflection;
 using System.Collections;
 using System.Threading;
+using Konfidence.Designpatterns.Singleton;
 
 namespace Konfidence.DesignPatterns
 {
-    public interface ISingleton
-    {
-        // NOP
-    }
 
     internal class SingletonException : Exception
     {
