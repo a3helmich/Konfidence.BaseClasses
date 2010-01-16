@@ -35,10 +35,13 @@ namespace Konfidence.TeamFoundation.Project
             _Root = _XmlDocument.DocumentElement;
             _NameSpaceURI = _Root.NamespaceURI;
 
+            // create a shortcut namespace reference
             _XmlNamespaceManager = new XmlNamespaceManager(_XmlDocument.NameTable);
             _XmlNamespaceManager.AddNamespace("p", _NameSpaceURI);
         }
 
+        // - search for an itemgroup node which contains Reference nodes
+        // - if there is not an itemgroup, create one, to contain newly created references
         protected XmlNode GetItemGroup(string itemGroupName)
         {
             XmlNodeList itemGroupList = _Root.SelectNodes("p:ItemGroup", _XmlNamespaceManager);
@@ -61,8 +64,7 @@ namespace Konfidence.TeamFoundation.Project
 
             if (!IsAssigned(foundItemGroup))
             {
-                foundItemGroup = _XmlDocument.CreateElement("ItemGroup", _NameSpaceURI);
-                _Root.AppendChild(foundItemGroup);
+                _Root.AppendChild(_XmlDocument.CreateElement("ItemGroup", _NameSpaceURI));
             }
 
             return foundItemGroup;

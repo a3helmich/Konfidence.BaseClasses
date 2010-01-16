@@ -7,23 +7,27 @@ namespace  Konfidence.TeamFoundation.Project
     {
         private bool _Changed = false;
 
+        #region simple properties
         public bool Changed
         {
             get { return _Changed; }
         }
-
-        private XmlNode _ReferenceItemGroup = null;
+        #endregion simple properties
 
         public ProjectReferenceGenerator(ProjectXmlDocument xmlDocument) : base(xmlDocument)
         {
-            _ReferenceItemGroup = GetItemGroup("reference");
+            XmlNode referenceItemGroup = GetItemGroup("reference");
 
-            Execute();
+            if (IsAssigned(referenceItemGroup))
+            {
+                Execute(referenceItemGroup);
+            }
         }
 
-        private void Execute()
+        // for each refence that has a relative path, replace the path with an absolute one.
+        private void Execute(XmlNode referenceItemGroup)
         {
-            XmlNodeList referenceNodeList = _ReferenceItemGroup.SelectNodes("p:Reference", XmlNamespaceManager);
+            XmlNodeList referenceNodeList = referenceItemGroup.SelectNodes("p:Reference", XmlNamespaceManager);
 
             foreach (XmlNode referenceNode in referenceNodeList)
             {
