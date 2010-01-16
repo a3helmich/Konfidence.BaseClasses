@@ -81,7 +81,7 @@ namespace Konfidence.UtilHelper
     {
         static public IApplicationLogger ApplicationLogger(string logFile)
         {
-            IApplicationLogger ApplicationLogger = Instance(typeof(ApplicationLogger)) as IApplicationLogger;
+            IApplicationLogger ApplicationLogger = GetInstance(typeof(ApplicationLogger)) as IApplicationLogger;
             ApplicationLogger.LogFile = logFile;
             ApplicationLogger.LogFile = logFile;
             return ApplicationLogger as IApplicationLogger;

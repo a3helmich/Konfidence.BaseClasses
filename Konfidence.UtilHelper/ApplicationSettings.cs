@@ -33,10 +33,10 @@ namespace Konfidence.UtilHelper
 
         static public IApplicationSettings ApplicationSettings(string application)
         {
-            IApplicationSettings applicationSettings = Instance(typeof(ApplicationSettings)) as IApplicationSettings;
+            ApplicationSettings applicationSettings = GetInstance(typeof(ApplicationSettings)) as ApplicationSettings;
 
-            (applicationSettings as ApplicationSettings)._Application = application;
-            (applicationSettings as ApplicationSettings)._RootPath = _RootPath;
+            applicationSettings._Application = application;
+            applicationSettings._RootPath = _RootPath;
 
             return applicationSettings;
         }

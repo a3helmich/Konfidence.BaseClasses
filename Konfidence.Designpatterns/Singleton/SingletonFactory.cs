@@ -21,7 +21,7 @@ namespace Konfidence.DesignPatterns.Singleton
         }
 
         // WORMGAATJES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        static protected ISingleton Instance(Type singletonType)
+        static protected ISingleton GetInstance(Type singletonType)
         {
             if (singletonType == null)
                 return null;
