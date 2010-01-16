@@ -12,7 +12,7 @@ namespace Konfidence.TeamFoundation
 {
     public class ReferenceReBaser : BaseItem
     {
-        private Permissions _tfsPermissions = new Permissions("tfs.konfidence.nl");
+        private TfsPermissions _TfsPermissions = new TfsPermissions("tfs.konfidence.nl");
 
         public ReferenceReBaser()
         {
@@ -31,7 +31,7 @@ namespace Konfidence.TeamFoundation
 
                 if (IsAssigned(tfsServerName))
                 {
-                    _tfsPermissions = new Permissions(tfsServerName.InnerText);
+                    _TfsPermissions = new TfsPermissions(tfsServerName.InnerText);
                 }
             }
         }
@@ -48,11 +48,23 @@ namespace Konfidence.TeamFoundation
             }
         }
 
+        private TfsCheckOut GetTfsCheckOut(string fileName)
+        {
+            TfsCheckOut tfsCheckOut = null;
+
+            if (IsAssigned(_TfsPermissions))
+            {
+                tfsCheckOut = new TfsCheckOut(_TfsPermissions, fileName);
+            }
+
+            return tfsCheckOut;
+        }
+
         private void RebaseProject(string fileName)
         {
-            if (IsAssigned(_tfsPermissions))
+            using (TfsCheckOut tfsCheckOut = GetTfsCheckOut(fileName))
             {
-                if (_tfsPermissions.CheckOut(fileName))
+                if (tfsCheckOut.IsValid)
                 {
                     ProjectXmlDocument projectXmlDocument = new ProjectXmlDocument();
                     projectXmlDocument.Load(fileName);
@@ -62,12 +74,6 @@ namespace Konfidence.TeamFoundation
                     if (projectReference.Changed)
                     {
                         projectXmlDocument.Save(fileName);
-
-                        _tfsPermissions.CheckIn(fileName);
-                    }
-                    else
-                    {
-                        _tfsPermissions.Undo(fileName);
                     }
                 }
             }
