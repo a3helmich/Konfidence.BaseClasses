@@ -16,6 +16,7 @@ namespace Konfidence.TeamFoundation
 
         public ReferenceReBaser()
         {
+            // if the Team Foundation Server differs from the konfidence server. get this servername from 'ProjectReBaser.Config.xml'
             string configFileName = @"\Projects\References\Config\ProjectReBaser.Config.xml";
 
             if (File.Exists(configFileName))
@@ -32,6 +33,18 @@ namespace Konfidence.TeamFoundation
                 {
                     _tfsPermissions = new Permissions(tfsServerName.InnerText);
                 }
+            }
+        }
+
+        public void ReBaseProjects(string basePath)
+        {
+            List<string> projectFileList = new List<string>();
+
+            projectFileList.AddRange(Directory.GetFiles(basePath, "*.csproj", SearchOption.AllDirectories));
+
+            foreach (string projectFile in projectFileList)
+            {
+                RebaseProject(projectFile);
             }
         }
 
@@ -57,18 +70,6 @@ namespace Konfidence.TeamFoundation
                         _tfsPermissions.Undo(fileName);
                     }
                 }
-            }
-        }
-
-        public void ReBaseProjects(string basePath)
-        {
-            List<string> projectFileList = new List<string>();
-
-            projectFileList.AddRange(Directory.GetFiles(basePath, "*.csproj", SearchOption.AllDirectories));
-
-            foreach (string projectFile in projectFileList)
-            {
-                RebaseProject(projectFile);
             }
         }
     }
