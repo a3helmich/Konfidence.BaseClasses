@@ -11,7 +11,7 @@ using System.IO;
 
 namespace Konfidence.TeamFoundation
 {
-    public class Permissions: BaseItem
+    public class TfsPermissions: BaseItem
     {
         private string _TfsServer = string.Empty;
         private TeamFoundationServer _Tfs = null;
@@ -19,7 +19,7 @@ namespace Konfidence.TeamFoundation
 
         private List<string> _CheckOutList = new List<string>();
 
-        public Permissions(string tfsServer)
+        public TfsPermissions(string tfsServer)
         {
             _TfsServer = tfsServer;
         }
