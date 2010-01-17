@@ -52,7 +52,7 @@ namespace  Konfidence.TeamFoundation.Project
 
                             hintpathText = hintpathText.Substring(referenceIndex);
 
-                            _ChangeList.Add(hintpathText);
+                            _ChangeList.Add(XmlDocument.FileName + " - " + hintpathText);
 
                             hintPath.InnerText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
 

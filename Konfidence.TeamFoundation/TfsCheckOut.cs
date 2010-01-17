@@ -10,6 +10,7 @@ namespace Konfidence.TeamFoundation
         private string _FileName = string.Empty;
         private TfsPermissions _TfsPermissions = null;
         private bool _IsValid = false;
+        private bool _IsAllreadyCheckedOut = false;
 
         public bool IsValid
         {
@@ -21,11 +22,16 @@ namespace Konfidence.TeamFoundation
             _FileName = fileName;
             _TfsPermissions = tfsPermissions;
 
-            if (!string.IsNullOrEmpty(fileName))
+            _IsAllreadyCheckedOut = tfsPermissions.IsCheckedOut(fileName);
+
+            if (!_IsAllreadyCheckedOut)
             {
-                if (tfsPermissions.CheckOut(fileName))
+                if (!string.IsNullOrEmpty(fileName))
                 {
-                    _IsValid = true;
+                    if (tfsPermissions.CheckOut(fileName))
+                    {
+                        _IsValid = true;
+                    }
                 }
             }
         }
@@ -34,7 +40,10 @@ namespace Konfidence.TeamFoundation
 
         public void Dispose()
         {
+            if (!_IsAllreadyCheckedOut)
+            {
                 _TfsPermissions.CheckIn(_FileName);
+            }
         }
 
         #endregion
