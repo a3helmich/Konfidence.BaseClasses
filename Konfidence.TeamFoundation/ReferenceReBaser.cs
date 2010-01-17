@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using Konfidence.TeamFoundation.Project;
 using System.Xml;
-using System.IO;
 using Konfidence.Base;
+using Konfidence.TeamFoundation.Project;
 
 
 namespace Konfidence.TeamFoundation
 {
+    public class TfsServerException : Exception
+    {
+        public TfsServerException(string message) : base(message) { }
+    }
+
     public class ReferenceReBaser : BaseItem
     {
         private TfsPermissions _TfsPermissions = new TfsPermissions("tfs.konfidence.nl");
@@ -63,6 +68,10 @@ namespace Konfidence.TeamFoundation
             if (IsAssigned(_TfsPermissions))
             {
                 tfsCheckOut = new TfsCheckOut(_TfsPermissions, fileName);
+            }
+            else
+            {
+                throw new TfsServerException("server permission voor '" + _TfsPermissions.TfsServer + "' kan niet worden aangemaakt."); 
             }
 
             return tfsCheckOut;

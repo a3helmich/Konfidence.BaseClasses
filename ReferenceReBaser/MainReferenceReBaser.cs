@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Konfidence.TeamFoundation;
+using System.Windows.Forms;
 
 namespace Konfidence.ReferenceReBaserApp
 {
@@ -10,13 +11,21 @@ namespace Konfidence.ReferenceReBaserApp
     {
         internal void Execute(string solutionFolder)
         {
-            ReferenceReBaser reBaser = new ReferenceReBaser();
+            try
+            {
 
-            reBaser.ReBaseProjects(solutionFolder);
+                ReferenceReBaser reBaser = new ReferenceReBaser();
 
-            ChangesForm changesForm = new ChangesForm();
+                reBaser.ReBaseProjects(solutionFolder);
 
-            changesForm.ShowList(reBaser.OverviewList);
+                ChangesForm changesForm = new ChangesForm();
+
+                changesForm.ShowList(reBaser.OverviewList);
+            }
+            catch (TfsServerException tfsEx)
+            {
+                MessageBox.Show(tfsEx.Message);
+            }
         }
     }
 }

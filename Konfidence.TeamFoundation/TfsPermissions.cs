@@ -14,6 +14,11 @@ namespace Konfidence.TeamFoundation
     public class TfsPermissions: BaseItem
     {
         private string _TfsServer = string.Empty;
+
+        public string TfsServer
+        {
+            get { return _TfsServer; }
+        }
         private TeamFoundationServer _Tfs = null;
         private VersionControlServer _VcServer = null;
 
