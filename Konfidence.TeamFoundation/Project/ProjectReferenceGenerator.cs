@@ -23,44 +23,61 @@ namespace  Konfidence.TeamFoundation.Project
 
         public ProjectReferenceGenerator(ProjectXmlDocument xmlDocument) : base(xmlDocument)
         {
+            ReBase();
+        }
+
+        public void ReBase()
+        {
             XmlNode referenceItemGroup = GetItemGroup("reference");
 
             if (IsAssigned(referenceItemGroup))
             {
-                Execute(referenceItemGroup);
+                ExecuteReBase(referenceItemGroup);
             }
         }
 
         // for each refence that has a relative path, replace that path with an absolute one.
-        private void Execute(XmlNode referenceItemGroup)
+        private void ExecuteReBase(XmlNode referenceItemGroup)
         {
             XmlNodeList referenceNodeList = referenceItemGroup.SelectNodes("p:Reference", XmlNamespaceManager);
 
             foreach (XmlNode referenceNode in referenceNodeList)
             {
-                XmlNode hintPath = referenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager);
-
-                if (IsAssigned(hintPath))
+                if (ReBaseReference(referenceNode))
                 {
-                    string hintpathText = hintPath.InnerText;
+                    _Changed = true;
+                }
+            }
+        }
 
-                    if (!hintpathText.StartsWith(@"c:\"))
+        private bool ReBaseReference(XmlNode referenceNode)
+        {
+            bool changed = false;
+
+            XmlNode hintPath = referenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager);
+
+            if (IsAssigned(hintPath))
+            {
+                string hintpathText = hintPath.InnerText;
+
+                if (!hintpathText.StartsWith(@"c:\"))
+                {
+                    if (hintpathText.Contains(@"\References\"))
                     {
-                        if (hintpathText.Contains(@"\References\"))
-                        {
-                            int referenceIndex = hintpathText.IndexOf(@"\References\");
+                        int referenceIndex = hintpathText.IndexOf(@"\References\");
 
-                            hintpathText = hintpathText.Substring(referenceIndex);
+                        hintpathText = hintpathText.Substring(referenceIndex);
 
-                            _ChangeList.Add(XmlDocument.FileName + " - " + hintpathText);
+                        _ChangeList.Add(XmlDocument.FileName + " - " + hintpathText);
 
-                            hintPath.InnerText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
+                        hintPath.InnerText = hintpathText.Replace(@"\References\", @"c:\projects\References\");
 
-                            _Changed = true;
-                        }
+                        changed = true;
                     }
                 }
             }
+
+            return changed;
         }
     }
 }
