@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTfsXmlDocument.cs" />
     <Compile Include="TfsCheckOut.cs" />
     <Compile Include="TfsPermissions.cs" />
     <Compile Include="Project\ProjectBaseGenerator.cs" />
@@ -73,4 +74,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).dll" "C:\Projects\References\$(ConfigurationName)" /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>
