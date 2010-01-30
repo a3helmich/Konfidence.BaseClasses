@@ -34,20 +34,20 @@ namespace  Konfidence.TeamFoundation.Project
         // for each refence that has a relative path, replace that path with an absolute one.
         private void ExecuteReBase(string fromBase, string toBase)
         {
-            foreach (XmlNode referenceNode in projectXmlDocument.DllReferenceItemGroupList)
+            foreach (XmlNode ddlReferenceNode in projectXmlDocument.DllReferenceItemGroupList)
             {
-                if (ReBaseReference(referenceNode, fromBase, toBase))
+                if (ReBaseReference(ddlReferenceNode, fromBase, toBase))
                 {
                     _Changed = true;
                 }
             }
         }
 
-        private bool ReBaseReference(XmlNode referenceNode, string fromBase, string toBase)
+        private bool ReBaseReference(XmlNode dllReferenceNode, string fromBase, string toBase)
         {
             bool changed = false;
 
-            XmlNode hintPath = referenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager);
+            XmlNode hintPath = dllReferenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager);
 
             if (IsAssigned(hintPath))
             {

@@ -31,7 +31,8 @@ namespace Konfidence.TeamFoundation
             get { return _Root; }
         }
 
-        protected string NameSpaceURI 
+        // TODO : weer protected
+        public string NameSpaceURI 
         {
             get { return _NameSpaceURI; }
         }
