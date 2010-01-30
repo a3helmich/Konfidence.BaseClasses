@@ -18,6 +18,7 @@ namespace Konfidence.TeamFoundation.Project
                 {
                     XmlElement hintPath = TfsXmlNode.SelectSingleNode("p:HintPath", XmlNamespaceManager) as XmlElement;
                 }
+
                 return _HintPath; 
             }
         }
