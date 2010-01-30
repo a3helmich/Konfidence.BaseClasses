@@ -28,20 +28,13 @@ namespace  Konfidence.TeamFoundation.Project
 
         public void ReBase(string fromBase, string toBase)
         {
-            XmlNode referenceItemGroup = GetItemGroup("reference");
-
-            if (IsAssigned(referenceItemGroup))
-            {
-                ExecuteReBase(referenceItemGroup, fromBase, toBase);
-            }
+            ExecuteReBase(fromBase, toBase);
         }
 
         // for each refence that has a relative path, replace that path with an absolute one.
-        private void ExecuteReBase(XmlNode referenceItemGroup, string fromBase, string toBase)
+        private void ExecuteReBase(string fromBase, string toBase)
         {
-            XmlNodeList referenceNodeList = referenceItemGroup.SelectNodes("p:Reference", XmlNamespaceManager);
-
-            foreach (XmlNode referenceNode in referenceNodeList)
+            foreach (XmlNode referenceNode in projectXmlDocument.DllReferenceItemGroupList)
             {
                 if (ReBaseReference(referenceNode, fromBase, toBase))
                 {
