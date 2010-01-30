@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTfsXmlDocument.cs" />
+    <Compile Include="Exceptions\TfsServerException.cs" />
+    <Compile Include="Solution\SolutionXmlDocument.cs" />
     <Compile Include="TfsCheckOut.cs" />
     <Compile Include="TfsPermissions.cs" />
     <Compile Include="Project\ProjectBaseGenerator.cs" />

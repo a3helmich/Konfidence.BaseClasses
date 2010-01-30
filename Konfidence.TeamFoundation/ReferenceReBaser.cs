@@ -6,15 +6,10 @@ using System.Text;
 using System.Xml;
 using Konfidence.Base;
 using Konfidence.TeamFoundation.Project;
-
+using Konfidence.TeamFoundation.Exceptions;
 
 namespace Konfidence.TeamFoundation
 {
-    public class TfsServerException : Exception
-    {
-        public TfsServerException(string message) : base(message) { }
-    }
-
     public class ReferenceReBaser : BaseItem
     {
         private TfsPermissions _TfsPermissions = new TfsPermissions("tfs.konfidence.nl");
