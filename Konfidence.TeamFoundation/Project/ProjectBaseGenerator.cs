@@ -42,37 +42,37 @@ namespace Konfidence.TeamFoundation.Project
 
         // - search for an itemgroup node which contains Reference nodes
         // - if there is not an itemgroup, create one, to contain newly created references
-        protected XmlNode GetItemGroup(string itemGroupName)
-        {
-            XmlNodeList itemGroupList = _Root.SelectNodes("p:ItemGroup", _XmlNamespaceManager);
+        //protected XmlNode GetItemGroup(string itemGroupName)
+        //{
+        //    XmlNodeList itemGroupList = _Root.SelectNodes("p:ItemGroup", _XmlNamespaceManager);
 
-            XmlNode foundItemGroup = null;
+        //    XmlNode foundItemGroup = null;
 
-            itemGroupName = itemGroupName.ToLower();
+        //    itemGroupName = itemGroupName.ToLower();
 
-            foreach (XmlNode itemGroup in itemGroupList)
-            {
-                string currentItemGroupName = itemGroup.FirstChild.Name.ToLower();
+        //    foreach (XmlNode itemGroup in itemGroupList)
+        //    {
+        //        string currentItemGroupName = itemGroup.FirstChild.Name.ToLower();
 
-                if (itemGroupName.Equals(currentItemGroupName))
-                {
-                    foundItemGroup = itemGroup;
+        //        if (itemGroupName.Equals(currentItemGroupName))
+        //        {
+        //            foundItemGroup = itemGroup;
 
-                    break;
-                }
-            }
+        //            break;
+        //        }
+        //    }
 
-            if (!IsAssigned(foundItemGroup))
-            {
-                _Root.AppendChild(_XmlDocument.CreateElement("ItemGroup", _NameSpaceURI));
-            }
+        //    if (!IsAssigned(foundItemGroup))
+        //    {
+        //        _Root.AppendChild(_XmlDocument.CreateElement("ItemGroup", _NameSpaceURI));
+        //    }
 
-            return foundItemGroup;
-        }
+        //    return foundItemGroup;
+        //}
 
-        protected XmlElement CreateElement(string elementName)
-        {
-            return projectXmlDocument.CreateElement(elementName, _NameSpaceURI);
-        }
+        //protected XmlElement CreateElement(string elementName)
+        //{
+        //    return projectXmlDocument.CreateElement(elementName, _NameSpaceURI);
+        //}
     }
 }

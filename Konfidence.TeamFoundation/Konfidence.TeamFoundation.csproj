@@ -53,7 +53,9 @@
   <ItemGroup>
     <Compile Include="BaseTfsXmlDocument.cs" />
     <Compile Include="BaseTfsXmlElement.cs" />
+    <Compile Include="BaseTfsXmlNode.cs" />
     <Compile Include="Exceptions\TfsServerException.cs" />
+    <Compile Include="Project\DllReferenceNode.cs" />
     <Compile Include="Solution\SolutionXmlDocument.cs" />
     <Compile Include="TfsCheckOut.cs" />
     <Compile Include="TfsPermissions.cs" />

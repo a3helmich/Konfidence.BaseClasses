@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace  Konfidence.TeamFoundation.Project
 {
-    public class ProjectReferenceGenerator: ProjectBaseGenerator
+    public class ProjectReferenceGenerator  : ProjectBaseGenerator
     {
         private bool _Changed = false;
 
@@ -47,7 +47,7 @@ namespace  Konfidence.TeamFoundation.Project
         {
             bool changed = false;
 
-            XmlNode hintPath = dllReferenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager);
+            XmlElement hintPath = dllReferenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager) as XmlElement;
 
             if (IsAssigned(hintPath))
             {
