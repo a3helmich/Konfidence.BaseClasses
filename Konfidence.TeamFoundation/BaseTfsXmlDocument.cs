@@ -68,6 +68,7 @@ namespace Konfidence.TeamFoundation
             return itemGroupList.SelectNodes("p:" + itemGroupName, XmlNamespaceManager);
         }
 
+        // - search for an itemgroup node which contains 'itemGroupName' nodes
         private XmlNode GetItemGroup(string itemGroupName)
         {
             XmlNodeList itemGroupList = Root.SelectNodes("p:ItemGroup", XmlNamespaceManager);
