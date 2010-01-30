@@ -7,17 +7,18 @@ using System.Xml;
 using Konfidence.Base;
 using Konfidence.TeamFoundation.Project;
 using Konfidence.TeamFoundation.Exceptions;
+using Konfidence.TeamFoundation.Solution;
 
 namespace Konfidence.TeamFoundation
 {
     public class ReferenceReBaser : BaseItem
     {
         private TfsPermissions _TfsPermissions = new TfsPermissions("tfs.konfidence.nl");
-        private List<string> _OverviewList = new List<string>();
+        private List<string> _RebasedProjectList = new List<string>();
 
-        public List<string> OverviewList
+        public List<string> RebasedProjectList
         {
-            get { return _OverviewList; }
+            get { return _RebasedProjectList; }
         }
 
         public ReferenceReBaser()
@@ -42,15 +43,13 @@ namespace Konfidence.TeamFoundation
             }
         }
 
-        public void ReBaseProjects(string basePath)
+        public void ReBaseProjects(string solutionPath)
         {
-            List<string> projectFileList = new List<string>();
+            _RebasedProjectList.Clear();
 
-            projectFileList.AddRange(Directory.GetFiles(basePath, "*.csproj", SearchOption.AllDirectories));
+            SolutionXmlDocument solutionXmlDocument = new SolutionXmlDocument(solutionPath);
 
-            _OverviewList.Clear();
-
-            foreach (string projectFile in projectFileList)
+            foreach (string projectFile in solutionXmlDocument.GetProjectFileList())
             {
                 RebaseProject(projectFile);
             }
@@ -85,7 +84,7 @@ namespace Konfidence.TeamFoundation
 
                     if (projectReference.Changed)
                     {
-                        _OverviewList.AddRange(projectReference.ChangeList);
+                        _RebasedProjectList.AddRange(projectReference.ChangeList);
 
                         projectXmlDocument.Save(fileName);
                     }

@@ -12,7 +12,7 @@ namespace Konfidence.TeamFoundation.Project
         private XmlNamespaceManager _XmlNamespaceManager;
 
         #region properties
-        public ProjectXmlDocument XmlDocument
+        public ProjectXmlDocument projectXmlDocument
         {
             get { return _XmlDocument; }
         }
@@ -72,7 +72,7 @@ namespace Konfidence.TeamFoundation.Project
 
         protected XmlElement CreateElement(string elementName)
         {
-            return XmlDocument.CreateElement(elementName, _NameSpaceURI);
+            return projectXmlDocument.CreateElement(elementName, _NameSpaceURI);
         }
     }
 }

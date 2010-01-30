@@ -68,7 +68,7 @@ namespace  Konfidence.TeamFoundation.Project
 
                         hintpathText = hintpathText.Substring(referenceIndex);
 
-                        _ChangeList.Add(XmlDocument.FileName + " - " + hintpathText);
+                        _ChangeList.Add(projectXmlDocument.FileName + " - " + hintpathText);
 
                         hintPath.InnerText = hintpathText.Replace(fromBase, toBase);
 
