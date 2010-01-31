@@ -6,6 +6,7 @@ namespace Konfidence.TeamFoundation.Project
     public class ProjectXmlDocument : BaseTfsXmlDocument
     {
         private const string DLL_REFERENCE_ITEMGROUP_NAME = "Reference";
+        private const string PROJECT_REFERENCE_ITEMGROUP_NAME = "ProjectReference";
         private const string PROJECT_COMPILE_ITEMGROUP_NAME = "Compile";
 
         private List<DllReferenceNode> _DllReferenceItemGroupList = null;
@@ -29,13 +30,23 @@ namespace Konfidence.TeamFoundation.Project
             }
         }
 
-        // TODO : when a DllReferenceNode is added to the Xml it must also be added to the list
+        // TODO : when a CompileProjectNode is added to the Xml it must also be added to the list
         // TODO : XmlNodeList omzetten naar List<CompileProjectNode>
         public XmlNodeList CompileProjectItemGroupList
         {
             get
             {
                 return GetItemGroupList(PROJECT_COMPILE_ITEMGROUP_NAME);
+            }
+        }
+
+        // TODO : when a ProjectReferenceNode is added to the Xml it must also be added to the list
+        // TODO : XmlNodeList omzetten naar List<ProjectReferenceNode>
+        public XmlNodeList ProjectReferenceItemGroupList
+        {
+            get
+            {
+                return GetItemGroupList(PROJECT_REFERENCE_ITEMGROUP_NAME);
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.IO;
 using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation
@@ -10,6 +11,7 @@ namespace Konfidence.TeamFoundation
     {
         private bool _Changed = false;
         private string _FullFileName = string.Empty;
+        private string _PathName = string.Empty;
 
         private XmlElement _Root;
         private string _NameSpaceURI;
@@ -24,6 +26,11 @@ namespace Konfidence.TeamFoundation
         public string FileName // TODO : moet protected worden
         {
             get { return _FullFileName; }
+        }
+
+        protected string PathName
+        {
+            get { return _PathName; }
         }
 
         protected XmlElement Root
@@ -47,6 +54,8 @@ namespace Konfidence.TeamFoundation
         {
 
             _FullFileName = fullFileName;
+
+            _PathName = Path.GetDirectoryName(fullFileName) + @"\";
 
             base.Load(_FullFileName);
 
