@@ -26,12 +26,12 @@ namespace  Konfidence.TeamFoundation.Project
             string fromBase = @"\References\";
             string toBase = @"c:\projects\References\";
 
-            DllReferenceRebase(fromBase, toBase, projectXmlDocument);
+            DllReferenceRebase(projectXmlDocument, fromBase, toBase);
         }
 
         // TODO : naar ProjectXmlDocument verplaatsen?
         // for each dllRefence that has a relative path, replace that path with an absolute one.
-        private void DllReferenceRebase(string fromBase, string toBase, ProjectXmlDocument projectXmlDocument)
+        private void DllReferenceRebase(ProjectXmlDocument projectXmlDocument, string fromBase, string toBase)
         {
             foreach (DllReferenceNode dllReferenceNode in projectXmlDocument.DllReferenceItemGroupList)
             {
