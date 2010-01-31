@@ -37,7 +37,8 @@ namespace Konfidence.TeamFoundation
             get { return _NameSpaceURI; }
         }
 
-        private XmlNamespaceManager XmlNamespaceManager
+        // TODO : weer naar protected brengen
+        protected XmlNamespaceManager XmlNamespaceManager
         {
             get { return _XmlNamespaceManager; }
         }

@@ -59,7 +59,6 @@
     <Compile Include="Solution\SolutionXmlDocument.cs" />
     <Compile Include="TfsCheckOut.cs" />
     <Compile Include="TfsPermissions.cs" />
-    <Compile Include="Project\ProjectBaseGenerator.cs" />
     <Compile Include="Project\ProjectReferenceGenerator.cs" />
     <Compile Include="Project\ProjectXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

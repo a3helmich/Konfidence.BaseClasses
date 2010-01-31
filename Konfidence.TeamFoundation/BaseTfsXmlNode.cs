@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Konfidence.TeamFoundation
 {
-    class BaseTfsXmlNode : BaseItem
+    public class BaseTfsXmlNode : BaseItem
     {
         private XmlNode _TfsXmlNode = null;
 

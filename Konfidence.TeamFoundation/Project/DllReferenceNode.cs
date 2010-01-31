@@ -6,25 +6,63 @@ using System.Xml;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    internal class DllReferenceNode : BaseTfsXmlNode
+    public class DllReferenceNode : BaseTfsXmlNode
     {
         private XmlElement _HintPath = null;
+        private XmlNamespaceManager _XmlNamespaceManager;
 
-        public XmlElement HintPath
+        public string HintPath
         {
             get 
             {
                 if (!IsAssigned(_HintPath))
                 {
-                    XmlElement hintPath = TfsXmlNode.SelectSingleNode("p:HintPath", XmlNamespaceManager) as XmlElement;
+                    _HintPath = TfsXmlNode.SelectSingleNode("p:HintPath", _XmlNamespaceManager) as XmlElement;
                 }
 
-                return _HintPath; 
+                return _HintPath.InnerText; 
             }
         }
 
-        public DllReferenceNode(XmlElement xmlElement): base(xmlElement)
+        private void SetHintPath(string hintPath)
         {
+            if (!IsAssigned(_HintPath))
+            {
+                _HintPath = TfsXmlNode.SelectSingleNode("p:HintPath", _XmlNamespaceManager) as XmlElement;
+            }
+
+            _HintPath.InnerText = hintPath;
         }
+
+        public DllReferenceNode(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager) : base(xmlNode)
+        {
+            _XmlNamespaceManager = xmlNamespaceManager;
+        }
+
+        public bool ReBaseReference(string fromBase, string toBase)
+        {
+            bool changed = false;
+            string hintPath = this.HintPath;
+
+            if (!string.IsNullOrEmpty(hintPath))
+            {
+                if (!hintPath.StartsWith(toBase))
+                {
+                    if (hintPath.Contains(fromBase))
+                    {
+                        int referenceIndex = hintPath.IndexOf(fromBase);
+
+                        hintPath = hintPath.Substring(referenceIndex);
+
+                        SetHintPath(hintPath.Replace(fromBase, toBase));
+
+                        changed = true;
+                    }
+                }
+            }
+
+            return changed;
+        }
+
     }
 }

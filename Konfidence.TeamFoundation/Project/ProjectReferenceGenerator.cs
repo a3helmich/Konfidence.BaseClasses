@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace  Konfidence.TeamFoundation.Project
 {
-    public class ProjectReferenceGenerator  : ProjectBaseGenerator
+    public class ProjectReferenceGenerator  
     {
         private bool _Changed = false;
 
@@ -21,56 +21,29 @@ namespace  Konfidence.TeamFoundation.Project
         }
         #endregion simple properties
 
-        public ProjectReferenceGenerator(ProjectXmlDocument xmlDocument) : base(xmlDocument)
+        public ProjectReferenceGenerator(ProjectXmlDocument projectXmlDocument) 
         {
-            ReBase(@"\References\", @"c:\projects\References\");
+            string fromBase = @"\References\";
+            string toBase = @"c:\projects\References\";
+
+            DllReferenceRebase(fromBase, toBase, projectXmlDocument);
         }
 
-        public void ReBase(string fromBase, string toBase)
+        // TODO : naar ProjectXmlDocument verplaatsen?
+        // for each dllRefence that has a relative path, replace that path with an absolute one.
+        private void DllReferenceRebase(string fromBase, string toBase, ProjectXmlDocument projectXmlDocument)
         {
-            ExecuteReBase(fromBase, toBase);
-        }
-
-        // for each refence that has a relative path, replace that path with an absolute one.
-        private void ExecuteReBase(string fromBase, string toBase)
-        {
-            foreach (XmlNode ddlReferenceNode in projectXmlDocument.DllReferenceItemGroupList)
+            foreach (DllReferenceNode dllReferenceNode in projectXmlDocument.DllReferenceItemGroupList)
             {
-                if (ReBaseReference(ddlReferenceNode, fromBase, toBase))
+                string changeListText = projectXmlDocument.FileName + " - " + dllReferenceNode.HintPath;
+
+                if (dllReferenceNode.ReBaseReference(fromBase, toBase))
                 {
+                    _ChangeList.Add(changeListText);
+
                     _Changed = true;
                 }
             }
-        }
-
-        private bool ReBaseReference(XmlNode dllReferenceNode, string fromBase, string toBase)
-        {
-            bool changed = false;
-
-            XmlElement hintPath = dllReferenceNode.SelectSingleNode("p:HintPath", XmlNamespaceManager) as XmlElement;
-
-            if (IsAssigned(hintPath))
-            {
-                string hintpathText = hintPath.InnerText;
-
-                if (!hintpathText.StartsWith(toBase))
-                {
-                    if (hintpathText.Contains(fromBase))
-                    {
-                        int referenceIndex = hintpathText.IndexOf(fromBase);
-
-                        hintpathText = hintpathText.Substring(referenceIndex);
-
-                        _ChangeList.Add(projectXmlDocument.FileName + " - " + hintpathText);
-
-                        hintPath.InnerText = hintpathText.Replace(fromBase, toBase);
-
-                        changed = true;
-                    }
-                }
-            }
-
-            return changed;
         }
     }
 }

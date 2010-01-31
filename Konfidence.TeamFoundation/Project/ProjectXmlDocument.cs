@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using System.Collections.Generic;
 
 namespace Konfidence.TeamFoundation.Project
 {
@@ -6,11 +7,25 @@ namespace Konfidence.TeamFoundation.Project
     {
         private const string DLL_REFERENCE_ITEMGROUP_NAME = "Reference";
 
-        public XmlNodeList DllReferenceItemGroupList
+        private List<DllReferenceNode> _DllReferenceItemGroupList = null;
+
+        // TODO : when a DllReferenceNode is added to the Xml it must also be added to the list
+
+        public List<DllReferenceNode> DllReferenceItemGroupList
         {
             get
             {
-                return GetItemGroupList(DLL_REFERENCE_ITEMGROUP_NAME);
+                if (!IsAssigned(_DllReferenceItemGroupList))
+                {
+                    _DllReferenceItemGroupList = new List<DllReferenceNode>();
+
+                    foreach (XmlNode dllReference in GetItemGroupList(DLL_REFERENCE_ITEMGROUP_NAME))
+                    {
+                        _DllReferenceItemGroupList.Add(new DllReferenceNode(dllReference, this.XmlNamespaceManager));
+                    }
+
+                }
+                return _DllReferenceItemGroupList;
             }
         }
     }
