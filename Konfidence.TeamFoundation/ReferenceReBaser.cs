@@ -89,6 +89,10 @@ namespace Konfidence.TeamFoundation
                         projectXmlDocument.Save(fileName);
                     }
                 }
+                else
+                {
+                    _RebasedProjectList.Add(fileName + " - Failed (allready checked out?)");
+                }
             }
         }
     }

@@ -20,7 +20,12 @@ namespace Konfidence.TeamFoundation.Project
                     _HintPath = TfsXmlNode.SelectSingleNode("p:HintPath", _XmlNamespaceManager) as XmlElement;
                 }
 
-                return _HintPath.InnerText; 
+                if (IsAssigned(_HintPath))
+                {
+                    return _HintPath.InnerText;
+                }
+
+                return string.Empty;
             }
         }
 

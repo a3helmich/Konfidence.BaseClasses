@@ -35,10 +35,10 @@ namespace  Konfidence.TeamFoundation.Project
         {
             foreach (DllReferenceNode dllReferenceNode in projectXmlDocument.DllReferenceItemGroupList)
             {
-                string changeListText = projectXmlDocument.FileName + " - " + dllReferenceNode.HintPath;
-
                 if (dllReferenceNode.ReBaseReference(fromBase, toBase))
                 {
+                    string changeListText = projectXmlDocument.FileName + " - " + dllReferenceNode.HintPath;
+
                     _ChangeList.Add(changeListText);
 
                     _Changed = true;
