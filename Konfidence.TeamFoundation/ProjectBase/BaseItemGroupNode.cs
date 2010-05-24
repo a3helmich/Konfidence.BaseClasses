@@ -25,7 +25,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
                     foreach (BaseItemNode dllReference in GetItemGroupList())
                     {
-                        _ItemList.Add(BaseItemNode.ge(dllReference, _TfsXmlDocument.XmlNamespaceManager));
+                        _ItemList.Add(new BaseItemNode(dllReference, _TfsXmlDocument.XmlNamespaceManager));
                     }
 
                 }

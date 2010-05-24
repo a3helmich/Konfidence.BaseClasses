@@ -21,9 +21,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
             _TfsXmlNode = xmlNode;
         }
 
-        protected abstract void SetProperties(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager);
-
-        public static BaseItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
+        public virtual BaseItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
         {
             BaseItemNode newItem = null;
 
