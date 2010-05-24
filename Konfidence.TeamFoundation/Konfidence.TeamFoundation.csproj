@@ -53,16 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProjectBase\BaseItemGroupNode.cs" />
+    <Compile Include="Project\DllReferenceItemGroupNode.cs" />
     <Compile Include="TfsBase\BaseTfsXmlDocument.cs" />
     <Compile Include="TfsBase\BaseTfsXmlElement.cs" />
-    <Compile Include="TfsBase\BaseTfsXmlNode.cs" />
+    <Compile Include="TfsBase\BaseItemNode.cs" />
     <Compile Include="Exceptions\TfsServerException.cs" />
     <Compile Include="Project\DllReferenceNode.cs" />
-    <Compile Include="Solution\SolutionXmlDocument.cs" />
+    <Compile Include="SolutionXmlDocument.cs" />
     <Compile Include="Tfs\TfsCheckOut.cs" />
     <Compile Include="Tfs\TfsPermissions.cs" />
     <Compile Include="Project\ProjectReferenceGenerator.cs" />
-    <Compile Include="Project\ProjectXmlDocument.cs" />
+    <Compile Include="ProjectXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceReBaser.cs" />
   </ItemGroup>
@@ -74,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Konfidence.nl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Solution\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

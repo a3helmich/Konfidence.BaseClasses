@@ -33,7 +33,7 @@ namespace Konfidence.TeamFoundation
             get { return _PathName; }
         }
 
-        protected XmlElement Root
+        internal protected XmlElement Root
         {
             get { return _Root; }
         }
@@ -45,7 +45,7 @@ namespace Konfidence.TeamFoundation
         }
 
         // TODO : weer naar protected brengen
-        protected XmlNamespaceManager XmlNamespaceManager
+        internal protected XmlNamespaceManager XmlNamespaceManager
         {
             get { return _XmlNamespaceManager; }
         }

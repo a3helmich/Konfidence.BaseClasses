@@ -1,7 +1,9 @@
 ﻿using System.Xml;
 using System.Collections.Generic;
+using Konfidence.TeamFoundation.Project;
+using Konfidence.TeamFoundation.ProjectBase;
 
-namespace Konfidence.TeamFoundation.Project
+namespace Konfidence.TeamFoundation
 {
     public class ProjectXmlDocument : BaseTfsXmlDocument
     {
@@ -10,6 +12,22 @@ namespace Konfidence.TeamFoundation.Project
         private const string PROJECT_COMPILE_ITEMGROUP_NAME = "Compile";
 
         private List<DllReferenceNode> _DllReferenceItemGroupList = null;
+
+        // simple properties
+        private DllReferenceItemGroupNode _DllReferenceItemGroup = null;
+
+        #region simple properties
+        public DllReferenceItemGroupNode DllReferenceItemGroup
+        {
+            get { return _DllReferenceItemGroup; }
+        }
+
+        #endregion simple properties
+
+        public ProjectXmlDocument()
+        {
+            _DllReferenceItemGroup = new DllReferenceItemGroupNode(this);
+        }
 
         // TODO : when a DllReferenceNode is added to the Xml it must also be added to the list
         public List<DllReferenceNode> DllReferenceItemGroupList

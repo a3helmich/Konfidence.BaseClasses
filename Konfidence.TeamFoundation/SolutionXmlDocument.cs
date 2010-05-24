@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Konfidence.TeamFoundation.Solution
+namespace Konfidence.TeamFoundation
 {
     public class SolutionXmlDocument : BaseTfsXmlDocument
     {

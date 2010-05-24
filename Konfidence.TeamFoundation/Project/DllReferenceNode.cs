@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class DllReferenceNode : BaseTfsXmlNode
+    public class DllReferenceNode : BaseItemNode
     {
         private XmlElement _HintPath = null;
         private XmlNamespaceManager _XmlNamespaceManager;

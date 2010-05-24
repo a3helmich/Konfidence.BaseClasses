@@ -7,7 +7,7 @@ using System.Xml;
 using Konfidence.Base;
 using Konfidence.TeamFoundation.Project;
 using Konfidence.TeamFoundation.Exceptions;
-using Konfidence.TeamFoundation.Solution;
+using Konfidence.TeamFoundation;
 
 namespace Konfidence.TeamFoundation
 {
