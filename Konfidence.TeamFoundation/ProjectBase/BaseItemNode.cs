@@ -5,9 +5,9 @@ using System.Text;
 using Konfidence.Base;
 using System.Xml;
 
-namespace Konfidence.TeamFoundation
+namespace Konfidence.TeamFoundation.ProjectBase
 {
-    public class BaseItemNode : BaseItem
+    public abstract class BaseItemNode : BaseItem
     {
         private XmlNode _TfsXmlNode = null;
 
@@ -19,6 +19,15 @@ namespace Konfidence.TeamFoundation
         public BaseItemNode(XmlNode xmlNode)
         {
             _TfsXmlNode = xmlNode;
+        }
+
+        protected abstract void SetProperties(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager);
+
+        public static BaseItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
+        {
+            BaseItemNode newItem = null;
+
+            return newItem;
         }
     }
 }

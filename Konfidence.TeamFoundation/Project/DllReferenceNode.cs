@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class DllReferenceNode : BaseItemNode
+    public class DllReferenceNode : BaseItemNode<DllReferenceNode>
     {
         private XmlElement _HintPath = null;
         private XmlNamespaceManager _XmlNamespaceManager;
@@ -69,5 +70,9 @@ namespace Konfidence.TeamFoundation.Project
             return changed;
         }
 
+        public override BaseItemNode<DllReferenceNode> GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
+        {
+            return new DllReferenceNode(xmlNode, xmlNamespaceManager);
+        }
     }
 }

@@ -7,25 +7,25 @@ using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
-    public class BaseItemGroupNode<T> : BaseItem
+    public class BaseItemGroupNode<BaseItemNode> : BaseItem
     {
         private string _ItemGroupName = string.Empty;
         private XmlNode _ItemGroupNode;
         private BaseTfsXmlDocument _TfsXmlDocument;
 
-        private List<T> _ItemList;
+        private List<BaseItemNode> _ItemList;
 
-        public List<T> ItemList
+        public List<BaseItemNode> ItemList
         {
             get
             {
                 if (!IsAssigned(_ItemList))
                 {
-                    _ItemList = new List<T>();
+                    _ItemList = new List<BaseItemNode>();
 
-                    foreach (T dllReference in GetItemGroupList())
+                    foreach (BaseItemNode dllReference in GetItemGroupList())
                     {
-                    //    _ItemList.Add(new T(dllReference, _TfsXmlDocument.XmlNamespaceManager));
+                        _ItemList.Add(BaseItemNode.ge(dllReference, _TfsXmlDocument.XmlNamespaceManager));
                     }
 
                 }
