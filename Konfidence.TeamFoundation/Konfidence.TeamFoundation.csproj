@@ -53,14 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TfsXml\BaseTfsXmlDocument.cs" />
-    <Compile Include="TfsXml\BaseTfsXmlElement.cs" />
-    <Compile Include="TfsXml\BaseTfsXmlNode.cs" />
+    <Compile Include="TfsBase\BaseTfsXmlDocument.cs" />
+    <Compile Include="TfsBase\BaseTfsXmlElement.cs" />
+    <Compile Include="TfsBase\BaseTfsXmlNode.cs" />
     <Compile Include="Exceptions\TfsServerException.cs" />
     <Compile Include="Project\DllReferenceNode.cs" />
     <Compile Include="Solution\SolutionXmlDocument.cs" />
-    <Compile Include="TfsCheckOut.cs" />
-    <Compile Include="TfsPermissions.cs" />
+    <Compile Include="Tfs\TfsCheckOut.cs" />
+    <Compile Include="Tfs\TfsPermissions.cs" />
     <Compile Include="Project\ProjectReferenceGenerator.cs" />
     <Compile Include="Project\ProjectXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
