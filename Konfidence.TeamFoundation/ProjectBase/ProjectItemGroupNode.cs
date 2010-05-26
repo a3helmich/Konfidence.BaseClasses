@@ -7,37 +7,36 @@ using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
-    public class BaseItemGroupNode<BaseItemNode> : BaseItem
+    public class ProjectItemGroupNode : BaseItem
     {
         private string _ItemGroupName = string.Empty;
         private XmlNode _ItemGroupNode;
         private BaseTfsXmlDocument _TfsXmlDocument;
 
-        private List<BaseItemNode> _ItemList;
+        private List<ProjectItemNode> _ItemList;
 
-        public List<BaseItemNode> ItemList
+        public List<ProjectItemNode> ItemList
         {
             get
             {
                 if (!IsAssigned(_ItemList))
                 {
-                    _ItemList = new List<BaseItemNode>();
+                    _ItemList = new List<ProjectItemNode>();
 
-                    foreach (BaseItemNode dllReference in GetItemGroupList())
+                    foreach (ProjectItemNode dllReference in GetItemGroupList())
                     {
-                        _ItemList.Add(new BaseItemNode(dllReference, _TfsXmlDocument.XmlNamespaceManager));
+                        _ItemList.Add(new ProjectItemNode(dllReference, _TfsXmlDocument.XmlNamespaceManager));
                     }
-
                 }
                 return _ItemList;
             }
         } 
 
-        protected BaseItemGroupNode()
+        protected ProjectItemGroupNode()
         {
         }
 
-        public BaseItemGroupNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument)
+        public ProjectItemGroupNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument)
         {
             _ItemGroupName = itemGroupName;
             _TfsXmlDocument = tfsXmlDocument;

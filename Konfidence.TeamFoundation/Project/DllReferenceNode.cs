@@ -7,7 +7,7 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class DllReferenceNode : BaseItemNode
+    public class DllReferenceNode : ProjectItemNode
     {
         private XmlElement _HintPath = null;
         private XmlNamespaceManager _XmlNamespaceManager;
@@ -71,7 +71,7 @@ namespace Konfidence.TeamFoundation.Project
         }
 
         // TODO : opdezelfde manier als dataitemlist utivoeren
-        public override BaseItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
+        public override ProjectItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
         {
             return new DllReferenceNode(xmlNode, xmlNamespaceManager);
         }

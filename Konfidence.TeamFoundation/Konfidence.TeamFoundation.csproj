@@ -53,11 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectBase\BaseItemGroupNode.cs" />
+    <Compile Include="ProjectBase\ProjectItemGroupNode.cs" />
+    <Compile Include="ProjectBase\ProjectItemNodeList.cs" />
     <Compile Include="Project\DllReferenceItemGroupNode.cs" />
     <Compile Include="TfsBase\BaseTfsXmlDocument.cs" />
     <Compile Include="TfsBase\BaseTfsXmlElement.cs" />
-    <Compile Include="ProjectBase\BaseItemNode.cs" />
+    <Compile Include="ProjectBase\ProjectItemNode.cs" />
     <Compile Include="Exceptions\TfsServerException.cs" />
     <Compile Include="Project\DllReferenceNode.cs" />
     <Compile Include="SolutionXmlDocument.cs" />

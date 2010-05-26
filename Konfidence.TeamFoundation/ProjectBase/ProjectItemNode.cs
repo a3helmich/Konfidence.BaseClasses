@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
-    public abstract class BaseItemNode : BaseItem
+    public abstract class ProjectItemNode : BaseItem
     {
         private XmlNode _TfsXmlNode = null;
 
@@ -16,14 +16,14 @@ namespace Konfidence.TeamFoundation.ProjectBase
             get { return _TfsXmlNode; }
         }
 
-        public BaseItemNode(XmlNode xmlNode)
+        public ProjectItemNode(XmlNode xmlNode)
         {
             _TfsXmlNode = xmlNode;
         }
 
-        public virtual BaseItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
+        public virtual ProjectItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
         {
-            BaseItemNode newItem = null;
+            ProjectItemNode newItem = null;
 
             return newItem;
         }
