@@ -33,7 +33,7 @@ namespace  Konfidence.TeamFoundation.Project
         // for each dllRefence that has a relative path, replace that path with an absolute one.
         private void DllReferenceRebase(ProjectXmlDocument projectXmlDocument, string fromBase, string toBase)
         {
-            foreach (DllReferenceNode dllReferenceNode in projectXmlDocument.DllReferenceItemGroupList)
+            foreach (DllReferenceItemNode dllReferenceNode in projectXmlDocument.DllReferenceItemGroupList)
             {
                 if (dllReferenceNode.ReBaseReference(fromBase, toBase))
                 {

@@ -7,50 +7,40 @@ using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
-    public class ProjectItemGroupNode : BaseItem
+    public class ProjectGroupNode : BaseItem 
     {
         private string _ItemGroupName = string.Empty;
-        private XmlNode _ItemGroupNode;
-        private BaseTfsXmlDocument _TfsXmlDocument;
+        private XmlNode _ItemGroupNode = null;
+        private BaseTfsXmlDocument _TfsXmlDocument = null;
 
-        private List<ProjectItemNode> _ItemList;
-
-        public List<ProjectItemNode> ItemList
+        public XmlNamespaceManager XmlNamespaceManager
         {
             get
             {
-                if (!IsAssigned(_ItemList))
-                {
-                    _ItemList = new List<ProjectItemNode>();
-
-                    foreach (ProjectItemNode dllReference in GetItemGroupList())
-                    {
-                        _ItemList.Add(new ProjectItemNode(dllReference, _TfsXmlDocument.XmlNamespaceManager));
-                    }
-                }
-                return _ItemList;
+                return _TfsXmlDocument.XmlNamespaceManager;
             }
-        } 
+        }
 
-        protected ProjectItemGroupNode()
+        // to avoid accidential initialation. (ie without parameters)
+        protected ProjectGroupNode()
         {
         }
 
-        public ProjectItemGroupNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument)
+        public ProjectGroupNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument)
         {
             _ItemGroupName = itemGroupName;
             _TfsXmlDocument = tfsXmlDocument;
 
-            _ItemGroupNode = GetItemGroup();
+            _ItemGroupNode = GetItemGroupNode();
         }
 
-        private XmlNodeList GetItemGroupList()
+        internal XmlNodeList GetItemNodeList()
         {
             return _ItemGroupNode.SelectNodes("p:" + _ItemGroupName, _TfsXmlDocument.XmlNamespaceManager);
         }
 
         // - search for an itemgroup node which contains 'itemGroupName' nodes
-        private XmlNode GetItemGroup()
+        private XmlNode GetItemGroupNode()
         {
             XmlNodeList itemGroupList = _TfsXmlDocument.Root.SelectNodes("p:ItemGroup", _TfsXmlDocument.XmlNamespaceManager);
 
@@ -73,7 +63,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
                 }
             }
 
-            // TODO : only make a group when an item is added!
+            // TODO : only make a group when an item is added! (ie if the group doesn't yet exists)
             //if (!IsAssigned(foundItemGroup))
             //{
             //    foundItemGroup = CreateElement("ItemGroup", NameSpaceURI);

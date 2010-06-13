@@ -7,11 +7,12 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class DllReferenceNode : ProjectItemNode
+    public class DllReferenceItemNode : ProjectItemNode
     {
         private XmlElement _HintPath = null;
         private XmlNamespaceManager _XmlNamespaceManager;
 
+        #region readOnlyProperties
         public string HintPath
         {
             get 
@@ -29,7 +30,13 @@ namespace Konfidence.TeamFoundation.Project
                 return string.Empty;
             }
         }
+        #endregion readOnlyProperties
 
+        public DllReferenceItemNode(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager) : base(xmlNode)
+        {
+            _XmlNamespaceManager = xmlNamespaceManager;
+        }
+        
         private void SetHintPath(string hintPath)
         {
             if (!IsAssigned(_HintPath))
@@ -38,11 +45,6 @@ namespace Konfidence.TeamFoundation.Project
             }
 
             _HintPath.InnerText = hintPath;
-        }
-
-        public DllReferenceNode(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager) : base(xmlNode)
-        {
-            _XmlNamespaceManager = xmlNamespaceManager;
         }
 
         public bool ReBaseReference(string fromBase, string toBase)
@@ -68,12 +70,6 @@ namespace Konfidence.TeamFoundation.Project
             }
 
             return changed;
-        }
-
-        // TODO : opdezelfde manier als dataitemlist utivoeren
-        public override ProjectItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
-        {
-            return new DllReferenceNode(xmlNode, xmlNamespaceManager);
         }
     }
 }

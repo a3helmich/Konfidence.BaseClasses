@@ -11,40 +11,29 @@ namespace Konfidence.TeamFoundation
         private const string PROJECT_REFERENCE_ITEMGROUP_NAME = "ProjectReference";
         private const string PROJECT_COMPILE_ITEMGROUP_NAME = "Compile";
 
-        private List<DllReferenceNode> _DllReferenceItemGroupList = null;
-
-        // simple properties
-        private DllReferenceItemGroupNode _DllReferenceItemGroup = null;
-
-        #region simple properties
-        public DllReferenceItemGroupNode DllReferenceItemGroup
-        {
-            get { return _DllReferenceItemGroup; }
-        }
-
-        #endregion simple properties
+        private DllReferenceItemNodeList _DllReferenceItemNodeList = null;
 
         public ProjectXmlDocument()
         {
-            _DllReferenceItemGroup = new DllReferenceItemGroupNode(this);
+            //_DllReferenceItemGroup = new DllReferenceGroupNode(this);
         }
 
         // TODO : when a DllReferenceNode is added to the Xml it must also be added to the list
-        public List<DllReferenceNode> DllReferenceItemGroupList
+        public DllReferenceItemNodeList DllReferenceItemGroupList
         {
             get
             {
-                if (!IsAssigned(_DllReferenceItemGroupList))
+                if (!IsAssigned(_DllReferenceItemNodeList))
                 {
-                    _DllReferenceItemGroupList = new List<DllReferenceNode>();
+                    _DllReferenceItemNodeList = new DllReferenceItemNodeList(this);
 
-                    foreach (XmlNode dllReference in GetItemGroupList(DLL_REFERENCE_ITEMGROUP_NAME))
-                    {
-                        _DllReferenceItemGroupList.Add(new DllReferenceNode(dllReference, this.XmlNamespaceManager));
-                    }
+                    //foreach (XmlNode dllReference in GetItemGroupList(DLL_REFERENCE_ITEMGROUP_NAME))
+                    //{
+                    //    _DllReferenceItemNodeList.Add(new DllReferenceItemNode(dllReference, this.XmlNamespaceManager));
+                    //}
 
                 }
-                return _DllReferenceItemGroupList;
+                return _DllReferenceItemNodeList;
             }
         }
 

@@ -21,11 +21,11 @@ namespace Konfidence.TeamFoundation.ProjectBase
             _TfsXmlNode = xmlNode;
         }
 
-        public virtual ProjectItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
-        {
-            ProjectItemNode newItem = null;
+        //public virtual ProjectItemNode GetNewItem(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
+        //{
+        //    ProjectItemNode newItem = null;
 
-            return newItem;
-        }
+        //    return newItem;
+        //}
     }
 }
