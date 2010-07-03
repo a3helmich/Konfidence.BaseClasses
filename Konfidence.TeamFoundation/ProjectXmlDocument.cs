@@ -39,7 +39,7 @@ namespace Konfidence.TeamFoundation
 
         // TODO : when a CompileProjectNode is added to the Xml it must also be added to the list
         // TODO : XmlNodeList omzetten naar List<CompileProjectNode>
-        public XmlNodeList CompileProjectItemGroupList
+        public List<XmlNode> CompileProjectItemGroupList
         {
             get
             {
@@ -49,7 +49,7 @@ namespace Konfidence.TeamFoundation
 
         // TODO : when a ProjectReferenceNode is added to the Xml it must also be added to the list
         // TODO : XmlNodeList omzetten naar List<ProjectReferenceNode>
-        public XmlNodeList ProjectReferenceItemGroupList
+        public List<XmlNode> ProjectReferenceItemGroupList
         {
             get
             {

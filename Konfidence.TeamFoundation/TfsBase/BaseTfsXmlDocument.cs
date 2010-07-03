@@ -72,11 +72,21 @@ namespace Konfidence.TeamFoundation
             return BaseItem.IsAssigned(assignedObject);
         }
 
-        protected XmlNodeList GetItemGroupList(string itemGroupName)
+        protected List<XmlNode> GetItemGroupList(string itemGroupName)
         {
+            List<XmlNode> returnList = new List<XmlNode>();
+            
             XmlNode itemGroupList = GetItemGroup(itemGroupName);
 
-            return itemGroupList.SelectNodes("p:" + itemGroupName, XmlNamespaceManager);
+            if (IsAssigned(itemGroupList))
+            {
+                foreach (XmlNode selectedNode in itemGroupList.SelectNodes("p:" + itemGroupName, XmlNamespaceManager))
+                {
+                    returnList.Add(selectedNode);
+                }
+            }
+
+            return returnList;
         }
 
         // - search for an itemgroup node which contains 'itemGroupName' nodes
