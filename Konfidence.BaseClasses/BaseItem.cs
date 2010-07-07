@@ -2,6 +2,13 @@ namespace Konfidence.Base
 {
 	public class BaseItem
 	{
+        private string _ErrorMessage = string.Empty;
+
+        public string ErrorMessage
+        {
+            get { return _ErrorMessage; }
+        }
+
 		public static bool IsAssigned(object assignedObject)
 		{
             if (assignedObject == null)
@@ -12,14 +19,24 @@ namespace Konfidence.Base
 			return true;
 		}
 
-        public static bool IsEmpty(string newString) // ToDo : back to protected 
+        public static bool IsAssigned(string newString) // ToDo : back to protected 
         {
             if (string.IsNullOrEmpty(newString))
             {
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
+        }
+
+        public void SetErrorMessage(string errorMessage)
+        {
+            _ErrorMessage = errorMessage;
+        }
+
+        public bool HasErrors()
+        {
+            return IsAssigned(_ErrorMessage);
         }
 	}
 }
