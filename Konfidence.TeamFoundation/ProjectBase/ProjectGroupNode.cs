@@ -13,7 +13,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
         private XmlNode _ItemGroupNode = null;
         private BaseTfsXmlDocument _TfsXmlDocument = null;
 
-        public XmlNamespaceManager XmlNamespaceManager
+        internal XmlNamespaceManager XmlNamespaceManager
         {
             get
             {
@@ -72,6 +72,15 @@ namespace Konfidence.TeamFoundation.ProjectBase
             //}
 
             return foundItemGroup;
+        }
+
+        internal protected XmlElement AppendChild()
+        {
+            XmlElement newElement = _TfsXmlDocument.CreateElement(_ItemGroupName, _TfsXmlDocument.NameSpaceURI);
+
+            _ItemGroupNode.AppendChild(newElement);
+
+            return newElement;
         }
     }
 }

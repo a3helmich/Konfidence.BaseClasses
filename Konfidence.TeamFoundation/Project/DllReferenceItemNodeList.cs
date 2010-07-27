@@ -14,11 +14,13 @@ namespace Konfidence.TeamFoundation.Project
         {
         }
 
-        protected override DllReferenceItemNode GetNewItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager)
+        // wordt alleen ge-called vanuit het base object
+        protected override DllReferenceItemNode GetItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager)
         {
             return new DllReferenceItemNode(projectItemNode, xmlNamespaceManager);
         }
 
+        // wordt alleen ge-called vanuit het base object
         protected override DllReferenceGroupNode GetGroupNode(BaseTfsXmlDocument tfsXmlDocument)
         {
             return new DllReferenceGroupNode(tfsXmlDocument);

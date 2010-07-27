@@ -15,10 +15,8 @@ namespace Konfidence.TeamFoundation
 
         public ProjectXmlDocument()
         {
-            //_DllReferenceItemGroup = new DllReferenceGroupNode(this);
         }
 
-        // TODO : when a DllReferenceNode is added to the Xml it must also be added to the list
         public DllReferenceItemNodeList DllReferenceItemGroupList
         {
             get
@@ -26,15 +24,14 @@ namespace Konfidence.TeamFoundation
                 if (!IsAssigned(_DllReferenceItemNodeList))
                 {
                     _DllReferenceItemNodeList = new DllReferenceItemNodeList(this);
-
-                    //foreach (XmlNode dllReference in GetItemGroupList(DLL_REFERENCE_ITEMGROUP_NAME))
-                    //{
-                    //    _DllReferenceItemNodeList.Add(new DllReferenceItemNode(dllReference, this.XmlNamespaceManager));
-                    //}
-
                 }
                 return _DllReferenceItemNodeList;
             }
+        }
+
+        public XmlElement AddReferenceElement()
+        {
+            return DllReferenceItemGroupList.AppendChild();
         }
 
         // TODO : when a CompileProjectNode is added to the Xml it must also be added to the list

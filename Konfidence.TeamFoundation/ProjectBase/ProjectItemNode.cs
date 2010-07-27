@@ -7,6 +7,7 @@ using System.Xml;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
+    // encapsulation van XmlNode
     public abstract class ProjectItemNode : BaseItem
     {
         private XmlNode _TfsXmlNode = null;

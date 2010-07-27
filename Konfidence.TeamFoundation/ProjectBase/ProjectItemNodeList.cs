@@ -10,10 +10,16 @@ namespace Konfidence.TeamFoundation.ProjectBase
     {
         private V _GroupNode = null;
 
-        //public V GroupNode
-        //{
-        //    get { return _GroupNode; }
-        //}
+        #region abstractmethods
+        /// <summary>
+        /// create and return a xxxDataItem derived from ProjectItemNode
+        /// </summary>
+        /// <returns></returns>
+        protected abstract T GetItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager);
+
+        protected abstract V GetGroupNode(BaseTfsXmlDocument tfsXmlDocument);
+
+        #endregion abstractmethods
 
         public ProjectItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
         {
@@ -21,27 +27,21 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             foreach (XmlNode projectItemNode in _GroupNode.GetItemNodeList())
             {
-                T baseItemNode = GetNewItemNode(projectItemNode, _GroupNode.XmlNamespaceManager);
+                T baseItemNode = GetItemNode(projectItemNode, _GroupNode.XmlNamespaceManager);
 
                 Add(baseItemNode);
             }
         }
 
-        /// <summary>
-        /// create and return a xxxDataItem derived from ProjectItemNode
-        /// </summary>
-        /// <returns></returns>
-        protected abstract T GetNewItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager);
+        internal protected XmlElement AppendChild()
+        {
+            XmlElement newElement = _GroupNode.AppendChild();
 
-        protected abstract V GetGroupNode(BaseTfsXmlDocument tfsXmlDocument);
+            T baseItemNode = GetItemNode(newElement, _GroupNode.XmlNamespaceManager);
 
-        //public void GetItemNode(XmlNode projectItemNode)
-        //{
-        //    T baseItemNode = GetNewItemNode(projectItemNode, _GroupNode.XmlNamespaceManager);
+            Add(baseItemNode);
 
-        //    Add(baseItemNode);
-
-        //    //return baseItemNode;
-        //}
+            return newElement;
+        }
     }
 }
