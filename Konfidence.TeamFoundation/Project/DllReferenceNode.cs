@@ -7,11 +7,11 @@ using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class DllReferenceGroupNode : ProjectGroupNode
+    public class DllReferenceNode : ProjectNode
     {
         private const string DLL_REFERENCE_ITEMGROUP_NAME = "Reference";
 
-        public DllReferenceGroupNode(BaseTfsXmlDocument tfsXmlDocument)
+        public DllReferenceNode(BaseTfsXmlDocument tfsXmlDocument)
             : base(DLL_REFERENCE_ITEMGROUP_NAME, tfsXmlDocument)
         {
         }

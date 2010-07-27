@@ -53,9 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectBase\ProjectGroupNode.cs" />
+    <Compile Include="ProjectBase\ProjectNode.cs" />
     <Compile Include="ProjectBase\ProjectItemNodeList.cs" />
-    <Compile Include="Project\DllReferenceGroupNode.cs" />
+    <Compile Include="Project\DllReferenceNode.cs" />
     <Compile Include="Project\DllReferenceItemNodeList.cs" />
     <Compile Include="TfsBase\BaseTfsXmlDocument.cs" />
     <Compile Include="TfsBase\BaseTfsXmlElement.cs" />

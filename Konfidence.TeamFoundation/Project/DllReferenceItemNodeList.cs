@@ -7,7 +7,7 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class DllReferenceItemNodeList : ProjectItemNodeList<DllReferenceItemNode, DllReferenceGroupNode>
+    public class DllReferenceItemNodeList : ProjectItemNodeList<DllReferenceItemNode, DllReferenceNode>
     {
         public DllReferenceItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
             : base(tfsXmlDocument)
@@ -21,9 +21,9 @@ namespace Konfidence.TeamFoundation.Project
         }
 
         // wordt alleen ge-called vanuit het base object
-        protected override DllReferenceGroupNode GetGroupNode(BaseTfsXmlDocument tfsXmlDocument)
+        protected override DllReferenceNode GetGroupNode(BaseTfsXmlDocument tfsXmlDocument)
         {
-            return new DllReferenceGroupNode(tfsXmlDocument);
+            return new DllReferenceNode(tfsXmlDocument);
         }
     }
 }

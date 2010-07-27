@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
-    public abstract class ProjectItemNodeList<T, V>: List<T> where T: ProjectItemNode where V: ProjectGroupNode
+    public abstract class ProjectItemNodeList<T, V>: List<T> where T: ProjectItemNode where V: ProjectNode
     {
         private V _GroupNode = null;
 

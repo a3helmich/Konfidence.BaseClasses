@@ -7,7 +7,6 @@ namespace Konfidence.TeamFoundation
 {
     public class ProjectXmlDocument : BaseTfsXmlDocument
     {
-        private const string DLL_REFERENCE_ITEMGROUP_NAME = "Reference";
         private const string PROJECT_REFERENCE_ITEMGROUP_NAME = "ProjectReference";
         private const string PROJECT_COMPILE_ITEMGROUP_NAME = "Compile";
 
@@ -17,7 +16,7 @@ namespace Konfidence.TeamFoundation
         {
         }
 
-        public DllReferenceItemNodeList DllReferenceItemGroupList
+        public DllReferenceItemNodeList DllReferenceItemNodeList
         {
             get
             {
@@ -31,7 +30,7 @@ namespace Konfidence.TeamFoundation
 
         public XmlElement AddReferenceElement()
         {
-            return DllReferenceItemGroupList.AppendChild();
+            return DllReferenceItemNodeList.AppendChild();
         }
 
         // TODO : when a CompileProjectNode is added to the Xml it must also be added to the list
