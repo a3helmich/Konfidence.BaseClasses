@@ -16,10 +16,6 @@ namespace Konfidence.TeamFoundation
 
         private static Dictionary<string, string> _ProjectGuidDictionary = null;
 
-        public ProjectXmlDocument()
-        {
-        }
-
         public DllReferenceItemNodeList DllReferenceItemNodeList
         {
             get
@@ -29,6 +25,18 @@ namespace Konfidence.TeamFoundation
                     _DllReferenceItemNodeList = new DllReferenceItemNodeList(this);
                 }
                 return _DllReferenceItemNodeList;
+            }
+        }
+
+        public ProjectReferenceItemNodeList ProjectReferenceItemNodeList
+        {
+            get
+            {
+                if (!IsAssigned(_ProjectReferenceItemGroupList))
+                {
+                    _ProjectReferenceItemGroupList = new ProjectReferenceItemNodeList(this);
+                }
+                return _ProjectReferenceItemGroupList;
             }
         }
 
@@ -43,6 +51,10 @@ namespace Konfidence.TeamFoundation
 
                 return _ProjectGuidDictionary;
             }
+        }
+
+        public ProjectXmlDocument()
+        {
         }
 
         public XmlElement AddReferenceElement()
@@ -107,20 +119,6 @@ namespace Konfidence.TeamFoundation
             }
 
             return Guid.Empty.ToString("B");
-        }
-
-        // TODO : when a ProjectReferenceNode is added to the Xml it must also be added to the list
-        // TODO : XmlNodeList omzetten naar List<ProjectReferenceNode>
-        public ProjectReferenceItemNodeList ProjectReferenceItemNodeList
-        {
-            get
-            {
-                if (!IsAssigned(_ProjectReferenceItemGroupList))
-                {
-                    _ProjectReferenceItemGroupList = new ProjectReferenceItemNodeList(this);
-                }
-                return _ProjectReferenceItemGroupList;
-            }
         }
 
         // TODO : when a CompileProjectNode is added to the Xml it must also be added to the list
