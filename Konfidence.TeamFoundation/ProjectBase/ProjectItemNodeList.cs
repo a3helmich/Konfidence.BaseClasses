@@ -15,9 +15,9 @@ namespace Konfidence.TeamFoundation.ProjectBase
         /// create and return a xxxDataItem derived from ProjectItemNode
         /// </summary>
         /// <returns></returns>
-        protected abstract T GetItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager);
+        internal protected abstract T GetItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager);
 
-        protected abstract V GetGroupNode(BaseTfsXmlDocument tfsXmlDocument);
+        internal protected abstract V GetGroupNode(BaseTfsXmlDocument tfsXmlDocument);
 
         #endregion abstractmethods
 
