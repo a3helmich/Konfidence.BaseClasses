@@ -35,7 +35,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
         // TODO : terugzetten naar internal protected
 //        internal protected XmlElement AppendChild()
-        public XmlElement AppendChild()
+        internal protected XmlElement AppendChild()
         {
             XmlElement newElement = _GroupNode.AppendChild();
 

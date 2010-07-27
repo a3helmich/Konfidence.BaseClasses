@@ -9,9 +9,12 @@ namespace Konfidence.TeamFoundation.Project
 {
     public class ProjectReferenceItemNodeList : ProjectItemNodeList<ProjectReferenceItemNode, ProjectReferenceNode>
     {
+        private BaseTfsXmlDocument _TfsXmlDocument = null;
+
         public ProjectReferenceItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
             : base(tfsXmlDocument)
         {
+            _TfsXmlDocument = tfsXmlDocument;
         }
 
         // wordt alleen ge-called vanuit het base object
@@ -24,6 +27,15 @@ namespace Konfidence.TeamFoundation.Project
         internal protected override ProjectReferenceNode GetGroupNode(BaseTfsXmlDocument tfsXmlDocument)
         {
             return new ProjectReferenceNode(tfsXmlDocument);
+        }
+
+        internal protected XmlElement AppendChild(XmlElement projectElement)
+        {
+            XmlElement referenceElement = base.AppendChild();
+
+            referenceElement.AppendChild(projectElement);
+
+            return referenceElement;
         }
     }
 }
