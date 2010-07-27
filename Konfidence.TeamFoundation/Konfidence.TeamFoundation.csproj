@@ -55,6 +55,9 @@
   <ItemGroup>
     <Compile Include="ProjectBase\ProjectNode.cs" />
     <Compile Include="ProjectBase\ProjectItemNodeList.cs" />
+    <Compile Include="Project\CompileProjectItemNode.cs" />
+    <Compile Include="Project\CompileProjectItemNodeList.cs" />
+    <Compile Include="Project\CompileProjectNode.cs" />
     <Compile Include="Project\DllReferenceNode.cs" />
     <Compile Include="Project\DllReferenceItemNodeList.cs" />
     <Compile Include="Project\ProjectAssemblyItem.cs" />

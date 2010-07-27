@@ -40,7 +40,7 @@ namespace Konfidence.TeamFoundation
             }
         }
 
-        public static Dictionary<string, string> ProjectGuidDictionary
+        protected Dictionary<string, string> ProjectGuidDictionary
         {
             get
             {
