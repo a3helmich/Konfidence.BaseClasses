@@ -7,7 +7,7 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    class ProjectReferenceItemNodeList : ProjectItemNodeList<ProjectReferenceItemNode, ProjectReferenceNode>
+    public class ProjectReferenceItemNodeList : ProjectItemNodeList<ProjectReferenceItemNode, ProjectReferenceNode>
     {
         public ProjectReferenceItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
             : base(tfsXmlDocument)

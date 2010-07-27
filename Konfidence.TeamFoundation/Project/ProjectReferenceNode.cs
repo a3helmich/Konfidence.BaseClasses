@@ -6,7 +6,7 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    class ProjectReferenceNode : ProjectNode
+    public class ProjectReferenceNode : ProjectNode
     {
         private const string PROJECT_REFERENCE_ITEMGROUP_NAME = "ProjectReference";
 

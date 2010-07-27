@@ -11,6 +11,7 @@ namespace Konfidence.TeamFoundation
         private const string PROJECT_COMPILE_ITEMGROUP_NAME = "Compile";
 
         private DllReferenceItemNodeList _DllReferenceItemNodeList = null;
+        private ProjectReferenceItemNodeList _ProjectReferenceItemGroupList = null;
 
         public ProjectXmlDocument()
         {
@@ -33,6 +34,20 @@ namespace Konfidence.TeamFoundation
             return DllReferenceItemNodeList.AppendChild();
         }
 
+        // TODO : when a ProjectReferenceNode is added to the Xml it must also be added to the list
+        // TODO : XmlNodeList omzetten naar List<ProjectReferenceNode>
+        public ProjectReferenceItemNodeList ProjectReferenceItemNodeList
+        {
+            get
+            {
+                if (!IsAssigned(_ProjectReferenceItemGroupList))
+                {
+                    _ProjectReferenceItemGroupList = new ProjectReferenceItemNodeList(this);
+                }
+                return _ProjectReferenceItemGroupList;
+            }
+        }
+
         // TODO : when a CompileProjectNode is added to the Xml it must also be added to the list
         // TODO : XmlNodeList omzetten naar List<CompileProjectNode>
         public List<XmlNode> CompileProjectItemGroupList
@@ -40,16 +55,6 @@ namespace Konfidence.TeamFoundation
             get
             {
                 return GetItemGroupList(PROJECT_COMPILE_ITEMGROUP_NAME);
-            }
-        }
-
-        // TODO : when a ProjectReferenceNode is added to the Xml it must also be added to the list
-        // TODO : XmlNodeList omzetten naar List<ProjectReferenceNode>
-        public List<XmlNode> ProjectReferenceItemGroupList
-        {
-            get
-            {
-                return GetItemGroupList(PROJECT_REFERENCE_ITEMGROUP_NAME);
             }
         }
     }
