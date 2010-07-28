@@ -11,7 +11,7 @@ namespace Konfidence.TeamFoundation
     {
         private DllReferenceItemNodeList _DllReferenceItemNodeList = null;
         private ProjectReferenceItemNodeList _ProjectReferenceItemGroupList = null;
-        private ProjectCompileItemNodeList _CompileProjectItemNodeList = null;
+        private ProjectCompileItemNodeList _ProjectCompileItemNodeList = null;
 
         private static Dictionary<string, string> _ProjectGuidDictionary = null;
 
@@ -39,15 +39,15 @@ namespace Konfidence.TeamFoundation
             }
         }
 
-        public ProjectCompileItemNodeList CompileProjectItemNodeList
+        public ProjectCompileItemNodeList ProjectCompileItemNodeList
         {
             get
             {
-                if (!IsAssigned(_CompileProjectItemNodeList))
+                if (!IsAssigned(_ProjectCompileItemNodeList))
                 {
-                    _CompileProjectItemNodeList = new ProjectCompileItemNodeList(this);
+                    _ProjectCompileItemNodeList = new ProjectCompileItemNodeList(this);
                 }
-                return _CompileProjectItemNodeList;
+                return _ProjectCompileItemNodeList;
             }
         }
 
