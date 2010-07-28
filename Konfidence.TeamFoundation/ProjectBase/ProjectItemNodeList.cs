@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
@@ -28,11 +29,16 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             _GroupNode = GetGroupNode(_TfsXmlDocument);
 
-            foreach (XmlNode projectItemNode in _GroupNode.GetItemNodeList())
-            {
-                T baseItemNode = GetItemNode(projectItemNode, _GroupNode.XmlNamespaceManager);
+            XmlNodeList itemNodeList = _GroupNode.GetItemNodeList();
 
-                Add(baseItemNode);
+            if (BaseItem.IsAssigned(itemNodeList))
+            {
+                foreach (XmlNode projectItemNode in itemNodeList)
+                {
+                    T baseItemNode = GetItemNode(projectItemNode, _GroupNode.XmlNamespaceManager);
+
+                    Add(baseItemNode);
+                }
             }
         }
 

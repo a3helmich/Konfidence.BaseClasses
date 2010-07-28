@@ -46,7 +46,12 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
         internal XmlNodeList GetItemNodeList()
         {
-            return _ItemGroupNode.SelectNodes("p:" + _ItemGroupName, _TfsXmlDocument.XmlNamespaceManager);
+            if (IsAssigned(_ItemGroupNode))
+            {
+                return _ItemGroupNode.SelectNodes("p:" + _ItemGroupName, _TfsXmlDocument.XmlNamespaceManager);
+            }
+
+            return null;
         }
 
         // - search for an itemgroup node which contains 'itemGroupName' nodes
