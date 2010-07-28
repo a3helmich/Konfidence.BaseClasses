@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace  Konfidence.TeamFoundation.Project
 {
-    public class ProjectXmlEditer  
+    public class ProjectXmlEditor  
     {
         private bool _Changed = false;
 
@@ -21,7 +21,7 @@ namespace  Konfidence.TeamFoundation.Project
         }
         #endregion simple properties
 
-        public ProjectXmlEditer(ProjectXmlDocument projectXmlDocument) 
+        public ProjectXmlEditor(ProjectXmlDocument projectXmlDocument) 
         {
             string fromBase = @"\References\";
             string toBase = @"c:\projects\References\";
