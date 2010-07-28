@@ -71,7 +71,7 @@
     <Compile Include="SolutionXmlDocument.cs" />
     <Compile Include="Tfs\TfsCheckOut.cs" />
     <Compile Include="Tfs\TfsPermissions.cs" />
-    <Compile Include="Project\ProjectReferenceGenerator.cs" />
+    <Compile Include="Project\ProjectXmlEditer.cs" />
     <Compile Include="ProjectXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceReBaser.cs" />

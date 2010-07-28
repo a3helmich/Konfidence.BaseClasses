@@ -80,7 +80,7 @@ namespace Konfidence.TeamFoundation
                     ProjectXmlDocument projectXmlDocument = new ProjectXmlDocument();
                     projectXmlDocument.Load(fileName);
 
-                    ProjectReferenceGenerator projectReference = new ProjectReferenceGenerator(projectXmlDocument);
+                    ProjectXmlEditer projectReference = new ProjectXmlEditer(projectXmlDocument);
 
                     if (projectReference.Changed)
                     {
