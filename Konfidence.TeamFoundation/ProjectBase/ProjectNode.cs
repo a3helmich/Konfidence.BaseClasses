@@ -7,7 +7,7 @@ using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
-    public class ProjectNode : BaseItem 
+    public abstract class ProjectNode : BaseItem 
     {
         private string _ItemGroupName = string.Empty;
         private XmlNode _ItemGroupNode = null;
@@ -32,6 +32,16 @@ namespace Konfidence.TeamFoundation.ProjectBase
             _TfsXmlDocument = tfsXmlDocument;
 
             _ItemGroupNode = GetItemGroupNode();
+        }
+
+        public ProjectNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
+        {
+            _ItemGroupName = itemGroupName;
+            _TfsXmlDocument = tfsXmlDocument;
+
+            _TfsXmlDocument.Root.AppendChild(itemGroupNode);
+
+            _ItemGroupNode = itemGroupNode;
         }
 
         internal XmlNodeList GetItemNodeList()

@@ -29,6 +29,14 @@ namespace Konfidence.TeamFoundation.Project
             return new ProjectReferenceNode(tfsXmlDocument);
         }
 
+        // wordt alleen ge-called vanuit het base object
+        internal protected override ProjectReferenceNode CreateGroupNode(BaseTfsXmlDocument tfsXmlDocument)
+        {
+            XmlNode itemGroupNode = tfsXmlDocument.CreateElement("ItemGroup", tfsXmlDocument.NameSpaceURI);
+
+            return new ProjectReferenceNode(tfsXmlDocument, itemGroupNode);
+        }
+
         internal protected XmlElement AppendChild(XmlElement projectElement)
         {
             XmlElement referenceElement = base.AppendChild();

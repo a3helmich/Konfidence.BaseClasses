@@ -9,6 +9,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
     public abstract class ProjectItemNodeList<T, V>: List<T> where T: ProjectItemNode where V: ProjectNode
     {
         private V _GroupNode = null;
+        private BaseTfsXmlDocument _TfsXmlDocument = null;
 
         #region abstractmethods
         /// <summary>
@@ -16,14 +17,16 @@ namespace Konfidence.TeamFoundation.ProjectBase
         /// </summary>
         /// <returns></returns>
         internal protected abstract T GetItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager);
-
         internal protected abstract V GetGroupNode(BaseTfsXmlDocument tfsXmlDocument);
+        internal protected abstract V CreateGroupNode(BaseTfsXmlDocument tfsXmlDocument);
 
         #endregion abstractmethods
 
         public ProjectItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
         {
-            _GroupNode = GetGroupNode(tfsXmlDocument);
+            _TfsXmlDocument = tfsXmlDocument;
+
+            _GroupNode = GetGroupNode(_TfsXmlDocument);
 
             foreach (XmlNode projectItemNode in _GroupNode.GetItemNodeList())
             {
@@ -37,6 +40,11 @@ namespace Konfidence.TeamFoundation.ProjectBase
 //        internal protected XmlElement AppendChild()
         internal protected XmlElement AppendChild()
         {
+            if (Count == 0)
+            {
+                _GroupNode = CreateGroupNode(_TfsXmlDocument);
+            }
+
             XmlElement newElement = _GroupNode.AppendChild();
 
             T baseItemNode = GetItemNode(newElement, _GroupNode.XmlNamespaceManager);
