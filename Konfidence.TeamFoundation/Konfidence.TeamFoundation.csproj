@@ -65,7 +65,6 @@
     <Compile Include="Project\ProjectReferenceItemNodeList.cs" />
     <Compile Include="Project\ProjectReferenceNode.cs" />
     <Compile Include="TfsBase\BaseTfsXmlDocument.cs" />
-    <Compile Include="TfsBase\BaseTfsXmlElement.cs" />
     <Compile Include="ProjectBase\ProjectItemNode.cs" />
     <Compile Include="Exceptions\TfsServerException.cs" />
     <Compile Include="Project\DllReferenceItemNode.cs" />
