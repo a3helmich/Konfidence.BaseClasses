@@ -68,20 +68,26 @@ namespace Konfidence.TeamFoundation
         {
         }
 
-        public XmlElement AddReferenceElement()
+        public XmlElement AddDllReferenceElement(ReferenceItem referenceItem)
         {
-            return DllReferenceItemNodeList.AppendChild();
+            XmlElement referenceElement = DllReferenceItemNodeList.AppendChild();
+
+            AddRequiredElements(referenceElement, referenceItem);
+
+            return referenceElement;
         }
 
-        public XmlElement AddProjectReferenceElement(ProjectAssemblyItem assemblyItem)
+        public XmlElement AddProjectReferenceElement(ReferenceItem referenceItem)
         {
             XmlElement projectElement = CreateElement("Project", NameSpaceURI);
 
-            projectElement.InnerText = GetProjectGuid(assemblyItem.IncludeAttribute);
+            projectElement.InnerText = GetProjectGuid(referenceItem.IncludeAttribute);
 
             XmlElement referenceElement = ProjectReferenceItemNodeList.AppendChild(projectElement);
 
             referenceElement.AppendChild(projectElement);
+
+            AddRequiredElements(referenceElement, referenceItem);
 
             return referenceElement;
         }
@@ -130,6 +136,66 @@ namespace Konfidence.TeamFoundation
             }
 
             return Guid.Empty.ToString("B");
+        }
+
+        private void AddRequiredElements(XmlElement referenceElement, ReferenceItem referenceItem)
+        {
+            AddSpecificVersionElement(referenceElement, referenceItem);
+
+            AddHintPathElement(referenceElement, referenceItem);
+
+            AddIncludeAttribute(referenceElement, referenceItem);
+
+            AddNameElement(referenceElement, referenceItem);
+        }
+
+        private void AddNameElement(XmlElement referenceElement, ReferenceItem referenceItem)
+        {
+            if (IsAssigned(referenceItem.Name))
+            {
+                XmlElement nameElement = CreateElement("Name", NameSpaceURI);
+
+                referenceElement.AppendChild(nameElement);
+
+                nameElement.InnerText = referenceItem.Name;
+            }
+        }
+
+        private void AddIncludeAttribute(XmlElement referenceElement, ReferenceItem referenceItem)
+        {
+            if (!string.IsNullOrEmpty(referenceItem.IncludeAttribute))
+            {
+                XmlAttribute includeAttribute = CreateAttribute("Include");
+
+                referenceElement.Attributes.Append(includeAttribute);
+
+                includeAttribute.InnerText = referenceItem.IncludeAttribute;
+            }
+        }
+
+        private void AddHintPathElement(XmlElement referenceElement, ReferenceItem referenceItem)
+        {
+            if (!string.IsNullOrEmpty(referenceItem.HintPathElement))
+            {
+
+                XmlElement hintPathElement = CreateElement("HintPath", NameSpaceURI);
+
+                referenceElement.AppendChild(hintPathElement);
+
+                hintPathElement.InnerText = referenceItem.HintPathElement;
+            }
+        }
+
+        private void AddSpecificVersionElement(XmlElement referenceElement, ReferenceItem referenceItem)
+        {
+            if (!string.IsNullOrEmpty(referenceItem.SpecificVersionElement))
+            {
+                XmlElement specificVersionElement = CreateElement("SpecificVersion", NameSpaceURI);
+
+                referenceElement.AppendChild(specificVersionElement);
+
+                specificVersionElement.InnerText = referenceItem.SpecificVersionElement;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class ProjectAssemblyItem : BaseItem
+    public class ReferenceItem : BaseItem
     {
         private string _SpecificVersionElement = string.Empty;
         private string _HintPathElement = string.Empty;
