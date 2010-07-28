@@ -7,11 +7,11 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class CompileProjectItemNode : ProjectItemNode
+    public class ProjectCompileItemNode : ProjectItemNode
     {
         private XmlNamespaceManager _XmlNamespaceManager;
 
-        public CompileProjectItemNode(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
+        public ProjectCompileItemNode(XmlNode xmlNode, XmlNamespaceManager xmlNamespaceManager)
             : base(xmlNode)
         {
             _XmlNamespaceManager = xmlNamespaceManager;

@@ -7,16 +7,16 @@ using System.Xml;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class CompileProjectNode : ProjectNode
+    public class ProjectCompileNode : ProjectNode
     {
         private const string PROJECT_COMPILE_ITEMGROUP_NAME = "Compile";
 
-        public CompileProjectNode(BaseTfsXmlDocument tfsXmlDocument)
+        public ProjectCompileNode(BaseTfsXmlDocument tfsXmlDocument)
             : base(PROJECT_COMPILE_ITEMGROUP_NAME, tfsXmlDocument)
         {
         }
 
-        internal CompileProjectNode(BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
+        internal ProjectCompileNode(BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
             : base(PROJECT_COMPILE_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode)
         {
         }
