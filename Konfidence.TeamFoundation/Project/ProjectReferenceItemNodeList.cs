@@ -37,9 +37,13 @@ namespace Konfidence.TeamFoundation.Project
             return new ProjectReferenceNode(tfsXmlDocument, itemGroupNode);
         }
 
-        internal protected XmlElement AppendChild(XmlElement projectElement)
+        internal protected XmlElement AppendChild(string projectGuid)
         {
             XmlElement referenceElement = base.AppendChild();
+
+            XmlElement projectElement = _TfsXmlDocument.CreateElement("Project", _TfsXmlDocument.NameSpaceURI);
+
+            projectElement.InnerText = projectGuid;
 
             referenceElement.AppendChild(projectElement);
 

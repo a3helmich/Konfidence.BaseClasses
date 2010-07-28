@@ -79,18 +79,22 @@ namespace Konfidence.TeamFoundation
 
         public XmlElement AddProjectReferenceElement(ReferenceItem referenceItem)
         {
-            XmlElement projectElement = CreateElement("Project", NameSpaceURI);
+            string projectGuid = GetProjectGuid(referenceItem.IncludeAttribute);
 
-            projectElement.InnerText = GetProjectGuid(referenceItem.IncludeAttribute);
-
-            XmlElement referenceElement = ProjectReferenceItemNodeList.AppendChild(projectElement);
-
-            referenceElement.AppendChild(projectElement);
+            XmlElement referenceElement = ProjectReferenceItemNodeList.AppendChild(projectGuid);
 
             AddRequiredElements(referenceElement, referenceItem);
 
             return referenceElement;
         }
+
+        public XmlElement AddProjectCompileElement(string fileName)
+        {
+            XmlElement compileElement = ProjectCompileItemNodeList.AppendChild(fileName);
+
+            return compileElement;
+        }
+
 
         private string GetProjectGuid(string projectFile)
         {

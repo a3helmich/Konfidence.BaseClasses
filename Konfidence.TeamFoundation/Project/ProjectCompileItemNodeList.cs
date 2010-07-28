@@ -9,9 +9,12 @@ namespace Konfidence.TeamFoundation.Project
 {
     public class ProjectCompileItemNodeList : ProjectItemNodeList<ProjectCompileItemNode, ProjectCompileNode>
     {
+        private BaseTfsXmlDocument _TfsXmlDocument = null;
+
         public ProjectCompileItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
             : base(tfsXmlDocument)
         {
+            _TfsXmlDocument = tfsXmlDocument;
         }
 
         // wordt alleen ge-called vanuit het base object
@@ -32,6 +35,19 @@ namespace Konfidence.TeamFoundation.Project
             XmlNode itemGroupNode = tfsXmlDocument.CreateElement("ItemGroup", tfsXmlDocument.NameSpaceURI);
 
             return new ProjectCompileNode(tfsXmlDocument, itemGroupNode);
+        }
+
+        internal XmlElement AppendChild(string fileName)
+        {
+            XmlElement compileElement = base.AppendChild();
+
+            XmlAttribute includeAttribute = _TfsXmlDocument.CreateAttribute("Include");
+
+            includeAttribute.InnerText = fileName;
+
+            compileElement.AppendChild(includeAttribute);
+
+            return compileElement;
         }
     }
 }
