@@ -15,6 +15,7 @@ namespace Konfidence.TeamFoundation
 
         private static Dictionary<string, string> _ProjectGuidDictionary = null;
 
+        #region properties
         public DllReferenceItemNodeList DllReferenceItemNodeList
         {
             get
@@ -63,6 +64,8 @@ namespace Konfidence.TeamFoundation
                 return _ProjectGuidDictionary;
             }
         }
+
+        #endregion properties
 
         public ProjectXmlDocument()
         {
