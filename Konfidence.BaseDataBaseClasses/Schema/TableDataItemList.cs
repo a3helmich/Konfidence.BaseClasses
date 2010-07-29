@@ -27,6 +27,8 @@ namespace Konfidence.BaseData.Schema
                     _GeneratedFileList = new List<string>();
                 }
 
+                BuildGeneratedFileList(_GeneratedFileList);
+
                 return _GeneratedFileList;
             }
         }
@@ -40,8 +42,6 @@ namespace Konfidence.BaseData.Schema
             CreateSchemaCommand();
 
             BuildItemList(_DataTableList);
-
-            BuildGeneratedFileList();
 
             DeleteSchemaCommand();
         }
@@ -102,17 +102,17 @@ namespace Konfidence.BaseData.Schema
             }
         }
 
-        private void BuildGeneratedFileList()
+        private void BuildGeneratedFileList(List<string> generatedFileList)
         {
-            GeneratedFileList.Clear();
+            generatedFileList.Clear();
 
             foreach (TableDataItem tableDataItem in this)
             {
                 foreach (string fileName in tableDataItem.GeneratedCsFileList)
                 {
-                    if (!GeneratedFileList.Contains(fileName))
+                    if (!generatedFileList.Contains(fileName))
                     {
-                        GeneratedFileList.Add(fileName);
+                        generatedFileList.Add(fileName);
                     }
                 }
             }

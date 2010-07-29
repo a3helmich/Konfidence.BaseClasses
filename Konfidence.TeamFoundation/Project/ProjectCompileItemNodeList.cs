@@ -45,7 +45,7 @@ namespace Konfidence.TeamFoundation.Project
 
             includeAttribute.InnerText = fileName;
 
-            compileElement.AppendChild(includeAttribute);
+            compileElement.Attributes.Append(includeAttribute);
 
             return compileElement;
         }

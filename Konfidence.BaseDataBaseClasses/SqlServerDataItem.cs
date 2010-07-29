@@ -14,7 +14,6 @@ namespace Konfidence.BaseData
         private const string AVAILABLE = "Available";
 
         private bool _IsAvailable = true;
-        private string _ErrorMessage = string.Empty;
 
         #region properties
         public int SqlServerId
@@ -28,11 +27,6 @@ namespace Konfidence.BaseData
         public bool IsAvailable
         {
             get { return _IsAvailable; }
-        }
-
-        public string ErrorMessage
-        {
-            get { return _ErrorMessage; }
         }
         #endregion properties
 
@@ -55,7 +49,8 @@ namespace Konfidence.BaseData
             catch(SqlException sqlException)
             {
                 _IsAvailable = false;
-                _ErrorMessage = sqlException.Message;
+
+                SetErrorMessage(sqlException.Message);
             }
         }
 
