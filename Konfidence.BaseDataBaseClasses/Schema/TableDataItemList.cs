@@ -1,19 +1,34 @@
-﻿using System.Data;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Konfidence.BaseData.Schema
 {
     public class TableDataItemList: BaseDataItemList<TableDataItem>
     {
-        private DataTable _DataTable;
+        private DataTable _DataTableList;
         private bool _StoredProcedureCreated = false;
         private string _SourcePath;
+        private List<string> _GeneratedFileList = null;
 
         #region properties
         public string SourcePath
         {
             get { return _SourcePath; }
             set { _SourcePath = value; }
+        }
+
+        public List<string> GeneratedFileList
+        {
+            get
+            {
+                if (!IsAssigned(_GeneratedFileList))
+                {
+                    _GeneratedFileList = new List<string>();
+                }
+
+                return _GeneratedFileList;
+            }
         }
         #endregion properties
 
@@ -24,7 +39,9 @@ namespace Konfidence.BaseData.Schema
         {
             CreateSchemaCommand();
 
-            BuildItemList(_DataTable);
+            BuildItemList(_DataTableList);
+
+            BuildGeneratedFileList();
 
             DeleteSchemaCommand();
         }
@@ -33,7 +50,7 @@ namespace Konfidence.BaseData.Schema
         {
             TableDataItem tableDataItem = GetNewDataItem();
 
-            _DataTable = tableDataItem.GetSchemaObject("Tables");
+            _DataTableList = tableDataItem.GetSchemaObject("Tables");
         }
 
         private void CreateSchemaCommand()
@@ -54,9 +71,9 @@ namespace Konfidence.BaseData.Schema
             }
         }
 
-        private void BuildItemList(DataTable dataTable)
+        private void BuildItemList(DataTable dataTableList)
         {
-            foreach (DataRow dataRow in dataTable.Rows)
+            foreach (DataRow dataRow in dataTableList.Rows)
             {
                 string tableType = dataRow["TABLE_TYPE"] as string;
 
@@ -81,6 +98,22 @@ namespace Konfidence.BaseData.Schema
                         break;
                     default:
                         throw new Exception("onbekend tabletype");
+                }
+            }
+        }
+
+        private void BuildGeneratedFileList()
+        {
+            GeneratedFileList.Clear();
+
+            foreach (TableDataItem tableDataItem in this)
+            {
+                foreach (string fileName in tableDataItem.GeneratedCsFileList)
+                {
+                    if (!GeneratedFileList.Contains(fileName))
+                    {
+                        GeneratedFileList.Add(fileName);
+                    }
                 }
             }
         }
