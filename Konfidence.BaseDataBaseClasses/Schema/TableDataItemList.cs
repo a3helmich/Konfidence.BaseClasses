@@ -115,6 +115,14 @@ namespace Konfidence.BaseData.Schema
                         generatedFileList.Add(fileName);
                     }
                 }
+
+                foreach (string fileName in tableDataItem.GeneratedSqlFiles)
+                {
+                    if (!generatedFileList.Contains(fileName))
+                    {
+                        generatedFileList.Add(fileName);
+                    }
+                }
             }
         }
 
