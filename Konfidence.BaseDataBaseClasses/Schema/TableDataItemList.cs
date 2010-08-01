@@ -6,10 +6,12 @@ namespace Konfidence.BaseData.Schema
 {
     public class TableDataItemList: BaseDataItemList<TableDataItem>
     {
-        private DataTable _DataTableList;
         private bool _StoredProcedureCreated = false;
         private string _SourcePath;
-        private List<string> _GeneratedFileList = null;
+
+        private DataTable _DataTableList;
+        private List<string> _GeneratedCsFileList = null;
+        private List<string> _GeneratedSqlFileList = null;
 
         #region properties
         public string SourcePath
@@ -18,18 +20,33 @@ namespace Konfidence.BaseData.Schema
             set { _SourcePath = value; }
         }
 
-        public List<string> GeneratedFileList
+        public List<string> GeneratedCsFileList
         {
             get
             {
-                if (!IsAssigned(_GeneratedFileList))
+                if (!IsAssigned(_GeneratedCsFileList))
                 {
-                    _GeneratedFileList = new List<string>();
+                    _GeneratedCsFileList = new List<string>();
                 }
 
-                BuildGeneratedFileList(_GeneratedFileList);
+                BuildGeneratedCsFileList(_GeneratedCsFileList);
 
-                return _GeneratedFileList;
+                return _GeneratedCsFileList;
+            }
+        }
+
+        public List<string> GeneratedSqlFileList
+        {
+            get
+            {
+                if (!IsAssigned(_GeneratedSqlFileList))
+                {
+                    _GeneratedSqlFileList = new List<string>();
+                }
+
+                BuildGeneratedCsFileList(_GeneratedSqlFileList);
+
+                return _GeneratedSqlFileList;
             }
         }
         #endregion properties
@@ -102,7 +119,7 @@ namespace Konfidence.BaseData.Schema
             }
         }
 
-        private void BuildGeneratedFileList(List<string> generatedFileList)
+        private void BuildGeneratedCsFileList(List<string> generatedFileList)
         {
             generatedFileList.Clear();
 
@@ -115,7 +132,15 @@ namespace Konfidence.BaseData.Schema
                         generatedFileList.Add(fileName);
                     }
                 }
+            }
+        }
 
+        private void BuildGeneratedSqlFileList(List<string> generatedFileList)
+        {
+            generatedFileList.Clear();
+
+            foreach (TableDataItem tableDataItem in this)
+            {
                 foreach (string fileName in tableDataItem.GeneratedSqlFiles)
                 {
                     if (!generatedFileList.Contains(fileName))

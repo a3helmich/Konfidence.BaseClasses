@@ -60,6 +60,7 @@
     <Compile Include="Project\ProjectCompileNode.cs" />
     <Compile Include="Project\DllReferenceNode.cs" />
     <Compile Include="Project\DllReferenceItemNodeList.cs" />
+    <Compile Include="Project\ProjectFileItem.cs" />
     <Compile Include="Project\ReferenceItem.cs" />
     <Compile Include="Project\ProjectReferenceItemNode.cs" />
     <Compile Include="Project\ProjectReferenceItemNodeList.cs" />
