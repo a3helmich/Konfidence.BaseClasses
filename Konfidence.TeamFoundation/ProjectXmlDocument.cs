@@ -91,9 +91,9 @@ namespace Konfidence.TeamFoundation
             return referenceElement;
         }
 
-        public XmlElement AddProjectCompileElement(string fileName)
+        public XmlElement AddProjectCompileElement(ProjectFileItem projectFileItem)
         {
-            XmlElement compileElement = ProjectCompileItemNodeList.AppendChild(fileName);
+            XmlElement compileElement = ProjectCompileItemNodeList.AppendChild(projectFileItem);
 
             return compileElement;
         }

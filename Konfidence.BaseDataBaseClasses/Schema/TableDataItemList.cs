@@ -44,7 +44,7 @@ namespace Konfidence.BaseData.Schema
                     _GeneratedSqlFileList = new List<string>();
                 }
 
-                BuildGeneratedCsFileList(_GeneratedSqlFileList);
+                BuildGeneratedSqlFileList(_GeneratedSqlFileList);
 
                 return _GeneratedSqlFileList;
             }

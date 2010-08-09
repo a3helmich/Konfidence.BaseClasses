@@ -37,13 +37,15 @@ namespace Konfidence.TeamFoundation.Project
             return new ProjectCompileNode(tfsXmlDocument, itemGroupNode);
         }
 
-        internal XmlElement AppendChild(string fileName)
+        internal XmlElement AppendChild(ProjectFileItem projectFileItem)
         {
             XmlElement compileElement = base.AppendChild();
+            
+            //compileElement.
 
             XmlAttribute includeAttribute = _TfsXmlDocument.CreateAttribute("Include");
 
-            includeAttribute.InnerText = fileName;
+            includeAttribute.InnerText = projectFileItem.FileName;
 
             compileElement.Attributes.Append(includeAttribute);
 
