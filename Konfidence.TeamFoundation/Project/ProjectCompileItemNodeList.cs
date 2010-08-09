@@ -41,6 +41,7 @@ namespace Konfidence.TeamFoundation.Project
         {
             XmlElement compileElement = base.AppendChild();
             
+            // ToDo de naam van het compileElement omzetten naar de meegegeven naam in het projectfileitem
             //compileElement.
 
             XmlAttribute includeAttribute = _TfsXmlDocument.CreateAttribute("Include");
