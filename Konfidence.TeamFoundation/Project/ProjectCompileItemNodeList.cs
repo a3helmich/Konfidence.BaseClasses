@@ -39,10 +39,11 @@ namespace Konfidence.TeamFoundation.Project
 
         internal XmlElement AppendChild(ProjectFileItem projectFileItem)
         {
-            XmlElement compileElement = base.AppendChild();
+            XmlElement compileElement = base.AppendChild(projectFileItem.Action);
             
             // ToDo de naam van het compileElement omzetten naar de meegegeven naam in het projectfileitem
             //compileElement.
+            //compileElement.Name = projectFileItem.Action;
 
             XmlAttribute includeAttribute = _TfsXmlDocument.CreateAttribute("Include");
 

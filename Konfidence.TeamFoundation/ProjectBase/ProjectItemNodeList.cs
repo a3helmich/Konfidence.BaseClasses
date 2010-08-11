@@ -44,12 +44,17 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
         internal protected XmlElement AppendChild()
         {
+            return AppendChild(string.Empty);
+        }
+
+        internal protected XmlElement AppendChild(string newItemGroupName)
+        {
             if (Count == 0)
             {
                 _GroupNode = CreateGroupNode(_TfsXmlDocument);
             }
 
-            XmlElement newElement = _GroupNode.AppendChild();
+            XmlElement newElement = _GroupNode.AppendChild(newItemGroupName);
 
             T baseItemNode = GetItemNode(newElement, _GroupNode.XmlNamespaceManager);
 
