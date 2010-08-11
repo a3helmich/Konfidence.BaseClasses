@@ -123,5 +123,14 @@ namespace Konfidence.TeamFoundation
 
             return foundItemGroup;
         }
+
+        protected void AddElement(XmlElement parentElement, string name, string value)
+        {
+            XmlElement childElement = CreateElement(name, NameSpaceURI);
+
+            parentElement.AppendChild(childElement);
+
+            childElement.InnerText = value;
+        }
     }
 }

@@ -169,11 +169,7 @@ namespace Konfidence.TeamFoundation
         {
             if (IsAssigned(referenceItem.Name))
             {
-                XmlElement nameElement = CreateElement("Name", NameSpaceURI);
-
-                referenceElement.AppendChild(nameElement);
-
-                nameElement.InnerText = referenceItem.Name;
+                AddElement(referenceElement, "Name", referenceItem.Name);
             }
         }
 
@@ -191,26 +187,17 @@ namespace Konfidence.TeamFoundation
 
         private void AddHintPathElement(XmlElement referenceElement, ReferenceItem referenceItem)
         {
-            if (!string.IsNullOrEmpty(referenceItem.HintPathElement))
+            if (IsAssigned(referenceItem.HintPathElement))
             {
-
-                XmlElement hintPathElement = CreateElement("HintPath", NameSpaceURI);
-
-                referenceElement.AppendChild(hintPathElement);
-
-                hintPathElement.InnerText = referenceItem.HintPathElement;
+                AddElement(referenceElement, "HintPath", referenceItem.HintPathElement);
             }
         }
 
         private void AddSpecificVersionElement(XmlElement referenceElement, ReferenceItem referenceItem)
         {
-            if (!string.IsNullOrEmpty(referenceItem.SpecificVersionElement))
+            if (IsAssigned(referenceItem.SpecificVersionElement))
             {
-                XmlElement specificVersionElement = CreateElement("SpecificVersion", NameSpaceURI);
-
-                referenceElement.AppendChild(specificVersionElement);
-
-                specificVersionElement.InnerText = referenceItem.SpecificVersionElement;
+                AddElement(referenceElement, "SpecificVersion", referenceItem.SpecificVersionElement);
             }
         }
     }
