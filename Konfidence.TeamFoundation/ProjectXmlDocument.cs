@@ -71,6 +71,15 @@ namespace Konfidence.TeamFoundation
         {
         }
 
+        public static ProjectXmlDocument GetProjectXmlDocument(string projectFile)
+        {
+            ProjectXmlDocument newProjectXmlDocument = new ProjectXmlDocument();
+
+            newProjectXmlDocument.Load(projectFile);
+
+            return newProjectXmlDocument;
+        }
+
         public XmlElement AddDllReferenceElement(ReferenceItem referenceItem)
         {
             XmlElement referenceElement = DllReferenceItemNodeList.AppendChild();
