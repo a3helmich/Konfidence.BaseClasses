@@ -8,34 +8,34 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    public class ProjectCompileItemNodeList : ProjectItemNodeList<ProjectCompileItemNode, ProjectCompileNode>
+    class ProjectNoneItemNodeList : ProjectItemNodeList<ProjectNoneItemNode, ProjectNoneNode>
     {
         private BaseTfsXmlDocument _TfsXmlDocument = null;
 
-        public ProjectCompileItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
+        public ProjectNoneItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
             : base(tfsXmlDocument)
         {
             _TfsXmlDocument = tfsXmlDocument;
         }
 
         // wordt alleen ge-called vanuit het base object
-        internal protected override ProjectCompileItemNode GetItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager)
+        internal protected override ProjectNoneItemNode GetItemNode(XmlNode projectItemNode, XmlNamespaceManager xmlNamespaceManager)
         {
-            return new ProjectCompileItemNode(projectItemNode, xmlNamespaceManager);
+            return new ProjectNoneItemNode(projectItemNode, xmlNamespaceManager);
         }
 
         // wordt alleen ge-called vanuit het base object
-        internal protected override ProjectCompileNode GetGroupNode(BaseTfsXmlDocument tfsXmlDocument)
+        internal protected override ProjectNoneNode GetGroupNode(BaseTfsXmlDocument tfsXmlDocument)
         {
-            return new ProjectCompileNode(tfsXmlDocument);
+            return new ProjectNoneNode(tfsXmlDocument);
         }
 
         // wordt alleen ge-called vanuit het base object
-        internal protected override ProjectCompileNode CreateGroupNode(BaseTfsXmlDocument tfsXmlDocument)
+        internal protected override ProjectNoneNode CreateGroupNode(BaseTfsXmlDocument tfsXmlDocument)
         {
             XmlNode itemGroupNode = tfsXmlDocument.CreateElement("ItemGroup", tfsXmlDocument.NameSpaceURI);
 
-            return new ProjectCompileNode(tfsXmlDocument, itemGroupNode);
+            return new ProjectNoneNode(tfsXmlDocument, itemGroupNode);
         }
 
         internal XmlElement AppendChild(ProjectFileItem projectFileItem)
