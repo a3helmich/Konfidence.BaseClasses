@@ -196,8 +196,6 @@ namespace Konfidence.UserControlHelpers
 			{
 				Session.Remove(KitSessionAccount.AccountObject);
 			}
-
-			return;
 		}
 	}
 }
