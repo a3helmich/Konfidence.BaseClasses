@@ -8,7 +8,7 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    class ProjectNoneNode: ProjectNode
+    public class ProjectNoneNode: ProjectNode
     {
         private const string PROJECT_NONE_ITEMGROUP_NAME = "None";
 

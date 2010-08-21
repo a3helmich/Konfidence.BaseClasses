@@ -12,6 +12,7 @@ namespace Konfidence.TeamFoundation
         private DllReferenceItemNodeList _DllReferenceItemNodeList = null;
         private ProjectReferenceItemNodeList _ProjectReferenceItemGroupList = null;
         private ProjectCompileItemNodeList _ProjectCompileItemNodeList = null;
+        private ProjectNoneItemNodeList _ProjectNoneItemNodeList = null;
 
         private static Dictionary<string, string> _ProjectGuidDictionary = null;
 
@@ -49,6 +50,18 @@ namespace Konfidence.TeamFoundation
                     _ProjectCompileItemNodeList = new ProjectCompileItemNodeList(this);
                 }
                 return _ProjectCompileItemNodeList;
+            }
+        }
+
+        public ProjectNoneItemNodeList ProjectNoneItemNodeList
+        {
+            get
+            {
+                if (!IsAssigned(_ProjectNoneItemNodeList))
+                {
+                    _ProjectNoneItemNodeList = new ProjectNoneItemNodeList(this);
+                }
+                return _ProjectNoneItemNodeList;
             }
         }
 
@@ -100,11 +113,21 @@ namespace Konfidence.TeamFoundation
             return referenceElement;
         }
 
-        public XmlElement AddProjectCompileElement(ProjectFileItem projectFileItem)
+        public XmlElement AddProjectFileElement(ProjectFileItem projectFileItem)
         {
-            XmlElement compileElement = ProjectCompileItemNodeList.AppendChild(projectFileItem);
+            XmlElement fileElement = null;
 
-            return compileElement;
+            switch (projectFileItem.Action.ToLower())
+            {
+                case "compile":
+                    fileElement = ProjectCompileItemNodeList.AppendChild(projectFileItem);
+                    break;
+                case "none":
+                    fileElement = ProjectNoneItemNodeList.AppendChild(projectFileItem);
+                    break;
+            }
+
+            return fileElement;
         }
 
 

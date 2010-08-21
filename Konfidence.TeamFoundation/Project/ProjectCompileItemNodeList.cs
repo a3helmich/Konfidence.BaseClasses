@@ -40,7 +40,7 @@ namespace Konfidence.TeamFoundation.Project
 
         internal XmlElement AppendChild(ProjectFileItem projectFileItem)
         {
-            XmlElement compileElement = base.AppendChild(projectFileItem.Action);
+            XmlElement compileElement = base.AppendChild();
             
             // ToDo de naam van het compileElement omzetten naar de meegegeven naam in het projectfileitem
             //compileElement.

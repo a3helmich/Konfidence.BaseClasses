@@ -8,7 +8,7 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    class ProjectNoneItemNode: ProjectItemNode
+    public class ProjectNoneItemNode: ProjectItemNode
     {
         private XmlNamespaceManager _XmlNamespaceManager;
 

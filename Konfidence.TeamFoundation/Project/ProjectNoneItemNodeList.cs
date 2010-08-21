@@ -8,7 +8,7 @@ using Konfidence.TeamFoundation.ProjectBase;
 
 namespace Konfidence.TeamFoundation.Project
 {
-    class ProjectNoneItemNodeList : ProjectItemNodeList<ProjectNoneItemNode, ProjectNoneNode>
+    public class ProjectNoneItemNodeList : ProjectItemNodeList<ProjectNoneItemNode, ProjectNoneNode>
     {
         private BaseTfsXmlDocument _TfsXmlDocument = null;
 
@@ -40,11 +40,7 @@ namespace Konfidence.TeamFoundation.Project
 
         internal XmlElement AppendChild(ProjectFileItem projectFileItem)
         {
-            XmlElement compileElement = base.AppendChild(projectFileItem.Action);
-            
-            // ToDo de naam van het compileElement omzetten naar de meegegeven naam in het projectfileitem
-            //compileElement.
-            //compileElement.Name = projectFileItem.Action;
+            XmlElement compileElement = base.AppendChild();
 
             XmlAttribute includeAttribute = _TfsXmlDocument.CreateAttribute("Include");
 

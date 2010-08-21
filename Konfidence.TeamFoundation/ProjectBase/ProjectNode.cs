@@ -89,18 +89,9 @@ namespace Konfidence.TeamFoundation.ProjectBase
             return foundItemGroup;
         }
 
-        internal protected XmlElement AppendChild(string newItemGroupName)
+        internal protected XmlElement AppendChild()
         {
-            XmlElement newElement;
-
-            if (IsAssigned(newItemGroupName))
-            {
-                newElement = _TfsXmlDocument.CreateElement(newItemGroupName, _TfsXmlDocument.NameSpaceURI);
-            }
-            else
-            {
-                newElement = _TfsXmlDocument.CreateElement(_ItemGroupName, _TfsXmlDocument.NameSpaceURI);
-            }
+            XmlElement newElement = _TfsXmlDocument.CreateElement(_ItemGroupName, _TfsXmlDocument.NameSpaceURI);
 
             _ItemGroupNode.AppendChild(newElement);
 
