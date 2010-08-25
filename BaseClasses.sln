@@ -1,6 +1,22 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongNameKey", "{5509EDEF-3EA1-4BBA-905A-34C9C89004C0}"
+	ProjectSection(SolutionItems) = preProject
+		Konfidence.nl.snk = Konfidence.nl.snk
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FAC7656-5009-4A8F-8383-F9488538224F}"
+	ProjectSection(SolutionItems) = preProject
+		BaseClasses.vsmdi = BaseClasses.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReBaserConfig", "ReBaserConfig", "{F13754A5-412F-41E5-B228-5F39C3ED476F}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\References\Config\ProjectReBaser.Config.xml = ..\..\References\Config\ProjectReBaser.Config.xml
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses", "Konfidence.BaseClasses\Konfidence.BaseClasses.csproj", "{D71A4677-79C7-443B-900D-218FBCFE8728}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers", "Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj", "{D60A1063-3897-44FA-97F5-85A9C25B1F8C}"
@@ -17,25 +33,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWindowForms"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.UtilHelper", "Konfidence.UtilHelper\Konfidence.UtilHelper.csproj", "{BAD05CC5-FB06-4B17-8089-67CF420159B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongNameKey", "{5509EDEF-3EA1-4BBA-905A-34C9C89004C0}"
-	ProjectSection(SolutionItems) = preProject
-		Konfidence.nl.snk = Konfidence.nl.snk
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.DesignPatterns", "Konfidence.Designpatterns\Konfidence.DesignPatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundation", "Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj", "{99B3193A-0739-4586-A379-138176C425A7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FAC7656-5009-4A8F-8383-F9488538224F}"
-	ProjectSection(SolutionItems) = preProject
-		BaseClasses.vsmdi = BaseClasses.vsmdi
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReBaserConfig", "ReBaserConfig", "{F13754A5-412F-41E5-B228-5F39C3ED476F}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\References\Config\ProjectReBaser.Config.xml = ..\..\References\Config\ProjectReBaser.Config.xml
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceReBaser", "ReferenceReBaser\ReferenceReBaser.csproj", "{195292BF-209C-423C-ABB1-6AC884122F22}"
 EndProject
@@ -70,7 +70,7 @@ Global
 		SccProjectUniqueName7 = Konfidence.BaseWindowForms\\Konfidence.BaseWindowForms.csproj
 		SccProjectName7 = Konfidence.BaseWindowForms
 		SccLocalPath7 = Konfidence.BaseWindowForms
-		SccProjectUniqueName8 = Konfidence.Designpatterns\\Konfidence.Designpatterns.csproj
+		SccProjectUniqueName8 = Konfidence.Designpatterns\\Konfidence.DesignPatterns.csproj
 		SccProjectName8 = Konfidence.Designpatterns
 		SccLocalPath8 = Konfidence.Designpatterns
 		SccProjectUniqueName9 = Konfidence.UtilHelper\\Konfidence.UtilHelper.csproj
