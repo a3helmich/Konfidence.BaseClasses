@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <DataBase>
+    TShirt
+  </DataBase>
+  <TargetProjectDirectory>
+    C:\Projects\Konfidence\BaseClasses\BaseClassesClasses
+  </TargetProjectDirectory>
+  <WebServiceDirectory>
+    C:\Projects\Konfidence\BaseClasses\BaseClassesWebService
+  </WebServiceDirectory>
+  <SolutionDirectory>
+  </SolutionDirectory>
+</Config>

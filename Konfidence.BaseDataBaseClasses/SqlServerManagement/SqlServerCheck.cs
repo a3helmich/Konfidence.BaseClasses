@@ -10,8 +10,10 @@ namespace Konfidence.BaseData.SqlServerManagement
         public static bool VerifyDatabaseServer(Database databaseInstance)
         {
             string serverName = string.Empty;
+            string databaseName = string.Empty;
 
             string[] connectionParameters = databaseInstance.ConnectionStringWithoutCredentials.Split(';'); 
+
             foreach(string param in connectionParameters)
             {
                 if (param.ToLower().StartsWith("server="))
@@ -20,9 +22,26 @@ namespace Konfidence.BaseData.SqlServerManagement
 
                     serverName = paramParts[1];
                 }
+
+                if (param.ToLower().StartsWith("database="))
+                {
+                    string[] paramParts = param.Split('=');
+
+                    databaseName = paramParts[1];
+                }
             }
 
-            return SqlServerSmo.VerifyDatabaseServer(serverName);
+            if (!SqlServerSmo.VerifyDatabaseServer(serverName))
+            {
+                throw new SqlHostException("Connection timeout (> 5000ms), Database Server " + serverName + " not found");
+            }
+
+            if (!SqlServerSmo.FindDatabase(serverName, databaseName))
+            {
+                throw new SqlHostException("Database " + databaseName + " does not exist");
+            }
+
+            return true;
         }
     }
 }

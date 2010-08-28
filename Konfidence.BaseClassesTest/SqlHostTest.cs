@@ -18,26 +18,7 @@ namespace Konfidence.TestBaseClasses
         {
             TableDataItemList tableList = null;
 
-            try
-            {
                 tableList = new TableDataItemList();
-            }
-            catch (SqlHostException)
-            {
-                // expected
-            }
-            catch (SqlException)
-            {
-                // unexpected
-                throw;
-            }
-            catch (Exception)
-            {
-                // totally unexpected
-                throw;
-            }
-
-            Assert.IsNotNull(tableList);
         }
     }
 }

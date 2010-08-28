@@ -29,7 +29,7 @@ namespace Konfidence.BaseData.SqlServerManagement
 
                 executerThread.Start();
 
-                executerThread.Join(1000); // 1 seconde genoeg, of moet dit aanpasbaar zijn?
+                executerThread.Join(5000); // 5 seconde genoeg, of moet dit aanpasbaar zijn?
                 // NB. the thread is not going to stop immediately -> the application will not stop right away. 
                 // but the response is really fast.
 
@@ -56,6 +56,25 @@ namespace Konfidence.BaseData.SqlServerManagement
                 // if this fails, a timeout has already occured
             }
 
+        }
+
+        internal static bool FindDatabase(string databaseServerName, string databaseName)
+        {
+            Server server = new Server(databaseServerName);
+
+            List<string> databaseList = new List<string>();
+
+            foreach (Database database in server.Databases)
+            {
+                databaseList.Add(database.Name.ToLower());
+            }
+
+            if (!databaseList.Contains(databaseName.ToLower()))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

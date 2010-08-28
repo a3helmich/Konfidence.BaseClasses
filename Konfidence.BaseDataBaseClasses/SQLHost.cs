@@ -286,9 +286,15 @@ namespace Konfidence.BaseData
                 databaseInstance = DatabaseFactory.CreateDatabase();
 			}
 
-            if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+            try
             {
-                throw new SqlHostException("Connection timeout (> 1000ms)");
+                if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+                {
+                }
+            }
+            catch
+            {
+                throw;
             }
 
             return databaseInstance;
