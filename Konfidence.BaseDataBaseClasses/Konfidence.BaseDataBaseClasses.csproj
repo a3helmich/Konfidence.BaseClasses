@@ -114,6 +114,7 @@
     <Compile Include="Schema\TableDataItem.cs" />
     <Compile Include="Schema\TableDataItemList.cs" />
     <Compile Include="SQLHost.cs" />
+    <Compile Include="SqlHostException.cs" />
     <Compile Include="SqlServerDataItem.cs" />
     <Compile Include="SqlServerManagement\SqlServerCheck.cs" />
     <Compile Include="SqlServerManagement\SqlServerSmo.cs" />

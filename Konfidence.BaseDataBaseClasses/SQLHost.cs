@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Data.SqlClient;
 using Konfidence.BaseData.SqlServerManagement;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData
 {
@@ -285,7 +286,10 @@ namespace Konfidence.BaseData
                 databaseInstance = DatabaseFactory.CreateDatabase();
 			}
 
-            SqlServerCheck.VerifyDatabaseServer(databaseInstance);
+            if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+            {
+                throw new SqlHostException("Connection timeout (> 1000ms)");
+            }
 
             return databaseInstance;
 		}

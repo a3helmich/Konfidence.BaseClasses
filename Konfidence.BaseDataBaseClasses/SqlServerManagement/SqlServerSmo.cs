@@ -30,6 +30,8 @@ namespace Konfidence.BaseData.SqlServerManagement
                 executerThread.Start();
 
                 executerThread.Join(1000); // 1 seconde genoeg, of moet dit aanpasbaar zijn?
+                // NB. the thread is not going to stop immediately -> the application will not stop right away. 
+                // but the response is really fast.
 
                 return _PingSucceeded;
             }
@@ -41,11 +43,19 @@ namespace Konfidence.BaseData.SqlServerManagement
         {
             _PingSucceeded = false;
 
-            Server server = new Server(_DatabaseServerName);
+            try
+            {
+                Server server = new Server(_DatabaseServerName);
 
-            string result = server.PingSqlServerVersion(_DatabaseServerName).ToString();
+                string result = server.PingSqlServerVersion(_DatabaseServerName).ToString();
 
-            _PingSucceeded = true;
+                _PingSucceeded = true;
+            }
+            catch
+            {
+                // if this fails, a timeout has already occured
+            }
+
         }
     }
 }

@@ -16,19 +16,28 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void SqlServerExists()
         {
+            TableDataItemList tableList = null;
+
             try
             {
-                TableDataItemList tableList = new TableDataItemList();
+                tableList = new TableDataItemList();
             }
-            catch (SqlException sqlEx)
+            catch (SqlHostException)
             {
-                string test = sqlEx.Message;
-                throw sqlEx;
+                // expected
             }
-            catch (Exception ex)
+            catch (SqlException)
             {
-                throw ex;
+                // unexpected
+                throw;
             }
+            catch (Exception)
+            {
+                // totally unexpected
+                throw;
+            }
+
+            Assert.IsNotNull(tableList);
         }
     }
 }
