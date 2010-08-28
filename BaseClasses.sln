@@ -9,6 +9,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FAC7656-5009-4A8F-8383-F9488538224F}"
 	ProjectSection(SolutionItems) = preProject
 		BaseClasses.vsmdi = BaseClasses.vsmdi
+		BaseClasses1.vsmdi = BaseClasses1.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
 EndProject
@@ -88,6 +89,9 @@ Global
 		SccProjectUniqueName13 = Konfidence.Security\\Konfidence.Security.csproj
 		SccProjectName13 = Konfidence.Security
 		SccLocalPath13 = Konfidence.Security
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = BaseClasses1.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

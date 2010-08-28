@@ -12,6 +12,8 @@ namespace Konfidence.BaseData
 
 		public SQLHost(string dataBaseName): base(string.Empty, dataBaseName)
 		{
+            // TODO : figure out if the Host is properly configured
+            //        and if all resources are avalable
 		}
 
 		#region GetField Methods
