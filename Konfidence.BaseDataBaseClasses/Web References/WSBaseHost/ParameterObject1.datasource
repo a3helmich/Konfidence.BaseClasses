@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="ParameterObject" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Konfidence.BaseData.WSBaseHost.ParameterObject</TypeInfo>
+   <TypeInfo>Konfidence.BaseData.WSBaseHost.ParameterObject, Web References.WSBaseHost.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

@@ -1,8 +1,12 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Konfidence.Base;
+using Konfidence.BaseData;
+using Konfidence.BaseData.Schema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Data.SqlClient;
 
 namespace Konfidence.TestBaseClasses
 {
@@ -12,7 +16,19 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void SqlServerExists()
         {
-
+            try
+            {
+                TableDataItemList tableList = new TableDataItemList();
+            }
+            catch (SqlException sqlEx)
+            {
+                string test = sqlEx.Message;
+                throw sqlEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

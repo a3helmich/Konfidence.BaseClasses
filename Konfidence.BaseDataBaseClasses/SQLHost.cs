@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using Konfidence.BaseData.SqlServerManagement;
 
 namespace Konfidence.BaseData
 {
@@ -273,14 +274,20 @@ namespace Konfidence.BaseData
 
 		private Database GetDatabase()
 		{
+            Database databaseInstance = null;
+
 			if (DataBaseName.Length > 0)
 			{
-				return DatabaseFactory.CreateDatabase(DataBaseName);
+				databaseInstance = DatabaseFactory.CreateDatabase(DataBaseName);
 			}
 			else
 			{
-				return DatabaseFactory.CreateDatabase();
+                databaseInstance = DatabaseFactory.CreateDatabase();
 			}
+
+            SqlServerCheck.VerifyDatabase(databaseInstance);
+
+            return databaseInstance;
 		}
 
 		private int GetOrdinal(string fieldName)
