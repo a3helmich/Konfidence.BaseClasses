@@ -285,7 +285,7 @@ namespace Konfidence.BaseData
                 databaseInstance = DatabaseFactory.CreateDatabase();
 			}
 
-            SqlServerCheck.VerifyDatabase(databaseInstance);
+            SqlServerCheck.VerifyDatabaseServer(databaseInstance);
 
             return databaseInstance;
 		}

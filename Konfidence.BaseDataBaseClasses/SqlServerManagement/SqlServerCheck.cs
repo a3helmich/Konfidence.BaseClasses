@@ -7,7 +7,7 @@ namespace Konfidence.BaseData.SqlServerManagement
 {
     internal class SqlServerCheck
     {
-        public static bool VerifyDatabase(Database databaseInstance)
+        public static bool VerifyDatabaseServer(Database databaseInstance)
         {
             string serverName = string.Empty;
 
