@@ -29,7 +29,7 @@ namespace Konfidence.BaseData.SqlServerManagement
 
                 executerThread.Start();
 
-                executerThread.Join(5000); // 5 seconde genoeg, of moet dit aanpasbaar zijn?
+                executerThread.Join(1500); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
                 // NB. the thread is not going to stop immediately -> the application will not stop right away. 
                 // but the response is really fast.
 

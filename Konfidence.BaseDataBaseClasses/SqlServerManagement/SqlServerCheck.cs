@@ -33,7 +33,7 @@ namespace Konfidence.BaseData.SqlServerManagement
 
             if (!SqlServerSmo.VerifyDatabaseServer(serverName))
             {
-                throw new SqlHostException("Connection timeout (> 5000ms), Database Server " + serverName + " not found");
+                throw new SqlHostException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
             }
 
             if (!SqlServerSmo.FindDatabase(serverName, databaseName))
