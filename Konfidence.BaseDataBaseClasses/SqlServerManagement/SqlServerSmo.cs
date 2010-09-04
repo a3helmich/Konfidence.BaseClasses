@@ -4,32 +4,36 @@ using System.Text;
 using Microsoft.SqlServer.Management.Smo;
 using System.Threading;
 using Konfidence.Base;
+using Microsoft.SqlServer.Management.Common;
+using System.Data.SqlClient;
 
 namespace Konfidence.BaseData.SqlServerManagement
 {
     internal class SqlServerSmo: BaseItem
     {
         private string _DatabaseServerName = string.Empty;
+        private SqlConnection _SqlConnection = null;
         private bool _PingSucceeded = false;
 
-        internal static bool VerifyDatabaseServer(string databaseServerName)
+        internal static bool VerifyDatabaseServer(SqlConnection sqlConnection, string databaseServerName)
         {
             SqlServerSmo executer = new SqlServerSmo();
 
-            return executer.PingSqlServerVersion(databaseServerName);
+            return executer.PingSqlServerVersion(sqlConnection, databaseServerName);
         }
 
-        private bool PingSqlServerVersion(string databaseServerName)
+        private bool PingSqlServerVersion(SqlConnection sqlConnection, string databaseServerName)
         {
             if (IsAssigned(databaseServerName))
             {
                 _DatabaseServerName = databaseServerName;
+                _SqlConnection = sqlConnection;
 
                 Thread executerThread = new Thread(PingSqlServerVersionExecuter);
 
                 executerThread.Start();
 
-                executerThread.Join(1500); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
+                executerThread.Join(3000); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
                 // NB. the thread is not going to stop immediately -> the application will not stop right away. 
                 // but the response is really fast.
 
@@ -45,22 +49,31 @@ namespace Konfidence.BaseData.SqlServerManagement
 
             try
             {
-                Server server = new Server(_DatabaseServerName);
+                ServerConnection serverConnection = new ServerConnection(_SqlConnection);
+
+                Server server = new Server(serverConnection);
 
                 string result = server.PingSqlServerVersion(_DatabaseServerName).ToString();
 
                 _PingSucceeded = true;
             }
-            catch
+            catch (FailedOperationException cfEx)
             {
+                throw cfEx.InnerException;
+            }
+            catch (Exception ex)
+            {
+                string test = ex.Message;
                 // if this fails, a timeout has already occured
             }
 
         }
 
-        internal static bool FindDatabase(string databaseServerName, string databaseName)
+        internal static bool FindDatabase(SqlConnection sqlConnection, string databaseName)
         {
-            Server server = new Server(databaseServerName);
+            ServerConnection serverConnection = new ServerConnection(sqlConnection);
+
+            Server server = new Server(serverConnection);
 
             List<string> databaseList = new List<string>();
 

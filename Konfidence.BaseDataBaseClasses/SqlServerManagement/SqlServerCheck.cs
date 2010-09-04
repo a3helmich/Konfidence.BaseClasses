@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace Konfidence.BaseData.SqlServerManagement
 {
@@ -12,6 +14,8 @@ namespace Konfidence.BaseData.SqlServerManagement
             string serverName = string.Empty;
             string databaseName = string.Empty;
 
+            SqlConnection sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
+            
             string[] connectionParameters = databaseInstance.ConnectionStringWithoutCredentials.Split(';'); 
 
             foreach(string param in connectionParameters)
@@ -31,12 +35,12 @@ namespace Konfidence.BaseData.SqlServerManagement
                 }
             }
 
-            if (!SqlServerSmo.VerifyDatabaseServer(serverName))
+            if (!SqlServerSmo.VerifyDatabaseServer(sqlConnection, serverName))
             {
                 throw new SqlHostException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
             }
 
-            if (!SqlServerSmo.FindDatabase(serverName, databaseName))
+            if (!SqlServerSmo.FindDatabase(sqlConnection, databaseName))
             {
                 throw new SqlHostException("Database " + databaseName + " does not exist");
             }
