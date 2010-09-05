@@ -12,22 +12,25 @@ namespace Konfidence.BaseData.SqlServerManagement
     internal class SqlServerSmo: BaseItem
     {
         private string _DatabaseServerName = string.Empty;
-        private SqlConnection _SqlConnection = null;
+        private string _UserName = string.Empty;
+        private string _Password = string.Empty;
+
         private bool _PingSucceeded = false;
 
-        internal static bool VerifyDatabaseServer(SqlConnection sqlConnection, string databaseServerName)
+        internal static bool VerifyDatabaseServer(string databaseServerName, string userName, string password)
         {
             SqlServerSmo executer = new SqlServerSmo();
 
-            return executer.PingSqlServerVersion(sqlConnection, databaseServerName);
+            return executer.PingSqlServerVersion(databaseServerName, userName, password);
         }
 
-        private bool PingSqlServerVersion(SqlConnection sqlConnection, string databaseServerName)
+        private bool PingSqlServerVersion(string databaseServerName, string userName, string password)
         {
             if (IsAssigned(databaseServerName))
             {
                 _DatabaseServerName = databaseServerName;
-                _SqlConnection = sqlConnection;
+                _UserName = userName;
+                _Password = password;
 
                 Thread executerThread = new Thread(PingSqlServerVersionExecuter);
 
@@ -49,11 +52,24 @@ namespace Konfidence.BaseData.SqlServerManagement
 
             try
             {
-                ServerConnection serverConnection = new ServerConnection(_SqlConnection);
+                string result;
 
-                Server server = new Server(serverConnection);
+                if (IsAssigned(_UserName) && IsAssigned(_Password))
+                {
+                    ServerConnection serverConnection = new ServerConnection(_DatabaseServerName, _UserName, _Password);
 
-                string result = server.PingSqlServerVersion(_DatabaseServerName).ToString();
+                    serverConnection.LoginSecure = false;
+
+                    Server server = new Server(serverConnection);
+
+                    result = server.PingSqlServerVersion(_DatabaseServerName, _UserName, _Password).ToString();
+                }
+                else
+                {
+                    Server server = new Server();
+
+                    result = server.PingSqlServerVersion(_DatabaseServerName).ToString();
+                }
 
                 _PingSucceeded = true;
             }
@@ -69,11 +85,22 @@ namespace Konfidence.BaseData.SqlServerManagement
 
         }
 
-        internal static bool FindDatabase(SqlConnection sqlConnection, string databaseName)
+        internal static bool FindDatabase(string databaseServerName, string databaseName, string userName, string password)
         {
-            ServerConnection serverConnection = new ServerConnection(sqlConnection);
+            Server server;
 
-            Server server = new Server(serverConnection);
+            if (IsAssigned(userName) && IsAssigned(password))
+            {
+                ServerConnection serverConnection = new ServerConnection(databaseServerName, userName, password);
+
+                serverConnection.LoginSecure = false;
+
+                server = new Server(serverConnection);
+            }
+            else
+            {
+                server = new Server();
+            }
 
             List<string> databaseList = new List<string>();
 

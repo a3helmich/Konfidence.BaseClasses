@@ -13,10 +13,12 @@ namespace Konfidence.BaseData.SqlServerManagement
         {
             string serverName = string.Empty;
             string databaseName = string.Empty;
+            string userName = string.Empty;
+            string password = string.Empty;
 
             SqlConnection sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
-            
-            string[] connectionParameters = databaseInstance.ConnectionStringWithoutCredentials.Split(';'); 
+
+            string[] connectionParameters = sqlConnection.ConnectionString.Split(';'); 
 
             foreach(string param in connectionParameters)
             {
@@ -33,14 +35,28 @@ namespace Konfidence.BaseData.SqlServerManagement
 
                     databaseName = paramParts[1];
                 }
+
+                if (param.ToLower().StartsWith("user id="))
+                {
+                    string[] paramParts = param.Split('=');
+
+                    userName = paramParts[1];
+                }
+
+                if (param.ToLower().StartsWith("password="))
+                {
+                    string[] paramParts = param.Split('=');
+
+                    password = paramParts[1];
+                }
             }
 
-            if (!SqlServerSmo.VerifyDatabaseServer(sqlConnection, serverName))
+            if (!SqlServerSmo.VerifyDatabaseServer(serverName, userName, password))
             {
                 throw new SqlHostException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
             }
 
-            if (!SqlServerSmo.FindDatabase(sqlConnection, databaseName))
+            if (!SqlServerSmo.FindDatabase(serverName, databaseName, userName, password))
             {
                 throw new SqlHostException("Database " + databaseName + " does not exist");
             }
