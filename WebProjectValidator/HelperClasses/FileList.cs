@@ -25,7 +25,7 @@ namespace WebProjectValidator.HelperClasses
             {
                 if (_Checker.IsValid(fileName))
                 {
-                    this.Add(fileName);
+                    this.Add(fileName.ToLower());
                 }
             }
         }

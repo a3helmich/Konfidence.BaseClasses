@@ -56,6 +56,7 @@
     <Compile Include="HelperClasses\FileList.cs" />
     <Compile Include="HelperClasses\FileType.cs" />
     <Compile Include="HelperClasses\FileTypeChecker.cs" />
+    <Compile Include="HelperClasses\ListProcessor.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

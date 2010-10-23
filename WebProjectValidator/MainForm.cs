@@ -28,8 +28,11 @@ namespace WebProjectValidator
 
         private void bStart_Click(object sender, EventArgs e)
         {
-            FileList fileList = new FileList(_ProjectFolder, FileType.web);
+            FileList fileList = new FileList(_ProjectFolder, FileType.cs);
 
+
+
+            lvDesignerFile.DataBindings.Add("", ListProcessor.processDesignerFile(fileList), "");
         }
     }
 }
