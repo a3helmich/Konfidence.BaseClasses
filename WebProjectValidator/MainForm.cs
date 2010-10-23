@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WebProjectValidator.HelperClasses;
 
 namespace WebProjectValidator
 {
@@ -27,7 +28,8 @@ namespace WebProjectValidator
 
         private void bStart_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("ja hoor");
+            FileList fileList = new FileList(_ProjectFolder, FileType.web);
+
         }
     }
 }

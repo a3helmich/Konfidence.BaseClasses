@@ -7,9 +7,16 @@ namespace WebProjectValidator.HelperClasses
 {
     class CheckItemList:List<CheckItem>
     {
+        public CheckItemList()
+        {
+            InitCs();
+        }
+
         public CheckItem AddItem(string namePart, CheckAction action)
         {
             CheckItem checkItem = new CheckItem(namePart, action);
+
+            Add(checkItem);
 
             return checkItem;
         }
@@ -28,6 +35,14 @@ namespace WebProjectValidator.HelperClasses
 
             AddItem(".aspx.vb", CheckAction.EndsWith);
             AddItem(".ascx.vb", CheckAction.EndsWith);
+        }
+
+        internal void InitWeb()
+        {
+            Clear();
+
+            AddItem(".aspx", CheckAction.EndsWith);
+            AddItem(".ascx", CheckAction.EndsWith);
         }
 
         public bool IsValid(string fileName)

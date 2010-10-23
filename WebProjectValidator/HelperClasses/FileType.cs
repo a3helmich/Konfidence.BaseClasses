@@ -8,6 +8,7 @@ namespace WebProjectValidator.HelperClasses
     enum FileType
     {
         cs = 0,
-        vb = 1
+        vb = 1,
+        web = 2
     }
 }

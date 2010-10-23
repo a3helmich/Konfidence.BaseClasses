@@ -8,6 +8,7 @@ namespace WebProjectValidator.HelperClasses
     class FileTypeChecker
     {
         private FileType _FileType = FileType.cs;
+        private CheckItemList checkItemList = new CheckItemList();
 
         #region simple properties
         internal FileType FileType
@@ -20,6 +21,33 @@ namespace WebProjectValidator.HelperClasses
         public FileTypeChecker()
         {
 
+        }
+
+        public void SetFileType(FileType type)
+        {
+            switch (type)
+            {
+                case FileType.cs:
+                    {
+                        checkItemList.InitCs();
+                        break;
+                    }
+                case FileType.vb:
+                    {
+                        checkItemList.InitVb();
+                        break;
+                    }
+                case FileType.web:
+                    {
+                        checkItemList.InitWeb();
+                        break;
+                    }
+            }
+        }
+
+        public bool IsValid(string fileName)
+        {
+            return checkItemList.IsValid(fileName);
         }
     }
 }
