@@ -7,6 +7,8 @@ namespace WebProjectValidator.HelperClasses
 {
     enum CheckAction
     {
-        Unknown
+        Unknown = 0,
+        Contains = 1,
+        EndsWith = 2
     }
 }
