@@ -32,7 +32,7 @@ namespace WebProjectValidator
 
 
 
-            lvDesignerFile.DataBindings.Add("", ListProcessor.processDesignerFile(fileList), "");
+            lvCodeFile.Items.AddRange(ListProcessor.processDesignerFile(fileList));
         }
     }
 }

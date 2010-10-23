@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("test1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("test2");
             this.lProjectName = new System.Windows.Forms.Label();
             this.tbProjectName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -193,9 +191,6 @@
             // lvCodeFile
             // 
             this.lvCodeFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCodeFile.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
             this.lvCodeFile.Location = new System.Drawing.Point(0, 0);
             this.lvCodeFile.Name = "lvCodeFile";
             this.lvCodeFile.Size = new System.Drawing.Size(607, 257);
