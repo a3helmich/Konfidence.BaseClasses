@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("test1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("test2");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("test1");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("test2");
             this.lProjectName = new System.Windows.Forms.Label();
             this.tbProjectName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -133,6 +133,7 @@
             this.bStart.TabIndex = 3;
             this.bStart.Text = "Start";
             this.bStart.UseVisualStyleBackColor = true;
+            this.bStart.Click += new System.EventHandler(this.bStart_Click);
             // 
             // tabControl1
             // 
@@ -193,8 +194,8 @@
             // 
             this.lvCodeFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvCodeFile.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.lvCodeFile.Location = new System.Drawing.Point(0, 0);
             this.lvCodeFile.Name = "lvCodeFile";
             this.lvCodeFile.Size = new System.Drawing.Size(607, 257);
@@ -280,6 +281,7 @@
             this.Controls.Add(this.lProjectName);
             this.Name = "MainForm";
             this.Text = "Web Project Validator";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);

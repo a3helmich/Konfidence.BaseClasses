@@ -11,9 +11,23 @@ namespace WebProjectValidator
 {
     public partial class MainForm : Form
     {
+        private string _BaseFolder = @"C:\Projects\Konfidence\KonfidenceWebSite\";
+
+        private string _ProjectFolder = string.Empty;
+
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            _ProjectFolder = _BaseFolder + tbProjectName.Text;
+        }
+
+        private void bStart_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("ja hoor");
         }
     }
 }
