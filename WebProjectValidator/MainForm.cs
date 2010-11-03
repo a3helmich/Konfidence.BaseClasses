@@ -31,8 +31,7 @@ namespace WebProjectValidator
             FileList fileList = new FileList(_ProjectFolder, FileType.cs);
 
 
-
-            lvCodeFile.Items.AddRange(ListProcessor.processDesignerFile(fileList));
+            dgvCodeFile.DataSource = ListProcessor.processDesignerFile(fileList);
         }
     }
 }

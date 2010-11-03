@@ -7,18 +7,28 @@ namespace WebProjectValidator.HelperClasses
 {
     class ListProcessor
     {
-        public static void processCodeFileCheck(FileList fileList)
+        private string _Project = string.Empty;
+        private string _Folder = string.Empty;
+
+        public ListProcessor(string project, string folder)
         {
+            _Project = project;
+            _Folder = folder;
         }
 
-        public static List<string> processDesignerFile(FileList fileList)
+        public void processCodeFileCheck(FileList fileList)
+        {
+            
+        }
+
+        public List<DesignerFileItem> processDesignerFile(FileList fileList)
         {
             List<string> findList = new List<string>(fileList);
-            List<string> resultList = new List<string>();
+            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
             foreach (string fileName in fileList)
             {
-                string findName = fileName.Replace(".cs", "designer.cs");
+                string findName = fileName.Replace(".cs", ".designer.cs");
 
                 if (!findList.Contains(findName))
                 {
@@ -29,7 +39,7 @@ namespace WebProjectValidator.HelperClasses
             return resultList;
         }
 
-        public static void processUserControl(FileList fileList)
+        public void processUserControl(FileList fileList)
         {
         }
     }

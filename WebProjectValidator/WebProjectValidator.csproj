@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Konfidence.BaseClasses">
+      <HintPath>..\..\..\References\Konfidence.BaseClasses.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,6 +56,7 @@
     <Compile Include="HelperClasses\CheckAction.cs" />
     <Compile Include="HelperClasses\CheckItem.cs" />
     <Compile Include="HelperClasses\CheckItemList.cs" />
+    <Compile Include="HelperClasses\DesignerFileItem.cs" />
     <Compile Include="HelperClasses\FileList.cs" />
     <Compile Include="HelperClasses\FileType.cs" />
     <Compile Include="HelperClasses\FileTypeChecker.cs" />
