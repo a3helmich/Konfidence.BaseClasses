@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WebProjectValidator.FileListChecker;
 
 namespace WebProjectValidator.HelperClasses
 {
@@ -31,15 +32,17 @@ namespace WebProjectValidator.HelperClasses
                 DesignerFileItem designerFileItem = new DesignerFileItem();
 
                 designerFileItem.Project = _Project;
-                designerFileItem.Folder = _Folder;
-                designerFileItem.FileName = fileName;
+                designerFileItem.Folder = _Folder.ToLower();
+                designerFileItem.FileName = fileName.Replace(designerFileItem.Folder, "");
 
                 string findName = fileName.Replace(".cs", ".designer.cs");
 
-                if (!findList.Contains(findName))
+                if (findList.Contains(findName))
                 {
-                    resultList.Add(findName);
+                    designerFileItem.InValid = false;
                 }
+
+                resultList.Add(designerFileItem);
             }
 
             return resultList;

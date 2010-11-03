@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WebProjectValidator.FileListChecker;
 using WebProjectValidator.HelperClasses;
 
 namespace WebProjectValidator
@@ -29,9 +30,10 @@ namespace WebProjectValidator
         private void bStart_Click(object sender, EventArgs e)
         {
             FileList fileList = new FileList(_ProjectFolder, FileType.cs);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder);
 
 
-            dgvCodeFile.DataSource = ListProcessor.processDesignerFile(fileList);
+            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList);
         }
     }
 }

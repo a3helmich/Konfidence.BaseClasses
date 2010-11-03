@@ -53,13 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelperClasses\CheckAction.cs" />
-    <Compile Include="HelperClasses\CheckItem.cs" />
-    <Compile Include="HelperClasses\CheckItemList.cs" />
+    <Compile Include="FileListChecker\CheckAction.cs" />
+    <Compile Include="FileListChecker\CheckItem.cs" />
+    <Compile Include="FileListChecker\CheckItemList.cs" />
     <Compile Include="HelperClasses\DesignerFileItem.cs" />
-    <Compile Include="HelperClasses\FileList.cs" />
-    <Compile Include="HelperClasses\FileType.cs" />
-    <Compile Include="HelperClasses\FileTypeChecker.cs" />
+    <Compile Include="FileListChecker\FileList.cs" />
+    <Compile Include="FileListChecker\FileType.cs" />
+    <Compile Include="FileListChecker\FileTypeChecker.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

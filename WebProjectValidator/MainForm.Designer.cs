@@ -36,32 +36,33 @@
             this.rbVB = new System.Windows.Forms.RadioButton();
             this.bStart = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.dgvDesignerFile = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dgvCodeFile = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.dgvCodeFile = new System.Windows.Forms.DataGridView();
-            this.dgvDesignerFile = new System.Windows.Forms.DataGridView();
             this.dgvUserControl = new System.Windows.Forms.DataGridView();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.dgvFileMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvFileMissingFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvFileMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvFileMissingInValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvFileMissingErrorMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDesignerFile)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFile)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDesignerFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUserControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -154,35 +155,6 @@
             this.tabControl1.Size = new System.Drawing.Size(621, 319);
             this.tabControl1.TabIndex = 4;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(613, 293);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "CodeFile Check";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.dgvCodeFile);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 33);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(607, 257);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(607, 30);
-            this.panel1.TabIndex = 0;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.panel5);
@@ -204,6 +176,21 @@
             this.panel5.Size = new System.Drawing.Size(607, 257);
             this.panel5.TabIndex = 1;
             // 
+            // dgvDesignerFile
+            // 
+            this.dgvDesignerFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDesignerFile.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvFileMissingProject,
+            this.dgvFileMissingFolder,
+            this.dgvFileMissingFileName,
+            this.dgvFileMissingInValid,
+            this.dgvFileMissingErrorMessage});
+            this.dgvDesignerFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDesignerFile.Location = new System.Drawing.Point(0, 0);
+            this.dgvDesignerFile.Name = "dgvDesignerFile";
+            this.dgvDesignerFile.Size = new System.Drawing.Size(607, 257);
+            this.dgvDesignerFile.TabIndex = 0;
+            // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -211,6 +198,44 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(607, 30);
             this.panel3.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(613, 293);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "CodeFile Check";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dgvCodeFile);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 33);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(607, 257);
+            this.panel2.TabIndex = 1;
+            // 
+            // dgvCodeFile
+            // 
+            this.dgvCodeFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCodeFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCodeFile.Location = new System.Drawing.Point(0, 0);
+            this.dgvCodeFile.Name = "dgvCodeFile";
+            this.dgvCodeFile.Size = new System.Drawing.Size(607, 257);
+            this.dgvCodeFile.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(607, 30);
+            this.panel1.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -233,37 +258,6 @@
             this.panel6.Size = new System.Drawing.Size(607, 257);
             this.panel6.TabIndex = 1;
             // 
-            // panel4
-            // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(3, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(607, 30);
-            this.panel4.TabIndex = 0;
-            // 
-            // dgvCodeFile
-            // 
-            this.dgvCodeFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCodeFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCodeFile.Location = new System.Drawing.Point(0, 0);
-            this.dgvCodeFile.Name = "dgvCodeFile";
-            this.dgvCodeFile.Size = new System.Drawing.Size(607, 257);
-            this.dgvCodeFile.TabIndex = 0;
-            // 
-            // dgvDesignerFile
-            // 
-            this.dgvDesignerFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDesignerFile.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvFileMissingProject,
-            this.dgvFileMissingFolder,
-            this.dgvFileMissingFileName,
-            this.dgvFileMissingInValid});
-            this.dgvDesignerFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDesignerFile.Location = new System.Drawing.Point(0, 0);
-            this.dgvDesignerFile.Name = "dgvDesignerFile";
-            this.dgvDesignerFile.Size = new System.Drawing.Size(607, 257);
-            this.dgvDesignerFile.TabIndex = 0;
-            // 
             // dgvUserControl
             // 
             this.dgvUserControl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -272,6 +266,14 @@
             this.dgvUserControl.Name = "dgvUserControl";
             this.dgvUserControl.Size = new System.Drawing.Size(607, 257);
             this.dgvUserControl.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(607, 30);
+            this.panel4.TabIndex = 0;
             // 
             // dgvFileMissingProject
             // 
@@ -286,6 +288,7 @@
             this.dgvFileMissingFolder.HeaderText = "Folder";
             this.dgvFileMissingFolder.Name = "dgvFileMissingFolder";
             this.dgvFileMissingFolder.ReadOnly = true;
+            this.dgvFileMissingFolder.Width = 250;
             // 
             // dgvFileMissingFileName
             // 
@@ -293,6 +296,7 @@
             this.dgvFileMissingFileName.HeaderText = "Filename";
             this.dgvFileMissingFileName.Name = "dgvFileMissingFileName";
             this.dgvFileMissingFileName.ReadOnly = true;
+            this.dgvFileMissingFileName.Width = 150;
             // 
             // dgvFileMissingInValid
             // 
@@ -300,6 +304,14 @@
             this.dgvFileMissingInValid.HeaderText = "Missing";
             this.dgvFileMissingInValid.Name = "dgvFileMissingInValid";
             this.dgvFileMissingInValid.ReadOnly = true;
+            this.dgvFileMissingInValid.Width = 55;
+            // 
+            // dgvFileMissingErrorMessage
+            // 
+            this.dgvFileMissingErrorMessage.DataPropertyName = "ErrorMessage";
+            this.dgvFileMissingErrorMessage.HeaderText = "ErrorMessage";
+            this.dgvFileMissingErrorMessage.Name = "dgvFileMissingErrorMessage";
+            this.dgvFileMissingErrorMessage.Visible = false;
             // 
             // MainForm
             // 
@@ -317,14 +329,14 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDesignerFile)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFile)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDesignerFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUserControl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -357,6 +369,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingFolder;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingInValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingErrorMessage;
     }
 }
 

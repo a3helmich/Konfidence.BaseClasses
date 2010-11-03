@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace WebProjectValidator.HelperClasses
+namespace WebProjectValidator.FileListChecker
 {
     class FileList:List<string>
     {
