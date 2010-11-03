@@ -28,6 +28,12 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
+                DesignerFileItem designerFileItem = new DesignerFileItem();
+
+                designerFileItem.Project = _Project;
+                designerFileItem.Folder = _Folder;
+                designerFileItem.FileName = fileName;
+
                 string findName = fileName.Replace(".cs", ".designer.cs");
 
                 if (!findList.Contains(findName))
