@@ -26,8 +26,7 @@ namespace WebProjectValidator
         {
             _ProjectFolder = _BaseFolder + tbProjectName.Text;
 
-            tbProject1.Text = tbProjectName.Text;
-            tbFolder1.Text = _BaseFolder;
+            tbFolder.Text = _BaseFolder;
         }
 
         private void bStart_Click(object sender, EventArgs e)

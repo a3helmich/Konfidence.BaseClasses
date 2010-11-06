@@ -63,7 +63,7 @@ namespace WebProjectValidator.HelperClasses
                 int deviderIndex = designerFileItem.FileName.LastIndexOf(@"\");
                 if (deviderIndex > 0)
                 {
-                    designerFileItem.ControlFolder = designerFileItem.FileName.Substring(0, deviderIndex);
+                    designerFileItem.ControlFolder = designerFileItem.FileName.Substring(1, deviderIndex) ;
                     designerFileItem.FileName = designerFileItem.FileName.Substring(deviderIndex);
                 }
 
