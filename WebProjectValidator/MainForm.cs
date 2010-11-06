@@ -32,7 +32,7 @@ namespace WebProjectValidator
         private void bStart_Click(object sender, EventArgs e)
         {
             FileList fileList = new FileList(_ProjectFolder, FileType.cs);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, LanguageType.cs);
             ListFilterType filter = ListFilterType.All;
 
             filter = GetFilterType();

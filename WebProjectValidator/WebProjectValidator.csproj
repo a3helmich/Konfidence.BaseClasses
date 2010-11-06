@@ -61,6 +61,7 @@
     <Compile Include="FileListChecker\FileList.cs" />
     <Compile Include="FileListChecker\FileType.cs" />
     <Compile Include="FileListChecker\FileTypeChecker.cs" />
+    <Compile Include="HelperClasses\LanguageType.cs" />
     <Compile Include="HelperClasses\ListFilterType.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
     <Compile Include="MainForm.cs">

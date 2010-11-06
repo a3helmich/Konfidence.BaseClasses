@@ -15,6 +15,9 @@ namespace WebProjectValidator.HelperClasses
         private int _ValidCount = 0;
         private int _InvalidCount = 0;
 
+        private string _DesignerReplace = string.Empty;
+        private string _DesignerSearch = string.Empty;
+
         #region simple properties
         public int Count
         {
@@ -35,10 +38,22 @@ namespace WebProjectValidator.HelperClasses
         }
         #endregion simple properties
 
-        public ListProcessor(string project, string folder)
+        public ListProcessor(string project, string folder, LanguageType language)
         {
             _Project = project;
             _Folder = folder;
+
+            switch (language)
+            {
+                case LanguageType.cs:
+                    _DesignerSearch = ".cs";
+                    _DesignerReplace = ".designer.cs";
+                    break;
+                case LanguageType.vb:
+                    _DesignerSearch = ".vb";
+                    _DesignerReplace = ".designer.vb";
+                    break;
+            }
         }
 
         public void processCodeFileCheck(FileList fileList)
@@ -58,7 +73,7 @@ namespace WebProjectValidator.HelperClasses
                 designerFileItem.Project = _Project;
                 designerFileItem.ProjectFolder = _Folder.ToLower();
 
-                designerFileItem.FileName = fileName.Replace(designerFileItem.ProjectFolder, "");
+                designerFileItem.FileName = fileName.Replace(designerFileItem.ProjectFolder, string.Empty);
 
                 int deviderIndex = designerFileItem.FileName.LastIndexOf(@"\");
                 if (deviderIndex > 0)
@@ -69,7 +84,7 @@ namespace WebProjectValidator.HelperClasses
 
                 designerFileItem.FileName = designerFileItem.FileName.Replace(@"\", string.Empty);
 
-                string findName = fileName.Replace(".cs", ".designer.cs");
+                string findName = fileName.Replace(_DesignerSearch, _DesignerReplace);
 
                 if (findList.Contains(findName))
                 {
