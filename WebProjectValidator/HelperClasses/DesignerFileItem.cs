@@ -9,20 +9,28 @@ namespace WebProjectValidator.HelperClasses
     public class DesignerFileItem: BaseItem
     {
         private string _Project = string.Empty;
-        private string _Folder = string.Empty;
+        private string _ProjectFolder = string.Empty;
+        private string _ControlFolder = ".";
         private string _FileName = string.Empty;
-        private bool _InValid = true;
+        private bool _Valid = false;
 
+        #region simple properties
         public string Project
         {
             get { return _Project; }
             set { _Project = value; }
         }
 
-        public string Folder
+        public string ProjectFolder
         {
-            get { return _Folder; }
-            set { _Folder = value; }
+            get { return _ProjectFolder; }
+            set { _ProjectFolder = value; }
+        }
+
+        public string ControlFolder
+        {
+            get { return _ControlFolder; }
+            set { _ControlFolder = value; }
         }
 
         public string FileName
@@ -31,10 +39,12 @@ namespace WebProjectValidator.HelperClasses
             set { _FileName = value; }
         }
 
-        public bool InValid
+        public bool Valid
         {
-            get { return _InValid; }
-            set { _InValid = value; }
+            get { return _Valid; }
+            set { _Valid = value; }
         }
+#endregion simple properties
+
     }
 }

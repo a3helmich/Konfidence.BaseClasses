@@ -37,6 +37,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -106,6 +107,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).dll" "C:\Projects\References\$(ConfigurationName)" /Y
+xcopy "$(TargetDir)$(TargetName).pdb" "C:\Projects\References\$(ConfigurationName)" /Y
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

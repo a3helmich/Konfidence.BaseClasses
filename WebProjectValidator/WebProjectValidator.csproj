@@ -11,7 +11,8 @@
     <RootNamespace>WebProjectValidator</RootNamespace>
     <AssemblyName>WebProjectValidator</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -60,6 +61,7 @@
     <Compile Include="FileListChecker\FileList.cs" />
     <Compile Include="FileListChecker\FileType.cs" />
     <Compile Include="FileListChecker\FileTypeChecker.cs" />
+    <Compile Include="HelperClasses\ListFilterType.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -80,6 +82,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

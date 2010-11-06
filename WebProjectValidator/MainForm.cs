@@ -25,15 +25,39 @@ namespace WebProjectValidator
         private void MainForm_Load(object sender, EventArgs e)
         {
             _ProjectFolder = _BaseFolder + tbProjectName.Text;
+
+            tbProject1.Text = tbProjectName.Text;
+            tbFolder1.Text = _BaseFolder;
         }
 
         private void bStart_Click(object sender, EventArgs e)
         {
             FileList fileList = new FileList(_ProjectFolder, FileType.cs);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder);
+            ListFilterType filter = ListFilterType.All;
 
+            filter = GetFilterType();
 
-            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList);
+            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList, filter);
+
+            tsslTotal.Visible = true;
+            tsslTotal.Text = "Total: " + processor.Count;
+
+        }
+
+        private ListFilterType GetFilterType()
+        {
+            if (rbExists.Checked)
+            {
+                return ListFilterType.Valid;
+            }
+
+            if (rbMissing.Checked)
+            {
+                return ListFilterType.Invalid;
+            }
+
+            return ListFilterType.All;
         }
     }
 }
