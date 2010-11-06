@@ -42,6 +42,10 @@ namespace WebProjectValidator
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;
+            tsslValid.Visible = true;
+            tsslValid.Text = "Existing: " + processor.ValidCount;
+            tsslInValid.Visible = true;
+            tsslInValid.Text = "Missing: " + processor.InvalidCount;
 
         }
 
