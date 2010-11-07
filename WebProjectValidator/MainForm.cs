@@ -47,12 +47,25 @@ namespace WebProjectValidator
             }
         }
 
-        private void UserControlMissing()
+        private void CodeFileCheck()
         {
-            throw new NotImplementedException();
+            FileList designerFileList = new FileList(_ProjectFolder, FileType.cs, ListType.Excluded);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+            ListFilterType filter = ListFilterType.All;
+
+            dgvCodeFile.DataSource = processor.processCodeFileCheck(designerFileList, filter);
+
+            tsslTotal.Visible = true;
+            tsslTotal.Text = "Total: " + processor.Count;
+            tsslValid.Visible = true;
+            tsslValid.Text = "Existing: " + processor.ValidCount;
+            tsslInValid.Visible = true;
+            tsslInValid.Text = "Missing: " + processor.InvalidCount;
+
+            lRowCount.Text = dgvCodeFile.RowCount.ToString();
         }
 
-        private void CodeFileCheck()
+        private void UserControlMissing()
         {
             throw new NotImplementedException();
         }
@@ -61,7 +74,7 @@ namespace WebProjectValidator
         {
             FileList fileList = new FileList(_ProjectFolder, FileType.cs, ListType.Included);
             FileList searchList = new FileList(_ProjectFolder, FileType.cs, ListType.Excluded);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, LanguageType.cs);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
             filter = GetFilterType();
@@ -76,6 +89,16 @@ namespace WebProjectValidator
             tsslInValid.Text = "Missing: " + processor.InvalidCount;
 
             lRowCount.Text = dgvDesignerFile.RowCount.ToString();
+        }
+
+        private LanguageType GetLanguageType()
+        {
+            if (rbCS.Checked)
+            {
+                return LanguageType.cs;
+            }
+
+            return LanguageType.vb;
         }
 
         private ListFilterType GetFilterType()
