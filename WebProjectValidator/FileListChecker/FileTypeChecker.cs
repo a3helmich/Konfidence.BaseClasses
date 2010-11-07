@@ -8,7 +8,7 @@ namespace WebProjectValidator.FileListChecker
     class FileTypeChecker
     {
         private FileType _FileType = FileType.cs;
-        private CheckItemList checkItemList = new CheckItemList();
+        private CheckItemList checkItemList = null;
 
         #region simple properties
         internal FileType FileType
@@ -18,9 +18,9 @@ namespace WebProjectValidator.FileListChecker
         }
         #endregion
 
-        public FileTypeChecker()
+        public FileTypeChecker(ListType type)
         {
-
+            checkItemList = new CheckItemList(type);
         }
 
         public void SetFileType(FileType type)

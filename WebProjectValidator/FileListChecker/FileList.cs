@@ -8,12 +8,14 @@ namespace WebProjectValidator.FileListChecker
 {
     class FileList:List<string>
     {
-        private FileTypeChecker _Checker = new FileTypeChecker();
+        private FileTypeChecker _Checker = null;
         private string _ProjectFolder = string.Empty;
 
-        public FileList(string projectFolder, FileType fileType)
+        public FileList(string projectFolder, FileType fileType, ListType listType)
         {
             _ProjectFolder = projectFolder;
+
+            _Checker = new FileTypeChecker(listType);
 
             _Checker.SetFileType(fileType);
 

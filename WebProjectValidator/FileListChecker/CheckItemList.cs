@@ -5,10 +5,20 @@ using System.Text;
 
 namespace WebProjectValidator.FileListChecker
 {
+    enum ListType
+    {
+        Excluded = 0,
+        Included = 1
+    }
+
     class CheckItemList:List<CheckItem>
     {
-        public CheckItemList()
+        private ListType _Type = ListType.Included;
+
+        public CheckItemList(ListType type)
         {
+            _Type = type;
+
             InitCs();
         }
 
@@ -25,16 +35,32 @@ namespace WebProjectValidator.FileListChecker
         {
             Clear();
 
-            AddItem(".aspx.cs", CheckAction.EndsWith);
-            AddItem(".ascx.cs", CheckAction.EndsWith);
+            switch (_Type)
+            {
+                case ListType.Included:
+                    AddItem(".aspx.cs", CheckAction.EndsWith);
+                    AddItem(".ascx.cs", CheckAction.EndsWith);
+                    break;
+                case ListType.Excluded:
+                    AddItem(".designer.cs", CheckAction.EndsWith);
+                    break;
+            }
         }
 
         public void InitVb()
         {
             Clear();
 
-            AddItem(".aspx.vb", CheckAction.EndsWith);
-            AddItem(".ascx.vb", CheckAction.EndsWith);
+            switch (_Type)
+            {
+                case ListType.Included:
+                    AddItem(".aspx.vb", CheckAction.EndsWith);
+                    AddItem(".ascx.vb", CheckAction.EndsWith);
+                    break;
+                case ListType.Excluded:
+                    AddItem(".designer.vb", CheckAction.EndsWith);
+                    break;
+            }
         }
 
         internal void InitWeb()

@@ -26,18 +26,47 @@ namespace WebProjectValidator
         {
             _ProjectFolder = _BaseFolder + tbProjectName.Text;
 
-            tbFolder.Text = _BaseFolder;
+            tbFolder.Text = _ProjectFolder;
         }
 
         private void bStart_Click(object sender, EventArgs e)
         {
-            FileList fileList = new FileList(_ProjectFolder, FileType.cs);
+            if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
+            {
+                DesignerFileMissing();
+            }
+
+            if (tabControl.SelectedTab.Equals(tpCodeFileCheck))
+            {
+                CodeFileCheck();
+            }
+
+            if (tabControl.SelectedTab.Equals(tpUserControlMissing))
+            {
+                UserControlMissing();
+            }
+        }
+
+        private void UserControlMissing()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CodeFileCheck()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DesignerFileMissing()
+        {
+            FileList fileList = new FileList(_ProjectFolder, FileType.cs, ListType.Included);
+            FileList searchList = new FileList(_ProjectFolder, FileType.cs, ListType.Excluded);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, LanguageType.cs);
             ListFilterType filter = ListFilterType.All;
 
             filter = GetFilterType();
 
-            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList, filter);
+            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList, searchList, filter);
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;
@@ -46,6 +75,7 @@ namespace WebProjectValidator
             tsslInValid.Visible = true;
             tsslInValid.Text = "Missing: " + processor.InvalidCount;
 
+            lRowCount.Text = dgvDesignerFile.RowCount.ToString();
         }
 
         private ListFilterType GetFilterType()

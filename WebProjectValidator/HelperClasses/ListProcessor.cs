@@ -61,10 +61,13 @@ namespace WebProjectValidator.HelperClasses
             
         }
 
-        public List<DesignerFileItem> processDesignerFile(FileList fileList, ListFilterType filter)
+        public List<DesignerFileItem> processDesignerFile(FileList fileList, FileList searchList, ListFilterType filter)
         {
-            List<string> findList = new List<string>(fileList);
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+
+            _Count = fileList.Count;
+            _ValidCount = fileList.Count;
+            _InvalidCount = 0;
 
             foreach (string fileName in fileList)
             {
@@ -86,9 +89,15 @@ namespace WebProjectValidator.HelperClasses
 
                 string findName = fileName.Replace(_DesignerSearch, _DesignerReplace);
 
-                if (findList.Contains(findName))
+                if (searchList.Contains(findName))
                 {
                     designerFileItem.Valid = true;
+                }
+
+                if (!designerFileItem.Valid)
+                {
+                    _ValidCount--;
+                    _InvalidCount++;
                 }
 
                 switch (filter)
@@ -100,29 +109,16 @@ namespace WebProjectValidator.HelperClasses
                         if (designerFileItem.Valid)
                         {
                             resultList.Add(designerFileItem);
-                            _ValidCount++;
                         }
                         break;
                     case ListFilterType.Invalid:
                         if (!designerFileItem.Valid)
                         {
                             resultList.Add(designerFileItem);
-                            _InvalidCount++;
                         }
                         break;
                 }
 
-            }
-
-            _Count = findList.Count;
-
-            if (_InvalidCount > _ValidCount)
-            {
-                _ValidCount = _Count - _InvalidCount;
-            }
-            else
-            {
-                _InvalidCount = _Count - _ValidCount;
             }
 
             return resultList;
