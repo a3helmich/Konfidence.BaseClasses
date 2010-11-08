@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WebProjectValidator.FileListChecker;
+using System.IO;
+using Konfidence.Base;
 
 namespace WebProjectValidator.HelperClasses
 {
-    class ListProcessor
+    class ListProcessor: BaseItem
     {
         private string _Project = string.Empty;
         private string _Folder = string.Empty;
@@ -64,7 +66,24 @@ namespace WebProjectValidator.HelperClasses
             foreach (string fileName in fileList)
             {
                 fileLines = new List<string>();
-                
+
+                using (TextReader textReader = new StreamReader(fileName))
+                {
+                    string line = textReader.ReadLine();
+
+                    while (IsAssigned(line))
+                    {
+                        fileLines.Add(line);
+                        line = textReader.ReadLine();
+                    }
+                }
+
+                DesignerFileItem fileItem = new DesignerFileItem();
+
+                fileItem.FileName = fileName;
+                fileItem.Valid = IsValidCodeFile(fileLines);
+
+                resultList.Add(fileItem);
             }
 
             _Count = fileList.Count;
@@ -72,6 +91,24 @@ namespace WebProjectValidator.HelperClasses
             _InvalidCount = 0;
 
             return resultList;
+        }
+
+        private bool IsValidCodeFile(List<string> fileLines)
+        {
+            foreach (string line in fileLines)
+            {
+                if (line.IndexOf("codefile", StringComparison.InvariantCultureIgnoreCase) > 0)
+                {
+                    return true;
+                }
+
+                if (line.IndexOf("codefile", StringComparison.InvariantCultureIgnoreCase) > 0)
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         public List<DesignerFileItem> processDesignerFile(FileList fileList, FileList searchList, ListFilterType filter)
