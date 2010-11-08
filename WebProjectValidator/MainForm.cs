@@ -49,7 +49,7 @@ namespace WebProjectValidator
 
         private void CodeFileCheck()
         {
-            FileList designerFileList = new FileList(_ProjectFolder, FileType.cs, ListType.Excluded);
+            FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 

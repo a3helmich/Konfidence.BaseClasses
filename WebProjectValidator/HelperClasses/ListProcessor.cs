@@ -59,6 +59,13 @@ namespace WebProjectValidator.HelperClasses
         public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+            List<string> fileLines = null;
+
+            foreach (string fileName in fileList)
+            {
+                fileLines = new List<string>();
+                
+            }
 
             _Count = fileList.Count;
             _ValidCount = fileList.Count;
