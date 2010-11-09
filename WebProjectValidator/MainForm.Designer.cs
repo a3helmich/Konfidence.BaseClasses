@@ -41,8 +41,6 @@
             this.dgvFileMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvFileMissingExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvFileMissingControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvFileMissingProjectFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvFileMissingErrorMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.rbExists = new System.Windows.Forms.RadioButton();
@@ -50,17 +48,24 @@
             this.tpCodeFileCheck = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvCodeFile = new System.Windows.Forms.DataGridView();
+            this.dgvCodeFileProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCodeFileFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCodeFileValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCodeFileControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rbCodeFileCheckAll = new System.Windows.Forms.RadioButton();
+            this.rbValid = new System.Windows.Forms.RadioButton();
+            this.rbInvalid = new System.Windows.Forms.RadioButton();
             this.tpUserControlMissing = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dgvUserControl = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tbFolder = new System.Windows.Forms.TextBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
-            this.tsslValid = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslInValid = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslValid = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTotal = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lRowCount = new System.Windows.Forms.Label();
+            this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileMissing.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -69,6 +74,7 @@
             this.tpCodeFileCheck.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFile)).BeginInit();
+            this.panel1.SuspendLayout();
             this.tpUserControlMissing.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUserControl)).BeginInit();
@@ -120,6 +126,7 @@
             // 
             // bStart
             // 
+            this.bStart.ForeColor = System.Drawing.SystemColors.ControlText;
             this.bStart.Location = new System.Drawing.Point(22, 12);
             this.bStart.Name = "bStart";
             this.bStart.Size = new System.Drawing.Size(75, 23);
@@ -142,12 +149,12 @@
             this.tabControl.Size = new System.Drawing.Size(956, 322);
             this.tabControl.TabIndex = 4;
             // 
-            // tpFileMissing
+            // tpDesignerFileMissing
             // 
             this.tpDesignerFileMissing.Controls.Add(this.panel5);
             this.tpDesignerFileMissing.Controls.Add(this.panel3);
             this.tpDesignerFileMissing.Location = new System.Drawing.Point(4, 22);
-            this.tpDesignerFileMissing.Name = "tpFileMissing";
+            this.tpDesignerFileMissing.Name = "tpDesignerFileMissing";
             this.tpDesignerFileMissing.Padding = new System.Windows.Forms.Padding(3);
             this.tpDesignerFileMissing.Size = new System.Drawing.Size(948, 296);
             this.tpDesignerFileMissing.TabIndex = 1;
@@ -170,9 +177,7 @@
             this.dgvFileMissingProject,
             this.dgvFileMissingFileName,
             this.dgvFileMissingExists,
-            this.dgvFileMissingControlFolder,
-            this.dgvFileMissingProjectFolder,
-            this.dgvFileMissingErrorMessage});
+            this.dgvFileMissingControlFolder});
             this.dgvDesignerFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDesignerFile.Location = new System.Drawing.Point(0, 0);
             this.dgvDesignerFile.Name = "dgvDesignerFile";
@@ -211,22 +216,6 @@
             this.dgvFileMissingControlFolder.ReadOnly = true;
             this.dgvFileMissingControlFolder.Width = 565;
             // 
-            // dgvFileMissingProjectFolder
-            // 
-            this.dgvFileMissingProjectFolder.DataPropertyName = "ProjectFolder";
-            this.dgvFileMissingProjectFolder.HeaderText = "ProjectFolder";
-            this.dgvFileMissingProjectFolder.Name = "dgvFileMissingProjectFolder";
-            this.dgvFileMissingProjectFolder.ReadOnly = true;
-            this.dgvFileMissingProjectFolder.Visible = false;
-            this.dgvFileMissingProjectFolder.Width = 200;
-            // 
-            // dgvFileMissingErrorMessage
-            // 
-            this.dgvFileMissingErrorMessage.DataPropertyName = "ErrorMessage";
-            this.dgvFileMissingErrorMessage.HeaderText = "ErrorMessage";
-            this.dgvFileMissingErrorMessage.Name = "dgvFileMissingErrorMessage";
-            this.dgvFileMissingErrorMessage.Visible = false;
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.rbAll);
@@ -241,9 +230,10 @@
             // rbAll
             // 
             this.rbAll.AutoSize = true;
+            this.rbAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbAll.Location = new System.Drawing.Point(146, 7);
             this.rbAll.Name = "rbAll";
-            this.rbAll.Size = new System.Drawing.Size(36, 17);
+            this.rbAll.Size = new System.Drawing.Size(35, 17);
             this.rbAll.TabIndex = 4;
             this.rbAll.TabStop = true;
             this.rbAll.Text = "All";
@@ -252,9 +242,10 @@
             // rbExists
             // 
             this.rbExists.AutoSize = true;
+            this.rbExists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbExists.Location = new System.Drawing.Point(78, 7);
             this.rbExists.Name = "rbExists";
-            this.rbExists.Size = new System.Drawing.Size(61, 17);
+            this.rbExists.Size = new System.Drawing.Size(60, 17);
             this.rbExists.TabIndex = 3;
             this.rbExists.Text = "Existing";
             this.rbExists.UseVisualStyleBackColor = true;
@@ -263,9 +254,10 @@
             // 
             this.rbMissing.AutoSize = true;
             this.rbMissing.Checked = true;
+            this.rbMissing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbMissing.Location = new System.Drawing.Point(12, 7);
             this.rbMissing.Name = "rbMissing";
-            this.rbMissing.Size = new System.Drawing.Size(60, 17);
+            this.rbMissing.Size = new System.Drawing.Size(59, 17);
             this.rbMissing.TabIndex = 2;
             this.rbMissing.TabStop = true;
             this.rbMissing.Text = "Missing";
@@ -295,26 +287,102 @@
             // dgvCodeFile
             // 
             this.dgvCodeFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCodeFile.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCodeFileProject,
+            this.dgvCodeFileFileName,
+            this.dgvCodeFileValid,
+            this.dgvCodeFileControlFolder});
             this.dgvCodeFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCodeFile.Location = new System.Drawing.Point(0, 0);
             this.dgvCodeFile.Name = "dgvCodeFile";
+            this.dgvCodeFile.RowHeadersVisible = false;
             this.dgvCodeFile.Size = new System.Drawing.Size(942, 260);
             this.dgvCodeFile.TabIndex = 0;
             // 
+            // dgvCodeFileProject
+            // 
+            this.dgvCodeFileProject.DataPropertyName = "Project";
+            this.dgvCodeFileProject.HeaderText = "Project";
+            this.dgvCodeFileProject.Name = "dgvCodeFileProject";
+            this.dgvCodeFileProject.ReadOnly = true;
+            // 
+            // dgvCodeFileFileName
+            // 
+            this.dgvCodeFileFileName.DataPropertyName = "FileName";
+            this.dgvCodeFileFileName.HeaderText = "File";
+            this.dgvCodeFileFileName.Name = "dgvCodeFileFileName";
+            this.dgvCodeFileFileName.ReadOnly = true;
+            this.dgvCodeFileFileName.Width = 200;
+            // 
+            // dgvCodeFileValid
+            // 
+            this.dgvCodeFileValid.DataPropertyName = "Valid";
+            this.dgvCodeFileValid.HeaderText = "Valid";
+            this.dgvCodeFileValid.Name = "dgvCodeFileValid";
+            this.dgvCodeFileValid.ReadOnly = true;
+            this.dgvCodeFileValid.Width = 55;
+            // 
+            // dgvCodeFileControlFolder
+            // 
+            this.dgvCodeFileControlFolder.DataPropertyName = "ControlFolder";
+            this.dgvCodeFileControlFolder.HeaderText = "Folder";
+            this.dgvCodeFileControlFolder.Name = "dgvCodeFileControlFolder";
+            this.dgvCodeFileControlFolder.ReadOnly = true;
+            this.dgvCodeFileControlFolder.Width = 565;
+            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.rbCodeFileCheckAll);
+            this.panel1.Controls.Add(this.rbValid);
+            this.panel1.Controls.Add(this.rbInvalid);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(942, 30);
             this.panel1.TabIndex = 0;
             // 
-            // tpYserControl
+            // rbCodeFileCheckAll
+            // 
+            this.rbCodeFileCheckAll.AutoSize = true;
+            this.rbCodeFileCheckAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbCodeFileCheckAll.Location = new System.Drawing.Point(146, 7);
+            this.rbCodeFileCheckAll.Name = "rbCodeFileCheckAll";
+            this.rbCodeFileCheckAll.Size = new System.Drawing.Size(35, 17);
+            this.rbCodeFileCheckAll.TabIndex = 7;
+            this.rbCodeFileCheckAll.TabStop = true;
+            this.rbCodeFileCheckAll.Text = "All";
+            this.rbCodeFileCheckAll.UseVisualStyleBackColor = true;
+            // 
+            // rbValid
+            // 
+            this.rbValid.AutoSize = true;
+            this.rbValid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbValid.Location = new System.Drawing.Point(78, 7);
+            this.rbValid.Name = "rbValid";
+            this.rbValid.Size = new System.Drawing.Size(47, 17);
+            this.rbValid.TabIndex = 6;
+            this.rbValid.Text = "Valid";
+            this.rbValid.UseVisualStyleBackColor = true;
+            // 
+            // rbInvalid
+            // 
+            this.rbInvalid.AutoSize = true;
+            this.rbInvalid.Checked = true;
+            this.rbInvalid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbInvalid.Location = new System.Drawing.Point(12, 7);
+            this.rbInvalid.Name = "rbInvalid";
+            this.rbInvalid.Size = new System.Drawing.Size(55, 17);
+            this.rbInvalid.TabIndex = 5;
+            this.rbInvalid.TabStop = true;
+            this.rbInvalid.Text = "Invalid";
+            this.rbInvalid.UseVisualStyleBackColor = true;
+            // 
+            // tpUserControlMissing
             // 
             this.tpUserControlMissing.Controls.Add(this.panel6);
             this.tpUserControlMissing.Controls.Add(this.panel4);
             this.tpUserControlMissing.Location = new System.Drawing.Point(4, 22);
-            this.tpUserControlMissing.Name = "tpYserControl";
+            this.tpUserControlMissing.Name = "tpUserControlMissing";
             this.tpUserControlMissing.Padding = new System.Windows.Forms.Padding(3);
             this.tpUserControlMissing.Size = new System.Drawing.Size(948, 296);
             this.tpUserControlMissing.TabIndex = 2;
@@ -360,19 +428,13 @@
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslInValid,
             this.tsslValid,
-            this.tsslTotal});
+            this.tsslTotal,
+            this.tsslRowCount});
             this.statusBar.Location = new System.Drawing.Point(0, 427);
             this.statusBar.Name = "statusBar";
             this.statusBar.Size = new System.Drawing.Size(984, 22);
             this.statusBar.TabIndex = 5;
             this.statusBar.Text = "statusStrip1";
-            // 
-            // tsslValid
-            // 
-            this.tsslValid.Name = "tsslValid";
-            this.tsslValid.Size = new System.Drawing.Size(35, 17);
-            this.tsslValid.Text = "Exists";
-            this.tsslValid.Visible = false;
             // 
             // tsslInValid
             // 
@@ -381,6 +443,13 @@
             this.tsslInValid.Text = "Missing";
             this.tsslInValid.Visible = false;
             // 
+            // tsslValid
+            // 
+            this.tsslValid.Name = "tsslValid";
+            this.tsslValid.Size = new System.Drawing.Size(35, 17);
+            this.tsslValid.Text = "Exists";
+            this.tsslValid.Visible = false;
+            // 
             // tsslTotal
             // 
             this.tsslTotal.Name = "tsslTotal";
@@ -388,14 +457,12 @@
             this.tsslTotal.Text = "Total";
             this.tsslTotal.Visible = false;
             // 
-            // lRowCount
+            // tsslRowCount
             // 
-            this.lRowCount.AutoSize = true;
-            this.lRowCount.Location = new System.Drawing.Point(394, 73);
-            this.lRowCount.Name = "lRowCount";
-            this.lRowCount.Size = new System.Drawing.Size(13, 13);
-            this.lRowCount.TabIndex = 6;
-            this.lRowCount.Text = "0";
+            this.tsslRowCount.Name = "tsslRowCount";
+            this.tsslRowCount.Size = new System.Drawing.Size(63, 17);
+            this.tsslRowCount.Text = "RowCount";
+            this.tsslRowCount.Visible = false;
             // 
             // MainForm
             // 
@@ -403,7 +470,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 449);
-            this.Controls.Add(this.lRowCount);
             this.Controls.Add(this.rbVB);
             this.Controls.Add(this.rbCS);
             this.Controls.Add(this.statusBar);
@@ -424,6 +490,8 @@
             this.tpCodeFileCheck.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFile)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tpUserControlMissing.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUserControl)).EndInit();
@@ -466,9 +534,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingExists;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingControlFolder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingProjectFolder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingErrorMessage;
-        private System.Windows.Forms.Label lRowCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileControlFolder;
+        private System.Windows.Forms.RadioButton rbCodeFileCheckAll;
+        private System.Windows.Forms.RadioButton rbValid;
+        private System.Windows.Forms.RadioButton rbInvalid;
+        private System.Windows.Forms.ToolStripStatusLabel tsslRowCount;
     }
 }
 

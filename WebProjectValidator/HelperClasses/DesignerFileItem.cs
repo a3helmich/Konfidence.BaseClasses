@@ -46,5 +46,21 @@ namespace WebProjectValidator.HelperClasses
         }
 #endregion simple properties
 
+        public DesignerFileItem(string project, string projectFolder, string fileName)
+        {
+            _Project = project;
+            _ProjectFolder = projectFolder;
+
+            _FileName = fileName.Replace(ProjectFolder, string.Empty);
+
+            int deviderIndex = FileName.LastIndexOf(@"\");
+            if (deviderIndex > 0)
+            {
+                _ControlFolder = FileName.Substring(0, deviderIndex);
+                _FileName = FileName.Substring(deviderIndex);
+            }
+
+            _FileName = FileName.Replace(@"\", string.Empty);
+        }
     }
 }

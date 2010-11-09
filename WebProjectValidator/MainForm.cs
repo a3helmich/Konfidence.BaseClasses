@@ -27,6 +27,10 @@ namespace WebProjectValidator
             _ProjectFolder = _BaseFolder + tbProjectName.Text;
 
             tbFolder.Text = _ProjectFolder;
+
+            dgvDesignerFile.AutoGenerateColumns = false;
+            dgvCodeFile.AutoGenerateColumns = false;
+            dgvUserControl.AutoGenerateColumns = false;
         }
 
         private void bStart_Click(object sender, EventArgs e)
@@ -53,16 +57,18 @@ namespace WebProjectValidator
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
+            filter = GetCodeFileCheckFilterType();
+
             dgvCodeFile.DataSource = processor.processCodeFileCheck(designerFileList, filter);
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;
             tsslValid.Visible = true;
-            tsslValid.Text = "Existing: " + processor.ValidCount;
+            tsslValid.Text = "Valid: " + processor.ValidCount;
             tsslInValid.Visible = true;
-            tsslInValid.Text = "Missing: " + processor.InvalidCount;
-
-            lRowCount.Text = dgvCodeFile.RowCount.ToString();
+            tsslInValid.Text = "Invalid: " + processor.InvalidCount;
+            tsslRowCount.Visible = true;
+            tsslRowCount.Text = "RowCount: " + dgvCodeFile.RowCount;
         }
 
         private void UserControlMissing()
@@ -77,7 +83,7 @@ namespace WebProjectValidator
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
-            filter = GetFilterType();
+            filter = GetDesignerFileMissingFilterType();
 
             dgvDesignerFile.DataSource = processor.processDesignerFile(fileList, searchList, filter);
 
@@ -87,8 +93,8 @@ namespace WebProjectValidator
             tsslValid.Text = "Existing: " + processor.ValidCount;
             tsslInValid.Visible = true;
             tsslInValid.Text = "Missing: " + processor.InvalidCount;
-
-            lRowCount.Text = dgvDesignerFile.RowCount.ToString();
+            tsslRowCount.Visible = true;
+            tsslRowCount.Text = "RowCount: " + dgvDesignerFile.RowCount;
         }
 
         private LanguageType GetLanguageType()
@@ -101,7 +107,7 @@ namespace WebProjectValidator
             return LanguageType.vb;
         }
 
-        private ListFilterType GetFilterType()
+        private ListFilterType GetDesignerFileMissingFilterType()
         {
             if (rbExists.Checked)
             {
@@ -109,6 +115,21 @@ namespace WebProjectValidator
             }
 
             if (rbMissing.Checked)
+            {
+                return ListFilterType.Invalid;
+            }
+
+            return ListFilterType.All;
+        }
+
+        private ListFilterType GetCodeFileCheckFilterType()
+        {
+            if (rbValid.Checked)
+            {
+                return ListFilterType.Valid;
+            }
+
+            if (rbInvalid.Checked)
             {
                 return ListFilterType.Invalid;
             }

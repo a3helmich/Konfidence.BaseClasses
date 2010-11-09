@@ -63,6 +63,10 @@ namespace WebProjectValidator.HelperClasses
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
             List<string> fileLines = null;
 
+            _Count = fileList.Count;
+            _ValidCount = fileList.Count;
+            _InvalidCount = 0;
+
             foreach (string fileName in fileList)
             {
                 fileLines = new List<string>();
@@ -78,17 +82,35 @@ namespace WebProjectValidator.HelperClasses
                     }
                 }
 
-                DesignerFileItem fileItem = new DesignerFileItem();
+                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
 
-                fileItem.FileName = fileName;
-                fileItem.Valid = IsValidCodeFile(fileLines);
+                designerFileItem.Valid = IsValidCodeFile(fileLines);
 
-                resultList.Add(fileItem);
+                if (!designerFileItem.Valid)
+                {
+                    _ValidCount--;
+                    _InvalidCount++;
+                }
+
+                switch (filter)
+                {
+                    case ListFilterType.All:
+                        resultList.Add(designerFileItem);
+                        break;
+                    case ListFilterType.Valid:
+                        if (designerFileItem.Valid)
+                        {
+                            resultList.Add(designerFileItem);
+                        }
+                        break;
+                    case ListFilterType.Invalid:
+                        if (!designerFileItem.Valid)
+                        {
+                            resultList.Add(designerFileItem);
+                        }
+                        break;
+                }
             }
-
-            _Count = fileList.Count;
-            _ValidCount = fileList.Count;
-            _InvalidCount = 0;
 
             return resultList;
         }
@@ -97,12 +119,12 @@ namespace WebProjectValidator.HelperClasses
         {
             foreach (string line in fileLines)
             {
-                if (line.IndexOf("codefile", StringComparison.InvariantCultureIgnoreCase) > 0)
+                if (line.IndexOf(" codefile=", StringComparison.InvariantCultureIgnoreCase) > 0)
                 {
                     return true;
                 }
 
-                if (line.IndexOf("codefile", StringComparison.InvariantCultureIgnoreCase) > 0)
+                if (line.IndexOf(" codebehind=", StringComparison.InvariantCultureIgnoreCase) > 0)
                 {
                     return false;
                 }
@@ -121,21 +143,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
-                DesignerFileItem designerFileItem = new DesignerFileItem();
-
-                designerFileItem.Project = _Project;
-                designerFileItem.ProjectFolder = _Folder.ToLower();
-
-                designerFileItem.FileName = fileName.Replace(designerFileItem.ProjectFolder, string.Empty);
-
-                int deviderIndex = designerFileItem.FileName.LastIndexOf(@"\");
-                if (deviderIndex > 0)
-                {
-                    designerFileItem.ControlFolder = designerFileItem.FileName.Substring(1, deviderIndex) ;
-                    designerFileItem.FileName = designerFileItem.FileName.Substring(deviderIndex);
-                }
-
-                designerFileItem.FileName = designerFileItem.FileName.Replace(@"\", string.Empty);
+                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
 
                 string findName = fileName.Replace(_DesignerSearch, _DesignerReplace);
 
