@@ -174,7 +174,13 @@ namespace WebProjectValidator.HelperClasses
                     }
                 }
 
-                userControlReferences.AddRange(GetControlReferences(fileLines));
+                foreach (string controlFileName in GetControlReferences(fileLines))
+                {
+                    if (!userControlReferences.Contains(controlFileName))
+                    {
+                        userControlReferences.Add(controlFileName);
+                    }
+                }
             }
 
             userControlReferences.Sort();
@@ -204,6 +210,13 @@ namespace WebProjectValidator.HelperClasses
                 if (line.Trim().StartsWith("<%@ Register"))
                 {
                     reference = line;
+
+                    if (line.Trim().EndsWith("%>"))
+                    {
+                        userControlReferenceLines.Add(reference);
+
+                        reference = string.Empty;
+                    }
                 }
 
                 if (IsAssigned(reference))
@@ -234,7 +247,9 @@ namespace WebProjectValidator.HelperClasses
 
         private string GetFileName(string referenceLine)
         {
-            return "test";
+            string fileName = referenceLine.Substring(referenceLine.IndexOf("src=", StringComparison.InvariantCultureIgnoreCase) + 5);
+            fileName = fileName.Substring(0, fileName.IndexOf("\""));
+            return fileName;
         }
 
         public bool MustAddDesignerFileItem(DesignerFileItem designerFileItem, ListFilterType filter)
