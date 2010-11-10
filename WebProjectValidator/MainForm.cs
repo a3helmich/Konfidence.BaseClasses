@@ -51,6 +51,27 @@ namespace WebProjectValidator
             }
         }
 
+        private void DesignerFileMissing()
+        {
+            FileList fileList = new FileList(_ProjectFolder, FileType.cs, ListType.Included);
+            FileList searchList = new FileList(_ProjectFolder, FileType.cs, ListType.Excluded);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+            ListFilterType filter = ListFilterType.All;
+
+            filter = GetDesignerFileMissingFilterType();
+
+            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList, searchList, filter);
+
+            tsslTotal.Visible = true;
+            tsslTotal.Text = "Total: " + processor.Count;
+            tsslValid.Visible = true;
+            tsslValid.Text = "Existing: " + processor.ValidCount;
+            tsslInValid.Visible = true;
+            tsslInValid.Text = "Missing: " + processor.InvalidCount;
+            tsslRowCount.Visible = true;
+            tsslRowCount.Text = "RowCount: " + dgvDesignerFile.RowCount;
+        }
+
         private void CodeFileCheck()
         {
             FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
@@ -73,28 +94,21 @@ namespace WebProjectValidator
 
         private void UserControlMissing()
         {
-            throw new NotImplementedException();
-        }
-
-        private void DesignerFileMissing()
-        {
-            FileList fileList = new FileList(_ProjectFolder, FileType.cs, ListType.Included);
-            FileList searchList = new FileList(_ProjectFolder, FileType.cs, ListType.Excluded);
+            FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
-            filter = GetDesignerFileMissingFilterType();
+            filter = GetUserControlMissingFilterType();
 
-            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList, searchList, filter);
+            dgvUserControl.DataSource = processor.processUserControlMissing(designerFileList, filter);
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;
             tsslValid.Visible = true;
-            tsslValid.Text = "Existing: " + processor.ValidCount;
+            tsslValid.Text = "Valid: " + processor.ValidCount;
             tsslInValid.Visible = true;
-            tsslInValid.Text = "Missing: " + processor.InvalidCount;
+            tsslInValid.Text = "Invalid: " + processor.InvalidCount;
             tsslRowCount.Visible = true;
-            tsslRowCount.Text = "RowCount: " + dgvDesignerFile.RowCount;
         }
 
         private LanguageType GetLanguageType()
@@ -134,6 +148,11 @@ namespace WebProjectValidator
                 return ListFilterType.Invalid;
             }
 
+            return ListFilterType.All;
+        }
+
+        private ListFilterType GetUserControlMissingFilterType()
+        {
             return ListFilterType.All;
         }
     }

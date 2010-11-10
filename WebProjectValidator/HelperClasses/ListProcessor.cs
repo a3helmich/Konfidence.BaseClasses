@@ -61,7 +61,7 @@ namespace WebProjectValidator.HelperClasses
         public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
-            List<string> fileLines = null;
+            List<string> fileLines = new List<string>();
 
             _Count = fileList.Count;
             _ValidCount = fileList.Count;
@@ -69,8 +69,6 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
-                fileLines = new List<string>();
-
                 using (TextReader textReader = new StreamReader(fileName))
                 {
                     string line = textReader.ReadLine();
@@ -92,23 +90,9 @@ namespace WebProjectValidator.HelperClasses
                     _InvalidCount++;
                 }
 
-                switch (filter)
+                if (MustAddDesignerFileItem(designerFileItem, filter))
                 {
-                    case ListFilterType.All:
-                        resultList.Add(designerFileItem);
-                        break;
-                    case ListFilterType.Valid:
-                        if (designerFileItem.Valid)
-                        {
-                            resultList.Add(designerFileItem);
-                        }
-                        break;
-                    case ListFilterType.Invalid:
-                        if (!designerFileItem.Valid)
-                        {
-                            resultList.Add(designerFileItem);
-                        }
-                        break;
+                    resultList.Add(designerFileItem);
                 }
             }
 
@@ -158,32 +142,120 @@ namespace WebProjectValidator.HelperClasses
                     _InvalidCount++;
                 }
 
-                switch (filter)
+                if (MustAddDesignerFileItem(designerFileItem, filter))
                 {
-                    case ListFilterType.All:
-                        resultList.Add(designerFileItem);
-                        break;
-                    case ListFilterType.Valid:
-                        if (designerFileItem.Valid)
-                        {
-                            resultList.Add(designerFileItem);
-                        }
-                        break;
-                    case ListFilterType.Invalid:
-                        if (!designerFileItem.Valid)
-                        {
-                            resultList.Add(designerFileItem);
-                        }
-                        break;
+                    resultList.Add(designerFileItem);
                 }
-
             }
 
             return resultList;
         }
 
-        public void processUserControl(FileList fileList)
+        public List<DesignerFileItem> processUserControlMissing(FileList fileList, ListFilterType filter)
         {
+            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+            List<string> fileLines = new List<string>();
+            List<string> userControlReferences = new List<string>();
+
+            _Count = fileList.Count;
+            _ValidCount = fileList.Count;
+            _InvalidCount = 0;
+
+            foreach (string fileName in fileList)
+            {
+                using (TextReader textReader = new StreamReader(fileName))
+                {
+                    string line = textReader.ReadLine();
+
+                    while (IsAssigned(line))
+                    {
+                        fileLines.Add(line);
+                        line = textReader.ReadLine();
+                    }
+                }
+
+                userControlReferences.AddRange(GetControlReferences(fileLines));
+            }
+
+            userControlReferences.Sort();
+
+            foreach (string fileName in userControlReferences)
+            {
+                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+
+                if (MustAddDesignerFileItem(designerFileItem, filter))
+                {
+                    resultList.Add(designerFileItem);
+                }
+            }
+
+            return resultList;
+        }
+
+        private List<string> GetControlReferences(List<string> fileLines)
+        {
+            List<string> userControlReferences = new List<string>();
+            List<string> userControlReferenceLines = new List<string>();
+
+            foreach (string line in fileLines)
+            {
+                string reference = string.Empty;
+
+                if (line.Trim().StartsWith("<%@ Register"))
+                {
+                    reference = line;
+                }
+
+                if (IsAssigned(reference))
+                {
+                    reference += line;
+
+                    if (line.Trim().EndsWith("%>"))
+                    {
+                        userControlReferenceLines.Add(reference);
+
+                        reference = string.Empty;
+                    }
+                }
+            }
+
+            foreach (string referenceLine in userControlReferenceLines)
+            {
+                string reference = GetFileName(referenceLine);
+
+                if (!userControlReferences.Contains(reference))
+                {
+                    userControlReferences.Add(reference);
+                }
+            }
+
+            return userControlReferences;
+        }
+
+        private string GetFileName(string referenceLine)
+        {
+            return "test";
+        }
+
+        public bool MustAddDesignerFileItem(DesignerFileItem designerFileItem, ListFilterType filter)
+        {
+            switch (filter)
+            {
+                case ListFilterType.Valid:
+                    if (designerFileItem.Valid)
+                    {
+                        return true;
+                    }
+                    return false;
+                case ListFilterType.Invalid:
+                    if (!designerFileItem.Valid)
+                    {
+                        return true;
+                    }
+                    return false;
+                default:
+                    return true;
+            }
         }
     }
 }
