@@ -119,12 +119,12 @@ namespace WebProjectValidator.HelperClasses
         {
             foreach (string line in fileLines)
             {
-                if (line.IndexOf(" codefile=", StringComparison.InvariantCultureIgnoreCase) > 0)
+                if (line.IndexOf("codefile=", StringComparison.InvariantCultureIgnoreCase) >= 0)
                 {
                     return true;
                 }
 
-                if (line.IndexOf(" codebehind=", StringComparison.InvariantCultureIgnoreCase) > 0)
+                if (line.IndexOf("codebehind=", StringComparison.InvariantCultureIgnoreCase) >= 0)
                 {
                     return false;
                 }
