@@ -195,6 +195,15 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
+            foreach (DesignerFileItem designerFileItem in resultList)
+            {
+                if (designerFileItem.FileName.StartsWith(".."))
+                {
+                    designerFileItem.Valid = false;
+                    designerFileItem.SetErrorMessage("file path begint met ../ ipv ~/");
+                }
+            }
+
             return resultList;
         }
 

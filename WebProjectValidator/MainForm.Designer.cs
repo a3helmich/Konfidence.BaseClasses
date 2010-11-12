@@ -66,6 +66,10 @@
             this.tsslValid = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dgvUserControlMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileMissing.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -401,9 +405,15 @@
             // dgvUserControl
             // 
             this.dgvUserControl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUserControl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvUserControlMissingProject,
+            this.dgvUserControlMissingFileName,
+            this.dgvUserControlMissingValid,
+            this.dgvUserControlMissingReason});
             this.dgvUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUserControl.Location = new System.Drawing.Point(0, 0);
             this.dgvUserControl.Name = "dgvUserControl";
+            this.dgvUserControl.RowHeadersVisible = false;
             this.dgvUserControl.Size = new System.Drawing.Size(942, 260);
             this.dgvUserControl.TabIndex = 0;
             // 
@@ -463,6 +473,37 @@
             this.tsslRowCount.Size = new System.Drawing.Size(63, 17);
             this.tsslRowCount.Text = "RowCount";
             this.tsslRowCount.Visible = false;
+            // 
+            // dgvUserControlMissingProject
+            // 
+            this.dgvUserControlMissingProject.DataPropertyName = "Project";
+            this.dgvUserControlMissingProject.HeaderText = "Project";
+            this.dgvUserControlMissingProject.Name = "dgvUserControlMissingProject";
+            this.dgvUserControlMissingProject.ReadOnly = true;
+            // 
+            // dgvUserControlMissingFileName
+            // 
+            this.dgvUserControlMissingFileName.DataPropertyName = "FileName";
+            this.dgvUserControlMissingFileName.HeaderText = "Reference";
+            this.dgvUserControlMissingFileName.Name = "dgvUserControlMissingFileName";
+            this.dgvUserControlMissingFileName.ReadOnly = true;
+            this.dgvUserControlMissingFileName.Width = 200;
+            // 
+            // dgvUserControlMissingValid
+            // 
+            this.dgvUserControlMissingValid.DataPropertyName = "Valid";
+            this.dgvUserControlMissingValid.HeaderText = "Valid";
+            this.dgvUserControlMissingValid.Name = "dgvUserControlMissingValid";
+            this.dgvUserControlMissingValid.ReadOnly = true;
+            this.dgvUserControlMissingValid.Width = 55;
+            // 
+            // dgvUserControlMissingReason
+            // 
+            this.dgvUserControlMissingReason.DataPropertyName = "ErrorMessage";
+            this.dgvUserControlMissingReason.HeaderText = "Reason";
+            this.dgvUserControlMissingReason.Name = "dgvUserControlMissingReason";
+            this.dgvUserControlMissingReason.ReadOnly = true;
+            this.dgvUserControlMissingReason.Width = 565;
             // 
             // MainForm
             // 
@@ -542,6 +583,10 @@
         private System.Windows.Forms.RadioButton rbValid;
         private System.Windows.Forms.RadioButton rbInvalid;
         private System.Windows.Forms.ToolStripStatusLabel tsslRowCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingReason;
     }
 }
 
