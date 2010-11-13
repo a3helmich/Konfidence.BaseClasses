@@ -163,6 +163,8 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
+                fileLines.Clear();
+
                 using (TextReader textReader = new StreamReader(fileName))
                 {
                     string line = textReader.ReadLine();
@@ -174,7 +176,8 @@ namespace WebProjectValidator.HelperClasses
                     }
                 }
 
-                foreach (string controlFileName in GetControlReferences(fileLines))
+                List<string> referenceList = GetControlReferences(fileLines);
+                foreach (string controlFileName in referenceList)
                 {
                     if (!userControlReferences.Contains(controlFileName))
                     {
@@ -188,6 +191,8 @@ namespace WebProjectValidator.HelperClasses
             foreach (string fileName in userControlReferences)
             {
                 DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+
+                designerFileItem.Valid = true;
 
                 if (MustAddDesignerFileItem(designerFileItem, filter))
                 {
@@ -228,7 +233,7 @@ namespace WebProjectValidator.HelperClasses
                     }
                 }
 
-                if (IsAssigned(reference))
+                if (IsString(reference))
                 {
                     reference += line;
 

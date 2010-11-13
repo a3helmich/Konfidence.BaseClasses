@@ -19,9 +19,19 @@ namespace Konfidence.Base
 			return true;
 		}
 
-        public static bool IsAssigned(string newString) // ToDo : back to protected 
+        public static bool IsString(string newString) // ToDo : back to protected 
         {
             if (string.IsNullOrEmpty(newString))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool IsAssigned(string newString) // ToDo : back to protected 
+        {
+            if (newString == null)
             {
                 return false;
             }
