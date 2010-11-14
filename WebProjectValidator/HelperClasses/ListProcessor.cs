@@ -256,7 +256,7 @@ namespace WebProjectValidator.HelperClasses
                     }
                 }
 
-                if (IsString(reference))
+                if (!IsEmpty(reference))
                 {
                     reference += line;
 
