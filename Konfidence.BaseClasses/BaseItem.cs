@@ -12,11 +12,6 @@ namespace Konfidence.Base
 
 		public static bool IsAssigned(object assignedObject)
 		{
-            if (assignedObject is string)
-            {
-                throw new Exception("Een string mag niet met IsAssigned getest worden!");
-            }
-
             if (assignedObject == null)
             {
                 return false;
@@ -24,6 +19,16 @@ namespace Konfidence.Base
 
 			return true;
 		}
+
+        public static bool IsAssigned(string newString) // ToDo : back to protected 
+        {
+            if (newString == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         public static bool IsEmpty(string newString) // ToDo : back to protected 
         {

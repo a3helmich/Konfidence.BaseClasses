@@ -164,6 +164,16 @@ namespace WebProjectValidator
                 return ListFilterType.Invalid;
             }
 
+            if (rbUserControlMissing.Checked)
+            {
+                return ListFilterType.Missing;
+            }
+
+            if (rbUserControlUnused.Checked)
+            {
+                return ListFilterType.Unused;
+            }
+
             return ListFilterType.All;
         }
     }

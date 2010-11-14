@@ -13,8 +13,8 @@ namespace WebProjectValidator.HelperClasses
         private string _ControlFolder = ".";
         private string _FileName = string.Empty;
         private bool _Valid = false;
-        private bool _Exists = false;
-        private bool _IsUsed = false;
+        private bool _Exists = true;
+        private bool _IsUsed = true;
 
         #region simple properties
         public string Project

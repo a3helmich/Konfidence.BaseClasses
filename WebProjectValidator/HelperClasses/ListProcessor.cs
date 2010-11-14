@@ -240,10 +240,10 @@ namespace WebProjectValidator.HelperClasses
             List<string> userControlReferences = new List<string>();
             List<string> userControlReferenceLines = new List<string>();
 
+            string reference = string.Empty;
+
             foreach (string line in fileLines)
             {
-                string reference = string.Empty;
-
                 if (line.Trim().StartsWith("<%@ Register"))
                 {
                     reference = line;
@@ -271,11 +271,11 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string referenceLine in userControlReferenceLines)
             {
-                string reference = GetReferenceFileName(referenceLine);
+                string referenceName = GetReferenceFileName(referenceLine);
 
-                if (!userControlReferences.Contains(reference))
+                if (!userControlReferences.Contains(referenceName))
                 {
-                    userControlReferences.Add(reference);
+                    userControlReferences.Add(referenceName);
                 }
             }
 
