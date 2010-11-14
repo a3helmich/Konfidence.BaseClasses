@@ -28,9 +28,9 @@ namespace WebProjectValidator
 
             tbFolder.Text = _ProjectFolder;
 
-            dgvDesignerFile.AutoGenerateColumns = false;
-            dgvCodeFile.AutoGenerateColumns = false;
-            dgvUserControl.AutoGenerateColumns = false;
+            dgvDesignerFileMissing.AutoGenerateColumns = false;
+            dgvCodeFileCheck.AutoGenerateColumns = false;
+            dgvUserControlMissing.AutoGenerateColumns = false;
         }
 
         private void bStart_Click(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace WebProjectValidator
 
             filter = GetDesignerFileMissingFilterType();
 
-            dgvDesignerFile.DataSource = processor.processDesignerFile(fileList, searchList, filter);
+            dgvDesignerFileMissing.DataSource = processor.processDesignerFileMissing(fileList, searchList, filter);
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;
@@ -69,7 +69,7 @@ namespace WebProjectValidator
             tsslInValid.Visible = true;
             tsslInValid.Text = "Missing: " + processor.InvalidCount;
             tsslRowCount.Visible = true;
-            tsslRowCount.Text = "RowCount: " + dgvDesignerFile.RowCount;
+            tsslRowCount.Text = "RowCount: " + dgvDesignerFileMissing.RowCount;
         }
 
         private void CodeFileCheck()
@@ -80,7 +80,7 @@ namespace WebProjectValidator
 
             filter = GetCodeFileCheckFilterType();
 
-            dgvCodeFile.DataSource = processor.processCodeFileCheck(designerFileList, filter);
+            dgvCodeFileCheck.DataSource = processor.processCodeFileCheck(designerFileList, filter);
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;
@@ -89,7 +89,7 @@ namespace WebProjectValidator
             tsslInValid.Visible = true;
             tsslInValid.Text = "Invalid: " + processor.InvalidCount;
             tsslRowCount.Visible = true;
-            tsslRowCount.Text = "RowCount: " + dgvCodeFile.RowCount;
+            tsslRowCount.Text = "RowCount: " + dgvCodeFileCheck.RowCount;
         }
 
         private void UserControlMissing()
@@ -100,7 +100,7 @@ namespace WebProjectValidator
 
             filter = GetUserControlMissingFilterType();
 
-            dgvUserControl.DataSource = processor.processUserControlMissing(designerFileList, filter);
+            dgvUserControlMissing.DataSource = processor.processUserControlMissing(designerFileList, filter);
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;
@@ -109,6 +109,7 @@ namespace WebProjectValidator
             tsslInValid.Visible = true;
             tsslInValid.Text = "Invalid: " + processor.InvalidCount;
             tsslRowCount.Visible = true;
+            tsslRowCount.Text = "RowCount: " + dgvUserControlMissing.RowCount;
         }
 
         private LanguageType GetLanguageType()
@@ -123,14 +124,14 @@ namespace WebProjectValidator
 
         private ListFilterType GetDesignerFileMissingFilterType()
         {
-            if (rbExists.Checked)
+            if (rbDesignerFileExists.Checked)
             {
-                return ListFilterType.Valid;
+                return ListFilterType.Exists;
             }
 
-            if (rbMissing.Checked)
+            if (rbDesignerFileMissing.Checked)
             {
-                return ListFilterType.Invalid;
+                return ListFilterType.Missing;
             }
 
             return ListFilterType.All;
@@ -138,12 +139,12 @@ namespace WebProjectValidator
 
         private ListFilterType GetCodeFileCheckFilterType()
         {
-            if (rbValid.Checked)
+            if (rbCodeFileCheckValid.Checked)
             {
                 return ListFilterType.Valid;
             }
 
-            if (rbInvalid.Checked)
+            if (rbCodeFileCheckInvalid.Checked)
             {
                 return ListFilterType.Invalid;
             }
@@ -153,6 +154,16 @@ namespace WebProjectValidator
 
         private ListFilterType GetUserControlMissingFilterType()
         {
+            if (rbUserControlValid.Checked)
+            {
+                return ListFilterType.Valid;
+            }
+
+            if (rbUserControlInvalid.Checked)
+            {
+                return ListFilterType.Invalid;
+            }
+
             return ListFilterType.All;
         }
     }

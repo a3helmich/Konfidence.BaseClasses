@@ -117,7 +117,7 @@ namespace WebProjectValidator.HelperClasses
             return false;
         }
 
-        public List<DesignerFileItem> processDesignerFile(FileList fileList, FileList searchList, ListFilterType filter)
+        public List<DesignerFileItem> processDesignerFileMissing(FileList fileList, FileList searchList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -133,10 +133,10 @@ namespace WebProjectValidator.HelperClasses
 
                 if (searchList.Contains(findName))
                 {
-                    designerFileItem.Valid = true;
+                    designerFileItem.Exists = true;
                 }
 
-                if (!designerFileItem.Valid)
+                if (!designerFileItem.Exists)
                 {
                     _ValidCount--;
                     _InvalidCount++;
@@ -155,11 +155,10 @@ namespace WebProjectValidator.HelperClasses
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
             List<string> fileLines = new List<string>();
-            List<string> userControlReferences = new List<string>();
+            List<string> allUserControlReferences = new List<string>();
+            List<DesignerFileItem> userControlReferences = new List<DesignerFileItem>();
 
-            _Count = fileList.Count;
-            _ValidCount = fileList.Count;
-            _InvalidCount = 0;
+            fileList.Sort();
 
             foreach (string fileName in fileList)
             {
@@ -179,33 +178,57 @@ namespace WebProjectValidator.HelperClasses
                 List<string> referenceList = GetControlReferences(fileLines);
                 foreach (string controlFileName in referenceList)
                 {
-                    if (!userControlReferences.Contains(controlFileName))
+                    if (!allUserControlReferences.Contains(controlFileName))
                     {
-                        userControlReferences.Add(controlFileName);
+                        allUserControlReferences.Add(controlFileName);
                     }
                 }
             }
 
-            userControlReferences.Sort();
+            allUserControlReferences.Sort();
 
-            foreach (string fileName in userControlReferences)
+            foreach (string fileName in allUserControlReferences)
             {
                 DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
 
                 designerFileItem.Valid = true;
 
-                if (MustAddDesignerFileItem(designerFileItem, filter))
-                {
-                    resultList.Add(designerFileItem);
-                }
+                userControlReferences.Add(designerFileItem);
             }
 
-            foreach (DesignerFileItem designerFileItem in resultList)
+
+            foreach (DesignerFileItem designerFileItem in userControlReferences)
             {
                 if (designerFileItem.FileName.StartsWith(".."))
                 {
                     designerFileItem.Valid = false;
                     designerFileItem.SetErrorMessage("file path begint met ../ ipv ~/");
+                }
+                else if (!designerFileItem.FileName.StartsWith("~") && designerFileItem.FileName.Contains("/"))
+                {
+                    designerFileItem.Valid = false;
+                    designerFileItem.SetErrorMessage("file path begint niet met ~/");
+                }
+            }
+
+            _Count = userControlReferences.Count;
+            _ValidCount = userControlReferences.Count;
+            _InvalidCount = 0;
+
+            foreach (DesignerFileItem designerFileItem in userControlReferences)
+            {
+                if (!designerFileItem.Valid)
+                {
+                    _ValidCount--;
+                    _InvalidCount++;
+                }
+            }
+
+            foreach (DesignerFileItem designerFileItem in userControlReferences)
+            {
+                if (MustAddDesignerFileItem(designerFileItem, filter))
+                {
+                    resultList.Add(designerFileItem);
                 }
             }
 
@@ -248,7 +271,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string referenceLine in userControlReferenceLines)
             {
-                string reference = GetFileName(referenceLine);
+                string reference = GetReferenceFileName(referenceLine);
 
                 if (!userControlReferences.Contains(reference))
                 {
@@ -259,7 +282,7 @@ namespace WebProjectValidator.HelperClasses
             return userControlReferences;
         }
 
-        private string GetFileName(string referenceLine)
+        private string GetReferenceFileName(string referenceLine)
         {
             string fileName = referenceLine.Substring(referenceLine.IndexOf("src=", StringComparison.InvariantCultureIgnoreCase) + 5);
             fileName = fileName.Substring(0, fileName.IndexOf("\""));
@@ -278,6 +301,24 @@ namespace WebProjectValidator.HelperClasses
                     return false;
                 case ListFilterType.Invalid:
                     if (!designerFileItem.Valid)
+                    {
+                        return true;
+                    }
+                    return false;
+                case ListFilterType.Exists:
+                    if (designerFileItem.Exists)
+                    {
+                        return true;
+                    }
+                    return false;
+                case ListFilterType.Missing:
+                    if (!designerFileItem.Exists)
+                    {
+                        return true;
+                    }
+                    return false;
+                case ListFilterType.Unused:
+                    if (!designerFileItem.IsUsed)
                     {
                         return true;
                     }
