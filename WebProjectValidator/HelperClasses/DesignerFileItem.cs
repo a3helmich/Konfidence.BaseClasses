@@ -70,7 +70,7 @@ namespace WebProjectValidator.HelperClasses
             _Project = project;
             _ProjectFolder = projectFolder;
 
-            _FileName = fileName.Replace(ProjectFolder, string.Empty);
+            _FileName = this.ReplaceIgnoreCase(fileName, ProjectFolder, string.Empty);
 
             int deviderIndex = FileName.LastIndexOf(@"\");
             if (deviderIndex > 0)

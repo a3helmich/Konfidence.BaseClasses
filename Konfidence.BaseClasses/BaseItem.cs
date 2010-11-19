@@ -34,10 +34,10 @@ namespace Konfidence.Base
         {
             if (string.IsNullOrEmpty(newString))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public void SetErrorMessage(string errorMessage)
@@ -53,11 +53,11 @@ namespace Konfidence.Base
         // string extender van maken
         public string ReplaceIgnoreCase(string fromString, string oldValue, string newValue)
         {
-            string toString = string.Empty;
+            string toString = fromString;
 
             int codeBehindIndex = fromString.IndexOf(oldValue, StringComparison.InvariantCultureIgnoreCase);
 
-            if (codeBehindIndex > 0)
+            if (codeBehindIndex > -1)
             {
                 toString = fromString.Substring(0, codeBehindIndex);
                 toString += newValue;

@@ -27,7 +27,7 @@ namespace WebProjectValidator.FileListChecker
             {
                 if (_Checker.IsValid(fileName))
                 {
-                    this.Add(fileName.ToLower());
+                    this.Add(fileName);
                 }
             }
         }

@@ -70,7 +70,7 @@ namespace WebProjectValidator.HelperClasses
             {
                 DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
 
-                string findName = fileName.Replace(_DesignerSearch, _DesignerReplace);
+                string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
 
                 if (searchList.Contains(findName))
                 {
@@ -246,7 +246,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string line in fileLines)
             {
-                if (line.Trim().StartsWith("<%@ Register"))
+                if (line.Trim().StartsWith("<%@ Register",StringComparison.InvariantCultureIgnoreCase) && line.Trim().IndexOf("src=", StringComparison.InvariantCultureIgnoreCase) > -1)
                 {
                     reference = line;
 
@@ -402,14 +402,7 @@ namespace WebProjectValidator.HelperClasses
 
                         if (foundPage)
                         {
-                            int codeBehindIndex = line.IndexOf(" codebehind=", StringComparison.InvariantCultureIgnoreCase);
-
-                            if (codeBehindIndex > 0)
-                            {
-                                newLine = line.Substring(0, codeBehindIndex);
-                                newLine += " CodeFile=";
-                                newLine += line.Substring(codeBehindIndex + " codebehind=".Length);
-                            }
+                            newLine = ReplaceIgnoreCase(line, " codebehind=", " CodeFile=");
                         }
 
                         if (line.Contains("%>"))

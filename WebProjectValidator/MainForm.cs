@@ -52,10 +52,26 @@ namespace WebProjectValidator
             }
         }
 
+        private FileType GetLanguageFileType()
+        {
+            LanguageType languageType = GetLanguageType();
+
+            switch (languageType)
+            {
+                case LanguageType.cs:
+                    return FileType.cs;
+                case LanguageType.vb:
+                    return FileType.vb;
+            }
+
+            return FileType.web;
+        }
+
         private void DesignerFileMissing()
         {
-            FileList fileList = new FileList(_ProjectFolder, FileType.cs, ListType.Included);
-            FileList searchList = new FileList(_ProjectFolder, FileType.cs, ListType.Excluded);
+
+            FileList fileList = new FileList(_ProjectFolder, GetLanguageFileType(), ListType.Included);
+            FileList searchList = new FileList(_ProjectFolder, GetLanguageFileType(), ListType.Excluded);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
