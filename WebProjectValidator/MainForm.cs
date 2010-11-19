@@ -32,6 +32,54 @@ namespace WebProjectValidator
             dgvDesignerFileMissing.AutoGenerateColumns = false;
             dgvCodeFileCheck.AutoGenerateColumns = false;
             dgvUserControlMissing.AutoGenerateColumns = false;
+
+            LoadDefaults();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveDefaults();
+        }
+
+        private void SaveDefaults()
+        {
+            ConfigurationStore configurationStore = new ConfigurationStore();
+
+            configurationStore.SetProperty("ProjectName", tbProjectName.Text);
+            configurationStore.SetProperty("ProjectFolder", tbFolder.Text);
+
+            string rbCSText = "0";
+            if (rbCS.Checked)
+            {
+                rbCSText = "1";
+            }
+
+            configurationStore.SetProperty("rbCSChecked", rbCSText);
+
+            configurationStore.Save();
+        }
+
+        private void LoadDefaults()
+        {
+            ConfigurationStore configurationStore = new ConfigurationStore();
+
+            string getText = string.Empty;
+
+            configurationStore.GetProperty("ProjectName", out getText);
+
+            tbProjectName.Text = getText;
+
+            configurationStore.GetProperty("ProjectFolder", out getText);
+
+            tbFolder.Text = getText;
+
+            configurationStore.GetProperty("rbCSChecked", out getText);
+
+            rbCS.Checked = false;
+            if (getText.Equals("1"))
+            {
+                rbCS.Checked = true;
+            }
         }
 
         private void bStart_Click(object sender, EventArgs e)
@@ -219,6 +267,16 @@ namespace WebProjectValidator
             else
             {
                 bFixAll.Enabled = false;
+            }
+        }
+
+        private void bFolderBrowse_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog.SelectedPath = tbFolder.Text;
+
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                tbFolder.Text = folderBrowserDialog.SelectedPath;
             }
         }
     }

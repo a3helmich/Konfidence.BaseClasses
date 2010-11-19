@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WebProjectValidator</RootNamespace>
     <AssemblyName>WebProjectValidator</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -72,6 +72,7 @@
     <Compile Include="FileListChecker\CheckAction.cs" />
     <Compile Include="FileListChecker\CheckItem.cs" />
     <Compile Include="FileListChecker\CheckItemList.cs" />
+    <Compile Include="HelperClasses\ConfigurationStore.cs" />
     <Compile Include="HelperClasses\DesignerFileItem.cs" />
     <Compile Include="FileListChecker\FileList.cs" />
     <Compile Include="FileListChecker\FileType.cs" />
@@ -100,6 +101,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
