@@ -49,5 +49,22 @@ namespace Konfidence.Base
         {
             return IsAssigned(_ErrorMessage);
         }
+
+        // string extender van maken
+        public string ReplaceIgnoreCase(string fromString, string oldValue, string newValue)
+        {
+            string toString = string.Empty;
+
+            int codeBehindIndex = fromString.IndexOf(oldValue, StringComparison.InvariantCultureIgnoreCase);
+
+            if (codeBehindIndex > 0)
+            {
+                toString = fromString.Substring(0, codeBehindIndex);
+                toString += newValue;
+                toString += fromString.Substring(codeBehindIndex + oldValue.Length);
+            }
+
+            return toString;
+        }
 	}
 }
