@@ -37,10 +37,6 @@
             this.tpDesignerFileMissing = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvDesignerFileMissing = new System.Windows.Forms.DataGridView();
-            this.dgvFileMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvFileMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvFileMissingExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvFileMissingControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.rbDesignerFileAll = new System.Windows.Forms.RadioButton();
             this.rbDesignerFileExists = new System.Windows.Forms.RadioButton();
@@ -64,17 +60,22 @@
             this.dgvUserControlMissingValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvUserControlMissingReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.rbUserControlUnused = new System.Windows.Forms.RadioButton();
+            this.rbUserControlMissing = new System.Windows.Forms.RadioButton();
+            this.rbUserControlAll = new System.Windows.Forms.RadioButton();
+            this.rbUserControlValid = new System.Windows.Forms.RadioButton();
+            this.rbUserControlInvalid = new System.Windows.Forms.RadioButton();
             this.tbFolder = new System.Windows.Forms.TextBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.tsslInValid = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslValid = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rbUserControlAll = new System.Windows.Forms.RadioButton();
-            this.rbUserControlValid = new System.Windows.Forms.RadioButton();
-            this.rbUserControlInvalid = new System.Windows.Forms.RadioButton();
-            this.rbUserControlMissing = new System.Windows.Forms.RadioButton();
-            this.rbUserControlUnused = new System.Windows.Forms.RadioButton();
+            this.bFixAll = new System.Windows.Forms.Button();
+            this.dgvFileMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvFileMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvFileMissingExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvFileMissingControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileMissing.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -158,6 +159,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(956, 322);
             this.tabControl.TabIndex = 4;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tpDesignerFileMissing
             // 
@@ -194,37 +196,6 @@
             this.dgvDesignerFileMissing.RowHeadersVisible = false;
             this.dgvDesignerFileMissing.Size = new System.Drawing.Size(942, 260);
             this.dgvDesignerFileMissing.TabIndex = 0;
-            // 
-            // dgvFileMissingProject
-            // 
-            this.dgvFileMissingProject.DataPropertyName = "Project";
-            this.dgvFileMissingProject.HeaderText = "Project";
-            this.dgvFileMissingProject.Name = "dgvFileMissingProject";
-            this.dgvFileMissingProject.ReadOnly = true;
-            // 
-            // dgvFileMissingFileName
-            // 
-            this.dgvFileMissingFileName.DataPropertyName = "FileName";
-            this.dgvFileMissingFileName.HeaderText = "Filename";
-            this.dgvFileMissingFileName.Name = "dgvFileMissingFileName";
-            this.dgvFileMissingFileName.ReadOnly = true;
-            this.dgvFileMissingFileName.Width = 200;
-            // 
-            // dgvFileMissingExists
-            // 
-            this.dgvFileMissingExists.DataPropertyName = "Valid";
-            this.dgvFileMissingExists.HeaderText = "Exists";
-            this.dgvFileMissingExists.Name = "dgvFileMissingExists";
-            this.dgvFileMissingExists.ReadOnly = true;
-            this.dgvFileMissingExists.Width = 55;
-            // 
-            // dgvFileMissingControlFolder
-            // 
-            this.dgvFileMissingControlFolder.DataPropertyName = "ControlFolder";
-            this.dgvFileMissingControlFolder.HeaderText = "Folder";
-            this.dgvFileMissingControlFolder.Name = "dgvFileMissingControlFolder";
-            this.dgvFileMissingControlFolder.ReadOnly = true;
-            this.dgvFileMissingControlFolder.Width = 565;
             // 
             // panel3
             // 
@@ -467,6 +438,66 @@
             this.panel4.Size = new System.Drawing.Size(942, 30);
             this.panel4.TabIndex = 0;
             // 
+            // rbUserControlUnused
+            // 
+            this.rbUserControlUnused.AutoSize = true;
+            this.rbUserControlUnused.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbUserControlUnused.Location = new System.Drawing.Point(225, 7);
+            this.rbUserControlUnused.Name = "rbUserControlUnused";
+            this.rbUserControlUnused.Size = new System.Drawing.Size(61, 17);
+            this.rbUserControlUnused.TabIndex = 12;
+            this.rbUserControlUnused.TabStop = true;
+            this.rbUserControlUnused.Text = "Unused";
+            this.rbUserControlUnused.UseVisualStyleBackColor = true;
+            // 
+            // rbUserControlMissing
+            // 
+            this.rbUserControlMissing.AutoSize = true;
+            this.rbUserControlMissing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbUserControlMissing.Location = new System.Drawing.Point(145, 7);
+            this.rbUserControlMissing.Name = "rbUserControlMissing";
+            this.rbUserControlMissing.Size = new System.Drawing.Size(59, 17);
+            this.rbUserControlMissing.TabIndex = 11;
+            this.rbUserControlMissing.TabStop = true;
+            this.rbUserControlMissing.Text = "Missing";
+            this.rbUserControlMissing.UseVisualStyleBackColor = true;
+            // 
+            // rbUserControlAll
+            // 
+            this.rbUserControlAll.AutoSize = true;
+            this.rbUserControlAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbUserControlAll.Location = new System.Drawing.Point(304, 7);
+            this.rbUserControlAll.Name = "rbUserControlAll";
+            this.rbUserControlAll.Size = new System.Drawing.Size(35, 17);
+            this.rbUserControlAll.TabIndex = 10;
+            this.rbUserControlAll.TabStop = true;
+            this.rbUserControlAll.Text = "All";
+            this.rbUserControlAll.UseVisualStyleBackColor = true;
+            // 
+            // rbUserControlValid
+            // 
+            this.rbUserControlValid.AutoSize = true;
+            this.rbUserControlValid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbUserControlValid.Location = new System.Drawing.Point(78, 7);
+            this.rbUserControlValid.Name = "rbUserControlValid";
+            this.rbUserControlValid.Size = new System.Drawing.Size(47, 17);
+            this.rbUserControlValid.TabIndex = 9;
+            this.rbUserControlValid.Text = "Valid";
+            this.rbUserControlValid.UseVisualStyleBackColor = true;
+            // 
+            // rbUserControlInvalid
+            // 
+            this.rbUserControlInvalid.AutoSize = true;
+            this.rbUserControlInvalid.Checked = true;
+            this.rbUserControlInvalid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbUserControlInvalid.Location = new System.Drawing.Point(12, 7);
+            this.rbUserControlInvalid.Name = "rbUserControlInvalid";
+            this.rbUserControlInvalid.Size = new System.Drawing.Size(55, 17);
+            this.rbUserControlInvalid.TabIndex = 8;
+            this.rbUserControlInvalid.TabStop = true;
+            this.rbUserControlInvalid.Text = "Invalid";
+            this.rbUserControlInvalid.UseVisualStyleBackColor = true;
+            // 
             // tbFolder
             // 
             this.tbFolder.Location = new System.Drawing.Point(291, 46);
@@ -516,65 +547,47 @@
             this.tsslRowCount.Text = "RowCount";
             this.tsslRowCount.Visible = false;
             // 
-            // rbUserControlAll
+            // bFixAll
             // 
-            this.rbUserControlAll.AutoSize = true;
-            this.rbUserControlAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbUserControlAll.Location = new System.Drawing.Point(304, 7);
-            this.rbUserControlAll.Name = "rbUserControlAll";
-            this.rbUserControlAll.Size = new System.Drawing.Size(35, 17);
-            this.rbUserControlAll.TabIndex = 10;
-            this.rbUserControlAll.TabStop = true;
-            this.rbUserControlAll.Text = "All";
-            this.rbUserControlAll.UseVisualStyleBackColor = true;
+            this.bFixAll.Enabled = false;
+            this.bFixAll.Location = new System.Drawing.Point(123, 12);
+            this.bFixAll.Name = "bFixAll";
+            this.bFixAll.Size = new System.Drawing.Size(75, 23);
+            this.bFixAll.TabIndex = 6;
+            this.bFixAll.Text = "Fix All";
+            this.bFixAll.UseVisualStyleBackColor = true;
+            this.bFixAll.Click += new System.EventHandler(this.bFixAll_Click);
             // 
-            // rbUserControlValid
+            // dgvFileMissingProject
             // 
-            this.rbUserControlValid.AutoSize = true;
-            this.rbUserControlValid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbUserControlValid.Location = new System.Drawing.Point(78, 7);
-            this.rbUserControlValid.Name = "rbUserControlValid";
-            this.rbUserControlValid.Size = new System.Drawing.Size(47, 17);
-            this.rbUserControlValid.TabIndex = 9;
-            this.rbUserControlValid.Text = "Valid";
-            this.rbUserControlValid.UseVisualStyleBackColor = true;
+            this.dgvFileMissingProject.DataPropertyName = "Project";
+            this.dgvFileMissingProject.HeaderText = "Project";
+            this.dgvFileMissingProject.Name = "dgvFileMissingProject";
+            this.dgvFileMissingProject.ReadOnly = true;
             // 
-            // rbUserControlInvalid
+            // dgvFileMissingFileName
             // 
-            this.rbUserControlInvalid.AutoSize = true;
-            this.rbUserControlInvalid.Checked = true;
-            this.rbUserControlInvalid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbUserControlInvalid.Location = new System.Drawing.Point(12, 7);
-            this.rbUserControlInvalid.Name = "rbUserControlInvalid";
-            this.rbUserControlInvalid.Size = new System.Drawing.Size(55, 17);
-            this.rbUserControlInvalid.TabIndex = 8;
-            this.rbUserControlInvalid.TabStop = true;
-            this.rbUserControlInvalid.Text = "Invalid";
-            this.rbUserControlInvalid.UseVisualStyleBackColor = true;
+            this.dgvFileMissingFileName.DataPropertyName = "FileName";
+            this.dgvFileMissingFileName.HeaderText = "Filename";
+            this.dgvFileMissingFileName.Name = "dgvFileMissingFileName";
+            this.dgvFileMissingFileName.ReadOnly = true;
+            this.dgvFileMissingFileName.Width = 200;
             // 
-            // rbUserControlMissing
+            // dgvFileMissingExists
             // 
-            this.rbUserControlMissing.AutoSize = true;
-            this.rbUserControlMissing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbUserControlMissing.Location = new System.Drawing.Point(145, 7);
-            this.rbUserControlMissing.Name = "rbUserControlMissing";
-            this.rbUserControlMissing.Size = new System.Drawing.Size(59, 17);
-            this.rbUserControlMissing.TabIndex = 11;
-            this.rbUserControlMissing.TabStop = true;
-            this.rbUserControlMissing.Text = "Missing";
-            this.rbUserControlMissing.UseVisualStyleBackColor = true;
+            this.dgvFileMissingExists.DataPropertyName = "Exists";
+            this.dgvFileMissingExists.HeaderText = "Exists";
+            this.dgvFileMissingExists.Name = "dgvFileMissingExists";
+            this.dgvFileMissingExists.ReadOnly = true;
+            this.dgvFileMissingExists.Width = 55;
             // 
-            // rbUserControlUnused
+            // dgvFileMissingControlFolder
             // 
-            this.rbUserControlUnused.AutoSize = true;
-            this.rbUserControlUnused.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbUserControlUnused.Location = new System.Drawing.Point(225, 7);
-            this.rbUserControlUnused.Name = "rbUserControlUnused";
-            this.rbUserControlUnused.Size = new System.Drawing.Size(61, 17);
-            this.rbUserControlUnused.TabIndex = 12;
-            this.rbUserControlUnused.TabStop = true;
-            this.rbUserControlUnused.Text = "Unused";
-            this.rbUserControlUnused.UseVisualStyleBackColor = true;
+            this.dgvFileMissingControlFolder.DataPropertyName = "ControlFolder";
+            this.dgvFileMissingControlFolder.HeaderText = "Folder";
+            this.dgvFileMissingControlFolder.Name = "dgvFileMissingControlFolder";
+            this.dgvFileMissingControlFolder.ReadOnly = true;
+            this.dgvFileMissingControlFolder.Width = 565;
             // 
             // MainForm
             // 
@@ -582,6 +595,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 449);
+            this.Controls.Add(this.bFixAll);
             this.Controls.Add(this.rbVB);
             this.Controls.Add(this.rbCS);
             this.Controls.Add(this.statusBar);
@@ -644,10 +658,6 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslValid;
         private System.Windows.Forms.ToolStripStatusLabel tsslInValid;
         private System.Windows.Forms.ToolStripStatusLabel tsslTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingFileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingExists;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingControlFolder;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileValid;
@@ -665,6 +675,11 @@
         private System.Windows.Forms.RadioButton rbUserControlInvalid;
         private System.Windows.Forms.RadioButton rbUserControlUnused;
         private System.Windows.Forms.RadioButton rbUserControlMissing;
+        private System.Windows.Forms.Button bFixAll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingExists;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingControlFolder;
     }
 }
 

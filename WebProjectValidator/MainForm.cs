@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -175,6 +176,34 @@ namespace WebProjectValidator
             }
 
             return ListFilterType.All;
+        }
+
+        private void bFixAll_Click(object sender, EventArgs e)
+        {
+            if (dgvCodeFileCheck.RowCount > 0)
+            {
+                FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
+                ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+                ListFilterType filter = ListFilterType.All;
+
+                filter = GetCodeFileCheckFilterType();
+
+                List<DesignerFileItem> repairList = processor.processCodeFileCheck(designerFileList, filter);
+
+                processor.repairCodeFile(repairList);
+            }
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tpCodeFileCheck)
+            {
+                bFixAll.Enabled = true;
+            }
+            else
+            {
+                bFixAll.Enabled = false;
+            }
         }
     }
 }

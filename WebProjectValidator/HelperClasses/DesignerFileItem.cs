@@ -13,7 +13,7 @@ namespace WebProjectValidator.HelperClasses
         private string _ControlFolder = ".";
         private string _FileName = string.Empty;
         private bool _Valid = false;
-        private bool _Exists = true;
+        private bool _Exists = false;
         private bool _IsUsed = true;
 
         #region simple properties
@@ -57,6 +57,11 @@ namespace WebProjectValidator.HelperClasses
         {
             get { return _IsUsed; }
             set { _IsUsed = value; }
+        }
+
+        public string FullFileName
+        {
+            get { return _ProjectFolder + @"\" + _FileName; }
         }
 #endregion simple properties
 

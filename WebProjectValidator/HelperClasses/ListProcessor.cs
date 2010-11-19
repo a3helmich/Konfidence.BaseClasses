@@ -58,6 +58,40 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
+        public List<DesignerFileItem> processDesignerFileMissing(FileList fileList, FileList searchList, ListFilterType filter)
+        {
+            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+
+            _Count = fileList.Count;
+            _ValidCount = fileList.Count;
+            _InvalidCount = 0;
+
+            foreach (string fileName in fileList)
+            {
+                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+
+                string findName = fileName.Replace(_DesignerSearch, _DesignerReplace);
+
+                if (searchList.Contains(findName))
+                {
+                    designerFileItem.Exists = true;
+                }
+
+                if (!designerFileItem.Exists)
+                {
+                    _ValidCount--;
+                    _InvalidCount++;
+                }
+
+                if (MustAddDesignerFileItem(designerFileItem, filter))
+                {
+                    resultList.Add(designerFileItem);
+                }
+            }
+
+            return resultList;
+        }
+
         public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
@@ -69,7 +103,9 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
-                using (TextReader textReader = new StreamReader(fileName))
+                fileLines.Clear();
+
+                using (TextReader textReader = new StreamReader(fileName, Encoding.Default))
                 {
                     string line = textReader.ReadLine();
 
@@ -117,40 +153,6 @@ namespace WebProjectValidator.HelperClasses
             return false;
         }
 
-        public List<DesignerFileItem> processDesignerFileMissing(FileList fileList, FileList searchList, ListFilterType filter)
-        {
-            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
-
-            _Count = fileList.Count;
-            _ValidCount = fileList.Count;
-            _InvalidCount = 0;
-
-            foreach (string fileName in fileList)
-            {
-                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
-
-                string findName = fileName.Replace(_DesignerSearch, _DesignerReplace);
-
-                if (searchList.Contains(findName))
-                {
-                    designerFileItem.Exists = true;
-                }
-
-                if (!designerFileItem.Exists)
-                {
-                    _ValidCount--;
-                    _InvalidCount++;
-                }
-
-                if (MustAddDesignerFileItem(designerFileItem, filter))
-                {
-                    resultList.Add(designerFileItem);
-                }
-            }
-
-            return resultList;
-        }
-
         public List<DesignerFileItem> processUserControlMissing(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
@@ -164,7 +166,7 @@ namespace WebProjectValidator.HelperClasses
             {
                 fileLines.Clear();
 
-                using (TextReader textReader = new StreamReader(fileName))
+                using (TextReader textReader = new StreamReader(fileName, Encoding.Default))
                 {
                     string line = textReader.ReadLine();
 
@@ -326,6 +328,101 @@ namespace WebProjectValidator.HelperClasses
                 default:
                     return true;
             }
+        }
+
+        public void repairCodeFile(List<DesignerFileItem> repairList)
+        {
+            List<string> fileLines = new List<string>();
+
+            foreach (DesignerFileItem fileItem in repairList)
+            {
+                fileLines.Clear();
+
+                if (!fileItem.Valid)
+                {
+
+                    using (TextReader textReader = new StreamReader(fileItem.FullFileName, Encoding.Default))
+                    {
+                        string line = textReader.ReadLine();
+
+                        while (IsAssigned(line))
+                        {
+                            fileLines.Add(line);
+                            line = textReader.ReadLine();
+                        }
+                    }
+
+                    List<string> newFileLines = fixCodeFile(fileLines);
+
+                    if (!Directory.Exists(fileItem.ProjectFolder + @"\fileBackup"))
+                    {
+                        Directory.CreateDirectory(fileItem.ProjectFolder + @"\fileBackup");
+                    }
+
+                    if (!File.Exists(fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName))
+                    {
+                        File.Copy(fileItem.FullFileName, fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName, true);
+                    }
+
+                    if (IsAssigned(newFileLines))
+                    {
+                        using (TextWriter textWriter = new StreamWriter(fileItem.FullFileName, false, Encoding.Default))
+                        {
+                            foreach (string line in newFileLines)
+                            {
+                                textWriter.WriteLine(line);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private List<string> fixCodeFile(List<string> fileLines)
+        {
+            List<string> newFileLines = null;
+
+            if (!IsValidCodeFile(fileLines))
+            {
+                bool foundPage = false;
+                bool finished = false;
+
+                newFileLines = new List<string>();
+
+                foreach (string line in fileLines)
+                {
+                    string newLine = line;
+
+                    if (!finished)
+                    {
+                        if (line.StartsWith("<%@ page", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            foundPage = true;
+                        }
+
+                        if (foundPage)
+                        {
+                            int codeBehindIndex = line.IndexOf(" codebehind=", StringComparison.InvariantCultureIgnoreCase);
+
+                            if (codeBehindIndex > 0)
+                            {
+                                newLine = line.Substring(0, codeBehindIndex);
+                                newLine += " CodeFile=";
+                                newLine += line.Substring(codeBehindIndex + " codebehind=".Length);
+                            }
+                        }
+
+                        if (line.Contains("%>"))
+                        {
+                            finished = true;
+                        }
+                    }
+
+                    newFileLines.Add(newLine);
+                }
+            }
+
+            return newFileLines;
         }
     }
 }
