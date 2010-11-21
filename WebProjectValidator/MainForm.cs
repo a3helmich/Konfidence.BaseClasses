@@ -76,9 +76,14 @@ namespace WebProjectValidator
             configurationStore.GetProperty("rbCSChecked", out getText);
 
             rbCS.Checked = false;
+            rbVB.Checked = false;
             if (getText.Equals("1"))
             {
                 rbCS.Checked = true;
+            }
+            else
+            {
+                rbVB.Checked = true;
             }
         }
 
