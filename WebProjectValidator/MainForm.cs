@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using WebProjectValidator.FileListChecker;
 using WebProjectValidator.HelperClasses;
+using Konfidence.Base;
 
 namespace WebProjectValidator
 {
@@ -21,6 +22,35 @@ namespace WebProjectValidator
         public MainForm()
         {
             InitializeComponent();
+        }
+
+
+        private bool Initialize()
+        {
+            string delimiter = string.Empty;
+
+            if (!tbFolder.Text.EndsWith(@"\"))
+            {
+                delimiter = @"\";
+            }
+
+            _ProjectFolder = tbFolder.Text + delimiter + tbProjectName.Text;
+
+            if (BaseItem.IsEmpty(tbFolder.Text))
+            {
+                MessageBox.Show("Selecteer een folder!");
+
+                return false;
+            }
+
+            if (!Directory.Exists(_ProjectFolder))
+            {
+                MessageBox.Show("Folder: '" + _ProjectFolder + "' bestaat niet!");
+
+                return false;
+            }
+
+            return true;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -89,19 +119,27 @@ namespace WebProjectValidator
 
         private void bStart_Click(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
-            {
-                DesignerFileMissing();
-            }
+            ExecuteStart();
+        }
 
-            if (tabControl.SelectedTab.Equals(tpCodeFileCheck))
+        private void ExecuteStart()
+        {
+            if (Initialize())
             {
-                CodeFileCheck();
-            }
+                if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
+                {
+                    DesignerFileMissing();
+                }
 
-            if (tabControl.SelectedTab.Equals(tpUserControlMissing))
-            {
-                UserControlMissing();
+                if (tabControl.SelectedTab.Equals(tpCodeFileCheck))
+                {
+                    CodeFileCheck();
+                }
+
+                if (tabControl.SelectedTab.Equals(tpUserControlMissing))
+                {
+                    UserControlMissing();
+                }
             }
         }
 
@@ -249,6 +287,8 @@ namespace WebProjectValidator
 
         private void bFixAll_Click(object sender, EventArgs e)
         {
+            ExecuteStart();
+
             if (dgvCodeFileCheck.RowCount > 0)
             {
                 FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);

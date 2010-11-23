@@ -11,6 +11,26 @@ namespace WebProjectValidator.FileListChecker
         private FileTypeChecker _Checker = null;
         private string _ProjectFolder = string.Empty;
 
+        public bool IsFiltered(string fileName)
+        {
+            if (fileName.IndexOf(@"\fileBackup\", StringComparison.InvariantCultureIgnoreCase) > -1)
+            {
+                return true;
+            }
+
+            if (fileName.IndexOf(@"\bin\debug\", StringComparison.InvariantCultureIgnoreCase) > -1)
+            {
+                return true;
+            }
+
+            if (fileName.IndexOf(@"\bin\release\", StringComparison.InvariantCultureIgnoreCase) > -1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public FileList(string projectFolder, FileType fileType, ListType listType)
         {
             _ProjectFolder = projectFolder;
@@ -25,11 +45,12 @@ namespace WebProjectValidator.FileListChecker
 
             foreach (string fileName in tempList)
             {
-                if (_Checker.IsValid(fileName))
+                if (_Checker.IsValid(fileName) && !IsFiltered(fileName))
                 {
                     this.Add(fileName);
                 }
             }
         }
+
     }
 }

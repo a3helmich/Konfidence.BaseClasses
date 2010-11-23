@@ -61,7 +61,7 @@ namespace WebProjectValidator.HelperClasses
 
         public string FullFileName
         {
-            get { return _ProjectFolder + @"\" + _FileName; }
+            get { return _ProjectFolder + _ControlFolder + @"\" + _FileName; }
         }
 #endregion simple properties
 

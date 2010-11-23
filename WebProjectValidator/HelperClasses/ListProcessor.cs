@@ -340,7 +340,6 @@ namespace WebProjectValidator.HelperClasses
 
                 if (!fileItem.Valid)
                 {
-
                     using (TextReader textReader = new StreamReader(fileItem.FullFileName, Encoding.Default))
                     {
                         string line = textReader.ReadLine();
@@ -396,6 +395,11 @@ namespace WebProjectValidator.HelperClasses
                     if (!finished)
                     {
                         if (line.StartsWith("<%@ page", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            foundPage = true;
+                        }
+
+                        if (line.StartsWith("<%@ control", StringComparison.InvariantCultureIgnoreCase))
                         {
                             foundPage = true;
                         }
