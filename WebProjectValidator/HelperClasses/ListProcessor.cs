@@ -150,7 +150,7 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return false;
+            return true; // komt niet voor in het bestand
         }
 
         public List<DesignerFileItem> processUserControlMissing(FileList fileList, ListFilterType filter)
