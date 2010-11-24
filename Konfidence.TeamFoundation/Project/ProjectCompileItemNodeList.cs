@@ -12,8 +12,7 @@ namespace Konfidence.TeamFoundation.Project
     {
         private BaseTfsXmlDocument _TfsXmlDocument = null;
 
-        public ProjectCompileItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
-            : base(tfsXmlDocument)
+        public ProjectCompileItemNodeList(BaseTfsXmlDocument tfsXmlDocument): base(tfsXmlDocument)
         {
             _TfsXmlDocument = tfsXmlDocument;
         }

@@ -9,6 +9,7 @@ namespace Konfidence.TeamFoundation
 {
     public class ProjectXmlDocument : BaseTfsXmlDocument
     {
+        private ContentItemNodeList _ProjectFileItemNodeList = null;
         private DllReferenceItemNodeList _DllReferenceItemNodeList = null;
         private ProjectReferenceItemNodeList _ProjectReferenceItemGroupList = null;
         private ProjectCompileItemNodeList _ProjectCompileItemNodeList = null;
@@ -17,6 +18,18 @@ namespace Konfidence.TeamFoundation
         private static Dictionary<string, string> _ProjectGuidDictionary = null;
 
         #region properties
+        public ContentItemNodeList ProjectFileItemNodeList
+        {
+            get
+            {
+                if (!IsAssigned(_ProjectFileItemNodeList))
+                {
+                    _ProjectFileItemNodeList = new ContentItemNodeList(this);
+                }
+                return _ProjectFileItemNodeList;
+            }
+        }
+
         public DllReferenceItemNodeList DllReferenceItemNodeList
         {
             get

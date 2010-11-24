@@ -67,9 +67,6 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Konfidence.BaseClasses">
-      <HintPath>..\..\..\References\Konfidence.BaseClasses.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -89,9 +86,11 @@
     <Compile Include="FileListChecker\FileList.cs" />
     <Compile Include="FileListChecker\FileType.cs" />
     <Compile Include="FileListChecker\FileTypeChecker.cs" />
+    <Compile Include="HelperClasses\FileReader.cs" />
     <Compile Include="HelperClasses\LanguageType.cs" />
     <Compile Include="HelperClasses\ListFilterType.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
+    <Compile Include="HelperClasses\ProjectFileProcessor.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +145,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
+      <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
+      <Name>Konfidence.BaseClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj">
+      <Project>{99B3193A-0739-4586-A379-138176C425A7}</Project>
+      <Name>Konfidence.TeamFoundation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

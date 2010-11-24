@@ -12,6 +12,7 @@ namespace WebProjectValidator.HelperClasses
     {
         private string _Project = string.Empty;
         private string _Folder = string.Empty;
+        private LanguageType _LanguageType = LanguageType.cs;
 
         private int _Count = 0;
         private int _ValidCount = 0;
@@ -95,7 +96,6 @@ namespace WebProjectValidator.HelperClasses
         public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
-            List<string> fileLines = new List<string>();
 
             _Count = fileList.Count;
             _ValidCount = fileList.Count;
@@ -103,18 +103,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
-                fileLines.Clear();
-
-                using (TextReader textReader = new StreamReader(fileName, Encoding.Default))
-                {
-                    string line = textReader.ReadLine();
-
-                    while (IsAssigned(line))
-                    {
-                        fileLines.Add(line);
-                        line = textReader.ReadLine();
-                    }
-                }
+                List<string> fileLines = FileReader.ReadLines(fileName);
 
                 DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
 
@@ -156,26 +145,18 @@ namespace WebProjectValidator.HelperClasses
         public List<DesignerFileItem> processUserControlMissing(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
-            List<string> fileLines = new List<string>();
             List<string> allUserControlReferences = new List<string>();
             List<DesignerFileItem> userControlReferences = new List<DesignerFileItem>();
+
+            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
+
+            List<string> projectFileList = projectFileProcessor.GetProjectFiles();
 
             fileList.Sort();
 
             foreach (string fileName in fileList)
             {
-                fileLines.Clear();
-
-                using (TextReader textReader = new StreamReader(fileName, Encoding.Default))
-                {
-                    string line = textReader.ReadLine();
-
-                    while (IsAssigned(line))
-                    {
-                        fileLines.Add(line);
-                        line = textReader.ReadLine();
-                    }
-                }
+                List<string> fileLines = FileReader.ReadLines(fileName);
 
                 List<string> referenceList = GetControlReferences(fileLines);
                 foreach (string controlFileName in referenceList)
@@ -332,24 +313,11 @@ namespace WebProjectValidator.HelperClasses
 
         public void repairCodeFile(List<DesignerFileItem> repairList)
         {
-            List<string> fileLines = new List<string>();
-
             foreach (DesignerFileItem fileItem in repairList)
             {
-                fileLines.Clear();
-
                 if (!fileItem.Valid)
                 {
-                    using (TextReader textReader = new StreamReader(fileItem.FullFileName, Encoding.Default))
-                    {
-                        string line = textReader.ReadLine();
-
-                        while (IsAssigned(line))
-                        {
-                            fileLines.Add(line);
-                            line = textReader.ReadLine();
-                        }
-                    }
+                    List<string> fileLines = FileReader.ReadLines(fileItem.FullFileName);
 
                     List<string> newFileLines = fixCodeFile(fileLines);
 

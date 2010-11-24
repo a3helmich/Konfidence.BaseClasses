@@ -9,8 +9,7 @@ namespace Konfidence.TeamFoundation.Project
 {
     public class DllReferenceItemNodeList : ProjectItemNodeList<DllReferenceItemNode, DllReferenceNode>
     {
-        public DllReferenceItemNodeList(BaseTfsXmlDocument tfsXmlDocument)
-            : base(tfsXmlDocument)
+        public DllReferenceItemNodeList(BaseTfsXmlDocument tfsXmlDocument) : base(tfsXmlDocument)
         {
         }
 

@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lProjectName = new System.Windows.Forms.Label();
             this.tbProjectName = new System.Windows.Forms.TextBox();
             this.rbCS = new System.Windows.Forms.RadioButton();
@@ -59,10 +65,6 @@
             this.tpUserControlMissing = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dgvUserControlMissing = new System.Windows.Forms.DataGridView();
-            this.dgvUserControlMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.rbUserControlUnused = new System.Windows.Forms.RadioButton();
             this.rbUserControlMissing = new System.Windows.Forms.RadioButton();
@@ -78,6 +80,10 @@
             this.bFixAll = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.bFolderBrowse = new System.Windows.Forms.Button();
+            this.dgvUserControlMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileMissing.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -186,12 +192,28 @@
             // 
             // dgvDesignerFileMissing
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDesignerFileMissing.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDesignerFileMissing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDesignerFileMissing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvFileMissingProject,
             this.dgvFileMissingFileName,
             this.dgvFileMissingExists,
             this.dgvFileMissingControlFolder});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDesignerFileMissing.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDesignerFileMissing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDesignerFileMissing.Location = new System.Drawing.Point(0, 0);
             this.dgvDesignerFileMissing.Name = "dgvDesignerFileMissing";
@@ -300,12 +322,28 @@
             // 
             // dgvCodeFileCheck
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCodeFileCheck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCodeFileCheck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCodeFileCheck.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvCodeFileProject,
             this.dgvCodeFileFileName,
             this.dgvCodeFileValid,
             this.dgvCodeFileControlFolder});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCodeFileCheck.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCodeFileCheck.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCodeFileCheck.Location = new System.Drawing.Point(0, 0);
             this.dgvCodeFileCheck.Name = "dgvCodeFileCheck";
@@ -414,49 +452,34 @@
             // 
             // dgvUserControlMissing
             // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvUserControlMissing.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvUserControlMissing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUserControlMissing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvUserControlMissingProject,
             this.dgvUserControlMissingFileName,
             this.dgvUserControlMissingValid,
             this.dgvUserControlMissingReason});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUserControlMissing.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvUserControlMissing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUserControlMissing.Location = new System.Drawing.Point(0, 0);
             this.dgvUserControlMissing.Name = "dgvUserControlMissing";
             this.dgvUserControlMissing.RowHeadersVisible = false;
             this.dgvUserControlMissing.Size = new System.Drawing.Size(942, 260);
             this.dgvUserControlMissing.TabIndex = 0;
-            // 
-            // dgvUserControlMissingProject
-            // 
-            this.dgvUserControlMissingProject.DataPropertyName = "Project";
-            this.dgvUserControlMissingProject.HeaderText = "Project";
-            this.dgvUserControlMissingProject.Name = "dgvUserControlMissingProject";
-            this.dgvUserControlMissingProject.ReadOnly = true;
-            // 
-            // dgvUserControlMissingFileName
-            // 
-            this.dgvUserControlMissingFileName.DataPropertyName = "FileName";
-            this.dgvUserControlMissingFileName.HeaderText = "Reference";
-            this.dgvUserControlMissingFileName.Name = "dgvUserControlMissingFileName";
-            this.dgvUserControlMissingFileName.ReadOnly = true;
-            this.dgvUserControlMissingFileName.Width = 200;
-            // 
-            // dgvUserControlMissingValid
-            // 
-            this.dgvUserControlMissingValid.DataPropertyName = "Valid";
-            this.dgvUserControlMissingValid.HeaderText = "Valid";
-            this.dgvUserControlMissingValid.Name = "dgvUserControlMissingValid";
-            this.dgvUserControlMissingValid.ReadOnly = true;
-            this.dgvUserControlMissingValid.Width = 55;
-            // 
-            // dgvUserControlMissingReason
-            // 
-            this.dgvUserControlMissingReason.DataPropertyName = "ErrorMessage";
-            this.dgvUserControlMissingReason.HeaderText = "Reason";
-            this.dgvUserControlMissingReason.Name = "dgvUserControlMissingReason";
-            this.dgvUserControlMissingReason.ReadOnly = true;
-            this.dgvUserControlMissingReason.Width = 565;
             // 
             // panel4
             // 
@@ -602,6 +625,37 @@
             this.bFolderBrowse.UseVisualStyleBackColor = true;
             this.bFolderBrowse.Click += new System.EventHandler(this.bFolderBrowse_Click);
             // 
+            // dgvUserControlMissingProject
+            // 
+            this.dgvUserControlMissingProject.DataPropertyName = "Project";
+            this.dgvUserControlMissingProject.HeaderText = "Project";
+            this.dgvUserControlMissingProject.Name = "dgvUserControlMissingProject";
+            this.dgvUserControlMissingProject.ReadOnly = true;
+            // 
+            // dgvUserControlMissingFileName
+            // 
+            this.dgvUserControlMissingFileName.DataPropertyName = "FileName";
+            this.dgvUserControlMissingFileName.HeaderText = "Reference";
+            this.dgvUserControlMissingFileName.Name = "dgvUserControlMissingFileName";
+            this.dgvUserControlMissingFileName.ReadOnly = true;
+            this.dgvUserControlMissingFileName.Width = 400;
+            // 
+            // dgvUserControlMissingValid
+            // 
+            this.dgvUserControlMissingValid.DataPropertyName = "Valid";
+            this.dgvUserControlMissingValid.HeaderText = "Valid";
+            this.dgvUserControlMissingValid.Name = "dgvUserControlMissingValid";
+            this.dgvUserControlMissingValid.ReadOnly = true;
+            this.dgvUserControlMissingValid.Width = 55;
+            // 
+            // dgvUserControlMissingReason
+            // 
+            this.dgvUserControlMissingReason.DataPropertyName = "ErrorMessage";
+            this.dgvUserControlMissingReason.HeaderText = "Reason";
+            this.dgvUserControlMissingReason.Name = "dgvUserControlMissingReason";
+            this.dgvUserControlMissingReason.ReadOnly = true;
+            this.dgvUserControlMissingReason.Width = 365;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.bStart;
@@ -682,10 +736,6 @@
         private System.Windows.Forms.RadioButton rbCodeFileCheckValid;
         private System.Windows.Forms.RadioButton rbCodeFileCheckInvalid;
         private System.Windows.Forms.ToolStripStatusLabel tsslRowCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingFileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingReason;
         private System.Windows.Forms.RadioButton rbUserControlAll;
         private System.Windows.Forms.RadioButton rbUserControlValid;
         private System.Windows.Forms.RadioButton rbUserControlInvalid;
@@ -698,6 +748,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingControlFolder;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.Button bFolderBrowse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingReason;
     }
 }
 

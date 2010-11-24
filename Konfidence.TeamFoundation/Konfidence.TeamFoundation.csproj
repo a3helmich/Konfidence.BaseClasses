@@ -82,6 +82,9 @@
   <ItemGroup>
     <Compile Include="ProjectBase\ProjectNode.cs" />
     <Compile Include="ProjectBase\ProjectItemNodeList.cs" />
+    <Compile Include="Project\ContentItemNode.cs" />
+    <Compile Include="Project\ContentItemNodeList.cs" />
+    <Compile Include="Project\ContentNode.cs" />
     <Compile Include="Project\ProjectCompileItemNode.cs" />
     <Compile Include="Project\ProjectCompileItemNodeList.cs" />
     <Compile Include="Project\ProjectCompileNode.cs" />
