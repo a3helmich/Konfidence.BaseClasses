@@ -57,6 +57,8 @@ namespace WebProjectValidator
         {
             _ProjectFolder = _BaseFolder + tbProjectName.Text;
 
+            lProjectFileName.Text = string.Empty;
+
             tbFolder.Text = _ProjectFolder;
 
             dgvDesignerFileMissing.AutoGenerateColumns = false;
@@ -209,6 +211,8 @@ namespace WebProjectValidator
             filter = GetUserControlMissingFilterType();
 
             dgvUserControlMissing.DataSource = processor.processUserControlMissing(designerFileList, filter);
+
+            lProjectFileName.Text = processor.ProjectFileName;
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;

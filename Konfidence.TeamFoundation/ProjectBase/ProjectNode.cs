@@ -63,6 +63,8 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             string itemGroupName = _ItemGroupName.ToLower();
 
+            List<XmlNode> 
+
             foreach (XmlNode itemGroup in itemGroupList)
             {
                 if (itemGroup.HasChildNodes)
@@ -71,9 +73,14 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
                     if (itemGroupName.Equals(currentItemGroupName))
                     {
-                        foundItemGroup = itemGroup;
-
-                        break;
+                        if (IsAssigned(foundItemGroup))
+                        {
+                            processSecondaryItemGroup(foundItemGroup, itemGroup);
+                        }
+                        else
+                        {
+                            foundItemGroup = itemGroup;
+                        }
                     }
                 }
             }
@@ -87,6 +94,23 @@ namespace Konfidence.TeamFoundation.ProjectBase
             //}
 
             return foundItemGroup;
+        }
+
+        private void processSecondaryItemGroup(XmlNode foundItemGroup, XmlNode itemGroup)
+        {
+            List<XmlNode> collectList = new List<XmlNode>();
+
+            foreach (XmlNode itemNode in itemGroup.ChildNodes)
+            {
+                collectList.Add(itemNode);
+            }
+
+            foreach(XmlNode itemNode in collectList)
+            {
+                foundItemGroup.AppendChild(itemNode);
+            }
+
+            itemGroup.ParentNode.RemoveChild(itemGroup);
         }
 
         internal protected XmlElement AppendChild()

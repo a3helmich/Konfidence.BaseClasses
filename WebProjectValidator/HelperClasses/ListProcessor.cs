@@ -14,6 +14,8 @@ namespace WebProjectValidator.HelperClasses
         private string _Folder = string.Empty;
         private LanguageType _LanguageType = LanguageType.cs;
 
+        private string _ProjectFileName = string.Empty;
+
         private int _Count = 0;
         private int _ValidCount = 0;
         private int _InvalidCount = 0;
@@ -39,12 +41,19 @@ namespace WebProjectValidator.HelperClasses
             get { return _InvalidCount; }
             set { _InvalidCount = value; }
         }
+
+        public string ProjectFileName
+        {
+            get { return _ProjectFileName; }
+        }
         #endregion simple properties
 
         public ListProcessor(string project, string folder, LanguageType language)
         {
             _Project = project;
             _Folder = folder;
+
+            _LanguageType = language;
 
             switch (language)
             {
@@ -150,7 +159,18 @@ namespace WebProjectValidator.HelperClasses
 
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
 
-            List<string> projectFileList = projectFileProcessor.GetProjectFiles();
+            List<string> extensionFilter = new List<string>();
+
+            extensionFilter.Add(".aspx");
+            extensionFilter.Add(".ascx");
+            extensionFilter.Add(".master");
+            extensionFilter.Add(".asax");
+
+            List<string> projectFileList = projectFileProcessor.GetProjectFiles(extensionFilter);
+
+            projectFileList.Sort();
+
+            _ProjectFileName = projectFileProcessor.ProjectFileName;
 
             fileList.Sort();
 

@@ -5,41 +5,66 @@ using System.Text;
 using Konfidence.TeamFoundation;
 using Konfidence.TeamFoundation.Project;
 using Konfidence.Base;
+using System.IO;
 
 namespace WebProjectValidator.HelperClasses
 {
     public class ProjectFileProcessor: BaseItem
     {
-        ProjectXmlDocument projectXmlDocument = new ProjectXmlDocument();
+        private ProjectXmlDocument _ProjectXmlDocument = null;
+        private string _ProjectFileName = string.Empty;
+
+        #region simple properties
+        public string ProjectFileName
+        {
+            get { return _ProjectFileName; }
+        }
+        #endregion
 
         public ProjectFileProcessor(string projectName, string folderName, LanguageType languageType)
         {
-            string fileName;
-
-            fileName = string.Empty;
+            _ProjectFileName = string.Empty;
 
             switch (languageType)
             {
                 case LanguageType.cs:
-                    fileName = folderName + @"\" + projectName + ".csproj";
+                    _ProjectFileName = folderName + @"\" + projectName + ".csproj";
                     break;
                 case LanguageType.vb:
-                    fileName = folderName + @"\" + projectName + ".vbproj";
+                    _ProjectFileName = folderName + @"\" + projectName + ".vbproj";
                     break;
             }
 
-            projectXmlDocument.Load(fileName);
+            if (File.Exists(_ProjectFileName))
+            {
+                _ProjectXmlDocument = new ProjectXmlDocument();
+
+                _ProjectXmlDocument.Load(_ProjectFileName);
+            }
+            else
+            {
+                _ProjectFileName = "Projectfile niet gevonden: " + _ProjectFileName;
+            }
         }
 
-        public List<string> GetProjectFiles()
+        public List<string> GetProjectFiles(List<string> extensionFilter)
         {
             List<string> fileList = new List<string>();
 
-            foreach (ContentItemNode content in projectXmlDocument.ProjectFileItemNodeList)
+            if (IsAssigned(_ProjectXmlDocument))
             {
-                if (IsAssigned(content.Include))
+                foreach (string filter in extensionFilter)
                 {
-                    fileList.Add(content.Include);
+                    foreach (ContentItemNode content in _ProjectXmlDocument.ProjectFileItemNodeList)
+                    {
+                        if (IsAssigned(content.Include))
+                        {
+                            if (content.Include.EndsWith(filter, StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                fileList.Add(content.Include);
+                            }
+                        }
+                    }
                 }
             }
 
