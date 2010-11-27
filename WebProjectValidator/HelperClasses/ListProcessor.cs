@@ -195,8 +195,9 @@ namespace WebProjectValidator.HelperClasses
                 {
                     List<string> fileLines = FileReader.ReadLines(fileName);
 
-                    List<string> referenceList = GetControlReferences(fileLines);
-                    foreach (string controlFileName in referenceList)
+                    ControlReferenceList referenceList = GetControlReferences(fileLines);
+                    // TODO : controlReference Class, met daarin de filename + de originele reference
+                    foreach (ControlReference controlFileName in referenceList)
                     {
                         string newControlFileName = controlFileName.Replace("/", @"\");
 
@@ -265,9 +266,9 @@ namespace WebProjectValidator.HelperClasses
             return resultList;
         }
 
-        private List<string> GetControlReferences(List<string> fileLines)
+        private ControlReferenceList GetControlReferences(List<string> fileLines)
         {
-            List<string> userControlReferences = new List<string>();
+            ControlReferenceList userControlReferences = new ControlReferenceList();
             List<string> userControlReferenceLines = new List<string>();
 
             string reference = string.Empty;
@@ -302,10 +303,11 @@ namespace WebProjectValidator.HelperClasses
             foreach (string referenceLine in userControlReferenceLines)
             {
                 string referenceName = GetReferenceFileName(referenceLine);
+                ControlReference controlReference = new ControlReference(referenceName, referenceName);
 
-                if (!userControlReferences.Contains(referenceName))
+                if (!userControlReferences.Contains(controlReference))
                 {
-                    userControlReferences.Add(referenceName);
+                    userControlReferences.Add(controlReference);
                 }
             }
 

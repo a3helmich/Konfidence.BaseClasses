@@ -82,6 +82,8 @@
     <Compile Include="FileListChecker\CheckItem.cs" />
     <Compile Include="FileListChecker\CheckItemList.cs" />
     <Compile Include="HelperClasses\ConfigurationStore.cs" />
+    <Compile Include="HelperClasses\ControlReference.cs" />
+    <Compile Include="HelperClasses\ControlReferenceList.cs" />
     <Compile Include="HelperClasses\DesignerFileItem.cs" />
     <Compile Include="FileListChecker\FileList.cs" />
     <Compile Include="FileListChecker\FileType.cs" />
