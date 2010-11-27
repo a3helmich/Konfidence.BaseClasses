@@ -166,7 +166,7 @@ namespace WebProjectValidator.HelperClasses
             extensionFilter.Add(".master");
             extensionFilter.Add(".asax");
 
-            List<string> projectFileList = projectFileProcessor.GetProjectFiles(extensionFilter);
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, extensionFilter);
 
             projectFileList.Sort();
 
@@ -176,14 +176,39 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
-                List<string> fileLines = FileReader.ReadLines(fileName);
+                string fileFolder = fileName.Replace(_Folder, "");
 
-                List<string> referenceList = GetControlReferences(fileLines);
-                foreach (string controlFileName in referenceList)
+                if (fileFolder.Contains(@"\"))
                 {
-                    if (!allUserControlReferences.Contains(controlFileName))
+                    fileFolder = fileFolder.Substring(0, fileFolder.LastIndexOf(@"\"));
+                    if (fileFolder.StartsWith(@"\"))
                     {
-                        allUserControlReferences.Add(controlFileName);
+                        fileFolder = fileFolder.Substring(1);
+                    }
+                }
+                else
+                {
+                    fileFolder = string.Empty;
+                }
+
+                if (projectFileList.Contains(fileName, StringComparer.CurrentCultureIgnoreCase))
+                {
+                    List<string> fileLines = FileReader.ReadLines(fileName);
+
+                    List<string> referenceList = GetControlReferences(fileLines);
+                    foreach (string controlFileName in referenceList)
+                    {
+                        string newControlFileName = controlFileName.Replace("/", @"\");
+
+                        if (!newControlFileName.StartsWith(@"~"))
+                        {
+                            newControlFileName = fileFolder + @"\" + newControlFileName;
+                        }
+
+                        if (!allUserControlReferences.Contains(newControlFileName))
+                        {
+                            allUserControlReferences.Add(newControlFileName);
+                        }
                     }
                 }
             }
@@ -193,6 +218,8 @@ namespace WebProjectValidator.HelperClasses
             foreach (string fileName in allUserControlReferences)
             {
                 DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+
+                string test = designerFileItem.FullFileName;
 
                 designerFileItem.Valid = true;
 

@@ -58,12 +58,42 @@ namespace WebProjectValidator.HelperClasses
             get { return _IsUsed; }
             set { _IsUsed = value; }
         }
+#endregion simple properties
 
         public string FullFileName
         {
-            get { return _ProjectFolder + _ControlFolder + @"\" + _FileName; }
+            get 
+            {
+                string fullFileName = string.Empty;
+
+                if (_FileName.StartsWith("~"))
+                {
+                    fullFileName = _FileName.Replace("~", _ProjectFolder);
+                }
+                else
+                {
+                    if (_ControlFolder == ".")
+                    {
+                        fullFileName = _ProjectFolder + @"\" + _FileName;
+                    }
+                    else
+                    {
+                        if (_ControlFolder.StartsWith("~"))
+                        {
+                            fullFileName = _ControlFolder.Replace("~", _ProjectFolder) + @"\" + _FileName;
+                        }
+                        else
+                        {
+                            fullFileName = _ProjectFolder + @"\" + _ControlFolder + @"\" + _FileName;
+                        }
+                    }
+                }
+
+                fullFileName = fullFileName.Replace("/", @"\");
+
+                return fullFileName;
+            }
         }
-#endregion simple properties
 
         public DesignerFileItem(string project, string projectFolder, string fileName)
         {

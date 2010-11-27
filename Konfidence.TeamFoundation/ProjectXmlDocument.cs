@@ -236,5 +236,41 @@ namespace Konfidence.TeamFoundation
                 AddElement(referenceElement, "SpecificVersion", referenceItem.SpecificVersionElement);
             }
         }
+
+        public List<string> GetProjectFileNameList()
+        {
+            List<string> fileList = new List<string>();
+
+            foreach (ContentItemNode content in ProjectFileItemNodeList)
+            {
+                if (IsAssigned(content.Include))
+                {
+                    fileList.Add(content.Include);
+                }
+            }
+
+            return fileList;
+        }
+
+        public List<string> GetProjectFileNameList(List<string> endsWithFilter)
+        {
+            List<string> fileList = new List<string>();
+
+            foreach (string filter in endsWithFilter)
+            {
+                foreach (ContentItemNode content in ProjectFileItemNodeList)
+                {
+                    if (IsAssigned(content.Include))
+                    {
+                        if (content.Include.EndsWith(filter, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            fileList.Add(content.Include);
+                        }
+                    }
+                }
+            }
+
+            return fileList;
+        }
     }
 }

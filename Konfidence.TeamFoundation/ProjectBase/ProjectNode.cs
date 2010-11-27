@@ -54,6 +54,21 @@ namespace Konfidence.TeamFoundation.ProjectBase
             return null;
         }
 
+        // the content itemgroup also contains None elements -> iterate thru all childnodes, to determine
+        // if this is a itemgroup with content nodes (the content itemgroup seems te be an exception)
+        private bool AnyChildContainsItemGroupName(XmlNode itemGroup, string itemGroupName)
+        {
+            foreach (XmlNode itemNode in itemGroup.ChildNodes)
+            {
+                if (itemNode.Name.ToLower().Equals(itemGroupName))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         // - search for an itemgroup node which contains 'itemGroupName' nodes
         private XmlNode GetItemGroupNode()
         {
@@ -63,7 +78,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             string itemGroupName = _ItemGroupName.ToLower();
 
-            List<XmlNode> 
+            List<XmlNode> movedGroups = new List<XmlNode>();
 
             foreach (XmlNode itemGroup in itemGroupList)
             {
@@ -71,11 +86,13 @@ namespace Konfidence.TeamFoundation.ProjectBase
                 {
                     string currentItemGroupName = itemGroup.FirstChild.Name.ToLower();
 
-                    if (itemGroupName.Equals(currentItemGroupName))
+                    if (AnyChildContainsItemGroupName(itemGroup, itemGroupName))
                     {
                         if (IsAssigned(foundItemGroup))
                         {
                             processSecondaryItemGroup(foundItemGroup, itemGroup);
+
+                            movedGroups.Add(itemGroup);
                         }
                         else
                         {
@@ -83,6 +100,11 @@ namespace Konfidence.TeamFoundation.ProjectBase
                         }
                     }
                 }
+            }
+
+            foreach (XmlNode itemGroup in movedGroups)
+            {
+                itemGroup.ParentNode.RemoveChild(itemGroup);
             }
 
             // TODO : only make a group when an item is added! (ie if the group doesn't yet exists)
@@ -109,8 +131,6 @@ namespace Konfidence.TeamFoundation.ProjectBase
             {
                 foundItemGroup.AppendChild(itemNode);
             }
-
-            itemGroup.ParentNode.RemoveChild(itemGroup);
         }
 
         internal protected XmlElement AppendChild()

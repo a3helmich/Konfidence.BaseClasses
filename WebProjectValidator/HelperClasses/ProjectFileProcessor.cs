@@ -47,24 +47,15 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public List<string> GetProjectFiles(List<string> extensionFilter)
+        public List<string> GetProjectFileNameList(string projectFolder, List<string> extensionFilter)
         {
             List<string> fileList = new List<string>();
 
             if (IsAssigned(_ProjectXmlDocument))
             {
-                foreach (string filter in extensionFilter)
+                foreach (string fileName in _ProjectXmlDocument.GetProjectFileNameList(extensionFilter))
                 {
-                    foreach (ContentItemNode content in _ProjectXmlDocument.ProjectFileItemNodeList)
-                    {
-                        if (IsAssigned(content.Include))
-                        {
-                            if (content.Include.EndsWith(filter, StringComparison.InvariantCultureIgnoreCase))
-                            {
-                                fileList.Add(content.Include);
-                            }
-                        }
-                    }
+                    fileList.Add(projectFolder + @"\" + fileName);
                 }
             }
 
