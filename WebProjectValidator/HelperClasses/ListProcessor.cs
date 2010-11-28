@@ -214,8 +214,6 @@ namespace WebProjectValidator.HelperClasses
             {
                 DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, controlReference);
 
-                string test = designerFileItem.FullFileName;
-
                 designerFileItem.Valid = true;
 
                 userControlReferences.Add(designerFileItem);
@@ -233,6 +231,12 @@ namespace WebProjectValidator.HelperClasses
                 {
                     designerFileItem.Valid = false;
                     designerFileItem.SetErrorMessage("file path begint niet met ~/");
+                }
+
+                if (!File.Exists(designerFileItem.FullFileName))
+                {
+                    designerFileItem.Valid = false;
+                    designerFileItem.SetErrorMessage("reference naar een niet bestaand control");
                 }
             }
 

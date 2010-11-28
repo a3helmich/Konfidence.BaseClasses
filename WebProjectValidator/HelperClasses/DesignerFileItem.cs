@@ -112,10 +112,9 @@ namespace WebProjectValidator.HelperClasses
         }
 
         public DesignerFileItem(string project, string projectFolder, ControlReference controlReference)
+            : this(project, projectFolder, controlReference.FileName)
         {
             _ControlReference = controlReference;
-
-            _FileName = controlReference.FileName;
         }
         
         public DesignerFileItem(string project, string projectFolder, string fileName)
