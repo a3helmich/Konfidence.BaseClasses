@@ -18,12 +18,12 @@ namespace WebProjectValidator
         private string _BaseFolder = @"C:\Projects\Konfidence\KonfidenceWebSite\";
 
         private string _ProjectFolder = string.Empty;
+        private string _ProjectRequiredText = string.Empty;
 
         public MainForm()
         {
             InitializeComponent();
         }
-
 
         private bool Initialize()
         {
@@ -57,7 +57,7 @@ namespace WebProjectValidator
         {
             _ProjectFolder = _BaseFolder + tbProjectName.Text;
 
-            lProjectFileName.Text = string.Empty;
+            _ProjectRequiredText = lProjectFileNameDisplay.Text;
 
             tbFolder.Text = _ProjectFolder;
 
@@ -168,6 +168,8 @@ namespace WebProjectValidator
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
+            lProjectFileNameDisplay.Text = _ProjectRequiredText;
+
             filter = GetDesignerFileMissingFilterType();
 
             dgvDesignerFileMissing.DataSource = processor.processDesignerFileMissing(fileList, searchList, filter);
@@ -189,6 +191,8 @@ namespace WebProjectValidator
             ListFilterType filter = ListFilterType.All;
 
             filter = GetCodeFileCheckFilterType();
+
+            lProjectFileNameDisplay.Text = _ProjectRequiredText;
 
             dgvCodeFileCheck.DataSource = processor.processCodeFileCheck(designerFileList, filter);
 
@@ -212,7 +216,7 @@ namespace WebProjectValidator
 
             dgvUserControlMissing.DataSource = processor.processUserControlMissing(designerFileList, filter);
 
-            lProjectFileName.Text = processor.ProjectFileName;
+            lProjectFileNameDisplay.Text = processor.ProjectFileName;
 
             tsslTotal.Visible = true;
             tsslTotal.Text = "Total: " + processor.Count;

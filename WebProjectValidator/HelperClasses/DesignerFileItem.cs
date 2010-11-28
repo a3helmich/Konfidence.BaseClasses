@@ -12,6 +12,9 @@ namespace WebProjectValidator.HelperClasses
         private string _ProjectFolder = string.Empty;
         private string _ControlFolder = ".";
         private string _FileName = string.Empty;
+
+        private ControlReference _ControlReference = null;
+
         private bool _Valid = false;
         private bool _Exists = false;
         private bool _IsUsed = true;
@@ -60,6 +63,19 @@ namespace WebProjectValidator.HelperClasses
         }
 #endregion simple properties
 
+        public string Reference
+        {
+            get
+            {
+                if (IsAssigned(_ControlReference))
+                {
+                    return _ControlReference.Reference;
+                }
+
+                return string.Empty;
+            }
+        }
+
         public string FullFileName
         {
             get 
@@ -95,6 +111,13 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
+        public DesignerFileItem(string project, string projectFolder, ControlReference controlReference)
+        {
+            _ControlReference = controlReference;
+
+            _FileName = controlReference.FileName;
+        }
+        
         public DesignerFileItem(string project, string projectFolder, string fileName)
         {
             _Project = project;

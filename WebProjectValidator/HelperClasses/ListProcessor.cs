@@ -154,7 +154,7 @@ namespace WebProjectValidator.HelperClasses
         public List<DesignerFileItem> processUserControlMissing(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
-            List<string> allUserControlReferences = new List<string>();
+            ControlReferenceList allUserControlReferences = new ControlReferenceList();
             List<DesignerFileItem> userControlReferences = new List<DesignerFileItem>();
 
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
@@ -195,20 +195,14 @@ namespace WebProjectValidator.HelperClasses
                 {
                     List<string> fileLines = FileReader.ReadLines(fileName);
 
-                    ControlReferenceList referenceList = GetControlReferences(fileLines);
+                    ControlReferenceList referenceList = GetControlReferenceList(fileLines, fileFolder);
+
                     // TODO : controlReference Class, met daarin de filename + de originele reference
-                    foreach (ControlReference controlFileName in referenceList)
+                    foreach (ControlReference controlReference in referenceList)
                     {
-                        string newControlFileName = controlFileName.Replace("/", @"\");
-
-                        if (!newControlFileName.StartsWith(@"~"))
+                        if (!allUserControlReferences.Contains(controlReference))
                         {
-                            newControlFileName = fileFolder + @"\" + newControlFileName;
-                        }
-
-                        if (!allUserControlReferences.Contains(newControlFileName))
-                        {
-                            allUserControlReferences.Add(newControlFileName);
+                            allUserControlReferences.Add(controlReference);
                         }
                     }
                 }
@@ -216,9 +210,9 @@ namespace WebProjectValidator.HelperClasses
 
             allUserControlReferences.Sort();
 
-            foreach (string fileName in allUserControlReferences)
+            foreach (ControlReference controlReference in allUserControlReferences)
             {
-                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, controlReference);
 
                 string test = designerFileItem.FullFileName;
 
@@ -230,12 +224,12 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (DesignerFileItem designerFileItem in userControlReferences)
             {
-                if (designerFileItem.FileName.StartsWith(".."))
+                if (designerFileItem.Reference.StartsWith(".."))
                 {
                     designerFileItem.Valid = false;
                     designerFileItem.SetErrorMessage("file path begint met ../ ipv ~/");
                 }
-                else if (!designerFileItem.FileName.StartsWith("~") && designerFileItem.FileName.Contains("/"))
+                else if (!designerFileItem.Reference.StartsWith("~") && designerFileItem.Reference.Contains("/"))
                 {
                     designerFileItem.Valid = false;
                     designerFileItem.SetErrorMessage("file path begint niet met ~/");
@@ -266,7 +260,7 @@ namespace WebProjectValidator.HelperClasses
             return resultList;
         }
 
-        private ControlReferenceList GetControlReferences(List<string> fileLines)
+        private ControlReferenceList GetControlReferenceList(List<string> fileLines, string fileFolder)
         {
             ControlReferenceList userControlReferences = new ControlReferenceList();
             List<string> userControlReferenceLines = new List<string>();
@@ -302,8 +296,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string referenceLine in userControlReferenceLines)
             {
-                string referenceName = GetReferenceFileName(referenceLine);
-                ControlReference controlReference = new ControlReference(referenceName, referenceName);
+                ControlReference controlReference = GetControlReference(referenceLine, fileFolder);
 
                 if (!userControlReferences.Contains(controlReference))
                 {
@@ -314,11 +307,17 @@ namespace WebProjectValidator.HelperClasses
             return userControlReferences;
         }
 
-        private string GetReferenceFileName(string referenceLine)
+        private ControlReference GetControlReference(string fullReferenceLine, string fileFolder)
         {
-            string fileName = referenceLine.Substring(referenceLine.IndexOf("src=", StringComparison.InvariantCultureIgnoreCase) + 5);
-            fileName = fileName.Substring(0, fileName.IndexOf("\""));
-            return fileName;
+            string referenceName = fullReferenceLine.Substring(fullReferenceLine.IndexOf("src=", StringComparison.InvariantCultureIgnoreCase) + 5);
+
+            string quote = "\"";
+
+            referenceName = referenceName.Substring(0, referenceName.IndexOf(quote));
+
+            ControlReference controlReference = new ControlReference(referenceName, fileFolder);
+
+            return controlReference;
         }
 
         public bool MustAddDesignerFileItem(DesignerFileItem designerFileItem, ListFilterType filter)
