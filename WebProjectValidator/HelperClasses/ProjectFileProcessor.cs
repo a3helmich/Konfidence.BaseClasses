@@ -59,6 +59,8 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
+            fileList.Sort();
+
             return fileList;
         }
     }

@@ -14,6 +14,8 @@ namespace WebProjectValidator.HelperClasses
         private string _Folder = string.Empty;
         private LanguageType _LanguageType = LanguageType.cs;
 
+        private List<string> _ExtensionFilter = new List<string>();
+
         private string _ProjectFileName = string.Empty;
 
         private int _Count = 0;
@@ -55,6 +57,11 @@ namespace WebProjectValidator.HelperClasses
 
             _LanguageType = language;
 
+            _ExtensionFilter.Add(".aspx");
+            _ExtensionFilter.Add(".ascx");
+            _ExtensionFilter.Add(".master");
+            _ExtensionFilter.Add(".asax");
+
             switch (language)
             {
                 case LanguageType.cs:
@@ -72,30 +79,44 @@ namespace WebProjectValidator.HelperClasses
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
-            _Count = fileList.Count;
-            _ValidCount = fileList.Count;
+            _Count = 0;
+            _ValidCount = 0;
             _InvalidCount = 0;
+
+            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
+
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
+
+            _ProjectFileName = projectFileProcessor.ProjectFileName;
 
             foreach (string fileName in fileList)
             {
-                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
-
-                string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
-
-                if (searchList.Contains(findName))
+                if (projectFileList.Contains(fileName.Substring(0, fileName.Length - 3), StringComparer.CurrentCultureIgnoreCase))
                 {
-                    designerFileItem.Exists = true;
-                }
+                    DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
 
-                if (!designerFileItem.Exists)
-                {
-                    _ValidCount--;
-                    _InvalidCount++;
-                }
+                    string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
 
-                if (MustAddDesignerFileItem(designerFileItem, filter))
-                {
-                    resultList.Add(designerFileItem);
+                    if (searchList.Contains(findName))
+                    {
+                        designerFileItem.Exists = true;
+                    }
+
+                    _Count++;
+
+                    if (designerFileItem.Exists)
+                    {
+                        _ValidCount++;
+                    }
+                    else
+                    {
+                        _InvalidCount++;
+                    }
+
+                    if (MustAddDesignerFileItem(designerFileItem, filter))
+                    {
+                        resultList.Add(designerFileItem);
+                    }
                 }
             }
 
@@ -106,27 +127,40 @@ namespace WebProjectValidator.HelperClasses
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
-            _Count = fileList.Count;
-            _ValidCount = fileList.Count;
+            _Count = 0;
+            _ValidCount = 0;
             _InvalidCount = 0;
+            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
+
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
+
+            _ProjectFileName = projectFileProcessor.ProjectFileName;
 
             foreach (string fileName in fileList)
             {
-                List<string> fileLines = FileReader.ReadLines(fileName);
-
-                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
-
-                designerFileItem.Valid = IsValidCodeFile(fileLines);
-
-                if (!designerFileItem.Valid)
+                if (projectFileList.Contains(fileName, StringComparer.CurrentCultureIgnoreCase))
                 {
-                    _ValidCount--;
-                    _InvalidCount++;
-                }
+                    List<string> fileLines = FileReader.ReadLines(fileName);
 
-                if (MustAddDesignerFileItem(designerFileItem, filter))
-                {
-                    resultList.Add(designerFileItem);
+                    DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+
+                    designerFileItem.Valid = IsValidCodeFile(fileLines);
+
+                    _Count++;
+
+                    if (designerFileItem.Exists)
+                    {
+                        _ValidCount++;
+                    }
+                    else
+                    {
+                        _InvalidCount++;
+                    }
+
+                    if (MustAddDesignerFileItem(designerFileItem, filter))
+                    {
+                        resultList.Add(designerFileItem);
+                    }
                 }
             }
 
@@ -159,16 +193,7 @@ namespace WebProjectValidator.HelperClasses
 
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
 
-            List<string> extensionFilter = new List<string>();
-
-            extensionFilter.Add(".aspx");
-            extensionFilter.Add(".ascx");
-            extensionFilter.Add(".master");
-            extensionFilter.Add(".asax");
-
-            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, extensionFilter);
-
-            projectFileList.Sort();
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
 
             _ProjectFileName = projectFileProcessor.ProjectFileName;
 
