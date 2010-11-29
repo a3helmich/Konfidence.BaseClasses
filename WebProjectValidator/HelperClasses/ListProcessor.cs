@@ -263,6 +263,12 @@ namespace WebProjectValidator.HelperClasses
                     designerFileItem.Valid = false;
                     designerFileItem.SetErrorMessage("reference naar een niet bestaand control");
                 }
+
+                if (!projectFileList.Contains(designerFileItem.FullFileName, StringComparer.CurrentCultureIgnoreCase))
+                {
+                    designerFileItem.Valid = false;
+                    designerFileItem.SetErrorMessage("reference naar een control dat niet in het project zit");
+                }
             }
 
             _Count = userControlReferences.Count;

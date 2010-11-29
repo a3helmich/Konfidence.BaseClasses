@@ -37,7 +37,7 @@ namespace WebProjectValidator.FileListChecker
             {
                 case CheckAction.Contains:
                     {
-                        if (text.Contains(_TextFragment))
+                        if (text.IndexOf(_TextFragment, StringComparison.InvariantCultureIgnoreCase) >= 0)
                         {
                             return true;
                         }
@@ -45,7 +45,7 @@ namespace WebProjectValidator.FileListChecker
                     }
                 case CheckAction.EndsWith:
                     {
-                        if (text.EndsWith(_TextFragment))
+                        if (text.EndsWith(_TextFragment, StringComparison.InvariantCultureIgnoreCase))
                         {
                             return true;
                         }

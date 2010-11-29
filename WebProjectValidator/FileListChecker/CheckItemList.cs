@@ -40,6 +40,7 @@ namespace WebProjectValidator.FileListChecker
                 case ListType.Included:
                     AddItem(".aspx.cs", CheckAction.EndsWith);
                     AddItem(".ascx.cs", CheckAction.EndsWith);
+                    AddItem(".master.cs", CheckAction.EndsWith);
                     break;
                 case ListType.Excluded:
                     AddItem(".designer.cs", CheckAction.EndsWith);
@@ -56,6 +57,7 @@ namespace WebProjectValidator.FileListChecker
                 case ListType.Included:
                     AddItem(".aspx.vb", CheckAction.EndsWith);
                     AddItem(".ascx.vb", CheckAction.EndsWith);
+                    AddItem(".master.vb", CheckAction.EndsWith);
                     break;
                 case ListType.Excluded:
                     AddItem(".designer.vb", CheckAction.EndsWith);
@@ -69,6 +71,7 @@ namespace WebProjectValidator.FileListChecker
 
             AddItem(".aspx", CheckAction.EndsWith);
             AddItem(".ascx", CheckAction.EndsWith);
+            AddItem(".master", CheckAction.EndsWith);
         }
 
         public bool IsValid(string fileName)
