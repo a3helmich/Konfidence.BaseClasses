@@ -363,7 +363,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public void repairCodeFile(List<DesignerFileItem> repairList)
+        public void repairCodeFileToApplication(List<DesignerFileItem> repairList)
         {
             foreach (DesignerFileItem fileItem in repairList)
             {
@@ -371,7 +371,7 @@ namespace WebProjectValidator.HelperClasses
                 {
                     List<string> fileLines = FileReader.ReadLines(fileItem.FullFileName);
 
-                    List<string> newFileLines = fixCodeFile(fileLines);
+                    List<string> newFileLines = fixCodeFileToApplication(fileLines);
 
                     if (!Directory.Exists(fileItem.ProjectFolder + @"\fileBackup"))
                     {
@@ -397,7 +397,41 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        private List<string> fixCodeFile(List<string> fileLines)
+        public void repairCodeFileToProject(List<DesignerFileItem> repairList)
+        {
+            foreach (DesignerFileItem fileItem in repairList)
+            {
+                if (fileItem.Valid) // even omgekeerde logica (2 keer)
+                {
+                    List<string> fileLines = FileReader.ReadLines(fileItem.FullFileName);
+
+                    List<string> newFileLines = fixCodeFileToProject(fileLines);
+
+                    if (!Directory.Exists(fileItem.ProjectFolder + @"\fileBackup"))
+                    {
+                        Directory.CreateDirectory(fileItem.ProjectFolder + @"\fileBackup");
+                    }
+
+                    if (!File.Exists(fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName))
+                    {
+                        File.Copy(fileItem.FullFileName, fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName, true);
+                    }
+
+                    if (IsAssigned(newFileLines))
+                    {
+                        using (TextWriter textWriter = new StreamWriter(fileItem.FullFileName, false, Encoding.Default))
+                        {
+                            foreach (string line in newFileLines)
+                            {
+                                textWriter.WriteLine(line);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private List<string> fixCodeFileToApplication(List<string> fileLines)
         {
             List<string> newFileLines = null;
 
@@ -427,6 +461,51 @@ namespace WebProjectValidator.HelperClasses
                         if (foundPage)
                         {
                             newLine = ReplaceIgnoreCase(line, " codebehind=", " CodeFile=");
+                        }
+
+                        if (line.Contains("%>"))
+                        {
+                            finished = true;
+                        }
+                    }
+
+                    newFileLines.Add(newLine);
+                }
+            }
+
+            return newFileLines;
+        }
+
+        private List<string> fixCodeFileToProject(List<string> fileLines)
+        {
+            List<string> newFileLines = null;
+
+            if (IsValidCodeFile(fileLines))  // even omgekeerde logica (2 plekken)
+            {
+                bool foundPage = false;
+                bool finished = false;
+
+                newFileLines = new List<string>();
+
+                foreach (string line in fileLines)
+                {
+                    string newLine = line;
+
+                    if (!finished)
+                    {
+                        if (line.StartsWith("<%@ page", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            foundPage = true;
+                        }
+
+                        if (line.StartsWith("<%@ control", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            foundPage = true;
+                        }
+
+                        if (foundPage)
+                        {
+                            newLine = ReplaceIgnoreCase(line, " codefile=", " Codebehind=");
                         }
 
                         if (line.Contains("%>"))

@@ -65,6 +65,10 @@
             this.tpUserControlMissing = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dgvUserControlMissing = new System.Windows.Forms.DataGridView();
+            this.dgvUserControlMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlMissingReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.rbUserControlUnused = new System.Windows.Forms.RadioButton();
             this.rbUserControlMissing = new System.Windows.Forms.RadioButton();
@@ -77,15 +81,12 @@
             this.tsslValid = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bFixAll = new System.Windows.Forms.Button();
+            this.bFixToApplication = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.bFolderBrowse = new System.Windows.Forms.Button();
             this.lProjectFileNameDisplay = new System.Windows.Forms.Label();
             this.lProjectFileName = new System.Windows.Forms.Label();
-            this.dgvUserControlMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bFixToProject = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileMissing.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -483,6 +484,37 @@
             this.dgvUserControlMissing.Size = new System.Drawing.Size(942, 260);
             this.dgvUserControlMissing.TabIndex = 0;
             // 
+            // dgvUserControlMissingProject
+            // 
+            this.dgvUserControlMissingProject.DataPropertyName = "Project";
+            this.dgvUserControlMissingProject.HeaderText = "Project";
+            this.dgvUserControlMissingProject.Name = "dgvUserControlMissingProject";
+            this.dgvUserControlMissingProject.ReadOnly = true;
+            // 
+            // dgvUserControlMissingFileName
+            // 
+            this.dgvUserControlMissingFileName.DataPropertyName = "Reference";
+            this.dgvUserControlMissingFileName.HeaderText = "Reference";
+            this.dgvUserControlMissingFileName.Name = "dgvUserControlMissingFileName";
+            this.dgvUserControlMissingFileName.ReadOnly = true;
+            this.dgvUserControlMissingFileName.Width = 400;
+            // 
+            // dgvUserControlMissingValid
+            // 
+            this.dgvUserControlMissingValid.DataPropertyName = "Valid";
+            this.dgvUserControlMissingValid.HeaderText = "Valid";
+            this.dgvUserControlMissingValid.Name = "dgvUserControlMissingValid";
+            this.dgvUserControlMissingValid.ReadOnly = true;
+            this.dgvUserControlMissingValid.Width = 55;
+            // 
+            // dgvUserControlMissingReason
+            // 
+            this.dgvUserControlMissingReason.DataPropertyName = "ErrorMessage";
+            this.dgvUserControlMissingReason.HeaderText = "Reason";
+            this.dgvUserControlMissingReason.Name = "dgvUserControlMissingReason";
+            this.dgvUserControlMissingReason.ReadOnly = true;
+            this.dgvUserControlMissingReason.Width = 365;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.rbUserControlUnused);
@@ -605,16 +637,16 @@
             this.tsslRowCount.Text = "RowCount";
             this.tsslRowCount.Visible = false;
             // 
-            // bFixAll
+            // bFixToApplication
             // 
-            this.bFixAll.Enabled = false;
-            this.bFixAll.Location = new System.Drawing.Point(123, 12);
-            this.bFixAll.Name = "bFixAll";
-            this.bFixAll.Size = new System.Drawing.Size(75, 23);
-            this.bFixAll.TabIndex = 6;
-            this.bFixAll.Text = "Fix All";
-            this.bFixAll.UseVisualStyleBackColor = true;
-            this.bFixAll.Click += new System.EventHandler(this.bFixAll_Click);
+            this.bFixToApplication.Enabled = false;
+            this.bFixToApplication.Location = new System.Drawing.Point(123, 12);
+            this.bFixToApplication.Name = "bFixToApplication";
+            this.bFixToApplication.Size = new System.Drawing.Size(75, 23);
+            this.bFixToApplication.TabIndex = 6;
+            this.bFixToApplication.Text = "Fix to App";
+            this.bFixToApplication.UseVisualStyleBackColor = true;
+            this.bFixToApplication.Click += new System.EventHandler(this.bFixToApplication_Click);
             // 
             // bFolderBrowse
             // 
@@ -645,36 +677,15 @@
             this.lProjectFileName.TabIndex = 9;
             this.lProjectFileName.Text = "Project file";
             // 
-            // dgvUserControlMissingProject
+            // bFixToProject
             // 
-            this.dgvUserControlMissingProject.DataPropertyName = "Project";
-            this.dgvUserControlMissingProject.HeaderText = "Project";
-            this.dgvUserControlMissingProject.Name = "dgvUserControlMissingProject";
-            this.dgvUserControlMissingProject.ReadOnly = true;
-            // 
-            // dgvUserControlMissingFileName
-            // 
-            this.dgvUserControlMissingFileName.DataPropertyName = "Reference";
-            this.dgvUserControlMissingFileName.HeaderText = "Reference";
-            this.dgvUserControlMissingFileName.Name = "dgvUserControlMissingFileName";
-            this.dgvUserControlMissingFileName.ReadOnly = true;
-            this.dgvUserControlMissingFileName.Width = 400;
-            // 
-            // dgvUserControlMissingValid
-            // 
-            this.dgvUserControlMissingValid.DataPropertyName = "Valid";
-            this.dgvUserControlMissingValid.HeaderText = "Valid";
-            this.dgvUserControlMissingValid.Name = "dgvUserControlMissingValid";
-            this.dgvUserControlMissingValid.ReadOnly = true;
-            this.dgvUserControlMissingValid.Width = 55;
-            // 
-            // dgvUserControlMissingReason
-            // 
-            this.dgvUserControlMissingReason.DataPropertyName = "ErrorMessage";
-            this.dgvUserControlMissingReason.HeaderText = "Reason";
-            this.dgvUserControlMissingReason.Name = "dgvUserControlMissingReason";
-            this.dgvUserControlMissingReason.ReadOnly = true;
-            this.dgvUserControlMissingReason.Width = 365;
+            this.bFixToProject.Location = new System.Drawing.Point(221, 12);
+            this.bFixToProject.Name = "bFixToProject";
+            this.bFixToProject.Size = new System.Drawing.Size(75, 23);
+            this.bFixToProject.TabIndex = 10;
+            this.bFixToProject.Text = "Fix to Proj";
+            this.bFixToProject.UseVisualStyleBackColor = true;
+            this.bFixToProject.Click += new System.EventHandler(this.bFixToProject_Click);
             // 
             // MainForm
             // 
@@ -682,10 +693,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 449);
+            this.Controls.Add(this.bFixToProject);
             this.Controls.Add(this.lProjectFileName);
             this.Controls.Add(this.lProjectFileNameDisplay);
             this.Controls.Add(this.bFolderBrowse);
-            this.Controls.Add(this.bFixAll);
+            this.Controls.Add(this.bFixToApplication);
             this.Controls.Add(this.rbVB);
             this.Controls.Add(this.rbCS);
             this.Controls.Add(this.statusBar);
@@ -763,7 +775,7 @@
         private System.Windows.Forms.RadioButton rbUserControlInvalid;
         private System.Windows.Forms.RadioButton rbUserControlUnused;
         private System.Windows.Forms.RadioButton rbUserControlMissing;
-        private System.Windows.Forms.Button bFixAll;
+        private System.Windows.Forms.Button bFixToApplication;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingExists;
@@ -776,6 +788,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingValid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingReason;
+        private System.Windows.Forms.Button bFixToProject;
     }
 }
 

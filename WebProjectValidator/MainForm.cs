@@ -293,7 +293,7 @@ namespace WebProjectValidator
             return ListFilterType.All;
         }
 
-        private void bFixAll_Click(object sender, EventArgs e)
+        private void bFixToApplication_Click(object sender, EventArgs e)
         {
             ExecuteStart();
 
@@ -307,7 +307,25 @@ namespace WebProjectValidator
 
                 List<DesignerFileItem> repairList = processor.processCodeFileCheck(designerFileList, filter);
 
-                processor.repairCodeFile(repairList);
+                processor.repairCodeFileToApplication(repairList);
+            }
+        }
+
+        private void bFixToProject_Click(object sender, EventArgs e)
+        {
+            ExecuteStart();
+
+            if (dgvCodeFileCheck.RowCount > 0)
+            {
+                FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
+                ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+                ListFilterType filter = ListFilterType.All;
+
+                filter = GetCodeFileCheckFilterType();
+
+                List<DesignerFileItem> repairList = processor.processCodeFileCheck(designerFileList, filter);
+
+                processor.repairCodeFileToProject(repairList);
             }
         }
 
@@ -315,11 +333,11 @@ namespace WebProjectValidator
         {
             if (tabControl.SelectedTab == tpCodeFileCheck)
             {
-                bFixAll.Enabled = true;
+                bFixToApplication.Enabled = true;
             }
             else
             {
-                bFixAll.Enabled = false;
+                bFixToApplication.Enabled = false;
             }
         }
 
