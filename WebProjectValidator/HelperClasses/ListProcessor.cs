@@ -148,7 +148,7 @@ namespace WebProjectValidator.HelperClasses
 
                     _Count++;
 
-                    if (designerFileItem.Exists)
+                    if (designerFileItem.Valid)
                     {
                         _ValidCount++;
                     }
@@ -489,9 +489,14 @@ namespace WebProjectValidator.HelperClasses
                             foundPage = true;
                         }
 
+                        if (line.StartsWith("<%@ master", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            foundPage = true;
+                        }
+
                         if (foundPage)
                         {
-                            newLine = ReplaceIgnoreCase(line, " codebehind=", " CodeFile=");
+                            newLine = ReplaceIgnoreCase(line, "codebehind=", "CodeFile=");
                         }
 
                         if (line.Contains("%>"))
@@ -534,9 +539,14 @@ namespace WebProjectValidator.HelperClasses
                             foundPage = true;
                         }
 
+                        if (line.StartsWith("<%@ master", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            foundPage = true;
+                        }
+
                         if (foundPage)
                         {
-                            newLine = ReplaceIgnoreCase(line, " codefile=", " Codebehind=");
+                            newLine = ReplaceIgnoreCase(line, "codefile=", "Codebehind=");
                         }
 
                         if (line.Contains("%>"))
