@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using Konfidence.BaseData.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Diagnostics;
 
 namespace Konfidence.BaseData
 {
@@ -288,8 +289,11 @@ namespace Konfidence.BaseData
 
             try
             {
-                if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+                if (Debugger.IsAttached)
                 {
+                    if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+                    {
+                    }
                 }
             }
             catch
