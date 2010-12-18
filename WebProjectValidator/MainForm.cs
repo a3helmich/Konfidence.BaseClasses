@@ -17,12 +17,15 @@ namespace WebProjectValidator
     {
         MainFormPresenter _Presenter = new MainFormPresenter();
 
-        private string _ProjectRequiredText = string.Empty;
-
         public MainForm()
         {
             InitializeComponent();
 
+            InitializeComponentEx();
+        }
+
+        private void InitializeComponentEx()
+        {
             dgvDesignerFileMissing.AutoGenerateColumns = false;
             dgvCodeFileCheck.AutoGenerateColumns = false;
             dgvUserControlMissing.AutoGenerateColumns = false;
@@ -32,6 +35,9 @@ namespace WebProjectValidator
         {
             tbSolutionFolder.Text = _Presenter.SolutionFolder;
             tbProjectName.Text = _Presenter.ProjectName;
+            rbCS.Checked = _Presenter.IsCS;
+            rbVB.Checked = _Presenter.IsVB;
+            lProjectFileNameDisplay.Text = _Presenter.ProjectFile;
         }
 
         private bool SetPresenter()
@@ -52,69 +58,18 @@ namespace WebProjectValidator
         {
             _Presenter.SolutionFolder = tbSolutionFolder.Text;
             _Presenter.ProjectName = tbProjectName.Text;
-        }
 
-        private bool Initialize()
-        {
-            return SetPresenter();
+            _Presenter.IsCS = rbCS.Checked;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _ProjectRequiredText = lProjectFileNameDisplay.Text;
-
-            LoadDefaults();
+            GetPresenter();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveDefaults();
-        }
-
-        private void SaveDefaults()
-        {
-            ConfigurationStore configurationStore = new ConfigurationStore();
-
-            configurationStore.SetProperty("ProjectName", tbProjectName.Text);
-            configurationStore.SetProperty("ProjectFolder", tbSolutionFolder.Text);
-
-            string rbCSText = "0";
-            if (rbCS.Checked)
-            {
-                rbCSText = "1";
-            }
-
-            configurationStore.SetProperty("rbCSChecked", rbCSText);
-
-            configurationStore.Save();
-        }
-
-        private void LoadDefaults()
-        {
-            ConfigurationStore configurationStore = new ConfigurationStore();
-
-            string getText = string.Empty;
-
-            configurationStore.GetProperty("ProjectName", out getText);
-
-            tbProjectName.Text = getText;
-
-            configurationStore.GetProperty("ProjectFolder", out getText);
-
-            tbSolutionFolder.Text = getText;
-
-            configurationStore.GetProperty("rbCSChecked", out getText);
-
-            rbCS.Checked = false;
-            rbVB.Checked = false;
-            if (getText.Equals("1"))
-            {
-                rbCS.Checked = true;
-            }
-            else
-            {
-                rbVB.Checked = true;
-            }
+            _Presenter.Close();
         }
 
         private void bStart_Click(object sender, EventArgs e)
@@ -124,7 +79,7 @@ namespace WebProjectValidator
 
         private void ExecuteStart()
         {
-            if (Initialize())
+            if (SetPresenter())
             {
                 if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
                 {
@@ -143,29 +98,12 @@ namespace WebProjectValidator
             }
         }
 
-        private FileType GetLanguageFileType()
-        {
-            LanguageType languageType = GetLanguageType();
-
-            switch (languageType)
-            {
-                case LanguageType.cs:
-                    return FileType.cs;
-                case LanguageType.vb:
-                    return FileType.vb;
-            }
-
-            return FileType.web;
-        }
-
         private void DesignerFileMissing()
         {
-            FileList fileList = new FileList(_Presenter.ProjectFolder, GetLanguageFileType(), ListType.Included);
-            FileList searchList = new FileList(_Presenter.ProjectFolder, GetLanguageFileType(), ListType.Excluded);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
+            FileList fileList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, ListType.Included);
+            FileList searchList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, ListType.Excluded);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
             ListFilterType filter = ListFilterType.All;
-
-            lProjectFileNameDisplay.Text = _ProjectRequiredText;
 
             filter = GetDesignerFileMissingFilterType();
 
@@ -184,12 +122,10 @@ namespace WebProjectValidator
         private void CodeFileCheck()
         {
             FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
             ListFilterType filter = ListFilterType.All;
 
             filter = GetCodeFileCheckFilterType();
-
-            lProjectFileNameDisplay.Text = _ProjectRequiredText;
 
             dgvCodeFileCheck.DataSource = processor.processCodeFileCheck(designerFileList, filter);
 
@@ -206,7 +142,7 @@ namespace WebProjectValidator
         private void UserControlMissing()
         {
             FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
             ListFilterType filter = ListFilterType.All;
 
             filter = GetUserControlMissingFilterType();
@@ -223,16 +159,6 @@ namespace WebProjectValidator
             tsslInValid.Text = "Invalid: " + processor.InvalidCount;
             tsslRowCount.Visible = true;
             tsslRowCount.Text = "RowCount: " + dgvUserControlMissing.RowCount;
-        }
-
-        private LanguageType GetLanguageType()
-        {
-            if (rbCS.Checked)
-            {
-                return LanguageType.cs;
-            }
-
-            return LanguageType.vb;
         }
 
         private ListFilterType GetDesignerFileMissingFilterType()
@@ -297,7 +223,7 @@ namespace WebProjectValidator
             if (dgvCodeFileCheck.RowCount > 0)
             {
                 FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
-                ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
+                ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
                 ListFilterType filter = ListFilterType.All;
 
                 filter = GetCodeFileCheckFilterType();
@@ -315,7 +241,7 @@ namespace WebProjectValidator
             if (dgvCodeFileCheck.RowCount > 0)
             {
                 FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
-                ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
+                ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
                 ListFilterType filter = ListFilterType.All;
 
                 filter = GetCodeFileCheckFilterType();

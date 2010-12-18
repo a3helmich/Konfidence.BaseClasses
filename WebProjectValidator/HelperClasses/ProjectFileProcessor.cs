@@ -21,31 +21,15 @@ namespace WebProjectValidator.HelperClasses
         }
         #endregion
 
-        public ProjectFileProcessor(string projectName, string folderName, LanguageType languageType)
+        public ProjectFileProcessor(string projectFile)
         {
-            _ProjectFileName = string.Empty;
-
-            switch (languageType)
-            {
-                case LanguageType.cs:
-                    _ProjectFileName = folderName + @"\" + projectName + ".csproj";
-                    break;
-                case LanguageType.vb:
-                    _ProjectFileName = folderName + @"\" + projectName + ".vbproj";
-                    break;
-            }
-
-            if (File.Exists(_ProjectFileName))
+            if (File.Exists(projectFile))
             {
                 _ProjectXmlDocument = new ProjectXmlDocument();
 
-                _ProjectXmlDocument.Load(_ProjectFileName);
+                _ProjectXmlDocument.Load(projectFile);
             }
-            else
-            {
-                _ProjectFileName = "Projectfile niet gevonden: " + _ProjectFileName;
-            }
-        }
+       }
 
         public List<string> GetProjectFileNameList(string projectFolder, List<string> extensionFilter)
         {

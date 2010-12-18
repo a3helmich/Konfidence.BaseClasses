@@ -12,6 +12,7 @@ namespace WebProjectValidator.HelperClasses
     {
         private string _Project = string.Empty;
         private string _Folder = string.Empty;
+        private string _ProjectFile = string.Empty;
         private LanguageType _LanguageType = LanguageType.cs;
 
         private List<string> _ExtensionFilter = new List<string>();
@@ -50,10 +51,11 @@ namespace WebProjectValidator.HelperClasses
         }
         #endregion simple properties
 
-        public ListProcessor(string project, string folder, LanguageType language)
+        public ListProcessor(string project, string folder, LanguageType language, string projectFile)
         {
             _Project = project;
             _Folder = folder;
+            _ProjectFile = projectFile;
 
             _LanguageType = language;
 
@@ -83,7 +85,7 @@ namespace WebProjectValidator.HelperClasses
             _ValidCount = 0;
             _InvalidCount = 0;
 
-            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
+            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
 
@@ -130,7 +132,7 @@ namespace WebProjectValidator.HelperClasses
             _Count = 0;
             _ValidCount = 0;
             _InvalidCount = 0;
-            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
+            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
 
@@ -191,7 +193,7 @@ namespace WebProjectValidator.HelperClasses
             ControlReferenceList allUserControlReferences = new ControlReferenceList();
             List<DesignerFileItem> userControlReferences = new List<DesignerFileItem>();
 
-            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_Project, _Folder, _LanguageType);
+            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
 
