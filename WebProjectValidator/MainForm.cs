@@ -15,55 +15,53 @@ namespace WebProjectValidator
 {
     public partial class MainForm : Form
     {
-        private string _BaseFolder = @"C:\Projects\Konfidence\KonfidenceWebSite\";
+        MainFormPresenter _Presenter = new MainFormPresenter();
 
-        private string _ProjectFolder = string.Empty;
         private string _ProjectRequiredText = string.Empty;
 
         public MainForm()
         {
             InitializeComponent();
-        }
-
-        private bool Initialize()
-        {
-            string delimiter = string.Empty;
-
-            if (!tbFolder.Text.EndsWith(@"\"))
-            {
-                delimiter = @"\";
-            }
-
-            _ProjectFolder = tbFolder.Text + delimiter + tbProjectName.Text;
-
-            if (BaseItem.IsEmpty(tbFolder.Text))
-            {
-                MessageBox.Show("Selecteer een folder!");
-
-                return false;
-            }
-
-            if (!Directory.Exists(_ProjectFolder))
-            {
-                MessageBox.Show("Folder: '" + _ProjectFolder + "' bestaat niet!");
-
-                return false;
-            }
-
-            return true;
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            _ProjectFolder = _BaseFolder + tbProjectName.Text;
-
-            _ProjectRequiredText = lProjectFileNameDisplay.Text;
-
-            tbFolder.Text = _ProjectFolder;
 
             dgvDesignerFileMissing.AutoGenerateColumns = false;
             dgvCodeFileCheck.AutoGenerateColumns = false;
             dgvUserControlMissing.AutoGenerateColumns = false;
+        }
+
+        private void GetPresenter()
+        {
+            tbSolutionFolder.Text = _Presenter.SolutionFolder;
+            tbProjectName.Text = _Presenter.ProjectName;
+        }
+
+        private bool SetPresenter()
+        {
+            SetPresenterProperties();
+
+            if (_Presenter.Validate())
+            {
+                return true;
+            }
+
+            MessageBox.Show(_Presenter.ErrorMessage);
+
+            return false;
+        }
+
+        private void SetPresenterProperties()
+        {
+            _Presenter.SolutionFolder = tbSolutionFolder.Text;
+            _Presenter.ProjectName = tbProjectName.Text;
+        }
+
+        private bool Initialize()
+        {
+            return SetPresenter();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            _ProjectRequiredText = lProjectFileNameDisplay.Text;
 
             LoadDefaults();
         }
@@ -78,7 +76,7 @@ namespace WebProjectValidator
             ConfigurationStore configurationStore = new ConfigurationStore();
 
             configurationStore.SetProperty("ProjectName", tbProjectName.Text);
-            configurationStore.SetProperty("ProjectFolder", tbFolder.Text);
+            configurationStore.SetProperty("ProjectFolder", tbSolutionFolder.Text);
 
             string rbCSText = "0";
             if (rbCS.Checked)
@@ -103,7 +101,7 @@ namespace WebProjectValidator
 
             configurationStore.GetProperty("ProjectFolder", out getText);
 
-            tbFolder.Text = getText;
+            tbSolutionFolder.Text = getText;
 
             configurationStore.GetProperty("rbCSChecked", out getText);
 
@@ -162,10 +160,9 @@ namespace WebProjectValidator
 
         private void DesignerFileMissing()
         {
-
-            FileList fileList = new FileList(_ProjectFolder, GetLanguageFileType(), ListType.Included);
-            FileList searchList = new FileList(_ProjectFolder, GetLanguageFileType(), ListType.Excluded);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+            FileList fileList = new FileList(_Presenter.ProjectFolder, GetLanguageFileType(), ListType.Included);
+            FileList searchList = new FileList(_Presenter.ProjectFolder, GetLanguageFileType(), ListType.Excluded);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
             lProjectFileNameDisplay.Text = _ProjectRequiredText;
@@ -186,8 +183,8 @@ namespace WebProjectValidator
 
         private void CodeFileCheck()
         {
-            FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+            FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
             filter = GetCodeFileCheckFilterType();
@@ -208,8 +205,8 @@ namespace WebProjectValidator
 
         private void UserControlMissing()
         {
-            FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+            FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
             ListFilterType filter = ListFilterType.All;
 
             filter = GetUserControlMissingFilterType();
@@ -299,8 +296,8 @@ namespace WebProjectValidator
 
             if (dgvCodeFileCheck.RowCount > 0)
             {
-                FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
-                ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+                FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+                ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
                 ListFilterType filter = ListFilterType.All;
 
                 filter = GetCodeFileCheckFilterType();
@@ -317,8 +314,8 @@ namespace WebProjectValidator
 
             if (dgvCodeFileCheck.RowCount > 0)
             {
-                FileList designerFileList = new FileList(_ProjectFolder, FileType.web, ListType.Included);
-                ListProcessor processor = new ListProcessor(tbProjectName.Text, _ProjectFolder, GetLanguageType());
+                FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+                ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, GetLanguageType());
                 ListFilterType filter = ListFilterType.All;
 
                 filter = GetCodeFileCheckFilterType();
@@ -334,20 +331,22 @@ namespace WebProjectValidator
             if (tabControl.SelectedTab == tpCodeFileCheck)
             {
                 bFixToApplication.Enabled = true;
+                bFixToProject.Enabled = true;
             }
             else
             {
                 bFixToApplication.Enabled = false;
+                bFixToProject.Enabled = false;
             }
         }
 
         private void bFolderBrowse_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog.SelectedPath = tbFolder.Text;
+            folderBrowserDialog.SelectedPath = tbSolutionFolder.Text;
 
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog.ShowDialog().Equals(DialogResult.OK))
             {
-                tbFolder.Text = folderBrowserDialog.SelectedPath;
+                tbSolutionFolder.Text = folderBrowserDialog.SelectedPath;
             }
         }
     }

@@ -20,16 +20,6 @@ namespace Konfidence.Base
 			return true;
 		}
 
-        public static bool IsAssigned(string newString) // ToDo : back to protected 
-        {
-            if (newString == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         public static bool IsEmpty(string newString) // ToDo : back to protected 
         {
             if (string.IsNullOrEmpty(newString))
@@ -40,6 +30,7 @@ namespace Konfidence.Base
             return false;
         }
 
+        // TODO : convert to errorlist 
         public void SetErrorMessage(string errorMessage)
         {
             _ErrorMessage = errorMessage;
@@ -47,7 +38,12 @@ namespace Konfidence.Base
 
         public bool HasErrors()
         {
-            return IsAssigned(_ErrorMessage);
+            return !IsEmpty(_ErrorMessage);
+        }
+
+        public void ClearErrorMessage()
+        {
+            _ErrorMessage = string.Empty;
         }
 
         // string extender van maken
