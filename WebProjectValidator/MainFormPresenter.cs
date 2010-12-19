@@ -13,8 +13,8 @@ namespace WebProjectValidator
     {
         private string _SolutionFolder = string.Empty;
         private string _ProjectName = string.Empty;
-        private bool _IsCS = true;
-        private LanguageType _LanguageType = LanguageType.cs;
+        private LanguageType _LanguageType = LanguageType.Unknown;
+        private TabPageType _TabPageType = TabPageType.Unknown;
 
 #region simple properties
         public string SolutionFolder
@@ -63,6 +63,12 @@ namespace WebProjectValidator
             }
         }
 
+        public TabPageType TabPageType
+        {
+            get { return _TabPageType; }
+            set { _TabPageType = value; }
+        }
+
 #endregion simple properties
 
         public bool IsCS
@@ -77,6 +83,7 @@ namespace WebProjectValidator
             set 
             {
                 LanguageType = LanguageType.vb;
+
                 if (value)
                 {
                     LanguageType = LanguageType.cs;
@@ -182,5 +189,7 @@ namespace WebProjectValidator
 
             configurationStore.Save();
         }
+    
+
     }
 }

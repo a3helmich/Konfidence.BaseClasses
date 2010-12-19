@@ -60,6 +60,19 @@ namespace WebProjectValidator
             _Presenter.ProjectName = tbProjectName.Text;
 
             _Presenter.IsCS = rbCS.Checked;
+
+            if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
+            {
+                _Presenter.TabPageType = TabPageType.DesignerFileMissing;
+            }
+            if (tabControl.SelectedTab.Equals(tpCodeFileCheck))
+            {
+                _Presenter.TabPageType = TabPageType.CodeFileCheck;
+            }
+            if (tabControl.SelectedTab.Equals(tpUserControlMissing))
+            {
+                _Presenter.TabPageType = TabPageType.UserControlMissing;
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -69,6 +82,8 @@ namespace WebProjectValidator
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SetPresenterProperties();
+
             _Presenter.Close();
         }
 
@@ -81,20 +96,23 @@ namespace WebProjectValidator
         {
             if (SetPresenter())
             {
-                if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
-                {
-                    DesignerFileMissing();
-                }
+                Execute();
+            }
+        }
 
-                if (tabControl.SelectedTab.Equals(tpCodeFileCheck))
-                {
+        private void Execute()
+        {
+            switch (_Presenter.TabPageType)
+            {
+                case TabPageType.CodeFileCheck:
                     CodeFileCheck();
-                }
-
-                if (tabControl.SelectedTab.Equals(tpUserControlMissing))
-                {
+                    break;
+                case TabPageType.DesignerFileMissing:
+                    DesignerFileMissing();
+                    break;
+                case TabPageType.UserControlMissing:
                     UserControlMissing();
-                }
+                    break;
             }
         }
 
@@ -165,12 +183,12 @@ namespace WebProjectValidator
         {
             if (rbDesignerFileExists.Checked)
             {
-                return ListFilterType.Exists;
+                return ListFilterType.DesignerFileExists;
             }
 
             if (rbDesignerFileMissing.Checked)
             {
-                return ListFilterType.Missing;
+                return ListFilterType.DesignerFileMissing;
             }
 
             return ListFilterType.All;
@@ -205,7 +223,7 @@ namespace WebProjectValidator
 
             if (rbUserControlMissing.Checked)
             {
-                return ListFilterType.Missing;
+                return ListFilterType.DesignerFileMissing;
             }
 
             if (rbUserControlUnused.Checked)

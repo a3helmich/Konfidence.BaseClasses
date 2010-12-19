@@ -7,8 +7,9 @@ namespace WebProjectValidator.FileListChecker
 {
     enum FileType
     {
-        cs = 0,
-        vb = 1,
-        web = 2
+        Unknown = 0,
+        cs = 1,
+        vb = 2,
+        web = 3
     }
 }

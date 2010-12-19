@@ -7,11 +7,12 @@ namespace WebProjectValidator.HelperClasses
 {
     enum ListFilterType
     {
-        All = 0,
-        Valid = 1,
-        Invalid = 2,
-        Exists =3,
-        Missing = 4,
-        Unused = 5
+        Unknown = 0,
+        All = 1,
+        Valid = 2,
+        Invalid = 3,
+        DesignerFileExists = 4,
+        DesignerFileMissing = 5,
+        Unused = 6
     }
 }

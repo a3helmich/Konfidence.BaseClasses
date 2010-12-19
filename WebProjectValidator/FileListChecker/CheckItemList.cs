@@ -7,8 +7,9 @@ namespace WebProjectValidator.FileListChecker
 {
     enum ListType
     {
-        Excluded = 0,
-        Included = 1
+        Unknown = 0,
+        Excluded = 1,
+        Included = 2
     }
 
     class CheckItemList:List<CheckItem>

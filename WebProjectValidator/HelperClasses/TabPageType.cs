@@ -5,10 +5,11 @@ using System.Text;
 
 namespace WebProjectValidator.HelperClasses
 {
-    public enum LanguageType
+    public enum TabPageType
     {
         Unknown = 0,
-        vb = 1,
-        cs = 2,
+        DesignerFileMissing = 1,
+        CodeFileCheck = 2,
+        UserControlMissing = 3,
     }
 }

@@ -373,13 +373,13 @@ namespace WebProjectValidator.HelperClasses
                         return true;
                     }
                     return false;
-                case ListFilterType.Exists:
+                case ListFilterType.DesignerFileExists:
                     if (designerFileItem.Exists)
                     {
                         return true;
                     }
                     return false;
-                case ListFilterType.Missing:
+                case ListFilterType.DesignerFileMissing:
                     if (!designerFileItem.Exists)
                     {
                         return true;

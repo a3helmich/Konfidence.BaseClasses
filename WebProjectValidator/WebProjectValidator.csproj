@@ -93,6 +93,7 @@
     <Compile Include="HelperClasses\ListFilterType.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
     <Compile Include="HelperClasses\ProjectFileProcessor.cs" />
+    <Compile Include="HelperClasses\TabPageType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
