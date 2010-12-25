@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WebProjectValidator.FileListChecker;
 using WebProjectValidator.HelperClasses;
 using Konfidence.Base;
+using WebProjectValidator.EnumTypes;
 
 namespace WebProjectValidator
 {
@@ -110,8 +111,8 @@ namespace WebProjectValidator
 
         private void DesignerFileMissing()
         {
-            FileList fileList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, DeveloperFileType.SourceFile);
-            FileList searchList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, DeveloperFileType.DesignerFile);
+            FileList fileList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageType, DeveloperFileType.SourceFile);
+            FileList searchList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageType, DeveloperFileType.DesignerFile);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
             ListFilterType filter = GetDesignerFileMissingFilterType();
 
@@ -129,7 +130,7 @@ namespace WebProjectValidator
 
         private void CodeFileCheck()
         {
-            FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
+            FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageType.cs, DeveloperFileType.WebFile);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
             ListFilterType filter = GetCodeFileCheckFilterType();
 
@@ -147,7 +148,7 @@ namespace WebProjectValidator
 
         private void UserControlMissing()
         {
-            FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
+            FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageType.cs, DeveloperFileType.WebFile);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
             ListFilterType filter = GetUserControlMissingFilterType();
 
@@ -224,7 +225,7 @@ namespace WebProjectValidator
         {
             if (dgvCodeFileCheck.RowCount > 0)
             {
-                FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
+                FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageType.cs, DeveloperFileType.WebFile);
                 ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
                 ListFilterType filter = GetCodeFileCheckFilterType();
 
@@ -240,7 +241,7 @@ namespace WebProjectValidator
 
             if (dgvCodeFileCheck.RowCount > 0)
             {
-                FileList sourceFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
+                FileList sourceFileList = new FileList(_Presenter.ProjectFolder, LanguageType.cs, DeveloperFileType.WebFile);
                 ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
                 ListFilterType filter = GetCodeFileCheckFilterType();
 

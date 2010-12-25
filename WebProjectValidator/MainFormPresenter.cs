@@ -6,6 +6,7 @@ using Konfidence.Base;
 using System.IO;
 using WebProjectValidator.HelperClasses;
 using WebProjectValidator.FileListChecker;
+using WebProjectValidator.EnumTypes;
 
 namespace WebProjectValidator
 {
@@ -46,21 +47,6 @@ namespace WebProjectValidator
         {
             get { return _LanguageType; }
             set { _LanguageType = value; }
-        }
-
-        public LanguageFileType LanguageFileType
-        {
-            get
-            {
-                switch (LanguageType)
-                {
-                    case LanguageType.cs:
-                        return LanguageFileType.cs;
-                    case LanguageType.vb:
-                        return LanguageFileType.vb;
-                }
-                return LanguageFileType.Unknown;
-            }
         }
 
         public TabPageType TabPageType

@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WebProjectValidator.EnumTypes;
 
 namespace WebProjectValidator.FileListChecker
 {
     class FileTypeChecker
     {
-        private LanguageFileType _LanguageFileType = LanguageFileType.cs;
+        private LanguageType _LanguageType = LanguageType.cs;
         private CheckItemList checkItemList = null;
 
         #region simple properties
-        internal LanguageFileType FileType
+        internal LanguageType FileType
         {
-            get { return _LanguageFileType; }
-            set { _LanguageFileType = value; }
+            get { return _LanguageType; }
+            set { _LanguageType = value; }
         }
         #endregion
 
-        public FileTypeChecker(LanguageFileType languageType)
+        public FileTypeChecker(LanguageType languageType)
         {
-            _LanguageFileType = languageType;
+            _LanguageType = languageType;
         }
 
         public void SetFileType(DeveloperFileType developerType)

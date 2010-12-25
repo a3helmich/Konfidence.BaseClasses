@@ -83,21 +83,20 @@
     <Compile Include="FileListChecker\CheckItemList.cs" />
     <Compile Include="FileListChecker\FolderFilterList.cs" />
     <Compile Include="FileListChecker\ListFiller.cs" />
-    <Compile Include="FileListChecker\ListType.cs" />
+    <Compile Include="EnumTypes\DeveloperFileType.cs" />
     <Compile Include="FileListChecker\WebCheckItemList.cs" />
     <Compile Include="HelperClasses\ConfigurationStore.cs" />
     <Compile Include="HelperClasses\ControlReference.cs" />
     <Compile Include="HelperClasses\ControlReferenceList.cs" />
     <Compile Include="HelperClasses\DesignerFileItem.cs" />
     <Compile Include="FileListChecker\FileList.cs" />
-    <Compile Include="FileListChecker\LanguageFileType.cs" />
     <Compile Include="FileListChecker\FileTypeChecker.cs" />
     <Compile Include="HelperClasses\FileReader.cs" />
-    <Compile Include="HelperClasses\LanguageType.cs" />
-    <Compile Include="HelperClasses\ListFilterType.cs" />
+    <Compile Include="EnumTypes\LanguageType.cs" />
+    <Compile Include="EnumTypes\ListFilterType.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
     <Compile Include="HelperClasses\ProjectFileProcessor.cs" />
-    <Compile Include="HelperClasses\TabPageType.cs" />
+    <Compile Include="EnumTypes\TabPageType.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

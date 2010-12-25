@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using WebProjectValidator.EnumTypes;
 
 namespace WebProjectValidator.FileListChecker
 {
@@ -13,7 +14,7 @@ namespace WebProjectValidator.FileListChecker
 
         private FolderFilterList _FolderFilterList = new FolderFilterList();
 
-        public FileList(string projectFolder, LanguageFileType fileType, DeveloperFileType listType)
+        public FileList(string projectFolder, LanguageType fileType, DeveloperFileType listType)
         {
             _ProjectFolder = projectFolder;
 

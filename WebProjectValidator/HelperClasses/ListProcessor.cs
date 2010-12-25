@@ -5,6 +5,7 @@ using System.Text;
 using WebProjectValidator.FileListChecker;
 using System.IO;
 using Konfidence.Base;
+using WebProjectValidator.EnumTypes;
 
 namespace WebProjectValidator.HelperClasses
 {
