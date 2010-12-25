@@ -5,9 +5,9 @@ using System.Text;
 
 namespace WebProjectValidator.FileListChecker
 {
-    class WebCheckItemList:CheckItemList
+    class WebFileCheckItemList:CheckItemList
     {
-        public WebCheckItemList()
+        public WebFileCheckItemList()
         {
             ListFiller.FillWebCheckItemList(this);
         }

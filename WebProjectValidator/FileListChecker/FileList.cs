@@ -9,18 +9,16 @@ namespace WebProjectValidator.FileListChecker
 {
     class FileList:List<string>
     {
-        private FileTypeChecker _Checker = null;
+        private CheckItemList _Checker = null;
         private string _ProjectFolder = string.Empty;
 
         private FolderFilterList _FolderFilterList = new FolderFilterList();
 
-        public FileList(string projectFolder, LanguageType fileType, DeveloperFileType listType)
+        public FileList(string projectFolder, LanguageType languageType, DeveloperFileType developerType)
         {
             _ProjectFolder = projectFolder;
 
-            _Checker = new FileTypeChecker(fileType);
-
-            _Checker.SetFileType(listType);
+            _Checker = GetChecker(languageType, developerType);
 
             List<string> tempList = new List<string>();
 
@@ -35,5 +33,25 @@ namespace WebProjectValidator.FileListChecker
             }
         }
 
+        public CheckItemList GetChecker(LanguageType languageType, DeveloperFileType developerType)
+        {
+            switch (developerType)
+            {
+                case DeveloperFileType.DesignerFile:
+                    {
+                        return new DesignerFileCheckItemList(languageType);
+                    }
+                case DeveloperFileType.SourceFile:
+                    {
+                        return new SourceFileCheckItemList(languageType);
+                    }
+                case DeveloperFileType.WebFile:
+                    {
+                        return new WebFileCheckItemList();
+                    }
+            }
+
+            return null;
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace WebProjectValidator.EnumTypes
         Unknown = 0,
         vb = 1,
         cs = 2,
+        None,
     }
 }
