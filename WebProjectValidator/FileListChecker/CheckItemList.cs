@@ -5,31 +5,26 @@ using System.Text;
 
 namespace WebProjectValidator.FileListChecker
 {
-    enum ListType
-    {
-        Unknown = 0,
-        Excluded = 1,
-        Included = 2
-    }
-
     class CheckItemList:List<CheckItem>
     {
-        private ListType _Type = ListType.Included;
+        private DeveloperFileType _Type = DeveloperFileType.SourceFile;
 
-        public CheckItemList(ListType type)
+        public CheckItemList()
+        {
+        }
+
+        public CheckItemList(DeveloperFileType type)
         {
             _Type = type;
 
             InitCs();
         }
 
-        public CheckItem AddItem(string namePart, CheckAction action)
+        public void AddItem(string namePart, CheckAction action)
         {
             CheckItem checkItem = new CheckItem(namePart, action);
 
             Add(checkItem);
-
-            return checkItem;
         }
 
         public void InitCs()
@@ -38,12 +33,12 @@ namespace WebProjectValidator.FileListChecker
 
             switch (_Type)
             {
-                case ListType.Included:
+                case DeveloperFileType.SourceFile:
                     AddItem(".aspx.cs", CheckAction.EndsWith);
                     AddItem(".ascx.cs", CheckAction.EndsWith);
                     AddItem(".master.cs", CheckAction.EndsWith);
                     break;
-                case ListType.Excluded:
+                case DeveloperFileType.DesignerFile:
                     AddItem(".designer.cs", CheckAction.EndsWith);
                     break;
             }
@@ -55,24 +50,15 @@ namespace WebProjectValidator.FileListChecker
 
             switch (_Type)
             {
-                case ListType.Included:
+                case DeveloperFileType.SourceFile:
                     AddItem(".aspx.vb", CheckAction.EndsWith);
                     AddItem(".ascx.vb", CheckAction.EndsWith);
                     AddItem(".master.vb", CheckAction.EndsWith);
                     break;
-                case ListType.Excluded:
+                case DeveloperFileType.DesignerFile:
                     AddItem(".designer.vb", CheckAction.EndsWith);
                     break;
             }
-        }
-
-        internal void InitWeb()
-        {
-            Clear();
-
-            AddItem(".aspx", CheckAction.EndsWith);
-            AddItem(".ascx", CheckAction.EndsWith);
-            AddItem(".master", CheckAction.EndsWith);
         }
 
         public bool IsValid(string fileName)

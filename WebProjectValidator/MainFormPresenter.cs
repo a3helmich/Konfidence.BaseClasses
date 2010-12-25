@@ -48,18 +48,18 @@ namespace WebProjectValidator
             set { _LanguageType = value; }
         }
 
-        public FileType LanguageFileType
+        public LanguageFileType LanguageFileType
         {
             get
             {
                 switch (LanguageType)
                 {
                     case LanguageType.cs:
-                        return FileType.cs;
+                        return LanguageFileType.cs;
                     case LanguageType.vb:
-                        return FileType.vb;
+                        return LanguageFileType.vb;
                 }
-                return FileType.web;
+                return LanguageFileType.Unknown;
             }
         }
 
@@ -189,7 +189,20 @@ namespace WebProjectValidator
 
             configurationStore.Save();
         }
-    
 
+
+
+        public bool ConvertButtonsEnabled 
+        {
+            get
+            {
+                if (TabPageType.Equals(TabPageType.CodeFileCheck))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
     }
 }

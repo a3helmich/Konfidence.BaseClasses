@@ -80,12 +80,12 @@
             this.tsslValid = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTotal = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bFixToApplication = new System.Windows.Forms.Button();
+            this.bConvertToWebApplication = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.bFolderBrowse = new System.Windows.Forms.Button();
             this.lProjectFileNameDisplay = new System.Windows.Forms.Label();
             this.lProjectFileName = new System.Windows.Forms.Label();
-            this.bFixToProject = new System.Windows.Forms.Button();
+            this.bConvertToWebProject = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileMissing.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -150,7 +150,7 @@
             this.bStart.ForeColor = System.Drawing.SystemColors.ControlText;
             this.bStart.Location = new System.Drawing.Point(22, 12);
             this.bStart.Name = "bStart";
-            this.bStart.Size = new System.Drawing.Size(75, 23);
+            this.bStart.Size = new System.Drawing.Size(90, 23);
             this.bStart.TabIndex = 3;
             this.bStart.Text = "Start";
             this.bStart.UseVisualStyleBackColor = true;
@@ -180,7 +180,7 @@
             this.tpDesignerFileMissing.Padding = new System.Windows.Forms.Padding(3);
             this.tpDesignerFileMissing.Size = new System.Drawing.Size(948, 296);
             this.tpDesignerFileMissing.TabIndex = 1;
-            this.tpDesignerFileMissing.Text = "Designer File Missing";
+            this.tpDesignerFileMissing.Text = "Designer file missing";
             this.tpDesignerFileMissing.UseVisualStyleBackColor = true;
             // 
             // panel5
@@ -310,7 +310,7 @@
             this.tpCodeFileCheck.Padding = new System.Windows.Forms.Padding(3);
             this.tpCodeFileCheck.Size = new System.Drawing.Size(948, 296);
             this.tpCodeFileCheck.TabIndex = 0;
-            this.tpCodeFileCheck.Text = "CodeFile Check";
+            this.tpCodeFileCheck.Text = "Web type check";
             this.tpCodeFileCheck.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -427,7 +427,7 @@
             this.tpUserControlMissing.Padding = new System.Windows.Forms.Padding(3);
             this.tpUserControlMissing.Size = new System.Drawing.Size(948, 296);
             this.tpUserControlMissing.TabIndex = 2;
-            this.tpUserControlMissing.Text = "User Control Missing";
+            this.tpUserControlMissing.Text = "User control missing";
             this.tpUserControlMissing.UseVisualStyleBackColor = true;
             // 
             // panel6
@@ -623,16 +623,16 @@
             this.tsslRowCount.Text = "RowCount";
             this.tsslRowCount.Visible = false;
             // 
-            // bFixToApplication
+            // bConvertToWebApplication
             // 
-            this.bFixToApplication.Enabled = false;
-            this.bFixToApplication.Location = new System.Drawing.Point(123, 12);
-            this.bFixToApplication.Name = "bFixToApplication";
-            this.bFixToApplication.Size = new System.Drawing.Size(75, 23);
-            this.bFixToApplication.TabIndex = 6;
-            this.bFixToApplication.Text = "Fix to App";
-            this.bFixToApplication.UseVisualStyleBackColor = true;
-            this.bFixToApplication.Click += new System.EventHandler(this.bFixToApplication_Click);
+            this.bConvertToWebApplication.Enabled = false;
+            this.bConvertToWebApplication.Location = new System.Drawing.Point(123, 12);
+            this.bConvertToWebApplication.Name = "bConvertToWebApplication";
+            this.bConvertToWebApplication.Size = new System.Drawing.Size(90, 23);
+            this.bConvertToWebApplication.TabIndex = 6;
+            this.bConvertToWebApplication.Text = "Convert to App";
+            this.bConvertToWebApplication.UseVisualStyleBackColor = true;
+            this.bConvertToWebApplication.Click += new System.EventHandler(this.bConvertToWebApplication_Click);
             // 
             // bFolderBrowse
             // 
@@ -664,16 +664,16 @@
             this.lProjectFileName.TabIndex = 9;
             this.lProjectFileName.Text = "Project file";
             // 
-            // bFixToProject
+            // bConvertToWebProject
             // 
-            this.bFixToProject.Enabled = false;
-            this.bFixToProject.Location = new System.Drawing.Point(221, 12);
-            this.bFixToProject.Name = "bFixToProject";
-            this.bFixToProject.Size = new System.Drawing.Size(75, 23);
-            this.bFixToProject.TabIndex = 10;
-            this.bFixToProject.Text = "Fix to Proj";
-            this.bFixToProject.UseVisualStyleBackColor = true;
-            this.bFixToProject.Click += new System.EventHandler(this.bFixToProject_Click);
+            this.bConvertToWebProject.Enabled = false;
+            this.bConvertToWebProject.Location = new System.Drawing.Point(221, 12);
+            this.bConvertToWebProject.Name = "bConvertToWebProject";
+            this.bConvertToWebProject.Size = new System.Drawing.Size(90, 23);
+            this.bConvertToWebProject.TabIndex = 10;
+            this.bConvertToWebProject.Text = "Convert to Proj";
+            this.bConvertToWebProject.UseVisualStyleBackColor = true;
+            this.bConvertToWebProject.Click += new System.EventHandler(this.bConvertToWebProject_Click);
             // 
             // MainForm
             // 
@@ -681,11 +681,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 449);
-            this.Controls.Add(this.bFixToProject);
+            this.Controls.Add(this.bConvertToWebProject);
             this.Controls.Add(this.lProjectFileName);
             this.Controls.Add(this.lProjectFileNameDisplay);
             this.Controls.Add(this.bFolderBrowse);
-            this.Controls.Add(this.bFixToApplication);
+            this.Controls.Add(this.bConvertToWebApplication);
             this.Controls.Add(this.rbVB);
             this.Controls.Add(this.rbCS);
             this.Controls.Add(this.statusBar);
@@ -762,7 +762,7 @@
         private System.Windows.Forms.RadioButton rbUserControlInvalid;
         private System.Windows.Forms.RadioButton rbUserControlUnused;
         private System.Windows.Forms.RadioButton rbUserControlMissing;
-        private System.Windows.Forms.Button bFixToApplication;
+        private System.Windows.Forms.Button bConvertToWebApplication;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingExists;
@@ -775,7 +775,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingValid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingReason;
-        private System.Windows.Forms.Button bFixToProject;
+        private System.Windows.Forms.Button bConvertToWebProject;
     }
 }
 

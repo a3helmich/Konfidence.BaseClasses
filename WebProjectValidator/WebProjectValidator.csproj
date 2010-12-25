@@ -81,12 +81,16 @@
     <Compile Include="FileListChecker\CheckAction.cs" />
     <Compile Include="FileListChecker\CheckItem.cs" />
     <Compile Include="FileListChecker\CheckItemList.cs" />
+    <Compile Include="FileListChecker\FolderFilterList.cs" />
+    <Compile Include="FileListChecker\ListFiller.cs" />
+    <Compile Include="FileListChecker\ListType.cs" />
+    <Compile Include="FileListChecker\WebCheckItemList.cs" />
     <Compile Include="HelperClasses\ConfigurationStore.cs" />
     <Compile Include="HelperClasses\ControlReference.cs" />
     <Compile Include="HelperClasses\ControlReferenceList.cs" />
     <Compile Include="HelperClasses\DesignerFileItem.cs" />
     <Compile Include="FileListChecker\FileList.cs" />
-    <Compile Include="FileListChecker\FileType.cs" />
+    <Compile Include="FileListChecker\LanguageFileType.cs" />
     <Compile Include="FileListChecker\FileTypeChecker.cs" />
     <Compile Include="HelperClasses\FileReader.cs" />
     <Compile Include="HelperClasses\LanguageType.cs" />

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace WebProjectValidator.FileListChecker
 {
-    enum FileType
+    enum DeveloperFileType
     {
         Unknown = 0,
-        cs = 1,
-        vb = 2,
-        web = 3
+        DesignerFile = 1,
+        SourceFile = 2,
+        WebFile = 3
     }
 }

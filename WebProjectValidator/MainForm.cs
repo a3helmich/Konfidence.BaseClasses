@@ -31,30 +31,20 @@ namespace WebProjectValidator
             dgvUserControlMissing.AutoGenerateColumns = false;
         }
 
-        private void GetPresenter()
+        private void PresenterToForm()
         {
             tbSolutionFolder.Text = _Presenter.SolutionFolder;
             tbProjectName.Text = _Presenter.ProjectName;
+            lProjectFileNameDisplay.Text = _Presenter.ProjectFile;
+
             rbCS.Checked = _Presenter.IsCS;
             rbVB.Checked = _Presenter.IsVB;
-            lProjectFileNameDisplay.Text = _Presenter.ProjectFile;
+            
+            bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled;
+            bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled;
         }
 
-        private bool SetPresenter()
-        {
-            SetPresenterProperties();
-
-            if (_Presenter.Validate())
-            {
-                return true;
-            }
-
-            MessageBox.Show(_Presenter.ErrorMessage);
-
-            return false;
-        }
-
-        private void SetPresenterProperties()
+        private void FormToPresenter()
         {
             _Presenter.SolutionFolder = tbSolutionFolder.Text;
             _Presenter.ProjectName = tbProjectName.Text;
@@ -77,53 +67,53 @@ namespace WebProjectValidator
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            GetPresenter();
+            PresenterToForm();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SetPresenterProperties();
+            FormToPresenter();
 
             _Presenter.Close();
         }
 
         private void bStart_Click(object sender, EventArgs e)
         {
-            ExecuteStart();
-        }
+            FormToPresenter();
 
-        private void ExecuteStart()
-        {
-            if (SetPresenter())
+            if (!Execute())
             {
-                Execute();
+                MessageBox.Show(_Presenter.ErrorMessage);
             }
         }
 
-        private void Execute()
+        private bool Execute()
         {
-            switch (_Presenter.TabPageType)
+            if (_Presenter.Validate())
             {
-                case TabPageType.CodeFileCheck:
-                    CodeFileCheck();
-                    break;
-                case TabPageType.DesignerFileMissing:
-                    DesignerFileMissing();
-                    break;
-                case TabPageType.UserControlMissing:
-                    UserControlMissing();
-                    break;
+                switch (_Presenter.TabPageType)
+                {
+                    case TabPageType.CodeFileCheck:
+                        CodeFileCheck();
+                        break;
+                    case TabPageType.DesignerFileMissing:
+                        DesignerFileMissing();
+                        break;
+                    case TabPageType.UserControlMissing:
+                        UserControlMissing();
+                        break;
+                }
+                return true;
             }
+            return false;
         }
 
         private void DesignerFileMissing()
         {
-            FileList fileList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, ListType.Included);
-            FileList searchList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, ListType.Excluded);
+            FileList fileList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, DeveloperFileType.SourceFile);
+            FileList searchList = new FileList(_Presenter.ProjectFolder, _Presenter.LanguageFileType, DeveloperFileType.DesignerFile);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-            ListFilterType filter = ListFilterType.All;
-
-            filter = GetDesignerFileMissingFilterType();
+            ListFilterType filter = GetDesignerFileMissingFilterType();
 
             dgvDesignerFileMissing.DataSource = processor.processDesignerFileMissing(fileList, searchList, filter);
 
@@ -139,11 +129,9 @@ namespace WebProjectValidator
 
         private void CodeFileCheck()
         {
-            FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+            FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-            ListFilterType filter = ListFilterType.All;
-
-            filter = GetCodeFileCheckFilterType();
+            ListFilterType filter = GetCodeFileCheckFilterType();
 
             dgvCodeFileCheck.DataSource = processor.processCodeFileCheck(designerFileList, filter);
 
@@ -159,11 +147,9 @@ namespace WebProjectValidator
 
         private void UserControlMissing()
         {
-            FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+            FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-            ListFilterType filter = ListFilterType.All;
-
-            filter = GetUserControlMissingFilterType();
+            ListFilterType filter = GetUserControlMissingFilterType();
 
             dgvUserControlMissing.DataSource = processor.processUserControlMissing(designerFileList, filter);
 
@@ -234,17 +220,13 @@ namespace WebProjectValidator
             return ListFilterType.All;
         }
 
-        private void bFixToApplication_Click(object sender, EventArgs e)
+        private void bConvertToWebApplication_Click(object sender, EventArgs e)
         {
-            ExecuteStart();
-
             if (dgvCodeFileCheck.RowCount > 0)
             {
-                FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+                FileList designerFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
                 ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-                ListFilterType filter = ListFilterType.All;
-
-                filter = GetCodeFileCheckFilterType();
+                ListFilterType filter = GetCodeFileCheckFilterType();
 
                 List<DesignerFileItem> repairList = processor.processCodeFileCheck(designerFileList, filter);
 
@@ -252,45 +234,47 @@ namespace WebProjectValidator
             }
         }
 
-        private void bFixToProject_Click(object sender, EventArgs e)
+        private void bConvertToWebProject_Click(object sender, EventArgs e)
         {
-            ExecuteStart();
+            FormToPresenter();
 
             if (dgvCodeFileCheck.RowCount > 0)
             {
-                FileList designerFileList = new FileList(_Presenter.ProjectFolder, FileType.web, ListType.Included);
+                FileList sourceFileList = new FileList(_Presenter.ProjectFolder, LanguageFileType.cs, DeveloperFileType.WebFile);
                 ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-                ListFilterType filter = ListFilterType.All;
+                ListFilterType filter = GetCodeFileCheckFilterType();
 
-                filter = GetCodeFileCheckFilterType();
-
-                List<DesignerFileItem> repairList = processor.processCodeFileCheck(designerFileList, filter);
+                List<DesignerFileItem> repairList = processor.processCodeFileCheck(sourceFileList, filter);
 
                 processor.repairCodeFileToProject(repairList);
             }
+
+            PresenterToForm();
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab == tpCodeFileCheck)
-            {
-                bFixToApplication.Enabled = true;
-                bFixToProject.Enabled = true;
-            }
-            else
-            {
-                bFixToApplication.Enabled = false;
-                bFixToProject.Enabled = false;
-            }
+            FormToPresenter();
+
+            PresenterToForm();
         }
 
         private void bFolderBrowse_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog.SelectedPath = tbSolutionFolder.Text;
+            FormToPresenter();
+
+            SelectSolutionFolder();
+
+            PresenterToForm();
+        }
+
+        private void SelectSolutionFolder()
+        {
+            folderBrowserDialog.SelectedPath = _Presenter.SolutionFolder;
 
             if (folderBrowserDialog.ShowDialog().Equals(DialogResult.OK))
             {
-                tbSolutionFolder.Text = folderBrowserDialog.SelectedPath;
+                _Presenter.SolutionFolder = folderBrowserDialog.SelectedPath;
             }
         }
     }

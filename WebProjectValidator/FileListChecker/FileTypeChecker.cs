@@ -7,39 +7,39 @@ namespace WebProjectValidator.FileListChecker
 {
     class FileTypeChecker
     {
-        private FileType _FileType = FileType.cs;
+        private LanguageFileType _LanguageFileType = LanguageFileType.cs;
         private CheckItemList checkItemList = null;
 
         #region simple properties
-        internal FileType FileType
+        internal LanguageFileType FileType
         {
-            get { return _FileType; }
-            set { _FileType = value; }
+            get { return _LanguageFileType; }
+            set { _LanguageFileType = value; }
         }
         #endregion
 
-        public FileTypeChecker(ListType type)
+        public FileTypeChecker(LanguageFileType languageType)
         {
-            checkItemList = new CheckItemList(type);
+            _LanguageFileType = languageType;
         }
 
-        public void SetFileType(FileType type)
+        public void SetFileType(DeveloperFileType developerType)
         {
-            switch (type)
+            switch (developerType)
             {
-                case FileType.cs:
+                case DeveloperFileType.DesignerFile:
                     {
-                        checkItemList.InitCs();
+                        //checkItemList.InitCs(_LanguageFileType);
                         break;
                     }
-                case FileType.vb:
+                case DeveloperFileType.SourceFile:
                     {
-                        checkItemList.InitVb();
+                        //checkItemList.InitVb(_LanguageFileType);
                         break;
                     }
-                case FileType.web:
+                case DeveloperFileType.WebFile:
                     {
-                        checkItemList.InitWeb();
+                        checkItemList = new WebCheckItemList();
                         break;
                     }
             }
