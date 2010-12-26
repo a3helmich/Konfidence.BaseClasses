@@ -72,6 +72,16 @@ namespace Konfidence.TeamFoundation
             return BaseItem.IsAssigned(assignedObject);
         }
 
+        protected static bool IsEmpty(string assignedObject)
+        {
+            return BaseItem.IsEmpty(assignedObject);
+        }
+
+        protected static bool IsNull(string assignedObject)
+        {
+            return BaseItem.IsNull(assignedObject);
+        }
+
         protected List<XmlNode> GetItemGroupList(string itemGroupName)
         {
             List<XmlNode> returnList = new List<XmlNode>();

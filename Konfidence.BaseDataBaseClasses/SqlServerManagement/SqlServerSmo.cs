@@ -26,7 +26,7 @@ namespace Konfidence.BaseData.SqlServerManagement
 
         private bool PingSqlServerVersion(string databaseServerName, string userName, string password)
         {
-            if (IsAssigned(databaseServerName))
+            if (!IsEmpty(databaseServerName))
             {
                 _DatabaseServerName = databaseServerName;
                 _UserName = userName;
@@ -54,7 +54,7 @@ namespace Konfidence.BaseData.SqlServerManagement
             {
                 string result;
 
-                if (IsAssigned(_UserName) && IsAssigned(_Password))
+                if (!IsEmpty(_UserName) && !IsEmpty(_Password))
                 {
                     ServerConnection serverConnection = new ServerConnection(_DatabaseServerName, _UserName, _Password);
 
@@ -89,7 +89,7 @@ namespace Konfidence.BaseData.SqlServerManagement
         {
             Server server;
 
-            if (IsAssigned(userName) && IsAssigned(password))
+            if (!IsEmpty(userName) && !IsEmpty(password))
             {
                 ServerConnection serverConnection = new ServerConnection(databaseServerName, userName, password);
 

@@ -203,7 +203,7 @@ namespace Konfidence.TeamFoundation
 
         private void AddNameElement(XmlElement referenceElement, ReferenceItem referenceItem)
         {
-            if (IsAssigned(referenceItem.Name))
+            if (!IsEmpty(referenceItem.Name))
             {
                 AddElement(referenceElement, "Name", referenceItem.Name);
             }
@@ -223,7 +223,7 @@ namespace Konfidence.TeamFoundation
 
         private void AddHintPathElement(XmlElement referenceElement, ReferenceItem referenceItem)
         {
-            if (IsAssigned(referenceItem.HintPathElement))
+            if (!IsEmpty(referenceItem.HintPathElement))
             {
                 AddElement(referenceElement, "HintPath", referenceItem.HintPathElement);
             }
@@ -231,7 +231,7 @@ namespace Konfidence.TeamFoundation
 
         private void AddSpecificVersionElement(XmlElement referenceElement, ReferenceItem referenceItem)
         {
-            if (IsAssigned(referenceItem.SpecificVersionElement))
+            if (!IsEmpty(referenceItem.SpecificVersionElement))
             {
                 AddElement(referenceElement, "SpecificVersion", referenceItem.SpecificVersionElement);
             }
@@ -243,7 +243,7 @@ namespace Konfidence.TeamFoundation
 
             foreach (ContentItemNode content in ProjectFileItemNodeList)
             {
-                if (IsAssigned(content.Include))
+                if (!IsEmpty(content.Include))
                 {
                     fileList.Add(content.Include);
                 }
@@ -260,7 +260,7 @@ namespace Konfidence.TeamFoundation
             {
                 foreach (ContentItemNode content in ProjectFileItemNodeList)
                 {
-                    if (IsAssigned(content.Include))
+                    if (!IsEmpty(content.Include))
                     {
                         if (content.Include.EndsWith(filter, StringComparison.InvariantCultureIgnoreCase))
                         {

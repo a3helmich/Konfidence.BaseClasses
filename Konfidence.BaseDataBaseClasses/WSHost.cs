@@ -190,7 +190,7 @@ namespace Konfidence.BaseData
 		{
 			string wsUrl = ConfigurationManager.AppSettings[serviceName];
 
-			if (IsAssigned(wsUrl))
+            if (!IsEmpty(wsUrl))
 			{
 				return wsUrl;
 			}

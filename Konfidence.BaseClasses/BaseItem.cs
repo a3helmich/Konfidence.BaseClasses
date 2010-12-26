@@ -10,8 +10,17 @@ namespace Konfidence.Base
             get { return _ErrorMessage; }
         }
 
+        //public static bool IsAssigned(string assignedObject)
+        //{
+        //    return false;
+        //}
 		public static bool IsAssigned(object assignedObject)
 		{
+            if (assignedObject is string)
+            {
+                throw new InvalidCastException("IsAssigned is invalid for strings, use IsNull, IsEmpty or string.IsNullOrEmpty");
+            }
+
             if (assignedObject == null)
             {
                 return false;
@@ -20,9 +29,19 @@ namespace Konfidence.Base
 			return true;
 		}
 
-        public static bool IsEmpty(string newString) // ToDo : back to protected 
+        public static bool IsNull(string assignedString) // ToDo : back to protected 
         {
-            if (string.IsNullOrEmpty(newString))
+            if (assignedString == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool IsEmpty(string assignedString) // ToDo : back to protected 
+        {
+            if (string.IsNullOrEmpty(assignedString))
             {
                 return true;
             }
