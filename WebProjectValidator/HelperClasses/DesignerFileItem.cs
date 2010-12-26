@@ -8,7 +8,6 @@ namespace WebProjectValidator.HelperClasses
 {
     public class DesignerFileItem: BaseItem
     {
-        private string _Project = string.Empty;
         private string _ProjectFolder = string.Empty;
         private string _ControlFolder = ".";
         private string _FileName = string.Empty;
@@ -20,11 +19,6 @@ namespace WebProjectValidator.HelperClasses
         private bool _IsUsed = true;
 
         #region simple properties
-        public string Project
-        {
-            get { return _Project; }
-            set { _Project = value; }
-        }
 
         public string ProjectFolder
         {
@@ -111,15 +105,14 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public DesignerFileItem(string project, string projectFolder, ControlReference controlReference)
-            : this(project, projectFolder, controlReference.FileName)
+        public DesignerFileItem(string projectFolder, ControlReference controlReference)
+            : this(projectFolder, controlReference.FileName)
         {
             _ControlReference = controlReference;
         }
         
-        public DesignerFileItem(string project, string projectFolder, string fileName)
+        public DesignerFileItem(string projectFolder, string fileName)
         {
-            _Project = project;
             _ProjectFolder = projectFolder;
 
             _FileName = this.ReplaceIgnoreCase(fileName, ProjectFolder, string.Empty);

@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lProjectName = new System.Windows.Forms.Label();
             this.tbProjectName = new System.Windows.Forms.TextBox();
             this.rbCS = new System.Windows.Forms.RadioButton();
@@ -59,8 +59,8 @@
             this.dgvCodeFileValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvCodeFileControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rbCodeFileCheckValid = new System.Windows.Forms.RadioButton();
-            this.rbCodeFileCheckInvalid = new System.Windows.Forms.RadioButton();
+            this.rbCheckWebProject = new System.Windows.Forms.RadioButton();
+            this.rbCheckWebApplication = new System.Windows.Forms.RadioButton();
             this.tpUserControlMissing = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.dgvUserControlMissing = new System.Windows.Forms.DataGridView();
@@ -180,7 +180,7 @@
             this.tpDesignerFileMissing.Padding = new System.Windows.Forms.Padding(3);
             this.tpDesignerFileMissing.Size = new System.Drawing.Size(948, 296);
             this.tpDesignerFileMissing.TabIndex = 1;
-            this.tpDesignerFileMissing.Text = "Designer file missing";
+            this.tpDesignerFileMissing.Text = "Designer file";
             this.tpDesignerFileMissing.UseVisualStyleBackColor = true;
             // 
             // panel5
@@ -194,28 +194,28 @@
             // 
             // dgvDesignerFileMissing
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDesignerFileMissing.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDesignerFileMissing.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDesignerFileMissing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDesignerFileMissing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvFileMissingProject,
             this.dgvFileMissingFileName,
             this.dgvFileMissingExists,
             this.dgvFileMissingControlFolder});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDesignerFileMissing.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDesignerFileMissing.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDesignerFileMissing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDesignerFileMissing.Location = new System.Drawing.Point(0, 0);
             this.dgvDesignerFileMissing.Name = "dgvDesignerFileMissing";
@@ -310,7 +310,7 @@
             this.tpCodeFileCheck.Padding = new System.Windows.Forms.Padding(3);
             this.tpCodeFileCheck.Size = new System.Drawing.Size(948, 296);
             this.tpCodeFileCheck.TabIndex = 0;
-            this.tpCodeFileCheck.Text = "Web type check";
+            this.tpCodeFileCheck.Text = "Project type validation";
             this.tpCodeFileCheck.UseVisualStyleBackColor = true;
             // 
             // panel2
@@ -324,28 +324,28 @@
             // 
             // dgvCodeFileCheck
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCodeFileCheck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCodeFileCheck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCodeFileCheck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCodeFileCheck.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvCodeFileProject,
             this.dgvCodeFileFileName,
             this.dgvCodeFileValid,
             this.dgvCodeFileControlFolder});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCodeFileCheck.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCodeFileCheck.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvCodeFileCheck.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCodeFileCheck.Location = new System.Drawing.Point(0, 0);
             this.dgvCodeFileCheck.Name = "dgvCodeFileCheck";
@@ -386,37 +386,37 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.rbCodeFileCheckValid);
-            this.panel1.Controls.Add(this.rbCodeFileCheckInvalid);
+            this.panel1.Controls.Add(this.rbCheckWebProject);
+            this.panel1.Controls.Add(this.rbCheckWebApplication);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(942, 30);
             this.panel1.TabIndex = 0;
             // 
-            // rbCodeFileCheckValid
+            // rbCheckWebProject
             // 
-            this.rbCodeFileCheckValid.AutoSize = true;
-            this.rbCodeFileCheckValid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbCodeFileCheckValid.Location = new System.Drawing.Point(145, 7);
-            this.rbCodeFileCheckValid.Name = "rbCodeFileCheckValid";
-            this.rbCodeFileCheckValid.Size = new System.Drawing.Size(113, 17);
-            this.rbCodeFileCheckValid.TabIndex = 6;
-            this.rbCodeFileCheckValid.Text = "Invalid web project";
-            this.rbCodeFileCheckValid.UseVisualStyleBackColor = true;
+            this.rbCheckWebProject.AutoSize = true;
+            this.rbCheckWebProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbCheckWebProject.Location = new System.Drawing.Point(145, 7);
+            this.rbCheckWebProject.Name = "rbCheckWebProject";
+            this.rbCheckWebProject.Size = new System.Drawing.Size(82, 17);
+            this.rbCheckWebProject.TabIndex = 6;
+            this.rbCheckWebProject.Text = "Web project";
+            this.rbCheckWebProject.UseVisualStyleBackColor = true;
             // 
-            // rbCodeFileCheckInvalid
+            // rbCheckWebApplication
             // 
-            this.rbCodeFileCheckInvalid.AutoSize = true;
-            this.rbCodeFileCheckInvalid.Checked = true;
-            this.rbCodeFileCheckInvalid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbCodeFileCheckInvalid.Location = new System.Drawing.Point(12, 7);
-            this.rbCodeFileCheckInvalid.Name = "rbCodeFileCheckInvalid";
-            this.rbCodeFileCheckInvalid.Size = new System.Drawing.Size(132, 17);
-            this.rbCodeFileCheckInvalid.TabIndex = 5;
-            this.rbCodeFileCheckInvalid.TabStop = true;
-            this.rbCodeFileCheckInvalid.Text = "Invalid web application";
-            this.rbCodeFileCheckInvalid.UseVisualStyleBackColor = true;
+            this.rbCheckWebApplication.AutoSize = true;
+            this.rbCheckWebApplication.Checked = true;
+            this.rbCheckWebApplication.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbCheckWebApplication.Location = new System.Drawing.Point(12, 7);
+            this.rbCheckWebApplication.Name = "rbCheckWebApplication";
+            this.rbCheckWebApplication.Size = new System.Drawing.Size(101, 17);
+            this.rbCheckWebApplication.TabIndex = 5;
+            this.rbCheckWebApplication.TabStop = true;
+            this.rbCheckWebApplication.Text = "Web application";
+            this.rbCheckWebApplication.UseVisualStyleBackColor = true;
             // 
             // tpUserControlMissing
             // 
@@ -441,28 +441,28 @@
             // 
             // dgvUserControlMissing
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUserControlMissing.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvUserControlMissing.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvUserControlMissing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUserControlMissing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvUserControlMissingProject,
             this.dgvUserControlMissingFileName,
             this.dgvUserControlMissingValid,
             this.dgvUserControlMissingReason});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUserControlMissing.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUserControlMissing.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvUserControlMissing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUserControlMissing.Location = new System.Drawing.Point(0, 0);
             this.dgvUserControlMissing.Name = "dgvUserControlMissing";
@@ -754,8 +754,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileValid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileControlFolder;
-        private System.Windows.Forms.RadioButton rbCodeFileCheckValid;
-        private System.Windows.Forms.RadioButton rbCodeFileCheckInvalid;
+        private System.Windows.Forms.RadioButton rbCheckWebProject;
+        private System.Windows.Forms.RadioButton rbCheckWebApplication;
         private System.Windows.Forms.ToolStripStatusLabel tsslRowCount;
         private System.Windows.Forms.RadioButton rbUserControlAll;
         private System.Windows.Forms.RadioButton rbUserControlValid;

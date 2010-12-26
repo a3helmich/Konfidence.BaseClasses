@@ -96,7 +96,7 @@ namespace WebProjectValidator.HelperClasses
             {
                 if (projectFileList.Contains(fileName.Substring(0, fileName.Length - 3), StringComparer.CurrentCultureIgnoreCase))
                 {
-                    DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+                    DesignerFileItem designerFileItem = new DesignerFileItem(_Folder, fileName);
 
                     string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
 
@@ -126,6 +126,20 @@ namespace WebProjectValidator.HelperClasses
             return resultList;
         }
 
+        public List<DesignerFileItem> GetWebApplicationFileList()
+        {
+            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+
+            return resultList;
+        }
+
+        public List<DesignerFileItem> GetWebProjectFileList()
+        {
+            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+
+            return resultList;
+        }
+
         public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ListFilterType filter)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
@@ -133,6 +147,7 @@ namespace WebProjectValidator.HelperClasses
             _Count = 0;
             _ValidCount = 0;
             _InvalidCount = 0;
+
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
@@ -145,7 +160,7 @@ namespace WebProjectValidator.HelperClasses
                 {
                     List<string> fileLines = FileReader.ReadLines(fileName);
 
-                    DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, fileName);
+                    DesignerFileItem designerFileItem = new DesignerFileItem( _Folder, fileName);
 
                     designerFileItem.Valid = IsValidCodeFile(fileLines);
 
@@ -240,7 +255,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (ControlReference controlReference in allUserControlReferences)
             {
-                DesignerFileItem designerFileItem = new DesignerFileItem(_Project, _Folder, controlReference);
+                DesignerFileItem designerFileItem = new DesignerFileItem( _Folder, controlReference);
 
                 designerFileItem.Valid = true;
 
@@ -397,7 +412,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public void repairCodeFileToApplication(List<DesignerFileItem> repairList)
+        public void ConvertToWebApplication(List<DesignerFileItem> repairList)
         {
             foreach (DesignerFileItem fileItem in repairList)
             {
@@ -431,7 +446,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public void repairCodeFileToProject(List<DesignerFileItem> repairList)
+        public void ConvertToWebProject(List<DesignerFileItem> repairList)
         {
             foreach (DesignerFileItem fileItem in repairList)
             {

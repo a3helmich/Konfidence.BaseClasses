@@ -7,7 +7,7 @@ using WebProjectValidator.EnumTypes;
 
 namespace WebProjectValidator.FileListChecker
 {
-    class FileList:List<string>
+    public class FileList : List<string>
     {
         private FolderFilterList _FolderFilterList = new FolderFilterList();
 

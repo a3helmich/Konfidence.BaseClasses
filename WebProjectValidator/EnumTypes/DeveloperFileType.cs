@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WebProjectValidator.EnumTypes
 {
-    enum DeveloperFileType
+    public enum DeveloperFileType
     {
         Unknown = 0,
         DesignerFile = 1,

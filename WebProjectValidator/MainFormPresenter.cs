@@ -17,6 +17,8 @@ namespace WebProjectValidator
         private LanguageType _LanguageType = LanguageType.Unknown;
         private TabPageType _TabPageType = TabPageType.Unknown;
 
+        private bool _IsWebProjectCheck;
+
 #region simple properties
         public string SolutionFolder
         {
@@ -55,6 +57,12 @@ namespace WebProjectValidator
             set { _TabPageType = value; }
         }
 
+        public bool IsWebProjectCheck
+        {
+            get { return _IsWebProjectCheck; }
+            set { _IsWebProjectCheck = value; }
+        }
+
 #endregion simple properties
 
         public bool IsCS
@@ -83,6 +91,35 @@ namespace WebProjectValidator
             get { return !IsCS; }
         }
 
+        public ListFilterType FilterType
+        {
+            get
+            {
+                switch (_TabPageType)
+                {
+                    case TabPageType.CodeFileCheck:
+                        {
+                            return ListFilterType.Unknown;
+                        }
+                    case TabPageType.DesignerFileMissing:
+                        {
+                            if (IsWebProjectCheck)
+                            {
+                                return ListFilterType.WebProject;
+                            }
+
+                            return ListFilterType.WebApplication;
+                        }
+                    case TabPageType.UserControlMissing:
+                        {
+                            return ListFilterType.Unknown;
+                        }
+                }
+
+                return ListFilterType.Unknown;
+            }
+        }
+
         public string ProjectFile
         {
             get
@@ -90,12 +127,40 @@ namespace WebProjectValidator
                 switch (LanguageType)
                 {
                     case LanguageType.cs:
-                        return ProjectFolder + @"\" + ProjectName + ".csproj";
+                        {
+                            return ProjectFolder + @"\" + ProjectName + ".csproj";
+                        }
                     case LanguageType.vb:
-                        return ProjectFolder + @"\" + ProjectName + ".vbproj";
+                        {
+                            return ProjectFolder + @"\" + ProjectName + ".vbproj";
+                        }
                 }
 
                 return "Unknown projectfile";
+            }
+        }
+
+        public FileList WebFileList
+        {
+            get
+            {
+                return new FileList(ProjectFolder, LanguageType, DeveloperFileType.WebFile);
+            }
+        }
+
+        public FileList SourceFileList
+        {
+            get
+            {
+                return new FileList(ProjectFolder, LanguageType, DeveloperFileType.SourceFile);
+            }
+        }
+
+        public FileList DesignerFileList
+        {
+            get
+            {
+                return new FileList(ProjectFolder, LanguageType, DeveloperFileType.DesignerFile);
             }
         }
 
@@ -175,8 +240,6 @@ namespace WebProjectValidator
 
             configurationStore.Save();
         }
-
-
 
         public bool ConvertButtonsEnabled 
         {

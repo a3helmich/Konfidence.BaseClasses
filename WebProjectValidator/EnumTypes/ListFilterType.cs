@@ -13,6 +13,8 @@ namespace WebProjectValidator.EnumTypes
         Invalid = 3,
         DesignerFileExists = 4,
         DesignerFileMissing = 5,
-        Unused = 6
+        Unused = 6,
+        WebProject,
+        WebApplication
     }
 }

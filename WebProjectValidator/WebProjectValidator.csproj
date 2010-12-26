@@ -92,6 +92,7 @@
     <Compile Include="HelperClasses\ControlReferenceList.cs" />
     <Compile Include="HelperClasses\DesignerFileItem.cs" />
     <Compile Include="FileListChecker\FileList.cs" />
+    <Compile Include="HelperClasses\DesignerFileItemList.cs" />
     <Compile Include="HelperClasses\FileReader.cs" />
     <Compile Include="EnumTypes\LanguageType.cs" />
     <Compile Include="EnumTypes\ListFilterType.cs" />
