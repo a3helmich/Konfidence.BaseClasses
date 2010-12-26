@@ -12,7 +12,7 @@ namespace WebProjectValidator.HelperClasses
     class ListProcessor: BaseItem
     {
         private string _Project = string.Empty;
-        private string _Folder = string.Empty;
+        private string _ProjectFolder = string.Empty;
         private string _ProjectFile = string.Empty;
         private LanguageType _LanguageType = LanguageType.cs;
 
@@ -52,10 +52,10 @@ namespace WebProjectValidator.HelperClasses
         }
         #endregion simple properties
 
-        public ListProcessor(string project, string folder, LanguageType language, string projectFile)
+        public ListProcessor(string project, string projectFolder, LanguageType language, string projectFile)
         {
             _Project = project;
-            _Folder = folder;
+            _ProjectFolder = projectFolder;
             _ProjectFile = projectFile;
 
             _LanguageType = language;
@@ -88,7 +88,7 @@ namespace WebProjectValidator.HelperClasses
 
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
-            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
             _ProjectFileName = projectFileProcessor.ProjectFileName;
 
@@ -96,7 +96,7 @@ namespace WebProjectValidator.HelperClasses
             {
                 if (projectFileList.Contains(fileName.Substring(0, fileName.Length - 3), StringComparer.CurrentCultureIgnoreCase))
                 {
-                    DesignerFileItem designerFileItem = new DesignerFileItem(_Folder, fileName);
+                    DesignerFileItem designerFileItem = new DesignerFileItem(_ProjectFolder, fileName);
 
                     string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
 
@@ -150,7 +150,7 @@ namespace WebProjectValidator.HelperClasses
 
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
-            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
             _ProjectFileName = projectFileProcessor.ProjectFileName;
 
@@ -160,7 +160,7 @@ namespace WebProjectValidator.HelperClasses
                 {
                     List<string> fileLines = FileReader.ReadLines(fileName);
 
-                    DesignerFileItem designerFileItem = new DesignerFileItem( _Folder, fileName);
+                    DesignerFileItem designerFileItem = new DesignerFileItem( _ProjectFolder, fileName);
 
                     designerFileItem.Valid = IsValidCodeFile(fileLines);
 
@@ -211,7 +211,7 @@ namespace WebProjectValidator.HelperClasses
 
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
-            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_Folder, _ExtensionFilter);
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
             _ProjectFileName = projectFileProcessor.ProjectFileName;
 
@@ -219,7 +219,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (string fileName in fileList)
             {
-                string fileFolder = fileName.Replace(_Folder, "");
+                string fileFolder = fileName.Replace(_ProjectFolder, "");
 
                 if (fileFolder.Contains(@"\"))
                 {
@@ -255,7 +255,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (ControlReference controlReference in allUserControlReferences)
             {
-                DesignerFileItem designerFileItem = new DesignerFileItem( _Folder, controlReference);
+                DesignerFileItem designerFileItem = new DesignerFileItem( _ProjectFolder, controlReference);
 
                 designerFileItem.Valid = true;
 
@@ -414,6 +414,8 @@ namespace WebProjectValidator.HelperClasses
 
         public void ConvertToWebApplication(List<DesignerFileItem> repairList)
         {
+            CheckFileBackupDirectory();
+
             foreach (DesignerFileItem fileItem in repairList)
             {
                 if (!fileItem.Valid)
@@ -422,32 +424,31 @@ namespace WebProjectValidator.HelperClasses
 
                     List<string> newFileLines = fixCodeFileToApplication(fileLines);
 
-                    if (!Directory.Exists(fileItem.ProjectFolder + @"\fileBackup"))
-                    {
-                        Directory.CreateDirectory(fileItem.ProjectFolder + @"\fileBackup");
-                    }
-
-                    if (!File.Exists(fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName))
-                    {
-                        File.Copy(fileItem.FullFileName, fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName, true);
-                    }
-
                     if (IsAssigned(newFileLines))
                     {
-                        using (TextWriter textWriter = new StreamWriter(fileItem.FullFileName, false, Encoding.Default))
+                        if (!File.Exists(fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName))
                         {
-                            foreach (string line in newFileLines)
-                            {
-                                textWriter.WriteLine(line);
-                            }
+                            File.Copy(fileItem.FullFileName, fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName, true);
                         }
+
+                        FileWriter.WriteLines(fileItem.FullFileName, newFileLines);
                     }
                 }
             }
         }
 
+        private void CheckFileBackupDirectory()
+        {
+            if (!Directory.Exists(_ProjectFolder + @"\fileBackup"))
+            {
+                Directory.CreateDirectory(_ProjectFolder + @"\fileBackup");
+            }
+        }
+
         public void ConvertToWebProject(List<DesignerFileItem> repairList)
         {
+            CheckFileBackupDirectory();
+
             foreach (DesignerFileItem fileItem in repairList)
             {
                 if (fileItem.Valid) // even omgekeerde logica (2 keer)
@@ -456,11 +457,6 @@ namespace WebProjectValidator.HelperClasses
 
                     List<string> newFileLines = fixCodeFileToProject(fileLines);
 
-                    if (!Directory.Exists(fileItem.ProjectFolder + @"\fileBackup"))
-                    {
-                        Directory.CreateDirectory(fileItem.ProjectFolder + @"\fileBackup");
-                    }
-
                     if (!File.Exists(fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName))
                     {
                         File.Copy(fileItem.FullFileName, fileItem.ProjectFolder + @"\fileBackup" + @"\" + fileItem.FileName, true);
@@ -468,13 +464,7 @@ namespace WebProjectValidator.HelperClasses
 
                     if (IsAssigned(newFileLines))
                     {
-                        using (TextWriter textWriter = new StreamWriter(fileItem.FullFileName, false, Encoding.Default))
-                        {
-                            foreach (string line in newFileLines)
-                            {
-                                textWriter.WriteLine(line);
-                            }
-                        }
+                        FileWriter.WriteLines(fileItem.FullFileName, newFileLines);
                     }
                 }
             }

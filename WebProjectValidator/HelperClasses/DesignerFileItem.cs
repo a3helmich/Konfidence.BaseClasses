@@ -76,28 +76,28 @@ namespace WebProjectValidator.HelperClasses
             {
                 string fullFileName = string.Empty;
 
-                if (_FileName.StartsWith("~"))
+                //if (_FileName.StartsWith("~"))
+                //{
+                //    fullFileName = _FileName.Replace("~", _ProjectFolder);
+                //}
+                //else
+                //{
+                if (_ControlFolder == ".")
                 {
-                    fullFileName = _FileName.Replace("~", _ProjectFolder);
+                    fullFileName = _ProjectFolder + @"\" + _FileName;
                 }
                 else
                 {
-                    if (_ControlFolder == ".")
+                    if (_ControlFolder.StartsWith("~"))
                     {
-                        fullFileName = _ProjectFolder + @"\" + _FileName;
+                        fullFileName = _ControlFolder.Replace("~", _ProjectFolder) + @"\" + _FileName;
                     }
                     else
                     {
-                        if (_ControlFolder.StartsWith("~"))
-                        {
-                            fullFileName = _ControlFolder.Replace("~", _ProjectFolder) + @"\" + _FileName;
-                        }
-                        else
-                        {
-                            fullFileName = _ProjectFolder + @"\" + _ControlFolder + @"\" + _FileName;
-                        }
+                        fullFileName = _ProjectFolder + @"\" + _ControlFolder + @"\" + _FileName;
                     }
                 }
+                //}
 
                 fullFileName = fullFileName.Replace("/", @"\");
 

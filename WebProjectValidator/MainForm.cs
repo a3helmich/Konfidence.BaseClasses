@@ -220,13 +220,11 @@ namespace WebProjectValidator
 
             ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
 
-            List<DesignerFileItem> repairList = processor.processCodeFileCheck(_Presenter.WebFileList, _Presenter.FilterType);
-
             // web application uses no projectfile -> all files must be converted
-            // the FileList WebFileList must transfered to a DesignerFileItemList
-
+            // the FileList WebFileList must be transfered to a DesignerFileItemList
             DesignerFileItemList FileItemList = new DesignerFileItemList(_Presenter.ProjectFolder,_Presenter.WebFileList);
-            processor.ConvertToWebApplication(repairList);
+
+            processor.ConvertToWebApplication(FileItemList);
 
             PresenterToForm();
         }

@@ -96,6 +96,7 @@
     <Compile Include="HelperClasses\FileReader.cs" />
     <Compile Include="EnumTypes\LanguageType.cs" />
     <Compile Include="EnumTypes\ListFilterType.cs" />
+    <Compile Include="HelperClasses\FileWriter.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
     <Compile Include="HelperClasses\ProjectFileProcessor.cs" />
     <Compile Include="EnumTypes\TabPageType.cs" />
