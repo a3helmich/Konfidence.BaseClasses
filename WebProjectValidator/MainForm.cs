@@ -222,9 +222,9 @@ namespace WebProjectValidator
 
             // web application uses no projectfile -> all files must be converted
             // the FileList WebFileList must be transfered to a DesignerFileItemList
-            DesignerFileItemList FileItemList = new DesignerFileItemList(_Presenter.ProjectFolder,_Presenter.WebFileList);
+            DesignerFileItemList webFileItemList = new DesignerFileItemList(_Presenter.ProjectFolder,_Presenter.WebFileList);
 
-            processor.ConvertToWebApplication(FileItemList);
+            processor.ConvertToWebApplication(webFileItemList);
 
             PresenterToForm();
         }
