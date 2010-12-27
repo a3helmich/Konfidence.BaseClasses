@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 namespace Konfidence.Base
 {
 	public class BaseItem
@@ -16,9 +17,13 @@ namespace Konfidence.Base
         //}
 		public static bool IsAssigned(object assignedObject)
 		{
-            if (assignedObject is string)
+            if (Debugger.IsAttached)
             {
-                throw new InvalidCastException("IsAssigned is invalid for strings, use IsNull, IsEmpty or string.IsNullOrEmpty");
+                // TODO : write exceptions to a logFile (introduce exclusion attribute?)
+                if (assignedObject is string)
+                {
+                    throw new InvalidCastException("IsAssigned is invalid for strings, use IsNull, IsEmpty or string.IsNullOrEmpty");
+                }
             }
 
             if (assignedObject == null)

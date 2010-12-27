@@ -51,9 +51,9 @@
             this.rbDesignerFileAll = new System.Windows.Forms.RadioButton();
             this.rbDesignerFileExists = new System.Windows.Forms.RadioButton();
             this.rbDesignerFileMissing = new System.Windows.Forms.RadioButton();
-            this.tpCodeFileCheck = new System.Windows.Forms.TabPage();
+            this.tpProjectTypeValidation = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dgvCodeFileCheck = new System.Windows.Forms.DataGridView();
+            this.dgvProjectTypeValidation = new System.Windows.Forms.DataGridView();
             this.dgvCodeFileProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvCodeFileFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvCodeFileValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,9 +91,9 @@
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDesignerFileMissing)).BeginInit();
             this.panel3.SuspendLayout();
-            this.tpCodeFileCheck.SuspendLayout();
+            this.tpProjectTypeValidation.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFileCheck)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjectTypeValidation)).BeginInit();
             this.panel1.SuspendLayout();
             this.tpUserControlMissing.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -162,7 +162,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tpDesignerFileMissing);
-            this.tabControl.Controls.Add(this.tpCodeFileCheck);
+            this.tabControl.Controls.Add(this.tpProjectTypeValidation);
             this.tabControl.Controls.Add(this.tpUserControlMissing);
             this.tabControl.Location = new System.Drawing.Point(16, 102);
             this.tabControl.Name = "tabControl";
@@ -301,28 +301,28 @@
             this.rbDesignerFileMissing.Text = "Missing";
             this.rbDesignerFileMissing.UseVisualStyleBackColor = true;
             // 
-            // tpCodeFileCheck
+            // tpProjectTypeValidation
             // 
-            this.tpCodeFileCheck.Controls.Add(this.panel2);
-            this.tpCodeFileCheck.Controls.Add(this.panel1);
-            this.tpCodeFileCheck.Location = new System.Drawing.Point(4, 22);
-            this.tpCodeFileCheck.Name = "tpCodeFileCheck";
-            this.tpCodeFileCheck.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCodeFileCheck.Size = new System.Drawing.Size(948, 296);
-            this.tpCodeFileCheck.TabIndex = 0;
-            this.tpCodeFileCheck.Text = "Project type validation";
-            this.tpCodeFileCheck.UseVisualStyleBackColor = true;
+            this.tpProjectTypeValidation.Controls.Add(this.panel2);
+            this.tpProjectTypeValidation.Controls.Add(this.panel1);
+            this.tpProjectTypeValidation.Location = new System.Drawing.Point(4, 22);
+            this.tpProjectTypeValidation.Name = "tpProjectTypeValidation";
+            this.tpProjectTypeValidation.Padding = new System.Windows.Forms.Padding(3);
+            this.tpProjectTypeValidation.Size = new System.Drawing.Size(948, 296);
+            this.tpProjectTypeValidation.TabIndex = 0;
+            this.tpProjectTypeValidation.Text = "Project type validation";
+            this.tpProjectTypeValidation.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dgvCodeFileCheck);
+            this.panel2.Controls.Add(this.dgvProjectTypeValidation);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 33);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(942, 260);
             this.panel2.TabIndex = 1;
             // 
-            // dgvCodeFileCheck
+            // dgvProjectTypeValidation
             // 
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -331,9 +331,9 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCodeFileCheck.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvCodeFileCheck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCodeFileCheck.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvProjectTypeValidation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvProjectTypeValidation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProjectTypeValidation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvCodeFileProject,
             this.dgvCodeFileFileName,
             this.dgvCodeFileValid,
@@ -345,13 +345,13 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCodeFileCheck.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvCodeFileCheck.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCodeFileCheck.Location = new System.Drawing.Point(0, 0);
-            this.dgvCodeFileCheck.Name = "dgvCodeFileCheck";
-            this.dgvCodeFileCheck.RowHeadersVisible = false;
-            this.dgvCodeFileCheck.Size = new System.Drawing.Size(942, 260);
-            this.dgvCodeFileCheck.TabIndex = 0;
+            this.dgvProjectTypeValidation.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvProjectTypeValidation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvProjectTypeValidation.Location = new System.Drawing.Point(0, 0);
+            this.dgvProjectTypeValidation.Name = "dgvProjectTypeValidation";
+            this.dgvProjectTypeValidation.RowHeadersVisible = false;
+            this.dgvProjectTypeValidation.Size = new System.Drawing.Size(942, 260);
+            this.dgvProjectTypeValidation.TabIndex = 0;
             // 
             // dgvCodeFileProject
             // 
@@ -705,9 +705,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDesignerFileMissing)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.tpCodeFileCheck.ResumeLayout(false);
+            this.tpProjectTypeValidation.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCodeFileCheck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProjectTypeValidation)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tpUserControlMissing.ResumeLayout(false);
@@ -730,7 +730,7 @@
         private System.Windows.Forms.RadioButton rbCS;
         private System.Windows.Forms.Button bStart;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tpCodeFileCheck;
+        private System.Windows.Forms.TabPage tpProjectTypeValidation;
         private System.Windows.Forms.TabPage tpDesignerFileMissing;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
@@ -739,7 +739,7 @@
         private System.Windows.Forms.TabPage tpUserControlMissing;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridView dgvCodeFileCheck;
+        private System.Windows.Forms.DataGridView dgvProjectTypeValidation;
         private System.Windows.Forms.DataGridView dgvDesignerFileMissing;
         private System.Windows.Forms.DataGridView dgvUserControlMissing;
         private System.Windows.Forms.TextBox tbSolutionFolder;

@@ -18,6 +18,11 @@ namespace WebProjectValidator
         private TabPageType _TabPageType = TabPageType.Unknown;
 
         private bool _IsWebProjectCheck;
+        private int _ProjectFileCount = 0;
+        private int _ProjectFileValidCount = 0;
+        private int _ProjectFileInvalidCount = 0;
+        private int _ProjectFileListCount = 0;
+        private List<DesignerFileItem> _ProjectTypeValidationList;
 
 #region simple properties
         public string SolutionFolder
@@ -63,6 +68,45 @@ namespace WebProjectValidator
             set { _IsWebProjectCheck = value; }
         }
 
+        public int ProjectFileCount
+        {
+            get { return _ProjectFileCount; }
+        }
+
+        public int ProjectFileValidCount
+        {
+            get { return _ProjectFileValidCount; }
+        }
+
+        public int ProjectFileInvalidCount
+        {
+            get { return _ProjectFileInvalidCount; }
+        }
+
+        public int ProjectFileListCount
+        {
+            get { return _ProjectFileListCount; }
+        }
+
+        public string ProjectFileCountText
+        {
+            get { return "Total: " + _ProjectFileCount; }
+        }
+
+        public string ProjectFileValidCountText
+        {
+            get { return "Valid: " + _ProjectFileValidCount; }
+        }
+
+        public string ProjectFileInvalidCountText
+        {
+            get { return "Invalid: " + _ProjectFileInvalidCount; }
+        }
+
+        public string ProjectFileListCountText
+        {
+            get { return "RowCount: " + _ProjectFileListCount; }
+        }
 #endregion simple properties
 
         public bool IsCS
@@ -97,7 +141,7 @@ namespace WebProjectValidator
             {
                 switch (_TabPageType)
                 {
-                    case TabPageType.CodeFileCheck:
+                    case TabPageType.ProjectTypeValidation:
                         {
                             return ListFilterType.Unknown;
                         }
@@ -137,6 +181,14 @@ namespace WebProjectValidator
                 }
 
                 return "Unknown projectfile";
+            }
+        }
+
+        public List<DesignerFileItem> ProjectTypeValidationList
+        {
+            get
+            {
+                return _ProjectTypeValidationList;
             }
         }
 
@@ -241,17 +293,77 @@ namespace WebProjectValidator
             configurationStore.Save();
         }
 
-        public bool ConvertButtonsEnabled 
+        public bool ConvertButtonsEnabled ()
         {
-            get
+            if (TabPageType.Equals(TabPageType.ProjectTypeValidation))
             {
-                if (TabPageType.Equals(TabPageType.CodeFileCheck))
-                {
-                    return true;
-                }
-
-                return false;
+                return true;
             }
+
+            return false;
+        }
+
+        public bool ProjectTypeValidationItemVisible()
+        {
+            if (TabPageType.Equals(TabPageType.ProjectTypeValidation))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void ConvertToWebApplication()
+        {
+            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+
+            // TODO : DesignerFileItem -> doesn't feel right
+            // TODO : property?
+            // web application uses no projectfile -> all files must be converted
+            DesignerFileItemList webFileItemList = new DesignerFileItemList(ProjectFolder, WebFileList);
+
+            processor.ConvertToWebApplication(webFileItemList);
+        }
+
+        public void ConvertToWebProject()
+        {
+            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+
+            // TODO : just get a list of all projectFiles without any processing
+            List<DesignerFileItem> webProjectFileItemList = processor.processCodeFileCheck(WebFileList, FilterType);
+
+            // web project uses a projectfile -> only files included in the project file must be converted
+            processor.ConvertToWebProject(webProjectFileItemList);
+        }
+
+        internal void ResetCalculatedProperties()
+        {
+            _ProjectFileCount = 0;
+            _ProjectFileValidCount = 0;
+            _ProjectFileInvalidCount = 0;
+            _ProjectFileListCount = 0;
+
+            _ProjectTypeValidationList = null;
+        }
+
+        public void ProjectTypeValidation()
+        {
+            ResetCalculatedProperties();
+
+            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+
+            if (IsWebProjectCheck)
+            {
+                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, FilterType);
+            }
+            else
+            {
+                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, FilterType);
+            }
+
+            _ProjectFileCount = processor.Count;
+            _ProjectFileValidCount = processor.ValidCount;
+            _ProjectFileInvalidCount = processor.InvalidCount;
+            _ProjectFileListCount = _ProjectTypeValidationList.Count;
         }
     }
 }

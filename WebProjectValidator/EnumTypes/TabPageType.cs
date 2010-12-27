@@ -9,7 +9,7 @@ namespace WebProjectValidator.EnumTypes
     {
         Unknown = 0,
         DesignerFileMissing = 1,
-        CodeFileCheck = 2,
+        ProjectTypeValidation = 2,
         UserControlMissing = 3,
     }
 }

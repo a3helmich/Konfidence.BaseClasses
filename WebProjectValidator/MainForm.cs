@@ -28,7 +28,7 @@ namespace WebProjectValidator
         private void InitializeComponentEx()
         {
             dgvDesignerFileMissing.AutoGenerateColumns = false;
-            dgvCodeFileCheck.AutoGenerateColumns = false;
+            dgvProjectTypeValidation.AutoGenerateColumns = false;
             dgvUserControlMissing.AutoGenerateColumns = false;
         }
 
@@ -41,8 +41,22 @@ namespace WebProjectValidator
             rbCS.Checked = _Presenter.IsCS;
             rbVB.Checked = _Presenter.IsVB;
             
-            bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled;
-            bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled;
+            bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled();
+            bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled();
+
+        #region ProjectTypeValidation
+            tsslTotal.Visible = _Presenter.ProjectTypeValidationItemVisible();
+            tsslValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
+            tsslInValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
+            tsslRowCount.Visible = _Presenter.ProjectTypeValidationItemVisible();
+
+            tsslTotal.Text = _Presenter.ProjectFileCountText;
+            tsslValid.Text = _Presenter.ProjectFileValidCountText;
+            tsslInValid.Text = _Presenter.ProjectFileInvalidCountText;
+            tsslRowCount.Text = _Presenter.ProjectFileListCountText;
+
+            dgvProjectTypeValidation.DataSource = _Presenter.ProjectTypeValidationList;
+        #endregion ProjectTypeValidation
         }
 
         private void FormToPresenter()
@@ -57,9 +71,9 @@ namespace WebProjectValidator
             {
                 _Presenter.TabPageType = TabPageType.DesignerFileMissing;
             }
-            if (tabControl.SelectedTab.Equals(tpCodeFileCheck))
+            if (tabControl.SelectedTab.Equals(tpProjectTypeValidation))
             {
-                _Presenter.TabPageType = TabPageType.CodeFileCheck;
+                _Presenter.TabPageType = TabPageType.ProjectTypeValidation;
             }
             if (tabControl.SelectedTab.Equals(tpUserControlMissing))
             {
@@ -95,8 +109,8 @@ namespace WebProjectValidator
             {
                 switch (_Presenter.TabPageType)
                 {
-                    case TabPageType.CodeFileCheck:
-                        CodeFileCheck();
+                    case TabPageType.ProjectTypeValidation:
+                        ProjectTypeValidation();
                         break;
                     case TabPageType.DesignerFileMissing:
                         DesignerFileMissing();
@@ -114,7 +128,7 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
+            ListProcessor processor = new ListProcessor(_Presenter.ProjectName, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
             ListFilterType filter = GetDesignerFileMissingFilterType();
 
             dgvDesignerFileMissing.DataSource = processor.processDesignerFileMissing(_Presenter.SourceFileList, _Presenter.DesignerFileList, filter);
@@ -131,22 +145,11 @@ namespace WebProjectValidator
             PresenterToForm();
         }
 
-        private void CodeFileCheck()
+        private void ProjectTypeValidation()
         {
             FormToPresenter();
 
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-
-            dgvCodeFileCheck.DataSource = processor.processCodeFileCheck(_Presenter.WebFileList, _Presenter.FilterType);
-
-            tsslTotal.Visible = true;
-            tsslTotal.Text = "Total: " + processor.Count;
-            tsslValid.Visible = true;
-            tsslValid.Text = "Valid: " + processor.ValidCount;
-            tsslInValid.Visible = true;
-            tsslInValid.Text = "Invalid: " + processor.InvalidCount;
-            tsslRowCount.Visible = true;
-            tsslRowCount.Text = "RowCount: " + dgvCodeFileCheck.RowCount;
+            _Presenter.ProjectTypeValidation();
 
             PresenterToForm();
         }
@@ -155,7 +158,8 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
+            ListProcessor processor = new ListProcessor(_Presenter.ProjectName, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
+
             ListFilterType filter = GetUserControlMissingFilterType();
 
             dgvUserControlMissing.DataSource = processor.processUserControlMissing(_Presenter.WebFileList, filter);
@@ -218,13 +222,7 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-
-            // web application uses no projectfile -> all files must be converted
-            // the FileList WebFileList must be transfered to a DesignerFileItemList
-            DesignerFileItemList webFileItemList = new DesignerFileItemList(_Presenter.ProjectFolder,_Presenter.WebFileList);
-
-            processor.ConvertToWebApplication(webFileItemList);
+            _Presenter.ConvertToWebApplication();
 
             PresenterToForm();
         }
@@ -233,15 +231,11 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            ListProcessor processor = new ListProcessor(tbProjectName.Text, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-
-            List<DesignerFileItem> repairList = processor.processCodeFileCheck(_Presenter.WebFileList, _Presenter.FilterType);
-
-            // web project uses a projectfile -> only files included in the project file must be converted
-            processor.ConvertToWebProject(repairList);
+            _Presenter.ConvertToWebProject();
 
             PresenterToForm();
         }
+
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
