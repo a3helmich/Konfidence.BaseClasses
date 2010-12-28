@@ -82,7 +82,7 @@
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.bConvertToWebApplication = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.bFolderBrowse = new System.Windows.Forms.Button();
+            this.bSelectSolutionFolder = new System.Windows.Forms.Button();
             this.lProjectFileNameDisplay = new System.Windows.Forms.Label();
             this.lProjectFileName = new System.Windows.Forms.Label();
             this.bConvertToWebProject = new System.Windows.Forms.Button();
@@ -634,17 +634,17 @@
             this.bConvertToWebApplication.UseVisualStyleBackColor = true;
             this.bConvertToWebApplication.Click += new System.EventHandler(this.bConvertToWebApplication_Click);
             // 
-            // bFolderBrowse
+            // bSelectSolutionFolder
             // 
-            this.bFolderBrowse.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bFolderBrowse.Location = new System.Drawing.Point(690, 43);
-            this.bFolderBrowse.Margin = new System.Windows.Forms.Padding(0);
-            this.bFolderBrowse.Name = "bFolderBrowse";
-            this.bFolderBrowse.Size = new System.Drawing.Size(24, 23);
-            this.bFolderBrowse.TabIndex = 7;
-            this.bFolderBrowse.Text = "...";
-            this.bFolderBrowse.UseVisualStyleBackColor = true;
-            this.bFolderBrowse.Click += new System.EventHandler(this.bFolderBrowse_Click);
+            this.bSelectSolutionFolder.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bSelectSolutionFolder.Location = new System.Drawing.Point(690, 43);
+            this.bSelectSolutionFolder.Margin = new System.Windows.Forms.Padding(0);
+            this.bSelectSolutionFolder.Name = "bSelectSolutionFolder";
+            this.bSelectSolutionFolder.Size = new System.Drawing.Size(24, 23);
+            this.bSelectSolutionFolder.TabIndex = 7;
+            this.bSelectSolutionFolder.Text = "...";
+            this.bSelectSolutionFolder.UseVisualStyleBackColor = true;
+            this.bSelectSolutionFolder.Click += new System.EventHandler(this.bSelectSolutionFolder_Click);
             // 
             // lProjectFileNameDisplay
             // 
@@ -684,7 +684,7 @@
             this.Controls.Add(this.bConvertToWebProject);
             this.Controls.Add(this.lProjectFileName);
             this.Controls.Add(this.lProjectFileNameDisplay);
-            this.Controls.Add(this.bFolderBrowse);
+            this.Controls.Add(this.bSelectSolutionFolder);
             this.Controls.Add(this.bConvertToWebApplication);
             this.Controls.Add(this.rbVB);
             this.Controls.Add(this.rbCS);
@@ -768,7 +768,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingExists;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvFileMissingControlFolder;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.Button bFolderBrowse;
+        private System.Windows.Forms.Button bSelectSolutionFolder;
         private System.Windows.Forms.Label lProjectFileNameDisplay;
         private System.Windows.Forms.Label lProjectFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingProject;

@@ -44,19 +44,40 @@ namespace WebProjectValidator
             bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled();
             bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled();
 
-        #region ProjectTypeValidation
-            tsslTotal.Visible = _Presenter.ProjectTypeValidationItemVisible();
-            tsslValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
-            tsslInValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
-            tsslRowCount.Visible = _Presenter.ProjectTypeValidationItemVisible();
+            #region ProjectTypeValidation
+            if (_Presenter.ProjectTypeValidationItemVisible())
+            {
+                tsslTotal.Visible = _Presenter.ProjectTypeValidationItemVisible();
+                tsslValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
+                tsslInValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
+                tsslRowCount.Visible = _Presenter.ProjectTypeValidationItemVisible();
 
-            tsslTotal.Text = _Presenter.ProjectFileCountText;
-            tsslValid.Text = _Presenter.ProjectFileValidCountText;
-            tsslInValid.Text = _Presenter.ProjectFileInvalidCountText;
-            tsslRowCount.Text = _Presenter.ProjectFileListCountText;
+                tsslTotal.Text = _Presenter.ProjectFileCountText;
+                tsslValid.Text = _Presenter.ProjectFileValidCountText;
+                tsslInValid.Text = _Presenter.ProjectFileInvalidCountText;
+                tsslRowCount.Text = _Presenter.ProjectFileListCountText;
+            }
 
             dgvProjectTypeValidation.DataSource = _Presenter.ProjectTypeValidationList;
-        #endregion ProjectTypeValidation
+            #endregion ProjectTypeValidation
+
+            #region MissingUserControlValidation
+            if (_Presenter.UserControlMissingValidationItemVisible())
+            {
+                tsslTotal.Visible = _Presenter.UserControlMissingValidationItemVisible();
+                tsslValid.Visible = _Presenter.UserControlMissingValidationItemVisible();
+                tsslInValid.Visible = _Presenter.UserControlMissingValidationItemVisible();
+                tsslRowCount.Visible = _Presenter.UserControlMissingValidationItemVisible();
+
+                tsslTotal.Text = _Presenter.UserControlMissingListCountText;
+                tsslValid.Text = _Presenter.UserControlMissingValidCountText;
+                tsslInValid.Text = _Presenter.UserControlMissingInvalidCountText;
+                tsslRowCount.Text = _Presenter.UserControlMissingListCountText;
+            }
+
+            dgvUserControlMissing.DataSource = _Presenter.MissingUserControlList;
+            #endregion MissingUserControlValidation
+      
         }
 
         private void FormToPresenter()
@@ -66,6 +87,11 @@ namespace WebProjectValidator
 
             _Presenter.IsCS = rbCS.Checked;
             _Presenter.IsWebProjectCheck = rbCheckWebProject.Checked;
+
+            _Presenter.IsUserControlValidCheck = rbUserControlValid.Checked;
+            _Presenter.IsUserControlInvalidCheck = rbUserControlInvalid.Checked;
+            _Presenter.IsUserControlMissingCheck = rbUserControlMissing.Checked;
+            _Presenter.IsUserControlUnusedCheck = rbUserControlUnused.Checked;
 
             if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
             {
@@ -158,22 +184,7 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            ListProcessor processor = new ListProcessor(_Presenter.ProjectName, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-
-            ListFilterType filter = GetUserControlMissingFilterType();
-
-            dgvUserControlMissing.DataSource = processor.processUserControlMissing(_Presenter.WebFileList, filter);
-
-            lProjectFileNameDisplay.Text = processor.ProjectFileName;
-
-            tsslTotal.Visible = true;
-            tsslTotal.Text = "Total: " + processor.Count;
-            tsslValid.Visible = true;
-            tsslValid.Text = "Valid: " + processor.ValidCount;
-            tsslInValid.Visible = true;
-            tsslInValid.Text = "Invalid: " + processor.InvalidCount;
-            tsslRowCount.Visible = true;
-            tsslRowCount.Text = "RowCount: " + dgvUserControlMissing.RowCount;
+            _Presenter.UserControlValidation();
 
             PresenterToForm();
         }
@@ -188,31 +199,6 @@ namespace WebProjectValidator
             if (rbDesignerFileMissing.Checked)
             {
                 return ListFilterType.DesignerFileMissing;
-            }
-
-            return ListFilterType.All;
-        }
-
-        private ListFilterType GetUserControlMissingFilterType()
-        {
-            if (rbUserControlValid.Checked)
-            {
-                return ListFilterType.Valid;
-            }
-
-            if (rbUserControlInvalid.Checked)
-            {
-                return ListFilterType.Invalid;
-            }
-
-            if (rbUserControlMissing.Checked)
-            {
-                return ListFilterType.DesignerFileMissing;
-            }
-
-            if (rbUserControlUnused.Checked)
-            {
-                return ListFilterType.Unused;
             }
 
             return ListFilterType.All;
@@ -244,7 +230,7 @@ namespace WebProjectValidator
             PresenterToForm();
         }
 
-        private void bFolderBrowse_Click(object sender, EventArgs e)
+        private void bSelectSolutionFolder_Click(object sender, EventArgs e)
         {
             FormToPresenter();
 

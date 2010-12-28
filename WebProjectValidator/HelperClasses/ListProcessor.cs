@@ -373,23 +373,27 @@ namespace WebProjectValidator.HelperClasses
             return controlReference;
         }
 
+        // TODO : split filterType usercontrol / designer functionality
         public bool MustAddDesignerFileItem(DesignerFileItem designerFileItem, ListFilterType filter)
         {
             switch (filter)
             {
                 case ListFilterType.Valid:
+                case ListFilterType.UserControlValid:
                     if (designerFileItem.Valid)
                     {
                         return true;
                     }
                     return false;
                 case ListFilterType.Invalid:
+                case ListFilterType.UserControlInvalid:
                     if (!designerFileItem.Valid)
                     {
                         return true;
                     }
                     return false;
                 case ListFilterType.DesignerFileExists:
+                case ListFilterType.UserControlMissing:
                     if (designerFileItem.Exists)
                     {
                         return true;
@@ -401,7 +405,7 @@ namespace WebProjectValidator.HelperClasses
                         return true;
                     }
                     return false;
-                case ListFilterType.Unused:
+                case ListFilterType.UserControlUnused:
                     if (!designerFileItem.IsUsed)
                     {
                         return true;
