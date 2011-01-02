@@ -1,95 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.IO;
-using System.Windows.Forms;
-using System.Xml;
-using Konfidence.Base;
+using WebProjectValidator.EnumTypes;
 
 namespace WebProjectValidator.HelperClasses
 {
-    public class ConfigurationStore : BaseItem
+    class ConfigurationStore : BaseConfigurationStore
     {
-        private XmlDocument _ConfigDocument = new XmlDocument();
-        private XmlElement _Root;
-        private string _ConfigFileName = string.Empty;
+        string _ProjectName = string.Empty;
+        string _ProjectFolder = string.Empty;
+        LanguageType _LanguageType = LanguageType.cs;
 
-        public ConfigurationStore()
+        public string ProjectName
         {
-            _ConfigFileName = Application.ProductName + ".xml";
-
-            if (!File.Exists(_ConfigFileName))
+            get
             {
-                _ConfigDocument.InnerXml = "<Config><ProjectName></ProjectName><ProjectFolder></ProjectFolder><rbCSChecked></rbCSChecked></Config>";
-                _ConfigDocument.Save(_ConfigFileName);
+                GetProperty("ProjectName", out _ProjectName);
+
+                return _ProjectName;
             }
-            else
+            set
             {
-                _ConfigDocument.Load(_ConfigFileName);
+                SetProperty("ProjectName", value);
             }
-
-            _Root = _ConfigDocument.DocumentElement;
         }
 
-        public void Save()
+        public string ProjectFolder
         {
-            _ConfigDocument.Save(_ConfigFileName);
-        }
-
-        public void SetProperty(string name, string value)
-        {
-            XmlNode valueNode = _Root.SelectSingleNode(name);
-
-            if (IsAssigned(valueNode))
+            get
             {
-                valueNode.InnerText = value;
+                GetProperty("ProjectFolder", out _ProjectFolder);
+
+                return _ProjectFolder;
             }
-
-        }
-
-        private string GetNodeValue(string name)
-        {
-            string nodeValue = _Root.SelectSingleNode(name).InnerText;
-
-            if (string.IsNullOrEmpty(nodeValue))
+            set
             {
-                return string.Empty;
+                SetProperty("ProjectFolder", value);
             }
-
-            return nodeValue;
         }
 
-        public void GetProperty(string name, out string value)
+        public LanguageType LanguageType
         {
-            value = GetNodeValue(name);
+            get
+            {
+                GetProperty("LanguageType", out _LanguageType);
+
+                return _LanguageType;
+            }
+            set
+            {
+                SetProperty("LanguageType", value.ToString());
+            }
         }
 
-        public void GetProperty(string name, out int value)
+        private void GetProperty(string name, out LanguageType value)
         {
-            value = 0;
+            string nodeValue = GetNodeValue(name);
 
-            int.TryParse(GetNodeValue(name), out value);
-        }
-
-        public void GetProperty(string name, out decimal value)
-        {
-            value = 0;
-
-            decimal.TryParse(GetNodeValue(name), out value);
-        }
-
-        public void GetProperty(string name, out bool value)
-        {
-            value = false;
-
-            bool.TryParse(GetNodeValue(name), out value);
-        }
-
-        public void GetProperty(string name, out DateTime value)
-        {
-            value = DateTime.MinValue;
-
-            DateTime.TryParse(GetNodeValue(name), out value);
+            try
+            {
+                value = (LanguageType)Enum.Parse(typeof(LanguageType), nodeValue);
+            }
+            catch
+            {
+                value = LanguageType.cs;
+            }
         }
     }
 }

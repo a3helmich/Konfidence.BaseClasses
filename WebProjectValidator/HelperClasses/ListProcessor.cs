@@ -47,6 +47,15 @@ namespace WebProjectValidator.HelperClasses
         }
         #endregion simple properties
 
+
+        private FileList WebFileList
+        {
+            get
+            {
+                return new FileList(_ProjectFolder, _LanguageType, DeveloperFileType.WebFile);
+            }
+        }
+
         public static ListProcessor GetProcessor(string project, string projectFolder, string projectFile, LanguageType language)
         {
             ListProcessor newProcessor = null;
@@ -95,7 +104,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public List<DesignerFileItem> processDesignerFileMissing(FileList fileList, FileList searchList, ProcessActionType actionType)
+        public List<DesignerFileItem> processDesignerFileValidation(FileList fileList, FileList searchList, ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -155,7 +164,7 @@ namespace WebProjectValidator.HelperClasses
             return resultList;
         }
 
-        public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ProcessActionType actionType)
+        public List<DesignerFileItem> processCodeFileCheck(ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -167,7 +176,7 @@ namespace WebProjectValidator.HelperClasses
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
-            foreach (string fileName in fileList)
+            foreach (string fileName in WebFileList)
             {
                 if (projectFileList.Contains(fileName, StringComparer.CurrentCultureIgnoreCase))
                 {

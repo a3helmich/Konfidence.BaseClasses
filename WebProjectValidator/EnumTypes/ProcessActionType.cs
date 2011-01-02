@@ -7,8 +7,8 @@ namespace WebProjectValidator.EnumTypes
 {
     enum ProcessActionType
     {
-        Unknown = 0,
-        All = 1,
+        None = 0,
+        DesignerFileAll = 1,
         DesignerFileExists = 2,
         DesignerFileMissing = 3,
         UserControlUnused = 4,
@@ -16,6 +16,7 @@ namespace WebProjectValidator.EnumTypes
         WebApplication = 6,
         UserControlValid = 7,
         UserControlInvalid = 8,
-        UserControlMissing = 9
+        UserControlMissing = 9,
+        UserControlAll = 10,
     }
 }

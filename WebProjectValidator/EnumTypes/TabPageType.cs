@@ -8,7 +8,7 @@ namespace WebProjectValidator.EnumTypes
     public enum TabPageType
     {
         Unknown = 0,
-        DesignerFileMissing = 1,
+        DesignerFileValidation = 1,
         ProjectTypeValidation = 2,
         UserControlValidation = 3,
     }

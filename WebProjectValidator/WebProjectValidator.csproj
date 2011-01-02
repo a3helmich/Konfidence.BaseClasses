@@ -87,6 +87,7 @@
     <Compile Include="FileListChecker\ListFiller.cs" />
     <Compile Include="EnumTypes\DeveloperFileType.cs" />
     <Compile Include="FileListChecker\WebFileCheckItemList.cs" />
+    <Compile Include="HelperClasses\BaseConfigurationStore.cs" />
     <Compile Include="HelperClasses\ConfigurationStore.cs" />
     <Compile Include="HelperClasses\ControlReference.cs" />
     <Compile Include="HelperClasses\ControlReferenceList.cs" />

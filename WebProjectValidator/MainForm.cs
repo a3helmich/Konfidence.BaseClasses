@@ -27,11 +27,11 @@ namespace WebProjectValidator
 
         private void InitializeComponentEx()
         {
-            dgvDesignerFileMissing.AutoGenerateColumns = false;
+            dgvDesignerFileValidation.AutoGenerateColumns = false;
             dgvProjectTypeValidation.AutoGenerateColumns = false;
             dgvUserControlValidation.AutoGenerateColumns = false;
 
-            tpDesignerFileMissing.Tag = TabPageType.DesignerFileMissing;
+            tpDesignerFileValidation.Tag = TabPageType.DesignerFileValidation;
             tpProjectTypeValidation.Tag = TabPageType.ProjectTypeValidation;
             tpUserControlValidation.Tag = TabPageType.UserControlValidation;
         }
@@ -48,12 +48,12 @@ namespace WebProjectValidator
             bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled();
             bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled();
 
-            if (_Presenter.DesignerFileMissingItemVisible())
+            if (_Presenter.DesignerFileValidationItemVisible())
             {
-                GetDesignerFileMissingCounts();
+                GetDesignerFileValidationCounts();
             }
 
-            dgvDesignerFileMissing.DataSource = _Presenter.DesignerFileMissingList;
+            dgvDesignerFileValidation.DataSource = _Presenter.DesignerFileValidationList;
 
             if (_Presenter.ProjectTypeValidationItemVisible())
             {
@@ -86,7 +86,7 @@ namespace WebProjectValidator
             tsslListCount.Text = _Presenter.ProjectFileListCountText;
         }
 
-        private void GetDesignerFileMissingCounts()
+        private void GetDesignerFileValidationCounts()
         {
             tsslTotal.Text = _Presenter.DesignerFileCountText;
             tsslStatus1.Text = _Presenter.DesignerFileExistsCountText;

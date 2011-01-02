@@ -15,7 +15,7 @@ namespace WebProjectValidator
         private string _SolutionFolder = string.Empty;
         private string _ProjectName = string.Empty;
         private LanguageType _LanguageType = LanguageType.Unknown;
-        private TabPageType _TabPageType = TabPageType.DesignerFileMissing;
+        private TabPageType _TabPageType = TabPageType.DesignerFileValidation;
 
         private bool _IsDesignerFileExistsCheck;
         private bool _IsDesignerFileMissingCheck;
@@ -27,24 +27,23 @@ namespace WebProjectValidator
         private bool _IsUserControlMissingCheck;
         private bool _IsUserControlUnusedCheck;
 
+        private List<DesignerFileItem> _EmptyDesignerFileList = new List<DesignerFileItem>();
+
         private int _DesignerFileCount = 0;
         private int _DesignerFileMissingCount = 0;
         private int _DesignerFileExistsCount = 0;
-        private int _DesignerFileListCount = 0;
 
-        private List<DesignerFileItem> _DesignerFileMissingList;
+        private List<DesignerFileItem> _DesignerFileValidationList;
 
         private int _ProjectFileCount = 0;
         private int _ProjectFileValidCount = 0;
         private int _ProjectFileInvalidCount = 0;
-        private int _ProjectFileListCount = 0;
 
         private List<DesignerFileItem> _ProjectTypeValidationList;
 
-        private int _UserControlValidationCount = 0;
-        private int _UserControlValidationValidCount = 0;
-        private int _UserControlValidationInvalidCount = 0;
-        private int _UserControlValidationListCount = 0;
+        private int _UserControlCount = 0;
+        private int _UserControlValidCount = 0;
+        private int _UserControlInvalidCount = 0;
 
         private List<DesignerFileItem> _UserControlValidationList;
 
@@ -146,7 +145,7 @@ namespace WebProjectValidator
 
         public string DesignerFileListCountText
         {
-            get { return "RowCount: " + _DesignerFileListCount; }
+            get { return "RowCount: " + _DesignerFileValidationList.Count; }
         }
 
         // project counters text
@@ -167,28 +166,28 @@ namespace WebProjectValidator
 
         public string ProjectFileListCountText
         {
-            get { return "RowCount: " + _ProjectFileListCount; }
+            get { return "RowCount: " + _ProjectTypeValidationList.Count; }
         }
         
         // user control counters text
         public string UserControlCountText
         {
-            get { return "Total: " + _UserControlValidationCount; }
+            get { return "Total: " + _UserControlCount; }
         }
 
         public string UserControlValidCountText
         {
-            get { return "Valid: " + _UserControlValidationValidCount; }
+            get { return "Valid: " + _UserControlValidCount; }
         }
 
         public string UserControlInvalidCountText
         {
-            get { return "Invalid: " + _UserControlValidationInvalidCount; }
+            get { return "Invalid: " + _UserControlInvalidCount; }
         }
 
         public string UserControlListCountText
         {
-            get { return "RowCount: " + _UserControlValidationListCount; }
+            get { return "RowCount: " + _UserControlValidationList.Count; }
         }
 #endregion simple properties
 
@@ -238,11 +237,11 @@ namespace WebProjectValidator
             }
         }
 
-        public List<DesignerFileItem> DesignerFileMissingList
+        public List<DesignerFileItem> DesignerFileValidationList
         {
             get
             {
-                return _DesignerFileMissingList;
+                return _DesignerFileValidationList;
             }
         }
 
@@ -272,9 +271,9 @@ namespace WebProjectValidator
             return false;
         }
 
-        public bool DesignerFileMissingItemVisible()
+        public bool DesignerFileValidationItemVisible()
         {
-            if (TabPageType.Equals(TabPageType.DesignerFileMissing))
+            if (TabPageType.Equals(TabPageType.DesignerFileValidation))
             {
                 return true;
             }
@@ -305,7 +304,7 @@ namespace WebProjectValidator
             {
                 switch (TabPageType)
                 {
-                    case TabPageType.DesignerFileMissing:
+                    case TabPageType.DesignerFileValidation:
                         {
                             if (IsDesignerFileExistsCheck)
                             {
@@ -317,7 +316,7 @@ namespace WebProjectValidator
                                 return ProcessActionType.DesignerFileMissing;
                             }
 
-                            return ProcessActionType.All;
+                            return ProcessActionType.DesignerFileAll;
                         }
                     case TabPageType.ProjectTypeValidation:
                         {
@@ -350,11 +349,11 @@ namespace WebProjectValidator
                                 return ProcessActionType.UserControlUnused;
                             }
 
-                            return ProcessActionType.All;
+                            return ProcessActionType.UserControlAll;
                         }
                 }
 
-                return ProcessActionType.Unknown;
+                return ProcessActionType.None;
             }
         }
         
@@ -422,39 +421,18 @@ namespace WebProjectValidator
         {
             ConfigurationStore configurationStore = new ConfigurationStore();
 
-            string getText = string.Empty;
-
-            configurationStore.GetProperty("ProjectName", out getText);
-
-            ProjectName = getText;
-
-            configurationStore.GetProperty("ProjectFolder", out getText);
-
-            SolutionFolder = getText;
-
-            configurationStore.GetProperty("rbCSChecked", out getText);
-
-            LanguageType = LanguageType.vb;
-            if (getText.Equals("1"))
-            {
-                LanguageType = LanguageType.cs;
-            }
+            ProjectName = configurationStore.ProjectName;
+            SolutionFolder = configurationStore.ProjectFolder;
+            LanguageType = configurationStore.LanguageType;
         }
 
         private void SaveDefaults()
         {
             ConfigurationStore configurationStore = new ConfigurationStore();
 
-            configurationStore.SetProperty("ProjectName", ProjectName);
-            configurationStore.SetProperty("ProjectFolder", SolutionFolder);
-
-            string rbCSText = "0";
-            if (LanguageType == LanguageType.cs)
-            {
-                rbCSText = "1";
-            }
-
-            configurationStore.SetProperty("rbCSChecked", rbCSText);
+            configurationStore.ProjectName = ProjectName;
+            configurationStore.ProjectFolder = SolutionFolder;
+            configurationStore.LanguageType = LanguageType;
 
             configurationStore.Save();
         }
@@ -476,7 +454,7 @@ namespace WebProjectValidator
             ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
             // TODO : just get a list of all projectFiles without any processing
-            List<DesignerFileItem> webProjectFileItemList = processor.processCodeFileCheck(WebFileList, ActionType);
+            List<DesignerFileItem> webProjectFileItemList = processor.processCodeFileCheck(ActionType);
 
             // web project uses a projectfile -> only files included in the project file must be converted
             processor.ConvertToWebProject(webProjectFileItemList);
@@ -484,58 +462,47 @@ namespace WebProjectValidator
 
         private void ResetCalculatedProperties()
         {
-            _DesignerFileListCount = 0;
             _DesignerFileMissingCount = 0;
             _DesignerFileExistsCount = 0;
             _DesignerFileCount = 0;
 
-            _DesignerFileMissingList = null;
+            _DesignerFileValidationList = _EmptyDesignerFileList;
 
             _ProjectFileCount = 0;
             _ProjectFileValidCount = 0;
             _ProjectFileInvalidCount = 0;
-            _ProjectFileListCount = 0;
 
-            _ProjectTypeValidationList = null;
+            _ProjectTypeValidationList = _EmptyDesignerFileList;
 
-            _UserControlValidationCount = 0;
-            _UserControlValidationValidCount = 0;
-            _UserControlValidationInvalidCount = 0;
-            _UserControlValidationListCount = 0;
+            _UserControlCount = 0;
+            _UserControlValidCount = 0;
+            _UserControlInvalidCount = 0;
 
-            _UserControlValidationList = null;
+            _UserControlValidationList = _EmptyDesignerFileList;
         }
 
         private void DesignerFileValidation()
         {
             ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
-            _DesignerFileMissingList = processor.processDesignerFileMissing(SourceFileList, DesignerFileList, ActionType);
+            _DesignerFileValidationList = processor.processDesignerFileValidation(SourceFileList, DesignerFileList, ActionType);
 
             _DesignerFileCount = processor.Count;
             _DesignerFileMissingCount = processor.ValidCount;
             _DesignerFileExistsCount = processor.InvalidCount;
-            _DesignerFileListCount = _DesignerFileMissingList.Count;
         }
 
         private void ProjectTypeValidation()
         {
             ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
-            // TODO : diferentiate between application and project
-            if (IsWebProjectCheck)
-            {
-                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, ActionType);
-            }
-            else
-            {
-                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, ActionType);
-            }
+            _ProjectTypeValidationList = processor.processCodeFileCheck(ActionType);
+
+            _ProjectTypeValidationList = processor.Execute(ActionType);
 
             _ProjectFileCount = processor.Count;
             _ProjectFileValidCount = processor.ValidCount;
             _ProjectFileInvalidCount = processor.InvalidCount;
-            _ProjectFileListCount = _ProjectTypeValidationList.Count;
         }
 
         private void UserControlValidation()
@@ -544,10 +511,9 @@ namespace WebProjectValidator
 
             _UserControlValidationList = processor.processUserControlValidation(WebFileList, ActionType);
 
-            _UserControlValidationCount = processor.Count;
-            _UserControlValidationValidCount = processor.ValidCount;
-            _UserControlValidationInvalidCount = processor.InvalidCount;
-            _UserControlValidationListCount = _UserControlValidationList.Count;
+            _UserControlCount = processor.Count;
+            _UserControlValidCount = processor.ValidCount;
+            _UserControlInvalidCount = processor.InvalidCount;
         }
 
         public bool Execute()
@@ -561,7 +527,7 @@ namespace WebProjectValidator
                     case TabPageType.ProjectTypeValidation:
                         ProjectTypeValidation();
                         break;
-                    case TabPageType.DesignerFileMissing:
+                    case TabPageType.DesignerFileValidation:
                         DesignerFileValidation();
                         break;
                     case TabPageType.UserControlValidation:
@@ -581,7 +547,7 @@ namespace WebProjectValidator
                 {
                     switch ((TabPageType)tabTag)
                     {
-                        case EnumTypes.TabPageType.DesignerFileMissing:
+                        case EnumTypes.TabPageType.DesignerFileValidation:
                         case EnumTypes.TabPageType.ProjectTypeValidation:
                         case EnumTypes.TabPageType.UserControlValidation:
                         case EnumTypes.TabPageType.Unknown:
