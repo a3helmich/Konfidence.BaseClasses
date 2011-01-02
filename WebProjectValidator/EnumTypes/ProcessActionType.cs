@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WebProjectValidator.EnumTypes
 {
-    enum ProcessActionType
+    public enum ProcessActionType
     {
         None = 0,
         DesignerFileAll = 1,

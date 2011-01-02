@@ -99,6 +99,7 @@
     <Compile Include="EnumTypes\ProcessActionType.cs" />
     <Compile Include="HelperClasses\FileWriter.cs" />
     <Compile Include="HelperClasses\ListProcessor.cs" />
+    <Compile Include="HelperClasses\ProcessActionResult.cs" />
     <Compile Include="HelperClasses\ProjectFileProcessor.cs" />
     <Compile Include="EnumTypes\TabPageType.cs" />
     <Compile Include="MainForm.cs">
@@ -107,6 +108,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainFormController.cs" />
     <Compile Include="MainFormPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -104,7 +104,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public List<DesignerFileItem> processDesignerFileValidation(FileList fileList, FileList searchList, ProcessActionType actionType)
+        public List<DesignerFileItem> ProcessDesignerFileValidation(FileList fileList, FileList searchList, ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -164,7 +164,7 @@ namespace WebProjectValidator.HelperClasses
             return resultList;
         }
 
-        public List<DesignerFileItem> processCodeFileCheck(ProcessActionType actionType)
+        public ProcessActionResult ProcessProjectTypeValidation(ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -204,7 +204,7 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return resultList;
+            return GetActionResult(resultList);
         }
 
         private bool IsValidCodeFile(List<string> fileLines)
@@ -225,7 +225,7 @@ namespace WebProjectValidator.HelperClasses
             return true; // komt niet voor in het bestand
         }
 
-        public List<DesignerFileItem> processUserControlValidation(FileList fileList, ProcessActionType actionType)
+        public ProcessActionResult ProcessUserControlValidation(ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
             ControlReferenceList allUserControlReferences = new ControlReferenceList();
@@ -235,9 +235,9 @@ namespace WebProjectValidator.HelperClasses
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
-            fileList.Sort();
+            WebFileList.Sort();
 
-            foreach (string fileName in fileList)
+            foreach (string fileName in WebFileList)
             {
                 string fileFolder = fileName.Replace(_ProjectFolder, "");
 
@@ -330,7 +330,19 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return resultList;
+            return GetActionResult(resultList);
+        }
+
+        private ProcessActionResult GetActionResult(List<DesignerFileItem> resultList)
+        {
+            ProcessActionResult processActionResult = new ProcessActionResult();
+
+            processActionResult.Count = Count;
+            processActionResult.ValidCount = ValidCount;
+            processActionResult.InvalidCount = InvalidCount;
+            processActionResult.DesignerFileItemList = resultList;
+
+            return processActionResult;
         }
 
         private ControlReferenceList GetControlReferenceList(List<string> fileLines, string fileFolder)

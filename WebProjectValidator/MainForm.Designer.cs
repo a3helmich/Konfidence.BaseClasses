@@ -43,6 +43,10 @@
             this.tpDesignerFileValidation = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvDesignerFileValidation = new System.Windows.Forms.DataGridView();
+            this.dgvDesignerFileValidationProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDesignerFileValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDesignerFileValidationExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDesignerFileValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.rbDesignerFileAll = new System.Windows.Forms.RadioButton();
             this.rbDesignerFileExists = new System.Windows.Forms.RadioButton();
@@ -50,10 +54,6 @@
             this.tpProjectTypeValidation = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvProjectTypeValidation = new System.Windows.Forms.DataGridView();
-            this.dgvCodeFileProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvCodeFileFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvCodeFileValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvCodeFileControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbCheckWebProject = new System.Windows.Forms.RadioButton();
             this.rbCheckWebApplication = new System.Windows.Forms.RadioButton();
@@ -82,10 +82,10 @@
             this.lProjectFileNameDisplay = new System.Windows.Forms.Label();
             this.lProjectFileName = new System.Windows.Forms.Label();
             this.bConvertToWebProject = new System.Windows.Forms.Button();
-            this.dgvDesignerFileValidationProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvDesignerFileValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvDesignerFileValidationExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvDesignerFileValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileValidation.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -223,6 +223,37 @@
             this.dgvDesignerFileValidation.Size = new System.Drawing.Size(942, 260);
             this.dgvDesignerFileValidation.TabIndex = 0;
             // 
+            // dgvDesignerFileValidationProject
+            // 
+            this.dgvDesignerFileValidationProject.DataPropertyName = "Project";
+            this.dgvDesignerFileValidationProject.HeaderText = "Project";
+            this.dgvDesignerFileValidationProject.Name = "dgvDesignerFileValidationProject";
+            this.dgvDesignerFileValidationProject.ReadOnly = true;
+            // 
+            // dgvDesignerFileValidationFileName
+            // 
+            this.dgvDesignerFileValidationFileName.DataPropertyName = "FileName";
+            this.dgvDesignerFileValidationFileName.HeaderText = "Filename";
+            this.dgvDesignerFileValidationFileName.Name = "dgvDesignerFileValidationFileName";
+            this.dgvDesignerFileValidationFileName.ReadOnly = true;
+            this.dgvDesignerFileValidationFileName.Width = 200;
+            // 
+            // dgvDesignerFileValidationExists
+            // 
+            this.dgvDesignerFileValidationExists.DataPropertyName = "Exists";
+            this.dgvDesignerFileValidationExists.HeaderText = "Exists";
+            this.dgvDesignerFileValidationExists.Name = "dgvDesignerFileValidationExists";
+            this.dgvDesignerFileValidationExists.ReadOnly = true;
+            this.dgvDesignerFileValidationExists.Width = 55;
+            // 
+            // dgvDesignerFileValidationControlFolder
+            // 
+            this.dgvDesignerFileValidationControlFolder.DataPropertyName = "ControlFolder";
+            this.dgvDesignerFileValidationControlFolder.HeaderText = "Folder";
+            this.dgvDesignerFileValidationControlFolder.Name = "dgvDesignerFileValidationControlFolder";
+            this.dgvDesignerFileValidationControlFolder.ReadOnly = true;
+            this.dgvDesignerFileValidationControlFolder.Width = 565;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.rbDesignerFileAll);
@@ -303,10 +334,10 @@
             this.dgvProjectTypeValidation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProjectTypeValidation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProjectTypeValidation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvCodeFileProject,
-            this.dgvCodeFileFileName,
-            this.dgvCodeFileValid,
-            this.dgvCodeFileControlFolder});
+            this.dgvProjectTypeValidationProject,
+            this.dgvProjectTypeValidationFileName,
+            this.dgvProjectTypeValidationValid,
+            this.dgvProjectTypeValidationControlFolder});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -321,37 +352,6 @@
             this.dgvProjectTypeValidation.RowHeadersVisible = false;
             this.dgvProjectTypeValidation.Size = new System.Drawing.Size(942, 260);
             this.dgvProjectTypeValidation.TabIndex = 0;
-            // 
-            // dgvCodeFileProject
-            // 
-            this.dgvCodeFileProject.DataPropertyName = "Project";
-            this.dgvCodeFileProject.HeaderText = "Project";
-            this.dgvCodeFileProject.Name = "dgvCodeFileProject";
-            this.dgvCodeFileProject.ReadOnly = true;
-            // 
-            // dgvCodeFileFileName
-            // 
-            this.dgvCodeFileFileName.DataPropertyName = "FileName";
-            this.dgvCodeFileFileName.HeaderText = "File";
-            this.dgvCodeFileFileName.Name = "dgvCodeFileFileName";
-            this.dgvCodeFileFileName.ReadOnly = true;
-            this.dgvCodeFileFileName.Width = 200;
-            // 
-            // dgvCodeFileValid
-            // 
-            this.dgvCodeFileValid.DataPropertyName = "Valid";
-            this.dgvCodeFileValid.HeaderText = "Valid";
-            this.dgvCodeFileValid.Name = "dgvCodeFileValid";
-            this.dgvCodeFileValid.ReadOnly = true;
-            this.dgvCodeFileValid.Width = 55;
-            // 
-            // dgvCodeFileControlFolder
-            // 
-            this.dgvCodeFileControlFolder.DataPropertyName = "ControlFolder";
-            this.dgvCodeFileControlFolder.HeaderText = "Folder";
-            this.dgvCodeFileControlFolder.Name = "dgvCodeFileControlFolder";
-            this.dgvCodeFileControlFolder.ReadOnly = true;
-            this.dgvCodeFileControlFolder.Width = 565;
             // 
             // panel1
             // 
@@ -640,36 +640,36 @@
             this.bConvertToWebProject.UseVisualStyleBackColor = true;
             this.bConvertToWebProject.Click += new System.EventHandler(this.bConvertToWebProject_Click);
             // 
-            // dgvDesignerFileValidationProject
+            // dgvProjectTypeValidationProject
             // 
-            this.dgvDesignerFileValidationProject.DataPropertyName = "Project";
-            this.dgvDesignerFileValidationProject.HeaderText = "Project";
-            this.dgvDesignerFileValidationProject.Name = "dgvDesignerFileValidationProject";
-            this.dgvDesignerFileValidationProject.ReadOnly = true;
+            this.dgvProjectTypeValidationProject.DataPropertyName = "Project";
+            this.dgvProjectTypeValidationProject.HeaderText = "Project";
+            this.dgvProjectTypeValidationProject.Name = "dgvProjectTypeValidationProject";
+            this.dgvProjectTypeValidationProject.ReadOnly = true;
             // 
-            // dgvDesignerFileValidationFileName
+            // dgvProjectTypeValidationFileName
             // 
-            this.dgvDesignerFileValidationFileName.DataPropertyName = "FileName";
-            this.dgvDesignerFileValidationFileName.HeaderText = "Filename";
-            this.dgvDesignerFileValidationFileName.Name = "dgvDesignerFileValidationFileName";
-            this.dgvDesignerFileValidationFileName.ReadOnly = true;
-            this.dgvDesignerFileValidationFileName.Width = 200;
+            this.dgvProjectTypeValidationFileName.DataPropertyName = "FileName";
+            this.dgvProjectTypeValidationFileName.HeaderText = "File";
+            this.dgvProjectTypeValidationFileName.Name = "dgvProjectTypeValidationFileName";
+            this.dgvProjectTypeValidationFileName.ReadOnly = true;
+            this.dgvProjectTypeValidationFileName.Width = 200;
             // 
-            // dgvDesignerFileValidationExists
+            // dgvProjectTypeValidationValid
             // 
-            this.dgvDesignerFileValidationExists.DataPropertyName = "Exists";
-            this.dgvDesignerFileValidationExists.HeaderText = "Exists";
-            this.dgvDesignerFileValidationExists.Name = "dgvDesignerFileValidationExists";
-            this.dgvDesignerFileValidationExists.ReadOnly = true;
-            this.dgvDesignerFileValidationExists.Width = 55;
+            this.dgvProjectTypeValidationValid.DataPropertyName = "Valid";
+            this.dgvProjectTypeValidationValid.HeaderText = "Valid";
+            this.dgvProjectTypeValidationValid.Name = "dgvProjectTypeValidationValid";
+            this.dgvProjectTypeValidationValid.ReadOnly = true;
+            this.dgvProjectTypeValidationValid.Width = 55;
             // 
-            // dgvDesignerFileValidationControlFolder
+            // dgvProjectTypeValidationControlFolder
             // 
-            this.dgvDesignerFileValidationControlFolder.DataPropertyName = "ControlFolder";
-            this.dgvDesignerFileValidationControlFolder.HeaderText = "Folder";
-            this.dgvDesignerFileValidationControlFolder.Name = "dgvDesignerFileValidationControlFolder";
-            this.dgvDesignerFileValidationControlFolder.ReadOnly = true;
-            this.dgvDesignerFileValidationControlFolder.Width = 565;
+            this.dgvProjectTypeValidationControlFolder.DataPropertyName = "ControlFolder";
+            this.dgvProjectTypeValidationControlFolder.HeaderText = "Folder";
+            this.dgvProjectTypeValidationControlFolder.Name = "dgvProjectTypeValidationControlFolder";
+            this.dgvProjectTypeValidationControlFolder.ReadOnly = true;
+            this.dgvProjectTypeValidationControlFolder.Width = 565;
             // 
             // MainForm
             // 
@@ -746,10 +746,6 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus1;
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus2;
         private System.Windows.Forms.ToolStripStatusLabel tsslTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationFileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationControlFolder;
         private System.Windows.Forms.RadioButton rbCheckWebProject;
         private System.Windows.Forms.RadioButton rbCheckWebApplication;
         private System.Windows.Forms.ToolStripStatusLabel tsslListCount;
@@ -768,14 +764,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlValidationValid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlValidationReason;
         private System.Windows.Forms.Button bConvertToWebProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileFileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileControlFolder;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvDesignerFileValidationProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvDesignerFileValidationFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvDesignerFileValidationExists;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvDesignerFileValidationControlFolder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationControlFolder;
     }
 }
 

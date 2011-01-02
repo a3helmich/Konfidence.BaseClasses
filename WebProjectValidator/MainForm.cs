@@ -48,24 +48,22 @@ namespace WebProjectValidator
             bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled();
             bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled();
 
-            if (_Presenter.DesignerFileValidationItemVisible())
+            switch (_Presenter.TabPageType)
             {
-                GetDesignerFileValidationCounts();
+                case TabPageType.DesignerFileValidation:
+                    GetDesignerFileValidationCounts();
+                    break;
+                case TabPageType.ProjectTypeValidation:
+                    GetProjectTypeValidationCounts();
+                    break;
+                case TabPageType.UserControlValidation:
+                    GetMissingUserControlValidationCounts();
+                    break;
             }
 
             dgvDesignerFileValidation.DataSource = _Presenter.DesignerFileValidationList;
 
-            if (_Presenter.ProjectTypeValidationItemVisible())
-            {
-                GetProjectTypeValidationCounts();
-            }
-
             dgvProjectTypeValidation.DataSource = _Presenter.ProjectTypeValidationList;
-
-            if (_Presenter.UserControlValidationItemVisible())
-            {
-                GetMissingUserControlValidationCounts();
-            }
 
             dgvUserControlValidation.DataSource = _Presenter.UserControlValidationList;
         }
