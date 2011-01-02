@@ -76,10 +76,10 @@
             this.rbUserControlInvalid = new System.Windows.Forms.RadioButton();
             this.tbSolutionFolder = new System.Windows.Forms.TextBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
-            this.tsslInValid = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslValid = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslStatus2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslStatus1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTotal = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslListCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.bConvertToWebApplication = new System.Windows.Forms.Button();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.bSelectSolutionFolder = new System.Windows.Forms.Button();
@@ -585,43 +585,39 @@
             // statusBar
             // 
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslInValid,
-            this.tsslValid,
+            this.tsslStatus2,
+            this.tsslStatus1,
             this.tsslTotal,
-            this.tsslRowCount});
+            this.tsslListCount});
             this.statusBar.Location = new System.Drawing.Point(0, 427);
             this.statusBar.Name = "statusBar";
             this.statusBar.Size = new System.Drawing.Size(984, 22);
             this.statusBar.TabIndex = 5;
             this.statusBar.Text = "statusStrip1";
             // 
-            // tsslInValid
+            // tsslStatus2
             // 
-            this.tsslInValid.Name = "tsslInValid";
-            this.tsslInValid.Size = new System.Drawing.Size(48, 17);
-            this.tsslInValid.Text = "Missing";
-            this.tsslInValid.Visible = false;
+            this.tsslStatus2.Name = "tsslStatus2";
+            this.tsslStatus2.Size = new System.Drawing.Size(48, 17);
+            this.tsslStatus2.Text = "Missing";
             // 
-            // tsslValid
+            // tsslStatus1
             // 
-            this.tsslValid.Name = "tsslValid";
-            this.tsslValid.Size = new System.Drawing.Size(35, 17);
-            this.tsslValid.Text = "Exists";
-            this.tsslValid.Visible = false;
+            this.tsslStatus1.Name = "tsslStatus1";
+            this.tsslStatus1.Size = new System.Drawing.Size(35, 17);
+            this.tsslStatus1.Text = "Exists";
             // 
             // tsslTotal
             // 
             this.tsslTotal.Name = "tsslTotal";
             this.tsslTotal.Size = new System.Drawing.Size(34, 17);
             this.tsslTotal.Text = "Total";
-            this.tsslTotal.Visible = false;
             // 
-            // tsslRowCount
+            // tsslListCount
             // 
-            this.tsslRowCount.Name = "tsslRowCount";
-            this.tsslRowCount.Size = new System.Drawing.Size(63, 17);
-            this.tsslRowCount.Text = "RowCount";
-            this.tsslRowCount.Visible = false;
+            this.tsslListCount.Name = "tsslListCount";
+            this.tsslListCount.Size = new System.Drawing.Size(63, 17);
+            this.tsslListCount.Text = "RowCount";
             // 
             // bConvertToWebApplication
             // 
@@ -747,8 +743,8 @@
         private System.Windows.Forms.RadioButton rbDesignerFileMissing;
         private System.Windows.Forms.RadioButton rbDesignerFileAll;
         private System.Windows.Forms.StatusStrip statusBar;
-        private System.Windows.Forms.ToolStripStatusLabel tsslValid;
-        private System.Windows.Forms.ToolStripStatusLabel tsslInValid;
+        private System.Windows.Forms.ToolStripStatusLabel tsslStatus1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslStatus2;
         private System.Windows.Forms.ToolStripStatusLabel tsslTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileProject;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileFileName;
@@ -756,7 +752,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileControlFolder;
         private System.Windows.Forms.RadioButton rbCheckWebProject;
         private System.Windows.Forms.RadioButton rbCheckWebApplication;
-        private System.Windows.Forms.ToolStripStatusLabel tsslRowCount;
+        private System.Windows.Forms.ToolStripStatusLabel tsslListCount;
         private System.Windows.Forms.RadioButton rbUserControlAll;
         private System.Windows.Forms.RadioButton rbUserControlValid;
         private System.Windows.Forms.RadioButton rbUserControlInvalid;

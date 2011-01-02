@@ -78,7 +78,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public List<DesignerFileItem> processDesignerFileMissing(FileList fileList, FileList searchList, ListFilterType filter)
+        public List<DesignerFileItem> processDesignerFileMissing(FileList fileList, FileList searchList, ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -116,7 +116,7 @@ namespace WebProjectValidator.HelperClasses
                         _InvalidCount++;
                     }
 
-                    if (MustAddDesignerFileItem(designerFileItem, filter))
+                    if (MustAddDesignerFileItem(designerFileItem, actionType))
                     {
                         resultList.Add(designerFileItem);
                     }
@@ -140,7 +140,7 @@ namespace WebProjectValidator.HelperClasses
             return resultList;
         }
 
-        public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ListFilterType filter)
+        public List<DesignerFileItem> processCodeFileCheck(FileList fileList, ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -175,7 +175,7 @@ namespace WebProjectValidator.HelperClasses
                         _InvalidCount++;
                     }
 
-                    if (MustAddDesignerFileItem(designerFileItem, filter))
+                    if (MustAddDesignerFileItem(designerFileItem, actionType))
                     {
                         resultList.Add(designerFileItem);
                     }
@@ -203,7 +203,7 @@ namespace WebProjectValidator.HelperClasses
             return true; // komt niet voor in het bestand
         }
 
-        public List<DesignerFileItem> processUserControlMissing(FileList fileList, ListFilterType filter)
+        public List<DesignerFileItem> processUserControlMissing(FileList fileList, ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
             ControlReferenceList allUserControlReferences = new ControlReferenceList();
@@ -304,7 +304,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (DesignerFileItem designerFileItem in userControlReferences)
             {
-                if (MustAddDesignerFileItem(designerFileItem, filter))
+                if (MustAddDesignerFileItem(designerFileItem, actionType))
                 {
                     resultList.Add(designerFileItem);
                 }
@@ -373,39 +373,42 @@ namespace WebProjectValidator.HelperClasses
             return controlReference;
         }
 
-        // TODO : split filterType usercontrol / designer functionality
-        public bool MustAddDesignerFileItem(DesignerFileItem designerFileItem, ListFilterType filter)
+        // TODO : split actionType usercontrol / designer functionality
+        public bool MustAddDesignerFileItem(DesignerFileItem designerFileItem, ProcessActionType actionType)
         {
-            switch (filter)
+            switch (actionType)
             {
-                case ListFilterType.Valid:
-                case ListFilterType.UserControlValid:
+                case ProcessActionType.UserControlValid:
                     if (designerFileItem.Valid)
                     {
                         return true;
                     }
                     return false;
-                case ListFilterType.Invalid:
-                case ListFilterType.UserControlInvalid:
+                case ProcessActionType.UserControlInvalid:
                     if (!designerFileItem.Valid)
                     {
                         return true;
                     }
                     return false;
-                case ListFilterType.DesignerFileExists:
-                case ListFilterType.UserControlMissing:
+                case ProcessActionType.DesignerFileExists:
                     if (designerFileItem.Exists)
                     {
                         return true;
                     }
                     return false;
-                case ListFilterType.DesignerFileMissing:
+                case ProcessActionType.DesignerFileMissing:
                     if (!designerFileItem.Exists)
                     {
                         return true;
                     }
                     return false;
-                case ListFilterType.UserControlUnused:
+                case ProcessActionType.UserControlMissing:
+                    if (!designerFileItem.Exists)
+                    {
+                        return true;
+                    }
+                    return false;
+                case ProcessActionType.UserControlUnused:
                     if (!designerFileItem.IsUsed)
                     {
                         return true;

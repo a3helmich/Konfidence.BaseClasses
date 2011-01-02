@@ -17,7 +17,7 @@ namespace WebProjectValidator.HelperClasses
             {
                 string line = textReader.ReadLine();
 
-                while (!IsEmpty(line))
+                while (!IsNull(line))
                 {
                     fileLines.Add(line);
                     line = textReader.ReadLine();

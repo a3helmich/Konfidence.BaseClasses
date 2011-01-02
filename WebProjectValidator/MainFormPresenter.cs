@@ -15,7 +15,10 @@ namespace WebProjectValidator
         private string _SolutionFolder = string.Empty;
         private string _ProjectName = string.Empty;
         private LanguageType _LanguageType = LanguageType.Unknown;
-        private TabPageType _TabPageType = TabPageType.Unknown;
+        private TabPageType _TabPageType = TabPageType.DesignerFileMissing;
+
+        private bool _IsDesignerFileExistsCheck;
+        private bool _IsDesignerFileMissingCheck;
 
         private bool _IsWebProjectCheck;
 
@@ -24,41 +27,26 @@ namespace WebProjectValidator
         private bool _IsUserControlMissingCheck;
         private bool _IsUserControlUnusedCheck;
 
-        public bool IsUserControlValidCheck
-        {
-            get { return _IsUserControlValidCheck; }
-            set { _IsUserControlValidCheck = value; }
-        }
+        private int _DesignerFileCount = 0;
+        private int _DesignerFileMissingCount = 0;
+        private int _DesignerFileExistsCount = 0;
+        private int _DesignerFileListCount = 0;
 
-        public bool IsUserControlInvalidCheck
-        {
-            get { return _IsUserControlInvalidCheck; }
-            set { _IsUserControlInvalidCheck = value; }
-        }
-
-        public bool IsUserControlMissingCheck
-        {
-            get { return _IsUserControlMissingCheck; }
-            set { _IsUserControlMissingCheck = value; }
-        }
-
-        public bool IsUserControlUnusedCheck
-        {
-            get { return _IsUserControlUnusedCheck; }
-            set { _IsUserControlUnusedCheck = value; }
-        }
+        private List<DesignerFileItem> _DesignerFileMissingList;
 
         private int _ProjectFileCount = 0;
         private int _ProjectFileValidCount = 0;
         private int _ProjectFileInvalidCount = 0;
         private int _ProjectFileListCount = 0;
+
         private List<DesignerFileItem> _ProjectTypeValidationList;
 
         private int _UserControlMissingCount = 0;
         private int _UserControlMissingValidCount = 0;
         private int _UserControlMissingInvalidCount = 0;
         private int _UserControlMissingListCount = 0;
-        private List<DesignerFileItem> _MissingUserControlList;
+
+        private List<DesignerFileItem> _UserControlMissingList;
 
 #region simple properties
         public string SolutionFolder
@@ -98,10 +86,67 @@ namespace WebProjectValidator
             set { _TabPageType = value; }
         }
 
+        public bool IsDesignerFileExistsCheck
+        {
+            get { return _IsDesignerFileExistsCheck; }
+            set { _IsDesignerFileExistsCheck = value; }
+        }
+
+        public bool IsDesignerFileMissingCheck
+        {
+            get { return _IsDesignerFileMissingCheck; }
+            set { _IsDesignerFileMissingCheck = value; }
+        }
+
         public bool IsWebProjectCheck
         {
             get { return _IsWebProjectCheck; }
             set { _IsWebProjectCheck = value; }
+        }
+
+        public bool IsUserControlValidCheck
+        {
+            get { return _IsUserControlValidCheck; }
+            set { _IsUserControlValidCheck = value; }
+        }
+
+        public bool IsUserControlInvalidCheck
+        {
+            get { return _IsUserControlInvalidCheck; }
+            set { _IsUserControlInvalidCheck = value; }
+        }
+
+        public bool IsUserControlMissingCheck
+        {
+            get { return _IsUserControlMissingCheck; }
+            set { _IsUserControlMissingCheck = value; }
+        }
+
+        public bool IsUserControlUnusedCheck
+        {
+            get { return _IsUserControlUnusedCheck; }
+            set { _IsUserControlUnusedCheck = value; }
+        }
+
+        // DesignerFile counters text
+        public string DesignerFileCountText
+        {
+            get { return "Total: " + _DesignerFileCount; }
+        }
+
+        public string DesignerFileMissingCountText
+        {
+            get { return "Existing: " + _DesignerFileMissingCount; }
+        }
+
+        public string DesignerFileExistsCountText
+        {
+            get { return "Missing: " + _DesignerFileExistsCount; }
+        }
+
+        public string DesignerFileListCountText
+        {
+            get { return "RowCount: " + _DesignerFileListCount; }
         }
 
         // project counters text
@@ -173,55 +218,6 @@ namespace WebProjectValidator
             get { return !IsCS; }
         }
 
-        public ListFilterType FilterType
-        {
-            get
-            {
-                switch (_TabPageType)
-                {
-                    case TabPageType.ProjectTypeValidation:
-                        {
-                            return ListFilterType.Unknown;
-                        }
-                    case TabPageType.DesignerFileMissing:
-                        {
-                            if (IsWebProjectCheck)
-                            {
-                                return ListFilterType.WebProject;
-                            }
-
-                            return ListFilterType.WebApplication;
-                        }
-                    case TabPageType.UserControlMissing:
-                        {
-                            if (IsUserControlInvalidCheck)
-                            {
-                                return ListFilterType.UserControlInvalid;
-                            }
-
-                            if (IsUserControlValidCheck)
-                            {
-                                return ListFilterType.UserControlValid;
-                            }
-                            
-                            if (IsUserControlMissingCheck)
-                            {
-                                return ListFilterType.UserControlMissing;
-                            }
-                            
-                            if (IsUserControlUnusedCheck)
-                            {
-                                return ListFilterType.UserControlUnused;
-                            }
-
-                            return ListFilterType.All;
-                        }
-                }
-
-                return ListFilterType.Unknown;
-            }
-        }
-
         public string ProjectFile
         {
             get
@@ -242,6 +238,14 @@ namespace WebProjectValidator
             }
         }
 
+        public List<DesignerFileItem> DesignerFileMissingList
+        {
+            get
+            {
+                return _DesignerFileMissingList;
+            }
+        }
+
         public List<DesignerFileItem> ProjectTypeValidationList
         {
             get
@@ -250,15 +254,111 @@ namespace WebProjectValidator
             }
         }
 
-        public List<DesignerFileItem> MissingUserControlList
+        public List<DesignerFileItem> UserControlMissingList
         {
             get
             {
-                return _MissingUserControlList;
+                return _UserControlMissingList;
+            }
+        }
+
+        public bool ConvertButtonsEnabled()
+        {
+            if (TabPageType.Equals(TabPageType.ProjectTypeValidation))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool DesignerFileMissingItemVisible()
+        {
+            if (TabPageType.Equals(TabPageType.DesignerFileMissing))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool ProjectTypeValidationItemVisible()
+        {
+            if (TabPageType.Equals(TabPageType.ProjectTypeValidation))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UserControlMissingValidationItemVisible()
+        {
+            if (TabPageType.Equals(TabPageType.UserControlMissing))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private ProcessActionType ActionType
+        {
+            get
+            {
+                switch (_TabPageType)
+                {
+                    case TabPageType.DesignerFileMissing:
+                        {
+                            if (IsDesignerFileExistsCheck)
+                            {
+                                return ProcessActionType.DesignerFileExists;
+                            }
+
+                            if (IsDesignerFileMissingCheck)
+                            {
+                                return ProcessActionType.DesignerFileMissing;
+                            }
+
+                            return ProcessActionType.All;
+                        }
+                    case TabPageType.ProjectTypeValidation:
+                        {
+                            if (IsWebProjectCheck)
+                            {
+                                return ProcessActionType.WebProject;
+                            }
+
+                            return ProcessActionType.WebApplication;
+                        }
+                    case TabPageType.UserControlMissing:
+                        {
+                            if (IsUserControlInvalidCheck)
+                            {
+                                return ProcessActionType.UserControlInvalid;
+                            }
+
+                            if (IsUserControlValidCheck)
+                            {
+                                return ProcessActionType.UserControlValid;
+                            }
+
+                            if (IsUserControlMissingCheck)
+                            {
+                                return ProcessActionType.UserControlMissing;
+                            }
+
+                            if (IsUserControlUnusedCheck)
+                            {
+                                return ProcessActionType.UserControlUnused;
+                            }
+
+                            return ProcessActionType.All;
+                        }
+                }
+
+                return ProcessActionType.Unknown;
             }
         }
         
-        public FileList WebFileList
+        private FileList WebFileList
         {
             get
             {
@@ -266,7 +366,7 @@ namespace WebProjectValidator
             }
         }
 
-        public FileList SourceFileList
+        private FileList SourceFileList
         {
             get
             {
@@ -274,7 +374,7 @@ namespace WebProjectValidator
             }
         }
 
-        public FileList DesignerFileList
+        private FileList DesignerFileList
         {
             get
             {
@@ -287,7 +387,7 @@ namespace WebProjectValidator
             LoadDefaults();
         }
 
-        public bool Validate()
+        private bool Validate()
         {
             ClearErrorMessage();
 
@@ -359,34 +459,6 @@ namespace WebProjectValidator
             configurationStore.Save();
         }
 
-        public bool ConvertButtonsEnabled ()
-        {
-            if (TabPageType.Equals(TabPageType.ProjectTypeValidation))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool ProjectTypeValidationItemVisible()
-        {
-            if (TabPageType.Equals(TabPageType.ProjectTypeValidation))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public bool UserControlMissingValidationItemVisible()
-        {
-            if (TabPageType.Equals(TabPageType.UserControlMissing))
-            {
-                return true;
-            }
-            return false;
-        }
-
         public void ConvertToWebApplication()
         {
             ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
@@ -404,14 +476,21 @@ namespace WebProjectValidator
             ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
 
             // TODO : just get a list of all projectFiles without any processing
-            List<DesignerFileItem> webProjectFileItemList = processor.processCodeFileCheck(WebFileList, FilterType);
+            List<DesignerFileItem> webProjectFileItemList = processor.processCodeFileCheck(WebFileList, ActionType);
 
             // web project uses a projectfile -> only files included in the project file must be converted
             processor.ConvertToWebProject(webProjectFileItemList);
         }
 
-        internal void ResetCalculatedProperties()
+        private void ResetCalculatedProperties()
         {
+            _DesignerFileListCount = 0;
+            _DesignerFileMissingCount = 0;
+            _DesignerFileExistsCount = 0;
+            _DesignerFileCount = 0;
+
+            _DesignerFileMissingList = null;
+
             _ProjectFileCount = 0;
             _ProjectFileValidCount = 0;
             _ProjectFileInvalidCount = 0;
@@ -424,23 +503,33 @@ namespace WebProjectValidator
             _UserControlMissingInvalidCount = 0;
             _UserControlMissingListCount = 0;
 
-            _MissingUserControlList = null;
+            _UserControlMissingList = null;
         }
 
-        public void ProjectTypeValidation()
+        private void DesignerFileValidation()
         {
-            ResetCalculatedProperties();
+            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
 
+            _DesignerFileMissingList = processor.processDesignerFileMissing(SourceFileList, DesignerFileList, ActionType);
+
+            _DesignerFileCount = processor.Count;
+            _DesignerFileMissingCount = processor.ValidCount;
+            _DesignerFileExistsCount = processor.InvalidCount;
+            _DesignerFileListCount = _DesignerFileMissingList.Count;
+        }
+
+        private void ProjectTypeValidation()
+        {
             ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
 
             // TODO : diferentiate between application and project
             if (IsWebProjectCheck)
             {
-                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, FilterType);
+                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, ActionType);
             }
             else
             {
-                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, FilterType);
+                _ProjectTypeValidationList = processor.processCodeFileCheck(WebFileList, ActionType);
             }
 
             _ProjectFileCount = processor.Count;
@@ -449,16 +538,63 @@ namespace WebProjectValidator
             _ProjectFileListCount = _ProjectTypeValidationList.Count;
         }
 
-        public void UserControlValidation()
+        private void UserControlValidation()
         {
             ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
 
-            List<DesignerFileItem> missingUserControlList = processor.processUserControlMissing(WebFileList, FilterType);
+            _UserControlMissingList = processor.processUserControlMissing(WebFileList, ActionType);
 
             _UserControlMissingCount = processor.Count;
             _UserControlMissingValidCount = processor.ValidCount;
             _UserControlMissingInvalidCount = processor.InvalidCount;
-            _UserControlMissingListCount = missingUserControlList.Count;
+            _UserControlMissingListCount = _UserControlMissingList.Count;
+        }
+
+        public bool Execute()
+        {
+            ResetCalculatedProperties();
+
+            if (Validate())
+            {
+                switch (TabPageType)
+                {
+                    case TabPageType.ProjectTypeValidation:
+                        ProjectTypeValidation();
+                        break;
+                    case TabPageType.DesignerFileMissing:
+                        DesignerFileValidation();
+                        break;
+                    case TabPageType.UserControlMissing:
+                        UserControlValidation();
+                        break;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsValidTag(object tabTag)
+        {
+            if (IsAssigned(tabTag))
+            {
+                try
+                {
+                    switch ((TabPageType)tabTag)
+                    {
+                        case EnumTypes.TabPageType.DesignerFileMissing:
+                        case EnumTypes.TabPageType.ProjectTypeValidation:
+                        case EnumTypes.TabPageType.UserControlMissing:
+                        case EnumTypes.TabPageType.Unknown:
+                            return true;
+                    }
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
     }
 }

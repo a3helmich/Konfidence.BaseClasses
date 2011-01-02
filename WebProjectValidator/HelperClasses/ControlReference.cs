@@ -64,7 +64,7 @@ namespace WebProjectValidator.HelperClasses
                 return FileName.Equals(otherControlReference.FileName);
             }
 
-            throw new Exception("Object is not a ControlReference!");
+            throw new InvalidCastException("Object is not a ControlReference!");
         }
     }
 }

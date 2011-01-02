@@ -30,6 +30,10 @@ namespace WebProjectValidator
             dgvDesignerFileMissing.AutoGenerateColumns = false;
             dgvProjectTypeValidation.AutoGenerateColumns = false;
             dgvUserControlMissing.AutoGenerateColumns = false;
+
+            tpDesignerFileMissing.Tag = TabPageType.DesignerFileMissing;
+            tpProjectTypeValidation.Tag = TabPageType.ProjectTypeValidation;
+            tpUserControlMissing.Tag = TabPageType.UserControlMissing;
         }
 
         private void PresenterToForm()
@@ -44,40 +48,50 @@ namespace WebProjectValidator
             bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled();
             bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled();
 
-            #region ProjectTypeValidation
+            if (_Presenter.DesignerFileMissingItemVisible())
+            {
+                GetDesignerFileMissingCounts();
+            }
+
+            dgvDesignerFileMissing.DataSource = _Presenter.DesignerFileMissingList;
+
             if (_Presenter.ProjectTypeValidationItemVisible())
             {
-                tsslTotal.Visible = _Presenter.ProjectTypeValidationItemVisible();
-                tsslValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
-                tsslInValid.Visible = _Presenter.ProjectTypeValidationItemVisible();
-                tsslRowCount.Visible = _Presenter.ProjectTypeValidationItemVisible();
-
-                tsslTotal.Text = _Presenter.ProjectFileCountText;
-                tsslValid.Text = _Presenter.ProjectFileValidCountText;
-                tsslInValid.Text = _Presenter.ProjectFileInvalidCountText;
-                tsslRowCount.Text = _Presenter.ProjectFileListCountText;
+                GetProjectTypeValidationCounts();
             }
 
             dgvProjectTypeValidation.DataSource = _Presenter.ProjectTypeValidationList;
-            #endregion ProjectTypeValidation
 
-            #region MissingUserControlValidation
             if (_Presenter.UserControlMissingValidationItemVisible())
             {
-                tsslTotal.Visible = _Presenter.UserControlMissingValidationItemVisible();
-                tsslValid.Visible = _Presenter.UserControlMissingValidationItemVisible();
-                tsslInValid.Visible = _Presenter.UserControlMissingValidationItemVisible();
-                tsslRowCount.Visible = _Presenter.UserControlMissingValidationItemVisible();
-
-                tsslTotal.Text = _Presenter.UserControlMissingListCountText;
-                tsslValid.Text = _Presenter.UserControlMissingValidCountText;
-                tsslInValid.Text = _Presenter.UserControlMissingInvalidCountText;
-                tsslRowCount.Text = _Presenter.UserControlMissingListCountText;
+                GetMissingUserControlValidationCounts();
             }
 
-            dgvUserControlMissing.DataSource = _Presenter.MissingUserControlList;
-            #endregion MissingUserControlValidation
-      
+            dgvUserControlMissing.DataSource = _Presenter.UserControlMissingList;
+        }
+
+        private void GetMissingUserControlValidationCounts()
+        {
+            tsslTotal.Text = _Presenter.UserControlMissingCountText;
+            tsslStatus1.Text = _Presenter.UserControlMissingValidCountText;
+            tsslStatus2.Text = _Presenter.UserControlMissingInvalidCountText;
+            tsslListCount.Text = _Presenter.UserControlMissingListCountText;
+        }
+
+        private void GetProjectTypeValidationCounts()
+        {
+            tsslTotal.Text = _Presenter.ProjectFileCountText;
+            tsslStatus1.Text = _Presenter.ProjectFileValidCountText;
+            tsslStatus2.Text = _Presenter.ProjectFileInvalidCountText;
+            tsslListCount.Text = _Presenter.ProjectFileListCountText;
+        }
+
+        private void GetDesignerFileMissingCounts()
+        {
+            tsslTotal.Text = _Presenter.DesignerFileCountText;
+            tsslStatus1.Text = _Presenter.DesignerFileExistsCountText;
+            tsslStatus2.Text = _Presenter.DesignerFileMissingCountText;
+            tsslListCount.Text = _Presenter.DesignerFileListCountText;
         }
 
         private void FormToPresenter()
@@ -86,6 +100,10 @@ namespace WebProjectValidator
             _Presenter.ProjectName = tbProjectName.Text;
 
             _Presenter.IsCS = rbCS.Checked;
+
+            _Presenter.IsDesignerFileExistsCheck = rbDesignerFileExists.Checked;
+            _Presenter.IsDesignerFileMissingCheck = rbDesignerFileMissing.Checked;
+
             _Presenter.IsWebProjectCheck = rbCheckWebProject.Checked;
 
             _Presenter.IsUserControlValidCheck = rbUserControlValid.Checked;
@@ -93,17 +111,9 @@ namespace WebProjectValidator
             _Presenter.IsUserControlMissingCheck = rbUserControlMissing.Checked;
             _Presenter.IsUserControlUnusedCheck = rbUserControlUnused.Checked;
 
-            if (tabControl.SelectedTab.Equals(tpDesignerFileMissing))
+            if (_Presenter.IsValidTag(tabControl.SelectedTab.Tag))
             {
-                _Presenter.TabPageType = TabPageType.DesignerFileMissing;
-            }
-            if (tabControl.SelectedTab.Equals(tpProjectTypeValidation))
-            {
-                _Presenter.TabPageType = TabPageType.ProjectTypeValidation;
-            }
-            if (tabControl.SelectedTab.Equals(tpUserControlMissing))
-            {
-                _Presenter.TabPageType = TabPageType.UserControlMissing;
+                _Presenter.TabPageType = (TabPageType)tabControl.SelectedTab.Tag;
             }
         }
 
@@ -123,85 +133,12 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            if (!Execute())
+            if (!_Presenter.Execute())
             {
                 MessageBox.Show(_Presenter.ErrorMessage);
             }
-        }
-
-        private bool Execute()
-        {
-            if (_Presenter.Validate())
-            {
-                switch (_Presenter.TabPageType)
-                {
-                    case TabPageType.ProjectTypeValidation:
-                        ProjectTypeValidation();
-                        break;
-                    case TabPageType.DesignerFileMissing:
-                        DesignerFileMissing();
-                        break;
-                    case TabPageType.UserControlMissing:
-                        UserControlMissing();
-                        break;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        private void DesignerFileMissing()
-        {
-            FormToPresenter();
-
-            ListProcessor processor = new ListProcessor(_Presenter.ProjectName, _Presenter.ProjectFolder, _Presenter.LanguageType, _Presenter.ProjectFile);
-            ListFilterType filter = GetDesignerFileMissingFilterType();
-
-            dgvDesignerFileMissing.DataSource = processor.processDesignerFileMissing(_Presenter.SourceFileList, _Presenter.DesignerFileList, filter);
-
-            tsslTotal.Visible = true;
-            tsslTotal.Text = "Total: " + processor.Count;
-            tsslValid.Visible = true;
-            tsslValid.Text = "Existing: " + processor.ValidCount;
-            tsslInValid.Visible = true;
-            tsslInValid.Text = "Missing: " + processor.InvalidCount;
-            tsslRowCount.Visible = true;
-            tsslRowCount.Text = "RowCount: " + dgvDesignerFileMissing.RowCount;
 
             PresenterToForm();
-        }
-
-        private void ProjectTypeValidation()
-        {
-            FormToPresenter();
-
-            _Presenter.ProjectTypeValidation();
-
-            PresenterToForm();
-        }
-
-        private void UserControlMissing()
-        {
-            FormToPresenter();
-
-            _Presenter.UserControlValidation();
-
-            PresenterToForm();
-        }
-
-        private ListFilterType GetDesignerFileMissingFilterType()
-        {
-            if (rbDesignerFileExists.Checked)
-            {
-                return ListFilterType.DesignerFileExists;
-            }
-
-            if (rbDesignerFileMissing.Checked)
-            {
-                return ListFilterType.DesignerFileMissing;
-            }
-
-            return ListFilterType.All;
         }
 
         private void bConvertToWebApplication_Click(object sender, EventArgs e)
