@@ -10,6 +10,6 @@ namespace WebProjectValidator.EnumTypes
         Unknown = 0,
         DesignerFileMissing = 1,
         ProjectTypeValidation = 2,
-        UserControlMissing = 3,
+        UserControlValidation = 3,
     }
 }

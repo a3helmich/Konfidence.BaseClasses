@@ -29,11 +29,11 @@ namespace WebProjectValidator
         {
             dgvDesignerFileMissing.AutoGenerateColumns = false;
             dgvProjectTypeValidation.AutoGenerateColumns = false;
-            dgvUserControlMissing.AutoGenerateColumns = false;
+            dgvUserControlValidation.AutoGenerateColumns = false;
 
             tpDesignerFileMissing.Tag = TabPageType.DesignerFileMissing;
             tpProjectTypeValidation.Tag = TabPageType.ProjectTypeValidation;
-            tpUserControlMissing.Tag = TabPageType.UserControlMissing;
+            tpUserControlValidation.Tag = TabPageType.UserControlValidation;
         }
 
         private void PresenterToForm()
@@ -62,20 +62,20 @@ namespace WebProjectValidator
 
             dgvProjectTypeValidation.DataSource = _Presenter.ProjectTypeValidationList;
 
-            if (_Presenter.UserControlMissingValidationItemVisible())
+            if (_Presenter.UserControlValidationItemVisible())
             {
                 GetMissingUserControlValidationCounts();
             }
 
-            dgvUserControlMissing.DataSource = _Presenter.UserControlMissingList;
+            dgvUserControlValidation.DataSource = _Presenter.UserControlValidationList;
         }
 
         private void GetMissingUserControlValidationCounts()
         {
-            tsslTotal.Text = _Presenter.UserControlMissingCountText;
-            tsslStatus1.Text = _Presenter.UserControlMissingValidCountText;
-            tsslStatus2.Text = _Presenter.UserControlMissingInvalidCountText;
-            tsslListCount.Text = _Presenter.UserControlMissingListCountText;
+            tsslTotal.Text = _Presenter.UserControlCountText;
+            tsslStatus1.Text = _Presenter.UserControlValidCountText;
+            tsslStatus2.Text = _Presenter.UserControlInvalidCountText;
+            tsslListCount.Text = _Presenter.UserControlListCountText;
         }
 
         private void GetProjectTypeValidationCounts()

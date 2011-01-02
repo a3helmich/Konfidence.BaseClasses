@@ -54,20 +54,20 @@
             this.tpProjectTypeValidation = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvProjectTypeValidation = new System.Windows.Forms.DataGridView();
-            this.dgvCodeFileProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvCodeFileFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvCodeFileValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvCodeFileControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbCheckWebProject = new System.Windows.Forms.RadioButton();
             this.rbCheckWebApplication = new System.Windows.Forms.RadioButton();
-            this.tpUserControlMissing = new System.Windows.Forms.TabPage();
+            this.tpUserControlValidation = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.dgvUserControlMissing = new System.Windows.Forms.DataGridView();
-            this.dgvUserControlMissingProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlMissingReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlValidation = new System.Windows.Forms.DataGridView();
+            this.dgvUserControlValidationProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlValidationReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.rbUserControlUnused = new System.Windows.Forms.RadioButton();
             this.rbUserControlMissing = new System.Windows.Forms.RadioButton();
@@ -95,9 +95,9 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjectTypeValidation)).BeginInit();
             this.panel1.SuspendLayout();
-            this.tpUserControlMissing.SuspendLayout();
+            this.tpUserControlValidation.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUserControlMissing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUserControlValidation)).BeginInit();
             this.panel4.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
@@ -163,7 +163,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tpDesignerFileMissing);
             this.tabControl.Controls.Add(this.tpProjectTypeValidation);
-            this.tabControl.Controls.Add(this.tpUserControlMissing);
+            this.tabControl.Controls.Add(this.tpUserControlValidation);
             this.tabControl.Location = new System.Drawing.Point(16, 102);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -334,10 +334,10 @@
             this.dgvProjectTypeValidation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProjectTypeValidation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProjectTypeValidation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvCodeFileProject,
-            this.dgvCodeFileFileName,
-            this.dgvCodeFileValid,
-            this.dgvCodeFileControlFolder});
+            this.dgvProjectTypeValidationProject,
+            this.dgvProjectTypeValidationFileName,
+            this.dgvProjectTypeValidationValid,
+            this.dgvProjectTypeValidationControlFolder});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -355,34 +355,34 @@
             // 
             // dgvCodeFileProject
             // 
-            this.dgvCodeFileProject.DataPropertyName = "Project";
-            this.dgvCodeFileProject.HeaderText = "Project";
-            this.dgvCodeFileProject.Name = "dgvCodeFileProject";
-            this.dgvCodeFileProject.ReadOnly = true;
+            this.dgvProjectTypeValidationProject.DataPropertyName = "Project";
+            this.dgvProjectTypeValidationProject.HeaderText = "Project";
+            this.dgvProjectTypeValidationProject.Name = "dgvCodeFileProject";
+            this.dgvProjectTypeValidationProject.ReadOnly = true;
             // 
             // dgvCodeFileFileName
             // 
-            this.dgvCodeFileFileName.DataPropertyName = "FileName";
-            this.dgvCodeFileFileName.HeaderText = "File";
-            this.dgvCodeFileFileName.Name = "dgvCodeFileFileName";
-            this.dgvCodeFileFileName.ReadOnly = true;
-            this.dgvCodeFileFileName.Width = 200;
+            this.dgvProjectTypeValidationFileName.DataPropertyName = "FileName";
+            this.dgvProjectTypeValidationFileName.HeaderText = "File";
+            this.dgvProjectTypeValidationFileName.Name = "dgvCodeFileFileName";
+            this.dgvProjectTypeValidationFileName.ReadOnly = true;
+            this.dgvProjectTypeValidationFileName.Width = 200;
             // 
             // dgvCodeFileValid
             // 
-            this.dgvCodeFileValid.DataPropertyName = "Valid";
-            this.dgvCodeFileValid.HeaderText = "Valid";
-            this.dgvCodeFileValid.Name = "dgvCodeFileValid";
-            this.dgvCodeFileValid.ReadOnly = true;
-            this.dgvCodeFileValid.Width = 55;
+            this.dgvProjectTypeValidationValid.DataPropertyName = "Valid";
+            this.dgvProjectTypeValidationValid.HeaderText = "Valid";
+            this.dgvProjectTypeValidationValid.Name = "dgvCodeFileValid";
+            this.dgvProjectTypeValidationValid.ReadOnly = true;
+            this.dgvProjectTypeValidationValid.Width = 55;
             // 
             // dgvCodeFileControlFolder
             // 
-            this.dgvCodeFileControlFolder.DataPropertyName = "ControlFolder";
-            this.dgvCodeFileControlFolder.HeaderText = "Folder";
-            this.dgvCodeFileControlFolder.Name = "dgvCodeFileControlFolder";
-            this.dgvCodeFileControlFolder.ReadOnly = true;
-            this.dgvCodeFileControlFolder.Width = 565;
+            this.dgvProjectTypeValidationControlFolder.DataPropertyName = "ControlFolder";
+            this.dgvProjectTypeValidationControlFolder.HeaderText = "Folder";
+            this.dgvProjectTypeValidationControlFolder.Name = "dgvCodeFileControlFolder";
+            this.dgvProjectTypeValidationControlFolder.ReadOnly = true;
+            this.dgvProjectTypeValidationControlFolder.Width = 565;
             // 
             // panel1
             // 
@@ -418,28 +418,28 @@
             this.rbCheckWebApplication.Text = "Web application";
             this.rbCheckWebApplication.UseVisualStyleBackColor = true;
             // 
-            // tpUserControlMissing
+            // tpUserControlValidation
             // 
-            this.tpUserControlMissing.Controls.Add(this.panel6);
-            this.tpUserControlMissing.Controls.Add(this.panel4);
-            this.tpUserControlMissing.Location = new System.Drawing.Point(4, 22);
-            this.tpUserControlMissing.Name = "tpUserControlMissing";
-            this.tpUserControlMissing.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUserControlMissing.Size = new System.Drawing.Size(948, 296);
-            this.tpUserControlMissing.TabIndex = 2;
-            this.tpUserControlMissing.Text = "User control missing";
-            this.tpUserControlMissing.UseVisualStyleBackColor = true;
+            this.tpUserControlValidation.Controls.Add(this.panel6);
+            this.tpUserControlValidation.Controls.Add(this.panel4);
+            this.tpUserControlValidation.Location = new System.Drawing.Point(4, 22);
+            this.tpUserControlValidation.Name = "tpUserControlValidation";
+            this.tpUserControlValidation.Padding = new System.Windows.Forms.Padding(3);
+            this.tpUserControlValidation.Size = new System.Drawing.Size(948, 296);
+            this.tpUserControlValidation.TabIndex = 2;
+            this.tpUserControlValidation.Text = "User control validation";
+            this.tpUserControlValidation.UseVisualStyleBackColor = true;
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.dgvUserControlMissing);
+            this.panel6.Controls.Add(this.dgvUserControlValidation);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 33);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(942, 260);
             this.panel6.TabIndex = 1;
             // 
-            // dgvUserControlMissing
+            // dgvUserControlValidation
             // 
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -448,13 +448,13 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUserControlMissing.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvUserControlMissing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUserControlMissing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvUserControlMissingProject,
-            this.dgvUserControlMissingFileName,
-            this.dgvUserControlMissingValid,
-            this.dgvUserControlMissingReason});
+            this.dgvUserControlValidation.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvUserControlValidation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUserControlValidation.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvUserControlValidationProject,
+            this.dgvUserControlValidationFileName,
+            this.dgvUserControlValidationValid,
+            this.dgvUserControlValidationReason});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -462,44 +462,44 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUserControlMissing.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvUserControlMissing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvUserControlMissing.Location = new System.Drawing.Point(0, 0);
-            this.dgvUserControlMissing.Name = "dgvUserControlMissing";
-            this.dgvUserControlMissing.RowHeadersVisible = false;
-            this.dgvUserControlMissing.Size = new System.Drawing.Size(942, 260);
-            this.dgvUserControlMissing.TabIndex = 0;
+            this.dgvUserControlValidation.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvUserControlValidation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUserControlValidation.Location = new System.Drawing.Point(0, 0);
+            this.dgvUserControlValidation.Name = "dgvUserControlValidation";
+            this.dgvUserControlValidation.RowHeadersVisible = false;
+            this.dgvUserControlValidation.Size = new System.Drawing.Size(942, 260);
+            this.dgvUserControlValidation.TabIndex = 0;
             // 
-            // dgvUserControlMissingProject
+            // dgvUserControlValidationProject
             // 
-            this.dgvUserControlMissingProject.DataPropertyName = "Project";
-            this.dgvUserControlMissingProject.HeaderText = "Project";
-            this.dgvUserControlMissingProject.Name = "dgvUserControlMissingProject";
-            this.dgvUserControlMissingProject.ReadOnly = true;
+            this.dgvUserControlValidationProject.DataPropertyName = "Project";
+            this.dgvUserControlValidationProject.HeaderText = "Project";
+            this.dgvUserControlValidationProject.Name = "dgvUserControlValidationProject";
+            this.dgvUserControlValidationProject.ReadOnly = true;
             // 
-            // dgvUserControlMissingFileName
+            // dgvUserControlValidationFileName
             // 
-            this.dgvUserControlMissingFileName.DataPropertyName = "Reference";
-            this.dgvUserControlMissingFileName.HeaderText = "Reference";
-            this.dgvUserControlMissingFileName.Name = "dgvUserControlMissingFileName";
-            this.dgvUserControlMissingFileName.ReadOnly = true;
-            this.dgvUserControlMissingFileName.Width = 400;
+            this.dgvUserControlValidationFileName.DataPropertyName = "Reference";
+            this.dgvUserControlValidationFileName.HeaderText = "Reference";
+            this.dgvUserControlValidationFileName.Name = "dgvUserControlValidationFileName";
+            this.dgvUserControlValidationFileName.ReadOnly = true;
+            this.dgvUserControlValidationFileName.Width = 400;
             // 
-            // dgvUserControlMissingValid
+            // dgvUserControlValidationValid
             // 
-            this.dgvUserControlMissingValid.DataPropertyName = "Valid";
-            this.dgvUserControlMissingValid.HeaderText = "Valid";
-            this.dgvUserControlMissingValid.Name = "dgvUserControlMissingValid";
-            this.dgvUserControlMissingValid.ReadOnly = true;
-            this.dgvUserControlMissingValid.Width = 55;
+            this.dgvUserControlValidationValid.DataPropertyName = "Valid";
+            this.dgvUserControlValidationValid.HeaderText = "Valid";
+            this.dgvUserControlValidationValid.Name = "dgvUserControlValidationValid";
+            this.dgvUserControlValidationValid.ReadOnly = true;
+            this.dgvUserControlValidationValid.Width = 55;
             // 
-            // dgvUserControlMissingReason
+            // dgvUserControlValidationReason
             // 
-            this.dgvUserControlMissingReason.DataPropertyName = "ErrorMessage";
-            this.dgvUserControlMissingReason.HeaderText = "Reason";
-            this.dgvUserControlMissingReason.Name = "dgvUserControlMissingReason";
-            this.dgvUserControlMissingReason.ReadOnly = true;
-            this.dgvUserControlMissingReason.Width = 365;
+            this.dgvUserControlValidationReason.DataPropertyName = "ErrorMessage";
+            this.dgvUserControlValidationReason.HeaderText = "Reason";
+            this.dgvUserControlValidationReason.Name = "dgvUserControlValidationReason";
+            this.dgvUserControlValidationReason.ReadOnly = true;
+            this.dgvUserControlValidationReason.Width = 365;
             // 
             // panel4
             // 
@@ -706,9 +706,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjectTypeValidation)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tpUserControlMissing.ResumeLayout(false);
+            this.tpUserControlValidation.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUserControlMissing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUserControlValidation)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.statusBar.ResumeLayout(false);
@@ -732,12 +732,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TabPage tpUserControlMissing;
+        private System.Windows.Forms.TabPage tpUserControlValidation;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView dgvProjectTypeValidation;
         private System.Windows.Forms.DataGridView dgvDesignerFileMissing;
-        private System.Windows.Forms.DataGridView dgvUserControlMissing;
+        private System.Windows.Forms.DataGridView dgvUserControlValidation;
         private System.Windows.Forms.TextBox tbSolutionFolder;
         private System.Windows.Forms.RadioButton rbDesignerFileExists;
         private System.Windows.Forms.RadioButton rbDesignerFileMissing;
@@ -746,10 +746,10 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus1;
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus2;
         private System.Windows.Forms.ToolStripStatusLabel tsslTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileFileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCodeFileControlFolder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectTypeValidationControlFolder;
         private System.Windows.Forms.RadioButton rbCheckWebProject;
         private System.Windows.Forms.RadioButton rbCheckWebApplication;
         private System.Windows.Forms.ToolStripStatusLabel tsslListCount;
@@ -767,10 +767,10 @@
         private System.Windows.Forms.Button bSelectSolutionFolder;
         private System.Windows.Forms.Label lProjectFileNameDisplay;
         private System.Windows.Forms.Label lProjectFileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingProject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingFileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingValid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlMissingReason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlValidationProject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlValidationFileName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlValidationValid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvUserControlValidationReason;
         private System.Windows.Forms.Button bConvertToWebProject;
     }
 }

@@ -41,12 +41,12 @@ namespace WebProjectValidator
 
         private List<DesignerFileItem> _ProjectTypeValidationList;
 
-        private int _UserControlMissingCount = 0;
-        private int _UserControlMissingValidCount = 0;
-        private int _UserControlMissingInvalidCount = 0;
-        private int _UserControlMissingListCount = 0;
+        private int _UserControlValidationCount = 0;
+        private int _UserControlValidationValidCount = 0;
+        private int _UserControlValidationInvalidCount = 0;
+        private int _UserControlValidationListCount = 0;
 
-        private List<DesignerFileItem> _UserControlMissingList;
+        private List<DesignerFileItem> _UserControlValidationList;
 
 #region simple properties
         public string SolutionFolder
@@ -171,24 +171,24 @@ namespace WebProjectValidator
         }
         
         // user control counters text
-        public string UserControlMissingCountText
+        public string UserControlCountText
         {
-            get { return "Total: " + _UserControlMissingCount; }
+            get { return "Total: " + _UserControlValidationCount; }
         }
 
-        public string UserControlMissingValidCountText
+        public string UserControlValidCountText
         {
-            get { return "Valid: " + _UserControlMissingValidCount; }
+            get { return "Valid: " + _UserControlValidationValidCount; }
         }
 
-        public string UserControlMissingInvalidCountText
+        public string UserControlInvalidCountText
         {
-            get { return "Invalid: " + _UserControlMissingInvalidCount; }
+            get { return "Invalid: " + _UserControlValidationInvalidCount; }
         }
 
-        public string UserControlMissingListCountText
+        public string UserControlListCountText
         {
-            get { return "RowCount: " + _UserControlMissingListCount; }
+            get { return "RowCount: " + _UserControlValidationListCount; }
         }
 #endregion simple properties
 
@@ -254,11 +254,11 @@ namespace WebProjectValidator
             }
         }
 
-        public List<DesignerFileItem> UserControlMissingList
+        public List<DesignerFileItem> UserControlValidationList
         {
             get
             {
-                return _UserControlMissingList;
+                return _UserControlValidationList;
             }
         }
 
@@ -290,9 +290,9 @@ namespace WebProjectValidator
             return false;
         }
 
-        public bool UserControlMissingValidationItemVisible()
+        public bool UserControlValidationItemVisible()
         {
-            if (TabPageType.Equals(TabPageType.UserControlMissing))
+            if (TabPageType.Equals(TabPageType.UserControlValidation))
             {
                 return true;
             }
@@ -303,7 +303,7 @@ namespace WebProjectValidator
         {
             get
             {
-                switch (_TabPageType)
+                switch (TabPageType)
                 {
                     case TabPageType.DesignerFileMissing:
                         {
@@ -328,7 +328,7 @@ namespace WebProjectValidator
 
                             return ProcessActionType.WebApplication;
                         }
-                    case TabPageType.UserControlMissing:
+                    case TabPageType.UserControlValidation:
                         {
                             if (IsUserControlInvalidCheck)
                             {
@@ -461,7 +461,7 @@ namespace WebProjectValidator
 
         public void ConvertToWebApplication()
         {
-            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+            ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
             // TODO : DesignerFileItem -> doesn't feel right
             // TODO : property?
@@ -473,7 +473,7 @@ namespace WebProjectValidator
 
         public void ConvertToWebProject()
         {
-            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+            ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
             // TODO : just get a list of all projectFiles without any processing
             List<DesignerFileItem> webProjectFileItemList = processor.processCodeFileCheck(WebFileList, ActionType);
@@ -498,17 +498,17 @@ namespace WebProjectValidator
 
             _ProjectTypeValidationList = null;
 
-            _UserControlMissingCount = 0;
-            _UserControlMissingValidCount = 0;
-            _UserControlMissingInvalidCount = 0;
-            _UserControlMissingListCount = 0;
+            _UserControlValidationCount = 0;
+            _UserControlValidationValidCount = 0;
+            _UserControlValidationInvalidCount = 0;
+            _UserControlValidationListCount = 0;
 
-            _UserControlMissingList = null;
+            _UserControlValidationList = null;
         }
 
         private void DesignerFileValidation()
         {
-            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+            ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
             _DesignerFileMissingList = processor.processDesignerFileMissing(SourceFileList, DesignerFileList, ActionType);
 
@@ -520,7 +520,7 @@ namespace WebProjectValidator
 
         private void ProjectTypeValidation()
         {
-            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+            ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
             // TODO : diferentiate between application and project
             if (IsWebProjectCheck)
@@ -540,14 +540,14 @@ namespace WebProjectValidator
 
         private void UserControlValidation()
         {
-            ListProcessor processor = new ListProcessor(ProjectName, ProjectFolder, LanguageType, ProjectFile);
+            ListProcessor processor = ListProcessor.GetProcessor(ProjectName, ProjectFolder, ProjectFile, LanguageType);
 
-            _UserControlMissingList = processor.processUserControlMissing(WebFileList, ActionType);
+            _UserControlValidationList = processor.processUserControlValidation(WebFileList, ActionType);
 
-            _UserControlMissingCount = processor.Count;
-            _UserControlMissingValidCount = processor.ValidCount;
-            _UserControlMissingInvalidCount = processor.InvalidCount;
-            _UserControlMissingListCount = _UserControlMissingList.Count;
+            _UserControlValidationCount = processor.Count;
+            _UserControlValidationValidCount = processor.ValidCount;
+            _UserControlValidationInvalidCount = processor.InvalidCount;
+            _UserControlValidationListCount = _UserControlValidationList.Count;
         }
 
         public bool Execute()
@@ -564,7 +564,7 @@ namespace WebProjectValidator
                     case TabPageType.DesignerFileMissing:
                         DesignerFileValidation();
                         break;
-                    case TabPageType.UserControlMissing:
+                    case TabPageType.UserControlValidation:
                         UserControlValidation();
                         break;
                 }
@@ -583,7 +583,7 @@ namespace WebProjectValidator
                     {
                         case EnumTypes.TabPageType.DesignerFileMissing:
                         case EnumTypes.TabPageType.ProjectTypeValidation:
-                        case EnumTypes.TabPageType.UserControlMissing:
+                        case EnumTypes.TabPageType.UserControlValidation:
                         case EnumTypes.TabPageType.Unknown:
                             return true;
                     }

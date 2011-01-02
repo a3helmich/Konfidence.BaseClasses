@@ -18,14 +18,14 @@ namespace WebProjectValidator.HelperClasses
 
         private List<string> _ExtensionFilter = new List<string>();
 
-        private string _ProjectFileName = string.Empty;
-
         private int _Count = 0;
         private int _ValidCount = 0;
         private int _InvalidCount = 0;
 
         private string _DesignerReplace = string.Empty;
         private string _DesignerSearch = string.Empty;
+
+        private static List<ListProcessor> _ListProcessorList = new List<ListProcessor>();
 
         #region simple properties
         public int Count
@@ -45,14 +45,31 @@ namespace WebProjectValidator.HelperClasses
             get { return _InvalidCount; }
             set { _InvalidCount = value; }
         }
-
-        public string ProjectFileName
-        {
-            get { return _ProjectFileName; }
-        }
         #endregion simple properties
 
-        public ListProcessor(string project, string projectFolder, LanguageType language, string projectFile)
+        public static ListProcessor GetProcessor(string project, string projectFolder, string projectFile, LanguageType language)
+        {
+            ListProcessor newProcessor = null;
+
+            foreach (ListProcessor processor in _ListProcessorList)
+            {
+                if (processor._Project == project && processor._ProjectFolder == projectFolder)
+                {
+                    if (processor._ProjectFile == projectFile && processor._LanguageType == language)
+                    {
+                        return processor;
+                    }
+                }
+            }
+
+            newProcessor = new ListProcessor(project, projectFolder, projectFile, language);
+
+            _ListProcessorList.Add(newProcessor);
+
+            return newProcessor;
+        }
+
+        private ListProcessor(string project, string projectFolder, string projectFile, LanguageType language)
         {
             _Project = project;
             _ProjectFolder = projectFolder;
@@ -89,8 +106,6 @@ namespace WebProjectValidator.HelperClasses
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
-
-            _ProjectFileName = projectFileProcessor.ProjectFileName;
 
             foreach (string fileName in fileList)
             {
@@ -152,8 +167,6 @@ namespace WebProjectValidator.HelperClasses
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
-            _ProjectFileName = projectFileProcessor.ProjectFileName;
-
             foreach (string fileName in fileList)
             {
                 if (projectFileList.Contains(fileName, StringComparer.CurrentCultureIgnoreCase))
@@ -203,7 +216,7 @@ namespace WebProjectValidator.HelperClasses
             return true; // komt niet voor in het bestand
         }
 
-        public List<DesignerFileItem> processUserControlMissing(FileList fileList, ProcessActionType actionType)
+        public List<DesignerFileItem> processUserControlValidation(FileList fileList, ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
             ControlReferenceList allUserControlReferences = new ControlReferenceList();
@@ -212,8 +225,6 @@ namespace WebProjectValidator.HelperClasses
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
-
-            _ProjectFileName = projectFileProcessor.ProjectFileName;
 
             fileList.Sort();
 
