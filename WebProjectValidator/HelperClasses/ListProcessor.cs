@@ -94,29 +94,35 @@ namespace WebProjectValidator.HelperClasses
             return newProcessor;
         }
 
-        private ListProcessor(string project, string projectFolder, string projectFile, LanguageType language)
+        private ListProcessor(string project, string projectFolder, string projectFile, LanguageType languageType)
         {
             _Project = project;
             _ProjectFolder = projectFolder;
             _ProjectFile = projectFile;
 
-            _LanguageType = language;
+            _LanguageType = languageType;
 
             _ExtensionFilter.Add(".aspx");
             _ExtensionFilter.Add(".ascx");
             _ExtensionFilter.Add(".master");
             _ExtensionFilter.Add(".asax");
 
-            switch (language)
+            switch (languageType)
             {
                 case LanguageType.cs:
-                    _DesignerSearch = ".cs";
-                    _DesignerReplace = ".designer.cs";
-                    break;
+                    {
+                        _DesignerSearch = ".cs";
+                        _DesignerReplace = ".designer.cs";
+
+                        break;
+                    }
                 case LanguageType.vb:
-                    _DesignerSearch = ".vb";
-                    _DesignerReplace = ".designer.vb";
-                    break;
+                    {
+                        _DesignerSearch = ".vb";
+                        _DesignerReplace = ".designer.vb";
+
+                        break;
+                    }
             }
         }
 
@@ -427,44 +433,55 @@ namespace WebProjectValidator.HelperClasses
             switch (actionType)
             {
                 case ProcessActionType.UserControlValid:
-                    if (designerFileItem.Valid)
                     {
-                        return true;
+                        if (designerFileItem.Valid)
+                        {
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
                 case ProcessActionType.UserControlInvalid:
-                    if (!designerFileItem.Valid)
                     {
-                        return true;
+                        if (!designerFileItem.Valid)
+                        {
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
                 case ProcessActionType.DesignerFileExists:
-                    if (designerFileItem.Exists)
                     {
-                        return true;
+                        if (designerFileItem.Exists)
+                        {
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
                 case ProcessActionType.DesignerFileMissing:
-                    if (!designerFileItem.Exists)
                     {
-                        return true;
+                        if (!designerFileItem.Exists)
+                        {
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
                 case ProcessActionType.UserControlMissing:
-                    if (!designerFileItem.Exists)
                     {
-                        return true;
+                        if (!designerFileItem.Exists)
+                        {
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
                 case ProcessActionType.UserControlUnused:
-                    if (!designerFileItem.IsUsed)
                     {
-                        return true;
+                        if (!designerFileItem.IsUsed)
+                        {
+                            return true;
+                        }
+                        return false;
                     }
-                    return false;
-                default:
-                    return true;
             }
+            return true;
         }
 
         public void ConvertToWebApplication()

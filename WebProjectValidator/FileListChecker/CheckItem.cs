@@ -41,6 +41,7 @@ namespace WebProjectValidator.FileListChecker
                         {
                             return true;
                         }
+
                         break;
                     }
                 case CheckAction.EndsWith:
@@ -49,6 +50,7 @@ namespace WebProjectValidator.FileListChecker
                         {
                             return true;
                         }
+
                         break;
                     }
             }

@@ -51,14 +51,20 @@ namespace WebProjectValidator
             switch (_Presenter.TabPageType)
             {
                 case TabPageType.DesignerFileValidation:
-                    GetDesignerFileValidationCounts();
-                    break;
+                    {
+                        GetDesignerFileValidationCounts();
+                        break;
+                    }
                 case TabPageType.ProjectTypeValidation:
-                    GetProjectTypeValidationCounts();
-                    break;
+                    {
+                        GetProjectTypeValidationCounts();
+                        break;
+                    }
                 case TabPageType.UserControlValidation:
-                    GetMissingUserControlValidationCounts();
-                    break;
+                    {
+                        GetMissingUserControlValidationCounts();
+                        break;
+                    }
             }
 
             dgvDesignerFileValidation.DataSource = _Presenter.DesignerFileValidationList;
@@ -136,9 +142,9 @@ namespace WebProjectValidator
             PresenterToForm();
         }
 
-        private void ExecuteEvent(ExecuteEventType executeType)
+        private void ExecuteEvent(ExecuteEventType executeEventType)
         {
-            if (!_Presenter.Execute(executeType))
+            if (!_Presenter.ExecuteEvent(executeEventType))
             {
                 MessageBox.Show(_Presenter.ErrorMessage);
             }

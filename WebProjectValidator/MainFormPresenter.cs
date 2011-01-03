@@ -439,24 +439,29 @@ namespace WebProjectValidator
             _UserControlValidationResult = new ProcessActionResult();
         }
 
-        public bool Execute(ExecuteEventType executeType)
+        public bool ExecuteEvent(ExecuteEventType executeEventType)
         {
             ResetProcessActionResult();
 
             if (Validate())
             {
                 MainFormController mainFormController = new MainFormController(ProjectName, ProjectFolder, ProjectFile, LanguageType);
-                switch (executeType)
+                switch (executeEventType)
                 {
                     case ExecuteEventType.ButtonStart:
                         {
                             ExecuteValidation(mainFormController);
+
                             break;
                         }
                     case ExecuteEventType.ButtonConvertToWebProject:
-                        break;
+                        {
+                            break;
+                        }
                     case ExecuteEventType.ButtonConvertToWebApplication:
-                        break;
+                        {
+                            break;
+                        }
                 }
                 return true;
             }
@@ -496,8 +501,10 @@ namespace WebProjectValidator
                         case EnumTypes.TabPageType.DesignerFileValidation:
                         case EnumTypes.TabPageType.ProjectTypeValidation:
                         case EnumTypes.TabPageType.UserControlValidation:
-                        case EnumTypes.TabPageType.Unknown:
+                        case EnumTypes.TabPageType.Unknown
+                            {
                             return true;
+                            }
                     }
                 }
                 catch

@@ -52,12 +52,16 @@ namespace WebProjectValidator.FileListChecker
             switch (languageType)
             {
                 case LanguageType.cs:
-                    return ".cs";
+                    {
+                        return ".cs";
+                    }
                 case LanguageType.vb:
-                    return ".vb";
-                default:
-                    return string.Empty;
+                    {
+                        return ".vb";
+                    }
             }
+
+            return string.Empty;
         }
     }
 }
