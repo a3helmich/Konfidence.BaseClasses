@@ -18,5 +18,7 @@ namespace WebProjectValidator.EnumTypes
         UserControlInvalid = 8,
         UserControlMissing = 9,
         UserControlAll = 10,
+        ConvertToWebApplication = 11,
+        ConvertToWebProject = 12,
     }
 }

@@ -15,6 +15,11 @@ namespace WebProjectValidator
         private string _ProjectFile;
         private LanguageType _LanguageType;
 
+        internal ListProcessor Processor
+        {
+            get { return ListProcessor.GetProcessor(_ProjectName, _ProjectFolder, _ProjectFile, _LanguageType);  }
+        }
+
         public MainFormController(string projectName, string projectFolder, string projectFile, LanguageType languageType)
         {
             _ProjectName = projectName;
@@ -27,6 +32,12 @@ namespace WebProjectValidator
         {
             switch (actionType)
             {
+                case ProcessActionType.DesignerFileExists:
+                    return DesignerFileValidationExecute(actionType);
+                case ProcessActionType.DesignerFileMissing:
+                    return DesignerFileValidationExecute(actionType);
+                case ProcessActionType.DesignerFileAll:
+                    return DesignerFileValidationExecute(actionType);
                 case ProcessActionType.WebApplication:
                     return ProjectTypeValidationExecute(actionType);
                 case ProcessActionType.WebProject:
@@ -41,24 +52,44 @@ namespace WebProjectValidator
                     return UserControlValidationExecute(actionType);
                 case ProcessActionType.UserControlAll:
                     return UserControlValidationExecute(actionType);
+                case ProcessActionType.ConvertToWebApplication:
+                    ConvertToWebApplicationExecute();
+                    break;
+                case ProcessActionType.ConvertToWebProject:
+                    ConvertToWebProjectExecute();
+                    break;
             }
 
             return new ProcessActionResult();
         }
 
+        private ProcessActionResult DesignerFileValidationExecute(ProcessActionType actionType)
+        {
+            return Processor.ProcessDesignerFileValidation(actionType);
+        }
+
         private ProcessActionResult ProjectTypeValidationExecute(ProcessActionType actionType)
         {
-            ListProcessor processor = ListProcessor.GetProcessor(_ProjectName, _ProjectFolder, _ProjectFile, _LanguageType);
-
-            return processor.ProcessProjectTypeValidation(actionType);
+            return Processor.ProcessProjectTypeValidation(actionType);
         }
 
         private ProcessActionResult UserControlValidationExecute(ProcessActionType actionType)
         {
+            return Processor.ProcessUserControlValidation(actionType);
+        }
 
-            ListProcessor processor = ListProcessor.GetProcessor(_ProjectName, _ProjectFolder, _ProjectFile, _LanguageType);
+        private void ConvertToWebProjectExecute()
+        {
+            // TODO : just get a list of all projectFiles without any processing
+            ProcessActionResult projectTypeValidationResult = Processor.ProcessProjectTypeValidation(ProcessActionType.WebProject);
 
-            return processor.ProcessUserControlValidation(actionType);
+            // web project uses a projectfile -> only files included in the project file must be converted
+            Processor.ConvertToWebProject(projectTypeValidationResult.DesignerFileItemList);
+        }
+
+        private void ConvertToWebApplicationExecute()
+        {
+            Processor.ConvertToWebApplication();
         }
     }
 }

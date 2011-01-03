@@ -131,12 +131,17 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            if (!_Presenter.Execute())
+            ExecuteEvent(ExecuteEventType.ButtonStart);
+
+            PresenterToForm();
+        }
+
+        private void ExecuteEvent(ExecuteEventType executeType)
+        {
+            if (!_Presenter.Execute(executeType))
             {
                 MessageBox.Show(_Presenter.ErrorMessage);
             }
-
-            PresenterToForm();
         }
 
         private void bConvertToWebApplication_Click(object sender, EventArgs e)

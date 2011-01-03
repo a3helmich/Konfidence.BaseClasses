@@ -56,6 +56,22 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
+        private FileList SourceFileList
+        {
+            get
+            {
+                return new FileList(_ProjectFolder, _LanguageType, DeveloperFileType.SourceFile);
+            }
+        }
+
+        private FileList DesignerFileList
+        {
+            get
+            {
+                return new FileList(_ProjectFolder, _LanguageType, DeveloperFileType.DesignerFile);
+            }
+        }
+
         public static ListProcessor GetProcessor(string project, string projectFolder, string projectFile, LanguageType language)
         {
             ListProcessor newProcessor = null;
@@ -104,7 +120,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public List<DesignerFileItem> ProcessDesignerFileValidation(FileList fileList, FileList searchList, ProcessActionType actionType)
+        public ProcessActionResult ProcessDesignerFileValidation(ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -116,7 +132,7 @@ namespace WebProjectValidator.HelperClasses
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
-            foreach (string fileName in fileList)
+            foreach (string fileName in SourceFileList)
             {
                 if (projectFileList.Contains(fileName.Substring(0, fileName.Length - 3), StringComparer.CurrentCultureIgnoreCase))
                 {
@@ -124,7 +140,7 @@ namespace WebProjectValidator.HelperClasses
 
                     string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
 
-                    if (searchList.Contains(findName))
+                    if (DesignerFileList.Contains(findName))
                     {
                         designerFileItem.Exists = true;
                     }
@@ -147,7 +163,7 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return resultList;
+            return GetActionResult(resultList);
         }
 
         public List<DesignerFileItem> GetWebApplicationFileList()
@@ -451,11 +467,16 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public void ConvertToWebApplication(List<DesignerFileItem> repairList)
+        public void ConvertToWebApplication()
         {
+            // TODO : DesignerFileItem -> doesn't feel right
+            // TODO : property?
+            // web application uses no projectfile -> all files must be converted
+            DesignerFileItemList webApplicationDesigenerFileItemList = new DesignerFileItemList(_ProjectFolder, WebFileList);
+
             CheckFileBackupDirectory();
 
-            foreach (DesignerFileItem fileItem in repairList)
+            foreach (DesignerFileItem fileItem in webApplicationDesigenerFileItemList)
             {
                 if (!fileItem.Valid)
                 {
