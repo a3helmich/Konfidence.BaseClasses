@@ -55,9 +55,11 @@ namespace Konfidence.Base
         }
 
         // TODO : convert to errorlist 
-        public void SetErrorMessage(string errorMessage)
+        public bool SetErrorMessage(string errorMessage)
         {
             _ErrorMessage = errorMessage;
+
+            return false;
         }
 
         public bool HasErrors()
