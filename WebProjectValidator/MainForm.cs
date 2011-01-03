@@ -133,28 +133,20 @@ namespace WebProjectValidator
             _Presenter.Close();
         }
 
-        private void bStart_Click(object sender, EventArgs e)
+        private void bRefresh_Click(object sender, EventArgs e)
         {
             FormToPresenter();
 
-            ExecuteEvent(ExecuteEventType.ButtonStart);
+            ExecuteEvent(ExecuteEventType.Refresh);
 
             PresenterToForm();
-        }
-
-        private void ExecuteEvent(ExecuteEventType executeEventType)
-        {
-            if (!_Presenter.ExecuteEvent(executeEventType))
-            {
-                MessageBox.Show(_Presenter.ErrorMessage);
-            }
         }
 
         private void bConvertToWebApplication_Click(object sender, EventArgs e)
         {
             FormToPresenter();
 
-            _Presenter.ConvertToWebApplication();
+            ExecuteEvent(ExecuteEventType.ConvertToWebApplication);
 
             PresenterToForm();
         }
@@ -163,7 +155,7 @@ namespace WebProjectValidator
         {
             FormToPresenter();
 
-            _Presenter.ConvertToWebProject();
+            ExecuteEvent(ExecuteEventType.ConvertToWebProject);
 
             PresenterToForm();
         }
@@ -192,6 +184,14 @@ namespace WebProjectValidator
             if (folderBrowserDialog.ShowDialog().Equals(DialogResult.OK))
             {
                 _Presenter.SolutionFolder = folderBrowserDialog.SelectedPath;
+            }
+        }
+
+        private void ExecuteEvent(ExecuteEventType executeEventType)
+        {
+            if (!_Presenter.ExecuteEvent(executeEventType))
+            {
+                MessageBox.Show(_Presenter.ErrorMessage);
             }
         }
     }

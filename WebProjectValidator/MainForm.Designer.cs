@@ -38,7 +38,7 @@
             this.tbProjectName = new System.Windows.Forms.TextBox();
             this.rbCS = new System.Windows.Forms.RadioButton();
             this.rbVB = new System.Windows.Forms.RadioButton();
-            this.bStart = new System.Windows.Forms.Button();
+            this.bRefresh = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tpDesignerFileValidation = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -54,6 +54,10 @@
             this.tpProjectTypeValidation = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvProjectTypeValidation = new System.Windows.Forms.DataGridView();
+            this.dgvProjectTypeValidationProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProjectTypeValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbCheckWebProject = new System.Windows.Forms.RadioButton();
             this.rbCheckWebApplication = new System.Windows.Forms.RadioButton();
@@ -82,10 +86,6 @@
             this.lProjectFileNameDisplay = new System.Windows.Forms.Label();
             this.lProjectFileName = new System.Windows.Forms.Label();
             this.bConvertToWebProject = new System.Windows.Forms.Button();
-            this.dgvProjectTypeValidationProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvProjectTypeValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvProjectTypeValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvProjectTypeValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileValidation.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -145,16 +145,16 @@
             this.rbVB.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.rbVB.UseVisualStyleBackColor = true;
             // 
-            // bStart
+            // bRefresh
             // 
-            this.bStart.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.bStart.Location = new System.Drawing.Point(22, 12);
-            this.bStart.Name = "bStart";
-            this.bStart.Size = new System.Drawing.Size(90, 23);
-            this.bStart.TabIndex = 3;
-            this.bStart.Text = "Start";
-            this.bStart.UseVisualStyleBackColor = true;
-            this.bStart.Click += new System.EventHandler(this.bStart_Click);
+            this.bRefresh.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.bRefresh.Location = new System.Drawing.Point(22, 12);
+            this.bRefresh.Name = "bRefresh";
+            this.bRefresh.Size = new System.Drawing.Size(90, 23);
+            this.bRefresh.TabIndex = 3;
+            this.bRefresh.Text = "Refresh";
+            this.bRefresh.UseVisualStyleBackColor = true;
+            this.bRefresh.Click += new System.EventHandler(this.bRefresh_Click);
             // 
             // tabControl
             // 
@@ -352,6 +352,37 @@
             this.dgvProjectTypeValidation.RowHeadersVisible = false;
             this.dgvProjectTypeValidation.Size = new System.Drawing.Size(942, 260);
             this.dgvProjectTypeValidation.TabIndex = 0;
+            // 
+            // dgvProjectTypeValidationProject
+            // 
+            this.dgvProjectTypeValidationProject.DataPropertyName = "Project";
+            this.dgvProjectTypeValidationProject.HeaderText = "Project";
+            this.dgvProjectTypeValidationProject.Name = "dgvProjectTypeValidationProject";
+            this.dgvProjectTypeValidationProject.ReadOnly = true;
+            // 
+            // dgvProjectTypeValidationFileName
+            // 
+            this.dgvProjectTypeValidationFileName.DataPropertyName = "FileName";
+            this.dgvProjectTypeValidationFileName.HeaderText = "File";
+            this.dgvProjectTypeValidationFileName.Name = "dgvProjectTypeValidationFileName";
+            this.dgvProjectTypeValidationFileName.ReadOnly = true;
+            this.dgvProjectTypeValidationFileName.Width = 200;
+            // 
+            // dgvProjectTypeValidationValid
+            // 
+            this.dgvProjectTypeValidationValid.DataPropertyName = "Valid";
+            this.dgvProjectTypeValidationValid.HeaderText = "Valid";
+            this.dgvProjectTypeValidationValid.Name = "dgvProjectTypeValidationValid";
+            this.dgvProjectTypeValidationValid.ReadOnly = true;
+            this.dgvProjectTypeValidationValid.Width = 55;
+            // 
+            // dgvProjectTypeValidationControlFolder
+            // 
+            this.dgvProjectTypeValidationControlFolder.DataPropertyName = "ControlFolder";
+            this.dgvProjectTypeValidationControlFolder.HeaderText = "Folder";
+            this.dgvProjectTypeValidationControlFolder.Name = "dgvProjectTypeValidationControlFolder";
+            this.dgvProjectTypeValidationControlFolder.ReadOnly = true;
+            this.dgvProjectTypeValidationControlFolder.Width = 565;
             // 
             // panel1
             // 
@@ -640,40 +671,9 @@
             this.bConvertToWebProject.UseVisualStyleBackColor = true;
             this.bConvertToWebProject.Click += new System.EventHandler(this.bConvertToWebProject_Click);
             // 
-            // dgvProjectTypeValidationProject
-            // 
-            this.dgvProjectTypeValidationProject.DataPropertyName = "Project";
-            this.dgvProjectTypeValidationProject.HeaderText = "Project";
-            this.dgvProjectTypeValidationProject.Name = "dgvProjectTypeValidationProject";
-            this.dgvProjectTypeValidationProject.ReadOnly = true;
-            // 
-            // dgvProjectTypeValidationFileName
-            // 
-            this.dgvProjectTypeValidationFileName.DataPropertyName = "FileName";
-            this.dgvProjectTypeValidationFileName.HeaderText = "File";
-            this.dgvProjectTypeValidationFileName.Name = "dgvProjectTypeValidationFileName";
-            this.dgvProjectTypeValidationFileName.ReadOnly = true;
-            this.dgvProjectTypeValidationFileName.Width = 200;
-            // 
-            // dgvProjectTypeValidationValid
-            // 
-            this.dgvProjectTypeValidationValid.DataPropertyName = "Valid";
-            this.dgvProjectTypeValidationValid.HeaderText = "Valid";
-            this.dgvProjectTypeValidationValid.Name = "dgvProjectTypeValidationValid";
-            this.dgvProjectTypeValidationValid.ReadOnly = true;
-            this.dgvProjectTypeValidationValid.Width = 55;
-            // 
-            // dgvProjectTypeValidationControlFolder
-            // 
-            this.dgvProjectTypeValidationControlFolder.DataPropertyName = "ControlFolder";
-            this.dgvProjectTypeValidationControlFolder.HeaderText = "Folder";
-            this.dgvProjectTypeValidationControlFolder.Name = "dgvProjectTypeValidationControlFolder";
-            this.dgvProjectTypeValidationControlFolder.ReadOnly = true;
-            this.dgvProjectTypeValidationControlFolder.Width = 565;
-            // 
             // MainForm
             // 
-            this.AcceptButton = this.bStart;
+            this.AcceptButton = this.bRefresh;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 449);
@@ -686,7 +686,7 @@
             this.Controls.Add(this.rbCS);
             this.Controls.Add(this.statusBar);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.bStart);
+            this.Controls.Add(this.bRefresh);
             this.Controls.Add(this.tbSolutionFolder);
             this.Controls.Add(this.tbProjectName);
             this.Controls.Add(this.lProjectName);
@@ -724,7 +724,7 @@
         private System.Windows.Forms.TextBox tbProjectName;
         private System.Windows.Forms.RadioButton rbVB;
         private System.Windows.Forms.RadioButton rbCS;
-        private System.Windows.Forms.Button bStart;
+        private System.Windows.Forms.Button bRefresh;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tpProjectTypeValidation;
         private System.Windows.Forms.TabPage tpDesignerFileValidation;

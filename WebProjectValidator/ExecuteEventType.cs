@@ -5,11 +5,11 @@ using System.Text;
 
 namespace WebProjectValidator
 {
-    enum ExecuteEventType
+    public enum ExecuteEventType
     {
         None = 0,
-        ButtonStart = 1,
-        ButtonConvertToWebProject = 2,
-        ButtonConvertToWebApplication = 3,
+        Refresh = 1,
+        ConvertToWebProject = 2,
+        ConvertToWebApplication = 3,
     }
 }

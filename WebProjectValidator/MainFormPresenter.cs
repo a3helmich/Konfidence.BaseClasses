@@ -27,11 +27,7 @@ namespace WebProjectValidator
         private bool _IsUserControlMissingCheck = false;
         private bool _IsUserControlUnusedCheck = false;
 
-        private ProcessActionResult _DesignerFileValidationResult = new ProcessActionResult();
-
-        private ProcessActionResult _ProjectTypeValidationResult = new ProcessActionResult();
-
-        private ProcessActionResult _UserControlValidationResult = new ProcessActionResult();
+        private ProcessActionResult _ProcessActionResult = new ProcessActionResult();
 
 #region simple properties
         public string SolutionFolder
@@ -116,64 +112,64 @@ namespace WebProjectValidator
         // DesignerFile counters text
         public string DesignerFileCountText
         {
-            get { return "Total: " + _DesignerFileValidationResult.Count; }
+            get { return "Total: " + _ProcessActionResult.Count; }
         }
 
         public string DesignerFileMissingCountText
         {
-            get { return "Existing: " + _DesignerFileValidationResult.ValidCount; }
+            get { return "Existing: " + _ProcessActionResult.ValidCount; }
         }
 
         public string DesignerFileExistsCountText
         {
-            get { return "Missing: " + _DesignerFileValidationResult.InvalidCount; }
+            get { return "Missing: " + _ProcessActionResult.InvalidCount; }
         }
 
         public string DesignerFileListCountText
         {
-            get { return "RowCount: " + _DesignerFileValidationResult.DesignerFileDesignerFileItemList.Count; }
+            get { return "RowCount: " + _ProcessActionResult.DesignerFileDesignerFileItemList.Count; }
         }
 
         // project counters text
         public string ProjectFileCountText
         {
-            get { return "Total: " + _ProjectTypeValidationResult.Count; }
+            get { return "Total: " + _ProcessActionResult.Count; }
         }
 
         public string ProjectFileValidCountText
         {
-            get { return "Valid: " + _ProjectTypeValidationResult.ValidCount; }
+            get { return "Valid: " + _ProcessActionResult.ValidCount; }
         }
 
         public string ProjectFileInvalidCountText
         {
-            get { return "Invalid: " + _ProjectTypeValidationResult.InvalidCount; }
+            get { return "Invalid: " + _ProcessActionResult.InvalidCount; }
         }
 
         public string ProjectFileListCountText
         {
-            get { return "RowCount: " + _ProjectTypeValidationResult.ProjectTypeDesignerFileItemList.Count; }
+            get { return "RowCount: " + _ProcessActionResult.ProjectTypeDesignerFileItemList.Count; }
         }
         
         // user control counters text
         public string UserControlCountText
         {
-            get { return "Total: " + _UserControlValidationResult.Count; }
+            get { return "Total: " + _ProcessActionResult.Count; }
         }
 
         public string UserControlValidCountText
         {
-            get { return "Valid: " + _UserControlValidationResult.ValidCount; }
+            get { return "Valid: " + _ProcessActionResult.ValidCount; }
         }
 
         public string UserControlInvalidCountText
         {
-            get { return "Invalid: " + _UserControlValidationResult.InvalidCount; }
+            get { return "Invalid: " + _ProcessActionResult.InvalidCount; }
         }
 
         public string UserControlListCountText
         {
-            get { return "RowCount: " + _UserControlValidationResult.UserControlDesignerFileItemList.Count; }
+            get { return "RowCount: " + _ProcessActionResult.UserControlDesignerFileItemList.Count; }
         }
 #endregion simple properties
 
@@ -227,7 +223,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _DesignerFileValidationResult.DesignerFileDesignerFileItemList;
+                return _ProcessActionResult.DesignerFileDesignerFileItemList;
             }
         }
 
@@ -235,7 +231,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _ProjectTypeValidationResult.ProjectTypeDesignerFileItemList;
+                return _ProcessActionResult.ProjectTypeDesignerFileItemList;
             }
         }
 
@@ -243,7 +239,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _UserControlValidationResult.UserControlDesignerFileItemList;
+                return _ProcessActionResult.UserControlDesignerFileItemList;
             }
         }
 
@@ -418,25 +414,11 @@ namespace WebProjectValidator
             configurationStore.Save();
         }
 
-        public void ConvertToWebApplication()
-        {
-            MainFormController mainFormController = new MainFormController(ProjectName, ProjectFolder, ProjectFile, LanguageType);
-
-            mainFormController.Execute(ProcessActionType.ConvertToWebApplication);
-        }
-
-        public void ConvertToWebProject()
-        {
-            MainFormController mainFormController = new MainFormController(ProjectName, ProjectFolder, ProjectFile, LanguageType);
-
-            mainFormController.Execute(ProcessActionType.ConvertToWebProject);
-        }
-
         private void ResetProcessActionResult()
         {
-            _DesignerFileValidationResult = new ProcessActionResult();
-            _ProjectTypeValidationResult = new ProcessActionResult();
-            _UserControlValidationResult = new ProcessActionResult();
+            _ProcessActionResult = new ProcessActionResult();
+            _ProcessActionResult = new ProcessActionResult();
+            _ProcessActionResult = new ProcessActionResult();
         }
 
         public bool ExecuteEvent(ExecuteEventType executeEventType)
@@ -446,48 +428,34 @@ namespace WebProjectValidator
             if (Validate())
             {
                 MainFormController mainFormController = new MainFormController(ProjectName, ProjectFolder, ProjectFile, LanguageType);
+
                 switch (executeEventType)
                 {
-                    case ExecuteEventType.ButtonStart:
+                    case ExecuteEventType.Refresh: // no specific action required
                         {
-                            ExecuteStartEvent(mainFormController);
+                            _ProcessActionResult = mainFormController.ExecuteRefresh(ActionType); 
 
                             break;
                         }
-                    case ExecuteEventType.ButtonConvertToWebProject:
+                    case ExecuteEventType.ConvertToWebProject:
                         {
+                            mainFormController.ExecuteEvent(executeEventType, ActionType);
+
                             break;
                         }
-                    case ExecuteEventType.ButtonConvertToWebApplication:
+                    case ExecuteEventType.ConvertToWebApplication:
                         {
+                            mainFormController.ExecuteEvent(executeEventType, ActionType);
+
                             break;
                         }
                 }
+
+                _ProcessActionResult = mainFormController.ExecuteRefresh(ActionType); // == refresh
+
                 return true;
             }
             return false;
-        }
-
-        private void ExecuteStartEvent(MainFormController mainFormController)
-        {
-            switch (TabPageType)
-            {
-                case TabPageType.DesignerFileValidation:
-                    {
-                        _DesignerFileValidationResult = mainFormController.Execute(ActionType);
-                        break;
-                    }
-                case TabPageType.ProjectTypeValidation:
-                    {
-                        _ProjectTypeValidationResult = mainFormController.Execute(ActionType);
-                        break;
-                    }
-                case TabPageType.UserControlValidation:
-                    {
-                        _UserControlValidationResult = mainFormController.Execute(ActionType);
-                        break;
-                    }
-            }
         }
 
         public bool IsValidTag(object tabTag)

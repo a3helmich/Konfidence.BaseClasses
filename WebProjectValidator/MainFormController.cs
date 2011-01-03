@@ -26,9 +26,24 @@ namespace WebProjectValidator
             _ProjectFolder = projectFolder;
             _ProjectFile = projectFile;
             _LanguageType = languageType;
+        } 
+
+        public void ExecuteEvent(ExecuteEventType eventType, ProcessActionType actionType)
+        {
+            switch (eventType)
+            {
+                case ExecuteEventType.ConvertToWebApplication:
+                    ConvertToWebApplicationExecute();
+                    break;
+                case ExecuteEventType.ConvertToWebProject:
+                    ConvertToWebProjectExecute();
+                    break;
+            }
+
+            ExecuteRefresh(actionType);
         }
 
-        public ProcessActionResult Execute(ProcessActionType actionType)
+        public ProcessActionResult ExecuteRefresh(ProcessActionType actionType)
         {
             switch (actionType)
             {
@@ -52,12 +67,6 @@ namespace WebProjectValidator
                     return UserControlValidationExecute(actionType);
                 case ProcessActionType.UserControlAll:
                     return UserControlValidationExecute(actionType);
-                case ProcessActionType.ConvertToWebApplication:
-                    ConvertToWebApplicationExecute();
-                    break;
-                case ProcessActionType.ConvertToWebProject:
-                    ConvertToWebProjectExecute();
-                    break;
             }
 
             return new ProcessActionResult();
