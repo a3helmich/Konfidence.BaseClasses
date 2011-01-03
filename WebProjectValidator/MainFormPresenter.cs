@@ -438,20 +438,13 @@ namespace WebProjectValidator
                             break;
                         }
                     case ExecuteEventType.ConvertToWebProject:
-                        {
-                            mainFormController.ExecuteEvent(executeEventType, ActionType);
-
-                            break;
-                        }
                     case ExecuteEventType.ConvertToWebApplication:
                         {
-                            mainFormController.ExecuteEvent(executeEventType, ActionType);
+                            _ProcessActionResult = mainFormController.ExecuteEvent(executeEventType, ActionType);
 
                             break;
                         }
                 }
-
-                _ProcessActionResult = mainFormController.ExecuteRefresh(ActionType); // == refresh
 
                 return true;
             }

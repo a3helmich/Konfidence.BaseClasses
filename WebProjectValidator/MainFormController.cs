@@ -26,9 +26,9 @@ namespace WebProjectValidator
             _ProjectFolder = projectFolder;
             _ProjectFile = projectFile;
             _LanguageType = languageType;
-        } 
+        }
 
-        public void ExecuteEvent(ExecuteEventType eventType, ProcessActionType actionType)
+        public ProcessActionResult ExecuteEvent(ExecuteEventType eventType, ProcessActionType actionType)
         {
             switch (eventType)
             {
@@ -40,7 +40,7 @@ namespace WebProjectValidator
                     break;
             }
 
-            ExecuteRefresh(actionType);
+            return ExecuteRefresh(actionType);
         }
 
         public ProcessActionResult ExecuteRefresh(ProcessActionType actionType)
