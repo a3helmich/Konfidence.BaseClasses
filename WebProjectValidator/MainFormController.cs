@@ -84,7 +84,7 @@ namespace WebProjectValidator
             ProcessActionResult projectTypeValidationResult = Processor.ProcessProjectTypeValidation(ProcessActionType.WebProject);
 
             // web project uses a projectfile -> only files included in the project file must be converted
-            Processor.ConvertToWebProject(projectTypeValidationResult.DesignerFileItemList);
+            Processor.ConvertToWebProject(projectTypeValidationResult.ProjectTypeDesignerFileItemList);
         }
 
         private void ConvertToWebApplicationExecute()

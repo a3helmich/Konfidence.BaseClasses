@@ -131,7 +131,7 @@ namespace WebProjectValidator
 
         public string DesignerFileListCountText
         {
-            get { return "RowCount: " + _DesignerFileValidationResult.DesignerFileItemList.Count; }
+            get { return "RowCount: " + _DesignerFileValidationResult.DesignerFileDesignerFileItemList.Count; }
         }
 
         // project counters text
@@ -152,7 +152,7 @@ namespace WebProjectValidator
 
         public string ProjectFileListCountText
         {
-            get { return "RowCount: " + _ProjectTypeValidationResult.DesignerFileItemList.Count; }
+            get { return "RowCount: " + _ProjectTypeValidationResult.ProjectTypeDesignerFileItemList.Count; }
         }
         
         // user control counters text
@@ -173,7 +173,7 @@ namespace WebProjectValidator
 
         public string UserControlListCountText
         {
-            get { return "RowCount: " + _UserControlValidationResult.DesignerFileItemList.Count; }
+            get { return "RowCount: " + _UserControlValidationResult.UserControlDesignerFileItemList.Count; }
         }
 #endregion simple properties
 
@@ -227,7 +227,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _DesignerFileValidationResult.DesignerFileItemList;
+                return _DesignerFileValidationResult.DesignerFileDesignerFileItemList;
             }
         }
 
@@ -235,7 +235,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _ProjectTypeValidationResult.DesignerFileItemList;
+                return _ProjectTypeValidationResult.ProjectTypeDesignerFileItemList;
             }
         }
 
@@ -243,7 +243,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _UserControlValidationResult.DesignerFileItemList;
+                return _UserControlValidationResult.UserControlDesignerFileItemList;
             }
         }
 
@@ -450,7 +450,7 @@ namespace WebProjectValidator
                 {
                     case ExecuteEventType.ButtonStart:
                         {
-                            ExecuteValidation(mainFormController);
+                            ExecuteStartEvent(mainFormController);
 
                             break;
                         }
@@ -468,7 +468,7 @@ namespace WebProjectValidator
             return false;
         }
 
-        private void ExecuteValidation(MainFormController mainFormController)
+        private void ExecuteStartEvent(MainFormController mainFormController)
         {
             switch (TabPageType)
             {
@@ -501,7 +501,7 @@ namespace WebProjectValidator
                         case EnumTypes.TabPageType.DesignerFileValidation:
                         case EnumTypes.TabPageType.ProjectTypeValidation:
                         case EnumTypes.TabPageType.UserControlValidation:
-                        case EnumTypes.TabPageType.Unknown
+                        case EnumTypes.TabPageType.Unknown:
                             {
                             return true;
                             }

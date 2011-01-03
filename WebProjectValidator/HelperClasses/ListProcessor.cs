@@ -362,7 +362,10 @@ namespace WebProjectValidator.HelperClasses
             processActionResult.Count = Count;
             processActionResult.ValidCount = ValidCount;
             processActionResult.InvalidCount = InvalidCount;
-            processActionResult.DesignerFileItemList = resultList;
+
+            processActionResult.DesignerFileDesignerFileItemList= resultList;
+            processActionResult.ProjectTypeDesignerFileItemList = resultList;
+            processActionResult.UserControlDesignerFileItemList = resultList;
 
             return processActionResult;
         }

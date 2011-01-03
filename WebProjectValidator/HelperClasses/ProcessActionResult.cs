@@ -11,7 +11,9 @@ namespace WebProjectValidator.HelperClasses
         private int _ValidCount = 0;
         private int _InvalidCount = 0;
 
-        private List<DesignerFileItem> _DesignerFileItemList = new List<DesignerFileItem>();
+        private List<DesignerFileItem> _DesignerFileDesignerFileItemList = new List<DesignerFileItem>();
+        private List<DesignerFileItem> _ProjectTypeDesignerFileItemList = new List<DesignerFileItem>();
+        private List<DesignerFileItem> _UserControlDesignerFileItemList = new List<DesignerFileItem>();
 
         #region simple properties
         public int Count
@@ -32,11 +34,24 @@ namespace WebProjectValidator.HelperClasses
             set { _InvalidCount = value; }
         }
 
-        public List<DesignerFileItem> DesignerFileItemList
+        public List<DesignerFileItem> DesignerFileDesignerFileItemList
         {
-            get { return _DesignerFileItemList; }
-            set { _DesignerFileItemList = value; }
+            get { return _DesignerFileDesignerFileItemList; }
+            set { _DesignerFileDesignerFileItemList = value; }
         }
+
+        public List<DesignerFileItem> ProjectTypeDesignerFileItemList
+        {
+            get { return _ProjectTypeDesignerFileItemList; }
+            set { _ProjectTypeDesignerFileItemList = value; }
+        }
+
+        public List<DesignerFileItem> UserControlDesignerFileItemList
+        {
+            get { return _UserControlDesignerFileItemList; }
+            set { _UserControlDesignerFileItemList = value; }
+        }
+
         #endregion simple properties
     }
 }
