@@ -33,11 +33,15 @@ namespace WebProjectValidator
             switch (eventType)
             {
                 case ExecuteEventType.ConvertToWebApplication:
-                    ConvertToWebApplicationExecute();
-                    break;
+                    {
+                        Processor.ConvertToWebApplication();
+                        break;
+                    }
                 case ExecuteEventType.ConvertToWebProject:
-                    ConvertToWebProjectExecute();
-                    break;
+                    {
+                        Processor.ConvertToWebProject(); 
+                        break;
+                    }
             }
 
             return ExecuteRefresh(actionType);
@@ -48,57 +52,48 @@ namespace WebProjectValidator
             switch (actionType)
             {
                 case ProcessActionType.DesignerFileExists:
-                    return DesignerFileValidationExecute(actionType);
+                    {
+                        return Processor.ProcessDesignerFileValidation(actionType);
+                    }
                 case ProcessActionType.DesignerFileMissing:
-                    return DesignerFileValidationExecute(actionType);
+                    {
+                        return Processor.ProcessDesignerFileValidation(actionType);
+                    }
                 case ProcessActionType.DesignerFileAll:
-                    return DesignerFileValidationExecute(actionType);
+                    {
+                        return Processor.ProcessDesignerFileValidation(actionType);
+                    }
                 case ProcessActionType.WebApplication:
-                    return ProjectTypeValidationExecute(actionType);
+                    {
+                        return Processor.ProcessProjectTypeValidation(actionType);
+                    }
                 case ProcessActionType.WebProject:
-                    return ProjectTypeValidationExecute(actionType);
+                    {
+                        return Processor.ProcessProjectTypeValidation(actionType);
+                    }
                 case ProcessActionType.UserControlValid:
-                    return UserControlValidationExecute(actionType);
+                    {
+                        return Processor.ProcessUserControlValidation(actionType);
+                    }
                 case ProcessActionType.UserControlInvalid:
-                    return UserControlValidationExecute(actionType);
+                    {
+                        return Processor.ProcessUserControlValidation(actionType);
+                    }
                 case ProcessActionType.UserControlMissing:
-                    return UserControlValidationExecute(actionType);
+                    {
+                        return Processor.ProcessUserControlValidation(actionType);
+                    }
                 case ProcessActionType.UserControlUnused:
-                    return UserControlValidationExecute(actionType);
+                    {
+                        return Processor.ProcessUserControlValidation(actionType);
+                    }
                 case ProcessActionType.UserControlAll:
-                    return UserControlValidationExecute(actionType);
+                    {
+                        return Processor.ProcessUserControlValidation(actionType);
+                    }
             }
 
             return new ProcessActionResult();
-        }
-
-        private ProcessActionResult DesignerFileValidationExecute(ProcessActionType actionType)
-        {
-            return Processor.ProcessDesignerFileValidation(actionType);
-        }
-
-        private ProcessActionResult ProjectTypeValidationExecute(ProcessActionType actionType)
-        {
-            return Processor.ProcessProjectTypeValidation(actionType);
-        }
-
-        private ProcessActionResult UserControlValidationExecute(ProcessActionType actionType)
-        {
-            return Processor.ProcessUserControlValidation(actionType);
-        }
-
-        private void ConvertToWebProjectExecute()
-        {
-            // TODO : just get a list of all projectFiles without any processing
-            ProcessActionResult projectTypeValidationResult = Processor.ProcessProjectTypeValidation(ProcessActionType.WebProject);
-
-            // web project uses a projectfile -> only files included in the project file must be converted
-            Processor.ConvertToWebProject(projectTypeValidationResult.ProjectTypeDeveloperItemList);
-        }
-
-        private void ConvertToWebApplicationExecute()
-        {
-            Processor.ConvertToWebApplication();
         }
     }
 }

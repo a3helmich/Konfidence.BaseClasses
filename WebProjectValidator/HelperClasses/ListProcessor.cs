@@ -542,8 +542,15 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public void ConvertToWebProject(List<DesignerFileItem> repairList)
+        public void ConvertToWebProject()
         {
+            // TODO : just get a list of all projectFiles without any processing
+            ProcessActionResult projectTypeValidationResult = ProcessProjectTypeValidation(ProcessActionType.WebProject);
+
+            List<DesignerFileItem> repairList = projectTypeValidationResult.ProjectTypeDeveloperItemList;
+
+            // web project uses a projectfile -> only files included in the project file must be converted
+
             CheckFileBackupDirectory();
 
             foreach (DesignerFileItem fileItem in repairList)
