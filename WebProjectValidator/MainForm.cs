@@ -40,7 +40,7 @@ namespace WebProjectValidator
         {
             tbSolutionFolder.Text = _Presenter.SolutionFolder;
             tbProjectName.Text = _Presenter.ProjectName;
-            lProjectFileNameDisplay.Text = _Presenter.ProjectFile;
+            tbProjectFile.Text = _Presenter.ProjectFile;
 
             rbCS.Checked = _Presenter.IsCS;
             rbVB.Checked = _Presenter.IsVB;
