@@ -80,9 +80,9 @@
             this.dgvProjectTypeValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvProjectTypeValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvProjectTypeValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvUserControlValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvUserControlValidationReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlValidationValid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvUserControlValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tpDesignerFileValidation.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -620,13 +620,13 @@
             this.dgvProjectTypeValidationControlFolder.ReadOnly = true;
             this.dgvProjectTypeValidationControlFolder.Width = 565;
             // 
-            // dgvUserControlValidationFileName
+            // dgvUserControlValidationReason
             // 
-            this.dgvUserControlValidationFileName.DataPropertyName = "Reference";
-            this.dgvUserControlValidationFileName.HeaderText = "Reference";
-            this.dgvUserControlValidationFileName.Name = "dgvUserControlValidationFileName";
-            this.dgvUserControlValidationFileName.ReadOnly = true;
-            this.dgvUserControlValidationFileName.Width = 400;
+            this.dgvUserControlValidationReason.DataPropertyName = "ErrorMessage";
+            this.dgvUserControlValidationReason.HeaderText = "Reason";
+            this.dgvUserControlValidationReason.Name = "dgvUserControlValidationReason";
+            this.dgvUserControlValidationReason.ReadOnly = true;
+            this.dgvUserControlValidationReason.Width = 365;
             // 
             // dgvUserControlValidationValid
             // 
@@ -636,13 +636,13 @@
             this.dgvUserControlValidationValid.ReadOnly = true;
             this.dgvUserControlValidationValid.Width = 55;
             // 
-            // dgvUserControlValidationReason
+            // dgvUserControlValidationFileName
             // 
-            this.dgvUserControlValidationReason.DataPropertyName = "ErrorMessage";
-            this.dgvUserControlValidationReason.HeaderText = "Reason";
-            this.dgvUserControlValidationReason.Name = "dgvUserControlValidationReason";
-            this.dgvUserControlValidationReason.ReadOnly = true;
-            this.dgvUserControlValidationReason.Width = 365;
+            this.dgvUserControlValidationFileName.DataPropertyName = "Reference";
+            this.dgvUserControlValidationFileName.HeaderText = "Reference";
+            this.dgvUserControlValidationFileName.Name = "dgvUserControlValidationFileName";
+            this.dgvUserControlValidationFileName.ReadOnly = true;
+            this.dgvUserControlValidationFileName.Width = 400;
             // 
             // MainForm
             // 
