@@ -76,12 +76,6 @@ namespace WebProjectValidator.HelperClasses
             {
                 string fullFileName = string.Empty;
 
-                //if (_FileName.StartsWith("~"))
-                //{
-                //    fullFileName = _FileName.Replace("~", _ProjectFolder);
-                //}
-                //else
-                //{
                 if (_ControlFolder == ".")
                 {
                     fullFileName = _ProjectFolder + @"\" + _FileName;
@@ -97,7 +91,6 @@ namespace WebProjectValidator.HelperClasses
                         fullFileName = _ProjectFolder + @"\" + _ControlFolder + @"\" + _FileName;
                     }
                 }
-                //}
 
                 fullFileName = fullFileName.Replace("/", @"\");
 

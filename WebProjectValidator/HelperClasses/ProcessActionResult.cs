@@ -7,51 +7,93 @@ namespace WebProjectValidator.HelperClasses
 {
     public class ProcessActionResult
     {
-        private int _Count = 0;
-        private int _ValidCount = 0;
-        private int _InvalidCount = 0;
+        private int _DesignerFileCount = 0;
+        private int _DesignerFileValidCount = 0;
+        private int _DesignerFileInvalidCount = 0;
 
-        private List<DesignerFileItem> _DesignerFileDesignerFileItemList = new List<DesignerFileItem>();
-        private List<DesignerFileItem> _ProjectTypeDesignerFileItemList = new List<DesignerFileItem>();
-        private List<DesignerFileItem> _UserControlDesignerFileItemList = new List<DesignerFileItem>();
+        private int _ProjectTypeCount = 0;
+        private int _ProjectTypeValidCount = 0;
+        private int _ProjectTypeInvalidCount = 0;
+
+        private int _UserControlCount = 0;
+        private int _UserControlValidCount = 0;
+        private int _UserControlInvalidCount = 0;
+
+        private List<DesignerFileItem> _DesignerFileDeveloperItemList = new List<DesignerFileItem>();
+        private List<DesignerFileItem> _ProjectTypeDeveloperItemList = new List<DesignerFileItem>();
+        private List<DesignerFileItem> _UserControlDeveloperItemList = new List<DesignerFileItem>();
 
         #region simple properties
-        public int Count
+        public int DesignerFileCount
         {
-            get { return _Count; }
-            set { _Count = value; }
+            get { return _DesignerFileCount; }
+            set { _DesignerFileCount = value; }
         }
 
-        public int ValidCount
+        public int DesignerFileValidCount
         {
-            get { return _ValidCount; }
-            set { _ValidCount = value; }
+            get { return _DesignerFileValidCount; }
+            set { _DesignerFileValidCount = value; }
         }
 
-        public int InvalidCount
+        public int DesignerFileInvalidCount
         {
-            get { return _InvalidCount; }
-            set { _InvalidCount = value; }
+            get { return _DesignerFileInvalidCount; }
+            set { _DesignerFileInvalidCount = value; }
         }
 
-        public List<DesignerFileItem> DesignerFileDesignerFileItemList
+        public List<DesignerFileItem> DesignerFileDeveloperItemList
         {
-            get { return _DesignerFileDesignerFileItemList; }
-            set { _DesignerFileDesignerFileItemList = value; }
+            get { return _DesignerFileDeveloperItemList; }
+            set { _DesignerFileDeveloperItemList = value; }
         }
-
-        public List<DesignerFileItem> ProjectTypeDesignerFileItemList
-        {
-            get { return _ProjectTypeDesignerFileItemList; }
-            set { _ProjectTypeDesignerFileItemList = value; }
-        }
-
-        public List<DesignerFileItem> UserControlDesignerFileItemList
-        {
-            get { return _UserControlDesignerFileItemList; }
-            set { _UserControlDesignerFileItemList = value; }
-        }
-
         #endregion simple properties
+
+        public int ProjectTypeCount
+        {
+            get { return _ProjectTypeCount; }
+            set { _ProjectTypeCount = value; }
+        }
+
+        public int ProjectTypeValidCount
+        {
+            get { return _ProjectTypeValidCount; }
+            set { _ProjectTypeValidCount = value; }
+        }
+
+        public int ProjectTypeInvalidCount
+        {
+            get { return _ProjectTypeInvalidCount; }
+            set { _ProjectTypeInvalidCount = value; }
+        }
+
+        public List<DesignerFileItem> ProjectTypeDeveloperItemList
+        {
+            get { return _ProjectTypeDeveloperItemList; }
+            set { _ProjectTypeDeveloperItemList = value; }
+        }
+        public int UserControlCount
+        {
+            get { return _UserControlCount; }
+            set { _UserControlCount = value; }
+        }
+
+        public int UserControlValidCount
+        {
+            get { return _UserControlValidCount; }
+            set { _UserControlValidCount = value; }
+        }
+
+        public int UserControlInvalidCount
+        {
+            get { return _UserControlInvalidCount; }
+            set { _UserControlInvalidCount = value; }
+        }
+
+        public List<DesignerFileItem> UserControlDeveloperItemList
+        {
+            get { return _UserControlDeveloperItemList; }
+            set { _UserControlDeveloperItemList = value; }
+        }
     }
 }

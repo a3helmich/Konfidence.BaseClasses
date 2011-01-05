@@ -112,64 +112,64 @@ namespace WebProjectValidator
         // DesignerFile counters text
         public string DesignerFileCountText
         {
-            get { return "Total: " + _ProcessActionResult.Count; }
+            get { return "Total: " + _ProcessActionResult.DesignerFileCount; }
         }
 
         public string DesignerFileMissingCountText
         {
-            get { return "Existing: " + _ProcessActionResult.ValidCount; }
+            get { return "Existing: " + _ProcessActionResult.DesignerFileInvalidCount; }
         }
 
         public string DesignerFileExistsCountText
         {
-            get { return "Missing: " + _ProcessActionResult.InvalidCount; }
+            get { return "Missing: " + _ProcessActionResult.DesignerFileValidCount; }
         }
 
         public string DesignerFileListCountText
         {
-            get { return "RowCount: " + _ProcessActionResult.DesignerFileDesignerFileItemList.Count; }
+            get { return "RowCount: " + _ProcessActionResult.DesignerFileDeveloperItemList.Count; }
         }
 
         // project counters text
         public string ProjectFileCountText
         {
-            get { return "Total: " + _ProcessActionResult.Count; }
+            get { return "Total: " + _ProcessActionResult.ProjectTypeCount; }
         }
 
         public string ProjectFileValidCountText
         {
-            get { return "Valid: " + _ProcessActionResult.ValidCount; }
+            get { return "Valid: " + _ProcessActionResult.ProjectTypeValidCount; }
         }
 
         public string ProjectFileInvalidCountText
         {
-            get { return "Invalid: " + _ProcessActionResult.InvalidCount; }
+            get { return "Invalid: " + _ProcessActionResult.ProjectTypeInvalidCount; }
         }
 
         public string ProjectFileListCountText
         {
-            get { return "RowCount: " + _ProcessActionResult.ProjectTypeDesignerFileItemList.Count; }
+            get { return "RowCount: " + _ProcessActionResult.ProjectTypeDeveloperItemList.Count; }
         }
         
         // user control counters text
         public string UserControlCountText
         {
-            get { return "Total: " + _ProcessActionResult.Count; }
+            get { return "Total: " + _ProcessActionResult.UserControlCount; }
         }
 
         public string UserControlValidCountText
         {
-            get { return "Valid: " + _ProcessActionResult.ValidCount; }
+            get { return "Valid: " + _ProcessActionResult.UserControlValidCount; }
         }
 
         public string UserControlInvalidCountText
         {
-            get { return "Invalid: " + _ProcessActionResult.InvalidCount; }
+            get { return "Invalid: " + _ProcessActionResult.UserControlInvalidCount; }
         }
 
         public string UserControlListCountText
         {
-            get { return "RowCount: " + _ProcessActionResult.UserControlDesignerFileItemList.Count; }
+            get { return "RowCount: " + _ProcessActionResult.UserControlDeveloperItemList.Count; }
         }
 #endregion simple properties
 
@@ -223,7 +223,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _ProcessActionResult.DesignerFileDesignerFileItemList;
+                return _ProcessActionResult.DesignerFileDeveloperItemList;
             }
         }
 
@@ -231,7 +231,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _ProcessActionResult.ProjectTypeDesignerFileItemList;
+                return _ProcessActionResult.ProjectTypeDeveloperItemList;
             }
         }
 
@@ -239,7 +239,7 @@ namespace WebProjectValidator
         {
             get
             {
-                return _ProcessActionResult.UserControlDesignerFileItemList;
+                return _ProcessActionResult.UserControlDeveloperItemList;
             }
         }
 
@@ -414,17 +414,8 @@ namespace WebProjectValidator
             configurationStore.Save();
         }
 
-        private void ResetProcessActionResult()
-        {
-            _ProcessActionResult = new ProcessActionResult();
-            _ProcessActionResult = new ProcessActionResult();
-            _ProcessActionResult = new ProcessActionResult();
-        }
-
         public bool ExecuteEvent(ExecuteEventType executeEventType)
         {
-            ResetProcessActionResult();
-
             if (Validate())
             {
                 MainFormController mainFormController = new MainFormController(ProjectName, ProjectFolder, ProjectFile, LanguageType);

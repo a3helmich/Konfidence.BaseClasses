@@ -26,6 +26,8 @@ namespace WebProjectValidator.HelperClasses
         private string _DesignerSearch = string.Empty;
 
         private static List<ListProcessor> _ListProcessorList = new List<ListProcessor>();
+        private static ProcessActionResult _ProcessActionResult = new ProcessActionResult();
+
 
         #region simple properties
         public int Count
@@ -169,7 +171,7 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return GetActionResult(resultList);
+            return GetActionResult(resultList, TabPageType.DesignerFileValidation);
         }
 
         public List<DesignerFileItem> GetWebApplicationFileList()
@@ -226,7 +228,7 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return GetActionResult(resultList);
+            return GetActionResult(resultList, TabPageType.ProjectTypeValidation);
         }
 
         private bool IsValidCodeFile(List<string> fileLines)
@@ -352,22 +354,37 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return GetActionResult(resultList);
+            return GetActionResult(resultList, TabPageType.UserControlValidation);
         }
 
-        private ProcessActionResult GetActionResult(List<DesignerFileItem> resultList)
+        private ProcessActionResult GetActionResult(List<DesignerFileItem> resultList, TabPageType tabPageType)
         {
-            ProcessActionResult processActionResult = new ProcessActionResult();
+            switch (tabPageType)
+            {
+                case TabPageType.DesignerFileValidation:
+                    _ProcessActionResult.DesignerFileCount = Count;
+                    _ProcessActionResult.DesignerFileValidCount = ValidCount;
+                    _ProcessActionResult.DesignerFileInvalidCount = InvalidCount;
 
-            processActionResult.Count = Count;
-            processActionResult.ValidCount = ValidCount;
-            processActionResult.InvalidCount = InvalidCount;
+                    _ProcessActionResult.DesignerFileDeveloperItemList = resultList;
+                    break;
+                case TabPageType.ProjectTypeValidation:
+                    _ProcessActionResult.ProjectTypeCount = Count;
+                    _ProcessActionResult.ProjectTypeValidCount = ValidCount;
+                    _ProcessActionResult.ProjectTypeInvalidCount = InvalidCount;
 
-            processActionResult.DesignerFileDesignerFileItemList= resultList;
-            processActionResult.ProjectTypeDesignerFileItemList = resultList;
-            processActionResult.UserControlDesignerFileItemList = resultList;
+                    _ProcessActionResult.ProjectTypeDeveloperItemList = resultList;
+                    break;
+                case TabPageType.UserControlValidation:
+                    _ProcessActionResult.UserControlCount = Count;
+                    _ProcessActionResult.UserControlValidCount = ValidCount;
+                    _ProcessActionResult.UserControlInvalidCount = InvalidCount;
 
-            return processActionResult;
+                    _ProcessActionResult.UserControlDeveloperItemList = resultList;
+                    break;
+            }
+
+            return _ProcessActionResult;
         }
 
         private ControlReferenceList GetControlReferenceList(List<string> fileLines, string fileFolder)

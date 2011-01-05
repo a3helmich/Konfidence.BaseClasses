@@ -66,28 +66,6 @@ namespace WebProjectValidator
                         break;
                     }
             }
-
-            dgvDesignerFileValidation.DataSource = _Presenter.DesignerFileValidationList;
-
-            dgvProjectTypeValidation.DataSource = _Presenter.ProjectTypeValidationList;
-
-            dgvUserControlValidation.DataSource = _Presenter.UserControlValidationList;
-        }
-
-        private void GetMissingUserControlValidationCounts()
-        {
-            tsslTotal.Text = _Presenter.UserControlCountText;
-            tsslStatus1.Text = _Presenter.UserControlValidCountText;
-            tsslStatus2.Text = _Presenter.UserControlInvalidCountText;
-            tsslListCount.Text = _Presenter.UserControlListCountText;
-        }
-
-        private void GetProjectTypeValidationCounts()
-        {
-            tsslTotal.Text = _Presenter.ProjectFileCountText;
-            tsslStatus1.Text = _Presenter.ProjectFileValidCountText;
-            tsslStatus2.Text = _Presenter.ProjectFileInvalidCountText;
-            tsslListCount.Text = _Presenter.ProjectFileListCountText;
         }
 
         private void GetDesignerFileValidationCounts()
@@ -96,6 +74,28 @@ namespace WebProjectValidator
             tsslStatus1.Text = _Presenter.DesignerFileExistsCountText;
             tsslStatus2.Text = _Presenter.DesignerFileMissingCountText;
             tsslListCount.Text = _Presenter.DesignerFileListCountText;
+
+            dgvDesignerFileValidation.DataSource = _Presenter.DesignerFileValidationList;
+        }
+
+        private void GetProjectTypeValidationCounts()
+        {
+            tsslTotal.Text = _Presenter.ProjectFileCountText;
+            tsslStatus1.Text = _Presenter.ProjectFileValidCountText;
+            tsslStatus2.Text = _Presenter.ProjectFileInvalidCountText;
+            tsslListCount.Text = _Presenter.ProjectFileListCountText;
+
+            dgvProjectTypeValidation.DataSource = _Presenter.ProjectTypeValidationList;
+        }
+
+        private void GetMissingUserControlValidationCounts()
+        {
+            tsslTotal.Text = _Presenter.UserControlCountText;
+            tsslStatus1.Text = _Presenter.UserControlValidCountText;
+            tsslStatus2.Text = _Presenter.UserControlInvalidCountText;
+            tsslListCount.Text = _Presenter.UserControlListCountText;
+
+            dgvUserControlValidation.DataSource = _Presenter.UserControlValidationList;
         }
 
         private void FormToPresenter()
