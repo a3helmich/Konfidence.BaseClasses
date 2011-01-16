@@ -8,9 +8,8 @@ namespace WebProjectValidator.EnumTypes
     public enum ProcessActionType
     {
         None = 0,
-        DesignerFileAll = 1,
         DesignerFileExists = 2,
-        DesignerFileMissing = 3,
+        InProjectFile = 3,
         UserControlUnused = 4,
         WebProject = 5,
         Website = 6,

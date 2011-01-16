@@ -6,7 +6,7 @@ using Konfidence.Base;
 
 namespace WebProjectValidator.HelperClasses
 {
-    public class DesignerFileItem: BaseItem
+    public class ApplicationFileItem: BaseItem
     {
         private string _ProjectFolder = string.Empty;
         private string _ControlFolder = ".";
@@ -98,13 +98,13 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public DesignerFileItem(string projectFolder, ControlReference controlReference)
+        public ApplicationFileItem(string projectFolder, ControlReference controlReference)
             : this(projectFolder, controlReference.FileName)
         {
             _ControlReference = controlReference;
         }
         
-        public DesignerFileItem(string projectFolder, string fileName)
+        public ApplicationFileItem(string projectFolder, string fileName)
         {
             _ProjectFolder = projectFolder;
 

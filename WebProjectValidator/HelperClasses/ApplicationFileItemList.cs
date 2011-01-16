@@ -6,13 +6,13 @@ using WebProjectValidator.FileListChecker;
 
 namespace WebProjectValidator.HelperClasses
 {
-    public class DesignerFileItemList : List<DesignerFileItem>
+    public class ApplicationFileItemList : List<ApplicationFileItem>
     {
-        public DesignerFileItemList(string projectFolder, FileList fileList)
+        public ApplicationFileItemList(string projectFolder, FileList fileList)
         {
             foreach (string fileName in fileList)
             {
-                DesignerFileItem designerFileItem = new DesignerFileItem(projectFolder, fileName);
+                ApplicationFileItem designerFileItem = new ApplicationFileItem(projectFolder, fileName);
 
                 this.Add(designerFileItem);
             }

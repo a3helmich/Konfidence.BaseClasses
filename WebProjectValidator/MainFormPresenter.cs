@@ -17,8 +17,8 @@ namespace WebProjectValidator
         private LanguageType _LanguageType = LanguageType.Unknown;
         private TabPageType _TabPageType = TabPageType.ProjectFileValidation;
 
-        private bool _IsDesignerFileExistsCheck = false;
-        private bool _IsDesignerFileMissingCheck = false;
+        private bool _IsDesignerFileExistsChecked = false;
+        private bool _IsInProjectFileChecked = false;
 
         private bool _IsWebProjectCheck = false;
 
@@ -67,16 +67,16 @@ namespace WebProjectValidator
             set { _TabPageType = value; }
         }
 
-        public bool IsDesignerFileExistsCheck
+        public bool IsDesignerFileExistsChecked
         {
-            get { return _IsDesignerFileExistsCheck; }
-            set { _IsDesignerFileExistsCheck = value; }
+            get { return _IsDesignerFileExistsChecked; }
+            set { _IsDesignerFileExistsChecked = value; }
         }
 
-        public bool IsDesignerFileMissingCheck
+        public bool IsInProjectFileChecked
         {
-            get { return _IsDesignerFileMissingCheck; }
-            set { _IsDesignerFileMissingCheck = value; }
+            get { return _IsInProjectFileChecked; }
+            set { _IsInProjectFileChecked = value; }
         }
 
         public bool IsWebProjectCheck
@@ -219,7 +219,7 @@ namespace WebProjectValidator
             }
         }
 
-        public List<DesignerFileItem> ProjectFileValidationList
+        public List<ApplicationFileItem> ProjectFileValidationList
         {
             get
             {
@@ -227,7 +227,7 @@ namespace WebProjectValidator
             }
         }
 
-        public List<DesignerFileItem> ProjectTypeValidationList
+        public List<ApplicationFileItem> ProjectTypeValidationList
         {
             get
             {
@@ -235,7 +235,7 @@ namespace WebProjectValidator
             }
         }
 
-        public List<DesignerFileItem> UserControlValidationList
+        public List<ApplicationFileItem> UserControlValidationList
         {
             get
             {
@@ -341,17 +341,17 @@ namespace WebProjectValidator
 
         private ProcessActionType GetDesignerFileActionType()
         {
-            if (IsDesignerFileExistsCheck)
+            if (IsDesignerFileExistsChecked)
             {
                 return ProcessActionType.DesignerFileExists;
             }
 
-            if (IsDesignerFileMissingCheck)
+            if (IsInProjectFileChecked)
             {
-                return ProcessActionType.DesignerFileMissing;
+                return ProcessActionType.InProjectFile;
             }
 
-            return ProcessActionType.DesignerFileAll;
+            return ProcessActionType.None;
         }
 
         private FileList WebFileList

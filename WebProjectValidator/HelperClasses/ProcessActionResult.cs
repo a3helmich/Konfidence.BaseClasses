@@ -19,9 +19,9 @@ namespace WebProjectValidator.HelperClasses
         private int _UserControlValidCount = 0;
         private int _UserControlInvalidCount = 0;
 
-        private List<DesignerFileItem> _DesignerFileDeveloperItemList = new List<DesignerFileItem>();
-        private List<DesignerFileItem> _ProjectTypeDeveloperItemList = new List<DesignerFileItem>();
-        private List<DesignerFileItem> _UserControlDeveloperItemList = new List<DesignerFileItem>();
+        private List<ApplicationFileItem> _DesignerFileDeveloperItemList = new List<ApplicationFileItem>();
+        private List<ApplicationFileItem> _ProjectTypeDeveloperItemList = new List<ApplicationFileItem>();
+        private List<ApplicationFileItem> _UserControlDeveloperItemList = new List<ApplicationFileItem>();
 
         #region simple properties
         public int DesignerFileCount
@@ -42,7 +42,7 @@ namespace WebProjectValidator.HelperClasses
             set { _DesignerFileInvalidCount = value; }
         }
 
-        public List<DesignerFileItem> DesignerFileDeveloperItemList
+        public List<ApplicationFileItem> DesignerFileDeveloperItemList
         {
             get { return _DesignerFileDeveloperItemList; }
             set { _DesignerFileDeveloperItemList = value; }
@@ -67,7 +67,7 @@ namespace WebProjectValidator.HelperClasses
             set { _ProjectTypeInvalidCount = value; }
         }
 
-        public List<DesignerFileItem> ProjectTypeDeveloperItemList
+        public List<ApplicationFileItem> ProjectTypeDeveloperItemList
         {
             get { return _ProjectTypeDeveloperItemList; }
             set { _ProjectTypeDeveloperItemList = value; }
@@ -90,7 +90,7 @@ namespace WebProjectValidator.HelperClasses
             set { _UserControlInvalidCount = value; }
         }
 
-        public List<DesignerFileItem> UserControlDeveloperItemList
+        public List<ApplicationFileItem> UserControlDeveloperItemList
         {
             get { return _UserControlDeveloperItemList; }
             set { _UserControlDeveloperItemList = value; }

@@ -44,9 +44,8 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvProjectFileValidation = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.rbDesignerFileAll = new System.Windows.Forms.RadioButton();
             this.rbDesignerFileExists = new System.Windows.Forms.RadioButton();
-            this.rbDesignerFileMissing = new System.Windows.Forms.RadioButton();
+            this.rbInProjectFile = new System.Windows.Forms.RadioButton();
             this.tpProjectTypeValidation = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvProjectTypeValidation = new System.Windows.Forms.DataGridView();
@@ -84,6 +83,7 @@
             this.dgvProjectFileValidationFileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvProjectFileValidationExists = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvProjectFileValidationControlFolder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbProjectInvalidOnly = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tpProjectFileValidation.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -219,54 +219,41 @@
             this.dgvProjectFileValidation.RowHeadersVisible = false;
             this.dgvProjectFileValidation.Size = new System.Drawing.Size(942, 260);
             this.dgvProjectFileValidation.TabIndex = 0;
-            this.dgvProjectFileValidation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProjectFileValidation_CellContentClick);
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.rbDesignerFileAll);
+            this.panel3.Controls.Add(this.cbProjectInvalidOnly);
             this.panel3.Controls.Add(this.rbDesignerFileExists);
-            this.panel3.Controls.Add(this.rbDesignerFileMissing);
+            this.panel3.Controls.Add(this.rbInProjectFile);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(942, 30);
             this.panel3.TabIndex = 0;
             // 
-            // rbDesignerFileAll
-            // 
-            this.rbDesignerFileAll.AutoSize = true;
-            this.rbDesignerFileAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbDesignerFileAll.Location = new System.Drawing.Point(145, 7);
-            this.rbDesignerFileAll.Name = "rbDesignerFileAll";
-            this.rbDesignerFileAll.Size = new System.Drawing.Size(35, 17);
-            this.rbDesignerFileAll.TabIndex = 4;
-            this.rbDesignerFileAll.TabStop = true;
-            this.rbDesignerFileAll.Text = "All";
-            this.rbDesignerFileAll.UseVisualStyleBackColor = true;
-            // 
             // rbDesignerFileExists
             // 
             this.rbDesignerFileExists.AutoSize = true;
             this.rbDesignerFileExists.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbDesignerFileExists.Location = new System.Drawing.Point(78, 7);
+            this.rbDesignerFileExists.Location = new System.Drawing.Point(102, 7);
             this.rbDesignerFileExists.Name = "rbDesignerFileExists";
-            this.rbDesignerFileExists.Size = new System.Drawing.Size(60, 17);
+            this.rbDesignerFileExists.Size = new System.Drawing.Size(111, 17);
             this.rbDesignerFileExists.TabIndex = 3;
-            this.rbDesignerFileExists.Text = "Existing";
+            this.rbDesignerFileExists.Text = "Designer file exists";
             this.rbDesignerFileExists.UseVisualStyleBackColor = true;
             // 
-            // rbDesignerFileMissing
+            // rbInProjectFile
             // 
-            this.rbDesignerFileMissing.AutoSize = true;
-            this.rbDesignerFileMissing.Checked = true;
-            this.rbDesignerFileMissing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbDesignerFileMissing.Location = new System.Drawing.Point(12, 7);
-            this.rbDesignerFileMissing.Name = "rbDesignerFileMissing";
-            this.rbDesignerFileMissing.Size = new System.Drawing.Size(59, 17);
-            this.rbDesignerFileMissing.TabIndex = 2;
-            this.rbDesignerFileMissing.TabStop = true;
-            this.rbDesignerFileMissing.Text = "Missing";
-            this.rbDesignerFileMissing.UseVisualStyleBackColor = true;
+            this.rbInProjectFile.AutoSize = true;
+            this.rbInProjectFile.Checked = true;
+            this.rbInProjectFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbInProjectFile.Location = new System.Drawing.Point(12, 7);
+            this.rbInProjectFile.Name = "rbInProjectFile";
+            this.rbInProjectFile.Size = new System.Drawing.Size(84, 17);
+            this.rbInProjectFile.TabIndex = 2;
+            this.rbInProjectFile.TabStop = true;
+            this.rbInProjectFile.Text = "In project file";
+            this.rbInProjectFile.UseVisualStyleBackColor = true;
             // 
             // tpProjectTypeValidation
             // 
@@ -654,6 +641,17 @@
             this.dgvProjectFileValidationControlFolder.ReadOnly = true;
             this.dgvProjectFileValidationControlFolder.Width = 565;
             // 
+            // cbProjectInvalidOnly
+            // 
+            this.cbProjectInvalidOnly.AutoSize = true;
+            this.cbProjectInvalidOnly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cbProjectInvalidOnly.Location = new System.Drawing.Point(343, 7);
+            this.cbProjectInvalidOnly.Name = "cbProjectInvalidOnly";
+            this.cbProjectInvalidOnly.Size = new System.Drawing.Size(76, 17);
+            this.cbProjectInvalidOnly.TabIndex = 4;
+            this.cbProjectInvalidOnly.Text = "Invalid only";
+            this.cbProjectInvalidOnly.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AcceptButton = this.bRefresh;
@@ -724,8 +722,7 @@
         private System.Windows.Forms.DataGridView dgvUserControlValidation;
         private System.Windows.Forms.TextBox tbSolutionFolder;
         private System.Windows.Forms.RadioButton rbDesignerFileExists;
-        private System.Windows.Forms.RadioButton rbDesignerFileMissing;
-        private System.Windows.Forms.RadioButton rbDesignerFileAll;
+        private System.Windows.Forms.RadioButton rbInProjectFile;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus1;
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus2;
@@ -754,6 +751,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectFileValidationFileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectFileValidationExists;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvProjectFileValidationControlFolder;
+        private System.Windows.Forms.CheckBox cbProjectInvalidOnly;
     }
 }
 

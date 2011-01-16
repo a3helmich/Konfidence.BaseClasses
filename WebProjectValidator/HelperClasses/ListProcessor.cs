@@ -49,7 +49,6 @@ namespace WebProjectValidator.HelperClasses
         }
         #endregion simple properties
 
-
         private FileList WebFileList
         {
             get
@@ -130,21 +129,29 @@ namespace WebProjectValidator.HelperClasses
 
         public ProcessActionResult ProcessProjectFileValidation(ProcessActionType actionType)
         {
-            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+            // 1. get a list of all files included in the projectfile
+            // 2. get a list of all files in the website
+            // 3. all website files not in included in the projectfile are invalid
+
+
+            // 1 :
+            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
+
+            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
+
+            // 2: 
+
+            List<ApplicationFileItem> resultList = new List<ApplicationFileItem>();
 
             _Count = 0;
             _ValidCount = 0;
             _InvalidCount = 0;
 
-            ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
-
-            List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
-
-            foreach (string fileName in SourceFileList)
+            foreach (string fileName in WebFileList)
             {
                 if (projectFileList.Contains(fileName.Substring(0, fileName.Length - 3), StringComparer.CurrentCultureIgnoreCase))
                 {
-                    DesignerFileItem designerFileItem = new DesignerFileItem(_ProjectFolder, fileName);
+                    ApplicationFileItem designerFileItem = new ApplicationFileItem(_ProjectFolder, fileName);
 
                     string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
 
@@ -174,23 +181,23 @@ namespace WebProjectValidator.HelperClasses
             return GetActionResult(resultList, TabPageType.ProjectFileValidation);
         }
 
-        public List<DesignerFileItem> GetWebsiteFileList()
-        {
-            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+        //public List<DesignerFileItem> GetWebsiteFileList()
+        //{
+        //    List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
-            return resultList;
-        }
+        //    return resultList;
+        //}
 
-        public List<DesignerFileItem> GetWebProjectFileList()
-        {
-            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+        //public List<DesignerFileItem> GetWebProjectFileList()
+        //{
+        //    List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
-            return resultList;
-        }
+        //    return resultList;
+        //}
 
         public ProcessActionResult ProcessProjectTypeValidation(ProcessActionType actionType)
         {
-            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+            List<ApplicationFileItem> resultList = new List<ApplicationFileItem>();
 
             _Count = 0;
             _ValidCount = 0;
@@ -206,7 +213,7 @@ namespace WebProjectValidator.HelperClasses
                 {
                     List<string> fileLines = FileReader.ReadLines(fileName);
 
-                    DesignerFileItem designerFileItem = new DesignerFileItem( _ProjectFolder, fileName);
+                    ApplicationFileItem designerFileItem = new ApplicationFileItem( _ProjectFolder, fileName);
 
                     designerFileItem.Valid = IsValidCodeFile(fileLines);
 
@@ -251,9 +258,9 @@ namespace WebProjectValidator.HelperClasses
 
         public ProcessActionResult ProcessUserControlValidation(ProcessActionType actionType)
         {
-            List<DesignerFileItem> resultList = new List<DesignerFileItem>();
+            List<ApplicationFileItem> resultList = new List<ApplicationFileItem>();
             ControlReferenceList allUserControlReferences = new ControlReferenceList();
-            List<DesignerFileItem> userControlReferences = new List<DesignerFileItem>();
+            List<ApplicationFileItem> userControlReferences = new List<ApplicationFileItem>();
 
             ProjectFileProcessor projectFileProcessor = new ProjectFileProcessor(_ProjectFile);
 
@@ -299,7 +306,7 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (ControlReference controlReference in allUserControlReferences)
             {
-                DesignerFileItem designerFileItem = new DesignerFileItem( _ProjectFolder, controlReference);
+                ApplicationFileItem designerFileItem = new ApplicationFileItem( _ProjectFolder, controlReference);
 
                 designerFileItem.Valid = true;
 
@@ -307,7 +314,7 @@ namespace WebProjectValidator.HelperClasses
             }
 
 
-            foreach (DesignerFileItem designerFileItem in userControlReferences)
+            foreach (ApplicationFileItem designerFileItem in userControlReferences)
             {
                 if (designerFileItem.Reference.StartsWith(".."))
                 {
@@ -337,7 +344,7 @@ namespace WebProjectValidator.HelperClasses
             _ValidCount = userControlReferences.Count;
             _InvalidCount = 0;
 
-            foreach (DesignerFileItem designerFileItem in userControlReferences)
+            foreach (ApplicationFileItem designerFileItem in userControlReferences)
             {
                 if (!designerFileItem.Valid)
                 {
@@ -346,7 +353,7 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            foreach (DesignerFileItem designerFileItem in userControlReferences)
+            foreach (ApplicationFileItem designerFileItem in userControlReferences)
             {
                 if (MustAddDesignerFileItem(designerFileItem, actionType))
                 {
@@ -357,7 +364,7 @@ namespace WebProjectValidator.HelperClasses
             return GetActionResult(resultList, TabPageType.UserControlValidation);
         }
 
-        private ProcessActionResult GetActionResult(List<DesignerFileItem> resultList, TabPageType tabPageType)
+        private ProcessActionResult GetActionResult(List<ApplicationFileItem> resultList, TabPageType tabPageType)
         {
             switch (tabPageType)
             {
@@ -448,7 +455,7 @@ namespace WebProjectValidator.HelperClasses
         }
 
         // TODO : split actionType usercontrol / designer functionality
-        public bool MustAddDesignerFileItem(DesignerFileItem designerFileItem, ProcessActionType actionType)
+        public bool MustAddDesignerFileItem(ApplicationFileItem designerFileItem, ProcessActionType actionType)
         {
             switch (actionType)
             {
@@ -476,7 +483,7 @@ namespace WebProjectValidator.HelperClasses
                         }
                         return false;
                     }
-                case ProcessActionType.DesignerFileMissing:
+                case ProcessActionType.InProjectFile:
                     {
                         if (!designerFileItem.Exists)
                         {
@@ -509,11 +516,11 @@ namespace WebProjectValidator.HelperClasses
             // TODO : DesignerFileItem -> doesn't feel right
             // TODO : property?
             // website uses no projectfile -> all files must be converted
-            DesignerFileItemList websiteDesigenerFileItemList = new DesignerFileItemList(_ProjectFolder, WebFileList);
+            ApplicationFileItemList websiteDesigenerFileItemList = new ApplicationFileItemList(_ProjectFolder, WebFileList);
 
             CheckFileBackupDirectory();
 
-            foreach (DesignerFileItem fileItem in websiteDesigenerFileItemList)
+            foreach (ApplicationFileItem fileItem in websiteDesigenerFileItemList)
             {
                 if (!fileItem.Valid)
                 {
@@ -547,13 +554,13 @@ namespace WebProjectValidator.HelperClasses
             // TODO : just get a list of all projectFiles without any processing
             ProcessActionResult projectTypeValidationResult = ProcessProjectTypeValidation(ProcessActionType.WebProject);
 
-            List<DesignerFileItem> repairList = projectTypeValidationResult.ProjectTypeDeveloperItemList;
+            List<ApplicationFileItem> repairList = projectTypeValidationResult.ProjectTypeDeveloperItemList;
 
             // web project uses a projectfile -> only files included in the project file must be converted
 
             CheckFileBackupDirectory();
 
-            foreach (DesignerFileItem fileItem in repairList)
+            foreach (ApplicationFileItem fileItem in repairList)
             {
                 if (fileItem.Valid) // even omgekeerde logica (2 keer)
                 {

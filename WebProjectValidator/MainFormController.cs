@@ -55,11 +55,7 @@ namespace WebProjectValidator
                     {
                         return Processor.ProcessProjectFileValidation(actionType);
                     }
-                case ProcessActionType.DesignerFileMissing:
-                    {
-                        return Processor.ProcessProjectFileValidation(actionType);
-                    }
-                case ProcessActionType.DesignerFileAll:
+                case ProcessActionType.InProjectFile:
                     {
                         return Processor.ProcessProjectFileValidation(actionType);
                     }

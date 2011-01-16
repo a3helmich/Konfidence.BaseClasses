@@ -105,8 +105,8 @@ namespace WebProjectValidator
 
             _Presenter.IsCS = rbCS.Checked;
 
-            _Presenter.IsDesignerFileExistsCheck = rbDesignerFileExists.Checked;
-            _Presenter.IsDesignerFileMissingCheck = rbDesignerFileMissing.Checked;
+            _Presenter.IsDesignerFileExistsChecked = rbDesignerFileExists.Checked;
+            _Presenter.IsInProjectFileChecked = rbInProjectFile.Checked;
 
             _Presenter.IsWebProjectCheck = rbCheckWebProject.Checked;
 
@@ -193,11 +193,6 @@ namespace WebProjectValidator
             {
                 MessageBox.Show(_Presenter.ErrorMessage);
             }
-        }
-
-        private void dgvProjectFileValidation_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
