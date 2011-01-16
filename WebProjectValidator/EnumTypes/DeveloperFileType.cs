@@ -8,8 +8,8 @@ namespace WebProjectValidator.EnumTypes
     public enum DeveloperFileType
     {
         Unknown = 0,
-        DesignerFile = 1,
-        SourceFile = 2,
-        WebFile = 3
+        DesignerFile = 1,   // .designer.
+        SourceFile = 2,     // .cs, .vb
+        WebFile = 3         // .aspx, .ascx, .master
     }
 }

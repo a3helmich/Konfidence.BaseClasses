@@ -12,9 +12,9 @@ namespace WebProjectValidator.HelperClasses
         {
             foreach (string fileName in fileList)
             {
-                ApplicationFileItem designerFileItem = new ApplicationFileItem(projectFolder, fileName);
+                ApplicationFileItem applicationFileItem = new ApplicationFileItem(projectFolder, fileName);
 
-                this.Add(designerFileItem);
+                this.Add(applicationFileItem);
             }
         }
     }

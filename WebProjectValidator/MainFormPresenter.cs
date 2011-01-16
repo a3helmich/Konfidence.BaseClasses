@@ -354,14 +354,6 @@ namespace WebProjectValidator
             return ProcessActionType.None;
         }
 
-        private FileList WebFileList
-        {
-            get
-            {
-                return new FileList(ProjectFolder, LanguageType, DeveloperFileType.WebFile);
-            }
-        }
-
         public MainFormPresenter()
         {
             LoadDefaults();

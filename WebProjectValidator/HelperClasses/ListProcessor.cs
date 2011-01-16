@@ -151,18 +151,18 @@ namespace WebProjectValidator.HelperClasses
             {
                 if (projectFileList.Contains(fileName.Substring(0, fileName.Length - 3), StringComparer.CurrentCultureIgnoreCase))
                 {
-                    ApplicationFileItem designerFileItem = new ApplicationFileItem(_ProjectFolder, fileName);
+                    ApplicationFileItem applicationFileItem = new ApplicationFileItem(_ProjectFolder, fileName);
 
                     string findName = this.ReplaceIgnoreCase(fileName, _DesignerSearch, _DesignerReplace);
 
                     if (DesignerFileList.Contains(findName))
                     {
-                        designerFileItem.Exists = true;
+                        applicationFileItem.Exists = true;
                     }
 
                     _Count++;
 
-                    if (designerFileItem.Exists)
+                    if (applicationFileItem.Exists)
                     {
                         _ValidCount++;
                     }
@@ -171,29 +171,15 @@ namespace WebProjectValidator.HelperClasses
                         _InvalidCount++;
                     }
 
-                    if (MustAddDesignerFileItem(designerFileItem, actionType))
+                    if (MustAddApplicationFileItem(applicationFileItem, actionType))
                     {
-                        resultList.Add(designerFileItem);
+                        resultList.Add(applicationFileItem);
                     }
                 }
             }
 
             return GetActionResult(resultList, TabPageType.ProjectFileValidation);
         }
-
-        //public List<DesignerFileItem> GetWebsiteFileList()
-        //{
-        //    List<DesignerFileItem> resultList = new List<DesignerFileItem>();
-
-        //    return resultList;
-        //}
-
-        //public List<DesignerFileItem> GetWebProjectFileList()
-        //{
-        //    List<DesignerFileItem> resultList = new List<DesignerFileItem>();
-
-        //    return resultList;
-        //}
 
         public ProcessActionResult ProcessProjectTypeValidation(ProcessActionType actionType)
         {
@@ -213,13 +199,13 @@ namespace WebProjectValidator.HelperClasses
                 {
                     List<string> fileLines = FileReader.ReadLines(fileName);
 
-                    ApplicationFileItem designerFileItem = new ApplicationFileItem( _ProjectFolder, fileName);
+                    ApplicationFileItem applicationFileItem = new ApplicationFileItem( _ProjectFolder, fileName);
 
-                    designerFileItem.Valid = IsValidCodeFile(fileLines);
+                    applicationFileItem.Valid = IsValidCodeFile(fileLines);
 
                     _Count++;
 
-                    if (designerFileItem.Valid)
+                    if (applicationFileItem.Valid)
                     {
                         _ValidCount++;
                     }
@@ -228,9 +214,9 @@ namespace WebProjectValidator.HelperClasses
                         _InvalidCount++;
                     }
 
-                    if (MustAddDesignerFileItem(designerFileItem, actionType))
+                    if (MustAddApplicationFileItem(applicationFileItem, actionType))
                     {
-                        resultList.Add(designerFileItem);
+                        resultList.Add(applicationFileItem);
                     }
                 }
             }
@@ -306,37 +292,37 @@ namespace WebProjectValidator.HelperClasses
 
             foreach (ControlReference controlReference in allUserControlReferences)
             {
-                ApplicationFileItem designerFileItem = new ApplicationFileItem( _ProjectFolder, controlReference);
+                ApplicationFileItem applicationFileItem = new ApplicationFileItem( _ProjectFolder, controlReference);
 
-                designerFileItem.Valid = true;
+                applicationFileItem.Valid = true;
 
-                userControlReferences.Add(designerFileItem);
+                userControlReferences.Add(applicationFileItem);
             }
 
 
-            foreach (ApplicationFileItem designerFileItem in userControlReferences)
+            foreach (ApplicationFileItem applicationFileItem in userControlReferences)
             {
-                if (designerFileItem.Reference.StartsWith(".."))
+                if (applicationFileItem.Reference.StartsWith(".."))
                 {
-                    designerFileItem.Valid = false;
-                    designerFileItem.SetErrorMessage("file path begint met ../ ipv ~/");
+                    applicationFileItem.Valid = false;
+                    applicationFileItem.SetErrorMessage("file path begint met ../ ipv ~/");
                 }
-                else if (!designerFileItem.Reference.StartsWith("~") && designerFileItem.Reference.Contains("/"))
+                else if (!applicationFileItem.Reference.StartsWith("~") && applicationFileItem.Reference.Contains("/"))
                 {
-                    designerFileItem.Valid = false;
-                    designerFileItem.SetErrorMessage("file path begint niet met ~/");
-                }
-
-                if (!File.Exists(designerFileItem.FullFileName))
-                {
-                    designerFileItem.Valid = false;
-                    designerFileItem.SetErrorMessage("reference naar een niet bestaand control");
+                    applicationFileItem.Valid = false;
+                    applicationFileItem.SetErrorMessage("file path begint niet met ~/");
                 }
 
-                if (!projectFileList.Contains(designerFileItem.FullFileName, StringComparer.CurrentCultureIgnoreCase))
+                if (!File.Exists(applicationFileItem.FullFileName))
                 {
-                    designerFileItem.Valid = false;
-                    designerFileItem.SetErrorMessage("reference naar een control dat niet in het project zit");
+                    applicationFileItem.Valid = false;
+                    applicationFileItem.SetErrorMessage("reference naar een niet bestaand control");
+                }
+
+                if (!projectFileList.Contains(applicationFileItem.FullFileName, StringComparer.CurrentCultureIgnoreCase))
+                {
+                    applicationFileItem.Valid = false;
+                    applicationFileItem.SetErrorMessage("reference naar een control dat niet in het project zit");
                 }
             }
 
@@ -344,20 +330,20 @@ namespace WebProjectValidator.HelperClasses
             _ValidCount = userControlReferences.Count;
             _InvalidCount = 0;
 
-            foreach (ApplicationFileItem designerFileItem in userControlReferences)
+            foreach (ApplicationFileItem applicationFileItem in userControlReferences)
             {
-                if (!designerFileItem.Valid)
+                if (!applicationFileItem.Valid)
                 {
                     _ValidCount--;
                     _InvalidCount++;
                 }
             }
 
-            foreach (ApplicationFileItem designerFileItem in userControlReferences)
+            foreach (ApplicationFileItem applicationFileItem in userControlReferences)
             {
-                if (MustAddDesignerFileItem(designerFileItem, actionType))
+                if (MustAddApplicationFileItem(applicationFileItem, actionType))
                 {
-                    resultList.Add(designerFileItem);
+                    resultList.Add(applicationFileItem);
                 }
             }
 
@@ -455,13 +441,13 @@ namespace WebProjectValidator.HelperClasses
         }
 
         // TODO : split actionType usercontrol / designer functionality
-        public bool MustAddDesignerFileItem(ApplicationFileItem designerFileItem, ProcessActionType actionType)
+        public bool MustAddApplicationFileItem(ApplicationFileItem applicationFileItem, ProcessActionType actionType)
         {
             switch (actionType)
             {
                 case ProcessActionType.UserControlValid:
                     {
-                        if (designerFileItem.Valid)
+                        if (applicationFileItem.Valid)
                         {
                             return true;
                         }
@@ -469,7 +455,7 @@ namespace WebProjectValidator.HelperClasses
                     }
                 case ProcessActionType.UserControlInvalid:
                     {
-                        if (!designerFileItem.Valid)
+                        if (!applicationFileItem.Valid)
                         {
                             return true;
                         }
@@ -477,7 +463,7 @@ namespace WebProjectValidator.HelperClasses
                     }
                 case ProcessActionType.DesignerFileExists:
                     {
-                        if (designerFileItem.Exists)
+                        if (applicationFileItem.Exists)
                         {
                             return true;
                         }
@@ -485,7 +471,7 @@ namespace WebProjectValidator.HelperClasses
                     }
                 case ProcessActionType.InProjectFile:
                     {
-                        if (!designerFileItem.Exists)
+                        if (!applicationFileItem.Exists)
                         {
                             return true;
                         }
@@ -493,7 +479,7 @@ namespace WebProjectValidator.HelperClasses
                     }
                 case ProcessActionType.UserControlMissing:
                     {
-                        if (!designerFileItem.Exists)
+                        if (!applicationFileItem.Exists)
                         {
                             return true;
                         }
@@ -501,7 +487,7 @@ namespace WebProjectValidator.HelperClasses
                     }
                 case ProcessActionType.UserControlUnused:
                     {
-                        if (!designerFileItem.IsUsed)
+                        if (!applicationFileItem.IsUsed)
                         {
                             return true;
                         }
@@ -513,14 +499,14 @@ namespace WebProjectValidator.HelperClasses
 
         public void ConvertToWebsite()
         {
-            // TODO : DesignerFileItem -> doesn't feel right
+            // TODO : ApplicationFileItem -> doesn't feel right
             // TODO : property?
             // website uses no projectfile -> all files must be converted
-            ApplicationFileItemList websiteDesigenerFileItemList = new ApplicationFileItemList(_ProjectFolder, WebFileList);
+            ApplicationFileItemList websiteApplicationFileItemList = new ApplicationFileItemList(_ProjectFolder, WebFileList);
 
             CheckFileBackupDirectory();
 
-            foreach (ApplicationFileItem fileItem in websiteDesigenerFileItemList)
+            foreach (ApplicationFileItem fileItem in websiteApplicationFileItemList)
             {
                 if (!fileItem.Valid)
                 {
