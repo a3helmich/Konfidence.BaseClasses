@@ -15,7 +15,7 @@ namespace WebProjectValidator
         private string _SolutionFolder = string.Empty;
         private string _ProjectName = string.Empty;
         private LanguageType _LanguageType = LanguageType.Unknown;
-        private TabPageType _TabPageType = TabPageType.DesignerFileValidation;
+        private TabPageType _TabPageType = TabPageType.ProjectFileValidation;
 
         private bool _IsDesignerFileExistsCheck = false;
         private bool _IsDesignerFileMissingCheck = false;
@@ -219,7 +219,7 @@ namespace WebProjectValidator
             }
         }
 
-        public List<DesignerFileItem> DesignerFileValidationList
+        public List<DesignerFileItem> ProjectFileValidationList
         {
             get
             {
@@ -253,9 +253,9 @@ namespace WebProjectValidator
             return false;
         }
 
-        public bool DesignerFileValidationItemVisible()
+        public bool ProjectFileValidationItemVisible()
         {
-            if (TabPageType.Equals(TabPageType.DesignerFileValidation))
+            if (TabPageType.Equals(TabPageType.ProjectFileValidation))
             {
                 return true;
             }
@@ -286,7 +286,7 @@ namespace WebProjectValidator
             {
                 switch (TabPageType)
                 {
-                    case TabPageType.DesignerFileValidation:
+                    case TabPageType.ProjectFileValidation:
                         {
                             return GetDesignerFileActionType();
                         }
@@ -336,7 +336,7 @@ namespace WebProjectValidator
                 return ProcessActionType.WebProject;
             }
 
-            return ProcessActionType.WebApplication;
+            return ProcessActionType.Website;
         }
 
         private ProcessActionType GetDesignerFileActionType()
@@ -429,7 +429,7 @@ namespace WebProjectValidator
                             break;
                         }
                     case ExecuteEventType.ConvertToWebProject:
-                    case ExecuteEventType.ConvertToWebApplication:
+                    case ExecuteEventType.ConvertToWebsite:
                         {
                             _ProcessActionResult = mainFormController.ExecuteEvent(executeEventType, ActionType);
 
@@ -450,7 +450,7 @@ namespace WebProjectValidator
                 {
                     switch ((TabPageType)tabTag)
                     {
-                        case EnumTypes.TabPageType.DesignerFileValidation:
+                        case EnumTypes.TabPageType.ProjectFileValidation:
                         case EnumTypes.TabPageType.ProjectTypeValidation:
                         case EnumTypes.TabPageType.UserControlValidation:
                         case EnumTypes.TabPageType.Unknown:

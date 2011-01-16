@@ -13,7 +13,7 @@ namespace WebProjectValidator.EnumTypes
         DesignerFileMissing = 3,
         UserControlUnused = 4,
         WebProject = 5,
-        WebApplication = 6,
+        Website = 6,
         UserControlValid = 7,
         UserControlInvalid = 8,
         UserControlMissing = 9,

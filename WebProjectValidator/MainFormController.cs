@@ -32,9 +32,9 @@ namespace WebProjectValidator
         {
             switch (eventType)
             {
-                case ExecuteEventType.ConvertToWebApplication:
+                case ExecuteEventType.ConvertToWebsite:
                     {
-                        Processor.ConvertToWebApplication();
+                        Processor.ConvertToWebsite();
                         break;
                     }
                 case ExecuteEventType.ConvertToWebProject:
@@ -53,17 +53,17 @@ namespace WebProjectValidator
             {
                 case ProcessActionType.DesignerFileExists:
                     {
-                        return Processor.ProcessDesignerFileValidation(actionType);
+                        return Processor.ProcessProjectFileValidation(actionType);
                     }
                 case ProcessActionType.DesignerFileMissing:
                     {
-                        return Processor.ProcessDesignerFileValidation(actionType);
+                        return Processor.ProcessProjectFileValidation(actionType);
                     }
                 case ProcessActionType.DesignerFileAll:
                     {
-                        return Processor.ProcessDesignerFileValidation(actionType);
+                        return Processor.ProcessProjectFileValidation(actionType);
                     }
-                case ProcessActionType.WebApplication:
+                case ProcessActionType.Website:
                     {
                         return Processor.ProcessProjectTypeValidation(actionType);
                     }

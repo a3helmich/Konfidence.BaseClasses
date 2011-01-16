@@ -128,7 +128,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        public ProcessActionResult ProcessDesignerFileValidation(ProcessActionType actionType)
+        public ProcessActionResult ProcessProjectFileValidation(ProcessActionType actionType)
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -171,10 +171,10 @@ namespace WebProjectValidator.HelperClasses
                 }
             }
 
-            return GetActionResult(resultList, TabPageType.DesignerFileValidation);
+            return GetActionResult(resultList, TabPageType.ProjectFileValidation);
         }
 
-        public List<DesignerFileItem> GetWebApplicationFileList()
+        public List<DesignerFileItem> GetWebsiteFileList()
         {
             List<DesignerFileItem> resultList = new List<DesignerFileItem>();
 
@@ -361,7 +361,7 @@ namespace WebProjectValidator.HelperClasses
         {
             switch (tabPageType)
             {
-                case TabPageType.DesignerFileValidation:
+                case TabPageType.ProjectFileValidation:
                     _ProcessActionResult.DesignerFileCount = Count;
                     _ProcessActionResult.DesignerFileValidCount = ValidCount;
                     _ProcessActionResult.DesignerFileInvalidCount = InvalidCount;
@@ -504,16 +504,16 @@ namespace WebProjectValidator.HelperClasses
             return true;
         }
 
-        public void ConvertToWebApplication()
+        public void ConvertToWebsite()
         {
             // TODO : DesignerFileItem -> doesn't feel right
             // TODO : property?
-            // web application uses no projectfile -> all files must be converted
-            DesignerFileItemList webApplicationDesigenerFileItemList = new DesignerFileItemList(_ProjectFolder, WebFileList);
+            // website uses no projectfile -> all files must be converted
+            DesignerFileItemList websiteDesigenerFileItemList = new DesignerFileItemList(_ProjectFolder, WebFileList);
 
             CheckFileBackupDirectory();
 
-            foreach (DesignerFileItem fileItem in webApplicationDesigenerFileItemList)
+            foreach (DesignerFileItem fileItem in websiteDesigenerFileItemList)
             {
                 if (!fileItem.Valid)
                 {

@@ -27,11 +27,11 @@ namespace WebProjectValidator
 
         private void InitializeComponentEx()
         {
-            dgvDesignerFileValidation.AutoGenerateColumns = false;
+            dgvProjectFileValidation.AutoGenerateColumns = false;
             dgvProjectTypeValidation.AutoGenerateColumns = false;
             dgvUserControlValidation.AutoGenerateColumns = false;
 
-            tpDesignerFileValidation.Tag = TabPageType.DesignerFileValidation;
+            tpProjectFileValidation.Tag = TabPageType.ProjectFileValidation;
             tpProjectTypeValidation.Tag = TabPageType.ProjectTypeValidation;
             tpUserControlValidation.Tag = TabPageType.UserControlValidation;
         }
@@ -45,14 +45,14 @@ namespace WebProjectValidator
             rbCS.Checked = _Presenter.IsCS;
             rbVB.Checked = _Presenter.IsVB;
             
-            bConvertToWebApplication.Enabled = _Presenter.ConvertButtonsEnabled();
+            bConvertToWebsite.Enabled = _Presenter.ConvertButtonsEnabled();
             bConvertToWebProject.Enabled = _Presenter.ConvertButtonsEnabled();
 
             switch (_Presenter.TabPageType)
             {
-                case TabPageType.DesignerFileValidation:
+                case TabPageType.ProjectFileValidation:
                     {
-                        GetDesignerFileValidationCounts();
+                        GetProjectFileValidationCounts();
                         break;
                     }
                 case TabPageType.ProjectTypeValidation:
@@ -68,14 +68,14 @@ namespace WebProjectValidator
             }
         }
 
-        private void GetDesignerFileValidationCounts()
+        private void GetProjectFileValidationCounts()
         {
             tsslTotal.Text = _Presenter.DesignerFileCountText;
             tsslStatus1.Text = _Presenter.DesignerFileExistsCountText;
             tsslStatus2.Text = _Presenter.DesignerFileMissingCountText;
             tsslListCount.Text = _Presenter.DesignerFileListCountText;
 
-            dgvDesignerFileValidation.DataSource = _Presenter.DesignerFileValidationList;
+            dgvProjectFileValidation.DataSource = _Presenter.ProjectFileValidationList;
         }
 
         private void GetProjectTypeValidationCounts()
@@ -142,11 +142,11 @@ namespace WebProjectValidator
             PresenterToForm();
         }
 
-        private void bConvertToWebApplication_Click(object sender, EventArgs e)
+        private void bConvertToWebsite_Click(object sender, EventArgs e)
         {
             FormToPresenter();
 
-            ExecuteEvent(ExecuteEventType.ConvertToWebApplication);
+            ExecuteEvent(ExecuteEventType.ConvertToWebsite);
 
             PresenterToForm();
         }
@@ -193,6 +193,11 @@ namespace WebProjectValidator
             {
                 MessageBox.Show(_Presenter.ErrorMessage);
             }
+        }
+
+        private void dgvProjectFileValidation_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

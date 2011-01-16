@@ -10,6 +10,6 @@ namespace WebProjectValidator
         None = 0,
         Refresh = 1,
         ConvertToWebProject = 2,
-        ConvertToWebApplication = 3,
+        ConvertToWebsite = 3,
     }
 }
