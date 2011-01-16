@@ -49,7 +49,7 @@ namespace WebProjectValidator.HelperClasses
         }
         #endregion simple properties
 
-        private FileList WebFileList
+        protected FileList WebFileList
         {
             get
             {
@@ -57,7 +57,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        private FileList SourceFileList
+        protected FileList SourceFileList
         {
             get
             {
@@ -65,7 +65,7 @@ namespace WebProjectValidator.HelperClasses
             }
         }
 
-        private FileList DesignerFileList
+        protected FileList DesignerFileList
         {
             get
             {
@@ -139,7 +139,8 @@ namespace WebProjectValidator.HelperClasses
 
             List<string> projectFileList = projectFileProcessor.GetProjectFileNameList(_ProjectFolder, _ExtensionFilter);
 
-            // 2: 
+            // 2: webfilelist
+            
 
             List<ApplicationFileItem> resultList = new List<ApplicationFileItem>();
 

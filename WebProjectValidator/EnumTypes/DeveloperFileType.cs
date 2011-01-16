@@ -10,6 +10,6 @@ namespace WebProjectValidator.EnumTypes
         Unknown = 0,
         DesignerFile = 1,   // .designer.
         SourceFile = 2,     // .cs, .vb
-        WebFile = 3         // .aspx, .ascx, .master
+        WebFile = 3         // .aspx, .ascx, .master, asax
     }
 }
