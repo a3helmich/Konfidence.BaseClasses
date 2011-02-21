@@ -45,7 +45,7 @@ namespace Konfidence.UserControlHelpers
 
 			currentTicket = sessionParameterObject.SessionTicket;
 
-			if (!IsAssigned(currentTicket))
+			if (!string.IsNullOrEmpty(currentTicket))
 			{
 				return 0;
 			}
@@ -64,7 +64,7 @@ namespace Konfidence.UserControlHelpers
 
 			string currentTicketString = context.Request[CurrentRefreshTicketEntry];
 
-			if (!IsAssigned(currentTicketString))
+			if (!string.IsNullOrEmpty(currentTicketString))
 			{
 				ticket = sessionTicket;
 			}
