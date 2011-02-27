@@ -215,6 +215,23 @@ namespace Konfidence.BaseData
 			throw (new Exception("GetFieldInt32: dataHost/_PropertyDictionary is not assigned"));
 		}
 
+        protected Guid GetFieldGuid(string fieldName)
+        {
+            if (IsAssigned(_PropertyDictionary))
+            {
+                return (Guid)_PropertyDictionary[fieldName];
+            }
+            else
+            {
+                if (IsAssigned(_DataHost))
+                {
+                    return _DataHost.GetFieldGuid(fieldName);
+                }
+            }
+
+            throw (new Exception("GetFieldGuid: dataHost/_PropertyDictionary is not assigned"));
+        }
+
 		protected string GetFieldString(string fieldName)
 		{
 			if (IsAssigned(_PropertyDictionary))
@@ -290,7 +307,19 @@ namespace Konfidence.BaseData
             AddInParameter(fieldName, DbType.Int32, value);
 		}
 
-		protected void SetField(string fieldName, string value)
+        protected void SetField(string fieldName, Guid value)
+        {
+            if (Guid.Empty.Equals(value))
+            {
+                AddInParameter(fieldName, DbType.Guid, null);
+            }
+            else
+            {
+                AddInParameter(fieldName, DbType.Guid, value);
+            }
+        }
+
+        protected void SetField(string fieldName, string value)
 		{
             AddInParameter(fieldName, DbType.String, value);
 		}
@@ -324,7 +353,12 @@ namespace Konfidence.BaseData
 			SetField(fieldName, value);
 		}
 
-		protected void SetParameter(string fieldName, string value)
+        protected void SetParameter(string fieldName, Guid value)
+        {
+            SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, string value)
 		{
 			SetField(fieldName, value);
 		}

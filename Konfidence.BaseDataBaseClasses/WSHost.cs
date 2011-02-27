@@ -31,7 +31,12 @@ namespace Konfidence.BaseData
 			return base.GetFieldInt32(fieldName);
 		}
 
-		internal override string GetFieldString(string fieldName)
+        internal override Guid GetFieldGuid(string fieldName)
+        {
+            return base.GetFieldGuid(fieldName);
+        }
+
+        internal override string GetFieldString(string fieldName)
 		{
 			return base.GetFieldString(fieldName);
 		}

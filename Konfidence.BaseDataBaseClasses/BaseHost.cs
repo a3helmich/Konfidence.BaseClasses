@@ -112,6 +112,11 @@ namespace Konfidence.BaseData
 			throw new NotImplementedException();
 		}
 
+        internal virtual Guid GetFieldGuid(string fieldName)
+        {
+            throw new NotImplementedException();
+        }
+
 		internal virtual bool GetFieldBool(string fieldName)
 		{
 			throw new NotImplementedException();

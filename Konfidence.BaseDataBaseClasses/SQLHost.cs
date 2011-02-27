@@ -32,6 +32,18 @@ namespace Konfidence.BaseData
 			return _DataReader.GetInt32(fieldOrdinal);
 		}
 
+        internal override Guid GetFieldGuid(string fieldName)
+        {
+            int fieldOrdinal = GetOrdinal(fieldName);
+
+            if (_DataReader.IsDBNull(fieldOrdinal))
+            {
+                return Guid.Empty;
+            }
+
+            return _DataReader.GetGuid(fieldOrdinal);
+        }
+
 		internal override string GetFieldString(string fieldName)
 		{
 			int fieldOrdinal = GetOrdinal(fieldName);
