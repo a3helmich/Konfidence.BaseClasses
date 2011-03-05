@@ -51,8 +51,8 @@ namespace Konfidence.BaseData.Schema
         }
         #endregion properties
 
-        private string createStoredProcedureCommand = "CREATE PROCEDURE [dbo].[PrimaryKey_Get] @tableName varchar(50) AS BEGIN SET NOCOUNT ON;  SELECT 1 as PrimaryKeyId, * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE (constraint_type = 'PRIMARY KEY') AND (table_name = @tableName) END";
-        private string deleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[PrimaryKey_Get]";
+        private string _CreateStoredProcedureCommand = "CREATE PROCEDURE [dbo].[PrimaryKey_Get] @tableName varchar(50) AS BEGIN SET NOCOUNT ON;  SELECT 1 as PrimaryKeyId, * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE (constraint_type = 'PRIMARY KEY') AND (table_name = @tableName) END";
+        private string _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[PrimaryKey_Get]";
 
         public TableDataItemList()
         {
@@ -74,7 +74,7 @@ namespace Konfidence.BaseData.Schema
         {
             if (!StoredProcedureExists("PrimaryKey_Get"))
             {
-                ExecuteTextCommand(createStoredProcedureCommand);
+                ExecuteTextCommand(_CreateStoredProcedureCommand);
 
                 _StoredProcedureCreated = true;
             }
@@ -84,7 +84,7 @@ namespace Konfidence.BaseData.Schema
         {
             if (_StoredProcedureCreated)
             {
-                ExecuteTextCommand(deleteStoredProcedureCommand);
+                ExecuteTextCommand(_DeleteStoredProcedureCommand);
             }
         }
 

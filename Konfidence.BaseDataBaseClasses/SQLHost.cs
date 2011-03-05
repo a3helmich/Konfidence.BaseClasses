@@ -20,7 +20,7 @@ namespace Konfidence.BaseData
 		}
 
 		#region GetField Methods
-		internal override Int32 GetFieldInt32(string fieldName)
+		internal override Int16 GetFieldInt16(string fieldName)
 		{
 			int fieldOrdinal = GetOrdinal(fieldName);
 
@@ -29,8 +29,20 @@ namespace Konfidence.BaseData
 				return 0;
 			}
 
-			return _DataReader.GetInt32(fieldOrdinal);
+			return _DataReader.GetInt16(fieldOrdinal);
 		}
+
+        internal override Int32 GetFieldInt32(string fieldName)
+        {
+            int fieldOrdinal = GetOrdinal(fieldName);
+
+            if (_DataReader.IsDBNull(fieldOrdinal))
+            {
+                return 0;
+            }
+
+            return _DataReader.GetInt32(fieldOrdinal);
+        }
 
         internal override Guid GetFieldGuid(string fieldName)
         {
@@ -79,6 +91,18 @@ namespace Konfidence.BaseData
 
 			return _DataReader.GetDateTime(fieldOrdinal);
 		}
+
+        internal override TimeSpan GetFieldTimeSpan(string fieldName)
+        {
+            int fieldOrdinal = GetOrdinal(fieldName);
+
+            if (_DataReader.IsDBNull(fieldOrdinal))
+            {
+                return TimeSpan.MinValue;
+            }
+
+            return (TimeSpan)_DataReader.GetValue(fieldOrdinal);
+        }
 
         internal override Decimal GetFieldDecimal(string fieldName)
         {

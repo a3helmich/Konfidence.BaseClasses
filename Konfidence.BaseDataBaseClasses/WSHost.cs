@@ -26,7 +26,12 @@ namespace Konfidence.BaseData
 		}
 
 		#region GetField Methods
-		internal override int GetFieldInt32(string fieldName)
+        internal override Int16 GetFieldInt16(string fieldName)
+        {
+            return base.GetFieldInt16(fieldName);
+        }
+        
+        internal override int GetFieldInt32(string fieldName)
 		{
 			return base.GetFieldInt32(fieldName);
 		}
@@ -50,6 +55,11 @@ namespace Konfidence.BaseData
 		{
 			return base.GetFieldDateTime(fieldName);
 		}
+
+        internal override TimeSpan GetFieldTimeSpan(string fieldName)
+        {
+            return base.GetFieldTimeSpan(fieldName);
+        }
 
         internal override Decimal GetFieldDecimal(string fieldName)
         {

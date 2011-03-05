@@ -9,12 +9,13 @@ namespace Konfidence.BaseData.Schema
         private bool _IsPrimaryKey = false;
         private bool _IsAutoUpdated = false;
         private bool _IsDefaulted = false;
+        private bool _IsReadonly = false;
         private bool _IsInternal = false;
 
         private string _Name = string.Empty;
         private int _OrdinalPosition = 0;
         private string _DataType = string.Empty;
-        private string _ColumnDefault = string.Empty;
+        //private string _ColumnDefault = string.Empty;
 
         //private bool _IsNullable = false;
         private string _CharacterMaximumLength = string.Empty;
@@ -29,10 +30,10 @@ namespace Konfidence.BaseData.Schema
         //private string _CollationCatalog = string.Empty;
 
         #region properties
-        public bool IsDefaulted
+        public bool IsPrimaryKey
         {
-            get { return _IsDefaulted; }
-            set { _IsDefaulted = value; }
+            get { return _IsPrimaryKey; }
+            set { _IsPrimaryKey = value; }
         }
 
         public bool IsAutoUpdated
@@ -41,16 +42,22 @@ namespace Konfidence.BaseData.Schema
             set { _IsAutoUpdated = value; }
         }
 
+        public bool IsDefaulted
+        {
+            get { return _IsDefaulted; }
+            set { _IsDefaulted = value; }
+        }
+
+        public bool IsReadonly
+        {
+            get { return _IsReadonly; }
+            set { _IsReadonly = value; }
+        }
+
         public bool IsInternal
         {
             get { return _IsInternal; }
             set { _IsInternal = value; }
-        }
-
-        public bool IsPrimaryKey
-        {
-            get { return _IsPrimaryKey; }
-            set { _IsPrimaryKey = value; }
         }
 
         public string Name
@@ -71,11 +78,11 @@ namespace Konfidence.BaseData.Schema
             set { _DataType = value; }
         }
 
-        public string ColumnDefault
-        {
-            get { return _ColumnDefault; }
-            set { _ColumnDefault = value; }
-        }
+        //public string ColumnDefault
+        //{
+        //    get { return _ColumnDefault; }
+        //    set { _ColumnDefault = value; }
+        //}
 
         //public bool IsNullable
         //{
@@ -146,6 +153,29 @@ namespace Konfidence.BaseData.Schema
 
         public ColumnDataItem()
         {
+        }
+
+        protected internal override void GetData()
+        {
+            _Name = GetFieldString("Name");
+
+            if (GetFieldInt32("Default_object_id") > 0)
+            {
+                _IsDefaulted = true;
+            }
+
+            _IsReadonly = GetFieldBool("Is_Computed");
+            
+            _OrdinalPosition = GetFieldInt32("column_id");
+            //_ColumnDefault = columnDefault;
+
+            _DataType = GetFieldString("datatype");
+
+            if (_DataType.Equals("varchar") || _DataType.Equals("char"))
+            {
+                _CharacterMaximumLength = GetFieldInt16("max_length").ToString();
+            }
+
         }
 
         public ColumnDataItem(string name): this()

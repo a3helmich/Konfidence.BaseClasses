@@ -198,6 +198,23 @@ namespace Konfidence.BaseData
 			}
 		}
 
+        protected Int16 GetFieldInt16(string fieldName)
+        {
+            if (IsAssigned(_PropertyDictionary))
+            {
+                return (Int16)_PropertyDictionary[fieldName];
+            }
+            else
+            {
+                if (IsAssigned(_DataHost))
+                {
+                    return _DataHost.GetFieldInt16(fieldName);
+                }
+            }
+
+            throw (new Exception("GetFieldInt16: dataHost/_PropertyDictionary is not assigned"));
+        }
+
 		protected Int32 GetFieldInt32(string fieldName)
 		{
 			if (IsAssigned(_PropertyDictionary))
@@ -283,6 +300,23 @@ namespace Konfidence.BaseData
 			throw (new Exception("GetFieldDateTime: dataHost/_PropertyDictionary  is not assigned"));
 		}
 
+        protected TimeSpan GetFieldTimeSpan(string fieldName)
+        {
+            if (IsAssigned(_PropertyDictionary))
+            {
+                return (TimeSpan)_PropertyDictionary[fieldName];
+            }
+            else
+            {
+                if (IsAssigned(_DataHost))
+                {
+                    return _DataHost.GetFieldTimeSpan(fieldName);
+                }
+            }
+
+            throw (new Exception("GetFieldTimeSpan: dataHost/_PropertyDictionary  is not assigned"));
+        }
+
         protected Decimal GetFieldDecimal(string fieldName)
         {
             if (IsAssigned(_PropertyDictionary))
@@ -341,6 +375,18 @@ namespace Konfidence.BaseData
 			}
 		}
 
+        protected void SetField(string fieldName, TimeSpan value)
+        {
+            if (value > TimeSpan.MinValue)
+            {
+                AddInParameter(fieldName, DbType.DateTime, value);
+            }
+            else
+            {
+                AddInParameter(fieldName, DbType.DateTime, null);
+            }
+        }
+
         protected void SetField(string fieldName, Decimal value)
         {
             AddInParameter(fieldName, DbType.Decimal, value);
@@ -372,6 +418,11 @@ namespace Konfidence.BaseData
 		{
 			SetField(fieldName, value);
 		}
+
+        protected void SetParameter(string fieldName, TimeSpan value)
+        {
+            SetField(fieldName, value);
+        }
 
         protected void SetParameterList(List<ParameterObject> parameterObjectList)
         {

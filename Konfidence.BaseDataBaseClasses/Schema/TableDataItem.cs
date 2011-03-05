@@ -116,19 +116,6 @@ namespace Konfidence.BaseData.Schema
                 }
             }
 
-            // TODO : figure out which columns have a default value
-            // find out which column is defaulted
-            foreach (ColumnDataItem columnDataItem in _ColumnDataItemList)
-            {
-                switch (columnDataItem.Name.ToLower())
-                {
-                    case "sysinserttime":
-                    case "sysupdatetime":
-                        columnDataItem.IsDefaulted = true;
-                        break;
-                }
-            }
-
             // DataItem specific fields not available to for developers
             foreach (ColumnDataItem columnDataItem in _ColumnDataItemList)
             {
