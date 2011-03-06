@@ -138,7 +138,11 @@ namespace Konfidence.BaseData
 			database.ExecuteNonQuery(dbCommand);
 
 			ItemId = (int)database.GetParameterValue(dbCommand, autoIdField);
-		}
+
+            // TODO : retrieve database-side updated fields, and make defaults toway fields, instead of readonly
+            //        make update trigers readonly and insert triggers toway fields, instead of readonly
+            //        generate code in the implemented-class instead of the BaseDataItem-class
+        }
 
 		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)
 		{

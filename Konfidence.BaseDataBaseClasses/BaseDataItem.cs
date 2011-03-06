@@ -379,11 +379,14 @@ namespace Konfidence.BaseData
         {
             if (value > TimeSpan.MinValue)
             {
-                AddInParameter(fieldName, DbType.DateTime, value);
+                DateTime inbetween = DateTime.Now;
+                inbetween = new DateTime(inbetween.Year, inbetween.Day, inbetween.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
+
+                AddInParameter(fieldName, DbType.Time, inbetween);
             }
             else
             {
-                AddInParameter(fieldName, DbType.DateTime, null);
+                AddInParameter(fieldName, DbType.Time, null);
             }
         }
 
@@ -574,16 +577,6 @@ namespace Konfidence.BaseData
 			SetData();
 
             return SetParameterData();
-
-            //List<ParameterObject> parameterObjectList = new List<ParameterObject>();
-            //foreach (ParameterObject parameterObject in _ParameterObjectList)
-            //{
-            //    parameterObjectList.Add(parameterObject);
-            //}
-
-            //_ParameterObjectList.Clear();
-
-            //return parameterObjectList;
 		}
 
         internal List<ParameterObject> SetParameterData()
