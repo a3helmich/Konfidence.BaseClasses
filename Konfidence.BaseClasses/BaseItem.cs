@@ -54,6 +54,20 @@ namespace Konfidence.Base
             return false;
         }
 
+        public static bool IsGuid(string assignedGuid)
+        {
+            try
+            {
+                Guid test = new Guid(assignedGuid);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         // TODO : convert to errorlist 
         public bool SetErrorMessage(string errorMessage)
         {
