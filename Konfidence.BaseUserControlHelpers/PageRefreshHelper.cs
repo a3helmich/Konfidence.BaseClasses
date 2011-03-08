@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.UI;
 using Konfidence.Base;
 
-namespace Konfidence.UserControlHelpers
+namespace Konfidence.BaseUserControlHelpers
 {
 	public static class PageRefreshHelper
 	{

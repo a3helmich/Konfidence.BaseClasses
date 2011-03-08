@@ -2,7 +2,7 @@ using System.Collections;
 using System.Web;
 using Konfidence.Base;
 
-namespace Konfidence.UserControlHelpers
+namespace Konfidence.BaseUserControlHelpers
 {
 	public class SessionHelper : BaseItem
 	{

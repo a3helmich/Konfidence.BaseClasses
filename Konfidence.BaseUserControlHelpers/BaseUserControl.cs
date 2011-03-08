@@ -2,20 +2,30 @@ using System;
 using System.Web.UI;
 using Konfidence.Base;
 
-namespace Konfidence.UserControlHelpers
+namespace Konfidence.BaseUserControlHelpers
 {
-	public class BaseUserControl: UserControl
+	public abstract class BaseUserControl<T>: UserControl where T : BaseWebPresenter, new()
 	{
 		private SessionHelper _SessionHelper;
 		private bool _IsForeignKeyChanged = false;
 		private bool _IsPrimaryKeyChanged = false;
 		private SessionAccount _SessionAccount = null;
 
+        private T _Presenter = null;
+
+        protected T Presenter
+        {
+            get
+            {
+                return _Presenter;
+            }
+        }
+
 		public bool IsRefreshed
 		{
 			get
 			{
-				BasePage refreshPage = Page as BasePage;
+                BasePage<T> refreshPage = Page as BasePage<T>;
 
 				if (IsAssigned(refreshPage))
 				{
@@ -39,9 +49,28 @@ namespace Konfidence.UserControlHelpers
 			}
 		}
 
+
+        protected abstract void FormToPresenter();
+        protected abstract void PresenterToForm();
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsAssigned(_Presenter))
+            {
+                _Presenter = new T();
+            }
+
+            FormToPresenter();
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            PresenterToForm();
+        }
+
 		protected virtual void LogOff()
 		{
-			BasePage topPage = NamingContainer as BasePage;
+            BasePage<T> topPage = NamingContainer as BasePage<T>;
 
 			if (IsAssigned(topPage))
 			{
@@ -80,7 +109,7 @@ namespace Konfidence.UserControlHelpers
 
 		protected void RebuildParent()
 		{
-			BaseUserControl topControl = NamingContainer as BaseUserControl;
+            BaseUserControl<T> topControl = NamingContainer as BaseUserControl<T>;
 
 			if (IsAssigned(topControl))
 			{
@@ -178,7 +207,7 @@ namespace Konfidence.UserControlHelpers
 			Rebuild();
 		}
 
-		protected virtual void TopRebuild(BaseUserControl childControl)
+        protected virtual void TopRebuild(BaseUserControl<T> childControl)
 		{
 			RebuildParent();
 		}

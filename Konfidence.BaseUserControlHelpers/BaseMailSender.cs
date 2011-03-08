@@ -2,7 +2,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 
-namespace Konfidence.UserControlHelpers
+namespace Konfidence.BaseUserControlHelpers
 {
 	public class BaseMailSender
 	{

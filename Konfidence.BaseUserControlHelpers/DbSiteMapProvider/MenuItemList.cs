@@ -3,7 +3,7 @@ using System.Data.Common;
 using Konfidence.BaseData;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Konfidence.UserControlHelpers.DbSiteMapProvider
+namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
 	public class MenuItemList : BaseDataItemList<MenuItem>
 	{

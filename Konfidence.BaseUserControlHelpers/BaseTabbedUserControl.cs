@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 
-namespace Konfidence.UserControlHelpers
+namespace Konfidence.BaseUserControlHelpers
 {
-	public class BaseTabbedUserControl: BaseUserControl
+	public class BaseTabbedUserControl: BaseUserControl<BaseWebPresenter>
 	{
 		private TabEntryList _TabEntryList = new TabEntryList();
 
@@ -11,7 +11,7 @@ namespace Konfidence.UserControlHelpers
 		{
 			public string TabId = string.Empty;				
 			public Button TabButton;									// default value null
-			public BaseUserControl TabbedUserControl; // default value null
+            public BaseUserControl<BaseWebPresenter> TabbedUserControl; // default value null
 		}
 
 		internal class TabEntryList: List<TabEntry>
@@ -33,7 +33,7 @@ namespace Konfidence.UserControlHelpers
 				}
 			}
 			
-			public string RegisterTab(Button tabButton, BaseUserControl tabbedUserControl)
+			public string RegisterTab(Button tabButton, BaseUserControl<BaseWebPresenter> tabbedUserControl)
 			{
 				TabEntry tabEntry	= new TabEntry();
 
@@ -54,7 +54,7 @@ namespace Konfidence.UserControlHelpers
 			AfterShowTab();
 		}
 
-		protected string RegisterTab(Button tabButton, BaseUserControl tabbedUserControl)
+        protected string RegisterTab(Button tabButton, BaseUserControl<BaseWebPresenter> tabbedUserControl)
 		{
 			return _TabEntryList.RegisterTab(tabButton, tabbedUserControl);
 		}
@@ -63,5 +63,15 @@ namespace Konfidence.UserControlHelpers
 		{
 			// NOP
 		}
-	}
+
+        protected override void FormToPresenter()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void PresenterToForm()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

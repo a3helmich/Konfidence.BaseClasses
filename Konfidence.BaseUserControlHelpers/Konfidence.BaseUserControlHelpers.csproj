@@ -100,6 +100,7 @@
     <Compile Include="DbSiteMapProvider\MenuItem.cs" />
     <Compile Include="DbSiteMapProvider\MenuItemList.cs" />
     <Compile Include="DbSiteMapProvider\MenuItemTree.cs" />
+    <Compile Include="PageWebPresenter.cs" />
     <Compile Include="PageRefreshHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionHelper.cs" />

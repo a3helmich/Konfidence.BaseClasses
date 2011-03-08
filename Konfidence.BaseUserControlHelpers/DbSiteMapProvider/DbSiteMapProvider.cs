@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.Web;
 using Konfidence.Base;
 
-namespace Konfidence.UserControlHelpers.DbSiteMapProvider
+namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
     public class DbSiteMapProviderLocal : DbSiteMapProvider
     {

@@ -4,15 +4,25 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using Konfidence.Base;
 
-namespace Konfidence.UserControlHelpers
+namespace Konfidence.BaseUserControlHelpers
 {
-	public class BasePage: Page
+	public abstract class BasePage<T>: Page where T: BaseWebPresenter, new()
 	{
 		private bool _IsExpired;  // false by default
 		private bool _IsRefreshed;  // false by default
 		private string _PageTitle = string.Empty;
 
+        private T _Presenter = null;
+
 		#region properties
+        protected T Presenter
+        {
+            get
+            {
+                return _Presenter;
+            }
+        }
+
 		public bool IsRefreshed
 		{
 			get
@@ -67,6 +77,24 @@ namespace Konfidence.UserControlHelpers
 		}
 
 		#endregion
+
+        protected abstract void FormToPresenter();
+        protected abstract void PresenterToForm();
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsAssigned(_Presenter))
+            {
+                _Presenter = new T();
+            }
+
+            FormToPresenter();
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            PresenterToForm();
+        }
 
 		protected static bool IsAssigned(object assignedObject)
 		{

@@ -1,6 +1,6 @@
 using Konfidence.Base;
 
-namespace Konfidence.UserControlHelpers
+namespace Konfidence.BaseUserControlHelpers
 {
 	public class SessionParameterObject: BaseItem
 	{

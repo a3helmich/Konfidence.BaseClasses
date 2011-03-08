@@ -1,4 +1,4 @@
-namespace Konfidence.UserControlHelpers.DbSiteMapProvider
+namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
 	public class MenuItemTree: MenuItem 
 	{

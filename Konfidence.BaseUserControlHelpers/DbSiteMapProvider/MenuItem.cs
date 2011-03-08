@@ -1,6 +1,6 @@
 using Konfidence.BaseData;
 
-namespace Konfidence.UserControlHelpers.DbSiteMapProvider
+namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
 	public class MenuItem : BaseDataItem
 	{
