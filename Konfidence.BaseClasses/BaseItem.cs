@@ -102,5 +102,28 @@ namespace Konfidence.Base
 
             return toString;
         }
-	}
+
+        public decimal ToDecimal(string decimalString,  decimal defaultValue)
+        {
+            decimal returnValue = defaultValue;
+
+            if (decimal.TryParse(decimalString, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+            {
+                return returnValue;
+            }
+            else
+            {
+                decimalString = decimalString.Replace(',', 'k');
+                decimalString = decimalString.Replace('.', ',');
+                decimalString = decimalString.Replace('k', '.');
+
+                if (decimal.TryParse(decimalString, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+                {
+                    return returnValue;
+                }
+            }
+
+            return returnValue; // default teruggeven
+        }
+    }
 }
