@@ -107,6 +107,11 @@ namespace Konfidence.Base
         {
             decimal returnValue = defaultValue;
 
+            if (decimalString.IndexOf('.') < 0 && decimalString.IndexOf(',') >= 0)
+            {
+                decimalString = decimalString.Replace(',', '.');
+            }
+
             if (decimal.TryParse(decimalString, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.InvariantCulture, out returnValue))
             {
                 return returnValue;
