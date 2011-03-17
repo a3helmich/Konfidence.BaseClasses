@@ -15,9 +15,11 @@ namespace Konfidence.DesignPatterns.Singleton
         static private bool SingletonInterfaceFilter(Type typeObject, Object criteriaObject)
         {
             if (typeObject.ToString() == criteriaObject.ToString())
+            {
                 return true;
-            else
-                return false;
+            }
+
+            return false;
         }
 
         // WORMGAATJES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
