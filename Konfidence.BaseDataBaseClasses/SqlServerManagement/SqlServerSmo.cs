@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.SqlServer.Management.Smo;
+using Microsoft.SqlServer.Server;
 using System.Threading;
 using Konfidence.Base;
 using Microsoft.SqlServer.Management.Common;
@@ -57,6 +58,8 @@ namespace Konfidence.BaseData.SqlServerManagement
                 if (!IsEmpty(_UserName) && !IsEmpty(_Password))
                 {
                     ServerConnection serverConnection = new ServerConnection(_DatabaseServerName, _UserName, _Password);
+
+                    Microsoft.SqlServer.Management.Common.ServerVersion test;
 
                     serverConnection.LoginSecure = false;
 
