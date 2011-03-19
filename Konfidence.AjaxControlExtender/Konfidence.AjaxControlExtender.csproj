@@ -69,7 +69,7 @@
     <EmbeddedResource Include="FocusBehavior.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AjaxExtender\" />
+    <Folder Include="JavaScript\" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\Konfidence\KonfidenceWebSite\CustomDictionary.xml">
