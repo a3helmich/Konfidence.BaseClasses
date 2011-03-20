@@ -11,9 +11,9 @@ using System.Web.UI;
 
 [assembly: AssemblyTitle("JavaScriptExtender")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Konfidence")]
 [assembly: AssemblyProduct("JavaScriptExtender")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyCopyright("Copyright © Konfidence 2010")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: ComVisible(false)]
