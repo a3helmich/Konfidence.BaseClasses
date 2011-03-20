@@ -64,7 +64,7 @@ Ace.GridRowHyperlinkExtender.prototype.get_IdList = function ()
     return this.IdList;
 }
 
-Ace.GridRowHighLightExtender.prototype.set_IdList = function (value)
+Ace.GridRowHyperlinkExtender.prototype.set_IdList = function (value)
 {
     if (this.IdList != value)
     {
@@ -73,6 +73,6 @@ Ace.GridRowHighLightExtender.prototype.set_IdList = function (value)
     }
 }
 
-JavaScriptControls.GridRowHyperlinkExtender.registerClass('Ace.GridRowHyperlinkExtender', Sys.UI.Control);
+Ace.GridRowHyperlinkExtender.registerClass('Ace.GridRowHyperlinkExtender', Sys.UI.Control);
 
 Sys.Application.notifyScriptLoaded();

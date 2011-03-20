@@ -37,4 +37,5 @@ using System.Web.UI;
 [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: WebResource("Konfidence.AjaxControlExtender.JavaScript.FocusBehavior.js", "application/x-javascript")] // "text/javascript")]
+[assembly: WebResource("Konfidence.AjaxControlExtender.JavaScript.FocusBehavior.js", "application/x-javascript")]
+[assembly: WebResource("Konfidence.AjaxControlExtender.JavaScript.GridRowHyperlinkExtender.js", "application/x-javascript")]
