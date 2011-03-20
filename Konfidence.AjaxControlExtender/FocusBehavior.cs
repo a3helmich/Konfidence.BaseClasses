@@ -58,7 +58,7 @@ namespace Konfidence.AjaxControlExtender
         protected override IEnumerable<ScriptReference> GetScriptReferences()
         {
             // the control searches for the .js file in a resource file, the resource file is in this case the controls own .dll file 
-            ScriptReference reference = new ScriptReference("Konfidence.AjaxControlExtender.FocusBehavior.js", "Konfidence.AjaxControlExtender");
+            ScriptReference reference = new ScriptReference("Konfidence.AjaxControlExtender.JavaScript.FocusBehavior.js", "Konfidence.AjaxControlExtender");
             List<ScriptReference> scriptReferenceList = new List<ScriptReference>();
 
             scriptReferenceList.Add(reference);

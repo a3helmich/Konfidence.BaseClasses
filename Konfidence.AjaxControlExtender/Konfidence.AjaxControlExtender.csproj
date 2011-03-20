@@ -66,11 +66,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FocusBehavior.js" />
+    <EmbeddedResource Include="JavaScript\FocusBehavior.js" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="JavaScript\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\Konfidence\KonfidenceWebSite\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>

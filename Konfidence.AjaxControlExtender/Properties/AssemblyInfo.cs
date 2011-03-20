@@ -10,9 +10,9 @@ using System.Web.UI;
 [assembly: AssemblyTitle("Konfidence.AjaxControlExtender")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Konfidence")]
 [assembly: AssemblyProduct("Konfidence.AjaxControlExtender")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
+[assembly: AssemblyCopyright("Copyright © 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -36,4 +36,5 @@ using System.Web.UI;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: WebResource("Konfidence.AjaxControlExtender.FocusBehavior.js", "application/x-javascript")] // "text/javascript")]
+
+[assembly: WebResource("Konfidence.AjaxControlExtender.JavaScript.FocusBehavior.js", "application/x-javascript")] // "text/javascript")]

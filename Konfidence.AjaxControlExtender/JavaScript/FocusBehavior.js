@@ -1,5 +1,4 @@
-﻿
-Type.registerNamespace('AjaxExtender');
+﻿Type.registerNamespace('AjaxExtender');
 
 // constructor
 AjaxExtender.FocusBehavior = function (element) 
