@@ -1,31 +1,31 @@
-﻿Type.registerNamespace('AjaxExtender');
+﻿Type.registerNamespace('Ace');
 
 // constructor
-AjaxExtender.FocusBehavior = function (element) 
+Ace.FocusBehavior = function (element) 
 {
-    AjaxExtender.FocusBehavior.initializeBase(this, [element]);
+    Ace.FocusBehavior.initializeBase(this, [element]);
 
     this.HighlightCssClass = null;
     this.NormalCssClass = null;
 }
 
-AjaxExtender.FocusBehavior.prototype.initialize = function() 
+Ace.FocusBehavior.prototype.initialize = function () 
 {
-    AjaxExtender.FocusBehavior.callBaseMethod(this, 'initialize');
+    Ace.FocusBehavior.callBaseMethod(this, 'initialize');
 
     $addHandlers(this.get_element(), { 'mouseover': this.onFocus, 'mouseout': this.onBlur }, this);
 
     this.get_element().className = this.NormalCssClass;
 }
 
-AjaxExtender.FocusBehavior.prototype.dispose = function() 
+Ace.FocusBehavior.prototype.dispose = function () 
 {
     $clearHandlers(this.get_element());
 
-    AjaxExtender.FocusBehavior.callBaseMethod(this, 'dispose');
+    Ace.FocusBehavior.callBaseMethod(this, 'dispose');
 }
 
-AjaxExtender.FocusBehavior.prototype.onFocus = function()
+Ace.FocusBehavior.prototype.onFocus = function ()
 {
     if (this.get_element() && !this.get_element().disabled) 
     {
@@ -33,7 +33,7 @@ AjaxExtender.FocusBehavior.prototype.onFocus = function()
     }
 }
 
-AjaxExtender.FocusBehavior.prototype.onBlur = function() 
+Ace.FocusBehavior.prototype.onBlur = function () 
 {
     if (this.get_element() && !this.get_element().disabled)
     {
@@ -41,12 +41,12 @@ AjaxExtender.FocusBehavior.prototype.onBlur = function()
     }
 }
 
-AjaxExtender.FocusBehavior.prototype.get_HighLightCssClass = function() 
+Ace.FocusBehavior.prototype.get_HighLightCssClass = function () 
 {
     return this.HighlightCssClass;
 }
 
-AjaxExtender.FocusBehavior.prototype.set_HighLightCssClass = function(value) 
+Ace.FocusBehavior.prototype.set_HighLightCssClass = function (value) 
 {
     if (this.HighlightCssClass != value) 
     {
@@ -55,12 +55,12 @@ AjaxExtender.FocusBehavior.prototype.set_HighLightCssClass = function(value)
     }
 }
 
-AjaxExtender.FocusBehavior.prototype.get_NormalCssClass = function ()
+Ace.FocusBehavior.prototype.get_NormalCssClass = function ()
  {
     return this.NormalCssClass;
 }
 
-AjaxExtender.FocusBehavior.prototype.set_NormalCssClass = function (value) 
+Ace.FocusBehavior.prototype.set_NormalCssClass = function (value) 
 {
     if (this.NormalCssClass != value) 
     {
@@ -69,6 +69,6 @@ AjaxExtender.FocusBehavior.prototype.set_NormalCssClass = function (value)
     }
 }
 
-AjaxExtender.FocusBehavior.registerClass('AjaxExtender.FocusBehavior', Sys.UI.Behavior);
+Ace.FocusBehavior.registerClass('Ace.FocusBehavior', Sys.UI.Behavior);
 
 Sys.Application.notifyScriptLoaded();

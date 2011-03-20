@@ -63,12 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FocusBehavior.cs" />
+    <Compile Include="GridRowHyperlinkExtender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JavaScript\FocusBehavior.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="JavaScript\GridRowHyperlinkExtender.js" />
+  </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\..\Konfidence\KonfidenceWebSite\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>

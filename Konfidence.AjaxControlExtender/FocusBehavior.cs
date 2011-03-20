@@ -42,7 +42,7 @@ namespace Konfidence.AjaxControlExtender
 
             if (targetControl != null)
             {
-                descriptor = new ScriptBehaviorDescriptor("AjaxExtender.FocusBehavior", targetControl.ClientID);
+                descriptor = new ScriptBehaviorDescriptor("Ace.FocusBehavior", targetControl.ClientID);
 
                 // properties op de js-class koppelen aan de properties op de cs-class
                 descriptor.AddProperty("HighlightCssClass", this.HighlightCssClass);
