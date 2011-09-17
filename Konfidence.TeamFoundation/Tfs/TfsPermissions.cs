@@ -34,6 +34,8 @@ namespace Konfidence.TeamFoundation
             if (!IsAssigned(_Tfs))
             {
                 _Tfs = new TeamFoundationServer(_TfsServer, new UICredentialsProvider());
+                //_Tfs = new TfsTeamProjectCollection(new Uri(_TfsServer), new UICredentialsProvider());
+
 
                 _Tfs.EnsureAuthenticated();
 

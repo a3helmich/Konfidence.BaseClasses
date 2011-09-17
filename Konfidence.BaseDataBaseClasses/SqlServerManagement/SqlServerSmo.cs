@@ -59,8 +59,6 @@ namespace Konfidence.BaseData.SqlServerManagement
                 {
                     ServerConnection serverConnection = new ServerConnection(_DatabaseServerName, _UserName, _Password);
 
-                    Microsoft.SqlServer.Management.Common.ServerVersion test;
-
                     serverConnection.LoginSecure = false;
 
                     Server server = new Server(serverConnection);

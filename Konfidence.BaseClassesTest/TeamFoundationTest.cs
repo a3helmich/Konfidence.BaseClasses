@@ -3,8 +3,8 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Konfidence.TeamFoundation;
 using System.IO;
+using Konfidence.TeamFoundation;
 
 namespace Konfidence.TestBaseClasses
 {
@@ -12,9 +12,9 @@ namespace Konfidence.TestBaseClasses
     /// Summary description for UnitTest1
     /// </summary>
     [TestClass]
-    public class TeamFoundation
+    public class TeamFoundationTest
     {
-        public TeamFoundation()
+        public TeamFoundationTest()
         {
             //
             // TODO: Add constructor logic here
@@ -64,7 +64,7 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void TestGetGlobalPermissions()
         {
-            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl");
+            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl/tfs");
 
             List<string> globalPermissions = tfsPermissions.GetGlobalPermissions();
         }
