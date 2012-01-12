@@ -18,7 +18,7 @@ namespace Konfidence.TestBaseClasses
         {
             TableDataItemList tableList = null;
 
-                tableList = new TableDataItemList();
+            tableList = new TableDataItemList("TestDatabase");
         }
     }
 }

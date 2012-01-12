@@ -54,8 +54,10 @@ namespace Konfidence.BaseData.Schema
         private string _CreateStoredProcedureCommand = "CREATE PROCEDURE [dbo].[PrimaryKey_Get] @tableName varchar(50) AS BEGIN SET NOCOUNT ON;  SELECT 1 as PrimaryKeyId, * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE (constraint_type = 'PRIMARY KEY') AND (table_name = @tableName) END";
         private string _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[PrimaryKey_Get]";
 
-        public TableDataItemList()
+        public TableDataItemList(string dataBaseName)
         {
+            DataBaseName = dataBaseName;
+
             CreateSchemaCommand();
 
             BuildItemList(_DataTableList);
