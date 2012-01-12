@@ -3,13 +3,4 @@
   <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
     <RunConfiguration id="c768d727-3034-4b8e-8df6-0699abfe70a8" name="Local Test Run" storage="localtestrun.testrunconfig" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </TestList>
-  <TestList name="test" id="d7b2c83c-954c-4c19-96c7-40d7b8497af5" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
-    <TestLinks>
-      <TestLink id="cfd98894-f141-fb93-6b04-5b5c643bd34e" name="TestGetGlobalPermissions" storage="konfidence.baseclassestest\bin\release\konfidence.testbaseclasses.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-      <TestLink id="5caed893-c878-d321-40d0-f29543a1fbf5" name="TestCheckOut" storage="konfidence.baseclassestest\bin\release\konfidence.testbaseclasses.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-      <TestLink id="7a9127bb-987a-df3a-2d9c-2a0f34864fa9" name="TestGetItemPermissions" storage="konfidence.baseclassestest\bin\release\konfidence.testbaseclasses.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-      <TestLink id="82914a6c-d1de-adad-ad9c-f701fc22b62a" name="TestReferenceRebaser" storage="konfidence.baseclassestest\bin\release\konfidence.testbaseclasses.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-      <TestLink id="f7526b7f-767c-3eb5-4914-c6cc598ee415" name="SqlServerExists" storage="konfidence.baseclassestest\bin\release\konfidence.testbaseclasses.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    </TestLinks>
-  </TestList>
 </TestLists>
