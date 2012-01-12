@@ -15,7 +15,7 @@ namespace Konfidence.ReferenceReBaserApp
             try
             {
                 ReferenceReBaser reBaser = new ReferenceReBaser();
-
+                 
                 reBaser.ReBaseProjects(solutionFolder);
 
                 ChangesForm changesForm = new ChangesForm();
