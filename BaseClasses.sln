@@ -46,7 +46,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProjectValidator", "WebProjectValidator\WebProjectValidator.csproj", "{298BC418-D248-4185-9011-D9A7593E67CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basics", "Konfidence.TeamFoundation.Sample\VersionControl\Basics.csproj", "{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundation.VersionControlSample", "Konfidence.TeamFoundation.VersionControlSample\Konfidence.TeamFoundation.VersionControlSample.csproj", "{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -96,9 +96,9 @@ Global
 		SccProjectUniqueName14 = WebProjectValidator\\WebProjectValidator.csproj
 		SccProjectName14 = WebProjectValidator
 		SccLocalPath14 = WebProjectValidator
-		SccProjectUniqueName15 = Konfidence.TeamFoundation.Sample\\VersionControl\\Basics.csproj
-		SccProjectName15 = Konfidence.TeamFoundation.Sample/VersionControl
-		SccLocalPath15 = Konfidence.TeamFoundation.Sample\\VersionControl
+		SccProjectUniqueName15 = Konfidence.TeamFoundation.VersionControlSample\\Konfidence.TeamFoundation.VersionControlSample.csproj
+		SccProjectName15 = Konfidence.TeamFoundation.VersionControlSample
+		SccLocalPath15 = Konfidence.TeamFoundation.VersionControlSample
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
