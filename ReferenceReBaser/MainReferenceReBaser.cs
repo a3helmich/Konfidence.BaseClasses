@@ -15,7 +15,7 @@ namespace Konfidence.ReferenceReBaserApp
             try
             {
                 ReferenceReBaser reBaser = new ReferenceReBaser();
-                 
+
                 reBaser.ReBaseProjects(solutionFolder);
 
                 ChangesForm changesForm = new ChangesForm();
@@ -25,6 +25,10 @@ namespace Konfidence.ReferenceReBaserApp
             catch (TfsServerException tfsEx)
             {
                 MessageBox.Show(tfsEx.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

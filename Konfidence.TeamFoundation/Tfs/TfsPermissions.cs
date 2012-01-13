@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.VersionControl.Client;
+using Microsoft.TeamFoundation.Common;
 using System.Xml;
 using Konfidence.TeamFoundation.Project;
 using Konfidence.Base;
@@ -29,11 +30,23 @@ namespace Konfidence.TeamFoundation
             _TfsServer = tfsServer;
         }
 
+
+        /// <summary>
+        /// http://msdn.microsoft.com/en-gb/library/bb286958.aspx 
+        /// keywords:  Connect to Team Foundation Server from a Console Application
+        /// http://archive.msdn.microsoft.com/TfsSdk/Release/ProjectReleases.aspx?ReleaseId=4188
+        /// keywords: Team Foundation Server 2010 SDK 
+        /// </summary>
         private void TfsInitialize()
         {
             if (!IsAssigned(_Tfs))
             {
-                _Tfs = new TeamFoundationServer(_TfsServer, new UICredentialsProvider());
+                //_Tfs = new TeamFoundationServer(_TfsServer, new UICredentialsProvider());
+
+                TfsConfigurationServer configurationServer = TfsConfigurationServerFactory.GetConfigurationServer(new Uri(_TfsServer));
+
+                UICredentialsProvider credentials = new UICredentialsProvider();
+                _Tfs = new TeamFoundationServer(new Uri(_TfsServer), credentials);
                 //_Tfs = new TfsTeamProjectCollection(new Uri(_TfsServer), new UICredentialsProvider());
 
 
