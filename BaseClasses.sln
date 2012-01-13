@@ -46,9 +46,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProjectValidator", "WebProjectValidator\WebProjectValidator.csproj", "{298BC418-D248-4185-9011-D9A7593E67CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basics", "Konfidence.TeamFoundation.Sample\VersionControl\Basics.csproj", "{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
+		SccNumberOfProjects = 16
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -94,6 +96,9 @@ Global
 		SccProjectUniqueName14 = WebProjectValidator\\WebProjectValidator.csproj
 		SccProjectName14 = WebProjectValidator
 		SccLocalPath14 = WebProjectValidator
+		SccProjectUniqueName15 = Konfidence.TeamFoundation.Sample\\VersionControl\\Basics.csproj
+		SccProjectName15 = Konfidence.TeamFoundation.Sample/VersionControl
+		SccLocalPath15 = Konfidence.TeamFoundation.Sample\\VersionControl
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -247,6 +252,16 @@ Global
 		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|Mixed Platforms.Build.0 = Release|x86
 		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|x86.ActiveCfg = Release|x86
 		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|x86.Build.0 = Release|x86
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{832B1FD7-72E5-4F81-BDCA-BEC1ED9EF212}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
