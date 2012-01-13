@@ -50,7 +50,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundation.V
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
+		SccNumberOfProjects = 16
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -96,6 +96,9 @@ Global
 		SccProjectUniqueName14 = WebProjectValidator\\WebProjectValidator.csproj
 		SccProjectName14 = WebProjectValidator
 		SccLocalPath14 = WebProjectValidator
+		SccProjectUniqueName15 = Konfidence.TeamFoundation.VersionControlSample\\Konfidence.TeamFoundation.VersionControlSample.csproj
+		SccProjectName15 = Konfidence.TeamFoundation.VersionControlSample
+		SccLocalPath15 = Konfidence.TeamFoundation.VersionControlSample
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
