@@ -45,10 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit">
-      <HintPath>..\..\..\References\AjaxControlToolkit.dll</HintPath>
+      <HintPath>c:\projects\References\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Konfidence.BaseClasses">
-      <HintPath>..\..\..\References\Konfidence.BaseClasses.dll</HintPath>
+      <HintPath>c:\projects\References\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
