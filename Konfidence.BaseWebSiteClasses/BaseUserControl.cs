@@ -54,7 +54,7 @@ namespace Konfidence.BaseWebsiteClasses
         {
             base.OnInit(e);
 
-            _BasePageHelper = new BasePageHelper(Page);
+            _BasePageHelper = new BasePageHelper(Page.Request.Url.ToString());
 
             After_OnInit();
         }

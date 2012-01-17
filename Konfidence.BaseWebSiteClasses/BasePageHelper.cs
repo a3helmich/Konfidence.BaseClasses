@@ -9,27 +9,25 @@ namespace Konfidence.BaseWebsiteClasses
 {
     internal class BasePageHelper: BaseItem
     {
-        private Page _CurrentPage;
+        private string[] _UrlParts = null;
 
-        private const string CURRENT_DOMAIN_EXTENSION = "CurrentDomainExtension";
-        private const string CURRENT_LANGUAGE = "CurrentLanguage";
-        private const string CURRENT_DNS_NAME = "CurrentSite";
-        private const string CURRENT_PAGE_PATH = "CurrentPagePath";
-        private const string CURRENT_PAGE_NAME = "CurrentPageName";
+        private string _CurrentDomainExtension = string.Empty;
+        private string _CurrentLanguage = string.Empty;
+        private string _CurrentDnsName = string.Empty;
+        private string _CurrentPagePath = string.Empty;
+        private string _CurrentPageName = string.Empty;
 
         #region readonly Session properties
         public string CurrentDomainExtension
         {
             get
             {
-                string newCurrentDomainExtension = string.Empty;
-
-                if (!IsEmpty(_CurrentPage.Session[CURRENT_DOMAIN_EXTENSION] as string))
+                if (IsEmpty(_CurrentDomainExtension))
                 {
-                    newCurrentDomainExtension = _CurrentPage.Session[CURRENT_DOMAIN_EXTENSION] as string;
+                    _CurrentDomainExtension = GetCurrentDomainExtension(_UrlParts);
                 }
 
-                return newCurrentDomainExtension;
+                return _CurrentDomainExtension;
             }
         }
 
@@ -37,14 +35,12 @@ namespace Konfidence.BaseWebsiteClasses
         {
             get
             {
-                string newCurrentLanguage = string.Empty;
-
-                if (!IsEmpty(_CurrentPage.Session[CURRENT_LANGUAGE] as string))
+                if (IsEmpty(_CurrentLanguage))
                 {
-                    newCurrentLanguage = _CurrentPage.Session[CURRENT_LANGUAGE] as string;
+                    _CurrentLanguage = GetCurrentLanguage(_UrlParts);
                 }
 
-                return newCurrentLanguage;
+                return _CurrentLanguage;
             }
         }
 
@@ -52,14 +48,12 @@ namespace Konfidence.BaseWebsiteClasses
         {
             get
             {
-                string newCurrentDnsName = string.Empty;
-
-                if (!IsEmpty(_CurrentPage.Session[CURRENT_DNS_NAME] as string))
+                if (IsEmpty(_CurrentDnsName))
                 {
-                    newCurrentDnsName = _CurrentPage.Session[CURRENT_DNS_NAME] as string;
+                    _CurrentDnsName = GetCurrentDnsName(_UrlParts);
                 }
 
-                return newCurrentDnsName;
+                return _CurrentDnsName;
             }
         }
 
@@ -67,14 +61,12 @@ namespace Konfidence.BaseWebsiteClasses
         {
             get
             {
-                string newCurrentPagePath = string.Empty;
-
-                if (!IsEmpty(_CurrentPage.Session[CURRENT_PAGE_PATH] as string))
+                if (IsEmpty(_CurrentPagePath))
                 {
-                    newCurrentPagePath = _CurrentPage.Session[CURRENT_PAGE_PATH] as string;
+                    _CurrentPagePath = GetCurrentPagePath(_UrlParts);
                 }
 
-                return newCurrentPagePath;
+                return _CurrentPagePath;
             }
         }
 
@@ -82,59 +74,22 @@ namespace Konfidence.BaseWebsiteClasses
         {
             get
             {
-                string newCurrentPageName = string.Empty;
-
-                if (!IsEmpty(_CurrentPage.Session[CURRENT_PAGE_NAME] as string))
+                if (IsEmpty(_CurrentPageName))
                 {
-                    newCurrentPageName = _CurrentPage.Session[CURRENT_PAGE_NAME] as string;
+                    _CurrentPageName = GetCurrentPageName(_UrlParts);
                 }
 
-                return newCurrentPageName;
+                return _CurrentPageName;
             }
         }
         #endregion readonly Session properties
 
-        public BasePageHelper(MasterPage masterPage) // alleen van de sessionvariabelen gebruik maken 
+        public BasePageHelper(string requestUrl)
         {
-            _CurrentPage = masterPage.Page;
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public BasePageHelper(UserControl userControl) // alleen van de sessionvariabelen gebruik maken 
-        {
-            _CurrentPage = userControl.Page;
-        }
-
-        public BasePageHelper(Page currentPage) // zet ook alle sessionvariabelen
-        {
-            _CurrentPage = currentPage;
-
-            if (!_CurrentPage.IsPostBack)
+            if (!IsEmpty(requestUrl))
             {
-                SetSessionProperties();
+                _UrlParts = requestUrl.ToLowerInvariant().Split('/');
             }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        private string[] urlParts
-        {
-            get
-            {
-                return _CurrentPage.Request.Url.ToString().ToLowerInvariant().Split('/');
-            }
-        }
-
-        private void SetSessionProperties()
-        {
-            _CurrentPage.Session[CURRENT_LANGUAGE] = GetCurrentLanguage(urlParts);
-
-            _CurrentPage.Session[CURRENT_DNS_NAME] = GetCurrentSite(urlParts);
-
-            _CurrentPage.Session[CURRENT_PAGE_PATH] = GetCurrentPagePath(urlParts);
-
-            _CurrentPage.Session[CURRENT_PAGE_NAME] = GetCurrentPageName(urlParts);
-
-            _CurrentPage.Session[CURRENT_DOMAIN_EXTENSION] = GetCurrentDomainExtension(urlParts);
         }
 
         private static string GetCurrentDomainExtension(string[] urlParts)
@@ -178,7 +133,7 @@ namespace Konfidence.BaseWebsiteClasses
             return currentPagePath;
         }
 
-        private static object GetCurrentPageName(string[] urlParts)
+        private static string GetCurrentPageName(string[] urlParts)
         {
             string currentPageName = string.Empty;
 
@@ -194,7 +149,7 @@ namespace Konfidence.BaseWebsiteClasses
             return currentPageName;
         }
 
-        private static string GetCurrentSite(string[] urlParts)
+        private static string GetCurrentDnsName(string[] urlParts)
         {
             string currentSite = "www.konfidence.nl";
 

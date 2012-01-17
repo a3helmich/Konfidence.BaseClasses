@@ -39,7 +39,7 @@ namespace Konfidence.BaseWebsiteClasses
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _BasePageHelper = new BasePageHelper(this);
+            _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
 
             AfterPage_Load();
         }
