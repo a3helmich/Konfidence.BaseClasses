@@ -9,7 +9,7 @@ namespace Konfidence.BaseWebsiteClasses
 {
     internal class BasePageHelper: BaseItem
     {
-        private string[] _UrlParts = null;
+        private string[] _UrlParts = new string[0];
 
         private string _CurrentDomainExtension = string.Empty;
         private string _CurrentLanguage = string.Empty;
