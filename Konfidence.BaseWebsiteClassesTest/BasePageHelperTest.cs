@@ -59,75 +59,6 @@ namespace Konfidence.BaseWebsiteClassesTest
         //
         #endregion
 
-        /// <summary>
-        ///A test for CurrentPagePath
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
-        public void CurrentPagePathTest()
-        {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            BasePageHelper_Accessor target = new BasePageHelper_Accessor(param0); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.CurrentPagePath;
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for CurrentPageName
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
-        public void CurrentPageNameTest()
-        {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            BasePageHelper_Accessor target = new BasePageHelper_Accessor(param0); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.CurrentPageName;
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for CurrentLanguage
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
-        public void CurrentLanguageTest()
-        {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            BasePageHelper_Accessor target = new BasePageHelper_Accessor(param0); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.CurrentLanguage;
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for CurrentDomainExtension
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
-        public void CurrentDomainExtensionTest()
-        {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            BasePageHelper_Accessor target = new BasePageHelper_Accessor(param0); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.CurrentDomainExtension;
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
-
-        /// <summary>
-        ///A test for CurrentDnsName
-        ///</summary>
-        [TestMethod()]
-        [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
-        public void CurrentDnsNameTest()
-        {
-            PrivateObject param0 = null; // TODO: Initialize to an appropriate value
-            BasePageHelper_Accessor target = new BasePageHelper_Accessor(param0); // TODO: Initialize to an appropriate value
-            string actual;
-            actual = target.CurrentDnsName;
-            Assert.Inconclusive("Verify the correctness of this test method.");
-        }
 
         /// <summary>
         ///A test for GetCurrentPagePath
@@ -136,11 +67,16 @@ namespace Konfidence.BaseWebsiteClassesTest
         [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
         public void GetCurrentPagePathTest()
         {
+            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+
             string[] urlParts = null; // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
             string actual;
             actual = BasePageHelper_Accessor.GetCurrentPagePath(urlParts);
             Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("Verify the correctness of this test method.");
+
+            actual = BasePageHelper_Accessor.CurrentPagePath;
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
@@ -151,11 +87,16 @@ namespace Konfidence.BaseWebsiteClassesTest
         [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
         public void GetCurrentPageNameTest()
         {
+            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+
             string[] urlParts = null; // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
             string actual;
             actual = BasePageHelper_Accessor.GetCurrentPageName(urlParts);
             Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("Verify the correctness of this test method.");
+
+            actual = BasePageHelper_Accessor.CurrentPageName;
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
@@ -166,11 +107,16 @@ namespace Konfidence.BaseWebsiteClassesTest
         [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
         public void GetCurrentLanguageTest()
         {
+            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+
             string[] urlParts = null; // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
             string actual;
             actual = BasePageHelper_Accessor.GetCurrentLanguage(urlParts);
             Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("Verify the correctness of this test method.");
+
+            actual = BasePageHelper_Accessor.CurrentLanguage;
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
@@ -181,11 +127,16 @@ namespace Konfidence.BaseWebsiteClassesTest
         [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
         public void GetCurrentDomainExtensionTest()
         {
+            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+
             string[] urlParts = null; // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
             string actual;
             actual = BasePageHelper_Accessor.GetCurrentDomainExtension(urlParts);
             Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("Verify the correctness of this test method.");
+
+            actual = target.CurrentDomainExtension;
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
@@ -196,11 +147,19 @@ namespace Konfidence.BaseWebsiteClassesTest
         [DeploymentItem("Konfidence.BaseWebsiteClasses.dll")]
         public void GetCurrentDnsNameTest()
         {
+            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+
             string[] urlParts = null; // TODO: Initialize to an appropriate value
             string expected = string.Empty; // TODO: Initialize to an appropriate value
+            BasePageHelper_Accessor target = new BasePageHelper_Accessor(urlParts); // TODO: Initialize to an appropriate value
+
             string actual;
             actual = BasePageHelper_Accessor.GetCurrentDnsName(urlParts);
             Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("Verify the correctness of this test method.");
+
+
+            actual = target.CurrentDnsName;
             Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
