@@ -91,6 +91,10 @@
       <Project>{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}</Project>
       <Name>Konfidence.BaseDataBaseClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseWebSiteClasses\Konfidence.BaseWebsiteClasses.csproj">
+      <Project>{1AB7FD15-F3AE-4522-BFAD-12034B574A9E}</Project>
+      <Name>Konfidence.BaseWebsiteClasses</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj">
       <Project>{99B3193A-0739-4586-A379-138176C425A7}</Project>
       <Name>Konfidence.TeamFoundation</Name>
