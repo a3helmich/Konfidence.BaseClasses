@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace Konfidence.BaseWebsiteClasses
 {
-    internal class BasePageHelper: BaseItem
+    public class BasePageHelper: BaseItem
     {
         private string[] _UrlParts = new string[0];
 
@@ -17,14 +17,15 @@ namespace Konfidence.BaseWebsiteClasses
         private string _CurrentPagePath = string.Empty;
         private string _CurrentPageName = string.Empty;
 
-        #region readonly Session properties
+        #region readonly properties
+
         public string CurrentDomainExtension
         {
             get
             {
                 if (IsEmpty(_CurrentDomainExtension))
                 {
-                    _CurrentDomainExtension = GetCurrentDomainExtension(_UrlParts);
+                    _CurrentDomainExtension = GetCurrentDomainExtension();
                 }
 
                 return _CurrentDomainExtension;
@@ -37,7 +38,7 @@ namespace Konfidence.BaseWebsiteClasses
             {
                 if (IsEmpty(_CurrentLanguage))
                 {
-                    _CurrentLanguage = GetCurrentLanguage(_UrlParts);
+                    _CurrentLanguage = GetCurrentLanguage();
                 }
 
                 return _CurrentLanguage;
@@ -50,7 +51,7 @@ namespace Konfidence.BaseWebsiteClasses
             {
                 if (IsEmpty(_CurrentDnsName))
                 {
-                    _CurrentDnsName = GetCurrentDnsName(_UrlParts);
+                    _CurrentDnsName = GetCurrentDnsName();
                 }
 
                 return _CurrentDnsName;
@@ -63,7 +64,7 @@ namespace Konfidence.BaseWebsiteClasses
             {
                 if (IsEmpty(_CurrentPagePath))
                 {
-                    _CurrentPagePath = GetCurrentPagePath(_UrlParts);
+                    _CurrentPagePath = GetCurrentPagePath();
                 }
 
                 return _CurrentPagePath;
@@ -76,13 +77,19 @@ namespace Konfidence.BaseWebsiteClasses
             {
                 if (IsEmpty(_CurrentPageName))
                 {
-                    _CurrentPageName = GetCurrentPageName(_UrlParts);
+                    _CurrentPageName = GetCurrentPageName();
                 }
 
                 return _CurrentPageName;
             }
         }
-        #endregion readonly Session properties
+
+        public bool IsValid
+        {
+            get { return Validate(); }
+        }
+
+        #endregion readonly  properties
 
         public BasePageHelper(string requestUrl)
         {
@@ -92,24 +99,64 @@ namespace Konfidence.BaseWebsiteClasses
             }
         }
 
-        private static string GetCurrentDomainExtension(string[] urlParts)
+        private bool Validate()
         {
-            string currentDomainExtension = "nl";
-
-            if (urlParts[0].Equals("http:"))
+            if (_UrlParts.Length < 3)
             {
-                string[] UrlNodes = urlParts[2].Split('.');
+                SetErrorMessage("Url is too short to be true");
 
-                if (UrlNodes.Length > 0)
+                return false;
+            }
+
+            if (_UrlParts[0] != "http:")
+            {
+                SetErrorMessage("Url does not start with http:");
+
+                return false;
+            }
+
+            if (IsEmpty(CurrentDnsName))
+            {
+                SetErrorMessage("dns name is empty");
+
+                return false;
+            }
+
+            if (!IsValidDnsName())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsValidDnsName()
+        {
+            string[] UrlNodes = CurrentDnsName.Split('.');
+
+            if (UrlNodes.Length <= 1)
+            {
+                SetErrorMessage("dns name is not valid (1 node only)");
+            }
+
+            return true;
+        }
+
+        private string GetCurrentDomainExtension()
+        {
+            string currentDomainExtension = "nl"; // default
+
+            string[] UrlNodes = CurrentDnsName.Split('.');
+
+            if (UrlNodes.Length > 0)
+            {
+                currentDomainExtension = UrlNodes[UrlNodes.Length - 1];
+
+                if (UrlNodes.Length > 1)
                 {
-                    string firstNode = UrlNodes[0];
-                    string lastNode = UrlNodes[UrlNodes.Length - 1];
-
-                    currentDomainExtension = lastNode;
-
-                    if (lastNode.Equals("uk") || firstNode.Equals("wwwuk"))
+                    if (currentDomainExtension.Equals("uk"))
                     {
-                        currentDomainExtension = "co.uk";
+                        currentDomainExtension = UrlNodes[UrlNodes.Length - 2] + "." + UrlNodes[UrlNodes.Length - 1];
                     }
                 }
             }
@@ -117,92 +164,73 @@ namespace Konfidence.BaseWebsiteClasses
             return currentDomainExtension;
         }
 
-        private static string GetCurrentPagePath(string[] urlParts)
+        private string GetCurrentPagePath()
         {
             string currentPagePath = string.Empty;
 
-            if (urlParts[0].Equals("http:"))
-            {
-                string[] pagePathParts = new string[urlParts.Length - 3];
+            // strip the first three nodes from the string array
+            string[] pagePathParts = new string[_UrlParts.Length - 3];
 
-                Array.Copy(urlParts, 3, pagePathParts, 0, pagePathParts.Length);
+            Array.Copy(_UrlParts, 3, pagePathParts, 0, pagePathParts.Length);
 
-                currentPagePath = "/" + string.Join("/", pagePathParts);
-            }
+            currentPagePath = "/" + string.Join("/", pagePathParts);
 
             return currentPagePath;
         }
 
-        private static string GetCurrentPageName(string[] urlParts)
+        private string GetCurrentPageName()
         {
-            string currentPageName = string.Empty;
-
-            if (urlParts[0].Equals("http:"))
+            if (IsEmpty(CurrentPagePath))
             {
-                string[] pagePathParts = new string[urlParts.Length - 3];
-
-                Array.Copy(urlParts, 3, pagePathParts, 0, pagePathParts.Length);
-
-                currentPageName = pagePathParts[1];
+                return string.Empty;
             }
 
-            return currentPageName;
+            string[] pagePathParts = CurrentPagePath.Split('/');
+
+            return pagePathParts[pagePathParts.Length - 1]; // laatste element is altijd pageName
         }
 
-        private static string GetCurrentDnsName(string[] urlParts)
+        private string GetCurrentDnsName()
         {
             string currentSite = "www.konfidence.nl";
 
-            if (urlParts[0].Equals("http:"))
+            if (!_UrlParts[2].Equals("localhost"))
             {
-                if (!urlParts[2].Equals("localhost"))
-                {
-                    currentSite = urlParts[2];
-                }
+                currentSite = _UrlParts[2];
             }
 
             return currentSite;
         }
 
-        private static string GetCurrentLanguage(string[] urlParts)
+        private string GetCurrentLanguage()
         {
             string currentLanguage = "nl"; // default language
 
-            if (urlParts[0].Equals("http:"))
+            if (!IsEmpty(CurrentDomainExtension))
             {
-                string[] UrlNodes = urlParts[2].Split('.');
+                string[] shortExtension = CurrentDomainExtension.Split('.'); // als uit meerdere nodes bestaat alleen de laatste oppikken
 
-                if (UrlNodes.Length > 0)
+                string testExtension = shortExtension[shortExtension.Length - 1];
+
+                switch (testExtension.ToLowerInvariant())
                 {
-                    string firstNode = UrlNodes[0];
-                    string lastNode = UrlNodes[UrlNodes.Length - 1];
-
-                    switch (lastNode)
-                    {
-                        case "nl":
-                        case "be":
-                            currentLanguage = "nl";
-                            break;
-                        case "DE":
-                            currentLanguage = "de";
-                            break;
-                        case "eu":
-                        case "com":
-                        case "uk":
-                            currentLanguage = "uk";
-                            break;
-                        case "fr":
-                            currentLanguage = "fr";
-                            break;
-                        case "ru":
-                            currentLanguage = "ru";
-                            break;
-                    }
-
-                    if (firstNode.Equals("wwwuk"))
-                    {
+                    case "nl":
+                    case "be":
+                        currentLanguage = "nl";
+                        break;
+                    case "de":
+                        currentLanguage = "de";
+                        break;
+                    case "eu":
+                    case "com":
+                    case "org":
+                    case "net":
+                    case "uk":
                         currentLanguage = "uk";
-                    }
+                        break;
+                    case "fr":
+                        currentLanguage = "fr";
+                        break;
                 }
             }
 

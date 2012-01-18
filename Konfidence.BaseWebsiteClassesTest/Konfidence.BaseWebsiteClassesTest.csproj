@@ -59,9 +59,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Shadow Include="Test References\Konfidence.BaseWebsiteClasses.accessor" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseWebSiteClasses\Konfidence.BaseWebsiteClasses.csproj">
       <Project>{1AB7FD15-F3AE-4522-BFAD-12034B574A9E}</Project>
       <Name>Konfidence.BaseWebsiteClasses</Name>
