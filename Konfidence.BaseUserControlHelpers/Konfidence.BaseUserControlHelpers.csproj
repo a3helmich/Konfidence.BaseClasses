@@ -107,7 +107,6 @@
     <Compile Include="SessionParameterObject.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <ItemGroup>
