@@ -59,6 +59,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj">
+      <Project>{D60A1063-3897-44FA-97F5-85A9C25B1F8C}</Project>
+      <Name>Konfidence.BaseUserControlHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Konfidence.BaseWebSiteClasses\Konfidence.BaseWebsiteClasses.csproj">
       <Project>{1AB7FD15-F3AE-4522-BFAD-12034B574A9E}</Project>
       <Name>Konfidence.BaseWebsiteClasses</Name>
