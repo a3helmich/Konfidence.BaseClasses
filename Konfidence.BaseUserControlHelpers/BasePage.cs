@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using Konfidence.Base;
+using Konfidence.BaseWebsiteClasses;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -11,6 +12,8 @@ namespace Konfidence.BaseUserControlHelpers
 		private bool _IsExpired;  // false by default
 		private bool _IsRefreshed;  // false by default
 		private string _PageTitle = string.Empty;
+
+        private BasePageHelper _BasePageHelper = null;  // TODO : aanpassen conform huidige werkwijze -> naar BaseWebPresenter verplaatsen
 
         private T _Presenter = null;
 
@@ -78,6 +81,33 @@ namespace Konfidence.BaseUserControlHelpers
 
 		#endregion
 
+        #region readonly session properties
+        protected string CurrentDomainExtension
+        {
+            get { return _BasePageHelper.CurrentDomainExtension; }
+        }
+
+        protected string CurrentLanguage
+        {
+            get { return _BasePageHelper.CurrentLanguage; }
+        }
+
+        protected string CurrentDnsName
+        {
+            get { return _BasePageHelper.CurrentDnsName; }
+        }
+
+        protected string CurrentPagePath
+        {
+            get { return _BasePageHelper.CurrentPagePath; }
+        }
+
+        protected string CurrentPageName
+        {
+            get { return _BasePageHelper.CurrentPageName; }
+        }
+        #endregion readonly session properties
+
         protected abstract void FormToPresenter();
         protected abstract void PresenterToForm();
 
@@ -104,6 +134,8 @@ namespace Konfidence.BaseUserControlHelpers
 		protected override void OnPreLoad(EventArgs e)
 		{
 			base.OnPreLoad(e);
+
+            _BasePageHelper = new BasePageHelper(Page.Request.Url.ToString());
 
 			CreatePageIdentifier();
 
