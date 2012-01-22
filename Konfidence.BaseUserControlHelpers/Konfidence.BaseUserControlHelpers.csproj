@@ -86,9 +86,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseMailSender.cs" />
+    <Compile Include="BaseMasterPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="BasePageHelper.cs" />
     <Compile Include="BaseTabbedUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
