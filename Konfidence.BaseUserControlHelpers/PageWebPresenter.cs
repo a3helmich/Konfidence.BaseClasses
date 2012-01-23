@@ -42,6 +42,20 @@ namespace Konfidence.BaseUserControlHelpers
             get { return HttpContext.Current.Request.IsLocal; }
         }
 
+        protected void SessionLogon(string fullName, string email, bool isAdministrator)
+        {
+            HttpContext.Current.Session[KitSessionAccount.AccountObject] = new SessionAccount();
+
+            SessionAccount.FullName = fullName;
+            SessionAccount.Email = email;
+            SessionAccount.IsAdministrator = isAdministrator;
+
+            if (!IsValidAccount)
+            {
+                LogOff();
+            }
+        }
+
         public virtual void LogOff()
         {
             if (IsAssigned(HttpContext.Current.Session[KitSessionAccount.AccountObject]))

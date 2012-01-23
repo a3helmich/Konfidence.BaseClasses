@@ -7,7 +7,7 @@ namespace Konfidence.Base
 		private bool _Administrator = false;
 
 		#region properties
-		public string LoggedOn
+		public string FullName
 		{
 			get
 			{
