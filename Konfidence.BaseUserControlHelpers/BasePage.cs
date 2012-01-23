@@ -11,7 +11,6 @@ namespace Konfidence.BaseUserControlHelpers
 	{
 		private bool _IsExpired;  // false by default
 		private bool _IsRefreshed;  // false by default
-		private string _PageTitle = string.Empty;
 
         private BasePageHelper _BasePageHelper = null;  // TODO : aanpassen conform huidige werkwijze -> naar BaseWebPresenter verplaatsen
 
@@ -39,18 +38,6 @@ namespace Konfidence.BaseUserControlHelpers
 			get
 			{
 				return _IsExpired;
-			}
-		}
-
-		public string PageTitle
-		{
-			get
-			{
-				return _PageTitle;
-			}
-			set
-			{
-				_PageTitle = value;
 			}
 		}
 
@@ -124,6 +111,8 @@ namespace Konfidence.BaseUserControlHelpers
         protected void Page_PreRender(object sender, EventArgs e)
         {
             PresenterToForm();
+
+            Title = Title + " - " + ConfigurationManager.AppSettings["applicationTitle"];
         }
 
 		protected static bool IsAssigned(object assignedObject)
@@ -152,8 +141,6 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 
 			AfterOnPreLoadPage();
-
-			Title = PageTitle + " - " + ConfigurationManager.AppSettings["applicationTitle"];
 		}
 
 		protected virtual void AfterOnPreLoadPage()
