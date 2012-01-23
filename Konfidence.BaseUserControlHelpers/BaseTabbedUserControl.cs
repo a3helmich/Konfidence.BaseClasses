@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
+using System;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class BaseTabbedUserControl<T> : BaseUserControl<T> where T : BaseWebPresenter, new()
+    public class BaseTabbedUserControl<T> : BaseUserControl<T>  where T : BaseWebPresenter, new()
 	{
 		private TabEntryList _TabEntryList = new TabEntryList();
 
@@ -51,6 +52,16 @@ namespace Konfidence.BaseUserControlHelpers
         {
         }
 
+        protected override void FormToPresenter()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void PresenterToForm()
+        {
+            throw new NotImplementedException();
+        }
+
 		protected void ShowTab(string tabId)
 		{
 			_TabEntryList.ShowTab(tabId);
@@ -67,15 +78,5 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			// NOP
 		}
-
-        protected override void FormToPresenter()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected override void PresenterToForm()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
