@@ -92,9 +92,12 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Redirect(string url)
         {
-            Response.Redirect(url, false);
+            if (!BaseItem.IsEmpty(url))
+            {
+                Response.Redirect(url, false);
 
-            Response.End();
+                Response.End();
+            }
         }
 
 		protected static bool IsAssigned(object assignedObject)

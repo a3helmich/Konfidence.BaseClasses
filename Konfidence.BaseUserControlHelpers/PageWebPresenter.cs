@@ -64,6 +64,12 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        public string FromUrl
+        {
+            get { return HttpContext.Current.Session[KitSessionAccount.FromUrl] as string; }
+            set { HttpContext.Current.Session[KitSessionAccount.FromUrl] = value; }
+        }
+
         public string Email
         {
             get
