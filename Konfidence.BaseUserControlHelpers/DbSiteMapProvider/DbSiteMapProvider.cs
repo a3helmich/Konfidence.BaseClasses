@@ -5,7 +5,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
-    //	[AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Minimal)]
+    //	[AspNetHostingPermission(SecurityAction.Demand, Leve// l=AspNetHostingPermissionLevel.Minimal)]
     public class DbSiteMapProvider : StaticSiteMapProvider
     {
         private bool _LoggedOn = false;
