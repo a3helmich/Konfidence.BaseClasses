@@ -99,23 +99,6 @@ namespace Konfidence.BaseUserControlHelpers
             PresenterToForm();
         }
 
-		public string MenuPage
-		{
-			get
-			{
-				if (IsAssigned(Session[KitSessionContext.UrlMenuPage]))
-				{
-					return Session[KitSessionContext.UrlMenuPage] as string;
-				}
-
-				return string.Empty;
-			}
-			set
-			{
-				Session[KitSessionContext.UrlMenuPage] = value;
-			}
-		}
-
 		protected static bool IsAssigned(object assignedObject)
 		{
 			return BaseItem.IsAssigned(assignedObject);

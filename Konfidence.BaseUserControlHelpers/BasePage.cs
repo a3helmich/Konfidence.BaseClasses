@@ -41,23 +41,6 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
-		public string MenuPage
-		{
-			get
-			{
-				if (IsAssigned(Session[KitSessionContext.UrlMenuPage]))
-				{
-					return Session[KitSessionContext.UrlMenuPage] as string;
-				}
-
-				return string.Empty;
-			}
-			set
-			{
-				Session[KitSessionContext.UrlMenuPage] = value;
-			}
-		}
-
 		#endregion
 
         #region readonly session properties
