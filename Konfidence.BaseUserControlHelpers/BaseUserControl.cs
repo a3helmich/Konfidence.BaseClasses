@@ -140,7 +140,7 @@ namespace Konfidence.BaseUserControlHelpers
 			base.OnInit(e);
 		}
 
-		protected void RebuildParent()
+        protected virtual void RebuildParent()
 		{
             BaseUserControl<BaseWebPresenter> topControl = NamingContainer as BaseUserControl<BaseWebPresenter>;
 
