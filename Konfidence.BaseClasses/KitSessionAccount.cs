@@ -7,5 +7,7 @@ namespace Konfidence.Base
 		public const string LogOnError = "LogOnError";
 
 		public const string AccountObject = "AccountObject";
+
+        public const string UrlMenuPage = "UrlMenuPage";
 	}
 }

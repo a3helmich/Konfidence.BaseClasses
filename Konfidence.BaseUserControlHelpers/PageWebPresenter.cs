@@ -12,26 +12,34 @@ namespace Konfidence.BaseUserControlHelpers
     public class BaseWebPresenter : BaseItem
     {
         private string _MenuPage = string.Empty;
+        private string _AccountEmail = string.Empty;
+        private string _AccountPassword = string.Empty;
 
         public string MenuPage
         {
             get { return ConfigurationManager.AppSettings["MenuPage"] as string; }
         }
 
+        public string AccountEmail
+        {
+            get { return _AccountEmail; }
+            set { _AccountEmail = value; }
+        }
+
+        public string AccountPassword
+        {
+            get { return _AccountPassword; }
+            set { _AccountPassword = value; }
+        }
+
         public SessionAccount SessionAccount
         {
-            get
-            {
-                return HttpContext.Current.Session[KitSessionAccount.AccountObject] as SessionAccount;
-            }
+            get { return HttpContext.Current.Session[KitSessionAccount.AccountObject] as SessionAccount; }
         }
 
         public bool IsLocal
         {
-            get
-            {
-                return HttpContext.Current.Request.IsLocal;
-            }
+            get { return HttpContext.Current.Request.IsLocal; }
         }
 
         public virtual void LogOff()
@@ -65,6 +73,23 @@ namespace Konfidence.BaseUserControlHelpers
                 }
 
                 return false;
+            }
+        }
+
+        public string LoginMessage
+        {
+            get
+            {
+                string ErrorText = HttpContext.Current.Session[KitSessionAccount.LogOnError] as string;
+
+                if (!IsEmpty(ErrorText))
+                {
+                    HttpContext.Current.Session.Remove(KitSessionAccount.LogOnError);
+
+                    return ErrorText;
+                }
+
+                return string.Empty;
             }
         }
 
