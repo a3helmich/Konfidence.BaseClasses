@@ -99,16 +99,6 @@ namespace Konfidence.BaseUserControlHelpers
             PresenterToForm();
         }
 
-		protected virtual void LogOff()
-		{
-            BasePage<T> topPage = NamingContainer as BasePage<T>;
-
-			if (IsAssigned(topPage))
-			{
-				topPage.LogOff();
-			}
-		}
-
 		public string MenuPage
 		{
 			get

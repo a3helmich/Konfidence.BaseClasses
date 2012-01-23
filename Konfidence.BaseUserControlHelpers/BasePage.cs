@@ -41,14 +41,6 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
-		public SessionAccount SessionAccount
-		{
-			get
-			{
-				return Session[KitSessionAccount.AccountObject] as SessionAccount;
-			}
-		}
-
 		public string MenuPage
 		{
 			get
@@ -237,12 +229,5 @@ namespace Konfidence.BaseUserControlHelpers
 			ClientScript.RegisterHiddenField(SessionHelper.SessionIdValue, Session.SessionID);
 		}
 
-		public virtual void LogOff()
-		{
-			if (IsAssigned(Session[KitSessionAccount.AccountObject]))
-			{
-				Session.Remove(KitSessionAccount.AccountObject);
-			}
-		}
 	}
 }
