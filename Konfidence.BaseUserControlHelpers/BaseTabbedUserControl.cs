@@ -3,7 +3,7 @@ using System.Web.UI.WebControls;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-	public class BaseTabbedUserControl: BaseUserControl<BaseWebPresenter>
+    public class BaseTabbedUserControl<T> : BaseUserControl<T> where T : BaseWebPresenter, new()
 	{
 		private TabEntryList _TabEntryList = new TabEntryList();
 
@@ -11,7 +11,7 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			public string TabId = string.Empty;				
 			public Button TabButton;									// default value null
-            public BaseUserControl<BaseWebPresenter> TabbedUserControl; // default value null
+            public BaseUserControl<T> TabbedUserControl; // default value null
 		}
 
 		internal class TabEntryList: List<TabEntry>
@@ -33,7 +33,7 @@ namespace Konfidence.BaseUserControlHelpers
 				}
 			}
 			
-			public string RegisterTab(Button tabButton, BaseUserControl<BaseWebPresenter> tabbedUserControl)
+			public string RegisterTab(Button tabButton, BaseUserControl<T> tabbedUserControl)
 			{
 				TabEntry tabEntry	= new TabEntry();
 
@@ -47,6 +47,10 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
+        public BaseTabbedUserControl()
+        {
+        }
+
 		protected void ShowTab(string tabId)
 		{
 			_TabEntryList.ShowTab(tabId);
@@ -54,7 +58,7 @@ namespace Konfidence.BaseUserControlHelpers
 			AfterShowTab();
 		}
 
-        protected string RegisterTab(Button tabButton, BaseUserControl<BaseWebPresenter> tabbedUserControl)
+        protected string RegisterTab(Button tabButton, BaseUserControl<T> tabbedUserControl)
 		{
 			return _TabEntryList.RegisterTab(tabButton, tabbedUserControl);
 		}
