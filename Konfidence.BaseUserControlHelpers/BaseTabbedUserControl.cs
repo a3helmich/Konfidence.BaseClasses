@@ -5,7 +5,7 @@ using System.Web.UI;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class BaseTabbedUserControl<T> : BaseUserControl<T>  where T : BaseWebPresenter, new()
+    public abstract class BaseTabbedUserControl<T> : BaseUserControl<T>  where T : BaseWebPresenter, new()
 	{
 		private TabEntryList _TabEntryList = new TabEntryList();
 
@@ -51,16 +51,6 @@ namespace Konfidence.BaseUserControlHelpers
 
         public BaseTabbedUserControl()
         {
-        }
-
-        protected override void FormToPresenter()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void PresenterToForm()
-        {
-            throw new NotImplementedException();
         }
 
 		protected void ShowTab(string tabId)
