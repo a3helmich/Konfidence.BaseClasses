@@ -68,6 +68,32 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        private bool IsAdministratorRequired
+        {
+            get
+            {
+                if (IsAssigned(SessionAccount))
+                {
+                    return IsAssigned(HttpContext.Current.Session[KitSessionAccount.AdministratorRequired]);
+                }
+
+                return false;
+            }
+        }
+
+        public bool IsValidAccount
+        {
+            get
+            {
+                if (IsAdministratorRequired && !SessionAccount.IsAdministrator)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
         public bool IsAdministrator
         {
             get

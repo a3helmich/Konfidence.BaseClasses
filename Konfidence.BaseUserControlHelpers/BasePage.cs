@@ -90,6 +90,13 @@ namespace Konfidence.BaseUserControlHelpers
             Title = Title + " - " + ConfigurationManager.AppSettings["ApplicationTitle"];
         }
 
+        protected void Redirect(string url)
+        {
+            Response.Redirect(url, false);
+
+            Response.End();
+        }
+
 		protected static bool IsAssigned(object assignedObject)
 		{
 			return BaseItem.IsAssigned(assignedObject);
@@ -211,6 +218,5 @@ namespace Konfidence.BaseUserControlHelpers
 			/// volgende check beschikbaar is.
 			ClientScript.RegisterHiddenField(SessionHelper.SessionIdValue, Session.SessionID);
 		}
-
 	}
 }

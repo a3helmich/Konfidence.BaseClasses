@@ -104,6 +104,13 @@ namespace Konfidence.BaseUserControlHelpers
 			return BaseItem.IsAssigned(assignedObject);
 		}
 
+        protected void Redirect(string url)
+        {
+            Response.Redirect(url, false);
+
+            Response.End();
+        }
+
 		protected override void OnInit(EventArgs e)
 		{
 			_SessionHelper = new SessionHelper(Context, UniqueID);

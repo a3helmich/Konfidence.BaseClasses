@@ -6,7 +6,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-	public static class PageRefreshHelper
+	public static class PageRefreshHelper 
 	{
 		public const string CurrentRefreshTicketEntry = "CURRENTREFRESHTICKETENTRY";
 
@@ -29,11 +29,6 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 
 			return isRefresh;
-		}
-
-		private static bool IsAssigned(object assignedObject)
-		{
-			return BaseItem.IsAssigned(assignedObject);
 		}
 
 		private static int GetSessionTicket(HttpContext context, Page page)

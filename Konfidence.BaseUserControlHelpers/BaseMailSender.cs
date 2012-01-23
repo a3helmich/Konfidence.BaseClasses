@@ -1,10 +1,11 @@
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-	public class BaseMailSender
+	public class BaseMailSender : BaseItem
 	{
 		protected static bool SendEmail(string toEmailAddress, string subject, string mailBody)
 		{
