@@ -101,10 +101,6 @@
     </Compile>
     <Compile Include="BaseConfigMailDataItem.cs" />
     <Compile Include="DbSiteMapProvider\DbSiteMapProvider.cs" />
-    <Compile Include="DbSiteMapProvider\DbSiteMapProviderAdministrator.cs" />
-    <Compile Include="DbSiteMapProvider\DbSiteMapProviderExternal.cs" />
-    <Compile Include="DbSiteMapProvider\DbSiteMapProviderInternal.cs" />
-    <Compile Include="DbSiteMapProvider\DbSiteMapProviderLocal.cs" />
     <Compile Include="DbSiteMapProvider\MenuItem.cs" />
     <Compile Include="DbSiteMapProvider\MenuItemList.cs" />
     <Compile Include="DbSiteMapProvider\MenuItemTree.cs" />

@@ -26,6 +26,14 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        public bool IsLocal
+        {
+            get
+            {
+                return HttpContext.Current.Request.IsLocal;
+            }
+        }
+
         public virtual void LogOff()
         {
             if (IsAssigned(HttpContext.Current.Session[KitSessionAccount.AccountObject]))

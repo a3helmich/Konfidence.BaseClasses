@@ -14,11 +14,6 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
         private SiteMapNode _RootNode = null;
 
-        // Implement a default constructor.
-        //public DbSiteMapProvider()
-        //{
-        //  // NOP
-        //}
         #region properties
 
         // Return the root node of the current site map.
