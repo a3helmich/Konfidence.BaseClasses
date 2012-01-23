@@ -5,7 +5,47 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
-    //	[AspNetHostingPermission(SecurityAction.Demand, Leve// l=AspNetHostingPermissionLevel.Minimal)]
+    public class DbSiteMapProviderLocal : DbSiteMapProvider
+    {
+        public DbSiteMapProviderLocal()
+        {
+            LoggedOn = false;
+            Administrator = false;
+            IsLocal = true;
+        }
+    }
+
+    public class DbSiteMapProviderExternal : DbSiteMapProvider
+    {
+        public DbSiteMapProviderExternal()
+        {
+            LoggedOn = false;
+            Administrator = false;
+            IsLocal = false;
+        }
+    }
+
+    public class DbSiteMapProviderInternal : DbSiteMapProvider
+    {
+        public DbSiteMapProviderInternal()
+        {
+            LoggedOn = true;
+            Administrator = false;
+            IsLocal = false;
+        }
+    }
+
+    public class DbSiteMapProviderAdministrator : DbSiteMapProvider
+    {
+        public DbSiteMapProviderAdministrator()
+        {
+            LoggedOn = true;
+            Administrator = true;
+            IsLocal = false;
+        }
+    }
+
+    //	[AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Minimal)]
     public class DbSiteMapProvider : StaticSiteMapProvider
     {
         private bool _LoggedOn = false;
@@ -14,6 +54,11 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
         private SiteMapNode _RootNode = null;
 
+        // Implement a default constructor.
+        //public DbSiteMapProvider()
+        //{
+        //  // NOP
+        //}
         #region properties
 
         // Return the root node of the current site map.
