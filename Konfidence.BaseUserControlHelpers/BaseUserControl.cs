@@ -142,11 +142,11 @@ namespace Konfidence.BaseUserControlHelpers
 
 		protected void RebuildParent()
 		{
-            BaseUserControl<T> topControl = NamingContainer as BaseUserControl<T>;
+            BaseUserControl<BaseWebPresenter> topControl = NamingContainer as BaseUserControl<BaseWebPresenter>;
 
 			if (IsAssigned(topControl))
 			{
-				topControl.TopRebuild(this);
+                topControl.RebuildParent();
 			}
 		}
 
@@ -240,7 +240,7 @@ namespace Konfidence.BaseUserControlHelpers
 			Rebuild();
 		}
 
-        protected virtual void TopRebuild(BaseUserControl<T> childControl)
+        private  void TopRebuild(BaseUserControl<BaseWebPresenter> childControl)
 		{
 			RebuildParent();
 		}
