@@ -112,7 +112,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             PresenterToForm();
 
-            Title = Title + " - " + ConfigurationManager.AppSettings["applicationTitle"];
+            Title = Title + " - " + ConfigurationManager.AppSettings["ApplicationTitle"];
         }
 
 		protected static bool IsAssigned(object assignedObject)
