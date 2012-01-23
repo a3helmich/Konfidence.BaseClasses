@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using System;
+using System.Web.UI;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -12,7 +13,7 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			public string TabId = string.Empty;				
 			public Button TabButton;									// default value null
-            public BaseUserControl<T> TabbedUserControl; // default value null
+            public UserControl TabbedUserControl; // default value null
 		}
 
 		internal class TabEntryList: List<TabEntry>
@@ -24,17 +25,17 @@ namespace Konfidence.BaseUserControlHelpers
 					if (tabEntry.TabId == tabId)
 					{
 						tabEntry.TabButton.Font.Bold = true;
-						tabEntry.TabbedUserControl.Show();
+						tabEntry.TabbedUserControl.Visible = true;
 					}
 					else
 					{
 						tabEntry.TabButton.Font.Bold = false;
-						tabEntry.TabbedUserControl.Hide();
+						tabEntry.TabbedUserControl.Visible = false;
 					}
 				}
 			}
-			
-			public string RegisterTab(Button tabButton, BaseUserControl<T> tabbedUserControl)
+
+            public string RegisterTab(Button tabButton, UserControl tabbedUserControl)
 			{
 				TabEntry tabEntry	= new TabEntry();
 
@@ -69,7 +70,7 @@ namespace Konfidence.BaseUserControlHelpers
 			AfterShowTab();
 		}
 
-        protected string RegisterTab(Button tabButton, BaseUserControl<T> tabbedUserControl)
+        protected string RegisterTab(Button tabButton, BaseUserControl<BaseWebPresenter> tabbedUserControl)
 		{
 			return _TabEntryList.RegisterTab(tabButton, tabbedUserControl);
 		}

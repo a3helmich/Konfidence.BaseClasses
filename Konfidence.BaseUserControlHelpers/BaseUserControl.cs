@@ -225,21 +225,6 @@ namespace Konfidence.BaseUserControlHelpers
 			// NOP : 
 		}
 
-		public virtual void Hide()
-		{
-			Visible = false;
-		}
-
-		/// <summary>
-		/// De base.Show method voert een Rebuild uit.
-		/// </summary>
-		public virtual void Show()
-		{
-			Visible = true;
-
-			Rebuild();
-		}
-
         private  void TopRebuild(BaseUserControl<BaseWebPresenter> childControl)
 		{
 			RebuildParent();
