@@ -74,6 +74,11 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        public string ApplicationPath
+        {
+            get { return VirtualPathUtility.ToAbsolute(@"~").TrimEnd('/'); }
+        }
+
         public string FromUrl
         {
             get { return HttpContext.Current.Session[KitSessionAccount.FromUrl] as string; }
