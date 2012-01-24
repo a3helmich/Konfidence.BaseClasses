@@ -56,6 +56,16 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        public string ResolveClientUrl(string url)
+        {
+            if (IsAssigned(url))
+            {
+                HttpContext.Current.Server.MapPath(url);
+            }
+
+            return string.Empty;
+        }
+
         public virtual void LogOff()
         {
             if (IsAssigned(HttpContext.Current.Session[KitSessionAccount.AccountObject]))
