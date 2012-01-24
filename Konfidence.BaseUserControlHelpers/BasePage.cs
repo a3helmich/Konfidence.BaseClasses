@@ -87,7 +87,10 @@ namespace Konfidence.BaseUserControlHelpers
         {
             PresenterToForm();
 
-            Title = Title + " - " + ConfigurationManager.AppSettings["ApplicationTitle"];
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ApplicationTitle"]))
+            {
+                Title = Title + " - " + ConfigurationManager.AppSettings["ApplicationTitle"];
+            }
         }
 
         protected void Redirect(string url)
