@@ -8,6 +8,7 @@ namespace Konfidence.BaseUserControlHelpers
 {
     public class BaseMasterPage : MasterPage
     {
+        // TODO : Presenter in BaseMasterPage aanbrengen
         private BasePageHelper _BasePageHelper = null;
 
         #region readonly session properties
