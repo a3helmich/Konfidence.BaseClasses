@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 
-namespace Konfidence.BaseWebsiteClasses
+namespace Konfidence.BaseUserControlHelpers
 {
     public class BaseMasterPage : MasterPage
     {

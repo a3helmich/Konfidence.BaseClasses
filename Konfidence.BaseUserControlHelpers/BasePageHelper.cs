@@ -5,7 +5,7 @@ using Konfidence.Base;
 using System.Globalization;
 
 
-namespace Konfidence.BaseWebsiteClasses
+namespace Konfidence.BaseUserControlHelpers
 {
     public class BasePageHelper: BaseItem
     {

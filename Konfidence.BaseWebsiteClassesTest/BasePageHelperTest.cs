@@ -1,6 +1,6 @@
-﻿using Konfidence.BaseWebsiteClasses;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Konfidence.BaseUserControlHelpers;
 
 namespace Konfidence.BaseWebsiteClassesTest
 {

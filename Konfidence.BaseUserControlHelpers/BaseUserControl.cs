@@ -1,7 +1,6 @@
 using System;
 using System.Web.UI;
 using Konfidence.Base;
-using Konfidence.BaseWebsiteClasses;
 using System.IO;
 using System.Globalization;
 
@@ -18,7 +17,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         private T _Presenter = null;
 
-        protected T Presenter
+        public T Presenter
         {
             get
             {

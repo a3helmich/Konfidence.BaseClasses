@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using Konfidence.Base;
-using Konfidence.BaseWebsiteClasses;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -17,7 +16,7 @@ namespace Konfidence.BaseUserControlHelpers
         private T _Presenter = null;
 
 		#region properties
-        protected T Presenter
+        public T Presenter
         {
             get
             {
