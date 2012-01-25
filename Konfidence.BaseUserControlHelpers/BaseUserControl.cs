@@ -83,13 +83,16 @@ namespace Konfidence.BaseUserControlHelpers
         protected abstract void FormToPresenter();
         protected abstract void PresenterToForm();
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             if (!IsAssigned(_Presenter))
             {
                 _Presenter = new T();
             }
+        }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
             FormToPresenter();
         }
 
