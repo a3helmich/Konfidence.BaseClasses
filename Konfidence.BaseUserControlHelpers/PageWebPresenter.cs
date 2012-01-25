@@ -50,7 +50,7 @@ namespace Konfidence.BaseUserControlHelpers
             SessionAccount.Email = email;
             SessionAccount.IsAdministrator = isAdministrator;
 
-            if (!IsValidAccount)
+            if (!IsAuthorized)
             {
                 LogOff();
             }
@@ -141,7 +141,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        public bool IsValidAccount
+        public bool IsAuthorized
         {
             get
             {
