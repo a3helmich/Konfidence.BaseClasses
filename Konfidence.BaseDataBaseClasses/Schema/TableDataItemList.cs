@@ -105,7 +105,7 @@ namespace Konfidence.BaseData.Schema
                         string schema = dataRow["TABLE_SCHEMA"] as string;
                         string name = dataRow["TABLE_NAME"] as string;
 
-                        if (!name.ToLower().Equals("dtproperties"))
+                        if (!name.ToLower().Equals("dtproperties") && !name.ToLower().StartsWith("sys"))
                         {
                             tableDataItem = new TableDataItem(catalog, schema, name);
 
