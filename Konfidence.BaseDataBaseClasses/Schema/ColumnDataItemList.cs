@@ -21,7 +21,7 @@ namespace Konfidence.BaseData.Schema
         protected override void InitializeDataItemList()
         {
             _CreateStoredProcedureCommand = GetCreateStoredProcedure();
-            _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[Columns_GetList_gen]";
+            _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[" + COLUMNS_GETLIST + "]";
 
             GetListStoredProcedure = COLUMNS_GETLIST;
         }
@@ -31,7 +31,7 @@ namespace Konfidence.BaseData.Schema
             // CreateStoreProcedure
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("CREATE PROCEDURE [dbo].[Columns_GetList_gen]");
+            sb.AppendLine("CREATE PROCEDURE [dbo].[" + COLUMNS_GETLIST + "]");
             sb.AppendLine("@tableName varchar(50)");
             sb.AppendLine("AS BEGIN");
             sb.AppendLine("  SET NOCOUNT ON;");
