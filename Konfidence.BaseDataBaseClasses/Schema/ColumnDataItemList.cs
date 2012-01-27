@@ -15,12 +15,35 @@ namespace Konfidence.BaseData.Schema
 
         private const string COLUMNS_GETLIST = "Columns_GetList_gen";
 
-        private string _CreateStoredProcedureCommand = "CREATE PROCEDURE [dbo].[Columns_GetList_gen] @tableName varchar(50) AS BEGIN SET NOCOUNT ON; SELECT t.name as tableName, st.name as datatype, cc.* FROM sys.columns cc, sys.tables t, sys.systypes st where cc.object_id = t.object_id and t.name = @tableName and st.xtype = cc.system_type_id END";
-        private string _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[Columns_GetList_gen]";
+        private string _CreateStoredProcedureCommand = string.Empty;
+        private string _DeleteStoredProcedureCommand = string.Empty;
 
         protected override void InitializeDataItemList()
         {
+            _CreateStoredProcedureCommand = GetCreateStoredProcedure();
+            _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[Columns_GetList_gen]";
+
             GetListStoredProcedure = COLUMNS_GETLIST;
+        }
+
+        private string GetCreateStoredProcedure()
+        {
+            // CreateStoreProcedure
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("CREATE PROCEDURE [dbo].[Columns_GetList_gen]");
+            sb.AppendLine("@tableName varchar(50)");
+            sb.AppendLine("AS BEGIN");
+            sb.AppendLine("  SET NOCOUNT ON;");
+            sb.AppendLine("  SELECT t.name AS tableName, st.name AS datatype, cc.*");
+            sb.AppendLine("  FROM sys.columns cc, sys.tables t, sys.systypes st");
+            sb.AppendLine("  WHERE cc.object_id = t.object_id");
+            sb.AppendLine("    AND t.name = @tableName");
+            sb.AppendLine("    AND st.xtype = cc.system_type_id");
+            sb.AppendLine("    AND st.status = 0");
+            sb.AppendLine("END");
+
+            return sb.ToString();
         }
 
         public ColumnDataItemList(string tableName) : base()
