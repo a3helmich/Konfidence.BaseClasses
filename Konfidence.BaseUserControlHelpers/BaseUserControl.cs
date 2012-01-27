@@ -21,6 +21,11 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
+                if (!IsAssigned(_Presenter))
+                {
+                    _Presenter = new T();
+                }
+
                 return _Presenter;
             }
         }
@@ -52,6 +57,18 @@ namespace Konfidence.BaseUserControlHelpers
 				return _SessionAccount;
 			}
 		}
+
+        protected string GetViewState(string fieldName)
+        {
+            object viewState = ViewState[fieldName];
+
+            if (IsAssigned(viewState))
+            {
+                return viewState.ToString();
+            }
+
+            return string.Empty;
+        }
 
         #region readonly session properties
         protected string CurrentDomainExtension
@@ -126,14 +143,14 @@ namespace Konfidence.BaseUserControlHelpers
 		}
 
         protected virtual void RebuildParent()
-		{
+        {
             BaseUserControl<BaseWebPresenter> topControl = NamingContainer as BaseUserControl<BaseWebPresenter>;
 
-			if (IsAssigned(topControl))
-			{
+            if (IsAssigned(topControl))
+            {
                 topControl.RebuildParent();
-			}
-		}
+            }
+        }
 
 		public int PrimaryKey
 		{
@@ -205,15 +222,15 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
-		public virtual void Rebuild()
-		{
-			// NOP : 
-		}
+        public virtual void Rebuild()
+        {
+            // NOP : 
+        }
 
-        private  void TopRebuild(BaseUserControl<BaseWebPresenter> childControl)
-		{
-			RebuildParent();
-		}
+        private void TopRebuild(BaseUserControl<BaseWebPresenter> childControl)
+        {
+            RebuildParent();
+        }
 
         protected void SwitchLanguagePanel(Control languageNL, Control languageDE, Control languageUK)
         {
