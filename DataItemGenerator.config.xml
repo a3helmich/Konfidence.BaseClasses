@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
   <DataBase>
-    TShirt
+    Newsletter
   </DataBase>
   <TargetProjectDirectory>
-    C:\Projects\Konfidence\BaseClasses\BaseClassesClasses
+    C:\Projects\Producten\Newsletter\NewsletterClasses
   </TargetProjectDirectory>
   <WebServiceDirectory>
-    C:\Projects\Konfidence\BaseClasses\BaseClassesWebService
+    C:\Projects\Producten\Newsletter\NewsletterWebService
   </WebServiceDirectory>
   <SolutionDirectory>
   </SolutionDirectory>
