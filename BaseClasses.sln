@@ -54,9 +54,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavaScriptExtender", "JavaS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWebsiteClassesTest", "Konfidence.BaseWebsiteClassesTest\Konfidence.BaseWebsiteClassesTest.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDataBaseClassesTest", "Konfidence.BaseDataBaseClassesTest\Konfidence.BaseDataBaseClassesTest.csproj", "{99197855-9052-499C-B7B4-EAF2F9D52512}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 19
+		SccNumberOfProjects = 20
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -114,6 +116,9 @@ Global
 		SccProjectUniqueName18 = Konfidence.BaseWebsiteClassesTest\\Konfidence.BaseWebsiteClassesTest.csproj
 		SccProjectName18 = Konfidence.BaseWebsiteClassesTest
 		SccLocalPath18 = Konfidence.BaseWebsiteClassesTest
+		SccProjectUniqueName19 = Konfidence.BaseDataBaseClassesTest\\Konfidence.BaseDataBaseClassesTest.csproj
+		SccProjectName19 = Konfidence.BaseDataBaseClassesTest
+		SccLocalPath19 = Konfidence.BaseDataBaseClassesTest
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -305,6 +310,16 @@ Global
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|x86.ActiveCfg = Release|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
