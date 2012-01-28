@@ -6,7 +6,6 @@ namespace Konfidence.BaseData.Schema
 {
     public class TableDataItemList: BaseDataItemList<TableDataItem>
     {
-        private bool _StoredProcedureCreated = false;
         private string _SourcePath;
 
         private DataTable _DataTableList;
@@ -51,18 +50,11 @@ namespace Konfidence.BaseData.Schema
         }
         #endregion properties
 
-        private string _CreateStoredProcedureCommand = "CREATE PROCEDURE [dbo].[PrimaryKey_Get] @tableName varchar(50) AS BEGIN SET NOCOUNT ON;  SELECT 1 as PrimaryKeyId, * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE (constraint_type = 'PRIMARY KEY') AND (table_name = @tableName) END";
-        private string _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[PrimaryKey_Get]";
-
         public TableDataItemList(string dataBaseName)
         {
             DataBaseName = dataBaseName;
 
-            CreateSchemaCommand();
-
             BuildItemList(_DataTableList);
-
-            DeleteSchemaCommand();
         }
 
         protected override void InitializeDataItemList()
@@ -70,24 +62,6 @@ namespace Konfidence.BaseData.Schema
             TableDataItem tableDataItem = GetNewDataItem();
 
             _DataTableList = tableDataItem.GetSchemaObject("Tables");
-        }
-
-        private void CreateSchemaCommand()
-        {
-            if (!StoredProcedureExists("PrimaryKey_Get"))
-            {
-                ExecuteTextCommand(_CreateStoredProcedureCommand);
-
-                _StoredProcedureCreated = true;
-            }
-        }
-
-        private void DeleteSchemaCommand()
-        {
-            if (_StoredProcedureCreated)
-            {
-                ExecuteTextCommand(_DeleteStoredProcedureCommand);
-            }
         }
 
         private void BuildItemList(DataTable dataTableList)

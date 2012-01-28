@@ -67,9 +67,18 @@ namespace Konfidence.BaseDataBaseClassesTest
         [TestMethod()]
         public void DataBaseStructureConstructorTest()
         {
-            string dataBaseName = string.Empty; // TODO: Initialize to an appropriate value
-            DataBaseStructure target = new DataBaseStructure(dataBaseName);
-            Assert.Inconclusive("TODO: Implement code to verify target");
+            DataBaseStructure target = new DataBaseStructure();
+        }
+
+        /// <summary>
+        ///A test for BuildStructure
+        ///</summary>
+        [TestMethod()]
+        public void BuildStructureTest()
+        {
+            DataBaseStructure target = new DataBaseStructure(); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
         }
     }
 }

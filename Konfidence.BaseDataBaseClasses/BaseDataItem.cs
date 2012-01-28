@@ -548,6 +548,13 @@ namespace Konfidence.BaseData
 			return dataHost.ViewExists(viewName);
 		}
 
+        protected internal bool StoredProcedureExists(string storedProcedureName)
+        {
+            BaseHost dataHost = GetHost();
+
+            return dataHost.StoredProcedureExists(storedProcedureName);
+        }
+
 		internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand, int autoKeyId)
 		{
 			if (autoKeyId > 0)
