@@ -11,78 +11,27 @@ namespace Konfidence.BaseData.Schema
     {
         //private DataTable _DataTable;
         private string _TableName;
-        private bool _StoredProcedureCreated = false;
-
-        private const string COLUMNS_GETLIST = "Columns_GetList_gen";
-
-        private string _CreateStoredProcedureCommand = string.Empty;
-        private string _DeleteStoredProcedureCommand = string.Empty;
 
         protected override void InitializeDataItemList()
         {
-            _CreateStoredProcedureCommand = GetCreateStoredProcedure();
-            _DeleteStoredProcedureCommand = "DROP PROCEDURE [dbo].[" + COLUMNS_GETLIST + "]";
-
-            GetListStoredProcedure = COLUMNS_GETLIST;
-        }
-
-        private string GetCreateStoredProcedure()
-        {
-            // CreateStoreProcedure
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("CREATE PROCEDURE [dbo].[" + COLUMNS_GETLIST + "]");
-            sb.AppendLine("@tableName varchar(50)");
-            sb.AppendLine("AS BEGIN");
-            sb.AppendLine("  SET NOCOUNT ON;");
-            sb.AppendLine("  SELECT t.name AS tableName, st.name AS datatype, cc.*");
-            sb.AppendLine("  FROM sys.columns cc, sys.tables t, sys.systypes st");
-            sb.AppendLine("  WHERE cc.object_id = t.object_id");
-            sb.AppendLine("    AND t.name = @tableName");
-            sb.AppendLine("    AND st.xtype = cc.system_type_id");
-            sb.AppendLine("    AND st.status = 0");
-            sb.AppendLine("END");
-
-            return sb.ToString();
+            GetListStoredProcedure = SPNames.COLUMNS_GETLIST;
         }
 
         public ColumnDataItemList(string tableName) : base()
         {
             _TableName = tableName;
 
-            CreateSchemaCommand();
-
             BuildItemList();
-
-            DeleteSchemaCommand();
         }
 
         public override void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
         {
 
-            if (storedProcedure.Equals(COLUMNS_GETLIST))
+            if (storedProcedure.Equals(SPNames.COLUMNS_GETLIST))
             {
                 base.SetParameters(storedProcedure, database, dbCommand);
 
                 database.AddInParameter(dbCommand, "TableName", DbType.String, _TableName);
-            }
-        }
-
-        private void CreateSchemaCommand()
-        {
-            if (!StoredProcedureExists(COLUMNS_GETLIST))
-            {
-                ExecuteTextCommand(_CreateStoredProcedureCommand);
-
-                _StoredProcedureCreated = true;
-            }
-        }
-
-        private void DeleteSchemaCommand()
-        {
-            if (_StoredProcedureCreated)
-            {
-                ExecuteTextCommand(_DeleteStoredProcedureCommand);
             }
         }
 

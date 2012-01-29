@@ -8,7 +8,7 @@ namespace DataItemGeneratorClasses
 {
     public class DataBaseStructure : SchemaBaseDataItem 
     {
-        private TableDataItemList _TableList;
+        private TableDataItemList _TableList = null;
 
         #region readonly properties
         public TableDataItemList TableList
@@ -24,31 +24,32 @@ namespace DataItemGeneratorClasses
 
         public void BuildStructure()
         {
+            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
+
             CreateStoredProcedures();
 
-            //_TableList = new TableDataItemList(_DataBaseName);
+            _TableList = new TableDataItemList(DataBaseName);
 
             DeleteStoredProcedures();
         }
 
         private void CreateStoredProcedures()
         {
-            if (!StoredProcedureExists("PrimaryKey_Get"))
-            {
-                CreateSPPrimaryKey_Get();
-            }
+            CreateSPPrimaryKey_Get(SPNames.PRIMARYKEY_GET);
+            CreateSPColumns_GetList(SPNames.COLUMNS_GETLIST);
         }
 
         private void DeleteStoredProcedures()
         {
-            DeleteSP("PrimaryKey_Get");
+            DeleteSP(SPNames.PRIMARYKEY_GET);
+            DeleteSP(SPNames.COLUMNS_GETLIST);
         }
 
-        private void CreateSPPrimaryKey_Get()
+        private void CreateSPPrimaryKey_Get(string storedProcedure)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("CREATE PROCEDURE [dbo].[PrimaryKey_Get]");
+            sb.AppendLine("CREATE PROCEDURE [dbo].[" + storedProcedure + "]");
             sb.AppendLine("  @tableName varchar(50)");
             sb.AppendLine("AS BEGIN");
             sb.AppendLine("  SET NOCOUNT ON;");
@@ -58,9 +59,26 @@ namespace DataItemGeneratorClasses
             sb.AppendLine("    AND table_name = @tableName");
             sb.AppendLine("END");
 
-            string createSPPrimaryKey_Get = sb.ToString();
+            ExecuteTextCommand(sb.ToString());
+        }
 
-            ExecuteTextCommand(createSPPrimaryKey_Get);
+        private void CreateSPColumns_GetList(string storedProcedure)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("CREATE PROCEDURE [dbo].[" + storedProcedure + "]");
+            sb.AppendLine("@tableName varchar(50)");
+            sb.AppendLine("AS BEGIN");
+            sb.AppendLine("  SET NOCOUNT ON;");
+            sb.AppendLine("  SELECT t.name AS tableName, st.name AS datatype, cc.*");
+            sb.AppendLine("  FROM sys.columns cc, sys.tables t, sys.systypes st");
+            sb.AppendLine("  WHERE cc.object_id = t.object_id");
+            sb.AppendLine("    AND t.name = @tableName");
+            sb.AppendLine("    AND st.xtype = cc.system_type_id");
+            sb.AppendLine("    AND st.status = 0");
+            sb.AppendLine("END");
+
+            ExecuteTextCommand(sb.ToString());
         }
 
         private void DeleteSP(string storedProcedure)

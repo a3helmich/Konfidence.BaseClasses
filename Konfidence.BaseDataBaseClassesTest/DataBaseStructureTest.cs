@@ -62,15 +62,6 @@ namespace Konfidence.BaseDataBaseClassesTest
         #endregion
 
         /// <summary>
-        ///A test for DataBaseStructure Constructor
-        ///</summary>
-        [TestMethod()]
-        public void DataBaseStructureConstructorTest()
-        {
-            DataBaseStructure target = new DataBaseStructure();
-        }
-
-        /// <summary>
         ///A test for BuildStructure
         ///</summary>
         [TestMethod()]
@@ -79,6 +70,8 @@ namespace Konfidence.BaseDataBaseClassesTest
             DataBaseStructure target = new DataBaseStructure(); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
+
+            Assert.AreEqual(12, target.TableList.Count); // newsletter heeft nu 12 tabellen
         }
     }
 }

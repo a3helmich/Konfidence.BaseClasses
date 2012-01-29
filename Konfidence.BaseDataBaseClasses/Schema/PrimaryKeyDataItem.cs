@@ -10,7 +10,6 @@ namespace Konfidence.BaseData.Schema
         private const string CONSTRAINT_NAME = "Constraint_Name";
         private const string PRIMARYKEYID = "PrimaryKeyId";
 
-        private const string PRIMARYKEY_GET = "PrimaryKey_Get";
         private const string TABLENAME = "tableName";
 
         private string _ConstraintName = string.Empty;
@@ -50,7 +49,7 @@ namespace Konfidence.BaseData.Schema
         {
             SetParameter(TABLENAME, tableName);
 
-            GetItem(PRIMARYKEY_GET);
+            GetItem(SPNames.PRIMARYKEY_GET);
         }
 
         protected override void InitializeDataItem()

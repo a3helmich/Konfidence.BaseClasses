@@ -35,7 +35,7 @@ namespace Konfidence.BaseData
 			{
 				if (serviceName.Equals(string.Empty))
 				{
-					throw new Exception("WS is enabled but the webservice is not declared");
+					throw new Exception("WebServices is enabled but the webservice is not declared");
 				}
 
 				return new WSHost(serviceName, databaseName);

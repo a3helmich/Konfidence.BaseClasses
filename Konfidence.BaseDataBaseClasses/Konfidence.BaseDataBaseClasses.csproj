@@ -108,6 +108,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Schema\SPNames.cs" />
     <Compile Include="Schema\DataBaseStructure.cs" />
     <Compile Include="Schema\ColumnDataItem.cs" />
     <Compile Include="Schema\ColumnDataItemList.cs" />
