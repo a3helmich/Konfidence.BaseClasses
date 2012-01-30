@@ -93,7 +93,7 @@ namespace Konfidence.BaseData.Schema
             // find out which column is the primaryKey
             foreach (ColumnDataItem columnDataItem in _ColumnDataItemList)
             {
-                if (columnDataItem.Name.Equals(PrimaryKey))
+                if (columnDataItem.Name.Equals(PrimaryKey, StringComparison.InvariantCultureIgnoreCase))
                 {
                     _IndexColumnsDataItemList.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
 
