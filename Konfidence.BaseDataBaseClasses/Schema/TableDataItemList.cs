@@ -6,18 +6,18 @@ namespace Konfidence.BaseData.Schema
 {
     public class TableDataItemList: BaseDataItemList<TableDataItem>
     {
-        private string _SourcePath;
+        //private string _SourcePath;
 
         private DataTable _DataTableList;
         private List<string> _GeneratedCsFileList = null;
         private List<string> _GeneratedSqlFileList = null;
 
         #region properties
-        public string SourcePath
-        {
-            get { return _SourcePath; }
-            set { _SourcePath = value; }
-        }
+        //public string SourcePath
+        //{
+        //    get { return _SourcePath; }
+        //    set { _SourcePath = value; }
+        //}
 
         public List<string> GeneratedCsFileList
         {

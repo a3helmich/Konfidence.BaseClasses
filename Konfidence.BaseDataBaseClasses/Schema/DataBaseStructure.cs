@@ -19,7 +19,11 @@ namespace DataItemGeneratorClasses
 
         public DataBaseStructure()
         {
+        }
 
+        public DataBaseStructure(string dataBaseName)
+        {
+            DataBaseName = dataBaseName;
         }
 
         public void BuildStructure()
