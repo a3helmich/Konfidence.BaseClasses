@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Konfidence.Base;
 using Konfidence.BaseData;
-using Konfidence.BaseData.Schema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.SqlClient;
 
@@ -16,9 +15,9 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void SqlServerExists()
         {
-            TableDataItemList tableList = null;
+            //TableDataItemList tableList = null;
 
-            tableList = new TableDataItemList("TestDatabase");
+            //tableList = new TableDataItemList("TestDatabase");
         }
     }
 }
