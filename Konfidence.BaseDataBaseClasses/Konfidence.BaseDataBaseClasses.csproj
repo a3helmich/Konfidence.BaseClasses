@@ -108,6 +108,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SchemaBaseDataItem.cs" />
     <Compile Include="SQLHost.cs" />
     <Compile Include="SqlHostException.cs" />
     <Compile Include="SqlServerDataItem.cs" />
