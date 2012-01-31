@@ -7,17 +7,17 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 		protected const string NODEID_FIELD = "NodeId";
 		protected internal const string PARENTNODEID_FIELD = "ParentNodeId";
 		protected const string URL_FIELD = "Url";
-		protected const string ROOT_FIELD = "Root";
-		protected const string VISIBLE_FIELD = "Visible";
+		protected const string ROOT_FIELD = "IsRoot";
+		protected const string VISIBLE_FIELD = "IsVisible";
 		protected const string MENUID_FIELD = "MenuId";
 		protected const string TITLE_FIELD = "MenuText";
 		protected const string DESCRIPTION_FIELD = "Description";
 		protected const string LANGUAGE_FIELD = "Language";
 		protected const string CHILDCOUNT_FIELD = "ChildCount";
-		protected const string NOTLOGONVISIBLE_FIELD = "NotLogonVisible";
-		protected const string LOGONVISIBLE_FIELD = "LogonVisible";
-		protected const string ADMINISTRATORS_FIELD = "Administrators";
-		protected const string LOCALVISIBLE_FIELD = "LocalVisible";
+		protected const string NOTLOGONVISIBLE_FIELD = "IsNotLogonVisible";
+		protected const string LOGONVISIBLE_FIELD = "IsLogonVisible";
+		protected const string ADMINISTRATORS_FIELD = "IsAdministrator";
+		protected const string LOCALVISIBLE_FIELD = "IsLocalVisible";
 
 		private const string MENUITEM_GET = "MENU_GET";
 
