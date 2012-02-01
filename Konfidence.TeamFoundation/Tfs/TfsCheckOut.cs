@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Konfidence.TeamFoundation
 {
-    internal class TfsCheckOut : IDisposable 
+    public class TfsCheckOut : IDisposable 
     {
         private string _FileName = string.Empty;
         private TfsPermissions _TfsPermissions = null;
