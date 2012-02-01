@@ -13,7 +13,7 @@ namespace Konfidence.TeamFoundation
 {
     public class ReferenceReBaser : BaseItem
     {
-        private TfsPermissions _TfsPermissions = new TfsPermissions("tfs.konfidence.nl");
+        private TfsPermissions _TfsPermissions = new TfsPermissions("http://tfs.konfidence.nl:8080/tfs/konfidence");
         private List<string> _RebasedProjectList = new List<string>();
 
         public List<string> RebasedProjectList

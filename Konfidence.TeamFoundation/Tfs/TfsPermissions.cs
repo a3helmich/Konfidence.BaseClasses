@@ -49,7 +49,6 @@ namespace Konfidence.TeamFoundation
                 _Tfs = new TeamFoundationServer(new Uri(_TfsServer), credentials);
                 //_Tfs = new TfsTeamProjectCollection(new Uri(_TfsServer), new UICredentialsProvider());
 
-
                 _Tfs.EnsureAuthenticated();
 
                 _VcServer = _Tfs.GetService(typeof(VersionControlServer)) as VersionControlServer;
