@@ -173,5 +173,24 @@ namespace Konfidence.TeamFoundation
             return false;
         }
 
+        public bool AddCheckIn(string fileName)
+        {
+            TfsInitialize();
+
+            Workspace ws = GetWorkSpace(fileName);
+
+            ws.PendAdd(fileName);
+
+            PendingChange[] pendingChangeList = ws.GetPendingChanges(fileName);
+
+            if (pendingChangeList.Length > 0)
+            {
+                int changeSet = ws.CheckIn(pendingChangeList, "ingecheckt met de team foundation library");
+
+                _CheckOutList.Remove(fileName);
+            }
+
+            return true;
+        }
     }
 }
