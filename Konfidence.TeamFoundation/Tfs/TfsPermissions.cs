@@ -163,7 +163,7 @@ namespace Konfidence.TeamFoundation
 
                 PendingChange[] pendingChangeList = ws.GetPendingChanges(fileName);
 
-                ws.CheckIn(pendingChangeList, "dit is een test met de TF library");
+                ws.CheckIn(pendingChangeList, "ingecheckt met de team foundation library");
 
                 _CheckOutList.Remove(fileName);
 
