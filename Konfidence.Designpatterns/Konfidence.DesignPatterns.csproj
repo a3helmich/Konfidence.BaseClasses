@@ -11,7 +11,7 @@
     <RootNamespace>Konfidence.DesignPatterns</RootNamespace>
     <AssemblyName>Konfidence.Designpatterns</AssemblyName>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>DesignPatterns.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -70,9 +70,6 @@
     <Compile Include="Singleton\SingletonFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DesignPatterns.snk" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +88,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
