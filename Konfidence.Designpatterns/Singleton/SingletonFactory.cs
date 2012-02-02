@@ -4,10 +4,11 @@ using System.Threading;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Konfidence.Base;
 
 namespace Konfidence.DesignPatterns.Singleton
 {
-    public class SingletonFactory
+    public class SingletonFactory : BaseItem
     {
         static private Hashtable SingletonTable = new Hashtable();
         static private TypeFilter SingletonFilter = new TypeFilter(SingletonInterfaceFilter);
