@@ -266,7 +266,24 @@ namespace Konfidence.BaseData
 			throw (new Exception("GetFieldString: dataHost/_PropertyDictionary  is not assigned"));
 		}
 
-		protected bool GetFieldBool(string fieldName)
+        protected bool GetFieldBool(string fieldName)
+        {
+            if (IsAssigned(_PropertyDictionary))
+            {
+                return (bool)_PropertyDictionary[fieldName];
+            }
+            else
+            {
+                if (IsAssigned(_DataHost))
+                {
+                    return _DataHost.GetFieldBool(fieldName);
+                }
+            }
+
+            throw (new Exception("GetFieldBool: dataHost/_PropertyDictionary  is not assigned"));
+        }
+
+		protected bool GetFieldBoolean(string fieldName)
 		{
 			if (IsAssigned(_PropertyDictionary))
 			{
