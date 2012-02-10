@@ -28,17 +28,23 @@ namespace Konfidence.BaseUserControlHelpers
             get { return HttpContext.Current.Request.IsLocal; }
         }
 
-        protected void SessionLogon(string fullName, string email, bool isAdministrator)
+        protected void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
         {
-            HttpContext.Current.Session[KitSessionAccount.AccountObject] = new SessionAccount();
-
-            SessionAccount.FullName = fullName;
-            SessionAccount.Email = email;
-            SessionAccount.IsAdministrator = isAdministrator;
-
-            if (!IsAuthorized)
+            if (!IsEmpty(password) && !IsEmpty(loginPassword))
             {
-                LogOff();
+                if (password.Equals(loginPassword))
+                {
+                    HttpContext.Current.Session[KitSessionAccount.AccountObject] = new SessionAccount();
+
+                    SessionAccount.FullName = fullName;
+                    SessionAccount.Email = email;
+                    SessionAccount.IsAdministrator = isAdministrator;
+
+                    if (!IsAuthorized)
+                    {
+                        LogOff();
+                    }
+                }
             }
         }
 
