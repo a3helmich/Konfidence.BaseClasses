@@ -8,12 +8,15 @@ namespace Konfidence.BaseUserControlHelpers
 {
 	public abstract class BasePage<T>: Page where T: BaseWebPresenter, new()
 	{
-		private bool _IsExpired;  // false by default
-		private bool _IsRefreshed;  // false by default
-
         private BasePageHelper _BasePageHelper = null;  // TODO : aanpassen conform huidige werkwijze -> naar BaseWebPresenter verplaatsen
 
         private T _Presenter = null;
+
+        protected abstract void FormToPresenter();
+        protected abstract void PresenterToForm();
+
+        private bool _IsExpired = false; 
+		private bool _IsRefreshed = false;
 
 		#region properties
         public T Presenter
@@ -69,9 +72,6 @@ namespace Konfidence.BaseUserControlHelpers
         }
         #endregion readonly session properties
 
-        protected abstract void FormToPresenter();
-        protected abstract void PresenterToForm();
-
         protected void Page_Init(object sender, EventArgs e)
         {
             if (!IsAssigned(_Presenter))
@@ -99,12 +99,17 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Redirect(string url)
         {
-            if (!BaseItem.IsEmpty(url))
+            if (!IsEmpty(url))
             {
                 Response.Redirect(url, false);
 
                 Response.End();
             }
+        }
+
+        protected static bool IsEmpty(string assignedString)
+        {
+            return BaseItem.IsEmpty(assignedString);
         }
 
 		protected static bool IsAssigned(object assignedObject)
@@ -118,6 +123,7 @@ namespace Konfidence.BaseUserControlHelpers
 
             _BasePageHelper = new BasePageHelper(Page.Request.Url.ToString());
 
+            // TODO : pageidentifier updatesessionstate and updaterefreshstate -> move to basemasterpage
 			CreatePageIdentifier();
 
 			UpdateSessionState();

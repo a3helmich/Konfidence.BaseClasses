@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
+using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class BaseMasterPage : MasterPage
+    public abstract class BaseMasterPage<T> : MasterPage where T : BaseWebPresenter, new()
     {
-        // TODO : Presenter in BaseMasterPage aanbrengen
         private BasePageHelper _BasePageHelper = null;
+
+        private T _Presenter = null;
+
+        public T Presenter
+        {
+            get
+            {
+                return _Presenter;
+            }
+        }
+
+        protected abstract void FormToPresenter();
+        protected abstract void PresenterToForm();
 
         #region readonly session properties
         protected string CurrentDomainExtension
@@ -38,16 +51,42 @@ namespace Konfidence.BaseUserControlHelpers
         }
         #endregion readonly session properties
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
-            _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
+            if (!IsAssigned(_BasePageHelper))
+            {
+                _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
+            }
 
-            AfterPage_Load();
+            if (!IsAssigned(_Presenter))
+            {
+                _Presenter = new T();
+            }
         }
 
-        protected virtual void AfterPage_Load()
+        protected void Page_Load(object sender, EventArgs e)
         {
-            // NOP
+            FormToPresenter();
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            PresenterToForm();
+        }
+
+        protected void Redirect(string url)
+        {
+            if (!BaseItem.IsEmpty(url))
+            {
+                Response.Redirect(url, false);
+
+                Response.End();
+            }
+        }
+
+        protected static bool IsAssigned(object assignedObject)
+        {
+            return BaseItem.IsAssigned(assignedObject);
         }
     }
 }
