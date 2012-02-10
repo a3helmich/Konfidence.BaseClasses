@@ -68,6 +68,7 @@
     <Compile Include="BaseControlHelper.cs" />
     <Compile Include="BaseItem.cs" />
     <Compile Include="BaseServiceHelper.cs" />
+    <Compile Include="BaseXmlDocument.cs" />
     <Compile Include="KitSessionAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionAccount.cs" />

@@ -7,13 +7,10 @@ using Konfidence.Base;
 
 namespace Konfidence.TeamFoundation
 {
-    public class BaseTfsXmlDocument : XmlDocument
+    public class BaseTfsXmlDocument : BaseXmlDocument
     {
         private bool _Changed = false;
-        private string _FullFileName = string.Empty;
-        private string _PathName = string.Empty;
 
-        private XmlElement _Root;
         private string _NameSpaceURI;
         private XmlNamespaceManager _XmlNamespaceManager;
 
@@ -23,28 +20,11 @@ namespace Konfidence.TeamFoundation
             set { _Changed = value; }
         }
 
-        public string FileName // TODO : moet protected worden
-        {
-            get { return _FullFileName; }
-        }
-
-        protected string PathName
-        {
-            get { return _PathName; }
-        }
-
-        internal protected XmlElement Root
-        {
-            get { return _Root; }
-        }
-
-        // TODO : weer protected
-        public string NameSpaceURI 
+        internal protected string NameSpaceURI 
         {
             get { return _NameSpaceURI; }
         }
 
-        // TODO : weer naar protected brengen
         internal protected XmlNamespaceManager XmlNamespaceManager
         {
             get { return _XmlNamespaceManager; }
@@ -52,34 +32,13 @@ namespace Konfidence.TeamFoundation
 
         public override void Load(string fullFileName)
         {
+            base.Load(fullFileName);
 
-            _FullFileName = fullFileName;
-
-            _PathName = Path.GetDirectoryName(fullFileName) + @"\";
-
-            base.Load(_FullFileName);
-
-            _Root = DocumentElement;
-            _NameSpaceURI = _Root.NamespaceURI;
+            _NameSpaceURI = Root.NamespaceURI;
 
             // create a shortcut namespace reference
             _XmlNamespaceManager = new XmlNamespaceManager(NameTable);
             _XmlNamespaceManager.AddNamespace("p", _NameSpaceURI);
-        }
-
-        protected static bool IsAssigned(object assignedObject)
-        {
-            return BaseItem.IsAssigned(assignedObject);
-        }
-
-        protected static bool IsEmpty(string assignedObject)
-        {
-            return BaseItem.IsEmpty(assignedObject);
-        }
-
-        protected static bool IsNull(string assignedObject)
-        {
-            return BaseItem.IsNull(assignedObject);
         }
 
         protected List<XmlNode> GetItemGroupList(string itemGroupName)
