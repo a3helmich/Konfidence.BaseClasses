@@ -12,24 +12,10 @@ namespace Konfidence.BaseUserControlHelpers
     public class BaseWebPresenter : BaseItem
     {
         private string _MenuPage = string.Empty;
-        private string _AccountEmail = string.Empty;
-        private string _AccountPassword = string.Empty;
 
         public string MenuPage
         {
             get { return ConfigurationManager.AppSettings["MenuPage"] as string; }
-        }
-
-        public string AccountEmail
-        {
-            get { return _AccountEmail; }
-            set { _AccountEmail = value; }
-        }
-
-        public string AccountPassword
-        {
-            get { return _AccountPassword; }
-            set { _AccountPassword = value; }
         }
 
         public SessionAccount SessionAccount
