@@ -98,7 +98,7 @@ namespace Konfidence.Base
 
             if (IsAssigned(valueNode))
             {
-                value = valueNode.Value;
+                value = valueNode.InnerText;
             }
         }
 
