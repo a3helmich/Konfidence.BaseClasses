@@ -12,6 +12,7 @@ namespace Konfidence.BaseUserControlHelpers
     public class BaseWebPresenter : BaseItem
     {
         private string _MenuPage = string.Empty;
+        private string _DataDirectory = string.Empty;
 
         public string MenuPage
         {
@@ -26,6 +27,26 @@ namespace Konfidence.BaseUserControlHelpers
         public bool IsLocal
         {
             get { return HttpContext.Current.Request.IsLocal; }
+        }
+
+        public string DataDirectory
+        {
+            get
+            {
+                if (IsEmpty(_DataDirectory))
+                {
+                    _DataDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+                    if (AppDomain.CurrentDomain.GetData("DataDirectory") != null)
+                    {
+                        _DataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+                    }
+
+                    _DataDirectory += @"\";
+                }
+
+                return _DataDirectory;
+            }
         }
 
         protected void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
