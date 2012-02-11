@@ -70,6 +70,38 @@ namespace Konfidence.Base
             _Root = DocumentElement;
         }
 
+        public void GetAttributeValue(string nodeName, string attributeName, out string value)
+        {
+            XmlNode valueNode = Root.SelectSingleNode(nodeName);
+
+            GetAttributeValue(valueNode, attributeName, out value);
+        }
+
+        public void GetAttributeValue(XmlNode valueNode, string attributeName, out string value)
+        {
+            value = string.Empty;
+
+            if (IsAssigned(valueNode))
+            {
+                if (IsAssigned(valueNode.Attributes[attributeName]))
+                {
+                    value = valueNode.Attributes[attributeName].Value;
+                }
+            }
+        }
+
+        public void GetValue(string nodeName, out string value)
+        {
+            value = string.Empty;
+
+            XmlNode valueNode = Root.SelectSingleNode(nodeName);
+
+            if (IsAssigned(valueNode))
+            {
+                value = valueNode.Value;
+            }
+        }
+
         protected static bool IsAssigned(object assignedObject)
         {
             return BaseItem.IsAssigned(assignedObject);
