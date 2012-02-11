@@ -14,11 +14,6 @@ namespace Konfidence.BaseUserControlHelpers
         private string _MenuPage = string.Empty;
         private string _DataDirectory = string.Empty;
 
-        public string MenuPage
-        {
-            get { return ConfigurationManager.AppSettings["MenuPage"] as string; }
-        }
-
         public SessionAccount SessionAccount
         {
             get { return HttpContext.Current.Session[KitSessionAccount.AccountObject] as SessionAccount; }
