@@ -102,6 +102,18 @@ namespace Konfidence.Base
             }
         }
 
+        public void GetValue(string nodeName, out bool value)
+        {
+            value = false;
+
+            XmlNode valueNode = Root.SelectSingleNode(nodeName);
+
+            if (IsAssigned(valueNode))
+            {
+                bool.TryParse(valueNode.InnerText, out value);
+            }
+        }
+
         protected static bool IsAssigned(object assignedObject)
         {
             return BaseItem.IsAssigned(assignedObject);
