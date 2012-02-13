@@ -450,6 +450,10 @@ namespace Konfidence.BaseData
         }
 		#endregion
 
+        protected virtual void AfterGetDataItem()
+        {
+        }
+
 		protected virtual void InitializeDataItem()
 		{
 			// NOP
@@ -501,10 +505,12 @@ namespace Konfidence.BaseData
 			_DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
 
             dataHost.GetItem(this, storedProcedure, _AutoIdField, autoKeyId);
+				
+            _Id = dataHost.Id; // TODO : why not in GetItem???
 
-            _Id = dataHost.Id;
+            AfterGetDataItem();
 
-			_DataHost = null;
+            _DataHost = null;
 		}
 
         protected virtual void BeforeSave()
