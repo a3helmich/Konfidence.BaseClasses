@@ -90,11 +90,6 @@ namespace Konfidence.BaseUserControlHelpers
         protected void Page_PreRender(object sender, EventArgs e)
         {
             PresenterToForm();
-
-            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["ApplicationTitle"]))
-            {
-                Title = Title + " - " + ConfigurationManager.AppSettings["ApplicationTitle"];
-            }
         }
 
         protected void Redirect(string url)
@@ -107,12 +102,12 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected static bool IsEmpty(string assignedString)
+        protected bool IsEmpty(string assignedString)
         {
             return BaseItem.IsEmpty(assignedString);
         }
 
-		protected static bool IsAssigned(object assignedObject)
+		protected bool IsAssigned(object assignedObject)
 		{
 			return BaseItem.IsAssigned(assignedObject);
 		}

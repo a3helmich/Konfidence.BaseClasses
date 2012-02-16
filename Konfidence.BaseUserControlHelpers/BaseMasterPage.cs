@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 using Konfidence.Base;
+using System.Configuration;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -84,7 +85,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected static bool IsAssigned(object assignedObject)
+        protected bool IsAssigned(object assignedObject)
         {
             return BaseItem.IsAssigned(assignedObject);
         }

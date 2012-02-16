@@ -66,7 +66,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         public string ResolveClientUrl(string url)
         {
-            if (IsAssigned(url))
+            if (!IsEmpty(url))
             {
                 HttpContext.Current.Server.MapPath(url);
             }
@@ -85,6 +85,16 @@ namespace Konfidence.BaseUserControlHelpers
         public string ApplicationPath
         {
             get { return VirtualPathUtility.ToAbsolute(@"~").TrimEnd('/'); }
+        }
+
+        public string RelativePageUrl(string pageUrl)
+        {
+            return VirtualPathUtility.ToAppRelative(pageUrl);
+        }
+
+        public string PageUrl
+        {
+            get { return HttpContext.Current.Request.Url.AbsolutePath; }
         }
 
         public string FromUrl
