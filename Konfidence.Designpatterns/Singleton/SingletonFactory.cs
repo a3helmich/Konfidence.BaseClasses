@@ -32,7 +32,7 @@ namespace Konfidence.DesignPatterns.Singleton
             }
 
             Object singleton;
-            string warningMessage = ": class must implement ISingleton interface";
+            string warningMessage = ": class must implement ISingleton interface"; 
 
             string iSingletonName = typeof(ISingleton).FullName;
 
@@ -51,6 +51,7 @@ namespace Konfidence.DesignPatterns.Singleton
             if (!IsAssigned(singleton))
             {
                 singleton = Activator.CreateInstance(singletonType);
+
                 _SingletonTable.Add(singletonType, singleton);
             }
 
