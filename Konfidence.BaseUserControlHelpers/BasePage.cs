@@ -102,6 +102,11 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        protected Control FindUserControlByType(ControlCollection controlCollection, Type findType)
+        {
+            return BasePageHelper.FindUserControlByType(controlCollection, findType);
+        }
+
         protected bool IsEmpty(string assignedString)
         {
             return BaseItem.IsEmpty(assignedString);

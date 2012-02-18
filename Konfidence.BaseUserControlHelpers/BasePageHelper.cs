@@ -236,5 +236,20 @@ namespace Konfidence.BaseUserControlHelpers
 
             return currentLanguage;
         }
+
+        internal static Control FindUserControlByType(ControlCollection controlCollection, Type findType)
+        {
+            foreach (Control x in controlCollection)
+            {
+                Type wantType = x.GetType();
+
+                if (wantType.IsSubclassOf(findType))
+                {
+                    return x;
+                }
+            }
+
+            return null;
+        }
     }
 }

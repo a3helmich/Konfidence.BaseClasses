@@ -133,6 +133,11 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        protected Control FindUserControlByType(ControlCollection controlCollection, Type findType)
+        {
+            return BasePageHelper.FindUserControlByType(controlCollection, findType);
+        }
+
 		protected override void OnInit(EventArgs e)
 		{
 			_SessionHelper = new SessionHelper(Context, UniqueID);
