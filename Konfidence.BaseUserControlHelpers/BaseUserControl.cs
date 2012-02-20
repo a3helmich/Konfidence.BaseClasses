@@ -58,6 +58,19 @@ namespace Konfidence.BaseUserControlHelpers
         //    }
         //}
 
+        protected bool IsViewStateRestore()
+        {
+            if (IsPostBack)
+            {
+                if (GetViewState("IsViewStateRestore").Equals("IsViewStateRestore"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         protected string GetViewState(string fieldName)
         {
             object viewState = ViewState[fieldName];
@@ -116,6 +129,8 @@ namespace Konfidence.BaseUserControlHelpers
         protected void Page_PreRender(object sender, EventArgs e)
         {
             PresenterToForm();
+
+            ViewState["IsViewStateRestore"] = "IsViewStateRestore";
         }
 
 		protected static bool IsAssigned(object assignedObject)
