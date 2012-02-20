@@ -6,6 +6,7 @@ using Konfidence.Base;
 using System.Web.UI;
 using System.Configuration;
 using System.Web;
+using Konfidence.BaseData;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -14,9 +15,15 @@ namespace Konfidence.BaseUserControlHelpers
         private string _MenuPage = string.Empty;
         private string _DataDirectory = string.Empty;
 
-        public SessionAccount SessionAccount
+        protected BaseDataItem CurrentInternalAccount
         {
-            get { return HttpContext.Current.Session[KitSessionAccount.AccountObject] as SessionAccount; }
+            get { return HttpContext.Current.Session[InternalSessionAccount.CurrentAccount] as BaseDataItem; }
+            set { HttpContext.Current.Session[InternalSessionAccount.CurrentAccount] = value; }
+        }
+
+        private InternalSessionAccount SessionAccount
+        {
+            get { return HttpContext.Current.Session[InternalSessionAccount.AccountObject] as InternalSessionAccount; }
         }
 
         public bool IsLocal
@@ -50,7 +57,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 if (password.Equals(loginPassword))
                 {
-                    HttpContext.Current.Session[KitSessionAccount.AccountObject] = new SessionAccount();
+                    HttpContext.Current.Session[InternalSessionAccount.AccountObject] = new InternalSessionAccount();
 
                     SessionAccount.FullName = fullName;
                     SessionAccount.Email = email;
@@ -76,9 +83,14 @@ namespace Konfidence.BaseUserControlHelpers
 
         public virtual void LogOff()
         {
-            if (IsAssigned(HttpContext.Current.Session[KitSessionAccount.AccountObject]))
+            if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.AccountObject]))
             {
-                HttpContext.Current.Session.Remove(KitSessionAccount.AccountObject);
+                HttpContext.Current.Session.Remove(InternalSessionAccount.AccountObject);
+            }
+
+            if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.CurrentAccount]))
+            {
+                HttpContext.Current.Session.Remove(InternalSessionAccount.CurrentAccount);
             }
         }
 
@@ -99,8 +111,8 @@ namespace Konfidence.BaseUserControlHelpers
 
         public string FromUrl
         {
-            get { return HttpContext.Current.Session[KitSessionAccount.FromUrl] as string; }
-            set { HttpContext.Current.Session[KitSessionAccount.FromUrl] = value; }
+            get { return HttpContext.Current.Session[InternalSessionAccount.FromUrl] as string; }
+            set { HttpContext.Current.Session[InternalSessionAccount.FromUrl] = value; }
         }
 
         public string Email
@@ -133,11 +145,11 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                string ErrorText = HttpContext.Current.Session[KitSessionAccount.LogOnError] as string;
+                string ErrorText = HttpContext.Current.Session[InternalSessionAccount.LogOnError] as string;
 
                 if (!IsEmpty(ErrorText))
                 {
-                    HttpContext.Current.Session.Remove(KitSessionAccount.LogOnError);
+                    HttpContext.Current.Session.Remove(InternalSessionAccount.LogOnError);
 
                     return ErrorText;
                 }
@@ -152,7 +164,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 if (IsAssigned(SessionAccount))
                 {
-                    return IsAssigned(HttpContext.Current.Session[KitSessionAccount.AdministratorRequired]);
+                    return IsAssigned(HttpContext.Current.Session[InternalSessionAccount.AdministratorRequired]);
                 }
 
                 return false;

@@ -11,7 +11,7 @@ namespace Konfidence.BaseUserControlHelpers
 		private SessionHelper _SessionHelper;
 		private bool _IsForeignKeyChanged = false;
 		private bool _IsPrimaryKeyChanged = false;
-		private SessionAccount _SessionAccount = null;
+		private InternalSessionAccount _SessionAccount = null;
 
         private BasePageHelper _BasePageHelper = null; // TODO : --> zie BasePage
 
@@ -45,18 +45,18 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
-		public SessionAccount SessionAccount
-		{
-			get
-			{
-				if (!IsAssigned(_SessionAccount))
-				{
-					_SessionAccount = Session[KitSessionAccount.AccountObject] as SessionAccount;
-				}
+        //public InternalSessionAccount SessionAccount
+        //{
+        //    get
+        //    {
+        //        if (!IsAssigned(_SessionAccount))
+        //        {
+        //            _SessionAccount = Session[InternalSessionAccount.AccountObject] as InternalSessionAccount;
+        //        }
 
-				return _SessionAccount;
-			}
-		}
+        //        return _SessionAccount;
+        //    }
+        //}
 
         protected string GetViewState(string fieldName)
         {
