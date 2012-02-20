@@ -58,24 +58,27 @@ namespace Konfidence.BaseUserControlHelpers
         //    }
         //}
 
-        protected bool IsViewStateRestore()
+        protected bool IsViewStateRestore
         {
-            if (IsPostBack)
+            get
             {
-                if (GetViewState("IsViewStateRestore").Equals("IsViewStateRestore"))
+                if (IsPostBack)
                 {
-                    return true;
+                    if (GetViewState("IsViewStateRestore").Equals("IsViewStateRestore"))
+                    {
+                        return true;
+                    }
                 }
-            }
 
-            return false;
+                return false;
+            }
         }
 
         protected string GetViewState(string fieldName)
         {
             object viewState = ViewState[fieldName];
 
-            if (IsAssigned(viewState))
+            if (viewState != null)
             {
                 return viewState.ToString();
             }
