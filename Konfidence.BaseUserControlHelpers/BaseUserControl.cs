@@ -11,11 +11,15 @@ namespace Konfidence.BaseUserControlHelpers
 		private SessionHelper _SessionHelper;
 		private bool _IsForeignKeyChanged = false;
 		private bool _IsPrimaryKeyChanged = false;
-		private InternalSessionAccount _SessionAccount = null;
+        //private InternalSessionAccount _SessionAccount = null;
 
         private BasePageHelper _BasePageHelper = null; // TODO : --> zie BasePage
 
         private T _Presenter = null;
+
+        protected abstract void FormToPresenter();
+        protected abstract void RestoreViewState();
+        protected abstract void PresenterToForm();
 
         public T Presenter
         {
@@ -113,9 +117,6 @@ namespace Konfidence.BaseUserControlHelpers
         }
         #endregion readonly session properties
 
-        protected abstract void FormToPresenter();
-        protected abstract void PresenterToForm();
-
         protected void Page_Init(object sender, EventArgs e)
         {
             if (!IsAssigned(_Presenter))
@@ -127,6 +128,11 @@ namespace Konfidence.BaseUserControlHelpers
         protected void Page_Load(object sender, EventArgs e)
         {
             FormToPresenter();
+
+            if (IsViewStateRestore && IsPostBack)
+            {
+                RestoreViewState();
+            }
         }
 
         protected void Page_PreRender(object sender, EventArgs e)

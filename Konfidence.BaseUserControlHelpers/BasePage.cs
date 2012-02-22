@@ -13,6 +13,7 @@ namespace Konfidence.BaseUserControlHelpers
         private T _Presenter = null;
 
         protected abstract void FormToPresenter();
+        protected abstract void RestoreViewState();
         protected abstract void PresenterToForm();
 
         private bool _IsExpired = false; 
@@ -34,6 +35,34 @@ namespace Konfidence.BaseUserControlHelpers
 				return _IsRefreshed;
 			}
 		}
+
+        protected bool IsViewStateRestore
+        {
+            get
+            {
+                if (IsPostBack)
+                {
+                    if (GetViewState("IsViewStateRestore").Equals("IsViewStateRestore"))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        protected string GetViewState(string fieldName)
+        {
+            object viewState = ViewState[fieldName];
+
+            if (viewState != null)
+            {
+                return viewState.ToString();
+            }
+
+            return string.Empty;
+        }
 
 		public bool IsExpired
 		{
@@ -85,11 +114,18 @@ namespace Konfidence.BaseUserControlHelpers
             MaintainScrollPositionOnPostBack = true;
 
             FormToPresenter();
+
+            if (IsViewStateRestore && IsPostBack)
+            {
+                RestoreViewState();
+            }
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
             PresenterToForm();
+
+            ViewState["IsViewStateRestore"] = "IsViewStateRestore";
         }
 
         protected void Redirect(string url)
