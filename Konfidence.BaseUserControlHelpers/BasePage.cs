@@ -36,7 +36,7 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
-        protected bool IsViewStateRestore
+        protected bool IsRestoreViewState
         {
             get
             {
@@ -111,18 +111,18 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            MaintainScrollPositionOnPostBack = true;
-
-            FormToPresenter();
-
-            if (IsViewStateRestore && IsPostBack)
+            if (IsRestoreViewState && IsPostBack)
             {
                 RestoreViewState();
             }
+
+            FormToPresenter();
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
+            MaintainScrollPositionOnPostBack = true;
+
             PresenterToForm();
 
             ViewState["IsViewStateRestore"] = "IsViewStateRestore";
