@@ -75,7 +75,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             if (!IsEmpty(url))
             {
-                HttpContext.Current.Server.MapPath(url);
+                return HttpContext.Current.Server.MapPath(url);
             }
 
             return string.Empty;
