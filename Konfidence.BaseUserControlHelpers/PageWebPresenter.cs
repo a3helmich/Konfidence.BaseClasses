@@ -104,6 +104,11 @@ namespace Konfidence.BaseUserControlHelpers
             return VirtualPathUtility.ToAppRelative(pageUrl);
         }
 
+        public string AbsolutePageUrl(string pageUrl)
+        {
+            return VirtualPathUtility.ToAbsolute(pageUrl);
+        }
+
         public string PageUrl
         {
             get { return HttpContext.Current.Request.Url.AbsolutePath; }
