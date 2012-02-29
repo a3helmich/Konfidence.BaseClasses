@@ -83,6 +83,7 @@
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="BaseConfigMailDataItem.cs" />
+    <Compile Include="BaseWebService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DbSiteMapProvider\DbSiteMapProvider.cs" />
     <Compile Include="DbSiteMapProvider\DbSiteMapProviderAdministrator.cs">
       <SubType>Code</SubType>
