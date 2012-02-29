@@ -331,8 +331,11 @@ namespace Konfidence.BaseData
             {
                 if (Debugger.IsAttached)
                 {
-                    if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+                    if (databaseInstance.DbProviderFactory is SqlClientFactory)
                     {
+                        if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+                        {
+                        }
                     }
                 }
             }
