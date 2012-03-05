@@ -6,9 +6,11 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public class BaseThreadManager<T, K> : BaseItem where T: BaseThreadRunner<K>, new() where K: BaseThreadAction, new()
+    public class BaseThreadManager<T, K, L> : BaseItem
+        where T : BaseThreadRunner<K, L>, new() where K : BaseThreadAction<L>, new() where L : BaseThreadParameterObject
     {
         private T _ThreadRunner = null;
+        private L _ParameterObject = null;
 
         protected T ThreadRunner
         {
@@ -20,11 +22,23 @@ namespace Konfidence.BaseThreadClasses
             get { return IsAssigned(_ThreadRunner); }
         }
 
+        private BaseThreadManager()
+        {
+             // afsluiten voor de buitenwereld
+        }
+
+        public BaseThreadManager(L parameterObject)
+        {
+            _ParameterObject = parameterObject;
+        }
+
         public void StartThread()
         {
             if (!IsAssigned(_ThreadRunner))
             {
                 _ThreadRunner = new T();
+
+                _ThreadRunner.SetParameterObject(_ParameterObject);
 
                 _ThreadRunner.StartThreadRunner();
             }

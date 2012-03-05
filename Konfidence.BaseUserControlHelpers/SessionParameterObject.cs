@@ -2,7 +2,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-	public class SessionParameterObject: BaseItem
+    public class SessionParameterObject : BaseParameterObject
 	{
 		private int _PrimaryKey; // default value 0 
 		private int _ForeignKey; // default value 0
