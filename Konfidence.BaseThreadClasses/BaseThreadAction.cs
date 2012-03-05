@@ -8,7 +8,7 @@ namespace Konfidence.BaseThreadClasses
 {
     public abstract class BaseThreadAction : BaseItem
     {
-        public abstract void Execute();
+        internal abstract void Execute();
 
         private bool _IsTerminating = false;
 

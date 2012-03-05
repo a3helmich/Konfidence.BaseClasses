@@ -10,7 +10,7 @@ namespace Konfidence.BaseThreadClasses
     {
         private T _ThreadRunner = null;
 
-        public T ThreadRunner
+        protected T ThreadRunner
         {
             get { return _ThreadRunner; }
         }

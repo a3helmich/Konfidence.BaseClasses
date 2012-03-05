@@ -16,7 +16,7 @@ namespace Konfidence.BaseThreadClasses
         private T _ThreadAction = null;
         private Thread _InternalThread = null;
 
-        public T ThreadAction
+        protected T ThreadAction
         {
             get { return _ThreadAction; }
         }
