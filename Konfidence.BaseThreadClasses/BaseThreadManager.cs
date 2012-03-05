@@ -6,7 +6,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public class BaseThreadManager<T, K> : BaseItem where T: BaseThreadRunner<K>, new() where K: BaseThreadExecute, new()
+    public class BaseThreadManager<T, K> : BaseItem where T: BaseThreadRunner<K>, new() where K: BaseThreadAction, new()
     {
         private T _ThreadRunner = null;
 

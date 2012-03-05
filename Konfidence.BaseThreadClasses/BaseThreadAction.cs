@@ -6,7 +6,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public abstract class BaseThreadExecute : BaseItem
+    public abstract class BaseThreadAction : BaseItem
     {
         public abstract void Execute();
 

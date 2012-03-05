@@ -7,26 +7,36 @@ using System.Threading;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public abstract class BaseThreadRunner<T> : BaseItem where T : BaseThreadExecute, new()
+    public abstract class BaseThreadRunner<T> : BaseItem where T : BaseThreadAction, new()
     {
-        protected abstract void ThreadLoop(T threadExecute);
+        //protected abstract void ThreadLoop(T threadExecute);
+        protected abstract void BeforeExecute();
+        protected abstract void AfterExecute();
 
-        private T _ThreadExecute = null;
+        private T _ThreadAction = null;
         private Thread _InternalThread = null;
 
-        public T ThreadExecute
+        public T ThreadAction
         {
-            get { return _ThreadExecute; }
+            get { return _ThreadAction; }
         }
 
         private void InternalThreadLoop()
         {
-            ThreadLoop(ThreadExecute);
+            //ThreadLoop(ThreadAction);
+            while (_InternalThread.IsAlive && !ThreadAction.IsTerminating)
+            {
+                BeforeExecute();
+
+                ThreadAction.Execute();
+
+                AfterExecute();
+            }
         }
 
         public void StartThreadRunner()
         {
-            _ThreadExecute = new T();
+            _ThreadAction = new T();
 
             _InternalThread = new Thread(new ThreadStart(InternalThreadLoop));
 
@@ -37,9 +47,9 @@ namespace Konfidence.BaseThreadClasses
         {
             if (IsAssigned(_InternalThread))
             {
-                if (IsAssigned(ThreadExecute))
+                if (IsAssigned(ThreadAction))
                 {
-                    ThreadExecute.IsTerminating = true;
+                    ThreadAction.IsTerminating = true;
                 }
             }
 
@@ -47,7 +57,7 @@ namespace Konfidence.BaseThreadClasses
 
             _InternalThread = null;
 
-            _ThreadExecute = null;
+            _ThreadAction = null;
         }
 
         protected void SleepThread(int seconds)
@@ -57,7 +67,7 @@ namespace Konfidence.BaseThreadClasses
                 int index = 0;
 
                 // Wacht een aantal seconden
-                while ((index < seconds) && !ThreadExecute.IsTerminating)
+                while ((index < seconds) && !ThreadAction.IsTerminating)
                 {
                     index++;
                     Thread.Sleep(1000);
