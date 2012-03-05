@@ -9,5 +9,13 @@ namespace Konfidence.BaseThreadClasses
     public abstract class BaseThreadExecute : BaseItem
     {
         public abstract void Execute();
+
+        private bool _IsTerminating = false;
+
+        internal bool IsTerminating
+        {
+            get { return _IsTerminating; }
+            set { _IsTerminating = value; }
+        }
     }
 }
