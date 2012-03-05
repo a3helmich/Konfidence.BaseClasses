@@ -8,7 +8,7 @@ namespace Konfidence.BaseUserControlHelpers
 {
 	public abstract class BasePage<T>: Page where T: BaseWebPresenter, new()
 	{
-        private BasePageHelper _BasePageHelper = null;  // TODO : aanpassen conform huidige werkwijze -> naar BaseWebPresenter verplaatsen
+        private BasePageHelper _BasePageHelper = null;  // TODO : aanpassen conform nieuwe werkwijze -> naar BaseWebPresenter verplaatsen
 
         private T _Presenter = null;
 
@@ -22,19 +22,18 @@ namespace Konfidence.BaseUserControlHelpers
 		#region properties
         public T Presenter
         {
-            get
-            {
-                return _Presenter;
-            }
+            get { return _Presenter; }
         }
 
 		public bool IsRefreshed
 		{
-			get
-			{
-				return _IsRefreshed;
-			}
+			get { return _IsRefreshed; }
 		}
+
+        public bool IsExpired
+        {
+            get { return _IsExpired; }
+        }
 
         protected bool IsRestoreViewState
         {
@@ -63,14 +62,6 @@ namespace Konfidence.BaseUserControlHelpers
 
             return string.Empty;
         }
-
-		public bool IsExpired
-		{
-			get
-			{
-				return _IsExpired;
-			}
-		}
 
 		#endregion
 

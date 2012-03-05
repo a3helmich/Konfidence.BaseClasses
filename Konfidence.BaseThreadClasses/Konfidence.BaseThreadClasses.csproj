@@ -64,9 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseThreadExecute.cs" />
     <Compile Include="BaseThreadItem.cs" />
+    <Compile Include="BaseThreadManager.cs" />
     <Compile Include="BaseThreadManagerItem.cs" />
     <Compile Include="BaseThreadParameterItem.cs" />
+    <Compile Include="BaseThreadRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
