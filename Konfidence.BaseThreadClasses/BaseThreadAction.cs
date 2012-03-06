@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Konfidence.Base;
+using System.Threading;
 
 namespace Konfidence.BaseThreadClasses
 {
@@ -21,6 +22,11 @@ namespace Konfidence.BaseThreadClasses
         protected void Finished()
         {
             IsTerminating = true;
+        }
+
+        protected void Sleep(int milliseconds)
+        {
+            Thread.Sleep(milliseconds);
         }
     }
 }
