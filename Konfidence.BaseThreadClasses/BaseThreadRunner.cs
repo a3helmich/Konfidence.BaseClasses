@@ -79,6 +79,8 @@ namespace Konfidence.BaseThreadClasses
             _InternalThread = null;
 
             _ThreadAction = null;
+
+            GC.Collect(GC.MaxGeneration); //  GC.Collect(GC.GetGeneration(this));
         }
 
         protected void SleepThread(int seconds)
