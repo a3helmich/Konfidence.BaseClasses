@@ -72,18 +72,28 @@ namespace Konfidence.BaseThreadClasses
                 }
             }
 
+            if (_InternalThread.IsAlive)
+            {
+                _InternalThread.Join();
+            }
+
             CleanupThread();
         }
 
         private void CleanupThread()
         {
-            _InternalThread.Join();
+            try
+            {
+                _InternalThread = null;
 
-            _InternalThread = null;
+                _ThreadAction = null;
 
-            _ThreadAction = null;
-
-            GC.Collect(GC.MaxGeneration); //  GC.Collect(GC.GetGeneration(this));
+                GC.Collect(GC.MaxGeneration); //  GC.Collect(GC.GetGeneration(this));
+            }
+            catch (Exception ex)
+            {
+                string test = ex.Message;
+            }
         }
 
         protected void SleepThread(int seconds)
