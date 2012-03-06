@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public abstract class BaseThreadRunner<T, L> : BaseItem where T : BaseThreadAction<L>, new() where L: BaseThreadParameterObject
+    public abstract class BaseThreadRunner<T> : BaseItem where T : BaseThreadAction, new() 
     {
         //protected abstract void ThreadLoop(T threadExecute);
         protected abstract void BeforeExecute();
@@ -15,7 +15,7 @@ namespace Konfidence.BaseThreadClasses
 
         private T _ThreadAction = null;
         private Thread _InternalThread = null;
-        private BaseParameterObject _ParameterObject;
+
 
         internal bool IsRunning
         {
@@ -33,11 +33,6 @@ namespace Konfidence.BaseThreadClasses
         protected T ThreadAction
         {
             get { return _ThreadAction; }
-        }
-
-        internal void SetParameterObject(BaseParameterObject parameterObject)
-        {
-            _ParameterObject = parameterObject;
         }
 
         private void InternalThreadLoop()
@@ -58,8 +53,6 @@ namespace Konfidence.BaseThreadClasses
         public void StartThreadRunner()
         {
             _ThreadAction = new T();
-
-            _ThreadAction.SetParameterObject(_ParameterObject);
 
             _InternalThread = new Thread(new ThreadStart(InternalThreadLoop));
 

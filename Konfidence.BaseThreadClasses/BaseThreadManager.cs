@@ -6,14 +6,13 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public abstract class BaseThreadManager<T, K, L> : BaseItem
-        where T : BaseThreadRunner<K, L>, new() where K : BaseThreadAction<L>, new() where L : BaseThreadParameterObject
+    public abstract class BaseThreadManager<T, K> : BaseItem
+        where T : BaseThreadRunner<K>, new() where K : BaseThreadAction, new() 
     {
         protected abstract void BeforeStart();
         protected abstract void AfterStop();
 
         private T _ThreadRunner = null;
-        private L _ParameterObject = null;
 
         protected T ThreadRunner
         {
@@ -31,16 +30,6 @@ namespace Konfidence.BaseThreadClasses
 
                 return false;
             }
-        }
-
-        private BaseThreadManager()
-        {
-             // afsluiten voor de buitenwereld
-        }
-
-        public BaseThreadManager(L parameterObject)
-        {
-            _ParameterObject = parameterObject;
         }
 
         private void GetThreadRunner()
@@ -62,8 +51,6 @@ namespace Konfidence.BaseThreadClasses
             if (!IsRunning)
             {
                 GetThreadRunner();
-
-                ThreadRunner.SetParameterObject(_ParameterObject);
 
                 ThreadRunner.StartThreadRunner();
             }
