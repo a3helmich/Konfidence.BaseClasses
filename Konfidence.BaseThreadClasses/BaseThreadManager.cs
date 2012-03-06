@@ -6,9 +6,12 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public class BaseThreadManager<T, K, L> : BaseItem
+    public abstract class BaseThreadManager<T, K, L> : BaseItem
         where T : BaseThreadRunner<K, L>, new() where K : BaseThreadAction<L>, new() where L : BaseThreadParameterObject
     {
+        protected abstract void BeforeStart();
+        protected abstract void AfterStop();
+
         private T _ThreadRunner = null;
         private L _ParameterObject = null;
 
@@ -43,10 +46,14 @@ namespace Konfidence.BaseThreadClasses
         private void GetThreadRunner()
         {
             _ThreadRunner = new T();
+
+            BeforeStart();
         }
 
         private void DeleteThreadRunner()
         {
+            AfterStop();
+
             _ThreadRunner = null;
         }
 
