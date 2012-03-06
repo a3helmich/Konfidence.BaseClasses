@@ -17,9 +17,17 @@ namespace Konfidence.BaseThreadClasses
             get { return _ThreadRunner; }
         }
 
-        public bool IsActive
+        public bool IsRunning
         {
-            get { return IsAssigned(_ThreadRunner); }
+            get
+            {
+                if (IsAssigned(_ThreadRunner))
+                {
+                    return _ThreadRunner.IsRunning;
+                }
+
+                return false;
+            }
         }
 
         private BaseThreadManager()
@@ -32,25 +40,35 @@ namespace Konfidence.BaseThreadClasses
             _ParameterObject = parameterObject;
         }
 
+        private void GetThreadRunner()
+        {
+            _ThreadRunner = new T();
+        }
+
+        private void DeleteThreadRunner()
+        {
+            _ThreadRunner = null;
+        }
+
         public void StartThread()
         {
-            if (!IsAssigned(_ThreadRunner))
+            if (!IsRunning)
             {
-                _ThreadRunner = new T();
+                GetThreadRunner();
 
-                _ThreadRunner.SetParameterObject(_ParameterObject);
+                ThreadRunner.SetParameterObject(_ParameterObject);
 
-                _ThreadRunner.StartThreadRunner();
+                ThreadRunner.StartThreadRunner();
             }
         }
 
         public void StopThread()
         {
-            if (IsAssigned(_ThreadRunner))
+            if (IsRunning)
             {
-                _ThreadRunner.StopThreadRunner();
+                ThreadRunner.StopThreadRunner();
 
-                _ThreadRunner = null;
+                DeleteThreadRunner();
             }
         }
     }

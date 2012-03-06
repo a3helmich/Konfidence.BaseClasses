@@ -28,5 +28,10 @@ namespace Konfidence.BaseThreadClasses
         {
             _ParameterObject = parameterObject as T;
         }
+
+        protected void Finished()
+        {
+            IsTerminating = true;
+        }
     }
 }

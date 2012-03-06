@@ -17,9 +17,27 @@ namespace Konfidence.BaseThreadClasses
         private Thread _InternalThread = null;
         private BaseParameterObject _ParameterObject;
 
+        internal bool IsRunning
+        {
+            get
+            {
+                if (IsAssigned(_ThreadAction))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         protected T ThreadAction
         {
             get { return _ThreadAction; }
+        }
+
+        internal void SetParameterObject(BaseParameterObject parameterObject)
+        {
+            _ParameterObject = parameterObject;
         }
 
         private void InternalThreadLoop()
@@ -33,11 +51,8 @@ namespace Konfidence.BaseThreadClasses
 
                 AfterExecute();
             }
-        }
 
-        internal void SetParameterObject(BaseParameterObject parameterObject)
-        {
-            _ParameterObject = parameterObject;
+            CleanupThread();
         }
 
         public void StartThreadRunner()
@@ -61,6 +76,11 @@ namespace Konfidence.BaseThreadClasses
                 }
             }
 
+            CleanupThread();
+        }
+
+        private void CleanupThread()
+        {
             _InternalThread.Join();
 
             _InternalThread = null;
