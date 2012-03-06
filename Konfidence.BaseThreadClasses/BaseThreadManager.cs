@@ -32,25 +32,16 @@ namespace Konfidence.BaseThreadClasses
             }
         }
 
-        private void GetThreadRunner()
+        public BaseThreadManager()
         {
             _ThreadRunner = new T();
-
-            BeforeStart();
-        }
-
-        private void DeleteThreadRunner()
-        {
-            AfterStop();
-
-            _ThreadRunner = null;
         }
 
         public void StartThread()
         {
             if (!IsRunning)
             {
-                GetThreadRunner();
+                BeforeStart();
 
                 ThreadRunner.StartThreadRunner();
             }
@@ -62,7 +53,7 @@ namespace Konfidence.BaseThreadClasses
             {
                 ThreadRunner.StopThreadRunner();
 
-                DeleteThreadRunner();
+                AfterStop();
             }
         }
     }
