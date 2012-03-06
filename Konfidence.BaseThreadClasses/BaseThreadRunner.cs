@@ -12,6 +12,7 @@ namespace Konfidence.BaseThreadClasses
         //protected abstract void ThreadLoop(T threadExecute);
         protected abstract void BeforeExecute();
         protected abstract void AfterExecute();
+        protected abstract void InitializeThreadLoop();
 
         private T _ThreadAction = null;
         private Thread _InternalThread = null;
@@ -37,6 +38,8 @@ namespace Konfidence.BaseThreadClasses
 
         private void InternalThreadLoop()
         {
+            InitializeThreadLoop();
+
             //ThreadLoop(ThreadAction);
             while (_InternalThread.IsAlive && !ThreadAction.IsTerminating)
             {
