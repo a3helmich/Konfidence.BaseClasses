@@ -84,6 +84,11 @@ namespace Konfidence.BaseData
 			return BaseItem.IsAssigned(assignedObject);
 		}
 
+        protected static bool IsEmpty(string assignedString)
+        {
+            return BaseItem.IsEmpty(assignedString);
+        }
+
 		/// <summary>
 		/// create and return a xxxDataItem derived from BaseDataItem
 		/// </summary>
