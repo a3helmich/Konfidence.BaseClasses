@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Configuration;
 using System.Web;
 using Konfidence.BaseData;
+using Konfidence.BaseUserControlHelpers.PageSetting;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -14,6 +15,9 @@ namespace Konfidence.BaseUserControlHelpers
     {
         private string _MenuPage = string.Empty;
         private string _DataDirectory = string.Empty;
+
+        private PageSettingDictionary _PageSettingDictionary = null;
+        private PageSettingXmlDocument _PageSettingDocument = null;
 
         protected BaseDataItem CurrentInternalAccount
         {
@@ -199,6 +203,34 @@ namespace Konfidence.BaseUserControlHelpers
                 }
 
                 return false;
+            }
+        }
+
+        protected PageSettingXmlDocument PageSettingDocument
+        {
+            get
+            {
+                if (!IsAssigned(_PageSettingDocument))
+                {
+                    _PageSettingDocument = new PageSettingXmlDocument();
+
+                    _PageSettingDocument.Load(DataDirectory + "PageSetting.nl.xml");
+                }
+
+                return _PageSettingDocument;
+            }
+        }
+
+        public PageSettingDictionary PageSettingDictionary
+        {
+            get
+            {
+                if (!IsAssigned(_PageSettingDictionary))
+                {
+                    _PageSettingDictionary = PageSettingDocument.PageSettingDictionary;
+                }
+
+                return _PageSettingDictionary;
             }
         }
     }
