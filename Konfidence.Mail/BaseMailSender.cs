@@ -12,6 +12,10 @@ namespace Konfidence.Mail
         private string _MailUser = string.Empty;
         private string _MailPassword = string.Empty;
 
+        private BaseMailSender()
+        {
+        }
+
         public BaseMailSender(string fromAddress, string mailHost, string mailUser, string mailPassword)
         {
             _FromAddress = fromAddress;
