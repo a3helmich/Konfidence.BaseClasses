@@ -10,29 +10,29 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
     public class PageSettingXmlDocument : BaseXmlDocument
     {
         private PageSettingDictionary _PageSettingDictionary = null;
-        private string _MenuPage = string.Empty;
-        private string _LogonPage = string.Empty;
+        private string _MenuUrl = string.Empty;
+        private string _LogonUrl = string.Empty;
 
-        public string MenuPage
+        public string MenuUrl
         {
             get
             {
                 if (PageSettingDictionary.Count > 0)
                 {
-                    return _MenuPage;
+                    return _MenuUrl;
                 }
 
                 return string.Empty;
             }
         }
 
-        public string LogonPage
+        public string LogonUrl
         {
             get
             {
                 if (PageSettingDictionary.Count > 0)
                 {
-                    return _LogonPage;
+                    return _LogonUrl;
                 }
 
                 return string.Empty;
@@ -62,10 +62,10 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
                             switch (role)
                             {
                                 case "login":
-                                    _LogonPage = pageSetting.PageName;
+                                    _LogonUrl = pageSetting.PageName;
                                     break;
                                 case "mainmenu":
-                                    _MenuPage = pageSetting.PageName;
+                                    _MenuUrl = pageSetting.PageName;
                                     break;
                             }
                         }

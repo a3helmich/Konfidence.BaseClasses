@@ -33,6 +33,19 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
             }
         }
 
+        public bool IsLogonRequired
+        {
+            get
+            {
+                if (State.Equals("Authenticated", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         public string State
         {
             get

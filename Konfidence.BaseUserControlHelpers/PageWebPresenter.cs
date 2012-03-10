@@ -233,5 +233,60 @@ namespace Konfidence.BaseUserControlHelpers
                 return _PageSettingDictionary;
             }
         }
+
+        public string MenuPageName
+        {
+            get
+            {
+                return PageSettingDocument.MenuUrl;
+            }
+        }
+
+        public string MenuUrl
+        {
+            get
+            {
+                if (!IsEmpty(PageSettingDocument.MenuUrl))
+                {
+                    return @"~\" + PageSettingDocument.MenuUrl;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string LogonPageName
+        {
+            get
+            {
+                return PageSettingDocument.LogonUrl;
+            }
+        }
+
+        public string LogonUrl
+        {
+            get
+            {
+                if (!IsEmpty(PageSettingDocument.LogonUrl))
+                {
+                    return @"~\" + PageSettingDocument.LogonUrl;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public bool IsLogonRequired
+        {
+            get
+            {
+                if (PageSettingDictionary.ContainsKey(PageUrl))
+                {
+                    return PageSettingDictionary[PageUrl].IsLogonRequired;
+                }
+
+                return false;
+            }
+        }
     }
 }
