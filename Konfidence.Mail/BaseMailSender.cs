@@ -7,12 +7,12 @@ namespace Konfidence.Mail
 {
 	public class BaseMailSender : BaseItem
 	{
-		protected static bool SendEmail(string toEmailAddress, string subject, string mailBody)
+		public bool SendEmail(string toEmailAddress, string subject, string mailBody)
 		{
 			return SendEmail(toEmailAddress, subject, mailBody, true);
 		}
 		
-		protected static bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml)
+		public bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml)
 		{
 			SmtpClient smtpClient;
 			MailMessage mailMessage;
@@ -46,7 +46,7 @@ namespace Konfidence.Mail
 			return true;
 		}
 
-		protected static string Replace(string line, string tag, string subString)
+		private string Replace(string line, string tag, string subString)
 		{
 			return Regex.Replace(line, tag, subString, RegexOptions.IgnoreCase);
 		}
