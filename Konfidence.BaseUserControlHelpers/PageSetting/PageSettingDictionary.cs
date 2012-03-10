@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Konfidence.BaseUserControlHelpers.PageSetting
 {
-    class PageSettingDictionary
+    public class PageSettingDictionary : Dictionary<string, PageSetting>
     {
     }
 }
