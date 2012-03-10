@@ -3,7 +3,7 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using Konfidence.Base;
 
-namespace Konfidence.BaseUserControlHelpers
+namespace Konfidence.Mail
 {
 	public class BaseMailSender : BaseItem
 	{

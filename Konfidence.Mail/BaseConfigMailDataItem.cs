@@ -1,6 +1,6 @@
 using Konfidence.BaseData;
 
-namespace Konfidence.BaseUserControlHelpers
+namespace Konfidence.Mail
 {
 	public class BaseConfigMailDataItem : BaseDataItem
 	{
