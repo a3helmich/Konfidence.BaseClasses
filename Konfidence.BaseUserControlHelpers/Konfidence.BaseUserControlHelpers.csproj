@@ -87,7 +87,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseMailSender.cs" />
     <Compile Include="BaseMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -101,7 +100,6 @@
     <Compile Include="BaseUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BaseConfigMailDataItem.cs" />
     <Compile Include="BaseWebService.cs">
       <SubType>Component</SubType>
     </Compile>
