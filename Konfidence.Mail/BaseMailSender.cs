@@ -7,6 +7,19 @@ namespace Konfidence.Mail
 {
 	public class BaseMailSender : BaseItem
 	{
+        private string _FromAddress = string.Empty;
+        private string _MailHost = string.Empty;
+        private string _MailUser = string.Empty;
+        private string _MailPassword = string.Empty;
+
+        public BaseMailSender(string fromAddress, string mailHost, string mailUser, string mailPassword)
+        {
+            _FromAddress = fromAddress;
+            _MailHost = mailHost;
+            _MailUser = mailUser;
+            _MailPassword = mailPassword;
+        }
+
 		public bool SendEmail(string toEmailAddress, string subject, string mailBody)
 		{
 			return SendEmail(toEmailAddress, subject, mailBody, true);
@@ -17,20 +30,18 @@ namespace Konfidence.Mail
 			SmtpClient smtpClient;
 			MailMessage mailMessage;
 
-			BaseConfigMailDataItem baseConfigMailDataItem = new BaseConfigMailDataItem();
-
-			MailAddress mailFrom = new MailAddress(baseConfigMailDataItem.FromAddress);
+			MailAddress mailFrom = new MailAddress(_FromAddress);
 			MailAddress mailTo = new MailAddress(toEmailAddress);
 
 			mailMessage = new MailMessage(mailFrom, mailTo);
-			smtpClient = new SmtpClient(baseConfigMailDataItem.MailHost);
+			smtpClient = new SmtpClient(_MailHost);
 
 			mailMessage.Body = mailBody;
 			mailMessage.IsBodyHtml = bodyIsHtml;
 
 			mailMessage.Subject = subject;
 
-			NetworkCredential basicAuthenticationInfo = new NetworkCredential(baseConfigMailDataItem.MailUser, baseConfigMailDataItem.MailPassword);
+			NetworkCredential basicAuthenticationInfo = new NetworkCredential(_MailUser, _MailPassword);
 
 			smtpClient.UseDefaultCredentials = false;
 			smtpClient.Credentials = basicAuthenticationInfo;
