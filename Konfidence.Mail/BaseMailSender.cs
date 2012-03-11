@@ -26,10 +26,10 @@ namespace Konfidence.Mail
 
 		public bool SendEmail(string toEmailAddress, string subject, string mailBody)
 		{
-			return SendEmail(toEmailAddress, subject, mailBody, true);
+			return SendEmail(toEmailAddress, subject, mailBody, true, string.Empty);
 		}
 		
-		public bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml)
+		public bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml, string fileName)
 		{
 			SmtpClient smtpClient;
 			MailMessage mailMessage;
@@ -44,6 +44,13 @@ namespace Konfidence.Mail
 			mailMessage.IsBodyHtml = bodyIsHtml;
 
 			mailMessage.Subject = subject;
+
+            if (!IsEmpty(fileName))
+            {
+                Attachment attachment = new Attachment(fileName);
+
+                mailMessage.Attachments.Add(attachment);
+            }
 
 			NetworkCredential basicAuthenticationInfo = new NetworkCredential(_MailUser, _MailPassword);
 
