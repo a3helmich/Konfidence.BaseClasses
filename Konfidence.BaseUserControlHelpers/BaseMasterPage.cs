@@ -18,6 +18,11 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
+                if (!IsAssigned(_Presenter))
+                {
+                    BuildPresenter();
+                }
+
                 return _Presenter;
             }
         }
@@ -28,42 +33,100 @@ namespace Konfidence.BaseUserControlHelpers
         #region readonly session properties
         protected string CurrentDomainExtension
         {
-            get { return _BasePageHelper.CurrentDomainExtension; }
+            get
+            {
+                if (IsAssigned(_BasePageHelper))
+                {
+                    return _BasePageHelper.CurrentDomainExtension;
+                }
+
+                return string.Empty;
+            }
         }
 
         protected string CurrentLanguage
         {
-            get { return _BasePageHelper.CurrentLanguage; }
+            get
+            {
+                if (IsAssigned(_BasePageHelper))
+                {
+                    return _BasePageHelper.CurrentLanguage;
+                }
+
+                return string.Empty;
+            }
         }
 
         protected string CurrentDnsName
         {
-            get { return _BasePageHelper.CurrentDnsName; }
+            get
+            {
+                if (IsAssigned(_BasePageHelper))
+                {
+                    return _BasePageHelper.CurrentDnsName;
+                }
+
+                return string.Empty;
+            }
         }
 
         protected string CurrentPagePath
         {
-            get { return _BasePageHelper.CurrentPagePath; }
+            get
+            {
+                if (IsAssigned(_BasePageHelper))
+                {
+                    return _BasePageHelper.CurrentPagePath;
+                }
+
+                return string.Empty;
+            }
         }
 
         protected string CurrentPageName
         {
-            get { return _BasePageHelper.CurrentPageName; }
+            get
+            {
+                if (IsAssigned(_BasePageHelper))
+                {
+                    return _BasePageHelper.CurrentPageName;
+                }
+
+                return string.Empty;
+            }
         }
         #endregion readonly session properties
 
-        protected void Page_Init(object sender, EventArgs e)
+        private void BuildPresenter()
         {
             if (!IsAssigned(_BasePageHelper))
             {
-                _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
+                try
+                {
+                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
+                }
+                catch (NullReferenceException)
+                {
+                    // jammer dan
+                }
             }
 
             if (!IsAssigned(_Presenter))
             {
                 _Presenter = new T();
+            }
 
+            if (IsEmpty(_Presenter.PageName))
+            {
                 _Presenter.SetPageName(CurrentPageName);
+            }
+        }
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (!IsPostBack && !Presenter.LogonPageName.Equals(Presenter.PageName, StringComparison.InvariantCultureIgnoreCase))
+            {
+                Presenter.FromUrl = CurrentPagePath;
             }
         }
 
@@ -85,6 +148,11 @@ namespace Konfidence.BaseUserControlHelpers
 
                 Response.End();
             }
+        }
+
+        protected bool IsEmpty(string assignedString)
+        {
+            return BaseItem.IsEmpty(assignedString);
         }
 
         protected bool IsAssigned(object assignedObject)
