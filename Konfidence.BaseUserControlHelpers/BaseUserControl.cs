@@ -28,6 +28,8 @@ namespace Konfidence.BaseUserControlHelpers
                 if (!IsAssigned(_Presenter))
                 {
                     _Presenter = new T();
+
+                    _Presenter.SetPageName(CurrentPageName);
                 }
 
                 return _Presenter;

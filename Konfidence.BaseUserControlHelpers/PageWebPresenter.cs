@@ -13,11 +13,58 @@ namespace Konfidence.BaseUserControlHelpers
 {
     public class BaseWebPresenter : BaseItem
     {
-        private string _MenuPage = string.Empty;
         private string _DataDirectory = string.Empty;
+        private string _PageName = string.Empty;
 
         private PageSettingDictionary _PageSettingDictionary = null;
         private PageSettingXmlDocument _PageSettingDocument = null;
+
+        public string PageName
+        {
+            get { return _PageName; }
+        }
+
+        public string MenuPageName
+        {
+            get
+            {
+                return PageSettingDocument.MenuUrl;
+            }
+        }
+
+        public string MenuUrl
+        {
+            get
+            {
+                if (!IsEmpty(PageSettingDocument.MenuUrl))
+                {
+                    return @"~\" + PageSettingDocument.MenuUrl;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string LogonPageName
+        {
+            get
+            {
+                return PageSettingDocument.LogonUrl;
+            }
+        }
+
+        public string LogonUrl
+        {
+            get
+            {
+                if (!IsEmpty(PageSettingDocument.LogonUrl))
+                {
+                    return @"~\" + PageSettingDocument.LogonUrl;
+                }
+
+                return string.Empty;
+            }
+        }
 
         protected BaseDataItem CurrentInternalAccount
         {
@@ -73,6 +120,11 @@ namespace Konfidence.BaseUserControlHelpers
                     }
                 }
             }
+        }
+
+        internal void SetPageName(string pageName)
+        {
+            _PageName = pageName;
         }
 
         public string ResolveClientUrl(string url)
@@ -233,56 +285,13 @@ namespace Konfidence.BaseUserControlHelpers
                 return _PageSettingDictionary;
             }
         }
-
-        public string MenuPageName
-        {
-            get
-            {
-                return PageSettingDocument.MenuUrl;
-            }
-        }
-
-        public string MenuUrl
-        {
-            get
-            {
-                if (!IsEmpty(PageSettingDocument.MenuUrl))
-                {
-                    return @"~\" + PageSettingDocument.MenuUrl;
-                }
-
-                return string.Empty;
-            }
-        }
-
-        public string LogonPageName
-        {
-            get
-            {
-                return PageSettingDocument.LogonUrl;
-            }
-        }
-
-        public string LogonUrl
-        {
-            get
-            {
-                if (!IsEmpty(PageSettingDocument.LogonUrl))
-                {
-                    return @"~\" + PageSettingDocument.LogonUrl;
-                }
-
-                return string.Empty;
-            }
-        }
-
         public bool IsLogonRequired
         {
             get
             {
-                if (PageSettingDictionary.ContainsKey(PageUrl))
+                if (PageSettingDictionary.ContainsKey(PageName))
                 {
-                    return PageSettingDictionary[PageUrl].IsLogonRequired;
+                    return PageSettingDictionary[PageName].IsLogonRequired;
                 }
 
                 return false;
