@@ -94,6 +94,11 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            if (!IsAssigned(_BasePageHelper))
+            {
+                _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
+            }
+
             if (!IsAssigned(_Presenter))
             {
                 _Presenter = new T();
@@ -154,8 +159,6 @@ namespace Konfidence.BaseUserControlHelpers
 		protected override void OnPreLoad(EventArgs e)
 		{
 			base.OnPreLoad(e);
-
-            _BasePageHelper = new BasePageHelper(Page.Request.Url.ToString());
 
             // TODO : pageidentifier updatesessionstate and updaterefreshstate -> move to basemasterpage
 			CreatePageIdentifier();

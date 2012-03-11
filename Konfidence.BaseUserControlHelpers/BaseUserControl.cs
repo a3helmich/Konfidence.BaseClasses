@@ -25,12 +25,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_Presenter))
-                {
-                    _Presenter = new T();
+                //if (!IsAssigned(_Presenter))
+                //{
+                //    _Presenter = new T();
 
-                    _Presenter.SetPageName(CurrentPageName);
-                }
+                //    _Presenter.SetPageName(CurrentPageName);
+                //}
 
                 return _Presenter;
             }
@@ -121,9 +121,16 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            if (!IsAssigned(_BasePageHelper))
+            {
+                _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
+            }
+
             if (!IsAssigned(_Presenter))
             {
                 _Presenter = new T();
+
+                _Presenter.SetPageName(CurrentPageName);
             }
         }
 
@@ -167,8 +174,6 @@ namespace Konfidence.BaseUserControlHelpers
 		protected override void OnInit(EventArgs e)
 		{
 			_SessionHelper = new SessionHelper(Context, UniqueID);
-
-            _BasePageHelper = new BasePageHelper(Page.Request.Url.ToString());
 
 			base.OnInit(e);
 		}
