@@ -518,6 +518,11 @@ namespace Konfidence.BaseData
             // NOP
         }
 
+        protected virtual void AfterSave()
+        {
+            // NOP
+        }
+
 		public void Save()
 		{
             BeforeSave();
@@ -532,6 +537,8 @@ namespace Konfidence.BaseData
 			dataHost.Save(this, SaveStoredProcedure, AutoIdField, _Id);
 
 			_Id = dataHost.Id;
+
+            AfterSave();
 		}
 
 		public void Delete()
