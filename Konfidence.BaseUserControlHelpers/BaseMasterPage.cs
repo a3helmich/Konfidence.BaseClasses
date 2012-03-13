@@ -142,6 +142,11 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
+            if (Presenter.IsLoggedIn)
+            {
+                Redirect(Presenter.SignInUrl);
+            }
+
             PresenterToForm();
         }
 
