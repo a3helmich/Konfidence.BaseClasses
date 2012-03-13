@@ -285,6 +285,23 @@ namespace Konfidence.BaseUserControlHelpers
                 return _PageSettingDictionary;
             }
         }
+
+        public string SignInUrl
+        {
+            get
+            {
+                if (IsLoggedIn)
+                {
+                    if (PageSettingDictionary.ContainsKey(PageName))
+                    {
+                        return PageSettingDictionary[PageName].SignInUrl;
+                    }
+                }
+
+                return string.Empty;
+            }
+        }
+
         public bool IsLogonRequired
         {
             get

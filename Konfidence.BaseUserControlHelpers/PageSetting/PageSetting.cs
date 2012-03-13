@@ -58,6 +58,18 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
             }
         }
 
+        public string SignInUrl
+        {
+            get
+            {
+                string signInUrl;
+
+                GetValue("SignInUrl", out signInUrl);
+
+                return signInUrl;
+            }
+        }
+
         public string HeaderText
         {
             get
