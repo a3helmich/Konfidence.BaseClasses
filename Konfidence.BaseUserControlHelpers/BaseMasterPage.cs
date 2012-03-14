@@ -151,6 +151,19 @@ namespace Konfidence.BaseUserControlHelpers
             return string.Empty;
         }
 
+
+        protected string GetSessionState(string fieldName)
+        {
+            object sessionState = Session[fieldName];
+
+            if (sessionState != null)
+            {
+                return sessionState.ToString();
+            }
+
+            return string.Empty;
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             if (!IsPostBack && !Presenter.LogonPageName.Equals(Presenter.PageName, StringComparison.InvariantCultureIgnoreCase))
@@ -161,7 +174,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsRestoreViewState && IsPostBack)
+            if (IsRestoreViewState)
             {
                 RestoreViewState();
             }
@@ -176,9 +189,26 @@ namespace Konfidence.BaseUserControlHelpers
                 Redirect(Presenter.SignInUrl);
             }
 
-            ViewState["IsRestoreViewState"] = "IsRestoreViewState";
-
             PresenterToForm();
+
+            ViewState["IsRestoreViewState"] = "IsRestoreViewState";
+            Session["FromMasterPage"] = Page.MasterPageFile;
+        }
+
+        protected bool IsMasterPagePostBack
+        {
+            get
+            {
+                if (Session["FromMasterPage"] != null)
+                {
+                    if (Session["FromMasterPage"].Equals(Page.MasterPageFile))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
         }
 
         protected void Redirect(string url)
