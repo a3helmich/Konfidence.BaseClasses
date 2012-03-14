@@ -27,6 +27,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        protected abstract void RestoreViewState();
         protected abstract void FormToPresenter();
         protected abstract void PresenterToForm();
 
@@ -122,6 +123,34 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        protected bool IsRestoreViewState
+        {
+            get
+            {
+                if (IsPostBack)
+                {
+                    if (GetViewState("IsRestoreViewState").Equals("IsRestoreViewState"))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        protected string GetViewState(string fieldName)
+        {
+            object viewState = ViewState[fieldName];
+
+            if (viewState != null)
+            {
+                return viewState.ToString();
+            }
+
+            return string.Empty;
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
             if (!IsPostBack && !Presenter.LogonPageName.Equals(Presenter.PageName, StringComparison.InvariantCultureIgnoreCase))
@@ -132,6 +161,11 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsRestoreViewState && IsPostBack)
+            {
+                RestoreViewState();
+            }
+
             FormToPresenter();
         }
 
@@ -141,6 +175,8 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 Redirect(Presenter.SignInUrl);
             }
+
+            ViewState["IsRestoreViewState"] = "IsRestoreViewState";
 
             PresenterToForm();
         }

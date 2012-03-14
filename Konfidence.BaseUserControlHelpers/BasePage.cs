@@ -12,8 +12,8 @@ namespace Konfidence.BaseUserControlHelpers
 
         private T _Presenter = null;
 
-        protected abstract void FormToPresenter();
         protected abstract void RestoreViewState();
+        protected abstract void FormToPresenter();
         protected abstract void PresenterToForm();
 
         private bool _IsExpired = false; 
@@ -49,7 +49,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 if (IsPostBack)
                 {
-                    if (GetViewState("IsViewStateRestore").Equals("IsViewStateRestore"))
+                    if (GetViewState("IsRestoreViewState").Equals("IsRestoreViewState"))
                     {
                         return true;
                     }
@@ -191,7 +191,7 @@ namespace Konfidence.BaseUserControlHelpers
 
             PresenterToForm();
 
-            ViewState["IsViewStateRestore"] = "IsViewStateRestore";
+            ViewState["IsRestoreViewState"] = "IsRestoreViewState";
         }
 
         protected void Redirect(string url)
