@@ -177,6 +177,8 @@ namespace Konfidence.BaseUserControlHelpers
         {
             if (IsRestoreViewState)
             {
+                CheckIsMasterPagePostBack();
+
                 RestoreViewState();
             }
 
