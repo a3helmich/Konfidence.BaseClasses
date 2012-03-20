@@ -175,10 +175,10 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            CheckIsMasterPagePostBack();
+
             if (IsRestoreViewState)
             {
-                CheckIsMasterPagePostBack();
-
                 RestoreViewState();
             }
 
@@ -215,22 +215,6 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get { return _IsMasterPagePostBack; }
         }
-
-        //protected bool IsMasterPagePostBack
-        //{
-        //    get
-        //    {
-        //        if (Session["FromMasterPage"] != null)
-        //        {
-        //            if (Session["FromMasterPage"].Equals(Page.MasterPageFile))
-        //            {
-        //                return true;
-        //            }
-        //        }
-
-        //        return false;
-        //    }
-        //}
 
         protected void Redirect(string url)
         {
