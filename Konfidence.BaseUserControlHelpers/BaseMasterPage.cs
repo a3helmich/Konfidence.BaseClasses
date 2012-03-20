@@ -11,6 +11,7 @@ namespace Konfidence.BaseUserControlHelpers
     public abstract class BaseMasterPage<T> : MasterPage where T : BaseWebPresenter, new()
     {
         private BasePageHelper _BasePageHelper = null;
+        private bool _IsMasterPagePostBack = false;
 
         private T _Presenter = null;
 
@@ -182,6 +183,19 @@ namespace Konfidence.BaseUserControlHelpers
             FormToPresenter();
         }
 
+        private void CheckIsMasterPagePostBack()
+        {
+            if (IsPostBack)
+            {
+                if (GetSessionState(Page.MasterPageFile + "_FromMasterPage").Equals(Page.MasterPageFile))
+                {
+                    _IsMasterPagePostBack = true;
+
+                    Session.Remove(Page.MasterPageFile + "_FromMasterPage");
+                }
+            }
+        }
+
         protected void Page_PreRender(object sender, EventArgs e)
         {
             if (Presenter.IsLoggedIn)
@@ -192,24 +206,29 @@ namespace Konfidence.BaseUserControlHelpers
             PresenterToForm();
 
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
-            Session["FromMasterPage"] = Page.MasterPageFile;
+            Session[Page.MasterPageFile + "_FromMasterPage"] = Page.MasterPageFile;
         }
 
         protected bool IsMasterPagePostBack
         {
-            get
-            {
-                if (Session["FromMasterPage"] != null)
-                {
-                    if (Session["FromMasterPage"].Equals(Page.MasterPageFile))
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
+            get { return _IsMasterPagePostBack; }
         }
+
+        //protected bool IsMasterPagePostBack
+        //{
+        //    get
+        //    {
+        //        if (Session["FromMasterPage"] != null)
+        //        {
+        //            if (Session["FromMasterPage"].Equals(Page.MasterPageFile))
+        //            {
+        //                return true;
+        //            }
+        //        }
+
+        //        return false;
+        //    }
+        //}
 
         protected void Redirect(string url)
         {
