@@ -220,11 +220,44 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        private List<string> _MasterPageFileList = null;
+
+        private List<string> MasterPageFileList
+        {
+            get
+            {
+                if (!IsAssigned(_MasterPageFileList))
+                {
+                    _MasterPageFileList = new List<string>();
+
+                    AddMasterPageFile(Page.Master, Page.MasterPageFile);
+                }
+
+                return _MasterPageFileList;
+            }
+        }
+
+        private void AddMasterPageFile(MasterPage masterPage, string masterPageFile)
+        {
+            if (!IsEmpty(masterPageFile))
+            {
+                _MasterPageFileList.Add(masterPageFile);
+            }
+
+            if (IsAssigned(masterPage))
+            {
+                AddMasterPageFile(masterPage.Master, masterPage.MasterPageFile);
+            }
+        }
+
         private void CheckIsMasterPagePostBack()
         {
-            if (IsPostBack)
+            foreach (string masterPageFile in MasterPageFileList)
             {
-                _IsMasterPagePostBack = MasterPageDictionaryIn.ContainsKey(Page.MasterPageFile);
+                if (MasterPageDictionaryIn.ContainsKey(masterPageFile))
+                {
+                    _IsMasterPagePostBack = true;
+                }
             }
         }
 
@@ -261,9 +294,12 @@ namespace Konfidence.BaseUserControlHelpers
 
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
 
-            if (!MasterPageDictionaryOut.ContainsKey(Page.MasterPageFile))
+            foreach (string masterPageFile in MasterPageFileList)
             {
-                MasterPageDictionaryOut.Add(Page.MasterPageFile, Page.MasterPageFile);
+                if (!MasterPageDictionaryOut.ContainsKey(masterPageFile))
+                {
+                    MasterPageDictionaryOut.Add(masterPageFile, masterPageFile);
+                }
             }
         }
 
