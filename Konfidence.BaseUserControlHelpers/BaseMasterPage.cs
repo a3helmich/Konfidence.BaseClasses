@@ -11,6 +11,10 @@ namespace Konfidence.BaseUserControlHelpers
     public abstract class BaseMasterPage<T> : MasterPage where T : BaseWebPresenter, new()
     {
         private BasePageHelper _BasePageHelper = null;
+
+        private Dictionary<string, string> _MasterPageDictionaryIn = null;
+        private Dictionary<string, string> _MasterPageDictionaryOut = null;
+
         private bool _IsMasterPagePostBack = false;
 
         private T _Presenter = null;
@@ -140,6 +144,42 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        protected Dictionary<string, string> MasterPageDictionaryIn
+        {
+            get
+            {
+                if (!IsAssigned(_MasterPageDictionaryIn))
+                {
+                    if (!IsAssigned(Session["MasterPageDictionaryIn"]))
+                    {
+                        Session["MasterPageDictionaryIn"] = new Dictionary<string, string>();
+                    }
+
+                    _MasterPageDictionaryIn = Session["MasterPageDictionaryIn"] as Dictionary<string, string>;
+                }
+
+                return _MasterPageDictionaryIn;
+            }
+        }
+
+        protected Dictionary<string, string> MasterPageDictionaryOut
+        {
+            get
+            {
+                if (!IsAssigned(_MasterPageDictionaryOut))
+                {
+                    if (!IsAssigned(Session["MasterPageDictionaryOut"]))
+                    {
+                        Session["MasterPageDictionaryOut"] = new Dictionary<string, string>();
+                    }
+
+                    _MasterPageDictionaryOut = Session["MasterPageDictionaryOut"] as Dictionary<string, string>;
+                }
+
+                return _MasterPageDictionaryOut;
+            }
+        }
+
         protected string GetViewState(string fieldName)
         {
             object viewState = ViewState[fieldName];
@@ -165,8 +205,33 @@ namespace Konfidence.BaseUserControlHelpers
             return string.Empty;
         }
 
+        private void BuildMasterPageDictionaries()
+        {
+            if (MasterPageDictionaryOut.Count > 0)
+            {
+                MasterPageDictionaryIn.Clear();
+
+                foreach (KeyValuePair<string, string> kvp in MasterPageDictionaryOut)
+                {
+                    MasterPageDictionaryIn.Add(kvp.Key, kvp.Value);
+                }
+
+                MasterPageDictionaryOut.Clear();
+            }
+        }
+
+        private void CheckIsMasterPagePostBack()
+        {
+            if (IsPostBack)
+            {
+                _IsMasterPagePostBack = MasterPageDictionaryIn.ContainsKey(Page.MasterPageFile);
+            }
+        }
+
         protected void Page_Init(object sender, EventArgs e)
         {
+            BuildMasterPageDictionaries();
+
             if (!IsPostBack && !Presenter.LogonPageName.Equals(Presenter.PageName, StringComparison.InvariantCultureIgnoreCase))
             {
                 Presenter.FromUrl = CurrentPagePath;
@@ -185,19 +250,6 @@ namespace Konfidence.BaseUserControlHelpers
             FormToPresenter();
         }
 
-        private void CheckIsMasterPagePostBack()
-        {
-            if (IsPostBack)
-            {
-                if (GetSessionState(Page.MasterPageFile + "_FromMasterPage").Equals(Page.MasterPageFile))
-                {
-                    _IsMasterPagePostBack = true;
-
-                    Session.Remove(Page.MasterPageFile + "_FromMasterPage");
-                }
-            }
-        }
-
         protected void Page_PreRender(object sender, EventArgs e)
         {
             if (Presenter.IsLoggedIn)
@@ -208,7 +260,11 @@ namespace Konfidence.BaseUserControlHelpers
             PresenterToForm();
 
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
-            Session[Page.MasterPageFile + "_FromMasterPage"] = Page.MasterPageFile;
+
+            if (!MasterPageDictionaryOut.ContainsKey(Page.MasterPageFile))
+            {
+                MasterPageDictionaryOut.Add(Page.MasterPageFile, Page.MasterPageFile);
+            }
         }
 
         protected bool IsMasterPagePostBack
