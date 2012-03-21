@@ -120,6 +120,19 @@ namespace Konfidence.BaseData
             return null;
         }
 
+        public T FindByIsSelected()
+        {
+            foreach (T dataItem in this)
+            {
+                if (dataItem.IsSelected)
+                {
+                    return dataItem;
+                }
+            }
+
+            return null;
+        }
+
         public T FindByIsEditing()
         {
             foreach (T dataItem in this)
