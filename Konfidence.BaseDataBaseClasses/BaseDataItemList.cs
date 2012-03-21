@@ -120,6 +120,19 @@ namespace Konfidence.BaseData
             return null;
         }
 
+        public T FindByIsEditing()
+        {
+            foreach (T dataItem in this)
+            {
+                if (dataItem.IsEditing)
+                {
+                    return dataItem;
+                }
+            }
+
+            return null;
+        }
+
 		public List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList()
 		{
 			List<List<BaseDataItem.ParameterObject>> baseDataItemListList = new List<List<BaseDataItem.ParameterObject>>();
