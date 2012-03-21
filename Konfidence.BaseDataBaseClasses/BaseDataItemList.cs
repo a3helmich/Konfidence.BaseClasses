@@ -107,6 +107,19 @@ namespace Konfidence.BaseData
 			return baseDataItem;
 		}
 
+        public T FindById(int id)
+        {
+            foreach (T dataItem in this)
+            {
+                if (dataItem.Id == id)
+                {
+                    return dataItem;
+                }
+            }
+
+            return null;
+        }
+
 		public List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList()
 		{
 			List<List<BaseDataItem.ParameterObject>> baseDataItemListList = new List<List<BaseDataItem.ParameterObject>>();
