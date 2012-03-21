@@ -146,6 +146,55 @@ namespace Konfidence.BaseData
             return null;
         }
 
+        public void SetSelected(string idText)
+        {
+            int id = 0;
+
+            int.TryParse(idText, out id);
+
+            SetSelected(id);
+        }
+
+        public void SetSelected(int id)
+        {
+            if (this.Count > 0)
+            {
+                foreach (T dataItem in this)
+                {
+                    dataItem.IsSelected = false;
+                }
+
+                if (id < 1)
+                {
+                    this[0].IsSelected = true;
+                }
+                else
+                {
+                    T dataItem = this.FindById(id);
+
+                    if (IsAssigned(dataItem))
+                    {
+                        dataItem.IsSelected = true;
+                    }
+                }
+            }
+        }
+
+        public bool IsEditing
+        {
+            get
+            {
+                T dataItem = FindByIsEditing();
+
+                if (IsAssigned(dataItem))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
 		public List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList()
 		{
 			List<List<BaseDataItem.ParameterObject>> baseDataItemListList = new List<List<BaseDataItem.ParameterObject>>();
