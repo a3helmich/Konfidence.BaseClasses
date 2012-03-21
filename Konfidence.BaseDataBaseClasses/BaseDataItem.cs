@@ -18,6 +18,9 @@ namespace Konfidence.BaseData
 		public const string BaseLanguage = "NL";
 		public bool WithLanguage = false;
 
+        private bool _IsSelected = false;
+        private bool _IsEditing = false;
+
 		private string _DeleteStoredProcedure = string.Empty;
 		private string _SaveStoredProcedure = string.Empty;
 
@@ -74,6 +77,18 @@ namespace Konfidence.BaseData
 			}
 			#endregion
 		}
+
+        public bool IsSelected
+        {
+            get { return _IsSelected; }
+            set { _IsSelected = value; }
+        }
+
+        public bool IsEditing
+        {
+            get { return _IsEditing; }
+            set { _IsEditing = value; }
+        }
 
 		public BaseDataItem()
 		{
