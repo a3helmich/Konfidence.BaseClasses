@@ -146,6 +146,18 @@ namespace Konfidence.BaseData
             return null;
         }
 
+        public T FindCurrent()
+        {
+            T dataItem = FindByIsEditing();
+
+            if (!IsAssigned(dataItem))
+            {
+                dataItem = FindByIsSelected();
+            }
+
+            return dataItem;
+        }
+
         public void SetSelected(string idText)
         {
             int id = 0;
