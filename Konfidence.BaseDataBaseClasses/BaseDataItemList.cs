@@ -14,7 +14,7 @@ namespace Konfidence.BaseData
 		List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList();
 	}
 
-	public class BaseDataItemList<T>: List<T>, IBaseDataItemList where T: BaseDataItem
+    public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem, new()
 	{
 
 		private string _GetListStoredProcedure = string.Empty;
@@ -188,6 +188,51 @@ namespace Konfidence.BaseData
                     {
                         dataItem.IsSelected = true;
                     }
+                }
+            }
+        }
+
+        public void SetIsEditing(bool isEditing, int id)
+        {
+            if (isEditing)
+            {
+                AddEditing(id);
+            }
+            else
+            {
+                RemoveEditing();
+            }
+        }
+
+        private void AddEditing(int id)
+        {
+            T dataItem = null;
+
+            dataItem = this.FindById(id);
+
+            if (id < 1 || !IsAssigned(dataItem))
+            {
+                dataItem = new T();
+
+                this.Add(dataItem);
+            }
+
+            dataItem.IsEditing = true;
+        }
+
+        private void RemoveEditing()
+        {
+            T dataItem = null;
+
+            dataItem = this.FindByIsEditing();
+
+            if (IsAssigned(dataItem))
+            {
+                dataItem.IsEditing = false;
+
+                if (dataItem.IsNew)
+                {
+                    this.Remove(dataItem);
                 }
             }
         }
