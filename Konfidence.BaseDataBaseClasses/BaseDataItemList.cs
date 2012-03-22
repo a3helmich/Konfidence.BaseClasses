@@ -200,6 +200,20 @@ namespace Konfidence.BaseData
             SetIsEditing(isEditing, 0);
         }
 
+        public void SetIsEditing(string isEditingText, string idText)
+        {
+            bool isEditing = false;
+            int id = 0;
+
+            if (int.TryParse(idText, out id))
+            {
+                if (bool.TryParse(isEditingText, out isEditing))
+                {
+                    this.SetIsEditing(isEditing, id);
+                }
+            }
+        }
+
         public void SetIsEditing(bool isEditing, int id)
         {
             if (isEditing)
