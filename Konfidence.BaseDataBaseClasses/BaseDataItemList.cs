@@ -89,18 +89,18 @@ namespace Konfidence.BaseData
             return BaseItem.IsEmpty(assignedString);
         }
 
-		/// <summary>
-		/// create and return a xxxDataItem derived from BaseDataItem
-		/// </summary>
-		/// <returns></returns>
-		protected virtual T GetNewDataItem()
-		{
-			throw new NotImplementedException(); // NOP
-		}
+        ///// <summary>
+        ///// create and return a xxxDataItem derived from BaseDataItem
+        ///// </summary>
+        ///// <returns></returns>
+        //protected virtual T GetNewDataItem()
+        //{
+        //    throw new NotImplementedException(); // NOP
+        //}
 
 		public BaseDataItem GetDataItem()
 		{
-			T baseDataItem = GetNewDataItem();
+			T baseDataItem = new T();
 
 			Add(baseDataItem);
 
@@ -158,6 +158,7 @@ namespace Konfidence.BaseData
             return dataItem;
         }
 
+        #region list selecting state control
         public void SetSelected(string idText)
         {
             int id = 0;
@@ -190,6 +191,13 @@ namespace Konfidence.BaseData
                     }
                 }
             }
+        }
+        #endregion list selecting state control
+
+        #region list editing state control
+        public void SetIsEditing(bool isEditing)
+        {
+            SetIsEditing(isEditing, 0);
         }
 
         public void SetIsEditing(bool isEditing, int id)
@@ -251,8 +259,72 @@ namespace Konfidence.BaseData
                 return false;
             }
         }
+        #endregion list editing state control
 
-		public List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList()
+        #region list dataitem editing
+        public void New()
+        {
+            T dataItem = FindCurrent();
+
+            if (IsAssigned(dataItem))
+            {
+                dataItem.IsSelected = false;
+            }
+
+            this.SetIsEditing(true);
+        }
+
+        public void Edit(T dataItem)
+        {
+            if (IsAssigned(dataItem))
+            {
+                this.SetIsEditing(true, dataItem.Id);
+            }
+        }
+
+        public void Save(T dataItem)
+        {
+            if (IsAssigned(dataItem))
+            {
+                dataItem.Save();
+
+                this.SetSelected(dataItem.Id);
+            }
+
+            this.SetIsEditing(false);
+        }
+
+        public void Cancel()
+        {
+            this.SetIsEditing(false);
+        }
+
+        public void Delete(T dataItem)
+        {
+            if (IsAssigned(dataItem))
+            {
+                dataItem.Delete();
+
+                int selectedIndex = this.IndexOf(dataItem);
+
+                this.Remove(dataItem);
+
+                if (this.Count > 0)
+                {
+                    if (selectedIndex < this.Count)
+                    {
+                        this[selectedIndex].IsSelected = true;
+                    }
+                    else
+                    {
+                        this[selectedIndex - 1].IsSelected = true;
+                    }
+                }
+            }
+        }
+        #endregion list editing
+
+        public List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList()
 		{
 			List<List<BaseDataItem.ParameterObject>> baseDataItemListList = new List<List<BaseDataItem.ParameterObject>>();
 
@@ -301,7 +373,7 @@ namespace Konfidence.BaseData
 
 		public void AddItem(BaseHost dataHost)
 		{
-			T baseDataItem = GetNewDataItem();
+			T baseDataItem = new T();
 
 			baseDataItem._DataHost = dataHost;
 

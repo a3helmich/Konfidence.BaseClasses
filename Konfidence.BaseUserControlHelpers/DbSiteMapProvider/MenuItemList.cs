@@ -36,9 +36,9 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             database.AddInParameter(dbCommand, MenuItem.PARENTNODEID_FIELD, DbType.Int32, _ParentId);
         }
 
-		protected override MenuItem GetNewDataItem()
-		{
-			return new MenuItem();
-		}
+        //protected override MenuItem GetNewDataItem()
+        //{
+        //    return new MenuItem();
+        //}
 	}
 }
