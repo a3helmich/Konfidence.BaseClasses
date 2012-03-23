@@ -24,7 +24,7 @@ namespace Konfidence.Base
             get { return _FullFileName; }
         }
 
-        protected string PathName
+        public string PathName
         {
             get { return _PathName; }
         }
