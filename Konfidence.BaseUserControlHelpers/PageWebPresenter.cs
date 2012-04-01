@@ -127,7 +127,17 @@ namespace Konfidence.BaseUserControlHelpers
             _PageName = pageName;
         }
 
-        public string ResolveClientUrl(string url)
+        //public string ResolveClientUrl(string url) --> moet worden ResolveServerPath
+        //{
+        //    if (!IsEmpty(url))
+        //    {
+        //        return HttpContext.Current.Server.MapPath(url);
+        //    }
+
+        //    return string.Empty;
+        //}
+
+        public string ResolveServerPath(string url)
         {
             if (!IsEmpty(url))
             {
