@@ -128,14 +128,6 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         //public string ResolveClientUrl(string url) --> moet worden ResolveServerPath
-        //{
-        //    if (!IsEmpty(url))
-        //    {
-        //        return HttpContext.Current.Server.MapPath(url);
-        //    }
-
-        //    return string.Empty;
-        //}
 
         public string ResolveServerPath(string url)
         {
