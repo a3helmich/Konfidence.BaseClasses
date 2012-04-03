@@ -120,7 +120,7 @@ namespace Konfidence.BaseData
             return null;
         }
 
-        public T FindByIsSelected()
+        protected T FindByIsSelected()
         {
             foreach (T dataItem in this)
             {
@@ -133,7 +133,7 @@ namespace Konfidence.BaseData
             return null;
         }
 
-        public T FindByIsEditing()
+        protected T FindByIsEditing()
         {
             foreach (T dataItem in this)
             {
