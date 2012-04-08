@@ -258,21 +258,6 @@ namespace Konfidence.BaseData
                 }
             }
         }
-
-        public bool IsEditing
-        {
-            get
-            {
-                T dataItem = FindByIsEditing();
-
-                if (IsAssigned(dataItem))
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
         #endregion list editing state control
 
         #region list dataitem editing
