@@ -9,9 +9,6 @@ namespace Konfidence.BaseUserControlHelpers
 	public abstract class BaseUserControl<T>: UserControl where T : BaseWebPresenter, new()
 	{
 		private SessionHelper _SessionHelper;
-		private bool _IsForeignKeyChanged = false;
-		private bool _IsPrimaryKeyChanged = false;
-        //private InternalSessionAccount _SessionAccount = null;
 
         private BasePageHelper _BasePageHelper = null; // TODO : --> zie BasePage
 
@@ -48,19 +45,6 @@ namespace Konfidence.BaseUserControlHelpers
 				return false;
 			}
 		}
-
-        //public InternalSessionAccount SessionAccount
-        //{
-        //    get
-        //    {
-        //        if (!IsAssigned(_SessionAccount))
-        //        {
-        //            _SessionAccount = Session[InternalSessionAccount.AccountObject] as InternalSessionAccount;
-        //        }
-
-        //        return _SessionAccount;
-        //    }
-        //}
 
         protected bool IsRestoreViewState
         {
@@ -174,6 +158,8 @@ namespace Konfidence.BaseUserControlHelpers
             if (!IsAssigned(_Presenter))
             {
                 _Presenter = new T();
+
+                _Presenter.PageInitialize();
             }
 
             if (IsEmpty(_Presenter.PageName))
@@ -235,96 +221,6 @@ namespace Konfidence.BaseUserControlHelpers
 
 			base.OnInit(e);
 		}
-
-        protected virtual void RebuildParent()
-        {
-            BaseUserControl<BaseWebPresenter> topControl = NamingContainer as BaseUserControl<BaseWebPresenter>;
-
-            if (IsAssigned(topControl))
-            {
-                topControl.RebuildParent();
-            }
-        }
-
-		public int PrimaryKey
-		{
-			get
-			{
-				return _SessionHelper.SessionParameterObject.PrimaryKey;
-			}
-			set
-			{
-				if (_SessionHelper.SessionParameterObject.PrimaryKey != value)
-				{
-					if (_SessionHelper.SessionParameterObject.PrimaryKey != 0)
-					{
-						_IsPrimaryKeyChanged = true;
-					}
-				}
-				_SessionHelper.SessionParameterObject.PrimaryKey = value;
-			}
-		}
-
-		public bool IsPrimaryKeyAssigned
-		{
-			get
-			{
-				return _SessionHelper.SessionParameterObject.IsPrimaryKeyAssigned;
-			}
-		}
-
-		public bool IsPrimaryKeyChanged
-		{
-			get
-			{
-				return _IsPrimaryKeyChanged;
-			}
-		}
-
-		public int ForeignKey
-		{
-			get
-			{
-				return _SessionHelper.SessionParameterObject.ForeignKey;
-			}
-			set
-			{
-				if (_SessionHelper.SessionParameterObject.ForeignKey != value)
-				{
-					if (_SessionHelper.SessionParameterObject.ForeignKey != 0)
-					{
-						_IsForeignKeyChanged = true;
-					}
-				}
-				_SessionHelper.SessionParameterObject.ForeignKey = value;
-			}
-		}
-
-		public bool IsForeignKeyAssigned
-		{
-			get
-			{
-				return _SessionHelper.SessionParameterObject.IsForeignKeyAssigned;
-			}
-		}
-
-		public bool IsForeignKeyChanged
-		{
-			get
-			{
-				return _IsForeignKeyChanged;
-			}
-		}
-
-        public virtual void Rebuild()
-        {
-            // NOP : 
-        }
-
-        private void TopRebuild(BaseUserControl<BaseWebPresenter> childControl)
-        {
-            RebuildParent();
-        }
 
         protected void SwitchLanguagePanel(Control languageNL, Control languageDE, Control languageUK)
         {

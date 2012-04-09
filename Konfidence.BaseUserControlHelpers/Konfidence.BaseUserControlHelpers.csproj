@@ -94,9 +94,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="BasePageHelper.cs" />
-    <Compile Include="BaseTabbedUserControl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="BaseUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

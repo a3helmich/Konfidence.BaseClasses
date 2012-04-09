@@ -11,8 +11,10 @@ using Konfidence.BaseUserControlHelpers.PageSetting;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class BaseWebPresenter : BaseItem
+    public abstract class BaseWebPresenter : BaseItem
     {
+        internal abstract void PageInitialize();
+
         private string _DataDirectory = string.Empty;
         private string _PageName = string.Empty;
 
