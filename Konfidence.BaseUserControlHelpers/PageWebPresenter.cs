@@ -13,7 +13,7 @@ namespace Konfidence.BaseUserControlHelpers
 {
     public abstract class BaseWebPresenter : BaseItem
     {
-        internal abstract void PageInitialize();
+        protected internal abstract void PageInitialize();
 
         private string _DataDirectory = string.Empty;
         private string _PageName = string.Empty;
