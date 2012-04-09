@@ -7,12 +7,6 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData
 {
-	public enum KeyType
-	{
-		Primary,
-		Foreign
-	}
-	
 	public class BaseDataItem: BaseItem
 	{
 		public const string BaseLanguage = "NL";
@@ -123,70 +117,37 @@ namespace Konfidence.BaseData
 		#region properties
 		protected string DataBaseName
 		{
-			get
-			{
-				return _DataBaseName;
-			}
-			set
-			{
-				_DataBaseName = value;
-			}
+			get { return _DataBaseName; }
+			set { _DataBaseName = value; }
 		}
 
 		protected string ServiceName
 		{
-			get
-			{
-				return _ServiceName;
-			}
-			set
-			{
-				_ServiceName = value;
-			}
+			get { return _ServiceName; }
+			set { _ServiceName = value; }
 		}
 
 		internal protected string AutoIdField
 		{
-			get
-			{
-				return _AutoIdField;
-			}
-			set
-			{
-				_AutoIdField = value;
-			}
+			get { return _AutoIdField; }
+			set { _AutoIdField = value; }
 		}
 
 		internal protected int Id
 		{
-			get
-			{
-				return _Id;
-			}
+			get { return _Id; }
 		}
 
 		internal protected string DeleteStoredProcedure
 		{
-			get
-			{
-				return _DeleteStoredProcedure;
-			}
-			set
-			{
-				 _DeleteStoredProcedure = value;
-			}
+			get { return _DeleteStoredProcedure; }
+			set { _DeleteStoredProcedure = value; }
 		}
 
         internal protected string SaveStoredProcedure
 		{
-			get
-			{
-				 return _SaveStoredProcedure;
-			}
-			set
-			{
-				 _SaveStoredProcedure = value;
-			}
+			get { return _SaveStoredProcedure; }
+			set { _SaveStoredProcedure = value; }
 		}
 
 		public bool IsNew
