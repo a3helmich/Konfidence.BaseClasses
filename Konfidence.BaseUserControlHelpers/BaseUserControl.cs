@@ -158,8 +158,6 @@ namespace Konfidence.BaseUserControlHelpers
             if (!IsAssigned(_Presenter))
             {
                 _Presenter = new T();
-
-                _Presenter.PageInitialize();
             }
 
             if (IsEmpty(_Presenter.PageName))
