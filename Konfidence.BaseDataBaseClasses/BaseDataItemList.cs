@@ -130,6 +130,13 @@ namespace Konfidence.BaseData
                 }
             }
 
+            if (Count > 0)
+            {
+                this[0].IsSelected = true;
+
+                return this[0];
+            }
+
             return null;
         }
 
