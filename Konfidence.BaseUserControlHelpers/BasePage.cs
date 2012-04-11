@@ -12,6 +12,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         private T _Presenter = null;
 
+        protected abstract void DataInitialize();
         protected abstract void RestoreViewState();
         protected abstract void FormToPresenter();
         protected abstract void PresenterToForm();
@@ -158,7 +159,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 _Presenter = new T();
 
-                _Presenter.PageInitialize();
+                DataInitialize();
             }
 
             if (IsEmpty(_Presenter.PageName))
