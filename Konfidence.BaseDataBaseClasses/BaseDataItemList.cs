@@ -177,6 +177,15 @@ namespace Konfidence.BaseData
             SetSelected(id, isEditing);
         }
 
+        public void SetSelected(string idText)
+        {
+            int id = 0;
+
+            int.TryParse(idText, out id);
+
+            SetSelected(id, false);
+        }
+
         public void SetSelected(int id)
         {
             SetSelected(id, false);
