@@ -166,16 +166,23 @@ namespace Konfidence.BaseData
         }
 
         #region list selecting state control
-        public void SetSelected(string idText)
+        public void SetSelected(string idText, string isEditingText)
         {
             int id = 0;
+            bool isEditing = false;
 
             int.TryParse(idText, out id);
+            bool.TryParse(isEditingText, out isEditing);
 
-            SetSelected(id);
+            SetSelected(id, isEditing);
         }
 
         public void SetSelected(int id)
+        {
+            SetSelected(id, false);
+        }
+
+        private void SetSelected(int id, bool isEditing)
         {
             if (this.Count > 0)
             {
@@ -195,6 +202,7 @@ namespace Konfidence.BaseData
                     if (IsAssigned(dataItem))
                     {
                         dataItem.IsSelected = true;
+                        dataItem.IsEditing = isEditing;
                     }
                 }
             }
