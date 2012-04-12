@@ -210,69 +210,69 @@ namespace Konfidence.BaseData
         #endregion list selecting state control
 
         #region list editing state control
-        public void SetIsEditing(bool isEditing)
-        {
-            SetIsEditing(isEditing, 0);
-        }
+        //public void SetIsEditing(bool isEditing)
+        //{
+        //    SetIsEditing(isEditing, 0);
+        //}
 
-        public void SetIsEditing(string isEditingText, string idText)
-        {
-            bool isEditing = false;
-            int id = 0;
+        //public void SetIsEditing(string isEditingText, string idText)
+        //{
+        //    bool isEditing = false;
+        //    int id = 0;
 
-            if (int.TryParse(idText, out id))
-            {
-                if (bool.TryParse(isEditingText, out isEditing))
-                {
-                    this.SetIsEditing(isEditing, id);
-                }
-            }
-        }
+        //    if (int.TryParse(idText, out id))
+        //    {
+        //        if (bool.TryParse(isEditingText, out isEditing))
+        //        {
+        //            this.SetIsEditing(isEditing, id);
+        //        }
+        //    }
+        //}
 
-        public void SetIsEditing(bool isEditing, int id)
-        {
-            if (isEditing)
-            {
-                AddEditing(id);
-            }
-            else
-            {
-                RemoveEditing();
-            }
-        }
+        //public void SetIsEditing(bool isEditing, int id)
+        //{
+        //    if (isEditing)
+        //    {
+        //        AddEditing(id);
+        //    }
+        //    else
+        //    {
+        //        RemoveEditing();
+        //    }
+        //}
 
-        private void AddEditing(int id)
-        {
-            T dataItem = null;
+        //private void AddEditing(int id)
+        //{
+        //    T dataItem = null;
 
-            dataItem = this.FindById(id);
+        //    dataItem = this.FindById(id);
 
-            if (id < 1 || !IsAssigned(dataItem))
-            {
-                dataItem = new T();
+        //    if (id < 1 || !IsAssigned(dataItem))
+        //    {
+        //        dataItem = new T();
 
-                this.Add(dataItem);
-            }
+        //        this.Add(dataItem);
+        //    }
 
-            dataItem.IsEditing = true;
-        }
+        //    dataItem.IsEditing = true;
+        //}
 
-        private void RemoveEditing()
-        {
-            T dataItem = null;
+        //private void RemoveEditing()
+        //{
+        //    T dataItem = null;
 
-            dataItem = this.FindByIsEditing();
+        //    dataItem = this.FindByIsEditing();
 
-            if (IsAssigned(dataItem))
-            {
-                dataItem.IsEditing = false;
+        //    if (IsAssigned(dataItem))
+        //    {
+        //        dataItem.IsEditing = false;
 
-                if (dataItem.IsNew)
-                {
-                    this.Remove(dataItem);
-                }
-            }
-        }
+        //        if (dataItem.IsNew)
+        //        {
+        //            this.Remove(dataItem);
+        //        }
+        //    }
+        //}
         #endregion list editing state control
 
         #region list dataitem editing
@@ -283,16 +283,19 @@ namespace Konfidence.BaseData
             if (IsAssigned(dataItem))
             {
                 dataItem.IsSelected = false;
+                dataItem.IsEditing = true; // nieuw
             }
 
-            this.SetIsEditing(true);
+            //this.SetIsEditing(true);
         }
 
         public void Edit(T dataItem)
         {
             if (IsAssigned(dataItem))
             {
-                this.SetIsEditing(true, dataItem.Id);
+                dataItem.IsEditing = true; // nieuw
+
+                //this.SetIsEditing(true, dataItem.Id);
             }
         }
 
@@ -303,14 +306,17 @@ namespace Konfidence.BaseData
                 dataItem.Save();
 
                 this.SetSelected(dataItem.Id);
+
+                dataItem.IsEditing = false; // nieuw
             }
 
-            this.SetIsEditing(false);
+            //this.SetIsEditing(false);
         }
 
-        public void Cancel()
+        public void Cancel(T dataItem)
         {
-            this.SetIsEditing(false);
+            dataItem.IsEditing = false; // nieuw
+            //this.SetIsEditing(false);
         }
 
         public void Delete(T dataItem)
