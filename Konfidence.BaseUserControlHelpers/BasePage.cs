@@ -201,12 +201,12 @@ namespace Konfidence.BaseUserControlHelpers
 
             PresenterToForm();
 
+            ViewState["IsRestoreViewState"] = "IsRestoreViewState";
+
             if (IsPostBack)
             {
                 SaveDefaults();
             }
-
-            ViewState["IsRestoreViewState"] = "IsRestoreViewState";
         }
 
         protected void Redirect(string url)
