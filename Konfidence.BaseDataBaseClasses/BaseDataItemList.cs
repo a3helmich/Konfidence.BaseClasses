@@ -165,6 +165,19 @@ namespace Konfidence.BaseData
             return dataItem;
         }
 
+        public bool HasCurrent()
+        {
+            foreach (T dataItem in this)
+            {
+                if (dataItem.IsEditing || dataItem.IsSelected)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         #region list selecting state control
         public void SetSelected(string idText, string isEditingText)
         {
