@@ -14,8 +14,10 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected abstract void DataInitialize();
         protected abstract void RestoreViewState();
+        protected abstract void LoadDefaults();
         protected abstract void FormToPresenter();
         protected abstract void PresenterToForm();
+        protected abstract void SaveDefaults();
 
         private bool _IsExpired = false; 
 		private bool _IsRefreshed = false;
@@ -185,6 +187,11 @@ namespace Konfidence.BaseUserControlHelpers
                 RestoreViewState();
             }
 
+            if (!IsPostBack)
+            {
+                LoadDefaults();
+            }
+
             FormToPresenter();
         }
 
@@ -193,6 +200,11 @@ namespace Konfidence.BaseUserControlHelpers
             MaintainScrollPositionOnPostBack = true;
 
             PresenterToForm();
+
+            if (IsPostBack)
+            {
+                SaveDefaults();
+            }
 
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
         }
