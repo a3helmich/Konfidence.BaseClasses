@@ -21,6 +21,11 @@ namespace Konfidence.BaseData
 		private string _DataBaseName = string.Empty;
 		private string _ServiceName = string.Empty;
 
+        protected virtual void AfterDataLoad()
+        {
+            //
+        }
+
 		#region properties
 
 		protected string DataBaseName
@@ -64,12 +69,14 @@ namespace Konfidence.BaseData
         {
             return HostFactory.GetHost(_ServiceName, _DataBaseName);
         }
-
-		protected void BuildItemList()
+        
+        protected void BuildItemList()
 		{
             BaseHost dataHost = GetHost();
 
 			dataHost.BuildItemList(this, GetListStoredProcedure);
+
+            AfterDataLoad();
 		}
 
 		protected void RebuildItemList()
