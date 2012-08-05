@@ -60,9 +60,24 @@ namespace Konfidence.TeamFoundation
             }
         }
 
+        public void AddProjectFile(string projectFile)
+        {
+            int lineIndex = 0;
+            foreach (string line in _TextFileLines)
+            {
+                if (line.Equals("Global", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    lineIndex++;
+                    break;
+                }
+            }
+
+
+        }
+
         public void Save()
         {
-            using (TextWriter solutionTextFile = new StreamWriter(_SolutionFile, false, Encoding.Default))
+            using (TextWriter solutionTextFile = new StreamWriter(_SolutionFile, false, Encoding.UTF8))
             {
                 foreach (string line in _TextFileLines)
                 {
