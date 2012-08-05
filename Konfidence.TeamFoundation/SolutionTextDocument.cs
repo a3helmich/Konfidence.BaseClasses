@@ -54,6 +54,8 @@ namespace Konfidence.TeamFoundation
                 while (line != null)
                 {
                     _TextFileLines.Add(line);
+
+                    line = solutionTextFile.ReadLine();
                 }
             }
         }
@@ -64,7 +66,7 @@ namespace Konfidence.TeamFoundation
             {
                 foreach (string line in _TextFileLines)
                 {
-                    solutionTextFile.Write(line);
+                    solutionTextFile.WriteLine(line);
                 }
             }
         }
