@@ -47,7 +47,7 @@ namespace Konfidence.TeamFoundation
         {
             _RebasedProjectList.Clear();
 
-            SolutionXmlDocument solutionXmlDocument = new SolutionXmlDocument(solutionPath);
+            SolutionTextDocument solutionXmlDocument = new SolutionTextDocument(solutionPath);
 
             foreach (string projectFile in solutionXmlDocument.GetProjectFileList())
             {
@@ -77,8 +77,7 @@ namespace Konfidence.TeamFoundation
             {
                 if (tfsCheckOut.IsValid)
                 {
-                    ProjectXmlDocument projectXmlDocument = new ProjectXmlDocument();
-                    projectXmlDocument.Load(fileName);
+                    ProjectXmlDocument projectXmlDocument = ProjectXmlDocument.GetProjectXmlDocument(fileName);
 
                     ProjectXmlEditor projectReference = new ProjectXmlEditor(projectXmlDocument);
 

@@ -93,7 +93,7 @@ namespace Konfidence.TeamFoundation
 
         #endregion properties
 
-        public ProjectXmlDocument()
+        private ProjectXmlDocument()
         {
         }
 

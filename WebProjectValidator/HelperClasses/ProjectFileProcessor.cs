@@ -32,9 +32,7 @@ namespace WebProjectValidator.HelperClasses
         {
             if (File.Exists(projectFile))
             {
-                _ProjectXmlDocument = new ProjectXmlDocument();
-
-                _ProjectXmlDocument.Load(projectFile);
+                _ProjectXmlDocument = ProjectXmlDocument.GetProjectXmlDocument(projectFile);
             }
         }
 

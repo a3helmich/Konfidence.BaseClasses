@@ -104,7 +104,7 @@
     <Compile Include="ProjectBase\ProjectItemNode.cs" />
     <Compile Include="Exceptions\TfsServerException.cs" />
     <Compile Include="Project\DllReferenceItemNode.cs" />
-    <Compile Include="SolutionXmlDocument.cs" />
+    <Compile Include="SolutionTextDocument.cs" />
     <Compile Include="Tfs\TfsCheckOut.cs" />
     <Compile Include="Tfs\TfsPermissions.cs" />
     <Compile Include="Project\ProjectXmlEditor.cs" />
