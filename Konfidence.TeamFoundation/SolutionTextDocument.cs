@@ -51,7 +51,7 @@ namespace Konfidence.TeamFoundation
             {
                 string line = solutionTextFile.ReadLine();
 
-                while (IsAssigned(line))
+                while (line != null)
                 {
                     _TextFileLines.Add(line);
                 }
