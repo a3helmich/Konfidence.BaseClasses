@@ -63,6 +63,7 @@ namespace Konfidence.TeamFoundation
         public void AddProjectFile(string projectFile)
         {
             int lineIndex = 0;
+
             foreach (string line in _TextFileLines)
             {
                 if (line.Equals("Global", StringComparison.InvariantCultureIgnoreCase))

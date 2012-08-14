@@ -54,9 +54,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDataBaseClas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamFoundationTest", "TeamFoundationTest\TeamFoundationTest.csproj", "{A5352860-AF69-424D-95E7-C1C37048EF78}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 21
+		SccNumberOfProjects = 22
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -120,6 +122,9 @@ Global
 		SccProjectUniqueName20 = Konfidence.Mail\\Konfidence.Mail.csproj
 		SccProjectName20 = Konfidence.Mail
 		SccLocalPath20 = Konfidence.Mail
+		SccProjectUniqueName21 = TeamFoundationTest\\TeamFoundationTest.csproj
+		SccProjectName21 = TeamFoundationTest
+		SccLocalPath21 = TeamFoundationTest
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -331,6 +336,16 @@ Global
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|x86.ActiveCfg = Release|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
