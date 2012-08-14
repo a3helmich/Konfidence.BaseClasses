@@ -19,7 +19,7 @@ namespace Konfidence.TeamFoundation
         }
 
         // TODO : what to do when multiple solutions are in the same folder? 
-        public SolutionTextDocument(string solutionPath)
+        internal SolutionTextDocument(string solutionPath)
         {
             _SolutionPath = solutionPath;
         }

@@ -54,7 +54,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDataBaseClas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamFoundationTest", "TeamFoundationTest\TeamFoundationTest.csproj", "{A5352860-AF69-424D-95E7-C1C37048EF78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundationTest", "Konfidence.TeamFoundationTest\Konfidence.TeamFoundationTest.csproj", "{A5352860-AF69-424D-95E7-C1C37048EF78}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -122,9 +122,9 @@ Global
 		SccProjectUniqueName20 = Konfidence.Mail\\Konfidence.Mail.csproj
 		SccProjectName20 = Konfidence.Mail
 		SccLocalPath20 = Konfidence.Mail
-		SccProjectUniqueName21 = TeamFoundationTest\\TeamFoundationTest.csproj
-		SccProjectName21 = TeamFoundationTest
-		SccLocalPath21 = TeamFoundationTest
+		SccProjectUniqueName21 = Konfidence.TeamFoundationTest\\Konfidence.TeamFoundationTest.csproj
+		SccProjectName21 = Konfidence.TeamFoundationTest
+		SccLocalPath21 = Konfidence.TeamFoundationTest
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
