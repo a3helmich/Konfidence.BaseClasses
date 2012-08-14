@@ -60,7 +60,7 @@ namespace Konfidence.TeamFoundation
             }
         }
 
-        public void AddProjectFile(string projectFile)
+        public void AddProjectFile(ProjectXmlDocument projectFile)
         {
             int lineIndex = 0;
 
