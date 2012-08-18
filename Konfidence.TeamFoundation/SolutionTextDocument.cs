@@ -62,18 +62,43 @@ namespace Konfidence.TeamFoundation
 
         public void AddProjectFile(ProjectXmlDocument projectFile)
         {
-            int lineIndex = 0;
+            List<string> resultFileLines = new List<string>();
 
             foreach (string line in _TextFileLines)
             {
                 if (line.Equals("Global", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    lineIndex++;
-                    break;
+                    InsertProjectLines(projectFile, resultFileLines);
                 }
+
+                resultFileLines.Add(line);
+            }
+        }
+
+        private void InsertProjectLines(ProjectXmlDocument projectFile, List<string> resultFileLines)
+        {
+            // Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassGeneratorClasses", "TestClassGeneratorClassesDb\TestClassGeneratorClasses.csproj", "{CB59EBEC-CF6D-4613-93FE-3C387DD00513}"
+// EndProject
+
+            string solutionPath = Path.GetDirectoryName(this._SolutionFile);
+            string projectPath = Path.GetDirectoryName(projectFile.FileName);
+
+            string relativePath = projectPath.Replace(solutionPath, string.Empty);
+
+            if (!relativePath.EndsWith(@"\"))
+            {
+                relativePath += @"\";
             }
 
+            string projectStartLine = @"Project(""{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"") = ";  // projecttype guid
+            string projectName = "\"" + Path.GetFileNameWithoutExtension(projectFile.FileName) + "\", ";
+            string projectFileName = "\"" + relativePath + Path.GetFileName(projectFile.FileName) + "\", ";
+            string projectGuid = projectFile.ProjectGuid;
 
+            string projectLine = projectStartLine + projectName + projectFileName;
+
+            resultFileLines.Add(projectLine);
+            resultFileLines.Add("EndProject");
         }
 
         public void Save()

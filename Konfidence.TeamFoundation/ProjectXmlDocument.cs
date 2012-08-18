@@ -14,10 +14,39 @@ namespace Konfidence.TeamFoundation
         private ProjectReferenceItemNodeList _ProjectReferenceItemGroupList = null;
         private ProjectCompileItemNodeList _ProjectCompileItemNodeList = null;
         private ProjectNoneItemNodeList _ProjectNoneItemNodeList = null;
+        private PropertyConfigurationItemNodeList _ProjectPropertyConfigurationNodeList = null;
 
         private static Dictionary<string, string> _ProjectGuidDictionary = null;
 
+        private string _ProjectGuid = string.Empty;
+
+        public string ProjectGuid
+        {
+            get
+            {
+                if (IsEmpty(_ProjectGuid))
+                {
+                    _ProjectGuid = ProjectPropertyConfigurationNodeList[0].ProjectGuid;
+                }
+                return _ProjectGuid;
+            }
+        }
+
         #region properties
+
+
+        internal PropertyConfigurationItemNodeList ProjectPropertyConfigurationNodeList
+        {
+            get
+            {
+                if (!IsAssigned(_ProjectPropertyConfigurationNodeList))
+                {
+                    _ProjectPropertyConfigurationNodeList = new PropertyConfigurationItemNodeList(this);
+                }
+                return _ProjectPropertyConfigurationNodeList;
+            }
+        }
+
         public ContentItemNodeList ProjectFileItemNodeList
         {
             get
