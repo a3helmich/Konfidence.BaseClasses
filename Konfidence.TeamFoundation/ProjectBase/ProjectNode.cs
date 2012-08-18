@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Konfidence.Base;
+using Konfidence.TeamFoundation.Project;
 
 namespace Konfidence.TeamFoundation.ProjectBase
 {
@@ -11,6 +12,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
     {
         private string _ItemGroupName = string.Empty;
         private XmlNode _ItemGroupNode = null;
+        private XmlNode _PropertyGroupNode = null;
         private BaseTfsXmlDocument _TfsXmlDocument = null;
 
         internal XmlNamespaceManager XmlNamespaceManager
@@ -32,6 +34,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
             _TfsXmlDocument = tfsXmlDocument;
 
             _ItemGroupNode = GetItemGroupNode();
+            _PropertyGroupNode = GetPropertyGroupNode();
         }
 
         public ProjectNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
@@ -67,6 +70,31 @@ namespace Konfidence.TeamFoundation.ProjectBase
             }
 
             return false;
+        }
+
+        // - search for an itemgroup node which contains 'itemGroupName' nodes
+        private XmlNode GetPropertyGroupNode()
+        {
+            XmlNodeList PropertyGroupList = _TfsXmlDocument.Root.SelectNodes("p:PropertyGroup", _TfsXmlDocument.XmlNamespaceManager);
+
+            XmlNode foundPropertyGroup = null;
+
+            string propertyGroupName = _ItemGroupName.ToLower();
+
+            foreach (XmlNode propertyGroup in PropertyGroupList)
+            {
+                if (propertyGroup.HasChildNodes)
+                {
+                    string currentItemGroupName = propertyGroup.FirstChild.Name.ToLower();
+
+                    if (AnyChildContainsItemGroupName(propertyGroup, propertyGroupName))
+                    {
+                        foundPropertyGroup = propertyGroup;
+                    }
+                }
+            }
+
+            return foundPropertyGroup;
         }
 
         // - search for an itemgroup node which contains 'itemGroupName' nodes
