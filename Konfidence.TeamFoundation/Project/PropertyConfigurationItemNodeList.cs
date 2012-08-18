@@ -30,5 +30,13 @@ namespace Konfidence.TeamFoundation.Project
         {
             throw new NotImplementedException();
         }
+
+        public string ProjectGuid
+        {
+            get
+            {
+                return this[0].GetElement("ProjectGuid").InnerText;
+            }
+        }
     }
 }

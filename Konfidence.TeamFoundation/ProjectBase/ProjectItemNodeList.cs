@@ -29,7 +29,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             _GroupNode = GetGroupNode(_TfsXmlDocument);
 
-            XmlNodeList itemNodeList = _GroupNode.GetItemNodeList();
+            XmlNodeList itemNodeList = _GroupNode.GetNodeList();
 
             if (BaseItem.IsAssigned(itemNodeList))
             {

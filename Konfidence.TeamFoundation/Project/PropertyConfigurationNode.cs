@@ -17,7 +17,7 @@ namespace Konfidence.TeamFoundation.Project
         }
 
         internal PropertyConfigurationNode(BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
-            : base(PROJECT_CONFIGURATION_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode)
+            : base(PROJECT_CONFIGURATION_ITEMGROUP_NAME, tfsXmlDocument, null, itemGroupNode)
         {
         }
     }

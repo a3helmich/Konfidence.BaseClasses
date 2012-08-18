@@ -26,7 +26,7 @@ namespace Konfidence.TeamFoundation
             {
                 if (IsEmpty(_ProjectGuid))
                 {
-                    _ProjectGuid = ProjectPropertyConfigurationNodeList[0].ProjectGuid;
+                    _ProjectGuid = ProjectPropertyConfigurationNodeList.ProjectGuid;
                 }
                 return _ProjectGuid;
             }

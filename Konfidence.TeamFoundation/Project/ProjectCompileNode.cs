@@ -18,7 +18,7 @@ namespace Konfidence.TeamFoundation.Project
         }
 
         internal ProjectCompileNode(BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
-            : base(PROJECT_COMPILE_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode)
+            : base(PROJECT_COMPILE_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode, null)
         {
         }
     }

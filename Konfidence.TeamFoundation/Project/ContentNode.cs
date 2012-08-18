@@ -18,7 +18,7 @@ namespace Konfidence.TeamFoundation.Project
         }
 
         internal ContentNode(BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
-            : base(DLL_CONTENT_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode)
+            : base(DLL_CONTENT_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode, null)
         {
         }
 

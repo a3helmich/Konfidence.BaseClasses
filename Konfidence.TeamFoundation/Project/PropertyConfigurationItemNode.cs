@@ -17,12 +17,9 @@ namespace Konfidence.TeamFoundation.Project
             _XmlNamespaceManager = xmlNamespaceManager;
         }
 
-        public string ProjectGuid
+        internal XmlNode GetElement(string p)
         {
-            get
-            {
-                return TfsXmlNode.Attributes["ProjectGuid"].InnerText;
-            }
+            throw new NotImplementedException();
         }
     }
 }

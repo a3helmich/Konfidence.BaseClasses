@@ -18,7 +18,7 @@ namespace Konfidence.TeamFoundation.Project
         }
 
         internal ProjectNoneNode(BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
-            : base(PROJECT_NONE_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode)
+            : base(PROJECT_NONE_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode, null)
         {
         }
     }

@@ -10,7 +10,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 {
     public abstract class ProjectNode : BaseItem 
     {
-        private string _ItemGroupName = string.Empty;
+        private string _GroupName = string.Empty;
         private XmlNode _ItemGroupNode = null;
         private XmlNode _PropertyGroupNode = null;
         private BaseTfsXmlDocument _TfsXmlDocument = null;
@@ -30,28 +30,34 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
         public ProjectNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument)
         {
-            _ItemGroupName = itemGroupName;
+            _GroupName = itemGroupName;
             _TfsXmlDocument = tfsXmlDocument;
 
             _ItemGroupNode = GetItemGroupNode();
             _PropertyGroupNode = GetPropertyGroupNode();
         }
 
-        public ProjectNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
+        public ProjectNode(string itemGroupName, BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode, XmlNode propertyGroupNode)
         {
-            _ItemGroupName = itemGroupName;
+            _GroupName = itemGroupName;
             _TfsXmlDocument = tfsXmlDocument;
 
             _TfsXmlDocument.Root.AppendChild(itemGroupNode);
 
             _ItemGroupNode = itemGroupNode;
+            _PropertyGroupNode = propertyGroupNode;
         }
 
-        internal XmlNodeList GetItemNodeList()
+        internal XmlNodeList GetNodeList()
         {
             if (IsAssigned(_ItemGroupNode))
             {
-                return _ItemGroupNode.SelectNodes("p:" + _ItemGroupName, _TfsXmlDocument.XmlNamespaceManager);
+                return _ItemGroupNode.SelectNodes("p:" + _GroupName, _TfsXmlDocument.XmlNamespaceManager);
+            }
+
+            if (IsAssigned(_PropertyGroupNode))
+            {
+                return _PropertyGroupNode.SelectNodes("p:" + _GroupName, _TfsXmlDocument.XmlNamespaceManager);
             }
 
             return null;
@@ -59,11 +65,11 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
         // the content itemgroup also contains None elements -> iterate thru all childnodes, to determine
         // if this is a itemgroup with content nodes (the content itemgroup seems te be an exception)
-        private bool AnyChildContainsItemGroupName(XmlNode itemGroup, string itemGroupName)
+        private bool AnyChildContainsGroupName(XmlNode group, string groupName)
         {
-            foreach (XmlNode itemNode in itemGroup.ChildNodes)
+            foreach (XmlNode itemNode in group.ChildNodes)
             {
-                if (itemNode.Name.ToLower().Equals(itemGroupName))
+                if (itemNode.Name.ToLower().Equals(groupName))
                 {
                     return true;
                 }
@@ -79,7 +85,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             XmlNode foundPropertyGroup = null;
 
-            string propertyGroupName = _ItemGroupName.ToLower();
+            string propertyGroupName = _GroupName.ToLower();
 
             foreach (XmlNode propertyGroup in PropertyGroupList)
             {
@@ -87,7 +93,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
                 {
                     string currentItemGroupName = propertyGroup.FirstChild.Name.ToLower();
 
-                    if (AnyChildContainsItemGroupName(propertyGroup, propertyGroupName))
+                    if (AnyChildContainsGroupName(propertyGroup, propertyGroupName))
                     {
                         foundPropertyGroup = propertyGroup;
                     }
@@ -104,7 +110,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             XmlNode foundItemGroup = null;
 
-            string itemGroupName = _ItemGroupName.ToLower();
+            string itemGroupName = _GroupName.ToLower();
 
             List<XmlNode> movedGroups = new List<XmlNode>();
 
@@ -114,7 +120,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
                 {
                     string currentItemGroupName = itemGroup.FirstChild.Name.ToLower();
 
-                    if (AnyChildContainsItemGroupName(itemGroup, itemGroupName))
+                    if (AnyChildContainsGroupName(itemGroup, itemGroupName))
                     {
                         if (IsAssigned(foundItemGroup))
                         {
@@ -163,7 +169,7 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
         internal protected XmlElement AppendChild()
         {
-            XmlElement newElement = _TfsXmlDocument.CreateElement(_ItemGroupName, _TfsXmlDocument.NameSpaceURI);
+            XmlElement newElement = _TfsXmlDocument.CreateElement(_GroupName, _TfsXmlDocument.NameSpaceURI);
 
             _ItemGroupNode.AppendChild(newElement);
 

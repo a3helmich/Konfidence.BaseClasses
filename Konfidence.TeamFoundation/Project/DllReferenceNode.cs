@@ -17,7 +17,7 @@ namespace Konfidence.TeamFoundation.Project
         }
 
         internal DllReferenceNode(BaseTfsXmlDocument tfsXmlDocument, XmlNode itemGroupNode)
-            : base(DLL_REFERENCE_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode)
+            : base(DLL_REFERENCE_ITEMGROUP_NAME, tfsXmlDocument, itemGroupNode, null)
         {
         }
     }
