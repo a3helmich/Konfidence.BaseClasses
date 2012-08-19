@@ -103,6 +103,8 @@
     <Compile Include="Project\ProjectReferenceItemNode.cs" />
     <Compile Include="Project\ProjectReferenceItemNodeList.cs" />
     <Compile Include="Project\ProjectReferenceNode.cs" />
+    <Compile Include="Solution\SolutionProject.cs" />
+    <Compile Include="Solution\SolutionProjectList.cs" />
     <Compile Include="TfsBase\BaseTfsXmlDocument.cs" />
     <Compile Include="ProjectBase\ProjectItemNode.cs" />
     <Compile Include="Exceptions\TfsServerException.cs" />
@@ -124,9 +126,7 @@
   <ItemGroup>
     <None Include="Konfidence.nl.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Solution\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>

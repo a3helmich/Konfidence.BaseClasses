@@ -14,6 +14,11 @@ namespace TeamFoundationTest
     [TestClass()]
     public class SolutionTextDocumentTest
     {
+        private static bool _InitDone = false;
+
+        static private string _TestDir = @"\TestClassGeneratorClassesDb";
+        static private string _TestProject = @"\TestClassGeneratorClasses.csproj";
+        static private string _TestSolution = @"\KonfidenceClassGenerator.sln";
 
         #region test context
         private TestContext testContextInstance;
@@ -33,6 +38,26 @@ namespace TeamFoundationTest
                 testContextInstance = value;
             }
         }
+
+        public string TestProjectDir
+        {
+            get { return TestContext.TestDeploymentDir + _TestDir; }
+        }
+
+        public string TestProjectFile
+        {
+            get { return TestProjectDir + _TestProject; }
+        }
+
+        public string TestSolutionFile
+        {
+            get
+            {
+                return TestContext.TestDeploymentDir + _TestSolution;
+            }
+        }
+
+
         #endregion test context
 
         #region Additional test attributes
@@ -52,10 +77,19 @@ namespace TeamFoundationTest
         //}
         //
         //Use TestInitialize to run code before running each test
-        //[TestInitialize()]
-        //public void MyTestInitialize()
-        //{
-        //}
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            if (!_InitDone)
+            {
+                // move projectfile to subdir
+                Directory.CreateDirectory(TestProjectDir);
+
+                File.Move(TestContext.TestDeploymentDir + _TestProject, TestProjectFile);
+
+                _InitDone = true;
+            }
+        }
         //
         //Use TestCleanup to run code after each test has run
         //[TestCleanup()]
@@ -72,21 +106,26 @@ namespace TeamFoundationTest
         [TestMethod()]
         public void AddProjectFileTest()
         {
-            // move projectfile to subdir
-            string testProjectDir =TestContext.TestDeploymentDir +  @"\TestClassGeneratorClassesDb";
-            Directory.CreateDirectory(testProjectDir);
-            string testProjectFile = testProjectDir + @"\TestClassGeneratorClasses.csproj";
+            SolutionTextDocument target = SolutionTextDocument.GetSolutionXmlDocument(TestSolutionFile); 
 
-            File.Move(TestContext.TestDeploymentDir + @"\TestClassGeneratorClasses.csproj", testProjectFile);
-
-            SolutionTextDocument target = SolutionTextDocument.GetSolutionXmlDocument(TestContext.TestDeploymentDir + @"\KonfidenceClassGenerator.sln"); // TODO: Initialize to an appropriate value
-
-            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(testProjectFile);
+            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(TestProjectFile);
 
             target.AddProjectFile(projectFile);
 
             target.Save();
 
+            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+        }
+
+        /// <summary>
+        ///A test for ParseFile
+        ///</summary>
+        [TestMethod()]
+        [DeploymentItem("Konfidence.TeamFoundation.dll")]
+        public void ParseFileTest()
+        {
+            SolutionTextDocument_Accessor target = SolutionTextDocument_Accessor.AttachShadow(SolutionTextDocument_Accessor.GetSolutionXmlDocument(TestSolutionFile)); 
+            target.ParseFile();
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
     }

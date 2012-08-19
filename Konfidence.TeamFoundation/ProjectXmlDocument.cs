@@ -4,6 +4,7 @@ using System.Xml;
 
 using Konfidence.TeamFoundation.Project;
 using Konfidence.TeamFoundation.ProjectBase;
+using System.IO;
 
 namespace Konfidence.TeamFoundation
 {
@@ -32,8 +33,25 @@ namespace Konfidence.TeamFoundation
             }
         }
 
+        public string ProjectName
+        {
+            get { return Path.GetFileNameWithoutExtension(FileName); }
+        }
         #region properties
 
+        public string GetRelativeProjectFileName(string basePath)
+        {
+            string projectPath = Path.GetDirectoryName(FileName);
+
+            string relativePath = projectPath.Replace(basePath, string.Empty);
+
+            if (!relativePath.EndsWith(@"\"))
+            {
+                relativePath += @"\";
+            }
+
+            return relativePath + Path.GetFileName(FileName); 
+        }
 
         internal PropertyConfigurationItemNodeList ProjectPropertyConfigurationNodeList
         {

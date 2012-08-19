@@ -56,9 +56,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfiden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundationTest", "Konfidence.TeamFoundationTest\Konfidence.TeamFoundationTest.csproj", "{A5352860-AF69-424D-95E7-C1C37048EF78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseTestClasses", "BaseTestClasses\BaseTestClasses.csproj", "{9094E4E8-3556-4AAF-8B84-229FAE12917A}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 22
+		SccNumberOfProjects = 23
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -125,6 +127,9 @@ Global
 		SccProjectUniqueName21 = Konfidence.TeamFoundationTest\\Konfidence.TeamFoundationTest.csproj
 		SccProjectName21 = Konfidence.TeamFoundationTest
 		SccLocalPath21 = Konfidence.TeamFoundationTest
+		SccProjectUniqueName22 = BaseTestClasses\\BaseTestClasses.csproj
+		SccProjectName22 = BaseTestClasses
+		SccLocalPath22 = BaseTestClasses
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -346,6 +351,16 @@ Global
 		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A5352860-AF69-424D-95E7-C1C37048EF78}.Release|x86.ActiveCfg = Release|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9094E4E8-3556-4AAF-8B84-229FAE12917A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
