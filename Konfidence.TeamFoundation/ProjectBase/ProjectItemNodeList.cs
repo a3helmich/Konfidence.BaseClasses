@@ -57,5 +57,9 @@ namespace Konfidence.TeamFoundation.ProjectBase
 
             return newElement;
         }
+        internal protected bool IsAssigned(object x)
+        {
+            return BaseItem.IsAssigned(x);
+        }
     }
 }

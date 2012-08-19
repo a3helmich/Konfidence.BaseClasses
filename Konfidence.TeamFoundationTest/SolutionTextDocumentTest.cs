@@ -1,6 +1,7 @@
 ﻿using Konfidence.TeamFoundation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 
 namespace TeamFoundationTest
 {
@@ -71,11 +72,21 @@ namespace TeamFoundationTest
         [TestMethod()]
         public void AddProjectFileTest()
         {
+            // move projectfile to subdir
+            string testProjectDir =TestContext.TestDeploymentDir +  @"\TestClassGeneratorClassesDb";
+            Directory.CreateDirectory(testProjectDir);
+            string testProjectFile = testProjectDir + @"\TestClassGeneratorClasses.csproj";
+
+            File.Move(TestContext.TestDeploymentDir + @"\TestClassGeneratorClasses.csproj", testProjectFile);
+
             SolutionTextDocument target = SolutionTextDocument.GetSolutionXmlDocument(TestContext.TestDeploymentDir + @"\KonfidenceClassGenerator.sln"); // TODO: Initialize to an appropriate value
 
-            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(TestContext.TestDeploymentDir + @"\TestClassGeneratorClasses.csproj");
+            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(testProjectFile);
 
             target.AddProjectFile(projectFile);
+
+            target.Save();
+
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
         }
     }

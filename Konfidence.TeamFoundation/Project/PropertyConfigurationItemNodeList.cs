@@ -35,8 +35,28 @@ namespace Konfidence.TeamFoundation.Project
         {
             get
             {
-                return this[0].GetElement("ProjectGuid").InnerText;
+                XmlNode element = this.GetElement("ProjectGuid");
+
+                if (IsAssigned(element))
+                {
+                    return element.InnerText;
+                }
+
+                return string.Empty;
             }
+        }
+
+        private XmlNode GetElement(string name)
+        {
+            foreach (PropertyConfigurationItemNode element in this)
+            {
+                if (element.TfsXmlNode.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return element.TfsXmlNode;
+                }
+            }
+
+            return null;
         }
     }
 }

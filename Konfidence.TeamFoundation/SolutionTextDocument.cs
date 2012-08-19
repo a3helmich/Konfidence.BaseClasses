@@ -73,6 +73,10 @@ namespace Konfidence.TeamFoundation
 
                 resultFileLines.Add(line);
             }
+
+            _TextFileLines.Clear();
+
+            _TextFileLines.AddRange(resultFileLines);
         }
 
         private void InsertProjectLines(ProjectXmlDocument projectFile, List<string> resultFileLines)
@@ -82,6 +86,11 @@ namespace Konfidence.TeamFoundation
 
             string solutionPath = Path.GetDirectoryName(this._SolutionFile);
             string projectPath = Path.GetDirectoryName(projectFile.FileName);
+
+            if (!solutionPath.EndsWith(@"\"))
+            {
+                solutionPath += @"\";
+            }
 
             string relativePath = projectPath.Replace(solutionPath, string.Empty);
 
@@ -93,9 +102,9 @@ namespace Konfidence.TeamFoundation
             string projectStartLine = @"Project(""{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"") = ";  // projecttype guid
             string projectName = "\"" + Path.GetFileNameWithoutExtension(projectFile.FileName) + "\", ";
             string projectFileName = "\"" + relativePath + Path.GetFileName(projectFile.FileName) + "\", ";
-            string projectGuid = projectFile.ProjectGuid;
+            string projectGuid = "\"" + projectFile.ProjectGuid + "\"";
 
-            string projectLine = projectStartLine + projectName + projectFileName;
+            string projectLine = projectStartLine + projectName + projectFileName + projectGuid;
 
             resultFileLines.Add(projectLine);
             resultFileLines.Add("EndProject");
