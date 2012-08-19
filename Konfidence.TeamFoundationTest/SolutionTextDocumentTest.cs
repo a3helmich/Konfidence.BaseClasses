@@ -18,9 +18,12 @@ namespace TeamFoundationTest
         private static bool _InitDone = false;
 
         static private string _TestDir = @"\TestClassGeneratorClassesDb";
+        static private string _ExistingDir = @"\DataItemGenerator";
         static private string _TestProject = @"\TestClassGeneratorClasses.csproj";
+        static private string _ExistingProject = @"\DataItemGenerator.csproj";
         static private string _TestSolution = @"\KonfidenceClassGenerator.sln";
         static private string _TestSolutionResult = @"\KonfidenceClassGenerator_TestResult.sln";
+
         #region test context
         private TestContext testContextInstance;
 
@@ -48,6 +51,19 @@ namespace TeamFoundationTest
         public string TestProjectFile
         {
             get { return TestProjectDir + _TestProject; }
+        }
+
+        public string ExistingProjectDir
+        {
+            get { return TestContext.TestDeploymentDir + _ExistingDir; }
+        }
+
+        public string ExistingProjectFile
+        {
+            get
+            {
+                return ExistingProjectDir + _ExistingProject;
+            }
         }
 
         public string TestSolutionFile
@@ -93,8 +109,10 @@ namespace TeamFoundationTest
             {
                 // move projectfile to subdir
                 Directory.CreateDirectory(TestProjectDir);
+                Directory.CreateDirectory(ExistingProjectDir);
 
                 File.Move(TestContext.TestDeploymentDir + _TestProject, TestProjectFile);
+                File.Move(TestContext.TestDeploymentDir + _ExistingProject, ExistingProjectFile);
 
                 _InitDone = true;
             }
@@ -129,20 +147,31 @@ namespace TeamFoundationTest
         /// <summary>
         ///A test for ParseFile
         ///</summary>
-        [TestMethod()]
+        [TestCategory("SolutionTextDocument"), TestMethod()]
         [DeploymentItem("Konfidence.TeamFoundation.dll")]
         public void ParseFileTest()
         {
             SolutionTextDocument_Accessor target = SolutionTextDocument_Accessor.AttachShadow(SolutionTextDocument_Accessor.GetSolutionXmlDocument(TestSolutionFile)); 
 
-            target.ParseFile();
+            // gebeurt impliciet als het bestand geladen wordt:  target.ParseSolutionFile();
 
-            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(TestProjectFile);
 
-            Assert.AreEqual(7, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
-            Assert.AreEqual(pro, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
-            Assert.AreEqual(7, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
-            Assert.AreEqual(7, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target.SccNumberOfProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target.NumberOfSolutionProjects, "Het aantal projecten moet 7 zijn!");
+
+            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(ExistingProjectFile);
+
+            target.AddProjectFile(projectFile);
+
+            Assert.AreEqual(7, target.SccNumberOfProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target.NumberOfSolutionProjects, "Het aantal projecten moet 7 zijn!");
+
+            projectFile = ProjectXmlDocument.GetProjectXmlDocument(TestProjectFile);
+
+            target.AddProjectFile(projectFile);
+
+            Assert.AreEqual(8, target.SccNumberOfProjects, "Het aantal projecten moet 8 zijn!");
+            Assert.AreEqual(8, target.NumberOfSolutionProjects, "Het aantal projecten moet 8 zijn!");
         }
     }
 }

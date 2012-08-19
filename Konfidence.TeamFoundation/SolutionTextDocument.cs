@@ -13,17 +13,62 @@ namespace Konfidence.TeamFoundation
         private string _SolutionPath = string.Empty;
         private string _SolutionFile = string.Empty;
 
-        private bool _HasNewProject = false;
-        private int _NumberOfProjects = 0;
+        private List<string> _TextFileLines = new List<string>();
 
-        protected bool HasNewProject
+        public int SccNumberOfProjects
         {
-            get { return _HasNewProject; }
+            get
+            {
+                return ParseSccNumberOfProjects();
+            }
         }
 
-        private SolutionProjectList projectList = new SolutionProjectList();
+        public int NumberOfSolutionProjects
+        {
+            get
+            {
+                if (HasSolutionItem)
+                {
+                    return SolutionProjectList.Count() + 1;
+                }
 
-        private List<string> _TextFileLines = new List<string>();
+                return SolutionProjectList.Count();
+            }
+        }
+
+        public SolutionProjectList SolutionProjectList
+        {
+            get
+            {
+                return ParseSolutionProjectList();
+            }
+        }
+
+        public bool HasSolutionItem
+        {
+            get
+            {
+                return ParseSolutionItem();
+            }
+        }
+
+        private bool ValidNumberOfProjects
+        {
+            get
+            {
+                if (SccNumberOfProjects != NumberOfSolutionProjects)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        private int SolutionProjectCount()
+        {
+            return SolutionProjectList.Count;
+        }
 
         private SolutionTextDocument()
         {
@@ -69,33 +114,64 @@ namespace Konfidence.TeamFoundation
                     line = solutionTextFile.ReadLine();
                 }
             }
-
-            ParseFile();
         }
 
-        private void ParseFile()
+        private int ParseSccNumberOfProjects()
         {
-            SolutionProject project = null;
+            int numberOfProjects = 0;
 
             foreach (string line in _TextFileLines)
             {
                 if (line.Trim().StartsWith("SccNumberOfProjects"))
                 {
-                    string numberOfProjects = line.Substring(line.IndexOf("=") + 1).Trim();
+                    string numberOfProjectString = line.Substring(line.IndexOf("=") + 1).Trim();
 
-                    int.TryParse(numberOfProjects, out _NumberOfProjects);
+                    int.TryParse(numberOfProjectString, out numberOfProjects);
+
+                    break;
                 }
+            }
 
-                if (line.StartsWith("EndProject"))
+            return numberOfProjects;
+        }
+
+        private bool ParseSolutionItem()
+        {
+            foreach (string line in _TextFileLines)
+            {
+                if (line.StartsWith(@"Project(""{2150E333-8FDC-42A3-9474-1A3956D46DE8}"")"))
                 {
-                    projectList.Add(project);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private SolutionProjectList ParseSolutionProjectList()
+        {
+            SolutionProjectList solutionProjectList = new SolutionProjectList();
+
+            SolutionProject project = null;
+
+            foreach (string line in _TextFileLines)
+            {
+                if (line.Equals("EndProject") && IsAssigned(project))
+                {
+                    solutionProjectList.Add(project);
 
                     project = null;
                 }
 
-                if (line.StartsWith(@"Project(""{2150E333-8FDC-42A3-9474-1A3956D46DE8}"")"))
+                if (line.StartsWith("Project"))
                 {
-                    project = new SolutionProject();
+                    if (!line.StartsWith(@"Project(""{2150E333-8FDC-42A3-9474-1A3956D46DE8}"")"))
+                    {
+                        if (line.StartsWith(@"Project("""))
+                        {
+                            project = new SolutionProject();
+                        }
+                    }
                 }
 
                 if (IsAssigned(project))
@@ -103,79 +179,139 @@ namespace Konfidence.TeamFoundation
                     project.AddLine(line);
                 }
             }
+
+            return solutionProjectList;
         }
 
-        private bool ValidNumberOfProjects
+        private bool CanAddProjectFile(ProjectXmlDocument projectFile)
         {
-            get
+            foreach (SolutionProject project in SolutionProjectList)
             {
-                if (_NumberOfProjects != NewNumberOfProjects)
+                if (projectFile.ProjectGuid.Equals(project.ProjectGuid, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return false;
                 }
 
-                return true;
-            }
-        }
+                if (projectFile.ProjectName.Equals(project.ProjectName, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return false;
+                }
 
-        protected int NewNumberOfProjects
-        {
-            get 
-            {
-            if (HasNewProject)
-            {
-                return projectList.Count + 1;
+                if (projectFile.FileName.EndsWith(project.ProjectFile, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return false;
+                }
             }
 
-            return projectList.Count;
-            }
-        }
-
-        private bool ValidProjectFile(ProjectXmlDocument projectFile)
-        {
-
-
-            return false;
+            return true;
         }
 
         public void AddProjectFile(ProjectXmlDocument projectFile)
         {
-            if (ValidProjectFile(projectFile))
+            if (CanAddProjectFile(projectFile))
             {
-                List<string> resultFileLines = new List<string>();
+                AddProjectEntry(projectFile);
 
-                string replaceLine;
+                // nb kan pas nadat het project is toegevoegd
+                SetSccNumberOfProjects();
 
-                foreach (string line in _TextFileLines)
+                AddTFSProjectEntries(projectFile);
+            }
+        }
+
+        private void AddProjectEntry(ProjectXmlDocument projectFile)
+        {
+            List<string> resultFileLines = new List<string>();
+
+            foreach (string line in _TextFileLines)
+            {
+                // voeg project toe
+                if (line.Equals("Global", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    replaceLine = string.Empty;
+                    InsertProjectLines(projectFile, resultFileLines);
+                }
 
-                    // voeg project toe
-                    if (line.Equals("Global", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        InsertProjectLines(projectFile, resultFileLines);
-                    }
+                resultFileLines.Add(line);
+            }
 
-                    // valideer het aantal projecten in de solution
-                    if (line.Trim().StartsWith("SccNumberOfProjects", StringComparison.InvariantCultureIgnoreCase) && !ValidNumberOfProjects)
-                    {
-                        replaceLine = line.Substring(0, line.IndexOf("=")) + " " + NewNumberOfProjects.ToString();
-                    }
+            _TextFileLines.Clear();
 
-                    if (IsEmpty(replaceLine))
+            _TextFileLines.AddRange(resultFileLines);
+        }
+
+        private void AddTFSProjectEntries(ProjectXmlDocument projectFile)
+        {
+            List<string> resultFileLines = new List<string>();
+
+            bool isTfsSection = false;
+
+            foreach (string line in _TextFileLines)
+            {
+                if (line.Trim().StartsWith("GlobalSection(TeamFoundationVersionControl)"))
+                {
+                    isTfsSection = true;
+                }
+                else
+                {
+                    if (isTfsSection)
                     {
-                        resultFileLines.Add(line);
-                    }
-                    else
-                    {
-                        resultFileLines.Add(replaceLine);
+                        if (line.Trim().StartsWith("EndGlobalSection"))
+                        {
+                            string relativeProjectFileName = projectFile.GetRelativeProjectFileName(SolutionPath);
+
+                            string count = SolutionProjectCount().ToString();
+
+                            string SccProjectUniqueNameLine = ("\t\tSccProjectUniqueName" + count + " = " + relativeProjectFileName).Replace(@"\", @"\\");
+                            //string SccProjectNameLine = "\t\tSccProjectName" + count + " = " + projectFile.ProjectName;
+                            string SccProjectNameLine = "\t\tSccProjectName" + count + " = " + Path.GetDirectoryName(relativeProjectFileName);
+                            string SccLocalPathLine = "\t\tSccLocalPath" + count + " = " + Path.GetDirectoryName(relativeProjectFileName);
+
+                            resultFileLines.Add(SccProjectUniqueNameLine);
+                            resultFileLines.Add(SccProjectNameLine);
+                            resultFileLines.Add(SccLocalPathLine);
+
+                            isTfsSection = false;
+                        }
                     }
                 }
 
-                _TextFileLines.Clear();
-
-                _TextFileLines.AddRange(resultFileLines);
+                resultFileLines.Add(line);
             }
+
+            _TextFileLines.Clear();
+
+            _TextFileLines.AddRange(resultFileLines);
+        }
+
+        private void SetSccNumberOfProjects()
+        {
+            List<string> resultFileLines = new List<string>();
+
+            string replaceLine;
+
+            foreach (string line in _TextFileLines)
+            {
+                replaceLine = string.Empty;
+
+                // valideer het aantal projecten in de solution
+                if (line.Trim().StartsWith("SccNumberOfProjects", StringComparison.InvariantCultureIgnoreCase) && !ValidNumberOfProjects)
+                {
+                    replaceLine = line.Substring(0, line.IndexOf("=") + 1) + " " + NumberOfSolutionProjects.ToString();
+                }
+
+                if (IsEmpty(replaceLine))
+                {
+                    resultFileLines.Add(line);
+                }
+                else
+                {
+                    resultFileLines.Add(replaceLine);
+                }
+            }
+
+            _TextFileLines.Clear();
+
+            _TextFileLines.AddRange(resultFileLines);
         }
 
         protected string SolutionPath

@@ -81,7 +81,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\DataItemGenerator.csproj" />
+    <Content Include="TestData\DataItemGenerator.csproj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\KonfidenceClassGenerator_TestResult.sln" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
