@@ -21,6 +21,7 @@ namespace TeamFoundationTest
         static private string _ExistingDir = @"\DataItemGenerator";
         static private string _TestProject = @"\TestClassGeneratorClasses.csproj";
         static private string _ExistingProject = @"\DataItemGenerator.csproj";
+        static private string _StartSolution = @"\KonfidenceClassGenerator_Start.sln";
         static private string _TestSolution = @"\KonfidenceClassGenerator.sln";
         static private string _TestSolutionResult = @"\KonfidenceClassGenerator_TestResult.sln";
 
@@ -111,11 +112,13 @@ namespace TeamFoundationTest
                 Directory.CreateDirectory(TestProjectDir);
                 Directory.CreateDirectory(ExistingProjectDir);
 
-                File.Move(TestContext.TestDeploymentDir + _TestProject, TestProjectFile);
-                File.Move(TestContext.TestDeploymentDir + _ExistingProject, ExistingProjectFile);
+                File.Copy(TestContext.TestDeploymentDir + _TestProject, TestProjectFile, true);
+                File.Copy(TestContext.TestDeploymentDir + _ExistingProject, ExistingProjectFile, true);
 
                 _InitDone = true;
             }
+
+            File.Copy(TestContext.TestDeploymentDir + _StartSolution, TestSolutionFile, true);
         }
         //
         //Use TestCleanup to run code after each test has run
@@ -156,22 +159,22 @@ namespace TeamFoundationTest
             // gebeurt impliciet als het bestand geladen wordt:  target.ParseSolutionFile();
 
 
-            Assert.AreEqual(7, target.SccNumberOfProjects, "Het aantal projecten moet 7 zijn!");
-            Assert.AreEqual(7, target.NumberOfSolutionProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target.SccNumberOfProjects, "1.Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target.NumberOfSolutionProjects, "2.Het aantal projecten moet 7 zijn!");
 
             ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(ExistingProjectFile);
 
             target.AddProjectFile(projectFile);
 
-            Assert.AreEqual(7, target.SccNumberOfProjects, "Het aantal projecten moet 7 zijn!");
-            Assert.AreEqual(7, target.NumberOfSolutionProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target.SccNumberOfProjects, "3.Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target.NumberOfSolutionProjects, "4.Het aantal projecten moet 7 zijn!");
 
             projectFile = ProjectXmlDocument.GetProjectXmlDocument(TestProjectFile);
 
             target.AddProjectFile(projectFile);
 
-            Assert.AreEqual(8, target.SccNumberOfProjects, "Het aantal projecten moet 8 zijn!");
-            Assert.AreEqual(8, target.NumberOfSolutionProjects, "Het aantal projecten moet 8 zijn!");
+            Assert.AreEqual(8, target.SccNumberOfProjects, "5.Het aantal projecten moet 8 zijn!");
+            Assert.AreEqual(8, target.NumberOfSolutionProjects, "6.Het aantal projecten moet 8 zijn!");
         }
     }
 }

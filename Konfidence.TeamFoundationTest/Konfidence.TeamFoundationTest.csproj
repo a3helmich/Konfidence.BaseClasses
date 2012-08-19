@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Shadow Include="Test References\Konfidence.TeamFoundation.accessor" />
-    <None Include="TestData\KonfidenceClassGenerator.sln" />
+    <None Include="TestData\KonfidenceClassGenerator_Start.sln" />
     <None Include="TestData\TestClassGeneratorClasses.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

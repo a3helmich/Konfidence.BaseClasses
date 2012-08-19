@@ -264,14 +264,7 @@ namespace Konfidence.TeamFoundation
 
                 AddTFSProjectEntries(projectFile);
 
-                AddConfigurationPlatforms();
-            }
-        }
-
-        private void AddConfigurationPlatforms()
-        {
-            if (ConfigurationList.Count > 0)
-            {
+                AddConfigurationPlatforms(projectFile);
             }
         }
 
@@ -285,6 +278,48 @@ namespace Konfidence.TeamFoundation
                 if (line.Equals("Global", StringComparison.InvariantCultureIgnoreCase))
                 {
                     InsertProjectLines(projectFile, resultFileLines);
+                }
+
+                resultFileLines.Add(line);
+            }
+
+            _TextFileLines.Clear();
+
+            _TextFileLines.AddRange(resultFileLines);
+        }
+
+        private void InsertConfigurationLines(List<string> resultFileLines, ProjectXmlDocument projectFile)
+        {
+            foreach (string configuration in ConfigurationList)
+            {
+                resultFileLines.Add("\t\t" + projectFile.ProjectGuid + "." + configuration.Replace("CPU =", "CPU.ActiveCfg ="));
+                resultFileLines.Add("\t\t" + projectFile.ProjectGuid + "." + configuration.Replace("CPU =", "CPU.Build.0 ="));
+            }
+        }
+
+        private void AddConfigurationPlatforms(ProjectXmlDocument projectFile)
+        {
+            List<string> resultFileLines = new List<string>();
+
+            bool isConfigurationSection = false;
+
+            foreach (string line in _TextFileLines)
+            {
+                if (line.Trim().StartsWith("GlobalSection(ProjectConfigurationPlatforms)"))
+                {
+                    isConfigurationSection = true;
+                }
+                else
+                {
+                    if (isConfigurationSection)
+                    {
+                        if (line.Trim().StartsWith("EndGlobalSection"))
+                        {
+                            InsertConfigurationLines(resultFileLines, projectFile);
+
+                            isConfigurationSection = false;
+                        }
+                    }
                 }
 
                 resultFileLines.Add(line);
