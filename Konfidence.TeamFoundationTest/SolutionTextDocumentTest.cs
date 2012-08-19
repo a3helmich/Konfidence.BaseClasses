@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using Konfidence.BaseUnitTestClasses;
 
 namespace TeamFoundationTest
 {
@@ -19,7 +20,7 @@ namespace TeamFoundationTest
         static private string _TestDir = @"\TestClassGeneratorClassesDb";
         static private string _TestProject = @"\TestClassGeneratorClasses.csproj";
         static private string _TestSolution = @"\KonfidenceClassGenerator.sln";
-
+        static private string _TestSolutionResult = @"\KonfidenceClassGenerator_TestResult.sln";
         #region test context
         private TestContext testContextInstance;
 
@@ -57,6 +58,14 @@ namespace TeamFoundationTest
             }
         }
 
+        public string TestSolutionResultFile
+        {
+            get
+            {
+                return TestContext.TestDeploymentDir + _TestSolutionResult;
+            }
+        }
+            
 
         #endregion test context
 
@@ -114,7 +123,7 @@ namespace TeamFoundationTest
 
             target.Save();
 
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            Assert.IsTrue(BaseFileTest.TextFileEqual(TestSolutionFile, TestSolutionResultFile), "Solutionfiles zijn niet gelijk.");
         }
 
         /// <summary>
@@ -125,8 +134,15 @@ namespace TeamFoundationTest
         public void ParseFileTest()
         {
             SolutionTextDocument_Accessor target = SolutionTextDocument_Accessor.AttachShadow(SolutionTextDocument_Accessor.GetSolutionXmlDocument(TestSolutionFile)); 
+
             target.ParseFile();
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+
+            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(TestProjectFile);
+
+            Assert.AreEqual(7, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(pro, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
+            Assert.AreEqual(7, target._NumberOfProjects, "Het aantal projecten moet 7 zijn!");
         }
     }
 }
