@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{24C99342-1BEF-4060-927E-01E8AF8992D8}</ProjectGuid>
+    <ProjectGuid>{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.BaseTestClasses</RootNamespace>
-    <AssemblyName>Konfidence.BaseTestClasses</AssemblyName>
+    <RootNamespace>Konfidence.BaseUnitTestClasses</RootNamespace>
+    <AssemblyName>Konfidence.BaseUnitTestClasses</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

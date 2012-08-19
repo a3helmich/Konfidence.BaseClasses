@@ -5,9 +5,9 @@ using System.Text;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.BaseTestClasses
+namespace Konfidence.BaseUnitTestClasses
 {
-    class BaseFileTest
+    public class BaseFileTest
     {
         public static bool BitmapsEqual(string file1, string file2)
         {
