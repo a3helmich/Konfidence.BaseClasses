@@ -64,6 +64,10 @@
       <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
       <Name>Konfidence.BaseClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseUnitTestClasses\Konfidence.BaseUnitTestClasses.csproj">
+      <Project>{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}</Project>
+      <Name>Konfidence.BaseUnitTestClasses</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Konfidence.TeamFoundation\Konfidence.TeamFoundation.csproj">
       <Project>{99B3193A-0739-4586-A379-138176C425A7}</Project>
       <Name>Konfidence.TeamFoundation</Name>
@@ -75,6 +79,9 @@
     <None Include="TestData\TestClassGeneratorClasses.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestData\KonfidenceClassGenerator_TestResult.sln" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
