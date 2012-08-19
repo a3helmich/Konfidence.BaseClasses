@@ -13,6 +13,8 @@ namespace Konfidence.TeamFoundation
         private string _SolutionPath = string.Empty;
         private string _SolutionFile = string.Empty;
 
+        private List<string> _ConfigurationList = null;
+
         private List<string> _TextFileLines = new List<string>();
 
         public int SccNumberOfProjects
@@ -41,6 +43,19 @@ namespace Konfidence.TeamFoundation
             get
             {
                 return ParseSolutionProjectList();
+            }
+        }
+
+        protected List<string> ConfigurationList
+        {
+            get
+            {
+                if (!IsAssigned(_ConfigurationList))
+                {
+                    _ConfigurationList = ParseConfigurations();
+                }
+
+                return _ConfigurationList;
             }
         }
 
@@ -183,6 +198,38 @@ namespace Konfidence.TeamFoundation
             return solutionProjectList;
         }
 
+        private List<string> ParseConfigurations()
+        {
+            List<string> configList = new List<string>();
+
+            bool isConfigurationSection = false;
+
+            foreach (string line in _TextFileLines)
+            {
+                if (line.Trim().StartsWith("GlobalSection(SolutionConfigurationPlatforms)"))
+                {
+                    isConfigurationSection = true;
+                }
+                else
+                {
+                    if (isConfigurationSection)
+                    {
+                        if (line.Trim().StartsWith("EndGlobalSection"))
+                        {
+
+                            isConfigurationSection = false;
+                        }
+                        else
+                        {
+                            configList.Add(line.Trim());
+                        }
+                    }
+                }
+            }
+
+            return configList;
+        }
+
         private bool CanAddProjectFile(ProjectXmlDocument projectFile)
         {
             foreach (SolutionProject project in SolutionProjectList)
@@ -216,6 +263,15 @@ namespace Konfidence.TeamFoundation
                 SetSccNumberOfProjects();
 
                 AddTFSProjectEntries(projectFile);
+
+                AddConfigurationPlatforms();
+            }
+        }
+
+        private void AddConfigurationPlatforms()
+        {
+            if (ConfigurationList.Count > 0)
+            {
             }
         }
 
