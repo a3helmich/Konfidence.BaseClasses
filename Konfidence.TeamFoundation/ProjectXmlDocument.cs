@@ -31,6 +31,10 @@ namespace Konfidence.TeamFoundation
                 }
                 return _ProjectGuid;
             }
+            set
+            {
+                ProjectPropertyConfigurationNodeList.ProjectGuid = value;
+            }
         }
 
         public string ProjectName

@@ -44,6 +44,18 @@ namespace Konfidence.TeamFoundation.Project
 
                 return string.Empty;
             }
+            set
+            {
+                XmlNode element = this.GetElement("ProjectGuid");
+
+                if (IsAssigned(element))
+                {
+                    if (IsGuid(value))
+                    {
+                        element.InnerText = value;
+                    }
+                }
+            }
         }
 
         private XmlNode GetElement(string name)
