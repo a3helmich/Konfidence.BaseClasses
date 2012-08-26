@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8DA3D408-9911-40BA-BFEB-CB3EC13AAF9A}</ProjectGuid>
+    <ProjectGuid>{2D783B35-1BB7-47A8-9CE6-C3E9B1762E0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestClassGeneratorClasses</RootNamespace>
