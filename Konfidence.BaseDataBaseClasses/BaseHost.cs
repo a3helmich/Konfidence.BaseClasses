@@ -63,6 +63,8 @@ namespace Konfidence.BaseData
 
 		internal virtual void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)
 		{
+
+            dataItem._Id = id;
 		}
 
 		internal virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)

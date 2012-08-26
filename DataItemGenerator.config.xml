@@ -1,14 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
   <DataBase>
-    Newsletter
+    TestClassGenerator
   </DataBase>
   <TargetProjectDirectory>
-    C:\Projects\Producten\Newsletter\NewsletterClasses
+    TestClassGeneratorClassesDb\
   </TargetProjectDirectory>
-  <WebServiceDirectory>
-    C:\Projects\Producten\Newsletter\NewsletterWebService
-  </WebServiceDirectory>
-  <SolutionDirectory>
-  </SolutionDirectory>
 </Config>

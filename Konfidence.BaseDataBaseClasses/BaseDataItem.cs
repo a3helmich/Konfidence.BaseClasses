@@ -22,7 +22,9 @@ namespace Konfidence.BaseData
 		internal Dictionary<string, object> _PropertyDictionary = null;
 
 		private string _AutoIdField = string.Empty;
-		private int _Id;
+		internal int _Id;
+
+        private Dictionary<string, ParameterObject> _AutoUpdateFieldList = null;
 
 		private string _ServiceName = string.Empty;
 
@@ -54,14 +56,8 @@ namespace Konfidence.BaseData
 
             public DbType DbType
 			{
-				get
-				{
-					return _DbType;
-				}
-				set
-				{
-					_DbType = value;
-				}
+				get { return _DbType; }
+				set { _DbType = value; }
 			}
 
 			public object Value
@@ -133,10 +129,23 @@ namespace Konfidence.BaseData
 			set { _AutoIdField = value; }
 		}
 
-		internal protected int Id
+		public int Id
 		{
 			get { return _Id; }
 		}
+
+        internal protected Dictionary<string, ParameterObject> AutoUpdateFieldList
+        {
+            get
+            {
+                if (IsAssigned(_AutoUpdateFieldList))
+                {
+                    _AutoUpdateFieldList = new Dictionary<string, ParameterObject>();
+                }
+
+                return _AutoUpdateFieldList;
+            }
+        }
 
 		internal protected string DeleteStoredProcedure
 		{
