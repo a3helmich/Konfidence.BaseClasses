@@ -134,7 +134,7 @@ namespace TeamFoundationTest
         ///A test for AddProjectFile
         ///</summary>
         [TestMethod()]
-        public void AddProjectFileTest()
+        public void AddProjectToSolutionTest()
         {
             SolutionTextDocument target = SolutionTextDocument.GetSolutionXmlDocument(TestSolutionFile); 
 
@@ -152,7 +152,7 @@ namespace TeamFoundationTest
         ///</summary>
         [TestCategory("SolutionTextDocument"), TestMethod()]
         [DeploymentItem("Konfidence.TeamFoundation.dll")]
-        public void ParseFileTest()
+        public void ParseSolutionFileTest()
         {
             SolutionTextDocument_Accessor target = SolutionTextDocument_Accessor.AttachShadow(SolutionTextDocument_Accessor.GetSolutionXmlDocument(TestSolutionFile)); 
 
