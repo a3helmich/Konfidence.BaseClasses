@@ -4,6 +4,6 @@
     TestClassGenerator
   </DataBase>
   <TargetProjectDirectory>
-    TestClassGeneratorClassesDb\
+    TestClassGeneratorClass\
   </TargetProjectDirectory>
 </Config>
