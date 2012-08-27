@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <DataBase>
+    TestClassGenerator
+  </DataBase>
+  <TargetProjectDirectory>
+    BaseClassesKonfidenceClasses
+  </TargetProjectDirectory>
+  <WebServiceDirectory>
+    BaseClassesKonfidenceWebService
+  </WebServiceDirectory>
+  <SolutionDirectory>
+  </SolutionDirectory>
+</Config>
