@@ -60,9 +60,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundationTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClasses", "Konfidence.BaseUnitTestClasses\Konfidence.BaseUnitTestClasses.csproj", "{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassGeneratorClasses", "BaseClassesKonfidenceClasses\TestClassGeneratorClasses.csproj", "{DA2DE505-2986-4768-81EC-38B7B5A061DE}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 23
+		SccNumberOfProjects = 24
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -132,6 +134,9 @@ Global
 		SccProjectUniqueName22 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
 		SccProjectName22 = Konfidence.BaseUnitTestClasses
 		SccLocalPath22 = Konfidence.BaseUnitTestClasses
+		SccProjectUniqueName23 = BaseClassesKonfidenceClasses\\TestClassGeneratorClasses.csproj
+		SccProjectName23 = BaseClassesKonfidenceClasses
+		SccLocalPath23 = BaseClassesKonfidenceClasses
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -363,6 +368,18 @@ Global
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|x86.ActiveCfg = Release|Any CPU
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Debug|Mixed Platforms = Debug|Mixed Platforms
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Debug|Mixed Platforms = Debug|Mixed Platforms
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Debug|x86 = Debug|x86
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Debug|x86 = Debug|x86
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Release|Mixed Platforms = Release|Mixed Platforms
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Release|Mixed Platforms = Release|Mixed Platforms
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Release|x86 = Release|x86
+		{DA2DE505-2986-4768-81EC-38B7B5A061DE}.Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
