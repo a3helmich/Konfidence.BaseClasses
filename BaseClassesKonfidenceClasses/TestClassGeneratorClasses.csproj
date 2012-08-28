@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F69E31D0-F7BD-4449-B0CF-A7799544C68E}</ProjectGuid>
+    <ProjectGuid>{7DE6B710-8354-4F18-84D2-78EE18A70F88}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestClassGeneratorClasses</RootNamespace>
@@ -105,10 +105,7 @@
     <None Include="Generated.Sql\Test4_GetList.sql" />
     <None Include="Generated.Sql\Test4_RequiredField.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Generated.Classes\" />
-    <Folder Include="Generated.Sql\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

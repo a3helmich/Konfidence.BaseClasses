@@ -281,7 +281,7 @@ namespace Konfidence.TeamFoundation
                 foreach (string line in _TextFileLines)
                 {
                     // voeg project toe
-                    if (line.Equals("Project(", StringComparison.InvariantCultureIgnoreCase) && !isAdded)
+                    if (line.StartsWith("Project(", StringComparison.InvariantCultureIgnoreCase) && !isAdded)
                     {
                         InsertDataItemGeneratorConfigFileLines(resultFileLines);
 
