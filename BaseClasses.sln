@@ -1,10 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig", "{2ce91d47-f20e-41fb-8824-d422d5e2ab85}"
-	ProjectSection(SolutionItems) = preProject
-		DataItemGenerator.config.xml = DataItemGenerator.config.xml
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig", "{2CE91D47-F20E-41FB-8824-D422D5E2AB85}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongNameKey", "{5509EDEF-3EA1-4BBA-905A-34C9C89004C0}"
 	ProjectSection(SolutionItems) = preProject
@@ -63,11 +60,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundationTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClasses", "Konfidence.BaseUnitTestClasses\Konfidence.BaseUnitTestClasses.csproj", "{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassGeneratorClasses", "BaseClassesKonfidenceClasses\TestClassGeneratorClasses.csproj", "{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 24
+		SccNumberOfProjects = 23
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -137,9 +132,6 @@ Global
 		SccProjectUniqueName22 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
 		SccProjectName22 = Konfidence.BaseUnitTestClasses
 		SccLocalPath22 = Konfidence.BaseUnitTestClasses
-		SccProjectUniqueName23 = BaseClassesKonfidenceClasses\\TestClassGeneratorClasses.csproj
-		SccProjectName23 = BaseClassesKonfidenceClasses
-		SccLocalPath23 = BaseClassesKonfidenceClasses
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -371,18 +363,6 @@ Global
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|x86.ActiveCfg = Release|Any CPU
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Debug|Mixed Platforms = Debug|Mixed Platforms
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Debug|Mixed Platforms = Debug|Mixed Platforms
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Debug|x86 = Debug|x86
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Debug|x86 = Debug|x86
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Release|Mixed Platforms = Release|Mixed Platforms
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Release|Mixed Platforms = Release|Mixed Platforms
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Release|x86 = Release|x86
-		{09C3ADFD-0C7F-46E6-8330-37AE1EFD01F0}.Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

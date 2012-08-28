@@ -299,7 +299,7 @@ namespace Konfidence.TeamFoundation
 
         private void InsertDataItemGeneratorConfigFileLines(List<string> resultFileLines)
         {
-            string projectGuid = Guid.NewGuid().ToString("B");
+            string projectGuid = Guid.NewGuid().ToString("B").ToUpper();
             
             string projectStart = "Project(\"{2150E333-8FDC-42A3-9474-1A3956D46DE8}\") = \"DataItemGeneratorConfig\", \"DataItemGeneratorConfig\", \"" + projectGuid + "\"";
             string projectSesionStart = "\tProjectSection(SolutionItems) = preProject";
