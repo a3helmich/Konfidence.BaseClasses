@@ -58,11 +58,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TeamFoundationTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClasses", "Konfidence.BaseUnitTestClasses\Konfidence.BaseUnitTestClasses.csproj", "{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassGeneratorClasses", "BaseClassesKonfidenceClasses\TestClassGeneratorClasses.csproj", "{8AB765A2-F947-43A2-AE13-772B25FBB86D}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 24
+		SccNumberOfProjects = 23
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -132,9 +130,6 @@ Global
 		SccProjectUniqueName22 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
 		SccProjectName22 = Konfidence.BaseUnitTestClasses
 		SccLocalPath22 = Konfidence.BaseUnitTestClasses
-		SccProjectUniqueName23 = BaseClassesKonfidenceClasses\\TestClassGeneratorClasses.csproj
-		SccProjectName23 = BaseClassesKonfidenceClasses
-		SccLocalPath23 = BaseClassesKonfidenceClasses
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -366,18 +361,6 @@ Global
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|x86.ActiveCfg = Release|Any CPU
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Debug|Mixed Platforms = Debug|Mixed Platforms
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Debug|Mixed Platforms = Debug|Mixed Platforms
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Debug|x86 = Debug|x86
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Debug|x86 = Debug|x86
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Release|Mixed Platforms = Release|Mixed Platforms
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Release|Mixed Platforms = Release|Mixed Platforms
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Release|x86 = Release|x86
-		{8AB765A2-F947-43A2-AE13-772B25FBB86D}.Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
