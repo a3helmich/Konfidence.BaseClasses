@@ -67,7 +67,7 @@ namespace Konfidence.BaseData
         }
 #endregion
 
-		internal override void Save(BaseDataItem dataItem, string saveStoredProcedure, string autoIdField, int id)
+		internal override void Save(BaseDataItem dataItem)
 		{
 			List<BaseDataItem.ParameterObject> ParameterDataItemList = dataItem.SetItemData();
 
@@ -83,7 +83,7 @@ namespace Konfidence.BaseData
 				parameterObjectList.Add(parameterObject);
 			}
 
-			 ItemId = _WsBaseHostService.Save(parameterObjectList.ToArray(), id);
+            dataItem._Id = _WsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.Id);
 		}
 
 		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)

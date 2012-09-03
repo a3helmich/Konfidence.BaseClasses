@@ -57,7 +57,7 @@ namespace Konfidence.BaseData
 			_DataBaseName = databaseName;
 		}
 
-		internal virtual void Save(BaseDataItem dataItem, string saveStoredProcedure, string autoIdField, int id)
+		internal virtual void Save(BaseDataItem dataItem)
 		{
 		}
 

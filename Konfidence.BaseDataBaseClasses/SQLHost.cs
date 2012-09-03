@@ -117,27 +117,27 @@ namespace Konfidence.BaseData
         }
         #endregion
 
-		internal override void Save(BaseDataItem dataItem, string saveStoredProcedure, string autoIdField, int id)
+		internal override void Save(BaseDataItem dataItem)
 		{
-			if (autoIdField.Equals(string.Empty))
+			if (dataItem.AutoIdField.Equals(string.Empty))
 			{
 				throw (new Exception("AutoIdField not provided"));
 			}
 
-			if (saveStoredProcedure.Equals(string.Empty))
+            if (dataItem.SaveStoredProcedure.Equals(string.Empty))
 			{
 				throw (new Exception("SaveStoredProcedure not provided"));
 			}
 
 			Database database = GetDatabase();
 
-			DbCommand dbCommand = database.GetStoredProcCommand(saveStoredProcedure);
+            DbCommand dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure);
 
 			SetItemData(dataItem, database, dbCommand);
 
 			database.ExecuteNonQuery(dbCommand);
 
-			ItemId = (int)database.GetParameterValue(dbCommand, autoIdField);
+            dataItem._Id = (int)database.GetParameterValue(dbCommand, dataItem.AutoIdField);
 
             // TODO : retrieve database-side updated fields, and make defaults toway fields, instead of readonly
             //        make update trigers readonly and insert triggers toway fields, instead of readonly

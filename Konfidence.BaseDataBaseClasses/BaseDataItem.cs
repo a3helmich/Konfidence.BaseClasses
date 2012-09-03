@@ -519,9 +519,7 @@ namespace Konfidence.BaseData
 
             BaseHost dataHost = GetHost();
 
-			dataHost.Save(this, SaveStoredProcedure, AutoIdField, _Id);
-
-			_Id = dataHost.Id;
+			dataHost.Save(this);
 
             AfterSave();
 		}
