@@ -96,9 +96,9 @@ namespace Konfidence.TeamFoundation
         }
 
         // TODO : get projectList from solution file
-        public List<string> GetProjectFileList() 
+        public List<string> GetProjectFileList()
         {
-            List<string>  projectFileList = new List<string>();
+            List<string> projectFileList = new List<string>();
 
             projectFileList.AddRange(Directory.GetFiles(_SolutionPath, "*.csproj", SearchOption.AllDirectories));
 
@@ -275,17 +275,53 @@ namespace Konfidence.TeamFoundation
             // Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig"
             if (!ContainsDataItemGeneratorConfigFile())
             {
+                bool containsFolder = ContainsDataItemGeneratorConfigFolder();
+
                 List<string> resultFileLines = new List<string>();
                 bool isAdded = false;
+                bool folderFound = false;
+                bool folderProjectFound = false;
 
                 foreach (string line in _TextFileLines)
                 {
-                    // voeg project toe
-                    if (line.StartsWith("Project(", StringComparison.InvariantCultureIgnoreCase) && !isAdded)
+                    if (!isAdded)
                     {
-                        InsertDataItemGeneratorConfigFileLines(resultFileLines);
+                        if (containsFolder)
+                        {
+                            if (folderFound)
+                            {
+                                if (folderProjectFound)
+                                {
+                                    // voeg projectRegel toe
+                                    AddDataItemGeneratorConfigFileLines(resultFileLines);
 
-                        isAdded = true;
+                                    isAdded = true;
+                                }
+                                else
+                                {
+                                    if (line.Trim().StartsWith("ProjectSection(SolutionItems) = preProject"))
+                                    {
+                                        folderProjectFound = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (line.StartsWith("Project(\"{2150E333-8FDC-42A3-9474-1A3956D46DE8}\") = \"DataItemGeneratorConfig\", \"DataItemGeneratorConfig\"", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    folderFound = true;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (line.StartsWith("Project(", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                InsertDataItemGeneratorConfigFileLines(resultFileLines);
+
+                                isAdded = true;
+                            }
+                        }
                     }
 
                     resultFileLines.Add(line);
@@ -297,10 +333,17 @@ namespace Konfidence.TeamFoundation
             }
         }
 
+        private void AddDataItemGeneratorConfigFileLines(List<string> resultFileLines)
+        {
+            string fileEntry = "\t\tDataItemGenerator.config.xml = DataItemGenerator.config.xml";
+
+            resultFileLines.Add(fileEntry);
+        }
+
         private void InsertDataItemGeneratorConfigFileLines(List<string> resultFileLines)
         {
             string projectGuid = Guid.NewGuid().ToString("B").ToUpper();
-            
+
             string projectStart = "Project(\"{2150E333-8FDC-42A3-9474-1A3956D46DE8}\") = \"DataItemGeneratorConfig\", \"DataItemGeneratorConfig\", \"" + projectGuid + "\"";
             string projectSesionStart = "\tProjectSection(SolutionItems) = preProject";
             string fileEntry = "\t\tDataItemGenerator.config.xml = DataItemGenerator.config.xml";
@@ -312,6 +355,19 @@ namespace Konfidence.TeamFoundation
             resultFileLines.Add(fileEntry);
             resultFileLines.Add(projectSesionEnd);
             resultFileLines.Add(projectEnd);
+        }
+
+        private bool ContainsDataItemGeneratorConfigFolder()
+        {
+            foreach (string line in _TextFileLines)
+            {
+                if (line.StartsWith("Project(\"{2150E333-8FDC-42A3-9474-1A3956D46DE8}\") = \"DataItemGeneratorConfig\", \"DataItemGeneratorConfig\"", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool ContainsDataItemGeneratorConfigFile()
