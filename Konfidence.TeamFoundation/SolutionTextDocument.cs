@@ -316,11 +316,26 @@ namespace Konfidence.TeamFoundation
 
         private bool ContainsDataItemGeneratorConfigFile()
         {
+            bool foundEntry = false;
+
             foreach (string line in _TextFileLines)
             {
+                if (foundEntry)
+                {
+                    if (line.Trim().Equals("DataItemGenerator.config.xml = DataItemGenerator.config.xml", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return true;
+                    }
+
+                    if (line.Trim().StartsWith("EndProject"))
+                    {
+                        return false;
+                    }
+                }
+
                 if (line.StartsWith("Project(\"{2150E333-8FDC-42A3-9474-1A3956D46DE8}\") = \"DataItemGeneratorConfig\", \"DataItemGeneratorConfig\"", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    return true;
+                    foundEntry = true;
                 }
             }
 
