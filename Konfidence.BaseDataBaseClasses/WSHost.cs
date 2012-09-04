@@ -69,11 +69,11 @@ namespace Konfidence.BaseData
 
 		internal override void Save(BaseDataItem dataItem)
 		{
-			List<BaseDataItem.ParameterObject> ParameterDataItemList = dataItem.SetItemData();
+			List<DbParameterObject> ParameterDataItemList = dataItem.SetItemData();
 
 			List<ParameterObject> parameterObjectList = new List<ParameterObject>();
 
-			foreach(BaseDataItem.ParameterObject parameterDataItem in ParameterDataItemList)
+			foreach(DbParameterObject parameterDataItem in ParameterDataItemList)
 			{
 				ParameterObject parameterObject = new ParameterObject();
 
@@ -101,7 +101,7 @@ namespace Konfidence.BaseData
             }
             else
             {
-                List<BaseDataItem.ParameterObject> ParameterDataItemList = dataItem.SetParameterData();
+                List<DbParameterObject> ParameterDataItemList = dataItem.SetParameterData();
 
                 List<ParameterObject> parameterObjectList = new List<ParameterObject>();
 
@@ -112,7 +112,7 @@ namespace Konfidence.BaseData
 
                 parameterObjectList.Add(parameterObject);
 
-                foreach (BaseDataItem.ParameterObject parameterDataItem in ParameterDataItemList)
+                foreach (DbParameterObject parameterDataItem in ParameterDataItemList)
                 {
                     parameterObject = new ParameterObject();
 

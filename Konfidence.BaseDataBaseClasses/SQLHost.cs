@@ -139,6 +139,11 @@ namespace Konfidence.BaseData
 
             dataItem._Id = (int)database.GetParameterValue(dbCommand, dataItem.AutoIdField);
 
+            foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
+            {
+                kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
+            }
+
             // TODO : retrieve database-side updated fields, and make defaults toway fields, instead of readonly
             //        make update trigers readonly and insert triggers toway fields, instead of readonly
             //        generate code in the implemented-class instead of the BaseDataItem-class
@@ -362,9 +367,9 @@ namespace Konfidence.BaseData
 			database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
 														dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.Id);
 
-			List<BaseDataItem.ParameterObject> ParameterObjectList = dataItem.SetItemData();
+			List<DbParameterObject> ParameterObjectList = dataItem.SetItemData();
 
-			foreach (BaseDataItem.ParameterObject parameterObject in ParameterObjectList)
+			foreach (DbParameterObject parameterObject in ParameterObjectList)
 			{
 				database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
 			}

@@ -24,49 +24,12 @@ namespace Konfidence.BaseData
 		private string _AutoIdField = string.Empty;
 		internal int _Id;
 
-        private Dictionary<string, ParameterObject> _AutoUpdateFieldList = null;
+        private Dictionary<string, DbParameterObject> _AutoUpdateFieldList = null;
 
 		private string _ServiceName = string.Empty;
 
-		private List<ParameterObject> _ParameterObjectList = new List<ParameterObject>();
+		private List<DbParameterObject> _ParameterObjectList = new List<DbParameterObject>();
 		private string _DataBaseName = string.Empty;
-
-		public /* internal */ class ParameterObject
-		{
-			private string _Field;
-			private DbType _DbType;
-			private object _Value;
-
-			public ParameterObject()
-			{}
-
-            public ParameterObject(string field, DbType dbType, object value)
-			{
-				Field = field;
-				DbType = dbType;
-				Value = value;
-			}
-
-			#region ParameterObject properties
-			public string Field
-			{
-				get { return _Field; }
-				set { _Field = value; }
-			}
-
-            public DbType DbType
-			{
-				get { return _DbType; }
-				set { _DbType = value; }
-			}
-
-			public object Value
-			{
-				get { return _Value; }
-				set { _Value = value; }
-			}
-			#endregion
-		}
 
         public bool IsSelected
         {
@@ -100,7 +63,7 @@ namespace Konfidence.BaseData
 			_PropertyDictionary = null;
 		}
 
-		internal void GetProperties(List<ParameterObject> properties)
+		internal void GetProperties(List<DbParameterObject> properties)
 		{
 			_ParameterObjectList = properties;
 
@@ -134,17 +97,22 @@ namespace Konfidence.BaseData
 			get { return _Id; }
 		}
 
-        internal protected Dictionary<string, ParameterObject> AutoUpdateFieldList
+        internal protected Dictionary<string, DbParameterObject> AutoUpdateFieldList
         {
             get
             {
                 if (IsAssigned(_AutoUpdateFieldList))
                 {
-                    _AutoUpdateFieldList = new Dictionary<string, ParameterObject>();
+                    _AutoUpdateFieldList = new Dictionary<string, DbParameterObject>();
                 }
 
                 return _AutoUpdateFieldList;
             }
+        }
+
+        internal protected void AddAutoUpdateField(string fieldName, DbType fieldType)
+        {
+            AutoUpdateFieldList.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
         }
 
 		internal protected string DeleteStoredProcedure
@@ -429,7 +397,7 @@ namespace Konfidence.BaseData
             SetField(fieldName, value);
         }
 
-        protected void SetParameterList(List<ParameterObject> parameterObjectList)
+        protected void SetParameterList(List<DbParameterObject> parameterObjectList)
         {
             _ParameterObjectList = parameterObjectList;
         }
@@ -583,7 +551,7 @@ namespace Konfidence.BaseData
 					// throw (new Exception("No parameters provided."));  // TODO: throw required maken
 				}
 
-				foreach (ParameterObject parameterObject in _ParameterObjectList)
+				foreach (DbParameterObject parameterObject in _ParameterObjectList)
 				{
 					database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
 				}
@@ -592,17 +560,17 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		internal List<ParameterObject> SetItemData()
+		internal List<DbParameterObject> SetItemData()
 		{
 			SetData();
 
             return SetParameterData();
 		}
 
-        internal List<ParameterObject> SetParameterData()
+        internal List<DbParameterObject> SetParameterData()
         {
-            List<ParameterObject> parameterObjectList = new List<ParameterObject>();
-            foreach (ParameterObject parameterObject in _ParameterObjectList)
+            List<DbParameterObject> parameterObjectList = new List<DbParameterObject>();
+            foreach (DbParameterObject parameterObject in _ParameterObjectList)
             {
                 parameterObjectList.Add(parameterObject);
             }
@@ -614,7 +582,7 @@ namespace Konfidence.BaseData
 
         private void AddInParameter(string field, DbType dbType, object value)
 		{
-			_ParameterObjectList.Add(new ParameterObject(field, dbType , value));
+			_ParameterObjectList.Add(new DbParameterObject(field, dbType , value));
 		}
 
 		protected internal virtual void GetData()

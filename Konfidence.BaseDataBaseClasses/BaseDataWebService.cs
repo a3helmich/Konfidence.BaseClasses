@@ -10,7 +10,7 @@ namespace Konfidence.BaseData
     public class BaseDataWebService : WebService
 	{
 		[WebMethod]
-		public int Save(List<BaseDataItem.ParameterObject> properties, int id)
+		public int Save(List<DbParameterObject> properties, int id)
 		{
 			BaseDataItem baseDataItem = GetNewDataItem();
 
@@ -29,23 +29,23 @@ namespace Konfidence.BaseData
 		}
 
 		[WebMethod]
-		public List<BaseDataItem.ParameterObject> GetItem(int id)
+		public List<DbParameterObject> GetItem(int id)
 		{
 			BaseDataItem baseDataItem = GetNewDataItem(id);
 
-			List<BaseDataItem.ParameterObject> properties = GetProperties(baseDataItem);
+			List<DbParameterObject> properties = GetProperties(baseDataItem);
 
 			return properties;
 		}
 
         [WebMethod]
-        public List<BaseDataItem.ParameterObject> GetItemByParam(List<BaseDataItem.ParameterObject> ParameterList)
+        public List<DbParameterObject> GetItemByParam(List<DbParameterObject> ParameterList)
         {
             BaseDataItem baseDataItem = GetNewDataItem(ParameterList);
 
-            List<BaseDataItem.ParameterObject> properties = GetProperties(baseDataItem);
+            List<DbParameterObject> properties = GetProperties(baseDataItem);
 
-            BaseDataItem.ParameterObject idProperty = new BaseDataItem.ParameterObject();
+            DbParameterObject idProperty = new DbParameterObject();
 
             idProperty.Field = "AutoIdField";
             idProperty.Value = baseDataItem.Id;
@@ -69,7 +69,7 @@ namespace Konfidence.BaseData
 		}
 
 		[WebMethod]
-		public List<List<BaseDataItem.ParameterObject>> BuildItemList()
+		public List<List<DbParameterObject>> BuildItemList()
 		{
 			IBaseDataItemList baseDataItemList = GetNewDataItemList();
 
@@ -113,11 +113,11 @@ namespace Konfidence.BaseData
 			baseDataItem.SetKey(id);
 		}
 
-		protected static void SetProperties(BaseDataItem baseDataItem, List<BaseDataItem.ParameterObject> properties)
+		protected static void SetProperties(BaseDataItem baseDataItem, List<DbParameterObject> properties)
 		{
 			Dictionary<string, object> propertyDictionary = new Dictionary<string, object>();
 
-			foreach (BaseDataItem.ParameterObject parameterObject in properties)
+			foreach (DbParameterObject parameterObject in properties)
 			{
 				propertyDictionary.Add(parameterObject.Field, parameterObject.Value);
 			}
@@ -125,9 +125,9 @@ namespace Konfidence.BaseData
 			baseDataItem.SetProperties(propertyDictionary);
 		}
 
-		protected static List<BaseDataItem.ParameterObject> GetProperties(BaseDataItem baseDataItem)
+		protected static List<DbParameterObject> GetProperties(BaseDataItem baseDataItem)
 		{
-			List<BaseDataItem.ParameterObject> properties = new List<BaseDataItem.ParameterObject>();
+			List<DbParameterObject> properties = new List<DbParameterObject>();
 
 			baseDataItem.GetProperties(properties);
 
@@ -144,7 +144,7 @@ namespace Konfidence.BaseData
 			throw new NotImplementedException(); // NOP
 		}
 
-        protected virtual BaseDataItem GetNewDataItem(List<BaseDataItem.ParameterObject> ParameterList)
+        protected virtual BaseDataItem GetNewDataItem(List<DbParameterObject> ParameterList)
         {
             throw new NotImplementedException(); // NOP
         }

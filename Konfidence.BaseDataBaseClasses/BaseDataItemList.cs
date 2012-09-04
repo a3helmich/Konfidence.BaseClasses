@@ -11,7 +11,7 @@ namespace Konfidence.BaseData
 		void SetParameters(string storedProcedure, Database database, DbCommand dbCommand);
 		void AddItem(BaseHost dataHost);
 		BaseDataItem GetDataItem();
-		List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList();
+		List<List<DbParameterObject>> Convert2ListOfParameterObjectList();
 	}
 
     public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem, new()
@@ -376,17 +376,17 @@ namespace Konfidence.BaseData
         }
         #endregion list editing
 
-        public List<List<BaseDataItem.ParameterObject>> Convert2ListOfParameterObjectList()
+        public List<List<DbParameterObject>> Convert2ListOfParameterObjectList()
 		{
-			List<List<BaseDataItem.ParameterObject>> baseDataItemListList = new List<List<BaseDataItem.ParameterObject>>();
+			List<List<DbParameterObject>> baseDataItemListList = new List<List<DbParameterObject>>();
 
 			foreach (BaseDataItem baseDataItem in this)
 			{
-				List<BaseDataItem.ParameterObject> properties = GetProperties(baseDataItem);
+				List<DbParameterObject> properties = GetProperties(baseDataItem);
 
 				if (baseDataItem.AutoIdField.Length > 0)
 				{
-					BaseDataItem.ParameterObject property = new BaseDataItem.ParameterObject();
+					DbParameterObject property = new DbParameterObject();
 
 					property.Field = "BaseDataItem_KeyValue";
 					property.Value = baseDataItem.Id;
@@ -400,9 +400,9 @@ namespace Konfidence.BaseData
 			return baseDataItemListList;
 		}
 
-		private static List<BaseDataItem.ParameterObject> GetProperties(BaseDataItem baseDataItem)
+		private static List<DbParameterObject> GetProperties(BaseDataItem baseDataItem)
 		{
-			List<BaseDataItem.ParameterObject> properties = new List<BaseDataItem.ParameterObject>();
+			List<DbParameterObject> properties = new List<DbParameterObject>();
 
 			baseDataItem.GetProperties(properties);
 
