@@ -70,7 +70,7 @@ namespace Konfidence.BaseData
 
         protected internal override void GetData()
         {
-            _IsAvailable = GetFieldBool(AVAILABLE);
+            GetField(AVAILABLE, out _IsAvailable);
         }
     }
 }

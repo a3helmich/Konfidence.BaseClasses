@@ -151,7 +151,47 @@ namespace Konfidence.BaseData
 			}
 		}
 
-        protected Int16 GetFieldInt16(string fieldName)
+        protected void GetField(string fieldName, out Int16 field)
+        {
+            field = GetFieldInt16(fieldName);
+        }
+
+        protected void GetField(string fieldName, out Int32 field)
+        {
+            field = GetFieldInt32(fieldName);
+        }
+
+        protected void GetField(string fieldName, out Guid field)
+        {
+            field = GetFieldGuid(fieldName);
+        }
+
+        protected void GetField(string fieldName, out string field)
+        {
+            field = GetFieldString(fieldName);
+        }
+
+        protected void GetField(string fieldName, out bool field)
+        {
+            field = GetFieldBool(fieldName);
+        }
+
+        protected void GetField(string fieldName, out DateTime field)
+        {
+            field = GetFieldDateTime(fieldName);
+        }
+
+        protected void GetField(string fieldName, out TimeSpan field)
+        {
+            field = GetFieldTimeSpan(fieldName);
+        }
+
+        protected void GetField(string fieldName, out Decimal field)
+        {
+            field = GetFieldDecimal(fieldName);
+        }
+
+        private Int16 GetFieldInt16(string fieldName)
         {
             if (IsAssigned(_PropertyDictionary))
             {
@@ -168,7 +208,7 @@ namespace Konfidence.BaseData
             throw (new Exception("GetFieldInt16: dataHost/_PropertyDictionary is not assigned"));
         }
 
-		protected Int32 GetFieldInt32(string fieldName)
+		private Int32 GetFieldInt32(string fieldName)
 		{
 			if (IsAssigned(_PropertyDictionary))
 			{
@@ -185,7 +225,7 @@ namespace Konfidence.BaseData
 			throw (new Exception("GetFieldInt32: dataHost/_PropertyDictionary is not assigned"));
 		}
 
-        protected Guid GetFieldGuid(string fieldName)
+        private Guid GetFieldGuid(string fieldName)
         {
             if (IsAssigned(_PropertyDictionary))
             {
@@ -202,7 +242,7 @@ namespace Konfidence.BaseData
             throw (new Exception("GetFieldGuid: dataHost/_PropertyDictionary is not assigned"));
         }
 
-		protected string GetFieldString(string fieldName)
+		private string GetFieldString(string fieldName)
 		{
 			if (IsAssigned(_PropertyDictionary))
 			{
@@ -219,7 +259,7 @@ namespace Konfidence.BaseData
 			throw (new Exception("GetFieldString: dataHost/_PropertyDictionary  is not assigned"));
 		}
 
-        protected bool GetFieldBool(string fieldName)
+        private bool GetFieldBool(string fieldName)
         {
             if (IsAssigned(_PropertyDictionary))
             {
@@ -236,24 +276,7 @@ namespace Konfidence.BaseData
             throw (new Exception("GetFieldBool: dataHost/_PropertyDictionary  is not assigned"));
         }
 
-		protected bool GetFieldBoolean(string fieldName)
-		{
-			if (IsAssigned(_PropertyDictionary))
-			{
-				return (bool)_PropertyDictionary[fieldName];
-			}
-			else
-			{
-				if (IsAssigned(_DataHost))
-				{
-					return _DataHost.GetFieldBool(fieldName);
-				}
-			}
-
-			throw (new Exception("GetFieldBool: dataHost/_PropertyDictionary  is not assigned"));
-		}
-
-		protected DateTime GetFieldDateTime(string fieldName)
+		private DateTime GetFieldDateTime(string fieldName)
 		{
 			if (IsAssigned(_PropertyDictionary))
 			{
@@ -270,7 +293,7 @@ namespace Konfidence.BaseData
 			throw (new Exception("GetFieldDateTime: dataHost/_PropertyDictionary  is not assigned"));
 		}
 
-        protected TimeSpan GetFieldTimeSpan(string fieldName)
+        private TimeSpan GetFieldTimeSpan(string fieldName)
         {
             if (IsAssigned(_PropertyDictionary))
             {
@@ -287,7 +310,7 @@ namespace Konfidence.BaseData
             throw (new Exception("GetFieldTimeSpan: dataHost/_PropertyDictionary  is not assigned"));
         }
 
-        protected Decimal GetFieldDecimal(string fieldName)
+        private Decimal GetFieldDecimal(string fieldName)
         {
             if (IsAssigned(_PropertyDictionary))
             {

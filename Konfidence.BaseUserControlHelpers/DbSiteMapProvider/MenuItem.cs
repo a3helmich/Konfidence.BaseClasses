@@ -150,19 +150,19 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
 		protected override void GetData()
 		{
-			_ParentNodeId = GetFieldInt32(PARENTNODEID_FIELD);
-			_Url = GetFieldString(URL_FIELD);
-			_Root = GetFieldBool(ROOT_FIELD);
-			_Visible = GetFieldBool(VISIBLE_FIELD);
-			_MenuId = GetFieldInt32(MENUID_FIELD);
-			_MenuText = GetFieldString(TITLE_FIELD);
-			_Description = GetFieldString(DESCRIPTION_FIELD);
-			_Language = GetFieldString(LANGUAGE_FIELD);
-			_ChildCount = GetFieldInt32(CHILDCOUNT_FIELD);
-			_LogonVisible = GetFieldBool(LOGONVISIBLE_FIELD);
-			_NotLogonVisible = GetFieldBool(NOTLOGONVISIBLE_FIELD);
-			_Administrators = GetFieldBool(ADMINISTRATORS_FIELD);
-			_LocalVisible = GetFieldBool(LOCALVISIBLE_FIELD);
+            GetField(PARENTNODEID_FIELD, out _ParentNodeId);
+            GetField(URL_FIELD, out _Url);
+            GetField(ROOT_FIELD, out _Root);
+            GetField(VISIBLE_FIELD, out _Visible);
+            GetField(MENUID_FIELD, out _MenuId);
+            GetField(TITLE_FIELD, out _MenuText);
+            GetField(DESCRIPTION_FIELD, out _Description);
+            GetField(LANGUAGE_FIELD, out _Language);
+            GetField(CHILDCOUNT_FIELD, out _ChildCount);
+            GetField(LOGONVISIBLE_FIELD, out _LogonVisible);
+            GetField(NOTLOGONVISIBLE_FIELD, out _NotLogonVisible);
+            GetField(ADMINISTRATORS_FIELD, out _Administrators);
+            GetField(LOCALVISIBLE_FIELD, out _LocalVisible);
 
 			if (ChildCount > 0)
 			{
