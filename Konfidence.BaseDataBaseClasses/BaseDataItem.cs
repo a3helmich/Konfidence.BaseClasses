@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using Konfidence.Base;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Xml;
 
 namespace Konfidence.BaseData
 {
@@ -110,6 +111,139 @@ namespace Konfidence.BaseData
             }
         }
 
+        internal protected void GetAutoUpdateField(string fieldName, out Int16 fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldInt16(fieldName);
+        }
+
+        internal protected void GetAutoUpdateField(string fieldName, out Int32 fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldInt32(fieldName);
+        }
+
+        internal protected void GetAutoUpdateField(string fieldName, out Guid fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldGuid(fieldName);
+        }
+
+        internal protected void GetAutoUpdateField(string fieldName, out string fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldString(fieldName);
+        }
+
+        internal protected void GetAutoUpdateField(string fieldName, out bool fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldBool(fieldName);
+        }
+
+        internal protected void GetAutoUpdateField(string fieldName, out DateTime fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldDateTime(fieldName);
+        }
+
+        internal protected void GetAutoUpdateField(string fieldName, out TimeSpan fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldTimeSpan(fieldName);
+        }
+
+        internal protected void GetAutoUpdateField(string fieldName, out Decimal fieldValue)
+        {
+            fieldValue = GetAutoUpdateFieldDecimal(fieldName);
+        }
+
+        private Int16 GetAutoUpdateFieldInt16(string fieldName)
+        {
+            Int16 fieldValue = 0;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = (Int16)AutoUpdateFieldList[fieldName].Value;
+            }
+            return fieldValue;
+        }
+
+        private Int32 GetAutoUpdateFieldInt32(string fieldName)
+        {
+            Int32 fieldValue = 0;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = (Int32)AutoUpdateFieldList[fieldName].Value;
+            }
+            return fieldValue;
+        }
+
+        private Guid GetAutoUpdateFieldGuid(string fieldName)
+        {
+            Guid fieldValue = Guid.Empty;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = (Guid)AutoUpdateFieldList[fieldName].Value;
+            }
+            return fieldValue;
+        }
+
+        private string GetAutoUpdateFieldString(string fieldName)
+        {
+            string fieldValue = string.Empty;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = AutoUpdateFieldList[fieldName].Value as string;
+            }
+
+            return fieldValue;
+        }
+
+        private bool GetAutoUpdateFieldBool(string fieldName)
+        {
+            bool fieldValue = false;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = (bool)AutoUpdateFieldList[fieldName].Value;
+            }
+
+            return fieldValue;
+        }
+
+        private DateTime GetAutoUpdateFieldDateTime(string fieldName)
+        {
+            DateTime fieldValue = DateTime.MinValue;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = (DateTime)AutoUpdateFieldList[fieldName].Value;
+            }
+
+            return fieldValue;
+        }
+
+        private TimeSpan GetAutoUpdateFieldTimeSpan(string fieldName)
+        {
+            TimeSpan fieldValue = TimeSpan.MinValue;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = (TimeSpan)AutoUpdateFieldList[fieldName].Value;
+            }
+
+            return fieldValue;
+        }
+
+        private Decimal GetAutoUpdateFieldDecimal(string fieldName)
+        {
+            Decimal fieldValue = 0;
+
+            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            {
+                fieldValue = (Decimal)AutoUpdateFieldList[fieldName].Value;
+            }
+
+            return fieldValue;
+        }
+
         internal protected void AddAutoUpdateField(string fieldName, DbType fieldType)
         {
             AutoUpdateFieldList.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
@@ -184,6 +318,13 @@ namespace Konfidence.BaseData
         protected void GetField(string fieldName, out TimeSpan field)
         {
             field = GetFieldTimeSpan(fieldName);
+        }
+
+        //line = "_" + columnDataItem.Name + ".LoadXml(GetField" + columnDataItem.DbDataType + "(" + columnDataItem.Name.ToUpper() + "));";
+
+        protected void GetField(string fieldName, ref XmlDocument field)
+        {
+            field.LoadXml(GetFieldString(fieldName));
         }
 
         protected void GetField(string fieldName, out Decimal field)
@@ -326,6 +467,8 @@ namespace Konfidence.BaseData
 
             throw (new Exception("GetFieldDecimal: dataHost/_PropertyDictionary  is not assigned"));
         }
+
+
         #endregion
 
 		#region SetField Methods
