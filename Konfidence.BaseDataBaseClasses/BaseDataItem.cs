@@ -655,6 +655,8 @@ namespace Konfidence.BaseData
 
 			dataHost.Save(this);
 
+            GetAutoUpdateData();
+
             AfterSave();
 		}
 
@@ -751,7 +753,13 @@ namespace Konfidence.BaseData
 			_ParameterObjectList.Add(new DbParameterObject(field, dbType , value));
 		}
 
-		protected internal virtual void GetData()
+        protected internal virtual void GetAutoUpdateData()
+		{
+			// NOP
+			throw new NotImplementedException();
+		}
+
+        protected internal virtual void GetData()
 		{
 			// NOP
 			throw new NotImplementedException();
