@@ -102,7 +102,7 @@ namespace Konfidence.BaseData
         {
             get
             {
-                if (IsAssigned(_AutoUpdateFieldList))
+                if (!IsAssigned(_AutoUpdateFieldList))
                 {
                     _AutoUpdateFieldList = new Dictionary<string, DbParameterObject>();
                 }

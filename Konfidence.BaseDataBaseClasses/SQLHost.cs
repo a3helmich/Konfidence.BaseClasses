@@ -131,19 +131,19 @@ namespace Konfidence.BaseData
 
 			Database database = GetDatabase();
 
-            DbCommand dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure);
-
-			SetItemData(dataItem, database, dbCommand);
-
-			database.ExecuteNonQuery(dbCommand);
-
-            dataItem._Id = (int)database.GetParameterValue(dbCommand, dataItem.AutoIdField);
-
-            foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
+            using (DbCommand dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
-                kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
-            }
+                SetItemData(dataItem, database, dbCommand);
 
+                database.ExecuteNonQuery(dbCommand);
+
+                dataItem._Id = (int)database.GetParameterValue(dbCommand, dataItem.AutoIdField);
+
+                foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
+                {
+                    kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
+                }
+            }
             // TODO : retrieve database-side updated fields, and make defaults toway fields, instead of readonly
             //        make update trigers readonly and insert triggers toway fields, instead of readonly
             //        generate code in the implemented-class instead of the BaseDataItem-class
@@ -369,9 +369,17 @@ namespace Konfidence.BaseData
 
 			List<DbParameterObject> ParameterObjectList = dataItem.SetItemData();
 
-			foreach (DbParameterObject parameterObject in ParameterObjectList)
+            foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
+            {
+                DbParameterObject parameterObject = kvp.Value as DbParameterObject;
+
+                database.AddParameter(dbCommand, parameterObject.Field, parameterObject.DbType, ParameterDirection.InputOutput,
+                                                            parameterObject.Field, DataRowVersion.Proposed, parameterObject.Value);
+            }
+
+            foreach (DbParameterObject parameterObject in ParameterObjectList)
 			{
-				database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+                    database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
 			}
 		}
 	}
