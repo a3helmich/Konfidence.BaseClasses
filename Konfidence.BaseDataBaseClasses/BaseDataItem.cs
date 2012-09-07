@@ -157,8 +157,12 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = (Int16)AutoUpdateFieldList[fieldName].Value;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = (Int16)AutoUpdateFieldList[fieldName].Value;
+                }
             }
+            
             return fieldValue;
         }
 
@@ -168,8 +172,12 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = (Int32)AutoUpdateFieldList[fieldName].Value;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = (Int32)AutoUpdateFieldList[fieldName].Value;
+                }
             }
+            
             return fieldValue;
         }
 
@@ -179,8 +187,12 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = (Guid)AutoUpdateFieldList[fieldName].Value;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = (Guid)AutoUpdateFieldList[fieldName].Value;
+                }
             }
+
             return fieldValue;
         }
 
@@ -190,7 +202,10 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = AutoUpdateFieldList[fieldName].Value as string;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = AutoUpdateFieldList[fieldName].Value as string;
+                }
             }
 
             return fieldValue;
@@ -202,7 +217,10 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = (bool)AutoUpdateFieldList[fieldName].Value;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = (bool)AutoUpdateFieldList[fieldName].Value;
+                }
             }
 
             return fieldValue;
@@ -214,7 +232,10 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = (DateTime)AutoUpdateFieldList[fieldName].Value;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = (DateTime)AutoUpdateFieldList[fieldName].Value;
+                }
             }
 
             return fieldValue;
@@ -226,7 +247,10 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = (TimeSpan)AutoUpdateFieldList[fieldName].Value;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = (TimeSpan)AutoUpdateFieldList[fieldName].Value;
+                }
             }
 
             return fieldValue;
@@ -238,7 +262,10 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
-                fieldValue = (Decimal)AutoUpdateFieldList[fieldName].Value;
+                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                {
+                    fieldValue = (Decimal)AutoUpdateFieldList[fieldName].Value;
+                }
             }
 
             return fieldValue;
