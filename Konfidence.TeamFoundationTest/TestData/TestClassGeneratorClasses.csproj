@@ -44,23 +44,23 @@
     <Reference Include="System.Xml" />
     <Reference Include="Konfidence.BaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\Projects\References\Konfidence.BaseClasses.dll</HintPath>
+      <HintPath>c:\projects\References\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Konfidence.BaseDataBaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\Projects\References\Konfidence.BaseDataBaseClasses.dll</HintPath>
+      <HintPath>c:\projects\References\Konfidence.BaseDataBaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d0a1a4e466b0ec13, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\Projects\References\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <HintPath>c:\projects\References\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d0a1a4e466b0ec13, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\Projects\References\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <HintPath>c:\projects\References\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ObjectBuilder, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d0a1a4e466b0ec13, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\Projects\References\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+      <HintPath>c:\projects\References\Microsoft.Practices.ObjectBuilder.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
