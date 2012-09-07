@@ -142,6 +142,11 @@ namespace Konfidence.BaseData
                 foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
                 {
                     kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
+
+                    if (DBNull.Value.Equals(kvp.Value.Value))
+                    {
+                        kvp.Value.Value = null;
+                    }
                 }
             }
             // TODO : retrieve database-side updated fields, and make defaults toway fields, instead of readonly
