@@ -14,6 +14,9 @@ namespace Konfidence.TestBaseClasses
     [TestClass]
     public class TeamFoundationTest
     {
+        private const string _TfsServer = "http://tfs.konfidence.nl:8080/tfs/konfidence";
+        private const string _TfsTestFile = @"C:\Projects\Konfidence\BaseClasses\Konfidence.BaseClassesTest\TestData\CheckOutClass.cs";
+
         public TeamFoundationTest()
         {
             //
@@ -64,7 +67,7 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void TestGetGlobalPermissions()
         {
-            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl/tfs");
+            TfsPermissions tfsPermissions = new TfsPermissions(_TfsServer);
 
             List<string> globalPermissions = tfsPermissions.GetGlobalPermissions();
         }
@@ -72,7 +75,7 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void TestGetItemPermissions()
         {
-            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl");
+            TfsPermissions tfsPermissions = new TfsPermissions(_TfsServer);
 
             List<string> itemPermissions = tfsPermissions.GetItemPermissions("$/Konfidence/BaseClasses");
         }
@@ -80,13 +83,11 @@ namespace Konfidence.TestBaseClasses
         [TestMethod]
         public void TestCheckOut()
         {
-            TfsPermissions tfsPermissions = new TfsPermissions("tfs.konfidence.nl");
+            TfsPermissions tfsPermissions = new TfsPermissions(_TfsServer);
 
-            string testFile = @"C:\Projects\Konfidence\BaseClasses\Konfidence.TestBaseClasses\TestData\CheckOutClass.cs";
-
-            if (tfsPermissions.CheckOut(testFile))
+            if (tfsPermissions.CheckOut(_TfsTestFile))
             {
-                tfsPermissions.Undo(testFile);
+                tfsPermissions.Undo(_TfsTestFile);
             }
             else
             {
