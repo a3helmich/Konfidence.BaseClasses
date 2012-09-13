@@ -15,7 +15,7 @@ namespace Konfidence.TestBaseClasses
     public class TeamFoundationTest
     {
         private const string _TfsServer = "http://tfs.konfidence.nl:8080/tfs/konfidence";
-        private const string _TfsTestFile = @"C:\Projects\Konfidence\BaseClasses\Konfidence.BaseClassesTest\TestData\CheckOutClass.cs";
+        private const string _TfsTestFile =  "CheckOutClass.cs";
 
         public TeamFoundationTest()
         {
@@ -85,7 +85,7 @@ namespace Konfidence.TestBaseClasses
         {
             TfsPermissions tfsPermissions = new TfsPermissions(_TfsServer);
 
-            if (tfsPermissions.CheckOut(_TfsTestFile))
+            if (tfsPermissions.CheckOut(TestContext.TestDeploymentDir + @"\" +  _TfsTestFile))
             {
                 tfsPermissions.Undo(_TfsTestFile);
             }
