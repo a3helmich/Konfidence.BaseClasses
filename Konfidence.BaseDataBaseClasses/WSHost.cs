@@ -124,15 +124,15 @@ namespace Konfidence.BaseData
 
                 parameterObjects = _WsBaseHostService.GetItemByParam(parameterObjectList.ToArray());
 
-                if (parameterObjects.Length > 0)
-                {
-                    parameterObject = parameterObjects[0];
+                //if (parameterObjects.Length > 0)
+                //{
+                //    parameterObject = parameterObjects[0];
 
-                    if (parameterObject.Field.Equals("AutoIdField"))
-                    {
-                        ItemId = (int)parameterObject.Value;
-                    }
-                }
+                //    if (parameterObject.Field.Equals("AutoIdField"))
+                //    {
+                //        ItemId = (int)parameterObject.Value;
+                //    }
+                //}B
             }
 
 			if (IsAssigned(parameterObjects))

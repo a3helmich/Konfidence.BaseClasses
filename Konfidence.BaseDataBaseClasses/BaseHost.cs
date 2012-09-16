@@ -34,21 +34,9 @@ namespace Konfidence.BaseData
 		{
 			get
 			{
-				return ItemId;
+				return _Id;
 			}
 		}
-
-        protected int ItemId
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                _Id = value;
-            }
-        }
 
         protected Guid GuidId
         {
