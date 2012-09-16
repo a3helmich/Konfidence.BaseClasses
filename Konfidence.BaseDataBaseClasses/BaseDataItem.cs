@@ -624,47 +624,32 @@ namespace Konfidence.BaseData
 
 		protected void GetItem(string storedProcedure)
 		{
-			GetItem(storedProcedure, 0);
-		}
-
-        //internal protected void GetItem(List<BaseDataItem.ParameterObject> ParameterList)
-        //{
-        //    if (ParameterList.Count > 0)
-        //    {
-        //        string storedProcedure = string.Empty;
-
-        //        ParameterObject storedProcedureObject = ParameterList[0];
-
-        //        if (storedProcedureObject.Field.Equals("StoredProcedure"))
-        //        {
-        //            storedProcedure = storedProcedureObject.Value as string;
-        //        }
-
-        //        if (ParameterList.Count > 1)
-        //        {
-        //            ParameterList = ParameterList.GetRange(1, ParameterList.Count - 1);
-
-        //            SetParameterList(ParameterList);
-        //        }
-
-        //        GetItem(storedProcedure);
-        //    }
-        //}
-
-		protected void GetItem(string storedProcedure, int autoKeyId)
-		{
             BaseHost dataHost = GetHost();
 
-			_DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
+            _DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
 
-            dataHost.GetItem(this, storedProcedure, _AutoIdField, autoKeyId);
-				
+            dataHost.GetItem(this, storedProcedure);
+
             _Id = dataHost.Id; // TODO : why not in GetItem???
 
             AfterGetDataItem();
 
             _DataHost = null;
+        }
+
+		protected void GetItem(string storedProcedure, int autoKeyId)
+		{
+            SetField(AutoIdField, autoKeyId);
+
+            GetItem(storedProcedure);
 		}
+
+        protected void GetItem(string storedProcedure, Guid guidId)
+        {
+            SetField(GuidIdField, guidId);
+
+            GetItem(storedProcedure);
+        }
 
         protected virtual void BeforeSave()
         {
@@ -738,28 +723,19 @@ namespace Konfidence.BaseData
             return dataHost.StoredProcedureExists(storedProcedureName);
         }
 
-		internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand, int autoKeyId)
+		internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
 		{
-			if (autoKeyId > 0)
-			{
-                database.AddInParameter(dbCommand, AutoIdField, DbType.Int32, autoKeyId);
-			}
-			else
-			{
-				SetQueryParameters(storedProcedure);
-				
-				if (_ParameterObjectList.Count == 0)
-				{
-					// throw (new Exception("No parameters provided."));  // TODO: throw required maken
-				}
+            if (_ParameterObjectList.Count == 0)
+            {
+                // throw (new Exception("No parameters provided."));  // TODO: throw required maken
+            }
 
-				foreach (DbParameterObject parameterObject in _ParameterObjectList)
-				{
-					database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
-				}
+            foreach (DbParameterObject parameterObject in _ParameterObjectList)
+            {
+                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+            }
 
-				_ParameterObjectList.Clear();
-			}
+            _ParameterObjectList.Clear();
 		}
 
 		internal List<DbParameterObject> SetItemData()
@@ -804,10 +780,10 @@ namespace Konfidence.BaseData
 			// NOP
 		}
 
-		protected virtual void SetQueryParameters(string storedProcedure)
-		{
-			// NOP
-		}
+        //protected virtual void SetQueryParameters(string storedProcedure)
+        //{
+        //    // NOP
+        //}
 
 		protected virtual bool IsValidDataItem()
 		{

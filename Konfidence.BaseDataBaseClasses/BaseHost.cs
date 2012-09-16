@@ -7,6 +7,7 @@ namespace Konfidence.BaseData
 	public class BaseHost: BaseItem
 	{
 		private int _Id = 0;
+        private Guid _GuidId = Guid.Empty;
 
 		private string _DataBaseName = string.Empty;
 		private string _ServiceName = string.Empty;
@@ -37,17 +38,29 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		protected int ItemId
-		{
-			get
-			{
-				return _Id;
-			}
-			set
-			{
-				_Id = value;
-			}
-		}
+        protected int ItemId
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                _Id = value;
+            }
+        }
+
+        protected Guid GuidId
+        {
+            get
+            {
+                return _GuidId;
+            }
+            set
+            {
+                _GuidId = value;
+            }
+        }
 
 		#endregion
 
@@ -61,13 +74,12 @@ namespace Konfidence.BaseData
 		{
 		}
 
-		internal virtual void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)
-		{
+        //internal virtual void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)
+        internal virtual void GetItem(BaseDataItem dataItem, string getStoredProcedure)
+        {
+        }
 
-            dataItem._Id = id;
-		}
-
-		internal virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        internal virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 		}
 

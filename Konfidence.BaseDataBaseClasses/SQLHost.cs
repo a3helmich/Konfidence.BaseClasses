@@ -154,7 +154,7 @@ namespace Konfidence.BaseData
             //        generate code in the implemented-class instead of the BaseDataItem-class
         }
 
-		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)
+		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure)
 		{
 			if (getStoredProcedure.Equals(string.Empty))
 			{
@@ -165,7 +165,7 @@ namespace Konfidence.BaseData
 
 			using (DbCommand dbCommand = database.GetStoredProcCommand(getStoredProcedure))
 			{
-				dataItem.SetParameters(getStoredProcedure, database, dbCommand, id);
+                dataItem.SetParameters(getStoredProcedure, database, dbCommand);
 
 				using (IDataReader dataReader = database.ExecuteReader(dbCommand))
 				{
@@ -173,14 +173,7 @@ namespace Konfidence.BaseData
 					{
 						_DataReader = dataReader;
 
-						if (autoIdField.Equals(string.Empty)) // TODO: AutoIdField verplicht maken? ==> ja!
-						{
-							// throw(new Exception("AutoIdField is not assigned"));
-						}
-						else
-						{
-							ItemId = GetFieldInt32(autoIdField);
-						}
+                        dataItem.GetKey();
 
 						dataItem.GetData();
 
@@ -225,7 +218,6 @@ namespace Konfidence.BaseData
 
 				using (IDataReader dataReader = database.ExecuteReader(dbCommand))
 				{
-
 					_DataReader = dataReader;
 
 					while (dataReader.Read())
@@ -369,11 +361,11 @@ namespace Konfidence.BaseData
 
 		private static void SetItemData(BaseDataItem dataItem, Database database, DbCommand dbCommand)
 		{
+            // autoidfield parameter toevoegen
 			database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
 														dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.Id);
 
-			List<DbParameterObject> ParameterObjectList = dataItem.SetItemData();
-
+            // alle velden die aan de kant van de database gewijzigd worden als parameter toevoegen
             foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
             {
                 DbParameterObject parameterObject = kvp.Value as DbParameterObject;
@@ -381,6 +373,9 @@ namespace Konfidence.BaseData
                 database.AddParameter(dbCommand, parameterObject.Field, parameterObject.DbType, ParameterDirection.InputOutput,
                                                             parameterObject.Field, DataRowVersion.Proposed, parameterObject.Value);
             }
+
+            // alle overige parameters toevoegen
+            List<DbParameterObject> ParameterObjectList = dataItem.SetItemData();
 
             foreach (DbParameterObject parameterObject in ParameterObjectList)
 			{

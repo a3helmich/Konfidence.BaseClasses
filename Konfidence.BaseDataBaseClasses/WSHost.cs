@@ -86,20 +86,20 @@ namespace Konfidence.BaseData
             dataItem._Id = _WsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.Id);
 		}
 
-		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)
+		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure) // , string autoIdField, int id)
 		{
             ParameterObject[] parameterObjects;
 
-            if (id > 0)
-            {
-                parameterObjects = _WsBaseHostService.GetItem(id);
+            //if (id > 0)
+            //{
+            //    parameterObjects = _WsBaseHostService.GetItem(id);
 
-                if (IsAssigned(parameterObjects))
-                {
-                    ItemId = id;
-                }
-            }
-            else
+            //    if (IsAssigned(parameterObjects))
+            //    {
+            //        ItemId = id;
+            //    }
+            //}
+            //else
             {
                 List<DbParameterObject> ParameterDataItemList = dataItem.SetParameterData();
 
