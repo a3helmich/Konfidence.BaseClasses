@@ -630,8 +630,6 @@ namespace Konfidence.BaseData
 
             dataHost.GetItem(this, storedProcedure);
 
-            _Id = dataHost.Id; // TODO : why not in GetItem???
-
             AfterGetDataItem();
 
             _DataHost = null;
