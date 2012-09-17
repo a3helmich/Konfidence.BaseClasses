@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Web;
 using Konfidence.BaseData;
 using Konfidence.BaseUserControlHelpers.PageSetting;
+using Konfidence.BaseUserControlHelpers.Login;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -18,6 +19,8 @@ namespace Konfidence.BaseUserControlHelpers
 
         private PageSettingDictionary _PageSettingDictionary = null;
         private PageSettingXmlDocument _PageSettingDocument = null;
+
+        private LoginContext _LoginContext = new LoginContext();
 
         public string PageName
         {
@@ -68,21 +71,8 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected BaseDataItem CurrentInternalAccount
         {
-            get { return HttpContext.Current.Session[InternalSessionAccount.CurrentAccount] as BaseDataItem; }
-            set { HttpContext.Current.Session[InternalSessionAccount.CurrentAccount] = value; }
-        }
-
-        private InternalSessionAccount SessionAccount
-        {
-            get
-            {
-                if (IsAssigned(HttpContext.Current))
-                {
-                    return HttpContext.Current.Session[InternalSessionAccount.AccountObject] as InternalSessionAccount;
-                }
-
-                return null;
-            }
+            get { return _LoginContext.CurrentInternalAccount; }
+            set { _LoginContext.CurrentInternalAccount = value; }
         }
 
         public bool IsLocal
@@ -112,30 +102,13 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
         {
-            if (!IsEmpty(password) && !IsEmpty(loginPassword))
-            {
-                if (password.Equals(loginPassword))
-                {
-                    HttpContext.Current.Session[InternalSessionAccount.AccountObject] = new InternalSessionAccount();
-
-                    SessionAccount.FullName = fullName;
-                    SessionAccount.Email = email;
-                    SessionAccount.IsAdministrator = isAdministrator;
-
-                    if (!IsAuthorized)
-                    {
-                        LogOff();
-                    }
-                }
-            }
+            _LoginContext.SessionLogon(fullName, email, password, loginPassword, isAdministrator);
         }
 
         internal void SetPageName(string pageName)
         {
             _PageName = pageName;
         }
-
-        //public string ResolveClientUrl(string url) --> moet worden ResolveServerPath
 
         public string ResolveServerPath(string url)
         {
@@ -149,15 +122,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         public virtual void LogOff()
         {
-            if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.AccountObject]))
-            {
-                HttpContext.Current.Session.Remove(InternalSessionAccount.AccountObject);
-            }
-
-            if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.CurrentAccount]))
-            {
-                HttpContext.Current.Session.Remove(InternalSessionAccount.CurrentAccount);
-            }
+            _LoginContext.LogOff();
         }
 
         public string ApplicationPath
@@ -188,84 +153,22 @@ namespace Konfidence.BaseUserControlHelpers
 
         public string Email
         {
-            get
-            {
-                if (IsAssigned(SessionAccount))
-                {
-                    return SessionAccount.Email;
-                }
-
-                return string.Empty;
-            }
+            get { return _LoginContext.Email; }
         }
 
         public bool IsLoggedIn
         {
-            get
-            {
-                if (IsAssigned(SessionAccount))
-                {
-                    return true;
-                }
-
-                return false;
-            }
+            get { return _LoginContext.IsLoggedIn; }
         }
 
-        public string LoginMessage
+        public string LoginErrorMessage
         {
-            get
-            {
-                string ErrorText = HttpContext.Current.Session[InternalSessionAccount.LogOnError] as string;
-
-                if (!IsEmpty(ErrorText))
-                {
-                    HttpContext.Current.Session.Remove(InternalSessionAccount.LogOnError);
-
-                    return ErrorText;
-                }
-
-                return string.Empty;
-            }
-        }
-
-        private bool IsAdministratorRequired
-        {
-            get
-            {
-                if (IsAssigned(SessionAccount))
-                {
-                    return IsAssigned(HttpContext.Current.Session[InternalSessionAccount.AdministratorRequired]);
-                }
-
-                return false;
-            }
-        }
-
-        public bool IsAuthorized
-        {
-            get
-            {
-                if (IsAdministratorRequired && !SessionAccount.IsAdministrator)
-                {
-                    return false;
-                }
-
-                return true;
-            }
+            get { return _LoginContext.LoginErrorMessage; }
         }
 
         public bool IsAdministrator
         {
-            get
-            {
-                if (IsAssigned(SessionAccount))
-                {
-                    return SessionAccount.IsAdministrator;
-                }
-
-                return false;
-            }
+            get { return _LoginContext.IsAdministrator; }
         }
 
         protected PageSettingXmlDocument PageSettingDocument

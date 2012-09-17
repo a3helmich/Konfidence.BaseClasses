@@ -12,7 +12,7 @@ namespace Konfidence.Base
         // menu
         public const string UrlMenuPage = "UrlMenuPage";
 
-		private string _LoggedOn = string.Empty;
+		private string _FullName = string.Empty;
 		private string _Email = string.Empty;
 		private bool _Administrator = false;
 
@@ -21,11 +21,11 @@ namespace Konfidence.Base
 		{
 			get
 			{
-				return _LoggedOn;
+				return _FullName;
 			}
 			set
 			{
-				_LoggedOn = value;
+				_FullName = value;
 			}
 		}
 

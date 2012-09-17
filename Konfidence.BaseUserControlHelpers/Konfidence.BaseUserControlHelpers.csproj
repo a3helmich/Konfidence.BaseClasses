@@ -116,6 +116,7 @@
     <Compile Include="DbSiteMapProvider\MenuItem.cs" />
     <Compile Include="DbSiteMapProvider\MenuItemList.cs" />
     <Compile Include="DbSiteMapProvider\MenuItemTree.cs" />
+    <Compile Include="Login\LoginContext.cs" />
     <Compile Include="PageSetting\PageSetting.cs" />
     <Compile Include="PageSetting\PageSettingDictionary.cs" />
     <Compile Include="PageSetting\PageSettingXmlDocument.cs" />
