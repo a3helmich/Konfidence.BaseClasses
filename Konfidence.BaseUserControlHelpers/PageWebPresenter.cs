@@ -74,7 +74,15 @@ namespace Konfidence.BaseUserControlHelpers
 
         private InternalSessionAccount SessionAccount
         {
-            get { return HttpContext.Current.Session[InternalSessionAccount.AccountObject] as InternalSessionAccount; }
+            get
+            {
+                if (IsAssigned(HttpContext.Current))
+                {
+                    return HttpContext.Current.Session[InternalSessionAccount.AccountObject] as InternalSessionAccount;
+                }
+
+                return null;
+            }
         }
 
         public bool IsLocal
