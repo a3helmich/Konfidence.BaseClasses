@@ -8,6 +8,8 @@ using Konfidence.BaseData;
 
 namespace Konfidence.BaseUserControlHelpers.Login
 {
+    // - in de SessionAccount wordt bijgehouden wie is ingelogd en welke rechten de account heeft.
+    // - in CurrentInternalAccount zit het accountobject dat in de applicatie is aangemaakt en gebruikt wordt om in te loggen
     class LoginContext : BaseItem
     {
         private InternalSessionAccount _AccountObject = null;
