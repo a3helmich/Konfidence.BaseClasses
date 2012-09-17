@@ -65,7 +65,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             }
         }
 
-        private bool IsAuthorized
+        internal bool IsAuthorized
         {
             get
             {

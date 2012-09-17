@@ -161,6 +161,11 @@ namespace Konfidence.BaseUserControlHelpers
             get { return _LoginContext.IsLoggedIn; }
         }
 
+        public bool IsAuthorized
+        {
+            get { return _LoginContext.IsAuthorized; }
+        }
+
         public string LoginErrorMessage
         {
             get { return _LoginContext.LoginErrorMessage; }
