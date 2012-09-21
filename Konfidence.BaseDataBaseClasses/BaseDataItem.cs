@@ -25,6 +25,7 @@ namespace Konfidence.BaseData
 		private string _AutoIdField = string.Empty;
         private string _GuidIdField = string.Empty;
         private int _Id = 0;
+        private Guid _GuidIdValue = Guid.Empty;
 
         private Dictionary<string, DbParameterObject> _AutoUpdateFieldList = null;
 
@@ -98,6 +99,11 @@ namespace Konfidence.BaseData
         {
             get { return _GuidIdField; }
             set { _GuidIdField = value; }
+        }
+
+        internal Guid GuidIdValue
+        {
+            get { return _GuidIdValue; }
         }
 
 		internal int Id
@@ -415,7 +421,14 @@ namespace Konfidence.BaseData
             {
                 if (IsAssigned(_DataHost))
                 {
-                    return _DataHost.GetFieldGuid(fieldName);
+                    Guid fieldValue = _DataHost.GetFieldGuid(fieldName);
+
+                    if (fieldName.Equals(GuidIdField, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        _GuidIdValue = fieldValue;
+                    }
+
+                    return fieldValue;
                 }
             }
 

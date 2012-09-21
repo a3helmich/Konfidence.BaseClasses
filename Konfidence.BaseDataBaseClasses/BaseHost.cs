@@ -7,7 +7,7 @@ namespace Konfidence.BaseData
 	public class BaseHost: BaseItem
 	{
 		private int _Id = 0;
-        private Guid _GuidId = Guid.Empty;
+        //private Guid _GuidId = Guid.Empty;
 
 		private string _DataBaseName = string.Empty;
 		private string _ServiceName = string.Empty;
@@ -38,17 +38,17 @@ namespace Konfidence.BaseData
 			}
 		}
 
-        protected Guid GuidId
-        {
-            get
-            {
-                return _GuidId;
-            }
-            set
-            {
-                _GuidId = value;
-            }
-        }
+        //protected Guid GuidId
+        //{
+        //    get
+        //    {
+        //        return _GuidId;
+        //    }
+        //    set
+        //    {
+        //        _GuidId = value;
+        //    }
+        //}
 
 		#endregion
 

@@ -127,6 +127,19 @@ namespace Konfidence.BaseData
             return null;
         }
 
+        public T FindByGuidId(Guid guidId)
+        {
+            foreach (T dataItem in this)
+            {
+                if (dataItem.GuidIdValue == guidId)
+                {
+                    return dataItem;
+                }
+            }
+
+            return null;
+        }
+
         protected T FindByIsSelected()
         {
             foreach (T dataItem in this)
@@ -194,27 +207,64 @@ namespace Konfidence.BaseData
             int id = 0;
             bool isEditing = false;
 
-            int.TryParse(idText, out id);
             bool.TryParse(isEditingText, out isEditing);
 
-            SetSelected(id, isEditing);
+            if (int.TryParse(idText, out id))
+            {
+                SetSelected(id, isEditing);
+            }
+            else
+            {
+                Guid guidId;
+
+                Guid.TryParse(idText, out guidId);
+
+                SetSelected(guidId, isEditing);
+            }
         }
 
         public void SetSelected(string idText)
         {
             int id = 0;
 
-            int.TryParse(idText, out id);
+            if (int.TryParse(idText, out id))
+            {
+                SetSelected(id, false);
+            }
+            else
+            {
+                Guid guidId;
 
-            SetSelected(id, false);
+                Guid.TryParse(idText, out guidId);
+
+                SetSelected(guidId, false);
+            }
         }
 
-        public void SetSelected(int id)
+        public void SetSelected(BaseDataItem dataItem)
+        {
+            if (IsAssigned(dataItem))
+            {
+                SetSelected(dataItem.Id, false);
+            }
+        }
+
+        private void SetSelected(int id)
         {
             SetSelected(id, false);
         }
-
+        
         private void SetSelected(int id, bool isEditing)
+        {
+            SetSelected(id, Guid.Empty, isEditing);
+        }
+        
+        private void SetSelected(Guid guidId, bool isEditing)
+        {
+            SetSelected(0, guidId, isEditing);
+        }
+
+        private void SetSelected(int id, Guid guidId, bool isEditing)
         {
             if (this.Count > 0)
             {
@@ -223,13 +273,22 @@ namespace Konfidence.BaseData
                     dataItem.IsSelected = false;
                 }
 
-                if (id < 1)
+                if (id < 1 && Guid.Empty.Equals(guidId))
                 {
                     this[0].IsSelected = true;
                 }
                 else
                 {
-                    T dataItem = this.FindById(id);
+                    T dataItem;
+
+                    if (id > 0)
+                    {
+                        dataItem = this.FindById(id);
+                    }
+                    else
+                    {
+                        dataItem = this.FindByGuidId(guidId);
+                    }
 
                     if (IsAssigned(dataItem))
                     {
