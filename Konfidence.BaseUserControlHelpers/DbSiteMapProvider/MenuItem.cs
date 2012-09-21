@@ -1,4 +1,5 @@
 using Konfidence.BaseData;
+using System;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
@@ -43,7 +44,14 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
 		public int NodeId
 		{
-			get { return Id; }
+            get
+            {
+                int idCode;
+
+                Int32.TryParse(Code, out idCode);
+
+                return idCode;
+            }
 		}
 
 		public int ParentNodeId

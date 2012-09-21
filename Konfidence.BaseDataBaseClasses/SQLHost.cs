@@ -137,7 +137,7 @@ namespace Konfidence.BaseData
 
                 database.ExecuteNonQuery(dbCommand);
 
-                dataItem._Id = (int)database.GetParameterValue(dbCommand, dataItem.AutoIdField);
+                dataItem.SetKey((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));
 
                 foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
                 {
