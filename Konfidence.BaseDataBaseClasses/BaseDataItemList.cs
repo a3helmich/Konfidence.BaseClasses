@@ -114,6 +114,24 @@ namespace Konfidence.BaseData
 			return baseDataItem;
 		}
 
+        public T FindById(string textId)
+        {
+            Guid guidId;
+            int id;
+
+            if (Guid.TryParse(textId, out guidId))
+            {
+                return FindById(guidId);
+            }
+
+            if (int.TryParse(textId, out id))
+            {
+                return FindById(id);
+            }
+
+            return null;
+        }
+
         public T FindById(int id)
         {
             foreach (T dataItem in this)
