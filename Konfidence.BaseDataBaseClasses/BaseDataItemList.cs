@@ -127,7 +127,7 @@ namespace Konfidence.BaseData
             return null;
         }
 
-        public T FindByGuidId(Guid guidId)
+        public T FindById(Guid guidId)
         {
             foreach (T dataItem in this)
             {
@@ -287,7 +287,7 @@ namespace Konfidence.BaseData
                     }
                     else
                     {
-                        dataItem = this.FindByGuidId(guidId);
+                        dataItem = this.FindById(guidId);
                     }
 
                     if (IsAssigned(dataItem))
