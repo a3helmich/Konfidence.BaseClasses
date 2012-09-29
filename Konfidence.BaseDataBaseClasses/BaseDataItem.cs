@@ -16,6 +16,7 @@ namespace Konfidence.BaseData
         private bool _IsSelected = false;
         private bool _IsEditing = false;
 
+        private string _LoadStoredProcedure = string.Empty;
 		private string _DeleteStoredProcedure = string.Empty;
 		private string _SaveStoredProcedure = string.Empty;
 
