@@ -22,7 +22,7 @@ namespace Konfidence.BaseData
 
 				baseDataItem.Save();
 
-				return baseDataItem.Id;
+				return baseDataItem._Id;
 			}
 
 			return 0;
@@ -48,7 +48,7 @@ namespace Konfidence.BaseData
             DbParameterObject idProperty = new DbParameterObject();
 
             idProperty.Field = "AutoIdField";
-            idProperty.Value = baseDataItem.Id;
+            idProperty.Value = baseDataItem._Id;
 
             properties.Insert(0, idProperty);
 

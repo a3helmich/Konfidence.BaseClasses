@@ -363,7 +363,7 @@ namespace Konfidence.BaseData
 		{
             // autoidfield parameter toevoegen
 			database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
-														dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.Id);
+														dataItem.AutoIdField, DataRowVersion.Proposed, dataItem._Id);
 
             // alle velden die aan de kant van de database gewijzigd worden als parameter toevoegen
             foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)

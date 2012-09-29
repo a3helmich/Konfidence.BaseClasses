@@ -44,7 +44,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
 		public int NodeId
 		{
-            get { return _Id;}
+            get { return Id;}
 		}
 
 		public int ParentNodeId
