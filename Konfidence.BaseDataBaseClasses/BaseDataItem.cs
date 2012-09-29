@@ -24,7 +24,7 @@ namespace Konfidence.BaseData
 
 		private string _AutoIdField = string.Empty;
         private string _GuidIdField = string.Empty;
-        private int _Id = 0;
+        protected int _Id = 0;
         private Guid _GuidIdValue = Guid.Empty;
 
         private Dictionary<string, DbParameterObject> _AutoUpdateFieldList = null;
@@ -111,10 +111,10 @@ namespace Konfidence.BaseData
 			get { return _Id; }
 		}
 
-        public string Code
-        {
-            get { return _Id.ToString(); }
-        }
+        //public string Code
+        //{
+        //    get { return _Id.ToString(); }
+        //}
 
         internal protected Dictionary<string, DbParameterObject> AutoUpdateFieldList
         {

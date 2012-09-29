@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using Konfidence.Base;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using System.Diagnostics;
 
 namespace Konfidence.BaseData
 {
@@ -126,6 +127,11 @@ namespace Konfidence.BaseData
 
             if (int.TryParse(textId, out id))
             {
+                if (Debugger.IsAttached)
+                {
+                    throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.FindById(..))");
+                }
+
                 return FindById(id);
             }
 
@@ -223,39 +229,49 @@ namespace Konfidence.BaseData
         public void SetSelected(string idText, string isEditingText)
         {
             int id = 0;
+            Guid guidId = Guid.Empty;
             bool isEditing = false;
 
             bool.TryParse(isEditingText, out isEditing);
 
-            if (int.TryParse(idText, out id))
+            if (Guid.TryParse(idText, out guidId))
             {
-                SetSelected(id, isEditing);
+                SetSelected(guidId, isEditing);
             }
             else
             {
-                Guid guidId;
+                if (int.TryParse(idText, out id))
+                {
+                    if (Debugger.IsAttached)
+                    {
+                        throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
+                    }
 
-                Guid.TryParse(idText, out guidId);
-
-                SetSelected(guidId, isEditing);
+                    SetSelected(id, isEditing);
+                }
             }
         }
 
         public void SetSelected(string idText)
         {
             int id = 0;
+            Guid guidId;
 
-            if (int.TryParse(idText, out id))
+            if (Guid.TryParse(idText, out guidId))
             {
-                SetSelected(id, false);
+                SetSelected(guidId, false);
             }
             else
             {
-                Guid guidId;
+                if (int.TryParse(idText, out id))
+                {
+                    if (Debugger.IsAttached)
+                    {
+                        throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
+                    }
 
-                Guid.TryParse(idText, out guidId);
-
-                SetSelected(guidId, false);
+                    SetSelected(id, false);
+                }
             }
         }
 
