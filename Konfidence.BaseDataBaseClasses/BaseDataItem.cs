@@ -295,6 +295,12 @@ namespace Konfidence.BaseData
             AutoUpdateFieldList.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
         }
 
+        internal protected string LoadStoredProcedure
+        {
+            get { return _LoadStoredProcedure; }
+            set { _LoadStoredProcedure = value; }
+        }
+
 		internal protected string DeleteStoredProcedure
 		{
 			get { return _DeleteStoredProcedure; }
@@ -621,6 +627,11 @@ namespace Konfidence.BaseData
             _ParameterObjectList = parameterObjectList;
         }
 		#endregion
+
+        internal void LoadDataItem()
+        {
+            GetItem(LoadStoredProcedure, Id);
+        }
 
         protected virtual void AfterGetDataItem()
         {

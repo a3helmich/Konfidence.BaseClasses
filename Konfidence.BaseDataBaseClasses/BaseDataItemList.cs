@@ -441,6 +441,8 @@ namespace Konfidence.BaseData
         public void Cancel(T dataItem)
         {
             dataItem.IsEditing = false; // nieuw
+
+            dataItem.LoadDataItem();
             //this.SetIsEditing(false);
         }
 
