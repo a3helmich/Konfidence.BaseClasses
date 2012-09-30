@@ -630,7 +630,10 @@ namespace Konfidence.BaseData
 
         internal void LoadDataItem()
         {
-            GetItem(LoadStoredProcedure, Id);
+            if (!IsEmpty(LoadStoredProcedure))
+            {
+                GetItem(LoadStoredProcedure, Id);
+            }
         }
 
         protected virtual void AfterGetDataItem()
