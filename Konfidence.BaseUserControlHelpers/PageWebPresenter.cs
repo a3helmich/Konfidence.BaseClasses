@@ -9,6 +9,7 @@ using System.Web;
 using Konfidence.BaseData;
 using Konfidence.BaseUserControlHelpers.PageSetting;
 using Konfidence.BaseUserControlHelpers.Login;
+using System.IO;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -184,10 +185,38 @@ namespace Konfidence.BaseUserControlHelpers
                 {
                     _PageSettingDocument = new PageSettingXmlDocument();
 
-                    _PageSettingDocument.Load(DataDirectory + "PageSetting.nl.xml");
+                    CheckPageSettingFile();
+
+                    _PageSettingDocument.Load(PageSettingFileName);
                 }
 
                 return _PageSettingDocument;
+            }
+        }
+
+        private void CheckPageSettingFile()
+        {
+            if (!File.Exists(PageSettingFileName))
+            {
+                BaseXmlDocument pageSettings = new BaseXmlDocument();
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
+                sb.AppendLine("<PageSetting>");
+                sb.AppendLine("</PageSetting>");
+
+                pageSettings.LoadXml(sb.ToString());
+
+                pageSettings.Save(PageSettingFileName);
+            }
+        }
+
+        private string PageSettingFileName
+        {
+            get
+            {
+                return DataDirectory + "PageSetting.nl.xml";
             }
         }
 
