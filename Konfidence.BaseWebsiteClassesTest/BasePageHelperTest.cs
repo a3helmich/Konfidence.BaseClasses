@@ -67,7 +67,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = string.Empty;
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsFalse(helper.IsValid, "empty url");
         }
 
@@ -77,7 +77,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -87,7 +87,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost/";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -97,7 +97,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost:8080";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -107,7 +107,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost:8080/";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -117,7 +117,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -127,7 +127,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost:8080/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -137,7 +137,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost/sitemap/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -147,7 +147,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost:8080/sitemap/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -157,7 +157,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost/sitemap/h/h/h/h/h/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -167,7 +167,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             BasePageHelper helper = null;
             string urlRequest = "http://localhost:8080/sitemap/h/h/h/h/h/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest);
+            helper = new BasePageHelper(urlRequest, string.Empty);
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -181,7 +181,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "/sitemap/sitemap.aspx";
 
@@ -196,7 +196,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "/sitemap/sitemap.aspx";
 
@@ -211,7 +211,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.nl";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "/";
 
@@ -226,7 +226,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.nl/sitemap/h/h/h/h/h/h/h/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "/sitemap/h/h/h/h/h/h/h/sitemap.aspx";
 
@@ -243,7 +243,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "sitemap.aspx"; 
 
@@ -258,7 +258,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost:8080/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "sitemap.aspx";
 
@@ -273,7 +273,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "sitemap.aspx";
 
@@ -288,7 +288,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost:8080/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "sitemap.aspx";
 
@@ -303,7 +303,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost/";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = string.Empty;
 
@@ -318,7 +318,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost:8080/";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = string.Empty;
 
@@ -333,7 +333,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = string.Empty;
 
@@ -348,7 +348,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost:8080";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = string.Empty;
 
@@ -367,7 +367,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "nl";
 
@@ -382,7 +382,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "nl";
 
@@ -397,7 +397,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.be/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "nl";
 
@@ -412,7 +412,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "uk";
 
@@ -427,7 +427,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "uk";
 
@@ -442,7 +442,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.fr/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl);
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
 
             string expected = "fr";
 
@@ -461,7 +461,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "nl";
             
@@ -476,7 +476,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "nl";
 
@@ -491,7 +491,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "eu";
 
@@ -506,7 +506,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "co.uk";
 
@@ -521,7 +521,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.gov.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "gov.uk";
 
@@ -540,7 +540,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "www.konfidence.nl";
 
@@ -555,7 +555,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "www.konfidence.nl";
 
@@ -570,7 +570,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         {
             string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl); // TODO: Initialize to an appropriate value
+            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
             string expected = "www.konfidence.co.uk";
 

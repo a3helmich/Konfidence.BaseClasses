@@ -10,12 +10,15 @@ namespace Konfidence.BaseUserControlHelpers
     public class BasePageHelper: BaseItem
     {
         private string[] _UrlParts = new string[0];
+        private string[] _RefererParts = new string[0];
 
         private string _CurrentDomainExtension = string.Empty;
         private string _CurrentLanguage = string.Empty;
         private string _CurrentDnsName = string.Empty;
         private string _CurrentPagePath = string.Empty;
         private string _CurrentPageName = string.Empty;
+
+        private string _RefererDnsName = string.Empty;
 
         #region readonly properties
 
@@ -58,6 +61,19 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        public string RefererDnsName
+        {
+            get
+            {
+                if (IsEmpty(_RefererDnsName))
+                {
+                    _RefererDnsName = GetRefererDnsName();
+                }
+
+                return _RefererDnsName;
+            }
+        }
+
         public string CurrentPagePath
         {
             get
@@ -91,11 +107,15 @@ namespace Konfidence.BaseUserControlHelpers
 
         #endregion readonly  properties
 
-        public BasePageHelper(string requestUrl)
+        public BasePageHelper(string requestUrl, string refererUrl)
         {
             if (!IsEmpty(requestUrl))
             {
                 _UrlParts = requestUrl.ToLowerInvariant().Split('/');
+            }
+            if (!IsEmpty(refererUrl))
+            {
+                _RefererParts = refererUrl.ToLowerInvariant().Split('/');
             }
         }
 
@@ -188,6 +208,18 @@ namespace Konfidence.BaseUserControlHelpers
             string[] pagePathParts = CurrentPagePath.Split('/');
 
             return pagePathParts[pagePathParts.Length - 1]; // laatste element is altijd pageName
+        }
+
+        private string GetRefererDnsName()
+        {
+            string refererSite = "www.konfidence.nl";
+
+            if (!_RefererParts[2].Equals("localhost"))
+            {
+                refererSite = _RefererParts[2];
+            }
+
+            return refererSite;
         }
 
         private string GetCurrentDnsName()

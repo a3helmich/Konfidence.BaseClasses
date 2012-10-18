@@ -76,6 +76,19 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        protected string RefererDnsName
+        {
+            get
+            {
+                if (IsAssigned(_BasePageHelper))
+                {
+                    return _BasePageHelper.RefererDnsName;
+                }
+
+                return string.Empty;
+            }
+        }
+
         protected string CurrentPagePath
         {
             get
@@ -109,7 +122,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 try
                 {
-                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString());
+                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString(), this.Request.UrlReferrer.ToString());
                 }
                 catch (NullReferenceException)
                 {
