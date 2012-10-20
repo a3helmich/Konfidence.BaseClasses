@@ -162,7 +162,14 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 try
                 {
-                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString(), this.Request.UrlReferrer.ToString());
+                    string urlReferer = string.Empty;
+
+                    if (IsAssigned(this.Request.UrlReferrer))
+                    {
+                        urlReferer = this.Request.UrlReferrer.ToString();
+                    }
+
+                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString(), urlReferer);
                 }
                 catch (NullReferenceException)
                 {
