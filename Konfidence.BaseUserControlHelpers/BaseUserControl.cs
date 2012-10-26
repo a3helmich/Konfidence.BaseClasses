@@ -193,19 +193,25 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsRestoreViewState && IsPostBack)
+            if (Visible)
             {
-                RestoreViewState();
-            }
+                if (IsRestoreViewState && IsPostBack)
+                {
+                    RestoreViewState();
+                }
 
-            FormToPresenter();
+                FormToPresenter();
+            }
         }
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            PresenterToForm();
+            if (Visible)
+            {
+                PresenterToForm();
 
-            ViewState["IsRestoreViewState"] = "IsRestoreViewState";
+                ViewState["IsRestoreViewState"] = "IsRestoreViewState";
+            }
         }
 
         protected bool IsEmpty(string assignedString)
