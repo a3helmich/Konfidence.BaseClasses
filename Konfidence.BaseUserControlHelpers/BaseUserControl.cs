@@ -203,7 +203,10 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            PresenterToForm();
+            if (Visible)
+            {
+                PresenterToForm();
+            }
 
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
         }
