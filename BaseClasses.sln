@@ -241,6 +241,7 @@ Global
 		{99B3193A-0739-4586-A379-138176C425A7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{99B3193A-0739-4586-A379-138176C425A7}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{99B3193A-0739-4586-A379-138176C425A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99B3193A-0739-4586-A379-138176C425A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99B3193A-0739-4586-A379-138176C425A7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{99B3193A-0739-4586-A379-138176C425A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{195292BF-209C-423C-ABB1-6AC884122F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
