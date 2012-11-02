@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.VersionControl.Client;
-using Microsoft.TeamFoundation.Common;
+//using Microsoft.TeamFoundation.Common;
 using System.Xml;
 using Konfidence.TeamFoundation.Project;
 using Konfidence.Base;
