@@ -38,8 +38,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClassesTest"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{EA37BC31-3523-495C-A0A0-3828065EE218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebProjectValidator", "WebProjectValidator\WebProjectValidator.csproj", "{298BC418-D248-4185-9011-D9A7593E67CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.AjaxControlExtender", "Konfidence.AjaxControlExtender\Konfidence.AjaxControlExtender.csproj", "{36CAA939-FEE2-40CD-BE3D-2A829F288BC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavaScriptExtender", "JavaScriptExtender\JavaScriptExtender.csproj", "{57041648-637F-49D1-813E-B6B054DF05F5}"
@@ -54,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClas
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 19
+		SccNumberOfProjects = 18
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -91,27 +89,24 @@ Global
 		SccProjectUniqueName11 = Konfidence.Security\\Konfidence.Security.csproj
 		SccProjectName11 = Konfidence.Security
 		SccLocalPath11 = Konfidence.Security
-		SccProjectUniqueName12 = WebProjectValidator\\WebProjectValidator.csproj
-		SccProjectName12 = WebProjectValidator
-		SccLocalPath12 = WebProjectValidator
-		SccProjectUniqueName13 = Konfidence.AjaxControlExtender\\Konfidence.AjaxControlExtender.csproj
-		SccProjectName13 = Konfidence.AjaxControlExtender
-		SccLocalPath13 = Konfidence.AjaxControlExtender
-		SccProjectUniqueName14 = JavaScriptExtender\\JavaScriptExtender.csproj
-		SccProjectName14 = JavaScriptExtender
-		SccLocalPath14 = JavaScriptExtender
-		SccProjectUniqueName15 = Konfidence.BaseWebsiteClassesTest\\Konfidence.BaseWebsiteClassesTest.csproj
-		SccProjectName15 = Konfidence.BaseWebsiteClassesTest
-		SccLocalPath15 = Konfidence.BaseWebsiteClassesTest
-		SccProjectUniqueName16 = Konfidence.BaseDataBaseClassesTest\\Konfidence.BaseDataBaseClassesTest.csproj
-		SccProjectName16 = Konfidence.BaseDataBaseClassesTest
-		SccLocalPath16 = Konfidence.BaseDataBaseClassesTest
-		SccProjectUniqueName17 = Konfidence.Mail\\Konfidence.Mail.csproj
-		SccProjectName17 = Konfidence.Mail
-		SccLocalPath17 = Konfidence.Mail
-		SccProjectUniqueName18 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
-		SccProjectName18 = Konfidence.BaseUnitTestClasses
-		SccLocalPath18 = Konfidence.BaseUnitTestClasses
+		SccProjectUniqueName12 = Konfidence.AjaxControlExtender\\Konfidence.AjaxControlExtender.csproj
+		SccProjectName12 = Konfidence.AjaxControlExtender
+		SccLocalPath12 = Konfidence.AjaxControlExtender
+		SccProjectUniqueName13 = JavaScriptExtender\\JavaScriptExtender.csproj
+		SccProjectName13 = JavaScriptExtender
+		SccLocalPath13 = JavaScriptExtender
+		SccProjectUniqueName14 = Konfidence.BaseWebsiteClassesTest\\Konfidence.BaseWebsiteClassesTest.csproj
+		SccProjectName14 = Konfidence.BaseWebsiteClassesTest
+		SccLocalPath14 = Konfidence.BaseWebsiteClassesTest
+		SccProjectUniqueName15 = Konfidence.BaseDataBaseClassesTest\\Konfidence.BaseDataBaseClassesTest.csproj
+		SccProjectName15 = Konfidence.BaseDataBaseClassesTest
+		SccLocalPath15 = Konfidence.BaseDataBaseClassesTest
+		SccProjectUniqueName16 = Konfidence.Mail\\Konfidence.Mail.csproj
+		SccProjectName16 = Konfidence.Mail
+		SccLocalPath16 = Konfidence.Mail
+		SccProjectUniqueName17 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
+		SccProjectName17 = Konfidence.BaseUnitTestClasses
+		SccLocalPath17 = Konfidence.BaseUnitTestClasses
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -234,17 +229,6 @@ Global
 		{EA37BC31-3523-495C-A0A0-3828065EE218}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EA37BC31-3523-495C-A0A0-3828065EE218}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EA37BC31-3523-495C-A0A0-3828065EE218}.Release|x86.ActiveCfg = Release|Any CPU
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Debug|x86.ActiveCfg = Debug|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Debug|x86.Build.0 = Debug|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|Mixed Platforms.Build.0 = Release|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|x86.ActiveCfg = Release|x86
-		{298BC418-D248-4185-9011-D9A7593E67CA}.Release|x86.Build.0 = Release|x86
 		{36CAA939-FEE2-40CD-BE3D-2A829F288BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36CAA939-FEE2-40CD-BE3D-2A829F288BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36CAA939-FEE2-40CD-BE3D-2A829F288BC0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
