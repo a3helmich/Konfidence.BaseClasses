@@ -178,6 +178,8 @@ namespace Konfidence.BaseUserControlHelpers
             if (!IsAssigned(_Presenter))
             {
                 _Presenter = new T();
+
+                _Presenter.IsLoaded = false;
             }
 
             if (IsEmpty(_Presenter.PageName))
@@ -195,6 +197,8 @@ namespace Konfidence.BaseUserControlHelpers
         {
             if (IsRestoreViewState && IsPostBack)
             {
+                Presenter.IsLoaded = true;
+
                 RestoreViewState();
             }
 

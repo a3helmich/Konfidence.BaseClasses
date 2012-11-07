@@ -440,10 +440,19 @@ namespace Konfidence.BaseData
 
         public void Cancel(T dataItem)
         {
-            dataItem.IsEditing = false; // nieuw
+            int dataItemIndex = this.IndexOf(dataItem);
 
-            dataItem.LoadDataItem();
-            //this.SetIsEditing(false);
+            if (dataItemIndex > -1)
+            {
+                T canceledDataItem = new T();
+
+                canceledDataItem._Id = dataItem._Id;
+
+                canceledDataItem.LoadDataItem();
+
+                this[dataItemIndex] = canceledDataItem;
+                //this.SetIsEditing(false);
+            }
         }
 
         public void Delete(T dataItem)

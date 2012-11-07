@@ -261,5 +261,13 @@ namespace Konfidence.BaseUserControlHelpers
                 return false;
             }
         }
+
+        private bool _IsLoaded;
+
+        public bool IsLoaded
+        {
+            get { return _IsLoaded; }
+            set { _IsLoaded = value; }
+        }
     }
 }
