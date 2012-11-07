@@ -188,8 +188,6 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            Visible = true;
-
             BuildPresenter();
         }
 
