@@ -100,6 +100,7 @@
     <Compile Include="BaseWebService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="BaseWebServicePresenter.cs" />
     <Compile Include="DbSiteMapProvider\DbSiteMapProvider.cs" />
     <Compile Include="DbSiteMapProvider\DbSiteMapProviderAdministrator.cs">
       <SubType>Code</SubType>
