@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using Konfidence.BaseData.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Diagnostics;
+using Konfidence.Base;
 
 namespace Konfidence.BaseData
 {
@@ -331,7 +332,7 @@ namespace Konfidence.BaseData
 
             try
             {
-                if (Debugger.IsAttached)
+                if (Debugger.IsAttached || BaseItem.UnitTest)
                 {
                     if (databaseInstance.DbProviderFactory is SqlClientFactory)
                     {

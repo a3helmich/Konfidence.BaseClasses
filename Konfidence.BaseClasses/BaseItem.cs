@@ -5,19 +5,16 @@ namespace Konfidence.Base
 	public class BaseItem
 	{
         private string _ErrorMessage = string.Empty;
+        public static bool UnitTest = false;
 
         public string ErrorMessage
         {
             get { return _ErrorMessage; }
         }
 
-        //public static bool IsAssigned(string assignedObject)
-        //{
-        //    return false;
-        //}
 		public static bool IsAssigned(object assignedObject)
 		{
-            if (Debugger.IsAttached)
+            if (Debugger.IsAttached || UnitTest)
             {
                 // TODO : write exceptions to a logFile (introduce exclusion attribute?)
                 if (assignedObject is string)

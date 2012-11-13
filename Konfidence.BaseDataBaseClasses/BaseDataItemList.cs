@@ -127,7 +127,7 @@ namespace Konfidence.BaseData
 
             if (int.TryParse(textId, out id))
             {
-                if (Debugger.IsAttached)
+                if (Debugger.IsAttached || BaseItem.UnitTest)
                 {
                     throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.FindById(..))");
                 }
@@ -242,7 +242,7 @@ namespace Konfidence.BaseData
             {
                 if (int.TryParse(idText, out id))
                 {
-                    if (Debugger.IsAttached)
+                    if (Debugger.IsAttached || BaseItem.UnitTest)
                     {
                         throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
                     }
@@ -265,7 +265,7 @@ namespace Konfidence.BaseData
             {
                 if (int.TryParse(idText, out id))
                 {
-                    if (Debugger.IsAttached)
+                    if (Debugger.IsAttached || BaseItem.UnitTest)
                     {
                         throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
                     }

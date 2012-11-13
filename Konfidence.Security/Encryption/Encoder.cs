@@ -30,7 +30,7 @@ namespace Konfidence.Security.Encryption
         {
             ArrayList byteList = null;
 
-            if (IsAssigned(rawData))
+            if (IsEmpty(rawData))
             {
                 byteList = new ArrayList();
 
