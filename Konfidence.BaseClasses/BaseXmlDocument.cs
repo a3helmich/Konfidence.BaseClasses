@@ -12,6 +12,8 @@ namespace Konfidence.Base
 
         private string _FullFileName = string.Empty;
         private string _PathName = string.Empty;
+        private string _RootNameSpaceURI;
+        private XmlNamespaceManager _XmlNamespaceManager;
 
         #region read only properties
         public XmlElement Root
@@ -28,6 +30,16 @@ namespace Konfidence.Base
         {
             get { return _PathName; }
         }
+
+        public string RootNameSpaceURI
+        {
+            get { return _RootNameSpaceURI; }
+        }
+
+        public XmlNamespaceManager XmlNamespaceManager
+        {
+            get { return _XmlNamespaceManager; }
+        }
         #endregion read only properties
 
         public override void Load(string filename)
@@ -38,35 +50,46 @@ namespace Konfidence.Base
 
             base.Load(filename);
 
+            PostLoad();
+        }
+
+        private void PostLoad()
+        {
             _Root = DocumentElement;
+
+            _RootNameSpaceURI = Root.NamespaceURI;
+
+            // create a shortcut namespace reference
+            _XmlNamespaceManager = new XmlNamespaceManager(NameTable);
+            _XmlNamespaceManager.AddNamespace("p", _RootNameSpaceURI);
         }
 
         public override void Load(Stream inStream)
         {
             base.Load(inStream);
 
-            _Root = DocumentElement;
+            PostLoad();
         }
 
         public override void Load(TextReader txtReader)
         {
             base.Load(txtReader);
 
-            _Root = DocumentElement;
+            PostLoad();
         }
 
         public override void Load(XmlReader reader)
         {
             base.Load(reader);
 
-            _Root = DocumentElement;
+            PostLoad();
         }
 
         public override void LoadXml(string xml)
         {
             base.LoadXml(xml);
 
-            _Root = DocumentElement;
+            PostLoad();
         }
 
         public void GetAttributeValue(string nodeName, string attributeName, out string value)
