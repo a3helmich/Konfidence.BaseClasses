@@ -136,11 +136,11 @@ namespace Konfidence.Base
             }
         }
 
-        public XmlElement AddElement(XmlElement parentElement, string name, string value)
+        public XmlElement AddElement(XmlNode parentNode, string name, string value)
         {
             XmlElement childElement = CreateElement(name, RootNameSpaceURI);
 
-            parentElement.AppendChild(childElement);
+            parentNode.AppendChild(childElement);
 
             childElement.InnerText = value;
 
@@ -150,6 +150,20 @@ namespace Konfidence.Base
         public XmlElement AddElement(string name, string value)
         {
             return AddElement(Root, name, value);
+        }
+
+        public XmlNode AddNode(XmlNode parentNode, string name)
+        {
+            XmlElement childElement = CreateElement(name, RootNameSpaceURI);
+
+            parentNode.AppendChild(childElement);
+
+            return childElement;
+        }
+
+        public XmlNode AddNode(string name)
+        {
+            return AddNode(Root, name);
         }
 
         protected static bool IsAssigned(object assignedObject)
