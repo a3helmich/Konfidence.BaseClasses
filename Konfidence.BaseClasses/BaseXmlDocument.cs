@@ -136,7 +136,7 @@ namespace Konfidence.Base
             }
         }
 
-        protected XmlElement AddElement(XmlElement parentElement, string name, string value)
+        public XmlElement AddElement(XmlElement parentElement, string name, string value)
         {
             XmlElement childElement = CreateElement(name, RootNameSpaceURI);
 
@@ -147,7 +147,7 @@ namespace Konfidence.Base
             return childElement;
         }
 
-        protected XmlElement AddElement(string name, string value)
+        public XmlElement AddElement(string name, string value)
         {
             return AddElement(Root, name, value);
         }
