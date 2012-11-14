@@ -136,6 +136,22 @@ namespace Konfidence.Base
             }
         }
 
+        protected XmlElement AddElement(XmlElement parentElement, string name, string value)
+        {
+            XmlElement childElement = CreateElement(name, RootNameSpaceURI);
+
+            parentElement.AppendChild(childElement);
+
+            childElement.InnerText = value;
+
+            return childElement;
+        }
+
+        protected XmlElement AddElement(string name, string value)
+        {
+            return AddElement(Root, name, value);
+        }
+
         protected static bool IsAssigned(object assignedObject)
         {
             return BaseItem.IsAssigned(assignedObject);
