@@ -167,18 +167,24 @@ namespace Konfidence.Base
             return SetValue(Root, name, value);
         }
 
-        public XmlNode AddNode(XmlNode parentNode, string name)
+        public XmlNode GetNode(XmlNode parentNode, string name)
         {
-            XmlElement childElement = CreateElement(name, RootNameSpaceURI);
+            //XmlNode childElement = parentNode.SelectSingleNode(name, _XmlNamespaceManager);
+            XmlNode childElement = parentNode.SelectSingleNode(name);
 
-            parentNode.AppendChild(childElement);
+            if (!IsAssigned(childElement))
+            {
+                childElement = CreateElement(name, RootNameSpaceURI);
+
+                parentNode.AppendChild(childElement);
+            }
 
             return childElement;
         }
 
-        public XmlNode AddNode(string name)
+        public XmlNode GetNode(string name)
         {
-            return AddNode(Root, name);
+            return GetNode(Root, name);
         }
 
         protected static bool IsAssigned(object assignedObject)
