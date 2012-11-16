@@ -114,9 +114,14 @@ namespace Konfidence.Base
 
         public void GetValue(string nodeName, out string value)
         {
+            GetValue(Root, nodeName, out value);
+        }
+
+        public void GetValue(XmlNode node,string nodeName, out string value)
+        {
             value = string.Empty;
 
-            XmlNode valueNode = Root.SelectSingleNode(nodeName);
+            XmlNode valueNode = node.SelectSingleNode(nodeName);
 
             if (IsAssigned(valueNode))
             {
@@ -126,9 +131,14 @@ namespace Konfidence.Base
 
         public void GetValue(string nodeName, out bool value)
         {
+            GetValue(Root, nodeName, out value);
+        }
+
+        public void GetValue(XmlNode node,string nodeName, out bool value)
+        {
             value = false;
 
-            XmlNode valueNode = Root.SelectSingleNode(nodeName);
+            XmlNode valueNode = node.SelectSingleNode(nodeName);
 
             if (IsAssigned(valueNode))
             {
