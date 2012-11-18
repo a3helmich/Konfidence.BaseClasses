@@ -69,11 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContainerSecurity\ContainerPermission.cs" />
-    <Compile Include="Encryption\ClientKeyEncryption.cs" />
     <Compile Include="Encryption\Decoder.cs" />
     <Compile Include="Encryption\Encoder.cs" />
-    <Compile Include="Encryption\EncoderDecoder.cs" />
-    <Compile Include="Encryption\ServerKeyEncryption.cs" />
+    <Compile Include="Encryption\KeyEncryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

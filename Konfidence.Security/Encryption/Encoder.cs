@@ -8,12 +8,12 @@ namespace Konfidence.Security.Encryption
 {
     public class Encoder : BaseItem, IDisposable
     {
-        private EncoderDecoder _Encoder = null;
+        private KeyEncryption _Encoder = null;
         private bool _Disposed = false;
 
         public Encoder(string publicKey)
         {
-            _Encoder = new EncoderDecoder();
+            _Encoder = new KeyEncryption(string.Empty);
 
             _Encoder.ReadKey(publicKey);
         }
@@ -83,7 +83,7 @@ namespace Konfidence.Security.Encryption
             {
                 if (_Encoder != null)
                 {
-                    _Encoder.Clear(); // resources vrijgeven.
+                    _Encoder.Dispose(); // resources vrijgeven.
 
                     _Encoder = null;
                 }

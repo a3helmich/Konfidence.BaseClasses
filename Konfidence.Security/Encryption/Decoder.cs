@@ -7,12 +7,12 @@ namespace Konfidence.Security.Encryption
 {
     public class Decoder : IDisposable
     {
-        private EncoderDecoder _Decoder = null;
+        private KeyEncryption _Decoder = null;
         private bool _Disposed = false;
 
         public Decoder(string privateKey)
         {
-            _Decoder = new EncoderDecoder();
+            _Decoder = new KeyEncryption(string.Empty);
 
             _Decoder.ReadKey(privateKey);
         }
@@ -60,7 +60,7 @@ namespace Konfidence.Security.Encryption
             {
                 if (_Decoder != null)
                 {
-                    _Decoder.Clear(); // resources vrijgeven.
+                    _Decoder.Dispose(); // resources vrijgeven.
 
                     _Decoder = null;
                 }
