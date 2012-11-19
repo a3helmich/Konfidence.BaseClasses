@@ -710,14 +710,28 @@ namespace Konfidence.BaseData
             AfterSave();
 		}
 
+        protected virtual void BeforeDelete()
+        {
+            // NOP
+        }
+
+        protected virtual void AfterDelete()
+        {
+            // NOP
+        }
+
 		public void Delete()
 		{
             BaseHost dataHost = GetHost();
 
+            BeforeDelete();
+
 			dataHost.Delete(DeleteStoredProcedure, AutoIdField, _Id);
 
 			_Id = 0;
-		}
+
+            AfterDelete();
+        }
 		  
 		protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
 		{
