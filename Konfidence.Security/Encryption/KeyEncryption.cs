@@ -12,7 +12,6 @@ namespace Konfidence.Security.Encryption
         private RSACryptoServiceProvider _RsaProvider;
 
         private bool _Disposed = false;
-        private bool _IsTemporary = false;
 
         private RSACryptoServiceProvider _TempRsaProvider = null;
         private int _TempKeySize = 0;
@@ -97,7 +96,6 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-
         private int GetMaxKeySize()
         {
             // at first i wanted to remove redundant keys etc. but keeping them in 
@@ -140,24 +138,18 @@ namespace Konfidence.Security.Encryption
             _MaxBytesServer = keySize / 8;
             _ContainerName = containerName;
 
+            bool isTemporary = false;
+
             if (string.IsNullOrEmpty(_ContainerName))
             {
-                _IsTemporary = true;
+                isTemporary = true;
 
-                //_ContainerName = "temp:" + Guid.NewGuid().ToString(); // get a temporary containerName
                 _ContainerName = "None";
             }
 
             Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) key - " + _ContainerName);
 
-            //InitializeEncryption();
-
-            //if (_IsTemporary)
-            {
-                Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) initialized");
-            }
-
-            if (_IsTemporary)
+            if (isTemporary)
             {
                 _RsaProvider = TempKeyContainer;
             }
@@ -166,15 +158,8 @@ namespace Konfidence.Security.Encryption
                 GetKeyContainer(_ContainerName);
             }
 
-            //if (_IsTemporary)
-            {
-                Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
-            }
+            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
         }
-
-        //protected virtual void InitializeEncryption()
-        //{
-        //}
 
         public static int MaxKeySize()
         {
@@ -228,11 +213,6 @@ namespace Konfidence.Security.Encryption
                     }
 
                 }
-
-                //if (_IsTemporary)
-                //{
-                //    _RsaProvider.PersistKeyInCsp = false;
-                //}
             }
             catch (CryptographicException e)
             {
