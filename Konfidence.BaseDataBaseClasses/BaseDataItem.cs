@@ -575,7 +575,7 @@ namespace Konfidence.BaseData
             if (value > TimeSpan.MinValue)
             {
                 DateTime inbetween = DateTime.Now;
-                inbetween = new DateTime(inbetween.Year, inbetween.Day, inbetween.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
+                inbetween = new DateTime(inbetween.Year, inbetween.Month, inbetween.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
 
                 AddInParameter(fieldName, DbType.Time, inbetween);
             }
