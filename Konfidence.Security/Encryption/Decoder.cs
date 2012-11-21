@@ -17,10 +17,8 @@ namespace Konfidence.Security.Encryption
             _Decoder.ReadKey(privateKey);
         }
 
-        public string Decrypt(ArrayList encryptedArrayList)
+        public string Decrypt(object[] encryptedData)
         {
-            object[] encryptedData = encryptedArrayList.ToArray();
-
             ASCIIEncoding asciiEncoding = new ASCIIEncoding();
             ArrayList encryptedDataList = new ArrayList();
             StringBuilder rawData = new StringBuilder();

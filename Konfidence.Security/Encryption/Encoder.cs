@@ -26,7 +26,7 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-        public ArrayList Encrypt(string rawData)
+        public object[] Encrypt(string rawData)
         {
             ArrayList byteList = null;
 
@@ -48,7 +48,7 @@ namespace Konfidence.Security.Encryption
                 byteList.Add(GetEnryptedDataBlock(partialString));
             }
 
-            return byteList;
+            return byteList.ToArray();
         }
 
         private byte[] GetEnryptedDataBlock(string partialString)
