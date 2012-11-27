@@ -111,7 +111,7 @@ namespace Konfidence.BaseUserControlHelpers
             _PageName = pageName;
         }
 
-        public string ResolveServerPath(string url)
+        public static string ResolveServerPath(string url)
         {
             if (!IsEmpty(url))
             {
