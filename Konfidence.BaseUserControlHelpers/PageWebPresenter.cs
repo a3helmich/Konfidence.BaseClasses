@@ -121,12 +121,17 @@ namespace Konfidence.BaseUserControlHelpers
             return string.Empty;
         }
 
+        public static string ResolveClientPath(string serverPath)
+        {
+            return serverPath.Replace(ResolveServerPath(ApplicationPath), @"~");
+        }
+
         public virtual void LogOff()
         {
             _LoginContext.LogOff();
         }
 
-        public string ApplicationPath
+        public static string ApplicationPath
         {
             get { return VirtualPathUtility.ToAbsolute(@"~").TrimEnd('/'); }
         }
