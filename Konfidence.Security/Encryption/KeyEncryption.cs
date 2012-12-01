@@ -174,11 +174,13 @@ namespace Konfidence.Security.Encryption
         {
             CspParameters cp = new CspParameters();
 
-            CryptoKeyAccessRule rule = new CryptoKeyAccessRule("everyone", CryptoKeyRights.FullControl, AccessControlType.Allow);
+            CryptoKeyAccessRule rule = new CryptoKeyAccessRule("everyone", CryptoKeyRights.FullControl | CryptoKeyRights.TakeOwnership | CryptoKeyRights.ChangePermissions, AccessControlType.Allow);
 
             CryptoKeySecurity cryptoKeySecurity = new CryptoKeySecurity();
 
-            cryptoKeySecurity.SetAccessRule(rule);
+            cryptoKeySecurity.AddAccessRule(rule);
+
+            //cryptoKeySecurity.SetOwner(rule);
 
             cp.KeyContainerName = containerName;
             cp.Flags |= CspProviderFlags.UseMachineKeyStore;
@@ -207,27 +209,45 @@ namespace Konfidence.Security.Encryption
                     catch (CryptographicException e)
                     {
                         {
-                            throw e;
+                            throw new Exception("create: " + e.Message, e);
                         }
                     }
                 }
 
                 if (_MaxBytesServer > 0 && _RsaProvider.KeySize != _MaxBytesServer * 8)
                 {
-                    Delete();
-
-                    if (!IsAssigned(_RsaProvider))
+                    try
                     {
-                        _RsaProvider = new RSACryptoServiceProvider(_MaxBytesServer * 8, cp);
-                    }
+                        try
+                        {
+                            Delete();
+                        }
+                        catch (CryptographicException e)
+                        {
+                            {
+                                throw new Exception("delete: " + e.Message, e);
+                            }
+                        }
 
+
+                        if (!IsAssigned(_RsaProvider))
+                        {
+                            _RsaProvider = new RSACryptoServiceProvider(_MaxBytesServer * 8, cp);
+                        }
+                    }
+                    catch (CryptographicException e)
+                    {
+                        {
+                            throw new Exception("replace: " + e.Message, e);
+                        }
+                    }
                 }
             }
             catch (CryptographicException e)
             {
                 Debug.WriteLine("Encryption: Utilhelper.GetKeyContainer(...) unexpected exception - " + e.Message);
 
-                throw e;
+                throw new Exception("most outer: " + e.Message, e);
             }
         }
 
