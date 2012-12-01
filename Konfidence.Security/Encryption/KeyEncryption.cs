@@ -217,6 +217,8 @@ namespace Konfidence.Security.Encryption
             catch (CryptographicException e)
             {
                 Debug.WriteLine("Encryption: Utilhelper.GetKeyContainer(...) unexpected exception - " + e.Message);
+
+                throw e;
             }
         }
 
