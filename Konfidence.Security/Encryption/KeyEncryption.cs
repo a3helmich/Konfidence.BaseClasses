@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using Konfidence.Base;
+using System.Security.AccessControl;
 
 namespace Konfidence.Security.Encryption
 {
@@ -172,8 +173,16 @@ namespace Konfidence.Security.Encryption
         private CspParameters GetCspParameters(string containerName)
         {
             CspParameters cp = new CspParameters();
+
+            CryptoKeyAccessRule rule = new CryptoKeyAccessRule("everyone", CryptoKeyRights.FullControl, AccessControlType.Allow);
+
+            CryptoKeySecurity cryptoKeySecurity = new CryptoKeySecurity();
+
+            cryptoKeySecurity.SetAccessRule(rule);
+
             cp.KeyContainerName = containerName;
             cp.Flags |= CspProviderFlags.UseMachineKeyStore;
+            cp.CryptoKeySecurity = cryptoKeySecurity;
 
             return cp;
         }
