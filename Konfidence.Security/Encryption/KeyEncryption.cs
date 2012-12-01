@@ -174,7 +174,7 @@ namespace Konfidence.Security.Encryption
         {
             CspParameters cp = new CspParameters();
 
-            CryptoKeyAccessRule rule = new CryptoKeyAccessRule("everyone", CryptoKeyRights.FullControl | CryptoKeyRights.TakeOwnership | CryptoKeyRights.ChangePermissions, AccessControlType.Allow);
+            CryptoKeyAccessRule rule = new CryptoKeyAccessRule("everyone",  CryptoKeyRights.Delete | CryptoKeyRights.FullControl | CryptoKeyRights.TakeOwnership | CryptoKeyRights.ChangePermissions, AccessControlType.Allow);
 
             CryptoKeySecurity cryptoKeySecurity = new CryptoKeySecurity();
 
