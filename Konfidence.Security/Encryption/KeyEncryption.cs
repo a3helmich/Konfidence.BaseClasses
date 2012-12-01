@@ -174,7 +174,7 @@ namespace Konfidence.Security.Encryption
         {
             CspParameters cp = new CspParameters();
 
-            string user = Environment.UserDomainName + "\\" + Environment.UserName;
+            string user = @"NT AUTHORITY\NETWORK SERVICE";
 
             CryptoKeyAccessRule rule = new CryptoKeyAccessRule(user, CryptoKeyRights.GenericRead | CryptoKeyRights.ReadData | CryptoKeyRights.ReadAttributes | CryptoKeyRights.Delete | CryptoKeyRights.FullControl | CryptoKeyRights.TakeOwnership | CryptoKeyRights.ChangePermissions, AccessControlType.Allow);
 
