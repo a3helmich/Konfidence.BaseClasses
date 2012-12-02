@@ -226,8 +226,20 @@ namespace Konfidence.BaseData
         }
 
         #region list selecting state control
+        protected virtual void BeforeSetSelected()
+        {
+            // nop
+        }
+
+        protected virtual void AfterSetSelected()
+        {
+            // nop
+        }
+
         public void SetSelected(string idText, string isEditingText)
         {
+            BeforeSetSelected();
+
             int id = 0;
             Guid guidId = Guid.Empty;
             bool isEditing = false;
@@ -250,10 +262,14 @@ namespace Konfidence.BaseData
                     SetSelected(id, isEditing);
                 }
             }
+
+            AfterSetSelected();
         }
 
         public void SetSelected(string idText)
         {
+            BeforeSetSelected();
+
             int id = 0;
             Guid guidId;
 
@@ -273,14 +289,21 @@ namespace Konfidence.BaseData
                     SetSelected(id, false);
                 }
             }
+
+            AfterSetSelected();
         }
 
         public void SetSelected(BaseDataItem dataItem)
         {
+            BeforeSetSelected();
+
             if (IsAssigned(dataItem))
             {
                 SetSelected(dataItem._Id, false);
             }
+
+
+            AfterSetSelected();
         }
 
         private void SetSelected(int id)
