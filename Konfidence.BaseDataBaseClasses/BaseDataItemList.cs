@@ -17,8 +17,6 @@ namespace Konfidence.BaseData
 
     public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem, new()
 	{
-        private bool _IsChanged = false;
-
 		private string _GetListStoredProcedure = string.Empty;
 		private string _DataBaseName = string.Empty;
 		private string _ServiceName = string.Empty;
@@ -227,15 +225,10 @@ namespace Konfidence.BaseData
         }
 
         #region list selecting state control
-        protected virtual void BeforeSetSelected()
-        {
-            _IsChanged = false;
-        }
+        //protected virtual void BeforeSetSelected()
+        //{
 
-        public bool IsChanged
-        {
-            get { return _IsChanged; }
-        }
+        //}
 
         //protected virtual void AfterSetSelected()
         //{
@@ -315,13 +308,6 @@ namespace Konfidence.BaseData
         private void SetSelected(int id)
         {
             SetSelected(id, false);
-
-            BaseDataItem baseDataItem = FindCurrent();
-
-            if (id != baseDataItem._Id)
-            {
-                _IsChanged = true;
-            }
         }
         
         private void SetSelected(int id, bool isEditing)
