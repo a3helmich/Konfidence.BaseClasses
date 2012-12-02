@@ -38,7 +38,17 @@ namespace Konfidence.BaseData
         public bool IsSelected
         {
             get { return _IsSelected; }
-            set { _IsSelected = value; }
+            set
+            {
+                _IsSelected = value;
+
+                IsSelectedChanged();
+            }
+        }
+
+        protected virtual void IsSelectedChanged()
+        {
+            // nop
         }
 
         public bool IsEditing

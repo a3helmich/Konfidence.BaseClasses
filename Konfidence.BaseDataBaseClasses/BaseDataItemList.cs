@@ -17,6 +17,7 @@ namespace Konfidence.BaseData
 
     public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem, new()
 	{
+        private bool _IsChanged = false;
 
 		private string _GetListStoredProcedure = string.Empty;
 		private string _DataBaseName = string.Empty;
@@ -164,7 +165,7 @@ namespace Konfidence.BaseData
             return null;
         }
 
-        protected T FindByIsSelected()
+        private T FindByIsSelected()
         {
             foreach (T dataItem in this)
             {
@@ -228,17 +229,22 @@ namespace Konfidence.BaseData
         #region list selecting state control
         protected virtual void BeforeSetSelected()
         {
-            // nop
+            _IsChanged = false;
         }
 
-        protected virtual void AfterSetSelected()
+        public bool IsChanged
         {
-            // nop
+            get { return _IsChanged; }
         }
+
+        //protected virtual void AfterSetSelected()
+        //{
+        //    // nop
+        //}
 
         public void SetSelected(string idText, string isEditingText)
         {
-            BeforeSetSelected();
+            //BeforeSetSelected();
 
             int id = 0;
             Guid guidId = Guid.Empty;
@@ -263,12 +269,12 @@ namespace Konfidence.BaseData
                 }
             }
 
-            AfterSetSelected();
+            //AfterSetSelected();
         }
 
         public void SetSelected(string idText)
         {
-            BeforeSetSelected();
+            //BeforeSetSelected();
 
             int id = 0;
             Guid guidId;
@@ -290,12 +296,12 @@ namespace Konfidence.BaseData
                 }
             }
 
-            AfterSetSelected();
+            //AfterSetSelected();
         }
 
         public void SetSelected(BaseDataItem dataItem)
         {
-            BeforeSetSelected();
+            //BeforeSetSelected();
 
             if (IsAssigned(dataItem))
             {
@@ -303,12 +309,19 @@ namespace Konfidence.BaseData
             }
 
 
-            AfterSetSelected();
+            //AfterSetSelected();
         }
 
         private void SetSelected(int id)
         {
             SetSelected(id, false);
+
+            BaseDataItem baseDataItem = FindCurrent();
+
+            if (id != baseDataItem._Id)
+            {
+                _IsChanged = true;
+            }
         }
         
         private void SetSelected(int id, bool isEditing)
@@ -463,19 +476,27 @@ namespace Konfidence.BaseData
 
         public void Cancel(T dataItem)
         {
-            int dataItemIndex = this.IndexOf(dataItem);
+            dataItem.LoadDataItem();
 
-            if (dataItemIndex > -1)
-            {
-                T canceledDataItem = new T();
+            dataItem.IsEditing = false;
 
-                canceledDataItem._Id = dataItem._Id;
+            //int dataItemIndex = this.IndexOf(dataItem);
 
-                canceledDataItem.LoadDataItem();
+            //if (dataItemIndex > -1)
+            //{
+            //    T canceledDataItem = new T();
 
-                this[dataItemIndex] = canceledDataItem;
-                //this.SetIsEditing(false);
-            }
+            //    canceledDataItem._Id = dataItem._Id;
+
+            //    canceledDataItem.LoadDataItem();
+
+            //    this[dataItemIndex] = canceledDataItem;
+
+            //    if (dataItem.IsSelected)
+            //    {
+            //        this.SetSelected(canceledDataItem._Id);
+            //    }
+            //}
         }
 
         public void Delete(T dataItem)
