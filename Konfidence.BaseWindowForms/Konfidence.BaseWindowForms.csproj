@@ -71,6 +71,7 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseFormPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseAboutForm.cs">
       <SubType>Form</SubType>
