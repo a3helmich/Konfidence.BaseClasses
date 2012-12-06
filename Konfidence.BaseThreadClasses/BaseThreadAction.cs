@@ -24,9 +24,9 @@ namespace Konfidence.BaseThreadClasses
             IsTerminating = true;
         }
 
-        protected void Sleep(int milliseconds)
-        {
-            Thread.Sleep(milliseconds);
-        }
+        //protected void Sleep(int milliseconds)
+        //{
+        //    Thread.Sleep(milliseconds);
+        //}
     }
 }

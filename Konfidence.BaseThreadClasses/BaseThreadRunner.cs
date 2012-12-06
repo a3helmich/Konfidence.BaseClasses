@@ -17,6 +17,8 @@ namespace Konfidence.BaseThreadClasses
         private T _ThreadAction = null;
         private Thread _InternalThread = null;
 
+        internal int SleepTime;
+        internal int WaitTime;
 
         internal bool IsRunning
         {
@@ -40,17 +42,39 @@ namespace Konfidence.BaseThreadClasses
         {
             InitializeThreadLoop();
 
-            //ThreadLoop(ThreadAction);
             while (_InternalThread.IsAlive && !ThreadAction.IsTerminating)
             {
                 BeforeExecute();
 
                 ThreadAction.Execute();
 
+                SleepThread(WaitTime); // default 100 miliseconds
+
                 AfterExecute();
             }
 
             CleanupThread();
+        }
+
+        protected void SleepThread(int milliSeconds)
+        {
+            if (SleepTime > WaitTime)
+            {
+                SleepTime = WaitTime;
+            }
+
+            if (_InternalThread.IsAlive)
+            {
+                int index = 0;
+
+                // Wacht een aantal seconden
+                while ((index < milliSeconds) && !ThreadAction.IsTerminating)
+                {
+                    index++;
+
+                    Thread.Sleep(SleepTime); // relieve CPU, default 0 milliseconds
+                }
+            }
         }
 
         public void StartThreadRunner()
@@ -93,21 +117,6 @@ namespace Konfidence.BaseThreadClasses
             catch (Exception ex)
             {
                 string test = ex.Message;
-            }
-        }
-
-        protected void SleepThread(int seconds)
-        {
-            if (_InternalThread.IsAlive)
-            {
-                int index = 0;
-
-                // Wacht een aantal seconden
-                while ((index < seconds) && !ThreadAction.IsTerminating)
-                {
-                    index++;
-                    Thread.Sleep(1000);
-                }
             }
         }
     }

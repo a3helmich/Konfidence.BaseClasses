@@ -14,6 +14,21 @@ namespace Konfidence.BaseThreadClasses
 
         private T _ThreadRunner = null;
 
+        private int _SleepMilliSeconds = 0;
+        private int _WaitMilliSeconds = 100;
+
+        public int SleepMilliSeconds
+        {
+            get { return _SleepMilliSeconds; }
+            set { _SleepMilliSeconds = value; }
+        }
+
+        public int WaitMilliSeconds
+        {
+            get { return _WaitMilliSeconds; }
+            set { _WaitMilliSeconds = value; }
+        }
+
         protected T ThreadRunner
         {
             get { return _ThreadRunner; }
@@ -42,6 +57,9 @@ namespace Konfidence.BaseThreadClasses
             if (!IsRunning)
             {
                 BeforeStart();
+
+                ThreadRunner.SleepTime = _SleepMilliSeconds;
+                ThreadRunner.WaitTime = _WaitMilliSeconds;
 
                 ThreadRunner.StartThreadRunner();
             }
