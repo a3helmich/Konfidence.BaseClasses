@@ -130,9 +130,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NewsletterClasses\NewsletterClasses.csproj">
-      <Project>{2CD8758F-987E-4AF0-9995-A9D609E24AEF}</Project>
-      <Name>NewsletterClasses</Name>
+    <ProjectReference Include="..\Konfidence.MenuClasses\DbSiteMapMenuClasses.csproj">
+      <Project>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</Project>
+      <Name>DbSiteMapMenuClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

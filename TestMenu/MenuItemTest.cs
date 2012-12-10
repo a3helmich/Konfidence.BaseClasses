@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Konfidence.BaseUserControlHelpers.DbSiteMapProvider;
-using Konfidence.NewsletterClasses;
+using Konfidence.DbSiteMapMenuClasses;
 
 namespace MenuTest
 {
