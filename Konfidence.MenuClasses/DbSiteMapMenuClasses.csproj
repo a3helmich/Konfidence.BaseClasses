@@ -34,6 +34,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -89,6 +95,7 @@
     <None Include="Generated.Sql\MenuText_RequiredField.sql" />
     <None Include="Generated.Sql\Menu_GetListByMenuCode.sql" />
     <None Include="Generated.Sql\MenuText_GetRowByMenuId.sql" />
+    <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

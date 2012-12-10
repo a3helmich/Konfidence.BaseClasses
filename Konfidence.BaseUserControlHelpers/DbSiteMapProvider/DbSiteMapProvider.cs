@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web;
 using Konfidence.Base;
+using Konfidence.DbSiteMapMenuClasses;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
@@ -177,21 +178,18 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        private SiteMapNode BuildMenuNode(MenuItem menuItem)
+        private SiteMapNode BuildMenuNode(Bl.MenuDataItem menuItem)
         {
             string menuUrl = string.Empty;
             string menuMenuText = string.Empty;
 
-            if (menuItem.Visible)
+            if (menuItem.IsVisible)
             {
                 menuUrl = menuItem.Url;
-                menuMenuText = menuItem.MenuText;
+                menuMenuText = menuItem.MenuText.MenuText;
             }
 
-            SiteMapNode menuNode = new SiteMapNode(this,
-                                                             menuItem.NodeId.ToString(),
-                                                             menuUrl,
-                                                             menuMenuText);
+            SiteMapNode menuNode = new SiteMapNode(this, menuItem.MenuId.ToString(), menuUrl, menuMenuText);
 
             return menuNode;
         }
