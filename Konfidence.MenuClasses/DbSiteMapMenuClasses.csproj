@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DbSiteMapMenuClasses</RootNamespace>
+    <AssemblyName>DbSiteMapMenuClasses</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\Projects\References\Konfidence.BaseClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseDataBaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\Projects\References\Konfidence.BaseDataBaseClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d0a1a4e466b0ec13, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\Projects\References\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d0a1a4e466b0ec13, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\Projects\References\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d0a1a4e466b0ec13, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\Projects\References\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Generated.Classes\MenuDataItem.generated.cs" />
+    <Compile Include="Generated.Classes\MenuDataItemList.generated.cs" />
+    <Compile Include="MenuDataItem.cs" />
+    <Compile Include="MenuDataItemList.cs" />
+    <Compile Include="Generated.Classes\MenuTextDataItem.generated.cs" />
+    <Compile Include="Generated.Classes\MenuTextDataItemList.generated.cs" />
+    <Compile Include="MenuTextDataItem.cs" />
+    <Compile Include="MenuTextDataItemList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Generated.Sql\Menu_SaveRow.sql" />
+    <None Include="Generated.Sql\Menu_GetRow.sql" />
+    <None Include="Generated.Sql\Menu_GetRowByGuid.sql" />
+    <None Include="Generated.Sql\Menu_DeleteRow.sql" />
+    <None Include="Generated.Sql\Menu_GetList.sql" />
+    <None Include="Generated.Sql\Menu_RequiredField.sql" />
+    <None Include="Generated.Sql\MenuText_SaveRow.sql" />
+    <None Include="Generated.Sql\MenuText_GetRow.sql" />
+    <None Include="Generated.Sql\MenuText_DeleteRow.sql" />
+    <None Include="Generated.Sql\MenuText_GetList.sql" />
+    <None Include="Generated.Sql\MenuText_RequiredField.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Generated.Classes\" />
+    <Folder Include="Generated.Sql\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
