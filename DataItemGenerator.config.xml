@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <DataBase>
+    DbSiteMapMenu
+  </DataBase>
+  <TargetProjectDirectory>
+    Konfidence.MenuClasses
+  </TargetProjectDirectory>
+  <WebServiceDirectory>
+    BaseClassesKonfidenceWebService
+  </WebServiceDirectory>
+  <SolutionDirectory>
+    C:\Projects\Konfidence\BaseClasses
+  </SolutionDirectory>
+</Config>
