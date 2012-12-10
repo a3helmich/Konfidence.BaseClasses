@@ -55,9 +55,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSiteMapMenuClasses", "Konfidence.MenuClasses\DbSiteMapMenuClasses.csproj", "{411D4B61-9DDF-43F9-AB11-B256DD8287E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMenu", "TestMenu\TestMenu.csproj", "{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 19
+		SccNumberOfProjects = 20
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -115,6 +117,9 @@ Global
 		SccProjectUniqueName18 = Konfidence.MenuClasses\\DbSiteMapMenuClasses.csproj
 		SccProjectName18 = Konfidence.MenuClasses
 		SccLocalPath18 = Konfidence.MenuClasses
+		SccProjectUniqueName19 = TestMenu\\TestMenu.csproj
+		SccProjectName19 = TestMenu
+		SccLocalPath19 = TestMenu
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -307,6 +312,16 @@ Global
 		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|x86.ActiveCfg = Release|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
