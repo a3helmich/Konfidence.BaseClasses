@@ -88,6 +88,7 @@
     <None Include="Generated.Sql\MenuText_GetList.sql" />
     <None Include="Generated.Sql\MenuText_RequiredField.sql" />
     <None Include="Generated.Sql\Menu_GetListByMenuCode.sql" />
+    <None Include="Generated.Sql\MenuText_GetRowByMenuId.sql" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
