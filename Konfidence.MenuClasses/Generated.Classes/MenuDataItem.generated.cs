@@ -49,6 +49,8 @@ namespace Konfidence.DbSiteMapMenuClasses
 			private string _ApplicationId = string.Empty;
 			private string _SysLock = string.Empty;
 			
+			private MenuIdDataItem _MenuId = null;
+			
 			#region generated properties
 			
 			public Guid MenuId
@@ -133,6 +135,19 @@ namespace Konfidence.DbSiteMapMenuClasses
 				set { _SysLock = value; }
 			}
 			#endregion generated properties
+			
+			public MenuIdDataItem MenuId
+			{
+				get
+				{
+					if (!IsAssigned(_MenuId))
+					{
+						_MenuId = MenuIdDataItem.GetByMenuId(MenuId);
+					}
+					
+					return _MenuId;
+				}
+			}
 			
 			public MenuDataItem()
 			{
