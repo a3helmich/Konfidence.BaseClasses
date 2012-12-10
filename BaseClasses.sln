@@ -5,6 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongNameKey", "{5509EDEF-3EA1-4BBA-905A-34C9C89004C0}"
 	ProjectSection(SolutionItems) = preProject
+		DataItemGenerator.config.xml = DataItemGenerator.config.xml
 		Konfidence.nl.snk = Konfidence.nl.snk
 	EndProjectSection
 EndProject
@@ -50,9 +51,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfiden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClasses", "Konfidence.BaseUnitTestClasses\Konfidence.BaseUnitTestClasses.csproj", "{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSiteMapMenuClasses", "Konfidence.MenuClasses\DbSiteMapMenuClasses.csproj", "{411D4B61-9DDF-43F9-AB11-B256DD8287E5}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 18
+		SccNumberOfProjects = 19
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -107,6 +110,9 @@ Global
 		SccProjectUniqueName17 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
 		SccProjectName17 = Konfidence.BaseUnitTestClasses
 		SccLocalPath17 = Konfidence.BaseUnitTestClasses
+		SccProjectUniqueName18 = Konfidence.MenuClasses\\DbSiteMapMenuClasses.csproj
+		SccProjectName18 = Konfidence.MenuClasses
+		SccLocalPath18 = Konfidence.MenuClasses
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
@@ -289,6 +295,18 @@ Global
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|x86.ActiveCfg = Release|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Mixed Platforms = Debug|Mixed Platforms
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Mixed Platforms = Debug|Mixed Platforms
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|x86 = Debug|x86
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|x86 = Debug|x86
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms = Release|Mixed Platforms
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms = Release|Mixed Platforms
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|x86 = Release|x86
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
