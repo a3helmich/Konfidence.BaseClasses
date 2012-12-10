@@ -169,6 +169,10 @@
       <Project>{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}</Project>
       <Name>Konfidence.BaseDataBaseClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Konfidence.MenuClasses\DbSiteMapMenuClasses.csproj">
+      <Project>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</Project>
+      <Name>DbSiteMapMenuClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
