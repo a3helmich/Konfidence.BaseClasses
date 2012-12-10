@@ -71,6 +71,21 @@ namespace Konfidence.DbSiteMapMenuClasses
 				return menuList;
 			}
 			
+			public MenuDataItemList FindListByParentMenuId(Guid parentmenuid)
+			{
+				MenuDataItemList menuList = new MenuDataItemList();
+				
+				foreach (MenuDataItem menu in this)
+				{
+					if (menu.ParentMenuId.Equals(parentmenuid))
+					{
+						menuList.Add(menu);
+					}
+				}
+				
+				return menuList;
+			}
+			
 			public override void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
 			{
 				
