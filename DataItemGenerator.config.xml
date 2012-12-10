@@ -22,6 +22,11 @@
       <Field>MenuCode</Field>
     </Table>
   </GetListBy>
+  <FindBy>
+    <Table Name="Menu">
+      <Field>ParentMenuId</Field>
+    </Table>
+  </FindBy>
   <FindListBy>
     <Table Name="Menu">
       <Field>ParentMenuId</Field>

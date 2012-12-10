@@ -107,19 +107,21 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
                 if (!IsAssigned(_RootNode)) // als eenmaal gebouwd, niet verder naar kijken
                 {
-                    MenuItemTree menuItemTree;
+                    Bl.MenuDataItemList menuItemList;
 
                     // Start with a clean slate
                     Clear();
 
-                    menuItemTree = new MenuItemTree(1);
+                    menuItemList = Bl.MenuDataItemList.GetListByMenuCode(1);
 
-                    rootNode = BuildMenuNode(menuItemTree);
+                    Bl.MenuDataItem rootMenu = GetMenuRootNode(menuItemList);
 
-                    if (menuItemTree.ChildNodes.Count > 0)
+                    rootNode = BuildMenuNode(rootMenu);
+
+                    if (menuItemList.Count > 1)
                     {
                         // Copy the menuItems from the tree to the sitemap
-                        BuildChildNodes(menuItemTree.ChildNodes, rootNode);
+                        BuildChildNodes(menuItemList, rootMenu, rootNode);
                     }
                 }
 
@@ -127,55 +129,72 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        private void BuildChildNodes(List<MenuItem> childNodes, SiteMapNode parentNode)
+        private void BuildChildNodes(Bl.MenuDataItemList childNodes, Bl.MenuDataItem rootMenu, SiteMapNode parentNode)
         {
-            foreach (MenuItem childItem in childNodes)
+            foreach (Bl.MenuDataItem childItem in childNodes)
             {
-                bool showItem = false;
-
-                if (IsLocal)
+                if (childItem.MenuId != childItem.ParentMenuId && rootMenu.MenuId == childItem.ParentMenuId)
                 {
-                    if (childItem.LocalVisible)
+                    bool showItem = false;
+
+                    if (IsLocal)
                     {
-                        showItem = true;
+                        if (childItem.IsLocalVisible)
+                        {
+                            showItem = true;
+                        }
                     }
-                }
-                else
-                {
-                    // show when not logged in
-                    if (childItem.NotLogonVisible && !LoggedOn)
+                    else
                     {
-                        showItem = true;
+                        // show when not logged in
+                        if (childItem.IsNotLogonVisible && !LoggedOn)
+                        {
+                            showItem = true;
+                        }
+
+                        // show when logged in
+                        if (childItem.IsLogonVisible && LoggedOn)
+                        {
+                            showItem = true;
+                        }
+
+                        // only visible for administrators
+                        if (childItem.IsAdministrator && !Administrator)
+                        {
+                            showItem = false;
+                        }
                     }
 
-                    // show when logged in
-                    if (childItem.LogonVisible && LoggedOn)
+                    if (showItem)
                     {
-                        showItem = true;
-                    }
+                        SiteMapNode childNode = BuildMenuNode(childItem);
 
-                    // only visible for administrators
-                    if (childItem.Administrators && !Administrator)
-                    {
-                        showItem = false;
-                    }
-                }
+                        // add childNode with SiteMapNode.AddNode(..) to the 
+                        // ChildNodes collection of the parent
+                        AddNode(childNode, parentNode);
 
-                if (showItem)
-                {
-                    SiteMapNode childNode = BuildMenuNode(childItem);
-
-                    // add childNode with SiteMapNode.AddNode(..) to the 
-                    // ChildNodes collection of the parent
-                    AddNode(childNode, parentNode);
-
-                    if (IsAssigned(childItem.ChildNodes) && childItem.ChildNodes.Count > 0)
-                    {
-                        // Copy the menuItems from the tree to the sitemap
-                        BuildChildNodes(childItem.ChildNodes, childNode);
+                        // CHILD of CHILD nodes ff niet
+                        //if (IsAssigned(childItem.ChildNodes) && childItem.ChildNodes.Count > 0)
+                        //{
+                        //    // Copy the menuItems from the tree to the sitemap
+                        //    BuildChildNodes(childItem.ChildNodes, childNode);
+                        //}
                     }
                 }
             }
+        }
+
+        private Bl.MenuDataItem GetMenuRootNode(Bl.MenuDataItemList menuList)
+        {
+            foreach (Bl.MenuDataItem menuItem in menuList)
+            {
+                if (menuItem.MenuId == menuItem.ParentMenuId)
+                {
+                    return menuItem;
+                }
+            }
+
+            return null;
         }
 
         private SiteMapNode BuildMenuNode(Bl.MenuDataItem menuItem)
