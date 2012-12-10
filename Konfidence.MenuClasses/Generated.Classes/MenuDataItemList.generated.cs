@@ -59,6 +59,19 @@ namespace Konfidence.DbSiteMapMenuClasses
 				return menuList;
 			}
 			
+			public MenuDataItem FindByParentMenuId(Guid parentmenuid)
+			{
+				foreach (MenuDataItem menu in this)
+				{
+					if (menu.ParentMenuId.Equals(parentmenuid))
+					{
+						return menu;
+					}
+				}
+				
+				return null;
+			}
+			
 			public MenuDataItemList FindAll()
 			{
 				MenuDataItemList menuList = new MenuDataItemList();
