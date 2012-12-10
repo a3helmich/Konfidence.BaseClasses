@@ -23,6 +23,7 @@ namespace Konfidence.DbSiteMapMenuClasses
 			private const string MENUTEXT_GETROWBYGUID = "gen_MenuText_GetRowByGuid";
 			private const string MENUTEXT_SAVEROW = "gen_MenuText_SaveRow";
 			private const string MENUTEXT_DELETEROW = "gen_MenuText_DeleteRow";
+			private const string MENUTEXT_GETROWBY_MENUID = "gen_MenuText_GetRowByMenuId";
 			
 			// property storage
 			private Guid _MenuId = Guid.Empty;
@@ -123,6 +124,22 @@ namespace Konfidence.DbSiteMapMenuClasses
 				SetField(SYSLOCK, _SysLock);
 				SetField(DESCRIPTION, _Description);
 				SetField(MENUTEXT, _MenuText);
+			}
+			
+			public static MenuTextDataItem GetByMenuId(Guid menuid)
+			{
+				MenuTextDataItem menutextDataItem = new MenuTextDataItem();
+				
+				menutextDataItem.SetParameter(MENUID, menuid);
+				
+				menutextDataItem.GetItem(MENUTEXT_GETROWBY_MENUID);
+				
+				if (!menutextDataItem.IsNew)
+				{
+					return menutextDataItem;
+				}
+				
+				return null;
 			}
 		}
 	}
