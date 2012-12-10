@@ -2,10 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig", "{2CE91D47-F20E-41FB-8824-D422D5E2AB85}"
+	ProjectSection(SolutionItems) = preProject
+		DataItemGenerator.config.xml = DataItemGenerator.config.xml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongNameKey", "{5509EDEF-3EA1-4BBA-905A-34C9C89004C0}"
 	ProjectSection(SolutionItems) = preProject
-		DataItemGenerator.config.xml = DataItemGenerator.config.xml
 		Konfidence.nl.snk = Konfidence.nl.snk
 	EndProjectSection
 EndProject
@@ -297,16 +299,14 @@ Global
 		{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}.Release|x86.ActiveCfg = Release|Any CPU
 		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Mixed Platforms = Debug|Mixed Platforms
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Mixed Platforms = Debug|Mixed Platforms
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|x86 = Debug|x86
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|x86 = Debug|x86
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms = Release|Mixed Platforms
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms = Release|Mixed Platforms
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|x86 = Release|x86
-		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|x86 = Release|x86
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{411D4B61-9DDF-43F9-AB11-B256DD8287E5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

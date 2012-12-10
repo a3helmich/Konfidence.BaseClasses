@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DbSiteMapMenuClasses</RootNamespace>
-    <AssemblyName>DbSiteMapMenuClasses</AssemblyName>
+    <AssemblyName>Konfidence.MenuClasses</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -88,10 +88,7 @@
     <None Include="Generated.Sql\MenuText_GetList.sql" />
     <None Include="Generated.Sql\MenuText_RequiredField.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Generated.Classes\" />
-    <Folder Include="Generated.Sql\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
