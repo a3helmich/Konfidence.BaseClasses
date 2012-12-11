@@ -81,6 +81,24 @@ namespace Konfidence.BaseUserControlHelpers
             get { return HttpContext.Current.Request.IsLocal; }
         }
 
+        protected void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
+        {
+            _LoginContext.SessionLogon(fullName, email, password, loginPassword, isAdministrator);
+        }
+
+        internal void SetPageName(string pageName)
+        {
+            _PageName = pageName;
+        }
+
+        public virtual void LogOff()
+        {
+            _LoginContext.LogOff();
+        }
+
+        /// <summary>
+        /// returns App_Data path like 'c:\...\app_data' 
+        /// </summary>
         public string DataDirectory
         {
             get
@@ -101,16 +119,11 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
-        {
-            _LoginContext.SessionLogon(fullName, email, password, loginPassword, isAdministrator);
-        }
-
-        internal void SetPageName(string pageName)
-        {
-            _PageName = pageName;
-        }
-
+        /// <summary>
+        /// url to physical
+        /// </summary>
+        /// <param name="url">the url to resolve</param>
+        /// <returns>the path like 'c:\...\foldername\filename' </returns>
         public static string ResolveServerPath(string url)
         {
             if (!IsEmpty(url))
@@ -121,26 +134,47 @@ namespace Konfidence.BaseUserControlHelpers
             return string.Empty;
         }
 
-        public static string ResolveClientPath(string serverPath)
+        /// <summary>
+        /// physical to relative url
+        /// </summary>
+        /// <param name="serverPath">the path like 'c:\...\foldername'</param>
+        /// <returns>the '\url'</returns>
+        public static string ResolveClientUrl(string serverPath)
         {
-            return serverPath.Replace(ResolveServerPath(ApplicationPath), @"~");
+            return serverPath.Replace(ResolveServerPath(ApplicationUrl), @"~");
         }
 
-        public virtual void LogOff()
+        /// <summary>
+        /// returns the application path like 'c:\...\foldername'
+        /// </summary>
+        public static string PhysicalApplicationPath
         {
-            _LoginContext.LogOff();
+            get { return AppDomain.CurrentDomain.BaseDirectory; }
         }
 
-        public static string ApplicationPath
+        /// <summary>
+        /// return the application Url like '/foldername'
+        /// </summary>
+        public static string ApplicationUrl
         {
             get { return VirtualPathUtility.ToAbsolute(@"~").TrimEnd('/'); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageUrl">Url like 'http:\\...\foldername'</param>
+        /// <returns>Url like '\foldername'</returns>
         public string RelativePageUrl(string pageUrl)
         {
             return VirtualPathUtility.ToAppRelative(pageUrl);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageUrl">Url like '\foldername'</param>
+        /// <returns>Url like 'http:\\...\foldername'</returns>
         public string AbsolutePageUrl(string pageUrl)
         {
             return VirtualPathUtility.ToAbsolute(pageUrl);
