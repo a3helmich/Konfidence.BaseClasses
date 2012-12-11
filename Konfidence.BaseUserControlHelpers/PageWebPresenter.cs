@@ -138,10 +138,22 @@ namespace Konfidence.BaseUserControlHelpers
         /// physical to relative url
         /// </summary>
         /// <param name="serverPath">the path like 'c:\...\foldername'</param>
-        /// <returns>the '\url'</returns>
+        /// <returns>the url '\foldername'</returns>
         public static string ResolveClientUrl(string serverPath)
         {
             return serverPath.Replace(ResolveServerPath(ApplicationUrl), @"~");
+        }
+
+        /// <summary>
+        /// return the full path for the client
+        /// </summary>
+        /// <param name="pageUrl">url like \folder\page</param>
+        /// <returns>http:\\...\folder\page</returns>
+        public string ClientUrl(string pageUrl)
+        {
+            string appRoot = "http:\\" + HttpContext.Current.Request.Url.Host;
+
+            return appRoot + AbsolutePageUrl(pageUrl);
         }
 
         /// <summary>
