@@ -153,7 +153,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         /// <summary>
-        /// return the application Url like '/foldername'
+        /// return the application Url like '\applicationFoldername'
         /// </summary>
         public static string ApplicationUrl
         {
@@ -164,7 +164,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// 
         /// </summary>
         /// <param name="pageUrl">Url like 'http:\\...\foldername'</param>
-        /// <returns>Url like '\foldername'</returns>
+        /// <returns>Url like '~\foldername'</returns>
         public string RelativePageUrl(string pageUrl)
         {
             return VirtualPathUtility.ToAppRelative(pageUrl);
@@ -173,8 +173,8 @@ namespace Konfidence.BaseUserControlHelpers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pageUrl">Url like '\foldername'</param>
-        /// <returns>Url like 'http:\\...\foldername'</returns>
+        /// <param name="pageUrl">Url like 'http:\\...\foldername'</param>
+        /// <returns>Url like '\applicationFoldername\foldername'</returns>
         public string AbsolutePageUrl(string pageUrl)
         {
             return VirtualPathUtility.ToAbsolute(pageUrl);
