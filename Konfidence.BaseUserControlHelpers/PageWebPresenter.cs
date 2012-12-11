@@ -151,7 +151,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// <returns>http:\\...\folder\page</returns>
         public string ClientUrl(string pageUrl)
         {
-            string appRoot = "http:\\" + HttpContext.Current.Request.Url.Host;
+            string appRoot = @"http://" + HttpContext.Current.Request.Url.Host;
 
             return appRoot + AbsolutePageUrl(pageUrl);
         }
@@ -185,7 +185,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pageUrl">Url like 'http:\\...\foldername'</param>
+        /// <param name="pageUrl">Url like '~\foldername'</param>
         /// <returns>Url like '\applicationFoldername\foldername'</returns>
         public string AbsolutePageUrl(string pageUrl)
         {
