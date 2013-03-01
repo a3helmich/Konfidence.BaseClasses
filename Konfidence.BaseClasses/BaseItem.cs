@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using JetBrains.Annotations;
+
 namespace Konfidence.Base
 {
 	public class BaseItem
@@ -12,6 +14,7 @@ namespace Konfidence.Base
             get { return _ErrorMessage; }
         }
 
+        [ContractAnnotation("assignedObject:null => false")]
 		public static bool IsAssigned(object assignedObject)
 		{
             if (Debugger.IsAttached || UnitTest)
@@ -31,6 +34,7 @@ namespace Konfidence.Base
 			return true;
 		}
 
+        [ContractAnnotation("assignedString:null => false")]
         public static bool IsNull(string assignedString) // ToDo : back to protected 
         {
             if (assignedString == null)
@@ -41,6 +45,7 @@ namespace Konfidence.Base
             return false;
         }
 
+        [ContractAnnotation("assignedString:null => false")]
         public static bool IsEmpty(string assignedString) // ToDo : back to protected 
         {
             if (string.IsNullOrEmpty(assignedString))
@@ -51,11 +56,13 @@ namespace Konfidence.Base
             return false;
         }
 
+        [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(string assignedGuid)
         {
             try
             {
-                Guid test = new Guid(assignedGuid);
+                // todo : tryparse in framework 4.x
+                var test = new Guid(assignedGuid);
             }
             catch
             {
@@ -102,7 +109,7 @@ namespace Konfidence.Base
 
         public decimal ToDecimal(string decimalString,  decimal defaultValue)
         {
-            decimal returnValue = defaultValue;
+            decimal returnValue;
 
             if (decimalString.IndexOf('.') < 0 && decimalString.IndexOf(',') >= 0)
             {
@@ -113,16 +120,14 @@ namespace Konfidence.Base
             {
                 return returnValue;
             }
-            else
-            {
-                decimalString = decimalString.Replace(',', 'k');
-                decimalString = decimalString.Replace('.', ',');
-                decimalString = decimalString.Replace('k', '.');
 
-                if (decimal.TryParse(decimalString, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.InvariantCulture, out returnValue))
-                {
-                    return returnValue;
-                }
+            decimalString = decimalString.Replace(',', 'k');
+            decimalString = decimalString.Replace('.', ',');
+            decimalString = decimalString.Replace('k', '.');
+
+            if (decimal.TryParse(decimalString, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+            {
+                return returnValue;
             }
 
             return returnValue; // default teruggeven
