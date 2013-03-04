@@ -6,7 +6,7 @@ namespace Konfidence.BaseData
 {
 	internal class HostFactory : BaseItem
 	{
-		private static bool WSEnabled
+		private static bool WsEnabled
 		{
 			get
 			{
@@ -31,7 +31,7 @@ namespace Konfidence.BaseData
 
 		public static BaseHost GetHost(string serviceName, string databaseName)
 		{
-			if (WSEnabled)
+			if (WsEnabled)
 			{
 				if (serviceName.Equals(string.Empty))
 				{
@@ -41,7 +41,7 @@ namespace Konfidence.BaseData
 				return new WSHost(serviceName, databaseName);
 			}
 
-			return new SQLHost(databaseName);
+			return new SqlHost(databaseName);
 		}
 	}
 }

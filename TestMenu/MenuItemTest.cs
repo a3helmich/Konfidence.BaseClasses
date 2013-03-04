@@ -1,9 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Konfidence.BaseUserControlHelpers.DbSiteMapProvider;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Konfidence.DbSiteMapMenuClasses;
 
 namespace MenuTest
@@ -14,28 +9,14 @@ namespace MenuTest
     [TestClass]
     public class MenuItemTest
     {
-        public MenuItemTest()
-        {
-        }
-
-        private TestContext testContextInstance;
-
         #region properties
+
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
+
         #endregion properties
 
         #region Additional test attributes
@@ -63,19 +44,19 @@ namespace MenuTest
         [TestMethod]
         public void GetSingleMenuItem()
         {
-            Bl.MenuDataItem menuItem = new Bl.MenuDataItem(2);
+            new Bl.MenuDataItem(2);
         }
 
         [TestMethod]
         public void GetSingleMenuItemList()
         {
-            Bl.MenuDataItemList menuItemList = Bl.MenuDataItemList.GetListByMenuCode(1);
+            Bl.MenuDataItemList.GetListByMenuCode(1);
         }
 
         [TestMethod]
         public void GetParentMenuItem()
         {
-            Bl.MenuDataItem menuItem = new Bl.MenuDataItem(1);
+            new Bl.MenuDataItem(1);
         }
     }
 }

@@ -6,15 +6,14 @@ using System.Data.SqlClient;
 using Konfidence.BaseData.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Diagnostics;
-using Konfidence.Base;
 
 namespace Konfidence.BaseData
 {
-	internal class SQLHost : BaseHost
+	internal class SqlHost : BaseHost
 	{
-		private IDataReader _DataReader = null;
+		private IDataReader _DataReader;
 
-		public SQLHost(string dataBaseName): base(string.Empty, dataBaseName)
+		public SqlHost(string dataBaseName): base(string.Empty, dataBaseName)
 		{
             // TODO : figure out if the Host is properly configured
             //        and if all resources are avalable
@@ -204,7 +203,7 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		internal override void BuildItemList(IBaseDataItemList BaseDataItemList, string getListStoredProcedure)
+		internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
 		{
 			if (getListStoredProcedure.Equals(string.Empty))
 			{
@@ -215,7 +214,7 @@ namespace Konfidence.BaseData
 
 			using (DbCommand dbCommand = database.GetStoredProcCommand(getListStoredProcedure))
 			{
-				BaseDataItemList.SetParameters(getListStoredProcedure, database, dbCommand);
+				baseDataItemList.SetParameters(getListStoredProcedure, database, dbCommand);
 
 				using (IDataReader dataReader = database.ExecuteReader(dbCommand))
 				{
@@ -223,7 +222,7 @@ namespace Konfidence.BaseData
 
 					while (dataReader.Read())
 					{
-						BaseDataItemList.AddItem(this);
+						baseDataItemList.AddItem(this);
 					}
 
 					_DataReader = null;
@@ -319,7 +318,7 @@ namespace Konfidence.BaseData
 
 		private Database GetDatabase()
 		{
-            Database databaseInstance = null;
+            Database databaseInstance;
 
 			if (DataBaseName.Length > 0)
 			{
@@ -330,31 +329,24 @@ namespace Konfidence.BaseData
                 databaseInstance = DatabaseFactory.CreateDatabase();
 			}
 
-            try
-            {
-                if (Debugger.IsAttached || BaseItem.UnitTest)
-                {
-                    if (databaseInstance.DbProviderFactory is SqlClientFactory)
-                    {
-                        if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
-                        {
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                throw;
-            }
+		    if (Debugger.IsAttached || UnitTest)
+		    {
+		        if (databaseInstance.DbProviderFactory is SqlClientFactory)
+		        {
+		            if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+		            {
+		            }
+		        }
+		    }
 
-            return databaseInstance;
+		    return databaseInstance;
 		}
 
 		private int GetOrdinal(string fieldName)
 		{
 			if (!IsAssigned(_DataReader))
 			{
-				throw new ArgumentNullException("dataRecord");
+				throw new ArgumentNullException("fieldName");
 			}
 
 			return _DataReader.GetOrdinal(fieldName);
@@ -369,16 +361,16 @@ namespace Konfidence.BaseData
             // alle velden die aan de kant van de database gewijzigd worden als parameter toevoegen
             foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
             {
-                DbParameterObject parameterObject = kvp.Value as DbParameterObject;
+                var parameterObject = kvp.Value;
 
                 database.AddParameter(dbCommand, parameterObject.Field, parameterObject.DbType, ParameterDirection.InputOutput,
                                                             parameterObject.Field, DataRowVersion.Proposed, parameterObject.Value);
             }
 
             // alle overige parameters toevoegen
-            List<DbParameterObject> ParameterObjectList = dataItem.SetItemData();
+            List<DbParameterObject> parameterObjectList = dataItem.SetItemData();
 
-            foreach (DbParameterObject parameterObject in ParameterObjectList)
+            foreach (DbParameterObject parameterObject in parameterObjectList)
 			{
                     database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
 			}

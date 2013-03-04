@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.BaseUnitTestClasses
@@ -13,8 +9,8 @@ namespace Konfidence.BaseUnitTestClasses
         {
             if (File.Exists(file1) && File.Exists(file2))
             {
-                FileInfo file1Info = new FileInfo(file1);
-                FileInfo file2Info = new FileInfo(file2);
+                var file1Info = new FileInfo(file1);
+                var file2Info = new FileInfo(file2);
 
                 if (file1Info.Length == file2Info.Length)
                 {
@@ -45,8 +41,8 @@ namespace Konfidence.BaseUnitTestClasses
         {
             if (File.Exists(file1) && File.Exists(file2))
             {
-                FileInfo file1Info = new FileInfo(file1);
-                FileInfo file2Info = new FileInfo(file2);
+                var file1Info = new FileInfo(file1);
+                var file2Info = new FileInfo(file2);
 
                 if (file1Info.Length == file2Info.Length)
                 {

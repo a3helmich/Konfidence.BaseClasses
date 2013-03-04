@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Web;
 using Konfidence.Base;
 using Konfidence.DbSiteMapMenuClasses;
@@ -13,7 +12,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
         private bool _Administrator = false;
         private bool _IsLocal = false;
 
-        private SiteMapNode _RootNode = null;
+        private SiteMapNode _RootNode;
 
         #region properties
 
@@ -73,14 +72,6 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             return RootNode;
         }
 
-        // Initialize is used to initialize the properties and any state that the
-        // AccessProvider holds, but is not used to build the site map.
-        // The site map is built when the BuildSiteMap method is called.
-        public override void Initialize(string name, NameValueCollection attributes) // !!! base niet aanroepen, is by design !!!
-        {
-            base.Initialize(name, attributes);
-        }
-
         ///
         /// SiteMapProvider and StaticSiteMapProvider methods that this derived class must override.
         ///
@@ -107,12 +98,10 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
                 if (!IsAssigned(_RootNode)) // als eenmaal gebouwd, niet verder naar kijken
                 {
-                    Bl.MenuDataItemList menuItemList;
-
                     // Start with a clean slate
                     Clear();
 
-                    menuItemList = Bl.MenuDataItemList.GetListByMenuCode(1);
+                    Bl.MenuDataItemList menuItemList = Bl.MenuDataItemList.GetListByMenuCode(1);
 
                     Bl.MenuDataItem rootMenu = GetMenuRootNode(menuItemList);
 
@@ -129,7 +118,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        private void BuildChildNodes(Bl.MenuDataItemList childNodes, Bl.MenuDataItem rootMenu, SiteMapNode parentNode)
+        private void BuildChildNodes(IEnumerable<Bl.MenuDataItem> childNodes, Bl.MenuDataItem rootMenu, SiteMapNode parentNode)
         {
             foreach (Bl.MenuDataItem childItem in childNodes)
             {
@@ -184,7 +173,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        private Bl.MenuDataItem GetMenuRootNode(Bl.MenuDataItemList menuList)
+        private Bl.MenuDataItem GetMenuRootNode(IEnumerable<Bl.MenuDataItem> menuList)
         {
             foreach (Bl.MenuDataItem menuItem in menuList)
             {
@@ -208,7 +197,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
                 menuMenuText = menuItem.MenuText.MenuText;
             }
 
-            SiteMapNode menuNode = new SiteMapNode(this, menuItem.MenuId.ToString(), menuUrl, menuMenuText);
+            var menuNode = new SiteMapNode(this, menuItem.MenuId.ToString(), menuUrl, menuMenuText);
 
             return menuNode;
         }

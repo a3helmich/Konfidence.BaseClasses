@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Konfidence.Base;
-using System.Web.UI;
-using System.Configuration;
 using System.Web;
 using Konfidence.BaseData;
 using Konfidence.BaseUserControlHelpers.PageSetting;
@@ -18,10 +14,10 @@ namespace Konfidence.BaseUserControlHelpers
         private string _DataDirectory = string.Empty;
         private string _PageName = string.Empty;
 
-        private PageSettingDictionary _PageSettingDictionary = null;
-        private PageSettingXmlDocument _PageSettingDocument = null;
+        private PageSettingDictionary _PageSettingDictionary;
+        private PageSettingXmlDocument _PageSettingDocument;
 
-        private LoginContext _LoginContext = new LoginContext();
+        private readonly LoginContext _LoginContext = new LoginContext();
 
         public string PageName
         {
@@ -249,9 +245,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             if (!File.Exists(PageSettingFileName))
             {
-                BaseXmlDocument pageSettings = new BaseXmlDocument();
+                var pageSettings = new BaseXmlDocument();
 
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
 
                 sb.AppendLine("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
                 sb.AppendLine("<PageSetting>");
@@ -313,12 +309,6 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        private bool _IsLoaded;
-
-        public bool IsLoaded
-        {
-            get { return _IsLoaded; }
-            set { _IsLoaded = value; }
-        }
+        public bool IsLoaded { get; set; }
     }
 }
