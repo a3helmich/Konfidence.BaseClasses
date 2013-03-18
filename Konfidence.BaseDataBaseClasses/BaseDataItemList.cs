@@ -79,6 +79,15 @@ namespace Konfidence.BaseData
             AfterDataLoad();
 		}
 
+        protected void BuildItemList(IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
+        {
+            BaseHost dataHost = GetHost();
+
+            dataHost.BuildItemList(this, relatedDataItemList, childDataItemList, GetListStoredProcedure);
+
+            AfterDataLoad();
+        }
+
 		protected void RebuildItemList()
 		{
 			Clear();
@@ -107,7 +116,7 @@ namespace Konfidence.BaseData
 
 		public BaseDataItem GetDataItem()
 		{
-			T baseDataItem = new T();
+			var baseDataItem = new T();
 
 			Add(baseDataItem);
 
@@ -239,9 +248,8 @@ namespace Konfidence.BaseData
         {
             //BeforeSetSelected();
 
-            int id = 0;
-            Guid guidId = Guid.Empty;
-            bool isEditing = false;
+            Guid guidId;
+            bool isEditing;
 
             bool.TryParse(isEditingText, out isEditing);
 
@@ -251,6 +259,8 @@ namespace Konfidence.BaseData
             }
             else
             {
+                int id;
+
                 if (int.TryParse(idText, out id))
                 {
                     if (Debugger.IsAttached || BaseItem.UnitTest)
@@ -269,7 +279,6 @@ namespace Konfidence.BaseData
         {
             //BeforeSetSelected();
 
-            int id = 0;
             Guid guidId;
 
             if (Guid.TryParse(idText, out guidId))
@@ -278,6 +287,8 @@ namespace Konfidence.BaseData
             }
             else
             {
+                int id;
+
                 if (int.TryParse(idText, out id))
                 {
                     if (Debugger.IsAttached || BaseItem.UnitTest)

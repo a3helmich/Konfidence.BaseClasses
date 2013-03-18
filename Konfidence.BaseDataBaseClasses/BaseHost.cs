@@ -70,6 +70,12 @@ namespace Konfidence.BaseData
         internal virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 		}
+        internal virtual void BuildItemList(IBaseDataItemList parentDataItemList,
+                                                   IBaseDataItemList relatedDataItemList,
+                                                   IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
+        {
+            
+        }
 
 		internal virtual void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
 		{

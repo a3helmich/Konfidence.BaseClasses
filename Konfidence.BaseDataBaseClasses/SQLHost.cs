@@ -203,7 +203,44 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
+        internal override void BuildItemList(IBaseDataItemList parentDataItemList, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
+	    {
+            if (getRelatedStoredProcedure.Equals(string.Empty))
+            {
+                throw (new Exception("GetListStoredProcedure not provided"));
+            }
+
+            Database database = GetDatabase();
+
+            using (DbCommand dbCommand = database.GetStoredProcCommand(getRelatedStoredProcedure))
+            {
+                parentDataItemList.SetParameters(getRelatedStoredProcedure, database, dbCommand);
+
+                using (IDataReader dataReader = database.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        parentDataItemList.AddItem(this);
+                    }
+
+                    dataReader.NextResult();
+
+                    while (dataReader.Read())
+                    {
+                        relatedDataItemList.AddItem(this);
+                    }
+
+                    dataReader.NextResult();
+
+                    while (dataReader.Read())
+                    {
+                        childDataItemList.AddItem(this);
+                    }
+                }
+            }
+        }
+
+	    internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
 		{
 			if (getListStoredProcedure.Equals(string.Empty))
 			{
@@ -218,14 +255,10 @@ namespace Konfidence.BaseData
 
 				using (IDataReader dataReader = database.ExecuteReader(dbCommand))
 				{
-					_DataReader = dataReader;
-
 					while (dataReader.Read())
 					{
 						baseDataItemList.AddItem(this);
 					}
-
-					_DataReader = null;
 				}
 			}
 		}   
