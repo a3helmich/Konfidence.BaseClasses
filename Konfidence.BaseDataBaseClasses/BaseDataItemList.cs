@@ -55,8 +55,7 @@ namespace Konfidence.BaseData
 
 		protected void BuildItemList(string getListStoredProcedure)
 		{
-            // TODO : fix: don't forget the defaultStoredProcedure this way
-            string defaultList = GetListStoredProcedure;
+            var defaultList = GetListStoredProcedure;
 
 			GetListStoredProcedure = getListStoredProcedure;
 
@@ -296,7 +295,7 @@ namespace Konfidence.BaseData
                         throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
                     }
 
-                    SetSelected(id, false);
+                    SetSelected(id);
                 }
             }
 
@@ -309,19 +308,14 @@ namespace Konfidence.BaseData
 
             if (IsAssigned(dataItem))
             {
-                SetSelected(dataItem._Id, false);
+                SetSelected(dataItem._Id);
             }
 
 
             //AfterSetSelected();
         }
 
-        private void SetSelected(int id)
-        {
-            SetSelected(id, false);
-        }
-        
-        private void SetSelected(int id, bool isEditing)
+        private void SetSelected(int id, bool isEditing = false)
         {
             SetSelected(id, Guid.Empty, isEditing);
         }
@@ -333,7 +327,7 @@ namespace Konfidence.BaseData
 
         private void SetSelected(int id, Guid guidId, bool isEditing)
         {
-            if (this.Count > 0)
+            if (Count > 0)
             {
                 foreach (T dataItem in this)
                 {
@@ -350,11 +344,11 @@ namespace Konfidence.BaseData
 
                     if (id > 0)
                     {
-                        dataItem = this.FindById(id);
+                        dataItem = FindById(id);
                     }
                     else
                     {
-                        dataItem = this.FindById(guidId);
+                        dataItem = FindById(guidId);
                     }
 
                     if (IsAssigned(dataItem))
@@ -463,7 +457,7 @@ namespace Konfidence.BaseData
             {
                 dataItem.Save();
 
-                this.SetSelected(dataItem._Id);
+                SetSelected(dataItem._Id);
 
                 dataItem.IsEditing = false; // nieuw
             }
@@ -502,13 +496,13 @@ namespace Konfidence.BaseData
             {
                 dataItem.Delete();
 
-                int selectedIndex = this.IndexOf(dataItem);
+                var selectedIndex = IndexOf(dataItem);
 
-                this.Remove(dataItem);
+                Remove(dataItem);
 
-                if (this.Count > 0)
+                if (Count > 0)
                 {
-                    if (selectedIndex < this.Count)
+                    if (selectedIndex < Count)
                     {
                         this[selectedIndex].IsSelected = true;
                     }
@@ -523,20 +517,17 @@ namespace Konfidence.BaseData
 
         public List<List<DbParameterObject>> Convert2ListOfParameterObjectList()
 		{
-			List<List<DbParameterObject>> baseDataItemListList = new List<List<DbParameterObject>>();
+			var baseDataItemListList = new List<List<DbParameterObject>>();
 
-			foreach (BaseDataItem baseDataItem in this)
+			foreach (var baseDataItem in this)
 			{
-				List<DbParameterObject> properties = GetProperties(baseDataItem);
+				var properties = GetProperties(baseDataItem);
 
 				if (baseDataItem.AutoIdField.Length > 0)
 				{
-					DbParameterObject property = new DbParameterObject();
+					var property = new DbParameterObject {Field = "BaseDataItem_KeyValue", Value = baseDataItem._Id};
 
-					property.Field = "BaseDataItem_KeyValue";
-					property.Value = baseDataItem._Id;
-
-					properties.Add(property);
+				    properties.Add(property);
 				}
 
 				baseDataItemListList.Add(properties);
@@ -547,7 +538,7 @@ namespace Konfidence.BaseData
 
 		private static List<DbParameterObject> GetProperties(BaseDataItem baseDataItem)
 		{
-			List<DbParameterObject> properties = new List<DbParameterObject>();
+			var properties = new List<DbParameterObject>();
 
 			baseDataItem.GetProperties(properties);
 
@@ -570,11 +561,9 @@ namespace Konfidence.BaseData
 
 		public void AddItem(BaseHost dataHost)
 		{
-			T baseDataItem = new T();
+			var baseDataItem = new T {_DataHost = dataHost};
 
-			baseDataItem._DataHost = dataHost;
-
-			if (IsAssigned(baseDataItem))
+		    if (IsAssigned(baseDataItem))
 			{
 				baseDataItem.GetKey();
 
