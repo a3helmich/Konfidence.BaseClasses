@@ -15,7 +15,7 @@ namespace Konfidence.Base
 #if DEBUG
             _IsDebug = true;
 #else
-            _IsDebug = False;
+            _IsDebug = false;
 #endif
         }
     }
