@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Konfidence.Base;
+﻿using Konfidence.Base;
 using System.Web;
 using Konfidence.BaseData;
 
@@ -12,8 +8,8 @@ namespace Konfidence.BaseUserControlHelpers.Login
     // - in CurrentInternalAccount zit het accountobject dat in de applicatie is aangemaakt en gebruikt wordt om in te loggen
     class LoginContext : BaseItem
     {
-        private InternalSessionAccount _AccountObject = null;
-        private BaseDataItem _CurrentAccount = null;
+        private InternalSessionAccount _AccountObject;
+        private BaseDataItem _CurrentAccount;
 
         private InternalSessionAccount SessionAccount
         {
@@ -108,13 +104,13 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                string ErrorText = HttpContext.Current.Session[InternalSessionAccount.LOG_ON_ERROR] as string;
+                var errorText = HttpContext.Current.Session[InternalSessionAccount.LOG_ON_ERROR] as string;
 
-                if (!IsEmpty(ErrorText))
+                if (!IsEmpty(errorText))
                 {
                     HttpContext.Current.Session.Remove(InternalSessionAccount.LOG_ON_ERROR);
 
-                    return ErrorText;
+                    return errorText;
                 }
 
                 return string.Empty;
@@ -132,6 +128,12 @@ namespace Konfidence.BaseUserControlHelpers.Login
 
                 return string.Empty;
             }
+        }
+
+        public LoginContext()
+        {
+            _CurrentAccount = null;
+            _AccountObject = null;
         }
 
         internal void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
