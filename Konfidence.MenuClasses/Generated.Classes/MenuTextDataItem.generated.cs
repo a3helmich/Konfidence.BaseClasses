@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using Konfidence.BaseData;
 
-namespace Konfidence.DbSiteMapMenuClasses
+namespace DbSiteMapMenuClasses.Generated.Classes
 {
 	public partial class Bl
 	{
@@ -126,9 +126,9 @@ namespace Konfidence.DbSiteMapMenuClasses
 				SetField(MENUTEXT, _MenuText);
 			}
 			
-			public static MenuTextDataItem GetByMenuId(Guid menuid)
+			public static DbSiteMapMenuClasses.Bl.MenuTextDataItem GetByMenuId(Guid menuid)
 			{
-				MenuTextDataItem menutextDataItem = new MenuTextDataItem();
+				DbSiteMapMenuClasses.Bl.MenuTextDataItem menutextDataItem = new DbSiteMapMenuClasses.Bl.MenuTextDataItem();
 				
 				menutextDataItem.SetParameter(MENUID, menuid);
 				

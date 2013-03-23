@@ -4,7 +4,7 @@ using System.Data.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.BaseData;
 
-namespace Konfidence.DbSiteMapMenuClasses
+namespace DbSiteMapMenuClasses.Generated.Classes
 {
 	public partial class Bl
 	{

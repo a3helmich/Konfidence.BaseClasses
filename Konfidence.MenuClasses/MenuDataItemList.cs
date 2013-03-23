@@ -1,12 +1,10 @@
-using System;
-using System.Data;
 using Konfidence.BaseData;
 
-namespace Konfidence.DbSiteMapMenuClasses
+namespace DbSiteMapMenuClasses
 {
 	public partial class Bl
 	{
-		public partial class MenuDataItemList : BaseDataItemList<MenuDataItem>
+		public partial class MenuDataItemList : BaseDataItemList<Generated.Classes.Bl.MenuDataItem>
 		{
 		}
 	}

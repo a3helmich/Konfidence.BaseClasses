@@ -1,10 +1,8 @@
 using System;
 using System.Data;
-using System.Data.Common;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.BaseData;
 
-namespace Konfidence.DbSiteMapMenuClasses
+namespace DbSiteMapMenuClasses.Generated.Classes
 {
 	public partial class Bl
 	{
@@ -49,7 +47,7 @@ namespace Konfidence.DbSiteMapMenuClasses
 			private string _ApplicationId = string.Empty;
 			private string _SysLock = string.Empty;
 			
-			private MenuTextDataItem _MenuText = null;
+			private DbSiteMapMenuClasses.Bl.MenuTextDataItem _MenuText = null;
 			
 			#region generated properties
 			
@@ -136,13 +134,13 @@ namespace Konfidence.DbSiteMapMenuClasses
 			}
 			#endregion generated properties
 			
-			public MenuTextDataItem MenuText
+			public DbSiteMapMenuClasses.Bl.MenuTextDataItem MenuText
 			{
 				get
 				{
 					if (!IsAssigned(_MenuText))
 					{
-						_MenuText = MenuTextDataItem.GetByMenuId(MenuId);
+						_MenuText = Bl.MenuTextDataItem.GetByMenuId(MenuId);
 					}
 					
 					return _MenuText;

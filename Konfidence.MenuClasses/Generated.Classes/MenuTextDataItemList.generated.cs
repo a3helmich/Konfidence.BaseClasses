@@ -1,12 +1,10 @@
-using System;
-using System.Data;
 using Konfidence.BaseData;
 
-namespace Konfidence.DbSiteMapMenuClasses
+namespace DbSiteMapMenuClasses.Generated.Classes
 {
 	public partial class Bl
 	{
-		public partial class MenuTextDataItemList : BaseDataItemList<MenuTextDataItem>
+		public partial class MenuTextDataItemList : BaseDataItemList<DbSiteMapMenuClasses.Bl.MenuTextDataItem>
 		{
 			// partial methods
 			partial void BeforeInitializeDataItemList();
@@ -47,7 +45,7 @@ namespace Konfidence.DbSiteMapMenuClasses
 			{
 				MenuTextDataItemList menutextList = new MenuTextDataItemList();
 				
-				foreach (MenuTextDataItem menutext in this)
+				foreach (DbSiteMapMenuClasses.Bl.MenuTextDataItem menutext in this)
 				{
 					menutextList.Add(menutext);
 				}
