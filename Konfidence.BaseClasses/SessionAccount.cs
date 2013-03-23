@@ -3,20 +3,19 @@ namespace Konfidence.Base
 	public class InternalSessionAccount
 	{
         // application 
-        public const string FromUrl = "FromUrlPage";
-        public const string AdministratorRequired = "AdministratorRequired";
-        public const string LogOnError = "LogOnError";
+        public const string FROM_URL = "FromUrlPage";
+        public const string ADMINISTRATOR_REQUIRED = "AdministratorRequired";
+        public const string LOG_ON_ERROR = "LogOnError";
         //  account
-        public const string AccountObject = "AccountObject";
-        public const string CurrentAccount = "CurrentAccountDataItem";
+        public const string ACCOUNT_OBJECT = "AccountObject";
+        public const string CURRENT_ACCOUNT = "CurrentAccountDataItem";
         // menu
-        public const string UrlMenuPage = "UrlMenuPage";
+        public const string URL_MENU_PAGE = "UrlMenuPage";
 
 		private string _FullName = string.Empty;
 		private string _Email = string.Empty;
-		private bool _Administrator = false;
 
-		#region properties
+	    #region properties
 		public string FullName
 		{
 			get
@@ -41,17 +40,13 @@ namespace Konfidence.Base
 			}
 		}
 
-		public bool IsAdministrator
-		{
-			get
-			{
-				return _Administrator;
-			}
-			set
-			{
-				_Administrator = value;
-			}
-		}
-		#endregion
-	}
+	    public bool IsAdministrator { get; set; }
+
+	    #endregion
+	
+        public InternalSessionAccount()
+        {
+            IsAdministrator = false;
+        }
+    }
 }

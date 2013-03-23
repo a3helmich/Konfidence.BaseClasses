@@ -21,7 +21,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             {
                 if (IsAssigned(HttpContext.Current))
                 {
-                    return HttpContext.Current.Session[InternalSessionAccount.AccountObject] as InternalSessionAccount;
+                    return HttpContext.Current.Session[InternalSessionAccount.ACCOUNT_OBJECT] as InternalSessionAccount;
                 }
 
                 return _AccountObject;
@@ -34,7 +34,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             {
                 if (IsAssigned(HttpContext.Current))
                 {
-                    return HttpContext.Current.Session[InternalSessionAccount.CurrentAccount] as BaseDataItem;
+                    return HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT] as BaseDataItem;
                 }
 
                 return _CurrentAccount;
@@ -43,7 +43,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             {
                 if (IsAssigned(HttpContext.Current))
                 {
-                    HttpContext.Current.Session[InternalSessionAccount.CurrentAccount] = value;
+                    HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT] = value;
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             {
                 if (IsAssigned(SessionAccount))
                 {
-                    return IsAssigned(HttpContext.Current.Session[InternalSessionAccount.AdministratorRequired]);
+                    return IsAssigned(HttpContext.Current.Session[InternalSessionAccount.ADMINISTRATOR_REQUIRED]);
                 }
 
                 return false;
@@ -108,11 +108,11 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                string ErrorText = HttpContext.Current.Session[InternalSessionAccount.LogOnError] as string;
+                string ErrorText = HttpContext.Current.Session[InternalSessionAccount.LOG_ON_ERROR] as string;
 
                 if (!IsEmpty(ErrorText))
                 {
-                    HttpContext.Current.Session.Remove(InternalSessionAccount.LogOnError);
+                    HttpContext.Current.Session.Remove(InternalSessionAccount.LOG_ON_ERROR);
 
                     return ErrorText;
                 }
@@ -140,7 +140,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             {
                 if (password.Equals(loginPassword))
                 {
-                    HttpContext.Current.Session[InternalSessionAccount.AccountObject] = new InternalSessionAccount();
+                    HttpContext.Current.Session[InternalSessionAccount.ACCOUNT_OBJECT] = new InternalSessionAccount();
 
                     SessionAccount.FullName = fullName;
                     SessionAccount.Email = email;
@@ -158,14 +158,14 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             if (IsAssigned(HttpContext.Current))
             {
-                if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.AccountObject]))
+                if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.ACCOUNT_OBJECT]))
                 {
-                    HttpContext.Current.Session.Remove(InternalSessionAccount.AccountObject);
+                    HttpContext.Current.Session.Remove(InternalSessionAccount.ACCOUNT_OBJECT);
                 }
 
-                if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.CurrentAccount]))
+                if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT]))
                 {
-                    HttpContext.Current.Session.Remove(InternalSessionAccount.CurrentAccount);
+                    HttpContext.Current.Session.Remove(InternalSessionAccount.CURRENT_ACCOUNT);
                 }
             }
             else

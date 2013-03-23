@@ -195,8 +195,8 @@ namespace Konfidence.BaseUserControlHelpers
 
         public string FromUrl
         {
-            get { return HttpContext.Current.Session[InternalSessionAccount.FromUrl] as string; }
-            set { HttpContext.Current.Session[InternalSessionAccount.FromUrl] = value; }
+            get { return HttpContext.Current.Session[InternalSessionAccount.FROM_URL] as string; }
+            set { HttpContext.Current.Session[InternalSessionAccount.FROM_URL] = value; }
         }
 
         public string Email

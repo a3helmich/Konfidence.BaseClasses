@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace Konfidence.Base
 {
@@ -18,7 +15,10 @@ namespace Konfidence.Base
                 newNode.InnerText = value;
             }
 
-            root.AppendChild(newNode);
+            if (IsAssigned(root))
+            {
+                root.AppendChild(newNode);
+            }
 
             return newNode;
         }
@@ -34,9 +34,13 @@ namespace Konfidence.Base
         {
             XmlNode root = xmlDocument.DocumentElement;
 
-            XmlNode subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
+            if (IsAssigned(root))
+            {
+                XmlNode subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
 
-            subDocumentNode.InnerXml = root.InnerXml;
+                subDocumentNode.InnerXml = root.InnerXml;
+            }
+
         }
     }
 }

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 using System.IO;
 
 namespace Konfidence.Base
 {
     public class BaseXmlDocument : XmlDocument
     {
-        private XmlElement _Root = null;
+        private XmlElement _Root;
 
         private string _FullFileName = string.Empty;
         private string _PathName = string.Empty;
-        private string _RootNameSpaceURI;
+        private string _RootNameSpaceUri;
         private XmlNamespaceManager _XmlNamespaceManager;
 
         #region read only properties
@@ -33,7 +30,7 @@ namespace Konfidence.Base
 
         public string RootNameSpaceURI
         {
-            get { return _RootNameSpaceURI; }
+            get { return _RootNameSpaceUri; }
         }
 
         public XmlNamespaceManager XmlNamespaceManager
@@ -57,11 +54,11 @@ namespace Konfidence.Base
         {
             _Root = DocumentElement;
 
-            _RootNameSpaceURI = Root.NamespaceURI;
+            _RootNameSpaceUri = Root.NamespaceURI;
 
             // create a shortcut namespace reference
             _XmlNamespaceManager = new XmlNamespaceManager(NameTable);
-            _XmlNamespaceManager.AddNamespace("p", _RootNameSpaceURI);
+            _XmlNamespaceManager.AddNamespace("p", _RootNameSpaceUri);
         }
 
         public override void Load(Stream inStream)
@@ -105,9 +102,16 @@ namespace Konfidence.Base
 
             if (IsAssigned(valueNode))
             {
-                if (IsAssigned(valueNode.Attributes[attributeName]))
+                var attributes = valueNode.Attributes;
+
+                if (attributes != null)
                 {
-                    value = valueNode.Attributes[attributeName].Value;
+                    var attribute = attributes[attributeName];
+
+                    if (IsAssigned(attribute))
+                    {
+                        value = attribute.Value;
+                    }
                 }
             }
         }

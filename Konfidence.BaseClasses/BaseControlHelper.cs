@@ -3,17 +3,19 @@ namespace Konfidence.Base
 {
     public class BaseControlHelper: BaseItem
     {
-        private bool _isDebug = false;
+        private readonly bool _IsDebug;
 
         public bool IsDebug
         {
-            get { return _isDebug; }
+            get { return _IsDebug; }
         }
 
         public BaseControlHelper()
         {
 #if DEBUG
-            _isDebug = true;
+            _IsDebug = true;
+#else
+            _IsDebug = False;
 #endif
         }
     }
