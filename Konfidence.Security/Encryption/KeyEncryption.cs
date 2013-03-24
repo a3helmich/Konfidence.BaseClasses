@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
-using System.Text;
 using Konfidence.Base;
 using System.Security.AccessControl;
 
@@ -12,12 +10,12 @@ namespace Konfidence.Security.Encryption
     {
         private RSACryptoServiceProvider _RsaProvider;
 
-        private bool _Disposed = false;
+        private bool _Disposed;
 
-        private RSACryptoServiceProvider _TempRsaProvider = null;
-        private int _TempKeySize = 0;
+        private RSACryptoServiceProvider _TempRsaProvider;
+        private int _TempKeySize;
 
-        private string _ContainerName;
+        private readonly string _ContainerName;
 
         // _MaxBytes schijnt uit te vinden te zijn, maar is een 
         // beetje vreemd heb onderstussen het een en ander 
@@ -25,8 +23,8 @@ namespace Konfidence.Security.Encryption
         // niet waar te zijn heb voorlopig gekozen voor halverwege 
         // keysize, dit lijkt te voldoen, moet verder uitgezocht
         //NB nov 2012: zal wel iets te maken hebben met de encoding van de string (onebyte/twobyte)
-        private int _MaxBytesServer = 0; // default voor de serverside
-        private int _MaxBytesClient = 0; // default voor de serverside
+        private int _MaxBytesServer; // default voor de serverside
+        private int _MaxBytesClient; // default voor de serverside
 
         #region properties
         public RSACryptoServiceProvider RsaProvider
@@ -67,6 +65,11 @@ namespace Konfidence.Security.Encryption
         }
         #endregion properties
 
+        public KeyEncryption()
+        {
+            _Disposed = false;
+        }
+
         protected RSACryptoServiceProvider TempKeyContainer
         {
             get
@@ -102,14 +105,14 @@ namespace Konfidence.Security.Encryption
             // at first i wanted to remove redundant keys etc. but keeping them in 
             // store is faster for non-key generating actions. like here, but also for encoding and decoding
             // Rsa.PersistKeyInCsp = false;  // don't want to keep this in storage
-            RSACryptoServiceProvider keyContainer = new RSACryptoServiceProvider();
+            var keyContainer = new RSACryptoServiceProvider();
 
             KeySizes legalKeySize = keyContainer.LegalKeySizes[0];
 
             switch (Environment.OSVersion.Platform)
             {
-                case System.PlatformID.Win32S:
-                case System.PlatformID.Win32Windows:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
                     {
                         _MaxBytesServer = legalKeySize.MinSize / 8;
                         break;
@@ -164,7 +167,7 @@ namespace Konfidence.Security.Encryption
 
         public static int MaxKeySize()
         {
-            using (KeyEncryption keyEncryption = new KeyEncryption(string.Empty))
+            using (var keyEncryption = new KeyEncryption(string.Empty))
             {
                 return keyEncryption.KeySize;
             }
@@ -172,15 +175,15 @@ namespace Konfidence.Security.Encryption
 
         private CspParameters GetCspParameters(string containerName)
         {
-            CspParameters cp = new CspParameters();
+            var cp = new CspParameters();
 
-            string user = "Everyone"; //  @"NT AUTHORITY\NETWORK SERVICE"; //network service
+            const string user = "Everyone"; //  @"NT AUTHORITY\NETWORK SERVICE"; //network service
 
             //Environment.
 
-            CryptoKeyAccessRule rule = new CryptoKeyAccessRule(user, CryptoKeyRights.Delete | CryptoKeyRights.FullControl | CryptoKeyRights.TakeOwnership | CryptoKeyRights.ChangePermissions, AccessControlType.Allow);
+            var rule = new CryptoKeyAccessRule(user, CryptoKeyRights.Delete | CryptoKeyRights.FullControl | CryptoKeyRights.TakeOwnership | CryptoKeyRights.ChangePermissions, AccessControlType.Allow);
 
-            CryptoKeySecurity cryptoKeySecurity = new CryptoKeySecurity();
+            var cryptoKeySecurity = new CryptoKeySecurity();
 
             cryptoKeySecurity.SetAccessRule(rule);
 
@@ -302,7 +305,7 @@ namespace Konfidence.Security.Encryption
         protected virtual void Dispose(bool disposing)
         {
 
-            if (!this._Disposed)
+            if (!_Disposed)
             {
                 if (_RsaProvider != null)
                 {

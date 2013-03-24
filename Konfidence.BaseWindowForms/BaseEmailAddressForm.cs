@@ -1,10 +1,3 @@
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
-
-
 // Enter your email address and you will recieve your settings file shortly.
 
 namespace Konfidence.BaseWindowForms
@@ -14,15 +7,15 @@ namespace Konfidence.BaseWindowForms
     /// </summary>
     public class BaseEmailAddressForm : System.Windows.Forms.Form
     {
-        private System.Windows.Forms.TextBox EmailTextBox;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.Label EmailLabel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox _EmailTextBox;
+        private System.Windows.Forms.Button _CancelButton;
+        private System.Windows.Forms.Button _ButtonOk;
+        private System.Windows.Forms.Label _EmailLabel;
+        private System.Windows.Forms.Label _LabelDescription;
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.Container components = null;
+        private readonly System.ComponentModel.Container _Components = null;
 
         public BaseEmailAddressForm()
         {
@@ -43,9 +36,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (components != null)
+                if (_Components != null)
                 {
-                    components.Dispose();
+                    _Components.Dispose();
                 }
             }
             base.Dispose(disposing);
@@ -59,49 +52,49 @@ namespace Konfidence.BaseWindowForms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseEmailAddressForm));
-            this.EmailTextBox = new System.Windows.Forms.TextBox();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.EmailLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this._EmailTextBox = new System.Windows.Forms.TextBox();
+            this._CancelButton = new System.Windows.Forms.Button();
+            this._ButtonOk = new System.Windows.Forms.Button();
+            this._EmailLabel = new System.Windows.Forms.Label();
+            this._LabelDescription = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // EmailTextBox
+            // _EmailTextBox
             // 
-            resources.ApplyResources(this.EmailTextBox, "EmailTextBox");
-            this.EmailTextBox.Name = "EmailTextBox";
+            resources.ApplyResources(this._EmailTextBox, "_EmailTextBox");
+            this._EmailTextBox.Name = "_EmailTextBox";
             // 
-            // cancelButton
+            // _CancelButton
             // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.cancelButton, "cancelButton");
-            this.cancelButton.Name = "cancelButton";
+            this._CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this._CancelButton, "_CancelButton");
+            this._CancelButton.Name = "_CancelButton";
             // 
-            // buttonOK
+            // _ButtonOk
             // 
-            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            resources.ApplyResources(this.buttonOK, "buttonOK");
-            this.buttonOK.Name = "buttonOK";
+            this._ButtonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this._ButtonOk, "_ButtonOk");
+            this._ButtonOk.Name = "_ButtonOk";
             // 
-            // EmailLabel
+            // _EmailLabel
             // 
-            resources.ApplyResources(this.EmailLabel, "EmailLabel");
-            this.EmailLabel.Name = "EmailLabel";
+            resources.ApplyResources(this._EmailLabel, "_EmailLabel");
+            this._EmailLabel.Name = "_EmailLabel";
             // 
-            // label1
+            // labelDescription
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this._LabelDescription, "_LabelDescription");
+            this._LabelDescription.Name = "_LabelDescription";
             // 
             // BaseEmailAddressForm
             // 
-            this.AcceptButton = this.buttonOK;
+            this.AcceptButton = this._ButtonOk;
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.EmailTextBox);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.EmailLabel);
+            this.Controls.Add(this._LabelDescription);
+            this.Controls.Add(this._EmailTextBox);
+            this.Controls.Add(this._CancelButton);
+            this.Controls.Add(this._ButtonOk);
+            this.Controls.Add(this._EmailLabel);
             this.Name = "BaseEmailAddressForm";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -115,7 +108,7 @@ namespace Konfidence.BaseWindowForms
         {
             get
             {
-                return EmailTextBox.Text;
+                return _EmailTextBox.Text;
             }
         }
     }

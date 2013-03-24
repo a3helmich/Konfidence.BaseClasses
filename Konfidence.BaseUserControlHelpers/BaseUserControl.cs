@@ -1,5 +1,6 @@
 using System;
 using System.Web.UI;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using System.IO;
 using System.Globalization;
@@ -8,11 +9,9 @@ namespace Konfidence.BaseUserControlHelpers
 {
 	public abstract class BaseUserControl<T>: UserControl where T : BaseWebPresenter, new()
 	{
-		private SessionHelper _SessionHelper;
+	    private BasePageHelper _BasePageHelper; // TODO : --> zie BasePage
 
-        private BasePageHelper _BasePageHelper = null; // TODO : --> zie BasePage
-
-        private T _Presenter = null;
+        private T _Presenter;
 
         protected abstract void RestoreViewState();
         protected abstract void FormToPresenter();
@@ -35,7 +34,7 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			get
 			{
-                BasePage<T> refreshPage = Page as BasePage<T>;
+                var refreshPage = Page as BasePage<T>;
 
 				if (IsAssigned(refreshPage))
 				{
@@ -152,7 +151,10 @@ namespace Konfidence.BaseUserControlHelpers
                 return string.Empty;
             }
         }
-        #endregion readonly session properties
+
+	    public SessionHelper SessionHelper { get; set; }
+
+	    #endregion readonly session properties
 
         private void BuildPresenter()
         {
@@ -162,12 +164,12 @@ namespace Konfidence.BaseUserControlHelpers
                 {
                     string urlReferer = string.Empty;
 
-                    if (IsAssigned(this.Request.UrlReferrer))
+                    if (IsAssigned(Request.UrlReferrer))
                     {
-                        urlReferer = this.Request.UrlReferrer.ToString();
+                        urlReferer = Request.UrlReferrer.ToString();
                     }
 
-                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString(), urlReferer);
+                    _BasePageHelper = new BasePageHelper(Request.Url.ToString(), urlReferer);
                 }
                 catch (NullReferenceException)
                 {
@@ -177,9 +179,7 @@ namespace Konfidence.BaseUserControlHelpers
 
             if (!IsAssigned(_Presenter))
             {
-                _Presenter = new T();
-
-                _Presenter.IsLoaded = false;
+                _Presenter = new T {IsLoaded = false};
             }
 
             if (IsEmpty(_Presenter.PageName))
@@ -217,7 +217,8 @@ namespace Konfidence.BaseUserControlHelpers
             return BaseItem.IsEmpty(assignedString);
         }
 
-		protected static bool IsAssigned(object assignedObject)
+        [ContractAnnotation("assignedObject:null => false")]
+        protected static bool IsAssigned(object assignedObject)
 		{
 			return BaseItem.IsAssigned(assignedObject);
 		}
@@ -239,32 +240,32 @@ namespace Konfidence.BaseUserControlHelpers
 
 		protected override void OnInit(EventArgs e)
 		{
-			_SessionHelper = new SessionHelper(Context, UniqueID);
+			SessionHelper = new SessionHelper(Context, UniqueID);
 
 			base.OnInit(e);
 		}
 
-        protected void SwitchLanguagePanel(Control languageNL, Control languageDE, Control languageUK)
+        protected void SwitchLanguagePanel(Control languageNl, Control languageDe, Control languageUk)
         {
-            if (languageDE != null && languageNL != null && languageUK != null)
+            if (languageDe != null && languageNl != null && languageUk != null)
             {
-                languageNL.Visible = true;
-                languageDE.Visible = true;
-                languageUK.Visible = true;
+                languageNl.Visible = true;
+                languageDe.Visible = true;
+                languageUk.Visible = true;
 
                 switch (CurrentLanguage)
                 {
                     case "nl":
-                        languageDE.Visible = false;
-                        languageUK.Visible = false;
+                        languageDe.Visible = false;
+                        languageUk.Visible = false;
                         break;
                     case "de":
-                        languageNL.Visible = false;
-                        languageUK.Visible = false;
+                        languageNl.Visible = false;
+                        languageUk.Visible = false;
                         break;
                     case "uk":
-                        languageDE.Visible = false;
-                        languageNL.Visible = false;
+                        languageDe.Visible = false;
+                        languageNl.Visible = false;
                         break;
                 }
             }
@@ -273,15 +274,15 @@ namespace Konfidence.BaseUserControlHelpers
         protected string LastUpdateDate()
         {
             // TODO: lastupdate moet afhankelijk zijn van de content!!!
-            string FilePath = Page.Request.PhysicalPath;
-            string OldFilePath = Page.Request.FilePath.Replace("/", @"\");
-            string ExeFilePath = Page.Request.CurrentExecutionFilePath.Replace("/", @"\");
+            string filePath = Page.Request.PhysicalPath;
+            string oldFilePath = Page.Request.FilePath.Replace("/", @"\");
+            string exeFilePath = Page.Request.CurrentExecutionFilePath.Replace("/", @"\");
 
-            FilePath = FilePath.Replace(OldFilePath, ExeFilePath);
+            filePath = filePath.Replace(oldFilePath, exeFilePath);
 
-            if (File.Exists(FilePath))
+            if (File.Exists(filePath))
             {
-                return File.GetLastWriteTime(FilePath).ToString("dd-MM-yyyy", CultureInfo.InvariantCulture) + "/" + DateTime.Now.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
+                return File.GetLastWriteTime(filePath).ToString("dd-MM-yyyy", CultureInfo.InvariantCulture) + "/" + DateTime.Now.ToString("dd-MM-yyyy", CultureInfo.InvariantCulture);
             }
 
             return "file not found";

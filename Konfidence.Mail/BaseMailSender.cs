@@ -1,22 +1,17 @@
 using System.Net;
 using System.Net.Mail;
-using System.Text.RegularExpressions;
 using Konfidence.Base;
 
 namespace Konfidence.Mail
 {
 	public class BaseMailSender : BaseItem
 	{
-        private string _FromAddress = string.Empty;
-        private string _MailHost = string.Empty;
-        private string _MailUser = string.Empty;
-        private string _MailPassword = string.Empty;
+        private readonly string _FromAddress = string.Empty;
+        private readonly string _MailHost = string.Empty;
+        private readonly string _MailUser = string.Empty;
+        private readonly string _MailPassword = string.Empty;
 
-        private BaseMailSender()
-        {
-        }
-
-        public BaseMailSender(string fromAddress, string mailHost, string mailUser, string mailPassword)
+	    public BaseMailSender(string fromAddress, string mailHost, string mailUser, string mailPassword)
         {
             _FromAddress = fromAddress;
             _MailHost = mailHost;
@@ -31,14 +26,11 @@ namespace Konfidence.Mail
 		
 		public bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml, string fileName)
 		{
-			SmtpClient smtpClient;
-			MailMessage mailMessage;
+		    var mailFrom = new MailAddress(_FromAddress);
+			var mailTo = new MailAddress(toEmailAddress);
 
-			MailAddress mailFrom = new MailAddress(_FromAddress);
-			MailAddress mailTo = new MailAddress(toEmailAddress);
-
-			mailMessage = new MailMessage(mailFrom, mailTo);
-			smtpClient = new SmtpClient(_MailHost);
+			var mailMessage = new MailMessage(mailFrom, mailTo);
+			var smtpClient = new SmtpClient(_MailHost);
 
 			mailMessage.Body = mailBody;
 			mailMessage.IsBodyHtml = bodyIsHtml;
@@ -47,12 +39,12 @@ namespace Konfidence.Mail
 
             if (!IsEmpty(fileName))
             {
-                Attachment attachment = new Attachment(fileName);
+                var attachment = new Attachment(fileName);
 
                 mailMessage.Attachments.Add(attachment);
             }
 
-			NetworkCredential basicAuthenticationInfo = new NetworkCredential(_MailUser, _MailPassword);
+			var basicAuthenticationInfo = new NetworkCredential(_MailUser, _MailPassword);
 
 			smtpClient.UseDefaultCredentials = false;
 			smtpClient.Credentials = basicAuthenticationInfo;
@@ -66,11 +58,6 @@ namespace Konfidence.Mail
 				return false;
 			}
 			return true;
-		}
-
-		private string Replace(string line, string tag, string subString)
-		{
-			return Regex.Replace(line, tag, subString, RegexOptions.IgnoreCase);
 		}
 	}
 }

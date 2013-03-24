@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using Konfidence.Base;
 
@@ -8,11 +7,13 @@ namespace Konfidence.Security.Encryption
 {
     public class Encoder : BaseItem, IDisposable
     {
-        private KeyEncryption _Encoder = null;
-        private bool _Disposed = false;
+        private KeyEncryption _Encoder;
+        private bool _Disposed;
 
         public Encoder(string publicKey)
         {
+            _Disposed = false;
+
             _Encoder = new KeyEncryption(string.Empty);
 
             _Encoder.ReadKey(publicKey);
@@ -48,12 +49,17 @@ namespace Konfidence.Security.Encryption
                 byteList.Add(GetEnryptedDataBlock(partialString));
             }
 
-            return byteList.ToArray();
+            if (byteList != null)
+            {
+                return byteList.ToArray();
+            }
+
+            return null;
         }
 
         private byte[] GetEnryptedDataBlock(string partialString)
         {
-            ASCIIEncoding asciiEncoding = new ASCIIEncoding();
+            var asciiEncoding = new ASCIIEncoding();
 
             byte[] byteData = asciiEncoding.GetBytes(partialString);
 
@@ -79,7 +85,7 @@ namespace Konfidence.Security.Encryption
         protected virtual void Dispose(bool disposing)
         {
 
-            if (!this._Disposed)
+            if (!_Disposed)
             {
                 if (_Encoder != null)
                 {

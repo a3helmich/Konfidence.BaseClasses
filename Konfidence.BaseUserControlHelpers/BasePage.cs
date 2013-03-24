@@ -1,5 +1,4 @@
 using System;
-using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using Konfidence.Base;
@@ -8,9 +7,9 @@ namespace Konfidence.BaseUserControlHelpers
 {
 	public abstract class BasePage<T>: Page where T: BaseWebPresenter, new()
 	{
-        private BasePageHelper _BasePageHelper = null;  // TODO : aanpassen conform nieuwe werkwijze -> naar BaseWebPresenter verplaatsen
+        private BasePageHelper _BasePageHelper;  // TODO : aanpassen conform nieuwe werkwijze -> naar BaseWebPresenter verplaatsen
 
-        private T _Presenter = null;
+        private T _Presenter;
 
         protected abstract void DataInitialize();
         protected abstract void RestoreViewState();
@@ -19,8 +18,8 @@ namespace Konfidence.BaseUserControlHelpers
         protected abstract void PresenterToForm();
         protected abstract void SaveDefaults();
 
-        private bool _IsExpired = false; 
-		private bool _IsRefreshed = false;
+        private bool _IsExpired; 
+		private bool _IsRefreshed;
 
 		#region properties
         public T Presenter
@@ -75,6 +74,12 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 		#endregion
+
+	    protected BasePage()
+        {
+            _IsExpired = false;
+            _IsRefreshed = false;
+        }
 
         #region readonly session properties
         protected string CurrentDomainExtension
@@ -164,12 +169,17 @@ namespace Konfidence.BaseUserControlHelpers
                 {
                     string urlReferer = string.Empty;
 
-                    if (IsAssigned(this.Request.UrlReferrer))
+                    if (IsAssigned(Request.UrlReferrer))
                     {
-                        urlReferer = this.Request.UrlReferrer.ToString();
+                        var urlReferrer = Request.UrlReferrer;
+
+                        if (urlReferrer != null)
+                        {
+                            urlReferer = urlReferrer.ToString();
+                        }
                     }
 
-                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString(), urlReferer);
+                    _BasePageHelper = new BasePageHelper(Request.Url.ToString(), urlReferer);
                 }
                 catch (NullReferenceException)
                 {
@@ -295,30 +305,30 @@ namespace Konfidence.BaseUserControlHelpers
 
 		private void UpdatePageIdentifier()
 		{
-			string PageId = Guid.NewGuid().ToString("N");
+			string pageId = Guid.NewGuid().ToString("N");
 
-			ClientScript.RegisterHiddenField(SessionHelper.PageIdValue, PageId);
-			Context.Items[SessionHelper.PageIdValue] = PageId;
+			ClientScript.RegisterHiddenField(SessionHelper.PAGE_ID_VALUE, pageId);
+			Context.Items[SessionHelper.PAGE_ID_VALUE] = pageId;
 		}
 
 		private void CreatePageIdentifier()
 		{
-			string PageId;
+			string pageId;
 
 			if (!IsPostBack)
 			{
-				PageId = Guid.NewGuid().ToString("N");
+				pageId = Guid.NewGuid().ToString("N");
 			}
 			else
 			{
-				PageId = Request[SessionHelper.PageIdValue];
+				pageId = Request[SessionHelper.PAGE_ID_VALUE];
 			}
 
-			ClientScript.RegisterHiddenField(SessionHelper.PageIdValue, PageId);
-			Context.Items[SessionHelper.PageIdValue] = PageId;
+			ClientScript.RegisterHiddenField(SessionHelper.PAGE_ID_VALUE, pageId);
+			Context.Items[SessionHelper.PAGE_ID_VALUE] = pageId;
 		}
 
-		private ScriptManager getScriptManager()
+		private ScriptManager GetScriptManager()
 		{
 			ScriptManager scriptManager = null;
 			
@@ -346,7 +356,7 @@ namespace Konfidence.BaseUserControlHelpers
 		private void UpdateRefreshState()
 		{
 			bool asyncPostBack;
-			ScriptManager scriptManager = getScriptManager();
+			ScriptManager scriptManager = GetScriptManager();
 
 			if (IsAssigned(scriptManager))
 			{
@@ -362,24 +372,24 @@ namespace Konfidence.BaseUserControlHelpers
 
 		private void UpdateSessionState()
 		{
-			string currentSessionId = Request[SessionHelper.SessionIdValue];
+			string currentSessionId = Request[SessionHelper.SESSION_ID_VALUE];
 
-			/// check of de sessie expired is.
-			/// 1. Om te kunnen verlopen, moet er een currentSessionId zijn. is die
-			/// er niet, dan is de sessie niet expired.
-			/// 2. Is er een currentSessionId, dan moet deze vergeleken worden met de sessionId
-			/// van de sessie waar we in zitten, deze moet gelijk zijn.
-			/// 3. Als er een currentSessionId is, en het is een nieuwe sessie. Dan is de sessie 
-			/// opnieuw opgebouwd en de sessie expired.
+             //check of de sessie expired is.
+             //1. Om te kunnen verlopen, moet er een currentSessionId zijn. is die
+             //er niet, dan is de sessie niet expired.
+             //2. Is er een currentSessionId, dan moet deze vergeleken worden met de sessionId
+             //van de sessie waar we in zitten, deze moet gelijk zijn.
+             //3. Als er een currentSessionId is, en het is een nieuwe sessie. Dan is de sessie 
+             //opnieuw opgebouwd en de sessie expired.
 
 			if (String.IsNullOrEmpty(currentSessionId) && currentSessionId == Session.SessionID && Session.IsNewSession)
 			{
 				_IsExpired = true;
 			}
 
-			/// bewaar de currentSessionId, zodat deze voor UpdateSessionState() bij de 
-			/// volgende check beschikbaar is.
-			ClientScript.RegisterHiddenField(SessionHelper.SessionIdValue, Session.SessionID);
+             //bewaar de currentSessionId, zodat deze voor UpdateSessionState() bij de 
+             //volgende check beschikbaar is.
+			ClientScript.RegisterHiddenField(SessionHelper.SESSION_ID_VALUE, Session.SessionID);
 		}
 	}
 }

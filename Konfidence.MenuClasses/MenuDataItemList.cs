@@ -4,7 +4,7 @@ namespace DbSiteMapMenuClasses
 {
 	public partial class Bl
 	{
-		public partial class MenuDataItemList : BaseDataItemList<Generated.Classes.Bl.MenuDataItem>
+		public partial class MenuDataItemList : BaseDataItemList<Bl.MenuDataItem>
 		{
 		}
 	}

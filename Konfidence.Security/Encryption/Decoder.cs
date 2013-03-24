@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Konfidence.Security.Encryption
 {
     public class Decoder : IDisposable
     {
-        private KeyEncryption _Decoder = null;
-        private bool _Disposed = false;
+        private KeyEncryption _Decoder;
+        private bool _Disposed;
 
         public Decoder(string privateKey)
         {
+            _Disposed = false;
+
             _Decoder = new KeyEncryption(string.Empty);
 
             _Decoder.ReadKey(privateKey);
@@ -19,9 +20,9 @@ namespace Konfidence.Security.Encryption
 
         public string Decrypt(object[] encryptedData)
         {
-            ASCIIEncoding asciiEncoding = new ASCIIEncoding();
-            ArrayList encryptedDataList = new ArrayList();
-            StringBuilder rawData = new StringBuilder();
+            var asciiEncoding = new ASCIIEncoding();
+            var encryptedDataList = new ArrayList();
+            var rawData = new StringBuilder();
 
             foreach (object objectItem in encryptedData)
             {
@@ -30,9 +31,7 @@ namespace Konfidence.Security.Encryption
 
             foreach (byte[] byteData in encryptedDataList)
             {
-                byte[] decryptedByteData;
-
-                decryptedByteData = _Decoder.RsaProvider.Decrypt(byteData, false);
+                byte[] decryptedByteData = _Decoder.RsaProvider.Decrypt(byteData, false);
 
                 rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
             }
@@ -54,7 +53,7 @@ namespace Konfidence.Security.Encryption
         protected virtual void Dispose(bool disposing)
         {
 
-            if (!this._Disposed)
+            if (!_Disposed)
             {
                 if (_Decoder != null)
                 {

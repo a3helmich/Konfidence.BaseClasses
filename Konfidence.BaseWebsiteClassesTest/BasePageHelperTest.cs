@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Konfidence.BaseUserControlHelpers;
 
 namespace Konfidence.BaseWebsiteClassesTest
@@ -8,26 +7,14 @@ namespace Konfidence.BaseWebsiteClassesTest
     ///This is a test class for BasePageHelperTest and is intended
     ///to contain all BasePageHelperTest Unit Tests
     ///</summary>
-    [TestClass()]
+    [TestClass]
     public class BasePageHelperTest
     {
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -61,113 +48,113 @@ namespace Konfidence.BaseWebsiteClassesTest
 
         #region UrlRequestTest
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest00Test()
         {
-            BasePageHelper helper = null;
             string urlRequest = string.Empty;
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsFalse(helper.IsValid, "empty url");
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest01Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost";
+            const string urlRequest = "http://localhost";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest02Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost/";
+            const string urlRequest = "http://localhost/";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest03Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost:8080";
+            const string urlRequest = "http://localhost:8080";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest04Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost:8080/";
+            const string urlRequest = "http://localhost:8080/";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest05Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost/sitemap.aspx";
+            const string urlRequest = "http://localhost/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest06Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost:8080/sitemap.aspx";
+            const string urlRequest = "http://localhost:8080/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest07Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost/sitemap/sitemap.aspx";
+            const string urlRequest = "http://localhost/sitemap/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest08Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost:8080/sitemap/sitemap.aspx";
+            const string urlRequest = "http://localhost:8080/sitemap/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest09Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost/sitemap/h/h/h/h/h/sitemap.aspx";
+            const string urlRequest = "http://localhost/sitemap/h/h/h/h/h/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void UrlRequest10Test()
         {
-            BasePageHelper helper = null;
-            string urlRequest = "http://localhost:8080/sitemap/h/h/h/h/h/sitemap.aspx";
+            const string urlRequest = "http://localhost:8080/sitemap/h/h/h/h/h/sitemap.aspx";
 
-            helper = new BasePageHelper(urlRequest, string.Empty);
+            var helper = new BasePageHelper(urlRequest, string.Empty);
+
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
@@ -176,14 +163,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPagePath01Test()
         {
-            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+            const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "/sitemap/sitemap.aspx";
+            const string expected = "/sitemap/sitemap.aspx";
 
             Assert.AreEqual(expected, target.CurrentPagePath);
         }
@@ -191,14 +178,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPagePath02Test()
         {
-            string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "/sitemap/sitemap.aspx";
+            const string expected = "/sitemap/sitemap.aspx";
 
             Assert.AreEqual(expected, target.CurrentPagePath);
         }
@@ -206,14 +193,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPagePath03Test()
         {
-            string requestUrl = "http://www.konfidence.nl";
+            const string requestUrl = "http://www.konfidence.nl";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "/";
+            const string expected = "/";
 
             Assert.AreEqual(expected, target.CurrentPagePath);
         }
@@ -221,14 +208,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPagePath04Test()
         {
-            string requestUrl = "http://www.konfidence.nl/sitemap/h/h/h/h/h/h/h/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.nl/sitemap/h/h/h/h/h/h/h/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "/sitemap/h/h/h/h/h/h/h/sitemap.aspx";
+            const string expected = "/sitemap/h/h/h/h/h/h/h/sitemap.aspx";
 
             Assert.AreEqual(expected, target.CurrentPagePath);
         }
@@ -238,14 +225,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName01Test()
         {
-            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+            const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "sitemap.aspx"; 
+            const string expected = "sitemap.aspx"; 
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -253,14 +240,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName02Test()
         {
-            string requestUrl = "http://localhost:8080/sitemap/sitemap.aspx";
+            const string requestUrl = "http://localhost:8080/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "sitemap.aspx";
+            const string expected = "sitemap.aspx";
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -268,14 +255,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName03Test()
         {
-            string requestUrl = "http://localhost/sitemap.aspx";
+            const string requestUrl = "http://localhost/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "sitemap.aspx";
+            const string expected = "sitemap.aspx";
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -283,14 +270,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName04Test()
         {
-            string requestUrl = "http://localhost:8080/sitemap.aspx";
+            const string requestUrl = "http://localhost:8080/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "sitemap.aspx";
+            const string expected = "sitemap.aspx";
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -298,14 +285,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName05Test()
         {
-            string requestUrl = "http://localhost/";
+            const string requestUrl = "http://localhost/";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = string.Empty;
+            var expected = string.Empty;
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -313,14 +300,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName06Test()
         {
-            string requestUrl = "http://localhost:8080/";
+            const string requestUrl = "http://localhost:8080/";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = string.Empty;
+            var expected = string.Empty;
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -328,14 +315,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName07Test()
         {
-            string requestUrl = "http://localhost";
+            const string requestUrl = "http://localhost";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = string.Empty;
+            var expected = string.Empty;
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -343,14 +330,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentPageName08Test()
         {
-            string requestUrl = "http://localhost:8080";
+            const string requestUrl = "http://localhost:8080";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = string.Empty;
+            var expected = string.Empty;
 
             Assert.AreEqual(expected, target.CurrentPageName);
         }
@@ -362,14 +349,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentLanguage01Test()
         {
-            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+            const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "nl";
+            const string expected = "nl";
 
             Assert.AreEqual(expected, target.CurrentLanguage);
         }
@@ -377,14 +364,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentLanguage02Test()
         {
-            string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "nl";
+            const string expected = "nl";
 
             Assert.AreEqual(expected, target.CurrentLanguage);
         }
@@ -392,14 +379,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentLanguage03Test()
         {
-            string requestUrl = "http://www.konfidence.be/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.be/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "nl";
+            const string expected = "nl";
 
             Assert.AreEqual(expected, target.CurrentLanguage);
         }
@@ -407,14 +394,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentLanguage04Test()
         {
-            string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "uk";
+            const string expected = "uk";
 
             Assert.AreEqual(expected, target.CurrentLanguage);
         }
@@ -422,14 +409,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentLanguage05Test()
         {
-            string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "uk";
+            const string expected = "uk";
 
             Assert.AreEqual(expected, target.CurrentLanguage);
         }
@@ -437,14 +424,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentLanguage06Test()
         {
-            string requestUrl = "http://www.konfidence.fr/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.fr/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty);
+            var target = new BasePageHelper(requestUrl, string.Empty);
 
-            string expected = "fr";
+            const string expected = "fr";
 
             Assert.AreEqual(expected, target.CurrentLanguage);
         }
@@ -456,14 +443,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDomainExtension01Test()
         {
-            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+            const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "nl";
+            const string expected = "nl";
             
             Assert.AreEqual(expected, target.CurrentDomainExtension);
         }
@@ -471,14 +458,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDomainExtension02Test()
         {
-            string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "nl";
+            const string expected = "nl";
 
             Assert.AreEqual(expected, target.CurrentDomainExtension);
         }
@@ -486,14 +473,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDomainExtension03Test()
         {
-            string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "eu";
+            const string expected = "eu";
 
             Assert.AreEqual(expected, target.CurrentDomainExtension);
         }
@@ -501,14 +488,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDomainExtension04Test()
         {
-            string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "co.uk";
+            const string expected = "co.uk";
 
             Assert.AreEqual(expected, target.CurrentDomainExtension);
         }
@@ -516,14 +503,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDomainExtension05Test()
         {
-            string requestUrl = "http://www.konfidence.gov.uk/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.gov.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "gov.uk";
+            const string expected = "gov.uk";
 
             Assert.AreEqual(expected, target.CurrentDomainExtension);
         }
@@ -535,14 +522,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDnsName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDnsName01Test()
         {
-            string requestUrl = "http://localhost/sitemap/sitemap.aspx";
+            const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "www.konfidence.nl";
+            const string expected = "www.konfidence.nl";
 
             Assert.AreEqual(expected, target.CurrentDnsName);
         }
@@ -550,14 +537,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDnsName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDnsName02Test()
         {
-            string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "www.konfidence.nl";
+            const string expected = "www.konfidence.nl";
 
             Assert.AreEqual(expected, target.CurrentDnsName);
         }
@@ -565,14 +552,14 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDnsName
         ///</summary>
-        [TestMethod()]
+        [TestMethod]
         public void GetCurrentDnsName03Test()
         {
-            string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
+            const string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
 
-            BasePageHelper target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
+            var target = new BasePageHelper(requestUrl, string.Empty); // TODO: Initialize to an appropriate value
 
-            string expected = "www.konfidence.co.uk";
+            const string expected = "www.konfidence.co.uk";
 
             Assert.AreEqual(expected, target.CurrentDnsName);
         }

@@ -18,7 +18,7 @@ namespace Konfidence.BaseHelper
         private static string _ApplicationEventLogName = "FrameWork";
         private static EventLog _EventLog;
 
-        private string _EventLogNamePrefix = "Kit_";
+        private const string EVENT_LOG_NAME_PREFIX = "Kit_";
         private string _EventLogName;
 
         #region ApplicationName
@@ -38,14 +38,24 @@ namespace Konfidence.BaseHelper
             {
                 if (_EventLog == null)
                 {
-                    _EventLogName = _EventLogNamePrefix + _ApplicationEventLogName;
+                    try
+                    {
+                        _EventLogName = EVENT_LOG_NAME_PREFIX + _ApplicationEventLogName;
 
-                    // the next thing works when we are not deiling with a webapp or service
-                    if (!EventLog.SourceExists(_EventLogName))
-                        EventLog.CreateEventSource(_EventLogName, "Application");
-                    _EventLog = new EventLog();
-                    _EventLog.Source = _EventLogName;
+                        // the next thing works when we are not deiling with a webapp or service
+                        if (!EventLog.SourceExists(_EventLogName))
+                        {
+                            EventLog.CreateEventSource(_EventLogName, "Application");
+                        }
+
+                        _EventLog = new EventLog { Source = _EventLogName };
+                    }
+                    catch 
+                    {
+                        _EventLog = null;
+                    }
                 }
+
                 return _EventLog;
             }
         }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Konfidence.Base;
-using System.Threading;
+﻿using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
@@ -11,13 +6,12 @@ namespace Konfidence.BaseThreadClasses
     {
         internal protected abstract void Execute();
 
-        private bool _IsTerminating = false;
-
-        internal bool IsTerminating
+        public BaseThreadAction()
         {
-            get { return _IsTerminating; }
-            set { _IsTerminating = value; }
+            IsTerminating = false;
         }
+
+        internal bool IsTerminating { get; set; }
 
         protected void Finished()
         {

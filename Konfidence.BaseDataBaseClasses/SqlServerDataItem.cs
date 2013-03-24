@@ -1,12 +1,11 @@
-﻿using Konfidence.BaseData;
-using System.Collections.Generic;
-using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace Konfidence.BaseData
 {
     public class SqlServerDataItem: BaseDataItem
     {
+        private readonly int _SqlServerId;
+
         private const string SQLSERVER_GET = "SqlServer_Get";
 
         private const string SQLSERVERID = "SqlServerId";
@@ -37,6 +36,8 @@ namespace Konfidence.BaseData
 
         public SqlServerDataItem(int sqlServerId)
         {
+            _SqlServerId = sqlServerId;
+
             SqlServerGetItem();
         }
 

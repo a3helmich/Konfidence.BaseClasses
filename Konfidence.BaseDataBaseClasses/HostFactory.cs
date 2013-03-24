@@ -38,7 +38,7 @@ namespace Konfidence.BaseData
 					throw new Exception("WebServices is enabled but the webservice is not declared");
 				}
 
-				return new WSHost(serviceName, databaseName);
+				return new WsHost(serviceName, databaseName);
 			}
 
 			return new SqlHost(databaseName);

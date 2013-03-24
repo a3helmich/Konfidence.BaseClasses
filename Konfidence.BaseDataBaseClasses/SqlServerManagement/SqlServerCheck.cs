@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Practices.EnterpriseLibrary.Data;
+﻿using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Data.SqlClient;
-using System.Data.Common;
 
 namespace Konfidence.BaseData.SqlServerManagement
 {
@@ -16,38 +12,41 @@ namespace Konfidence.BaseData.SqlServerManagement
             string userName = string.Empty;
             string password = string.Empty;
 
-            SqlConnection sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
+            var sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
 
-            string[] connectionParameters = sqlConnection.ConnectionString.Split(';'); 
-
-            foreach(string param in connectionParameters)
+            if (sqlConnection != null)
             {
-                if (param.ToLower().StartsWith("server="))
+                string[] connectionParameters = sqlConnection.ConnectionString.Split(';'); 
+
+                foreach(string param in connectionParameters)
                 {
-                    string[] paramParts = param.Split('=');
+                    if (param.ToLower().StartsWith("server="))
+                    {
+                        string[] paramParts = param.Split('=');
 
-                    serverName = paramParts[1];
-                }
+                        serverName = paramParts[1];
+                    }
 
-                if (param.ToLower().StartsWith("database="))
-                {
-                    string[] paramParts = param.Split('=');
+                    if (param.ToLower().StartsWith("database="))
+                    {
+                        string[] paramParts = param.Split('=');
 
-                    databaseName = paramParts[1];
-                }
+                        databaseName = paramParts[1];
+                    }
 
-                if (param.ToLower().StartsWith("user id="))
-                {
-                    string[] paramParts = param.Split('=');
+                    if (param.ToLower().StartsWith("user id="))
+                    {
+                        string[] paramParts = param.Split('=');
 
-                    userName = paramParts[1];
-                }
+                        userName = paramParts[1];
+                    }
 
-                if (param.ToLower().StartsWith("password="))
-                {
-                    string[] paramParts = param.Split('=');
+                    if (param.ToLower().StartsWith("password="))
+                    {
+                        string[] paramParts = param.Split('=');
 
-                    password = paramParts[1];
+                        password = paramParts[1];
+                    }
                 }
             }
 

@@ -127,7 +127,7 @@
   <data name="LastNameLabel.Text">
     <value>Achternaam</value>
   </data>
-  <data name="ApplicationLabel.Text">
+  <data name="_ApplicationLabel.Text">
     <value>Applicatie Registratie</value>
   </data>
   <data name="SerialLabel.Text">

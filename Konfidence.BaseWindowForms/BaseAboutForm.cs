@@ -1,13 +1,7 @@
 using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Globalization;
-using System.Reflection;
 using System.Resources;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
 
@@ -17,9 +11,9 @@ namespace Konfidence.BaseWindowForms
     /// <summary>
     /// Summary description for WamAboutForm.
     /// </summary>
-    public class BaseAboutForm : System.Windows.Forms.Form
+    public class BaseAboutForm : Form
     {
-        protected System.Windows.Forms.TextBox CopyrightTextBox;
+        protected TextBox CopyrightTextBox;
         #region CopyrightText
         public string CopyrightText
         {
@@ -34,13 +28,13 @@ namespace Konfidence.BaseWindowForms
         }
         #endregion
 
-        private System.Windows.Forms.LinkLabel konfidenceLinkLabel;
-        private System.Windows.Forms.Button buttonOK;
-        protected TextBox textBoxRegistrationCode;
+        private LinkLabel _KonfidenceLinkLabel;
+        private Button _ButtonOk;
+        protected TextBox TextBoxRegistrationCode;
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.Container components = null;
+        private readonly System.ComponentModel.Container _Components = null;
 
         public BaseAboutForm()
         {
@@ -61,9 +55,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (components != null)
+                if (_Components != null)
                 {
-                    components.Dispose();
+                    _Components.Dispose();
                 }
             }
             base.Dispose(disposing);
@@ -78,9 +72,9 @@ namespace Konfidence.BaseWindowForms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseAboutForm));
             this.CopyrightTextBox = new System.Windows.Forms.TextBox();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.konfidenceLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.textBoxRegistrationCode = new System.Windows.Forms.TextBox();
+            this._ButtonOk = new System.Windows.Forms.Button();
+            this._KonfidenceLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.TextBoxRegistrationCode = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // CopyrightTextBox
@@ -93,33 +87,33 @@ namespace Konfidence.BaseWindowForms
             // 
             // buttonOK
             // 
-            resources.ApplyResources(this.buttonOK, "buttonOK");
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            resources.ApplyResources(this._ButtonOk, "_ButtonOk");
+            this._ButtonOk.Name = "_ButtonOk";
+            this._ButtonOk.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // konfidenceLinkLabel
             // 
-            resources.ApplyResources(this.konfidenceLinkLabel, "konfidenceLinkLabel");
-            this.konfidenceLinkLabel.Name = "konfidenceLinkLabel";
-            this.konfidenceLinkLabel.TabStop = true;
-            this.konfidenceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.konfidenceLinkLabel_LinkClicked);
+            resources.ApplyResources(this._KonfidenceLinkLabel, "_KonfidenceLinkLabel");
+            this._KonfidenceLinkLabel.Name = "_KonfidenceLinkLabel";
+            this._KonfidenceLinkLabel.TabStop = true;
+            this._KonfidenceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.konfidenceLinkLabel_LinkClicked);
             // 
             // textBoxRegistrationCode
             // 
-            this.textBoxRegistrationCode.AcceptsReturn = true;
-            resources.ApplyResources(this.textBoxRegistrationCode, "textBoxRegistrationCode");
-            this.textBoxRegistrationCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxRegistrationCode.Name = "textBoxRegistrationCode";
-            this.textBoxRegistrationCode.ReadOnly = true;
+            this.TextBoxRegistrationCode.AcceptsReturn = true;
+            resources.ApplyResources(this.TextBoxRegistrationCode, "TextBoxRegistrationCode");
+            this.TextBoxRegistrationCode.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBoxRegistrationCode.Name = "TextBoxRegistrationCode";
+            this.TextBoxRegistrationCode.ReadOnly = true;
             // 
             // BaseAboutForm
             // 
-            this.AcceptButton = this.buttonOK;
+            this.AcceptButton = this._ButtonOk;
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.textBoxRegistrationCode);
-            this.Controls.Add(this.konfidenceLinkLabel);
+            this.Controls.Add(this.TextBoxRegistrationCode);
+            this.Controls.Add(this._KonfidenceLinkLabel);
             this.Controls.Add(this.CopyrightTextBox);
-            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this._ButtonOk);
             this.MinimizeBox = false;
             this.Name = "BaseAboutForm";
             this.ShowInTaskbar = false;
@@ -134,24 +128,26 @@ namespace Konfidence.BaseWindowForms
         {
             if (classType == null || !classType.IsSubclassOf(typeof(BaseAboutForm)))
             {
-                ResourceManager resources = new ResourceManager(typeof(BaseAboutForm));
-                string WarningMessage = resources.GetString("BaseAboutFormException.WarningMessage");
+                var resources = new ResourceManager(typeof(BaseAboutForm));
+                var warningMessage = resources.GetString("BaseAboutFormException.WarningMessage");
 
                 if (classType == null)
-                    throw new BaseAboutFormException(resources.GetString("BaseAboutFormException.NullWarningMessage") + WarningMessage);
-                else
-                    throw new BaseAboutFormException(classType.ToString() + WarningMessage);
+                {
+                    throw new BaseAboutFormException(resources.GetString("BaseAboutFormException.NullWarningMessage") + warningMessage);
+                }
+
+                throw new BaseAboutFormException(classType + warningMessage);
             }
 
             return true;
         }
 
-        private void konfidenceLinkLabel_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        private void konfidenceLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(konfidenceLinkLabel.Text);
+            Process.Start(_KonfidenceLinkLabel.Text);
         }
 
-        private void buttonOK_Click(object sender, System.EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
             Close();
         }

@@ -1,9 +1,5 @@
-using System;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Resources;
 
@@ -14,47 +10,47 @@ namespace Konfidence.BaseWindowForms
 
     public class BaseRegistrationForm : System.Windows.Forms.Form
     {
-        private string _EmptyString;
+        private readonly string _EmptyString;
 
-        private IApplicationSettings _ApplicationSettings = ApplicationSettingsFactory.ApplicationSettings(Application.ProductName);
+        private readonly IApplicationSettings _ApplicationSettings = ApplicationSettingsFactory.ApplicationSettings(Application.ProductName);
 
-        private System.Windows.Forms.Label EmailLabel;
-        private System.Windows.Forms.Label CityLabel;
-        private System.Windows.Forms.Label ZipcodeLabel;
-        private System.Windows.Forms.Label Address1Label;
-        private System.Windows.Forms.Label Address2Label;
-        private System.Windows.Forms.Label StateLabel;
-        private System.Windows.Forms.Label CountryLabel;
-        private System.Windows.Forms.Label CompanyLabel;
-        private System.Windows.Forms.Label PhoneLabel;
-        private System.Windows.Forms.Label FirstNameLabel;
-        private System.Windows.Forms.Label LastNameLabel;
-        private System.Windows.Forms.Label ApplicationLabel;
-        private System.Windows.Forms.TextBox LastNameTextBox;
-        private System.Windows.Forms.TextBox CompanyTextBox;
-        private System.Windows.Forms.TextBox EmailTextBox;
-        private System.Windows.Forms.TextBox PhoneTextBox;
-        private System.Windows.Forms.TextBox Address1TextBox;
-        private System.Windows.Forms.TextBox Address2TextBox;
-        private System.Windows.Forms.TextBox ZipTextBox;
-        private System.Windows.Forms.TextBox CityTextBox;
-        private System.Windows.Forms.TextBox StateTextBox;
-        private System.Windows.Forms.TextBox CountryTextBox;
-        private System.Windows.Forms.TextBox FirstNameTextBox;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.TextBox FirstErrorTextBox;
-        private System.Windows.Forms.TextBox SerialTextBox;
-        private System.Windows.Forms.Label SerialLabel;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonReRegister;
-        private System.Windows.Forms.Label FirstNameRequiredLabel;
-        private System.Windows.Forms.Label LastNameRequiredLabel;
-        private System.Windows.Forms.Label EMailRequiredLabel;
-        private System.Windows.Forms.Label Address1RequiredLabel;
-        private System.Windows.Forms.Label ZipRequiredLabel;
-        private System.Windows.Forms.Label CityRequiredLabel;
-        private System.Windows.Forms.Label CountryRequiredLabel;
+        private Label _EmailLabel;
+        private Label CityLabel;
+        private Label ZipcodeLabel;
+        private Label Address1Label;
+        private Label Address2Label;
+        private Label StateLabel;
+        private Label CountryLabel;
+        private Label CompanyLabel;
+        private Label PhoneLabel;
+        private Label FirstNameLabel;
+        private Label LastNameLabel;
+        private Label _ApplicationLabel;
+        private TextBox _LastNameTextBox;
+        private TextBox _CompanyTextBox;
+        private TextBox _EmailTextBox;
+        private TextBox _PhoneTextBox;
+        private TextBox _Address1TextBox;
+        private TextBox _Address2TextBox;
+        private TextBox _ZipTextBox;
+        private TextBox _CityTextBox;
+        private TextBox _StateTextBox;
+        private TextBox _CountryTextBox;
+        private TextBox _FirstNameTextBox;
+        private Button _ButtonOk;
+        private ErrorProvider _ErrorProvider;
+        private TextBox _FirstErrorTextBox;
+        private TextBox _SerialTextBox;
+        private Label SerialLabel;
+        private Button _ButtonCancel;
+        private Button buttonReRegister;
+        private Label _FirstNameRequiredLabel;
+        private Label _LastNameRequiredLabel;
+        private Label _EMailRequiredLabel;
+        private Label _Address1RequiredLabel;
+        private Label _ZipRequiredLabel;
+        private Label _CityRequiredLabel;
+        private Label _CountryRequiredLabel;
         private IContainer components;
 
         public BaseRegistrationForm()
@@ -67,7 +63,7 @@ namespace Konfidence.BaseWindowForms
             //
             // TODO: Add any constructor code after InitializeComponent call
             //
-            ResourceManager resources = new System.Resources.ResourceManager(typeof(BaseRegistrationForm));
+            var resources = new ResourceManager(typeof(BaseRegistrationForm));
 
             _EmptyString = resources.GetString("EmptyString.Text");
         }
@@ -94,7 +90,7 @@ namespace Konfidence.BaseWindowForms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseRegistrationForm));
-            this.EmailLabel = new System.Windows.Forms.Label();
+            this._EmailLabel = new System.Windows.Forms.Label();
             this.CityLabel = new System.Windows.Forms.Label();
             this.ZipcodeLabel = new System.Windows.Forms.Label();
             this.Address1Label = new System.Windows.Forms.Label();
@@ -105,39 +101,39 @@ namespace Konfidence.BaseWindowForms
             this.CompanyLabel = new System.Windows.Forms.Label();
             this.PhoneLabel = new System.Windows.Forms.Label();
             this.LastNameLabel = new System.Windows.Forms.Label();
-            this.ApplicationLabel = new System.Windows.Forms.Label();
-            this.LastNameTextBox = new System.Windows.Forms.TextBox();
-            this.CompanyTextBox = new System.Windows.Forms.TextBox();
-            this.EmailTextBox = new System.Windows.Forms.TextBox();
-            this.PhoneTextBox = new System.Windows.Forms.TextBox();
-            this.Address1TextBox = new System.Windows.Forms.TextBox();
-            this.Address2TextBox = new System.Windows.Forms.TextBox();
-            this.ZipTextBox = new System.Windows.Forms.TextBox();
-            this.CityTextBox = new System.Windows.Forms.TextBox();
-            this.StateTextBox = new System.Windows.Forms.TextBox();
-            this.CountryTextBox = new System.Windows.Forms.TextBox();
-            this.FirstNameTextBox = new System.Windows.Forms.TextBox();
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.FirstNameRequiredLabel = new System.Windows.Forms.Label();
-            this.LastNameRequiredLabel = new System.Windows.Forms.Label();
-            this.EMailRequiredLabel = new System.Windows.Forms.Label();
-            this.Address1RequiredLabel = new System.Windows.Forms.Label();
-            this.ZipRequiredLabel = new System.Windows.Forms.Label();
-            this.CityRequiredLabel = new System.Windows.Forms.Label();
-            this.CountryRequiredLabel = new System.Windows.Forms.Label();
-            this.FirstErrorTextBox = new System.Windows.Forms.TextBox();
-            this.SerialTextBox = new System.Windows.Forms.TextBox();
+            this._ApplicationLabel = new System.Windows.Forms.Label();
+            this._LastNameTextBox = new System.Windows.Forms.TextBox();
+            this._CompanyTextBox = new System.Windows.Forms.TextBox();
+            this._EmailTextBox = new System.Windows.Forms.TextBox();
+            this._PhoneTextBox = new System.Windows.Forms.TextBox();
+            this._Address1TextBox = new System.Windows.Forms.TextBox();
+            this._Address2TextBox = new System.Windows.Forms.TextBox();
+            this._ZipTextBox = new System.Windows.Forms.TextBox();
+            this._CityTextBox = new System.Windows.Forms.TextBox();
+            this._StateTextBox = new System.Windows.Forms.TextBox();
+            this._CountryTextBox = new System.Windows.Forms.TextBox();
+            this._FirstNameTextBox = new System.Windows.Forms.TextBox();
+            this._ButtonOk = new System.Windows.Forms.Button();
+            this._ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this._ButtonCancel = new System.Windows.Forms.Button();
+            this._FirstNameRequiredLabel = new System.Windows.Forms.Label();
+            this._LastNameRequiredLabel = new System.Windows.Forms.Label();
+            this._EMailRequiredLabel = new System.Windows.Forms.Label();
+            this._Address1RequiredLabel = new System.Windows.Forms.Label();
+            this._ZipRequiredLabel = new System.Windows.Forms.Label();
+            this._CityRequiredLabel = new System.Windows.Forms.Label();
+            this._CountryRequiredLabel = new System.Windows.Forms.Label();
+            this._FirstErrorTextBox = new System.Windows.Forms.TextBox();
+            this._SerialTextBox = new System.Windows.Forms.TextBox();
             this.SerialLabel = new System.Windows.Forms.Label();
             this.buttonReRegister = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._ErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // EmailLabel
             // 
-            resources.ApplyResources(this.EmailLabel, "EmailLabel");
-            this.EmailLabel.Name = "EmailLabel";
+            resources.ApplyResources(this._EmailLabel, "_EmailLabel");
+            this._EmailLabel.Name = "_EmailLabel";
             // 
             // CityLabel
             // 
@@ -191,133 +187,133 @@ namespace Konfidence.BaseWindowForms
             // 
             // ApplicationLabel
             // 
-            resources.ApplyResources(this.ApplicationLabel, "ApplicationLabel");
-            this.ApplicationLabel.Name = "ApplicationLabel";
+            resources.ApplyResources(this._ApplicationLabel, "_ApplicationLabel");
+            this._ApplicationLabel.Name = "_ApplicationLabel";
             // 
             // LastNameTextBox
             // 
-            resources.ApplyResources(this.LastNameTextBox, "LastNameTextBox");
-            this.LastNameTextBox.Name = "LastNameTextBox";
+            resources.ApplyResources(this._LastNameTextBox, "_LastNameTextBox");
+            this._LastNameTextBox.Name = "_LastNameTextBox";
             // 
             // CompanyTextBox
             // 
-            resources.ApplyResources(this.CompanyTextBox, "CompanyTextBox");
-            this.CompanyTextBox.Name = "CompanyTextBox";
+            resources.ApplyResources(this._CompanyTextBox, "_CompanyTextBox");
+            this._CompanyTextBox.Name = "_CompanyTextBox";
             // 
             // EmailTextBox
             // 
-            resources.ApplyResources(this.EmailTextBox, "EmailTextBox");
-            this.EmailTextBox.Name = "EmailTextBox";
+            resources.ApplyResources(this._EmailTextBox, "_EmailTextBox");
+            this._EmailTextBox.Name = "_EmailTextBox";
             // 
             // PhoneTextBox
             // 
-            resources.ApplyResources(this.PhoneTextBox, "PhoneTextBox");
-            this.PhoneTextBox.Name = "PhoneTextBox";
+            resources.ApplyResources(this._PhoneTextBox, "_PhoneTextBox");
+            this._PhoneTextBox.Name = "_PhoneTextBox";
             // 
             // Address1TextBox
             // 
-            resources.ApplyResources(this.Address1TextBox, "Address1TextBox");
-            this.Address1TextBox.Name = "Address1TextBox";
+            resources.ApplyResources(this._Address1TextBox, "_Address1TextBox");
+            this._Address1TextBox.Name = "_Address1TextBox";
             // 
             // Address2TextBox
             // 
-            resources.ApplyResources(this.Address2TextBox, "Address2TextBox");
-            this.Address2TextBox.Name = "Address2TextBox";
+            resources.ApplyResources(this._Address2TextBox, "_Address2TextBox");
+            this._Address2TextBox.Name = "_Address2TextBox";
             // 
             // ZipTextBox
             // 
-            resources.ApplyResources(this.ZipTextBox, "ZipTextBox");
-            this.ZipTextBox.Name = "ZipTextBox";
+            resources.ApplyResources(this._ZipTextBox, "_ZipTextBox");
+            this._ZipTextBox.Name = "_ZipTextBox";
             // 
             // CityTextBox
             // 
-            resources.ApplyResources(this.CityTextBox, "CityTextBox");
-            this.CityTextBox.Name = "CityTextBox";
+            resources.ApplyResources(this._CityTextBox, "_CityTextBox");
+            this._CityTextBox.Name = "_CityTextBox";
             // 
             // StateTextBox
             // 
-            resources.ApplyResources(this.StateTextBox, "StateTextBox");
-            this.StateTextBox.Name = "StateTextBox";
+            resources.ApplyResources(this._StateTextBox, "_StateTextBox");
+            this._StateTextBox.Name = "_StateTextBox";
             // 
             // CountryTextBox
             // 
-            resources.ApplyResources(this.CountryTextBox, "CountryTextBox");
-            this.CountryTextBox.Name = "CountryTextBox";
+            resources.ApplyResources(this._CountryTextBox, "_CountryTextBox");
+            this._CountryTextBox.Name = "_CountryTextBox";
             // 
             // FirstNameTextBox
             // 
-            resources.ApplyResources(this.FirstNameTextBox, "FirstNameTextBox");
-            this.FirstNameTextBox.Name = "FirstNameTextBox";
+            resources.ApplyResources(this._FirstNameTextBox, "_FirstNameTextBox");
+            this._FirstNameTextBox.Name = "_FirstNameTextBox";
             // 
             // buttonOK
             // 
-            resources.ApplyResources(this.buttonOK, "buttonOK");
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            resources.ApplyResources(this._ButtonOk, "_ButtonOk");
+            this._ButtonOk.Name = "_ButtonOk";
+            this._ButtonOk.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // errorProvider
             // 
-            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider.ContainerControl = this;
-            resources.ApplyResources(this.errorProvider, "errorProvider");
+            this._ErrorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._ErrorProvider.ContainerControl = this;
+            resources.ApplyResources(this._ErrorProvider, "_ErrorProvider");
             // 
             // buttonCancel
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Click += new System.EventHandler(this.CancelButton_Click);
+            resources.ApplyResources(this._ButtonCancel, "_ButtonCancel");
+            this._ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this._ButtonCancel.Name = "_ButtonCancel";
+            this._ButtonCancel.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // FirstNameRequiredLabel
             // 
-            resources.ApplyResources(this.FirstNameRequiredLabel, "FirstNameRequiredLabel");
-            this.FirstNameRequiredLabel.Name = "FirstNameRequiredLabel";
+            resources.ApplyResources(this._FirstNameRequiredLabel, "_FirstNameRequiredLabel");
+            this._FirstNameRequiredLabel.Name = "_FirstNameRequiredLabel";
             // 
             // LastNameRequiredLabel
             // 
-            resources.ApplyResources(this.LastNameRequiredLabel, "LastNameRequiredLabel");
-            this.LastNameRequiredLabel.Name = "LastNameRequiredLabel";
+            resources.ApplyResources(this._LastNameRequiredLabel, "_LastNameRequiredLabel");
+            this._LastNameRequiredLabel.Name = "_LastNameRequiredLabel";
             // 
             // EMailRequiredLabel
             // 
-            resources.ApplyResources(this.EMailRequiredLabel, "EMailRequiredLabel");
-            this.EMailRequiredLabel.Name = "EMailRequiredLabel";
+            resources.ApplyResources(this._EMailRequiredLabel, "_EMailRequiredLabel");
+            this._EMailRequiredLabel.Name = "_EMailRequiredLabel";
             // 
             // Address1RequiredLabel
             // 
-            resources.ApplyResources(this.Address1RequiredLabel, "Address1RequiredLabel");
-            this.Address1RequiredLabel.Name = "Address1RequiredLabel";
+            resources.ApplyResources(this._Address1RequiredLabel, "_Address1RequiredLabel");
+            this._Address1RequiredLabel.Name = "_Address1RequiredLabel";
             // 
             // ZipRequiredLabel
             // 
-            resources.ApplyResources(this.ZipRequiredLabel, "ZipRequiredLabel");
-            this.ZipRequiredLabel.Name = "ZipRequiredLabel";
+            resources.ApplyResources(this._ZipRequiredLabel, "_ZipRequiredLabel");
+            this._ZipRequiredLabel.Name = "_ZipRequiredLabel";
             // 
             // CityRequiredLabel
             // 
-            resources.ApplyResources(this.CityRequiredLabel, "CityRequiredLabel");
-            this.CityRequiredLabel.Name = "CityRequiredLabel";
+            resources.ApplyResources(this._CityRequiredLabel, "_CityRequiredLabel");
+            this._CityRequiredLabel.Name = "_CityRequiredLabel";
             // 
             // CountryRequiredLabel
             // 
-            resources.ApplyResources(this.CountryRequiredLabel, "CountryRequiredLabel");
-            this.CountryRequiredLabel.Name = "CountryRequiredLabel";
+            resources.ApplyResources(this._CountryRequiredLabel, "_CountryRequiredLabel");
+            this._CountryRequiredLabel.Name = "_CountryRequiredLabel";
             // 
             // FirstErrorTextBox
             // 
-            this.FirstErrorTextBox.AcceptsReturn = true;
-            resources.ApplyResources(this.FirstErrorTextBox, "FirstErrorTextBox");
-            this.FirstErrorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.FirstErrorTextBox.Name = "FirstErrorTextBox";
-            this.FirstErrorTextBox.ReadOnly = true;
+            this._FirstErrorTextBox.AcceptsReturn = true;
+            resources.ApplyResources(this._FirstErrorTextBox, "_FirstErrorTextBox");
+            this._FirstErrorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this._FirstErrorTextBox.Name = "_FirstErrorTextBox";
+            this._FirstErrorTextBox.ReadOnly = true;
             // 
             // SerialTextBox
             // 
-            this.SerialTextBox.AcceptsReturn = true;
-            resources.ApplyResources(this.SerialTextBox, "SerialTextBox");
-            this.SerialTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.SerialTextBox.Name = "SerialTextBox";
-            this.SerialTextBox.ReadOnly = true;
+            this._SerialTextBox.AcceptsReturn = true;
+            resources.ApplyResources(this._SerialTextBox, "_SerialTextBox");
+            this._SerialTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this._SerialTextBox.Name = "_SerialTextBox";
+            this._SerialTextBox.ReadOnly = true;
             // 
             // SerialLabel
             // 
@@ -332,34 +328,34 @@ namespace Konfidence.BaseWindowForms
             // 
             // BaseRegistrationForm
             // 
-            this.AcceptButton = this.buttonOK;
+            this.AcceptButton = this._ButtonOk;
             resources.ApplyResources(this, "$this");
-            this.CancelButton = this.buttonCancel;
+            this.CancelButton = this._ButtonCancel;
             this.Controls.Add(this.buttonReRegister);
             this.Controls.Add(this.SerialLabel);
-            this.Controls.Add(this.SerialTextBox);
-            this.Controls.Add(this.FirstErrorTextBox);
-            this.Controls.Add(this.LastNameTextBox);
-            this.Controls.Add(this.CompanyTextBox);
-            this.Controls.Add(this.EmailTextBox);
-            this.Controls.Add(this.Address1TextBox);
-            this.Controls.Add(this.Address2TextBox);
-            this.Controls.Add(this.ZipTextBox);
-            this.Controls.Add(this.CityTextBox);
-            this.Controls.Add(this.StateTextBox);
-            this.Controls.Add(this.CountryTextBox);
-            this.Controls.Add(this.FirstNameTextBox);
-            this.Controls.Add(this.PhoneTextBox);
-            this.Controls.Add(this.CountryRequiredLabel);
-            this.Controls.Add(this.CityRequiredLabel);
-            this.Controls.Add(this.ZipRequiredLabel);
-            this.Controls.Add(this.Address1RequiredLabel);
-            this.Controls.Add(this.EMailRequiredLabel);
-            this.Controls.Add(this.LastNameRequiredLabel);
-            this.Controls.Add(this.FirstNameRequiredLabel);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.ApplicationLabel);
+            this.Controls.Add(this._SerialTextBox);
+            this.Controls.Add(this._FirstErrorTextBox);
+            this.Controls.Add(this._LastNameTextBox);
+            this.Controls.Add(this._CompanyTextBox);
+            this.Controls.Add(this._EmailTextBox);
+            this.Controls.Add(this._Address1TextBox);
+            this.Controls.Add(this._Address2TextBox);
+            this.Controls.Add(this._ZipTextBox);
+            this.Controls.Add(this._CityTextBox);
+            this.Controls.Add(this._StateTextBox);
+            this.Controls.Add(this._CountryTextBox);
+            this.Controls.Add(this._FirstNameTextBox);
+            this.Controls.Add(this._PhoneTextBox);
+            this.Controls.Add(this._CountryRequiredLabel);
+            this.Controls.Add(this._CityRequiredLabel);
+            this.Controls.Add(this._ZipRequiredLabel);
+            this.Controls.Add(this._Address1RequiredLabel);
+            this.Controls.Add(this._EMailRequiredLabel);
+            this.Controls.Add(this._LastNameRequiredLabel);
+            this.Controls.Add(this._FirstNameRequiredLabel);
+            this.Controls.Add(this._ButtonCancel);
+            this.Controls.Add(this._ButtonOk);
+            this.Controls.Add(this._ApplicationLabel);
             this.Controls.Add(this.LastNameLabel);
             this.Controls.Add(this.PhoneLabel);
             this.Controls.Add(this.CompanyLabel);
@@ -370,10 +366,10 @@ namespace Konfidence.BaseWindowForms
             this.Controls.Add(this.Address2Label);
             this.Controls.Add(this.FirstNameLabel);
             this.Controls.Add(this.Address1Label);
-            this.Controls.Add(this.EmailLabel);
+            this.Controls.Add(this._EmailLabel);
             this.Name = "BaseRegistrationForm";
             this.Load += new System.EventHandler(this.BaseRegistrationForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._ErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,11 +380,11 @@ namespace Konfidence.BaseWindowForms
         private void SetFieldStatus(bool fieldStatus)
         {
             SerialLabel.Visible = fieldStatus;
-            EmailTextBox.ReadOnly = fieldStatus;
-            buttonOK.Enabled = !fieldStatus;
-            if (buttonOK.Enabled)
+            _EmailTextBox.ReadOnly = fieldStatus;
+            _ButtonOk.Enabled = !fieldStatus;
+            if (_ButtonOk.Enabled)
             {
-                AcceptButton = buttonOK;
+                AcceptButton = _ButtonOk;
             }
             else
             {
@@ -398,86 +394,84 @@ namespace Konfidence.BaseWindowForms
 
         private void BaseRegistrationForm_Load(object sender, System.EventArgs e)
         {
-            ApplicationLabel.Text = ApplicationLabel.Text.ToUpper(CultureInfo.CurrentCulture);
+            _ApplicationLabel.Text = _ApplicationLabel.Text.ToUpper(CultureInfo.CurrentCulture);
 
-            FirstNameTextBox.Text = _ApplicationSettings.GetStringValue("FirstNameTextBox.Text");
-            LastNameTextBox.Text = _ApplicationSettings.GetStringValue("LastNameTextBox.Text");
-            CompanyTextBox.Text = _ApplicationSettings.GetStringValue("CompanyTextBox.Text");
-            EmailTextBox.Text = _ApplicationSettings.GetStringValue("EmailTextBox.Text");
-            PhoneTextBox.Text = _ApplicationSettings.GetStringValue("PhoneTextBox.Text");
-            Address1TextBox.Text = _ApplicationSettings.GetStringValue("Address1TextBox.Text");
-            Address2TextBox.Text = _ApplicationSettings.GetStringValue("Address2TextBox.Text");
-            ZipTextBox.Text = _ApplicationSettings.GetStringValue("ZipTextBox.Text");
-            CityTextBox.Text = _ApplicationSettings.GetStringValue("CityTextBox.Text");
-            StateTextBox.Text = _ApplicationSettings.GetStringValue("StateTextBox.Text");
-            CountryTextBox.Text = _ApplicationSettings.GetStringValue("CountryTextBox.Text");
-            SerialTextBox.Text = _ApplicationSettings.GetStringValue("Serial.Text");
+            _FirstNameTextBox.Text = _ApplicationSettings.GetStringValue("FirstNameTextBox.Text");
+            _LastNameTextBox.Text = _ApplicationSettings.GetStringValue("LastNameTextBox.Text");
+            _CompanyTextBox.Text = _ApplicationSettings.GetStringValue("CompanyTextBox.Text");
+            _EmailTextBox.Text = _ApplicationSettings.GetStringValue("EmailTextBox.Text");
+            _PhoneTextBox.Text = _ApplicationSettings.GetStringValue("PhoneTextBox.Text");
+            _Address1TextBox.Text = _ApplicationSettings.GetStringValue("Address1TextBox.Text");
+            _Address2TextBox.Text = _ApplicationSettings.GetStringValue("Address2TextBox.Text");
+            _ZipTextBox.Text = _ApplicationSettings.GetStringValue("ZipTextBox.Text");
+            _CityTextBox.Text = _ApplicationSettings.GetStringValue("CityTextBox.Text");
+            _StateTextBox.Text = _ApplicationSettings.GetStringValue("StateTextBox.Text");
+            _CountryTextBox.Text = _ApplicationSettings.GetStringValue("CountryTextBox.Text");
+            _SerialTextBox.Text = _ApplicationSettings.GetStringValue("Serial.Text");
 
-            if (SerialTextBox.Text.Length > 0)
+            if (_SerialTextBox.Text.Length > 0)
                 SetFieldStatus(true);
             else
                 SetFieldStatus(false);
         }
 
-        private bool ValidateTextBox(TextBox textBox, bool IsValid)
+        private bool ValidateTextBox(TextBox textBox, bool isValid)
         {
-            string RequiredInformation = "This is required information for registration";
-            string NoError = string.Empty;
+            const string requiredInformation = "This is required information for registration";
+            string noError = string.Empty;
 
             if (textBox.Text.Length == 0)
             {
-                errorProvider.SetError(textBox, RequiredInformation);
-                if (IsValid)
-                    IsValid = false;
+                _ErrorProvider.SetError(textBox, requiredInformation);
+                if (isValid)
+                    isValid = false;
 
-                if (FirstErrorTextBox.Text.Length == 0)
-                    FirstErrorTextBox.Text = textBox.AccessibleName + ": " + RequiredInformation;
+                if (_FirstErrorTextBox.Text.Length == 0)
+                    _FirstErrorTextBox.Text = textBox.AccessibleName + ": " + requiredInformation;
             }
             else
             {
-                errorProvider.SetError(textBox, NoError);
+                _ErrorProvider.SetError(textBox, noError);
             }
 
-            return IsValid;
+            return isValid;
         }
 
-        private bool ValidateEmail(TextBox textBox, bool IsValid)
+        private bool ValidateEmail(TextBox textBox, bool isValid)
         {
-            string RequiredEmail = "Email address does not have a valid format";
+            const string requiredEmail = "Email address does not have a valid format";
 
             if (textBox.Text.Length > 0)
             {
                 if (!BaseUtilHelper.IsValidEmail(textBox.Text))
                 {
-                    errorProvider.SetError(textBox, RequiredEmail);
-                    IsValid = false;
+                    _ErrorProvider.SetError(textBox, requiredEmail);
+                    isValid = false;
 
-                    if (FirstErrorTextBox.Text.Length == 0)
-                        FirstErrorTextBox.Text = textBox.AccessibleName + ": " + RequiredEmail;
+                    if (_FirstErrorTextBox.Text.Length == 0)
+                        _FirstErrorTextBox.Text = textBox.AccessibleName + ": " + requiredEmail;
                 }
             }
 
-            return IsValid;
+            return isValid;
         }
 
         private bool DoValidation()
         {
-            bool Valid = true;
+            _FirstErrorTextBox.Text = _EmptyString;
 
-            FirstErrorTextBox.Text = _EmptyString;
+            bool valid = ValidateTextBox(_FirstNameTextBox, true);
+            valid = ValidateTextBox(_LastNameTextBox, valid);
+            valid = ValidateTextBox(_EmailTextBox, valid);
 
-            Valid = ValidateTextBox(FirstNameTextBox, Valid);
-            Valid = ValidateTextBox(LastNameTextBox, Valid);
-            Valid = ValidateTextBox(EmailTextBox, Valid);
+            valid = ValidateEmail(_EmailTextBox, valid);
 
-            Valid = ValidateEmail(EmailTextBox, Valid);
+            valid = ValidateTextBox(_Address1TextBox, valid);
+            valid = ValidateTextBox(_CountryTextBox, valid);
+            valid = ValidateTextBox(_CityTextBox, valid);
+            valid = ValidateTextBox(_ZipTextBox, valid);
 
-            Valid = ValidateTextBox(Address1TextBox, Valid);
-            Valid = ValidateTextBox(CountryTextBox, Valid);
-            Valid = ValidateTextBox(CityTextBox, Valid);
-            Valid = ValidateTextBox(ZipTextBox, Valid);
-
-            return Valid;
+            return valid;
         }
 
         private void buttonOK_Click(object sender, System.EventArgs e)
@@ -486,17 +480,17 @@ namespace Konfidence.BaseWindowForms
             {
                 DialogResult = DialogResult.OK;
 
-                _ApplicationSettings.SetStringValue("FirstNameTextBox.Text", FirstNameTextBox.Text);
-                _ApplicationSettings.SetStringValue("LastNameTextBox.Text", LastNameTextBox.Text);
-                _ApplicationSettings.SetStringValue("CompanyTextBox.Text", CompanyTextBox.Text);
-                _ApplicationSettings.SetStringValue("EmailTextBox.Text", EmailTextBox.Text);
-                _ApplicationSettings.SetStringValue("PhoneTextBox.Text", PhoneTextBox.Text);
-                _ApplicationSettings.SetStringValue("Address1TextBox.Text", Address1TextBox.Text);
-                _ApplicationSettings.SetStringValue("Address2TextBox.Text", Address2TextBox.Text);
-                _ApplicationSettings.SetStringValue("ZipTextBox.Text", ZipTextBox.Text);
-                _ApplicationSettings.SetStringValue("CityTextBox.Text", CityTextBox.Text);
-                _ApplicationSettings.SetStringValue("StateTextBox.Text", StateTextBox.Text);
-                _ApplicationSettings.SetStringValue("CountryTextBox.Text", CountryTextBox.Text);
+                _ApplicationSettings.SetStringValue("FirstNameTextBox.Text", _FirstNameTextBox.Text);
+                _ApplicationSettings.SetStringValue("LastNameTextBox.Text", _LastNameTextBox.Text);
+                _ApplicationSettings.SetStringValue("CompanyTextBox.Text", _CompanyTextBox.Text);
+                _ApplicationSettings.SetStringValue("EmailTextBox.Text", _EmailTextBox.Text);
+                _ApplicationSettings.SetStringValue("PhoneTextBox.Text", _PhoneTextBox.Text);
+                _ApplicationSettings.SetStringValue("Address1TextBox.Text", _Address1TextBox.Text);
+                _ApplicationSettings.SetStringValue("Address2TextBox.Text", _Address2TextBox.Text);
+                _ApplicationSettings.SetStringValue("ZipTextBox.Text", _ZipTextBox.Text);
+                _ApplicationSettings.SetStringValue("CityTextBox.Text", _CityTextBox.Text);
+                _ApplicationSettings.SetStringValue("StateTextBox.Text", _StateTextBox.Text);
+                _ApplicationSettings.SetStringValue("CountryTextBox.Text", _CountryTextBox.Text);
 
                 _ApplicationSettings.Flush();
 
@@ -518,47 +512,47 @@ namespace Konfidence.BaseWindowForms
 
         public string Address1
         {
-            get { return Address1TextBox.Text; }
+            get { return _Address1TextBox.Text; }
         }
         public string Address2
         {
-            get { return Address2TextBox.Text; }
+            get { return _Address2TextBox.Text; }
         }
         public string LastName
         {
-            get { return LastNameTextBox.Text; }
+            get { return _LastNameTextBox.Text; }
         }
         public string FirstName
         {
-            get { return FirstNameTextBox.Text; }
+            get { return _FirstNameTextBox.Text; }
         }
         public string Company
         {
-            get { return CompanyTextBox.Text; }
+            get { return _CompanyTextBox.Text; }
         }
         public string Email
         {
-            get { return EmailTextBox.Text; }
+            get { return _EmailTextBox.Text; }
         }
         public string Phone
         {
-            get { return PhoneTextBox.Text; }
+            get { return _PhoneTextBox.Text; }
         }
         public string Zip
         {
-            get { return ZipTextBox.Text; }
+            get { return _ZipTextBox.Text; }
         }
         public string City
         {
-            get { return CityTextBox.Text; }
+            get { return _CityTextBox.Text; }
         }
         public string State
         {
-            get { return StateTextBox.Text; }
+            get { return _StateTextBox.Text; }
         }
         public string Country
         {
-            get { return CountryTextBox.Text; }
+            get { return _CountryTextBox.Text; }
         }
 
     }

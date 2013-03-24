@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Services;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseData
@@ -39,16 +40,13 @@ namespace Konfidence.BaseData
 		}
 
         [WebMethod]
-        public List<DbParameterObject> GetItemByParam(List<DbParameterObject> ParameterList)
+        public List<DbParameterObject> GetItemByParam(List<DbParameterObject> parameterList)
         {
-            BaseDataItem baseDataItem = GetNewDataItem(ParameterList);
+            BaseDataItem baseDataItem = GetNewDataItem(parameterList);
 
             List<DbParameterObject> properties = GetProperties(baseDataItem);
 
-            DbParameterObject idProperty = new DbParameterObject();
-
-            idProperty.Field = "AutoIdField";
-            idProperty.Value = baseDataItem._Id;
+            var idProperty = new DbParameterObject {Field = "AutoIdField", Value = baseDataItem._Id};
 
             properties.Insert(0, idProperty);
 
@@ -115,7 +113,7 @@ namespace Konfidence.BaseData
 
 		protected static void SetProperties(BaseDataItem baseDataItem, List<DbParameterObject> properties)
 		{
-			Dictionary<string, object> propertyDictionary = new Dictionary<string, object>();
+			var propertyDictionary = new Dictionary<string, object>();
 
 			foreach (DbParameterObject parameterObject in properties)
 			{
@@ -127,7 +125,7 @@ namespace Konfidence.BaseData
 
 		protected static List<DbParameterObject> GetProperties(BaseDataItem baseDataItem)
 		{
-			List<DbParameterObject> properties = new List<DbParameterObject>();
+			var properties = new List<DbParameterObject>();
 
 			baseDataItem.GetProperties(properties);
 
@@ -154,7 +152,8 @@ namespace Konfidence.BaseData
 			throw new NotImplementedException(); // NOP
 		}
 
-		protected static bool IsAssigned(object assignedObject)
+        [ContractAnnotation("assignedObject:null => false")]
+        protected static bool IsAssigned(object assignedObject)
 		{
 			return BaseItem.IsAssigned(assignedObject);
 		}

@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Web;
 using System.Web.UI;
 
 namespace JavaScriptExtender
@@ -10,7 +7,7 @@ namespace JavaScriptExtender
     public class AsyncFileUploadExtender : ExtenderControl
     {
         private string _AsyncFileUploaderId = string.Empty;
-        private string _AsyncCVUploaderId = string.Empty;
+        private string _AsyncCvUploaderId = string.Empty;
         private string _AsyncVideoUploaderId = string.Empty;
 
         private string _AccountId = string.Empty;
@@ -22,10 +19,10 @@ namespace JavaScriptExtender
             set { _AsyncFileUploaderId = value; }
         }
 
-        public string AsyncCVUploaderId
+        public string AsyncCvUploaderId
         {
-            get { return _AsyncCVUploaderId; }
-            set { _AsyncCVUploaderId = value; }
+            get { return _AsyncCvUploaderId; }
+            set { _AsyncCvUploaderId = value; }
         }
 
         public string AsyncVideoUploaderId
@@ -46,22 +43,17 @@ namespace JavaScriptExtender
             set { _ButtonIdList = value; }
         }
 
-        public AsyncFileUploadExtender()
-        {
-        }
-
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl)
         {
-            ScriptBehaviorDescriptor descriptor;
-            List<ScriptDescriptor> scriptDescriptorList = new List<ScriptDescriptor>();
+            var scriptDescriptorList = new List<ScriptDescriptor>();
 
-            descriptor = new ScriptBehaviorDescriptor("JavaScriptControls.AsyncFileUploadExtender", targetControl.ClientID);
+            var descriptor = new ScriptBehaviorDescriptor("JavaScriptControls.AsyncFileUploadExtender", targetControl.ClientID);
 
-            descriptor.AddProperty("AsyncFileUploaderId", this.AsyncFileUploaderId);
-            descriptor.AddProperty("AsyncCVUploaderId", this.AsyncCVUploaderId);
-            descriptor.AddProperty("AsyncVideoUploaderId", this.AsyncVideoUploaderId);
-            descriptor.AddProperty("AccountId", this.AccountId);
-            descriptor.AddProperty("ButtonIdList", this.ButtonIdList);
+            descriptor.AddProperty("AsyncFileUploaderId", AsyncFileUploaderId);
+            descriptor.AddProperty("AsyncCVUploaderId", AsyncCvUploaderId);
+            descriptor.AddProperty("AsyncVideoUploaderId", AsyncVideoUploaderId);
+            descriptor.AddProperty("AccountId", AccountId);
+            descriptor.AddProperty("ButtonIdList", ButtonIdList);
 
             scriptDescriptorList.Add(descriptor);
 
@@ -70,11 +62,9 @@ namespace JavaScriptExtender
 
         protected override IEnumerable<ScriptReference> GetScriptReferences()
         {
-            ScriptReference reference = new ScriptReference("JavaScriptExtender.JavaScript.AsyncFileUploadExtender.js", "JavaScriptExtender");
+            var reference = new ScriptReference("JavaScriptExtender.JavaScript.AsyncFileUploadExtender.js", "JavaScriptExtender");
 
-            List<ScriptReference> scriptReferenceList = new List<ScriptReference>();
-
-            scriptReferenceList.Add(reference);
+            var scriptReferenceList = new List<ScriptReference> {reference};
 
             return scriptReferenceList;
         }

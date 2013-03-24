@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Konfidence.Base;
+﻿using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
-    public abstract class BaseThreadManager<T, K> : BaseItem
-        where T : BaseThreadRunner<K>, new() where K : BaseThreadAction, new() 
+    public abstract class BaseThreadManager<T, TK> : BaseItem
+        where T : BaseThreadRunner<TK>, new() where TK : BaseThreadAction, new() 
     {
         protected abstract void BeforeStart();
         protected abstract void AfterStop();
 
-        private T _ThreadRunner = null;
+        private readonly T _ThreadRunner;
 
-        private int _SleepMilliSeconds = 0;
+        private int _SleepMilliSeconds;
         private int _WaitMilliSeconds = 100;
 
         public int SleepMilliSeconds
@@ -47,7 +43,7 @@ namespace Konfidence.BaseThreadClasses
             }
         }
 
-        public BaseThreadManager()
+        protected BaseThreadManager()
         {
             _ThreadRunner = new T();
         }

@@ -6,13 +6,13 @@ namespace Konfidence.BaseUserControlHelpers
 {
 	public class SessionHelper : BaseItem
 	{
-		public const string SessionIdValue = "KIT_SESSIONID";
-		public const string PageIdValue = "KIT_PAGEID";
+		public const string SESSION_ID_VALUE = "KIT_SESSIONID";
+		public const string PAGE_ID_VALUE = "KIT_PAGEID";
 
-		private const string ParameterObjectHashtableClassType = "ParameterObjectHashtable";
+		private const string PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE = "ParameterObjectHashtable";
 
-		private HttpContext _Context;
-		private string _ControlName;
+		private readonly HttpContext _Context;
+		private readonly string _ControlName;
 
 		public SessionHelper(HttpContext context, string controlName)
 		{
@@ -20,19 +20,17 @@ namespace Konfidence.BaseUserControlHelpers
 			_ControlName = controlName;
 		}
 
-		private Hashtable _ParameterObjectHashtable
+		private Hashtable ParameterObjectHashtable
 		{
 			get
 			{
-				Hashtable parameterObjectHashtable;
-
-				parameterObjectHashtable = _Context.Session[ParameterObjectHashtableClassType] as Hashtable;
+			    var parameterObjectHashtable = _Context.Session[PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE] as Hashtable;
 
 				if (!IsAssigned(parameterObjectHashtable))
 				{
 					parameterObjectHashtable = new Hashtable();
 
-					_Context.Session[ParameterObjectHashtableClassType] = parameterObjectHashtable;
+					_Context.Session[PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE] = parameterObjectHashtable;
 				}
 
 				return parameterObjectHashtable;
@@ -43,20 +41,18 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			get
 			{
-				SessionParameterObject _SessionParameterObject;
+			    var pageId = _Context.Items[PAGE_ID_VALUE] as string;
 
-				string PageId = _Context.Items[PageIdValue] as string;
+				var sessionParameterObject = ParameterObjectHashtable[pageId + "_" + _ControlName] as SessionParameterObject;
 
-				_SessionParameterObject = _ParameterObjectHashtable[PageId + "_" + _ControlName] as SessionParameterObject;
-
-				if (!IsAssigned(_SessionParameterObject))
+				if (!IsAssigned(sessionParameterObject))
 				{
-					_SessionParameterObject = new SessionParameterObject();
+					sessionParameterObject = new SessionParameterObject();
 
-					_ParameterObjectHashtable[PageId + "_" + _ControlName] = _SessionParameterObject;
+					ParameterObjectHashtable[pageId + "_" + _ControlName] = sessionParameterObject;
 				}
 
-				return _SessionParameterObject;
+				return sessionParameterObject;
 			}
 		}
 	}

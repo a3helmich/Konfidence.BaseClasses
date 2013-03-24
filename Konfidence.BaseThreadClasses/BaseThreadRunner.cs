@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Konfidence.Base;
 using System.Threading;
 
@@ -14,8 +11,8 @@ namespace Konfidence.BaseThreadClasses
         protected abstract void AfterExecute();
         protected abstract void InitializeThreadLoop();
 
-        private T _ThreadAction = null;
-        private Thread _InternalThread = null;
+        private T _ThreadAction;
+        private Thread _InternalThread;
 
         internal int SleepTime;
         internal int WaitTime;
@@ -81,7 +78,7 @@ namespace Konfidence.BaseThreadClasses
         {
             _ThreadAction = new T();
 
-            _InternalThread = new Thread(new ThreadStart(InternalThreadLoop));
+            _InternalThread = new Thread(InternalThreadLoop);
 
             _InternalThread.Start();
         }

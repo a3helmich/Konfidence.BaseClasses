@@ -6,11 +6,11 @@ namespace Konfidence.BaseData
 {
 	public class BaseHost: BaseItem
 	{
-		private int _Id = 0;
-        //private Guid _GuidId = Guid.Empty;
+	    private const int ID = 0;
+	    //private Guid _GuidId = Guid.Empty;
 
-		private string _DataBaseName = string.Empty;
-		private string _ServiceName = string.Empty;
+		private readonly string _DataBaseName = string.Empty;
+		private readonly string _ServiceName = string.Empty;
 
 		#region properties
 
@@ -34,7 +34,7 @@ namespace Konfidence.BaseData
 		{
 			get
 			{
-				return _Id;
+				return ID;
 			}
 		}
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Diagnostics;
@@ -94,7 +95,8 @@ namespace Konfidence.BaseData
 			BuildItemList();
 		}
 
-		protected static bool IsAssigned(object assignedObject)
+        [ContractAnnotation("assignedObject:null => false")]
+        protected static bool IsAssigned(object assignedObject)
 		{
 			return BaseItem.IsAssigned(assignedObject);
 		}
@@ -561,7 +563,7 @@ namespace Konfidence.BaseData
 
 		public void AddItem(BaseHost dataHost)
 		{
-			var baseDataItem = new T {_DataHost = dataHost};
+			var baseDataItem = new T {DataHost = dataHost};
 
 		    if (IsAssigned(baseDataItem))
 			{

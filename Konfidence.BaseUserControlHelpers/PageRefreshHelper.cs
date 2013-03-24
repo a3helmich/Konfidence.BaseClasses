@@ -2,13 +2,12 @@ using System;
 using System.Globalization;
 using System.Web;
 using System.Web.UI;
-using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
 	public static class PageRefreshHelper 
 	{
-		public const string CurrentRefreshTicketEntry = "CURRENTREFRESHTICKETENTRY";
+		public const string CURRENT_REFRESH_TICKET_ENTRY = "CURRENTREFRESHTICKETENTRY";
 
 		public static bool Check(Page page, HttpContext context, bool asyncPostback)
 		{
@@ -33,12 +32,11 @@ namespace Konfidence.BaseUserControlHelpers
 
 		private static int GetSessionTicket(HttpContext context, Page page)
 		{
-			string currentTicket;
+		    var sessionHelper = new SessionHelper(context, page.UniqueID);
 
-			SessionHelper sessionHelper = new SessionHelper(context, page.UniqueID);
-			SessionParameterObject sessionParameterObject = sessionHelper.SessionParameterObject;
+			var sessionParameterObject = sessionHelper.SessionParameterObject;
 
-			currentTicket = sessionParameterObject.SessionTicket;
+			var currentTicket = sessionParameterObject.SessionTicket;
 
 			if (!string.IsNullOrEmpty(currentTicket))
 			{
@@ -57,7 +55,7 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			int ticket;
 
-			string currentTicketString = context.Request[CurrentRefreshTicketEntry];
+			string currentTicketString = context.Request[CURRENT_REFRESH_TICKET_ENTRY];
 
 			if (!string.IsNullOrEmpty(currentTicketString))
 			{
@@ -85,10 +83,11 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			string ticket = assignedTicket.ToString(CultureInfo.InvariantCulture);
 
-			page.ClientScript.RegisterHiddenField(CurrentRefreshTicketEntry, ticket);
+			page.ClientScript.RegisterHiddenField(CURRENT_REFRESH_TICKET_ENTRY, ticket);
 
-			SessionHelper sessionHelper = new SessionHelper(context, page.UniqueID);
-			SessionParameterObject sessionParameterObject = sessionHelper.SessionParameterObject;
+			var sessionHelper = new SessionHelper(context, page.UniqueID);
+
+			var sessionParameterObject = sessionHelper.SessionParameterObject;
 
 			sessionParameterObject.SessionTicket = ticket;
 		}

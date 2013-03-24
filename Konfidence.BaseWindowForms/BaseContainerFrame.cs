@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 using Konfidence.BaseHelper;
 
 namespace Konfidence.BaseWindowForms
@@ -19,10 +14,10 @@ namespace Konfidence.BaseWindowForms
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.Container components = null;
-        public System.Windows.Forms.Panel BaseFrameLeftContainerPanel;
-        public System.Windows.Forms.Panel BaseFrameRightContainerPanel;
-        public System.Windows.Forms.Splitter FrameSplitter;
+        private readonly System.ComponentModel.Container _Components = null;
+        public Panel BaseFrameLeftContainerPanel;
+        public Panel BaseFrameRightContainerPanel;
+        public Splitter FrameSplitter;
         private bool _ShowDesignHelper;
 
         public bool ShowDesignHelper
@@ -66,9 +61,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (components != null)
+                if (_Components != null)
                 {
-                    components.Dispose();
+                    _Components.Dispose();
                 }
             }
             base.Dispose(disposing);
@@ -123,9 +118,7 @@ namespace Konfidence.BaseWindowForms
         }
         #endregion
 
-        private BaseConfigClass _Config;
-
-        public BaseConfigClass Config { get { return _Config; } set { _Config = value; } }
+        public BaseConfigClass Config { get; set; }
 
         public virtual void AfterCreate()
         {

@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using System.IO;
+using JetBrains.Annotations;
 
 namespace Konfidence.Base
 {
@@ -191,6 +192,7 @@ namespace Konfidence.Base
             return GetNode(Root, name);
         }
 
+        [ContractAnnotation("assignedObject:null => false")]
         protected static bool IsAssigned(object assignedObject)
         {
             return BaseItem.IsAssigned(assignedObject);

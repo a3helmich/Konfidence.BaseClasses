@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Windows.Forms;
-
-namespace BaseWindowForms
+namespace Konfidence.BaseWindowForms
 {
     /// <summary>
     /// Summary description for BaseMainFrame.
@@ -15,7 +8,7 @@ namespace BaseWindowForms
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.Container components = null;
+        private readonly System.ComponentModel.Container _Components = null;
 
         public BaseMainFrame()
         {
@@ -37,9 +30,9 @@ namespace BaseWindowForms
         {
             if (disposing)
             {
-                if (components != null)
+                if (_Components != null)
                 {
-                    components.Dispose();
+                    _Components.Dispose();
                 }
             }
             base.Dispose(disposing);

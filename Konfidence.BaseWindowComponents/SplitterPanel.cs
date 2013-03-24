@@ -1,29 +1,24 @@
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Windows.Forms;
 
-namespace BaseWindowComponents
+namespace Konfidence.BaseWindowComponents
 {
 	/// <summary>
 	/// Summary description for UserControl1.
 	/// </summary>
-	public class SplitterPanel : System.Windows.Forms.UserControl
+	public class SplitterPanel : UserControl
 	{
-    public System.Windows.Forms.Splitter splitter;
-    public System.Windows.Forms.Panel panel2;
-    private System.Windows.Forms.Panel _panel1;
+    public Splitter Splitter;
+    public Panel Panel2;
+    private Panel _Panel1;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private readonly System.ComponentModel.Container _Components = null;
 
-    public Panel panel1
+    public Panel Panel1
     {
-      get { return _panel1; }
-      set { _panel1 = value; }
+      get { return _Panel1; }
+      set { _Panel1 = value; }
     }
 
 
@@ -43,8 +38,8 @@ namespace BaseWindowComponents
 		{
 			if( disposing )
 			{
-				if( components != null )
-					components.Dispose();
+				if( _Components != null )
+					_Components.Dispose();
 			}
 			base.Dispose( disposing );
 		}
@@ -56,42 +51,42 @@ namespace BaseWindowComponents
 		/// </summary>
 		private void InitializeComponent()
 		{
-      this._panel1 = new System.Windows.Forms.Panel();
-      this.splitter = new System.Windows.Forms.Splitter();
-      this.panel2 = new System.Windows.Forms.Panel();
+      this._Panel1 = new System.Windows.Forms.Panel();
+      this.Splitter = new System.Windows.Forms.Splitter();
+      this.Panel2 = new System.Windows.Forms.Panel();
       this.SuspendLayout();
       // 
       // _panel1
       // 
-      this._panel1.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
-      this._panel1.Dock = System.Windows.Forms.DockStyle.Left;
-      this._panel1.Location = new System.Drawing.Point(0, 0);
-      this._panel1.Name = "_panel1";
-      this._panel1.Size = new System.Drawing.Size(128, 240);
-      this._panel1.TabIndex = 0;
+      this._Panel1.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
+      this._Panel1.Dock = System.Windows.Forms.DockStyle.Left;
+      this._Panel1.Location = new System.Drawing.Point(0, 0);
+      this._Panel1.Name = "_Panel1";
+      this._Panel1.Size = new System.Drawing.Size(128, 240);
+      this._Panel1.TabIndex = 0;
       // 
       // splitter
       // 
-      this.splitter.Location = new System.Drawing.Point(128, 0);
-      this.splitter.Name = "splitter";
-      this.splitter.Size = new System.Drawing.Size(16, 240);
-      this.splitter.TabIndex = 1;
-      this.splitter.TabStop = false;
+      this.Splitter.Location = new System.Drawing.Point(128, 0);
+      this.Splitter.Name = "Splitter";
+      this.Splitter.Size = new System.Drawing.Size(16, 240);
+      this.Splitter.TabIndex = 1;
+      this.Splitter.TabStop = false;
       // 
       // panel2
       // 
-      this.panel2.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(192)), ((System.Byte)(255)), ((System.Byte)(192)));
-      this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.panel2.Location = new System.Drawing.Point(144, 0);
-      this.panel2.Name = "panel2";
-      this.panel2.Size = new System.Drawing.Size(136, 240);
-      this.panel2.TabIndex = 2;
+      this.Panel2.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(192)), ((System.Byte)(255)), ((System.Byte)(192)));
+      this.Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.Panel2.Location = new System.Drawing.Point(144, 0);
+      this.Panel2.Name = "Panel2";
+      this.Panel2.Size = new System.Drawing.Size(136, 240);
+      this.Panel2.TabIndex = 2;
       // 
       // SplitterPanel
       // 
-      this.Controls.Add(this.panel2);
-      this.Controls.Add(this.splitter);
-      this.Controls.Add(this._panel1);
+      this.Controls.Add(this.Panel2);
+      this.Controls.Add(this.Splitter);
+      this.Controls.Add(this._Panel1);
       this.Name = "SplitterPanel";
       this.Size = new System.Drawing.Size(280, 240);
       this.ResumeLayout(false);

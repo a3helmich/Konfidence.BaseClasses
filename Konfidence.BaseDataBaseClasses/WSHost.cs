@@ -5,11 +5,11 @@ using Konfidence.BaseData.WSBaseHost;
 
 namespace Konfidence.BaseData
 {
-	internal class WSHost : BaseHost
+	internal class WsHost : BaseHost
 	{
-		private WSBaseHostService _WsBaseHostService;
+		private readonly WSBaseHostService _WsBaseHostService;
 
-        public WSHost(string serviceName, string dataBaseName) : base(serviceName, dataBaseName)
+        public WsHost(string serviceName, string dataBaseName) : base(serviceName, dataBaseName)
 		{
             _WsBaseHostService = new WSBaseHostService();
 
@@ -26,61 +26,20 @@ namespace Konfidence.BaseData
 		}
 
 		#region GetField Methods
-        internal override Int16 GetFieldInt16(string fieldName)
-        {
-            return base.GetFieldInt16(fieldName);
-        }
-        
-        internal override int GetFieldInt32(string fieldName)
-		{
-			return base.GetFieldInt32(fieldName);
-		}
 
-        internal override Guid GetFieldGuid(string fieldName)
-        {
-            return base.GetFieldGuid(fieldName);
-        }
-
-        internal override string GetFieldString(string fieldName)
-		{
-			return base.GetFieldString(fieldName);
-		}
-
-		internal override bool GetFieldBool(string fieldName)
-		{
-			return base.GetFieldBool(fieldName);
-		}
-
-		internal override DateTime GetFieldDateTime(string fieldName)
-		{
-			return base.GetFieldDateTime(fieldName);
-		}
-
-        internal override TimeSpan GetFieldTimeSpan(string fieldName)
-        {
-            return base.GetFieldTimeSpan(fieldName);
-        }
-
-        internal override Decimal GetFieldDecimal(string fieldName)
-        {
-            return base.GetFieldDecimal(fieldName);
-        }
-#endregion
+	    #endregion
 
 		internal override void Save(BaseDataItem dataItem)
 		{
-			List<DbParameterObject> ParameterDataItemList = dataItem.SetItemData();
+			var parameterDataItemList = dataItem.SetItemData();
 
-			List<ParameterObject> parameterObjectList = new List<ParameterObject>();
+			var parameterObjectList = new List<ParameterObject>();
 
-			foreach(DbParameterObject parameterDataItem in ParameterDataItemList)
+			foreach(DbParameterObject parameterDataItem in parameterDataItemList)
 			{
-				ParameterObject parameterObject = new ParameterObject();
+				var parameterObject = new ParameterObject {Field = parameterDataItem.Field, Value = parameterDataItem.Value};
 
-				parameterObject.Field = parameterDataItem.Field;
-				parameterObject.Value = parameterDataItem.Value;
-
-				parameterObjectList.Add(parameterObject);
+			    parameterObjectList.Add(parameterObject);
 			}
 
             dataItem.SetKey(_WsBaseHostService.Save(parameterObjectList.ToArray(), dataItem._Id));
@@ -101,23 +60,21 @@ namespace Konfidence.BaseData
             //}
             //else
             {
-                List<DbParameterObject> ParameterDataItemList = dataItem.SetParameterData();
+                var parameterDataItemList = dataItem.SetParameterData();
 
-                List<ParameterObject> parameterObjectList = new List<ParameterObject>();
+                var parameterObjectList = new List<ParameterObject>();
 
-                ParameterObject parameterObject = new ParameterObject();
-
-                parameterObject.Field = "StoredProcedure";
-                parameterObject.Value = getStoredProcedure;
+                var parameterObject = new ParameterObject {Field = "StoredProcedure", Value = getStoredProcedure};
 
                 parameterObjectList.Add(parameterObject);
 
-                foreach (DbParameterObject parameterDataItem in ParameterDataItemList)
+                foreach (DbParameterObject parameterDataItem in parameterDataItemList)
                 {
-                    parameterObject = new ParameterObject();
-
-                    parameterObject.Field = parameterDataItem.Field;
-                    parameterObject.Value = parameterDataItem.Value;
+                    parameterObject = new ParameterObject
+                        {
+                            Field = parameterDataItem.Field,
+                            Value = parameterDataItem.Value
+                        };
 
                     parameterObjectList.Add(parameterObject);
                 }
@@ -137,7 +94,7 @@ namespace Konfidence.BaseData
 
 			if (IsAssigned(parameterObjects))
 			{
-				Dictionary<string, object> propertyDictionary = new Dictionary<string, object>();
+				var propertyDictionary = new Dictionary<string, object>();
 
 				foreach(ParameterObject parameterObject in parameterObjects)
 				{
@@ -159,9 +116,9 @@ namespace Konfidence.BaseData
 
 			foreach (ParameterObject[] parameterObjectList in parameterObjectsList)
 			{
-				BaseDataItem baseDataItem = baseDataItemList.GetDataItem();
+				var baseDataItem = baseDataItemList.GetDataItem();
 
-				Dictionary<string, object> parameterDictionary = new Dictionary<string, object>();
+				var parameterDictionary = new Dictionary<string, object>();
 
 				foreach (ParameterObject parameterObjectItem in parameterObjectList)
 				{

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Konfidence.Base;
 using System.Xml;
 
@@ -85,6 +82,11 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
         public PageSetting(XmlElement pageSettingElement)
         {
             LoadXml(pageSettingElement.OuterXml);
+        }
+
+        public override sealed void LoadXml(string xml)
+        {
+            base.LoadXml(xml);
         }
     }
 }

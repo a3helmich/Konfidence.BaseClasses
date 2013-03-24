@@ -1,17 +1,14 @@
 using System.Collections.Generic;
 using System.Web;
+using DbSiteMapMenuClasses;
+using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.DbSiteMapMenuClasses;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
     //	[AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Minimal)]
     public class DbSiteMapProvider : StaticSiteMapProvider
     {
-        private bool _LoggedOn = false;
-        private bool _Administrator = false;
-        private bool _IsLocal = false;
-
         private SiteMapNode _RootNode;
 
         #region properties
@@ -29,43 +26,20 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        public bool LoggedOn
-        {
-            get
-            {
-                return _LoggedOn;
-            }
-            set
-            {
-                _LoggedOn = value;
-            }
-        }
+        public bool LoggedOn { get; set; }
 
-        public bool Administrator
-        {
-            get
-            {
-                return _Administrator;
-            }
-            set
-            {
-                _Administrator = value;
-            }
-        }
+        public bool Administrator { get; set; }
 
-        public bool IsLocal
-        {
-            get
-            {
-                return _IsLocal;
-            }
-            set
-            {
-                _IsLocal = value;
-            }
-        }
+        public bool IsLocal { get; set; }
 
         #endregion
+
+        public DbSiteMapProvider()
+        {
+            LoggedOn = false;
+            Administrator = false;
+            IsLocal = false;
+        }
 
         protected override SiteMapNode GetRootNodeCore() // !!! base niet aanroepen, is by design !!!
         {
@@ -202,6 +176,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             return menuNode;
         }
 
+        [ContractAnnotation("assignedObject:null => false")]
         private static bool IsAssigned(object assignedObject)
         {
             return BaseItem.IsAssigned(assignedObject);

@@ -6,9 +6,8 @@ namespace Konfidence.BaseUserControlHelpers
 	{
 		private int _PrimaryKey; // default value 0 
 		private int _ForeignKey; // default value 0
-		private string _SessionTicket; // default value 0
-		
-		#region properties
+
+        #region properties
 		public int PrimaryKey
 		{
 			get
@@ -55,18 +54,8 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
-		public string SessionTicket
-		{
-			get
-			{
-				return _SessionTicket;
-			}
-			set
-			{
-				_SessionTicket = value;
-			}
-		}
+        public string SessionTicket { get; set; }
 
-		#endregion
+        #endregion
 	}
 }

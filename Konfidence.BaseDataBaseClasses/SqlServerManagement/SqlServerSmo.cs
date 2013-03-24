@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.SqlServer.Management.Smo;
-using Microsoft.SqlServer.Server;
 using System.Threading;
 using Konfidence.Base;
 using Microsoft.SqlServer.Management.Common;
-using System.Data.SqlClient;
 
 namespace Konfidence.BaseData.SqlServerManagement
 {
@@ -16,11 +12,16 @@ namespace Konfidence.BaseData.SqlServerManagement
         private string _UserName = string.Empty;
         private string _Password = string.Empty;
 
-        private bool _PingSucceeded = false;
+        private bool _PingSucceeded;
+
+        public SqlServerSmo()
+        {
+            _PingSucceeded = false;
+        }
 
         internal static bool VerifyDatabaseServer(string databaseServerName, string userName, string password)
         {
-            SqlServerSmo executer = new SqlServerSmo();
+            var executer = new SqlServerSmo();
 
             return executer.PingSqlServerVersion(databaseServerName, userName, password);
         }
@@ -33,7 +34,7 @@ namespace Konfidence.BaseData.SqlServerManagement
                 _UserName = userName;
                 _Password = password;
 
-                Thread executerThread = new Thread(PingSqlServerVersionExecuter);
+                var executerThread = new Thread(PingSqlServerVersionExecuter);
 
                 executerThread.Start();
 
@@ -53,23 +54,22 @@ namespace Konfidence.BaseData.SqlServerManagement
 
             try
             {
-                string result;
-
                 if (!IsEmpty(_UserName) && !IsEmpty(_Password))
                 {
-                    ServerConnection serverConnection = new ServerConnection(_DatabaseServerName, _UserName, _Password);
+                    var serverConnection = new ServerConnection(_DatabaseServerName, _UserName, _Password)
+                        {
+                            LoginSecure = false
+                        };
 
-                    serverConnection.LoginSecure = false;
+                    var server = new Server(serverConnection);
 
-                    Server server = new Server(serverConnection);
-
-                    result = server.PingSqlServerVersion(_DatabaseServerName, _UserName, _Password).ToString();
+                    server.PingSqlServerVersion(_DatabaseServerName, _UserName, _Password);
                 }
                 else
                 {
-                    Server server = new Server();
+                    var server = new Server();
 
-                    result = server.PingSqlServerVersion(_DatabaseServerName).ToString();
+                    server.PingSqlServerVersion(_DatabaseServerName);
                 }
 
                 _PingSucceeded = true;
@@ -78,9 +78,8 @@ namespace Konfidence.BaseData.SqlServerManagement
             {
                 throw cfEx.InnerException;
             }
-            catch (Exception ex)
+            catch
             {
-                string test = ex.Message;
                 // if this fails, a timeout has already occured
             }
 
@@ -92,9 +91,10 @@ namespace Konfidence.BaseData.SqlServerManagement
 
             if (!IsEmpty(userName) && !IsEmpty(password))
             {
-                ServerConnection serverConnection = new ServerConnection(databaseServerName, userName, password);
-
-                serverConnection.LoginSecure = false;
+                var serverConnection = new ServerConnection(databaseServerName, userName, password)
+                    {
+                        LoginSecure = false
+                    };
 
                 server = new Server(serverConnection);
             }
@@ -103,7 +103,7 @@ namespace Konfidence.BaseData.SqlServerManagement
                 server = new Server();
             }
 
-            List<string> databaseList = new List<string>();
+            var databaseList = new List<string>();
 
             foreach (Database database in server.Databases)
             {

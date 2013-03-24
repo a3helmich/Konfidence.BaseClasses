@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Konfidence.Base;
-using Konfidence.BaseData;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data.SqlClient;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.TestBaseClasses
 {

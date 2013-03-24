@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Konfidence.Base;
+﻿using Konfidence.Base;
 using System.Xml;
 
 namespace Konfidence.BaseUserControlHelpers.PageSetting
 {
     public class PageSettingXmlDocument : BaseXmlDocument
     {
-        private PageSettingDictionary _PageSettingDictionary = null;
+        private PageSettingDictionary _PageSettingDictionary;
         private string _MenuUrl = string.Empty;
         private string _LogonUrl = string.Empty;
 
@@ -53,7 +49,7 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
                     {
                         foreach (XmlElement pageSettingElement in pageSettingNodeList)
                         {
-                            PageSetting pageSetting = new PageSetting(pageSettingElement);
+                            var pageSetting = new PageSetting(pageSettingElement);
 
                             _PageSettingDictionary.Add(pageSetting.PageName.ToLowerInvariant(), pageSetting);
 

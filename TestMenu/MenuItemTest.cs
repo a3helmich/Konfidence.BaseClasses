@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Konfidence.DbSiteMapMenuClasses;
+﻿using DbSiteMapMenuClasses;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MenuTest
 {
@@ -44,7 +44,9 @@ namespace MenuTest
         [TestMethod]
         public void GetSingleMenuItem()
         {
-            new Bl.MenuDataItem(2);
+            var dataItem = new Bl.MenuDataItem(2);
+
+            Assert.IsNotNull(dataItem);
         }
 
         [TestMethod]
@@ -56,7 +58,9 @@ namespace MenuTest
         [TestMethod]
         public void GetParentMenuItem()
         {
-            new Bl.MenuDataItem(1);
+            var test = new Bl.MenuDataItem(1);
+
+            Assert.IsNotNull(test);
         }
     }
 }

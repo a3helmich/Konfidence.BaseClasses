@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.UI;
 using Konfidence.Base;
-using System.Configuration;
 
 namespace Konfidence.BaseUserControlHelpers
 {
     public abstract class BaseMasterPage<T> : MasterPage where T : BaseWebPresenter, new()
     {
-        private BasePageHelper _BasePageHelper = null;
+        private BasePageHelper _BasePageHelper;
 
-        private Dictionary<string, string> _MasterPageDictionaryIn = null;
-        private Dictionary<string, string> _MasterPageDictionaryOut = null;
+        private Dictionary<string, string> _MasterPageDictionaryIn;
+        private Dictionary<string, string> _MasterPageDictionaryOut;
 
-        private bool _IsMasterPagePostBack = false;
+        private bool _IsMasterPagePostBack;
 
-        private T _Presenter = null;
+        private T _Presenter;
 
         public T Presenter
         {
@@ -30,6 +27,11 @@ namespace Konfidence.BaseUserControlHelpers
 
                 return _Presenter;
             }
+        }
+
+        protected BaseMasterPage ()
+        {
+            _IsMasterPagePostBack = false;
         }
 
         protected abstract void RestoreViewState();
@@ -124,12 +126,17 @@ namespace Konfidence.BaseUserControlHelpers
                 {
                     string urlReferer = string.Empty;
 
-                    if (IsAssigned(this.Request.UrlReferrer))
+                    if (IsAssigned(Request.UrlReferrer))
                     {
-                        urlReferer = this.Request.UrlReferrer.ToString();
+                        var urlReferrer = Request.UrlReferrer;
+
+                        if (urlReferrer != null)
+                        {
+                            urlReferer = urlReferrer.ToString();
+                        }
                     }
 
-                    _BasePageHelper = new BasePageHelper(this.Request.Url.ToString(), urlReferer);
+                    _BasePageHelper = new BasePageHelper(Request.Url.ToString(), urlReferer);
                 }
                 catch (NullReferenceException)
                 {
@@ -240,9 +247,9 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        private List<string> _MasterPageFileList = null;
+        private List<string> _MasterPageFileList;
 
-        private List<string> MasterPageFileList
+        private IEnumerable<string> MasterPageFileList
         {
             get
             {

@@ -1,7 +1,3 @@
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 using Konfidence.UtilHelper;
 
@@ -10,14 +6,14 @@ namespace Konfidence.BaseWindowForms
     /// <summary>
     /// Summary description for BaseDialogForm.
     /// </summary>
-    public class BaseDialogForm : System.Windows.Forms.Form
+    public class BaseDialogForm : Form
     {
-        protected System.Windows.Forms.Button buttonCancel;
-        protected System.Windows.Forms.Button buttonOK;
+        protected Button ButtonCancel;
+        protected Button ButtonOk;
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.Container components = null;
+        private readonly System.ComponentModel.Container _Components = null;
 
         private IApplicationSettings _ApplicationSettings;
         private string _ConfigurationName = string.Empty;
@@ -30,6 +26,12 @@ namespace Konfidence.BaseWindowForms
                     _ApplicationSettings = ApplicationSettingsFactory.ApplicationSettings(Application.ProductName);
                 return _ApplicationSettings;
             }
+        }
+
+        public string ConfigurationName
+        {
+            get { return _ConfigurationName; }
+            set { _ConfigurationName = value; }
         }
 
         public BaseDialogForm() : this(Application.ProductName)
@@ -45,7 +47,7 @@ namespace Konfidence.BaseWindowForms
 
         public BaseDialogForm(string configurationName)
         {
-            _ConfigurationName = configurationName;
+            ConfigurationName = configurationName;
         }
 
         /// <summary>
@@ -55,9 +57,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (components != null)
+                if (_Components != null)
                 {
-                    components.Dispose();
+                    _Components.Dispose();
                 }
             }
             base.Dispose(disposing);
@@ -70,38 +72,38 @@ namespace Konfidence.BaseWindowForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOK = new System.Windows.Forms.Button();
+            this.ButtonCancel = new System.Windows.Forms.Button();
+            this.ButtonOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonCancel.Location = new System.Drawing.Point(153, 118);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 16;
-            this.buttonCancel.Text = "Cancel";
+            this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.ButtonCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ButtonCancel.Location = new System.Drawing.Point(153, 118);
+            this.ButtonCancel.Name = "ButtonCancel";
+            this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
+            this.ButtonCancel.TabIndex = 16;
+            this.ButtonCancel.Text = "Cancel";
             // 
             // buttonOK
             // 
-            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonOK.Location = new System.Drawing.Point(73, 118);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
-            this.buttonOK.TabIndex = 15;
-            this.buttonOK.Text = "OK";
+            this.ButtonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ButtonOk.Location = new System.Drawing.Point(73, 118);
+            this.ButtonOk.Name = "ButtonOk";
+            this.ButtonOk.Size = new System.Drawing.Size(75, 23);
+            this.ButtonOk.TabIndex = 15;
+            this.ButtonOk.Text = "OK";
             // 
             // BaseDialogForm
             // 
-            this.AcceptButton = this.buttonOK;
+            this.AcceptButton = this.ButtonOk;
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(296, 262);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.ButtonCancel);
+            this.Controls.Add(this.ButtonOk);
             this.Name = "BaseDialogForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "BaseDialogForm";

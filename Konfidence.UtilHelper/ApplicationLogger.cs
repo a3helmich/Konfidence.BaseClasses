@@ -1,5 +1,4 @@
 using System.IO;
-using Konfidence.DesignPatterns;
 using Konfidence.DesignPatterns.Singleton;
 
 
@@ -19,7 +18,7 @@ namespace Konfidence.UtilHelper
     {
         private string _LogFile;
         private StreamWriter _LogStream;
-        private bool disposed; //  = false; // default :(
+        private bool _Disposed; //  = false; // default :(
 
         private StreamWriter LogStream
         {
@@ -60,7 +59,7 @@ namespace Konfidence.UtilHelper
 
         ~ApplicationLogger()
         {
-            if (disposed)
+            if (_Disposed)
             {
                 LogStream.Flush();
                 LogStream.Close();
@@ -71,7 +70,7 @@ namespace Konfidence.UtilHelper
         {
             LogStream.Flush();
             LogStream.Close();
-            disposed = true;
+            _Disposed = true;
         }
 
 
@@ -81,10 +80,16 @@ namespace Konfidence.UtilHelper
     {
         static public IApplicationLogger ApplicationLogger(string logFile)
         {
-            IApplicationLogger ApplicationLogger = GetInstance(typeof(ApplicationLogger)) as IApplicationLogger;
-            ApplicationLogger.LogFile = logFile;
-            ApplicationLogger.LogFile = logFile;
-            return ApplicationLogger as IApplicationLogger;
+            var applicationLogger = GetInstance(typeof(ApplicationLogger)) as IApplicationLogger;
+
+            if (applicationLogger != null)
+            {
+                applicationLogger.LogFile = logFile;
+
+                return applicationLogger;
+            }
+
+            return null;
         }
 
         private ApplicationLoggerFactory()

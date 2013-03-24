@@ -1,4 +1,3 @@
-using System;
 using System.Text.RegularExpressions;
 
 
@@ -11,8 +10,8 @@ namespace Konfidence.BaseWindowForms
     {
         public static bool IsValidEmail(string eMail)
         {
-            Regex regex = new Regex(".+@.+\\.[a-z]+");
-            Match match = regex.Match(eMail);
+            var regex = new Regex(".+@.+\\.[a-z]+");
+            var match = regex.Match(eMail);
 
             return match.Success;
         }

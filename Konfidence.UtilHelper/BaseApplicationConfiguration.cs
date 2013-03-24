@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Xml;
 using System.Collections;
 using System;
@@ -9,9 +10,9 @@ namespace Konfidence.UtilHelper
     public class BaseApplicationConfiguration: BaseItem
     {
         private XmlDocument _Configuration;
-        private XmlNode _Root = null;
+        private XmlNode _Root;
 
-        private string _ConfigFileName;
+        private readonly string _ConfigFileName;
 
         protected string ConfigFileName
         {
@@ -80,8 +81,8 @@ namespace Konfidence.UtilHelper
 
         protected ArrayList GetArrayListNodeValue(string name)
         {
-            ArrayList ArrayArrayList = new ArrayList();
-            ArrayList ArrayByteListNodeValue = new ArrayList();
+            var arrayArrayList = new ArrayList();
+            var arrayByteListNodeValue = new ArrayList();
 
             string joinedArray = GetNodeValue(name);
 
@@ -89,28 +90,28 @@ namespace Konfidence.UtilHelper
             {
                 if (!string.IsNullOrEmpty(joinedArray))
                 {
-                    ArrayList ArrayListNodeValue = new ArrayList();
+                    var arrayListNodeValue = new ArrayList();
 
                     string[] splitArray = joinedArray.Split(' ');
 
-                    ArrayListNodeValue.AddRange(splitArray);
+                    arrayListNodeValue.AddRange(splitArray);
 
-                    foreach (string byteString in ArrayListNodeValue)
+                    foreach (string byteString in arrayListNodeValue)
                     {
-                        ArrayByteListNodeValue.Add(Convert.ToByte(byteString));
+                        arrayByteListNodeValue.Add(Convert.ToByte(byteString));
                     }
                 }
 
-                ArrayArrayList.Add(ArrayByteListNodeValue.ToArray(typeof(byte)) as byte[]);
+                arrayArrayList.Add(arrayByteListNodeValue.ToArray(typeof(byte)) as byte[]);
             }
-            catch
+            catch (Exception)
             {
                 // hier kom je o.a. terecht als de arraystring geen arraystring is.
                 // op dit moment gebeurt dit als de password string verkeerd wordt aangepast.
                 // ff niks
             }
 
-            return ArrayArrayList;
+            return arrayArrayList;
         }
 
         protected void SetNodeValue(string name, string value)
@@ -153,19 +154,22 @@ namespace Konfidence.UtilHelper
 
             if (IsAssigned(value))
             {
-                ArrayList stringArrayList = new ArrayList();
+                var stringArrayList = new ArrayList();
 
                 foreach (byte[] byteArray in value)
                 {
                     foreach (byte byteChar in byteArray)
                     {
-                        stringArrayList.Add(byteChar.ToString());
+                        stringArrayList.Add(byteChar.ToString(CultureInfo.InvariantCulture));
                     }
                 }
 
-                string[] stringArray = stringArrayList.ToArray(typeof(string)) as string[];
+                var stringArray = stringArrayList.ToArray(typeof(string)) as string[];
 
-                joinedArray = string.Join(" ", stringArray);
+                if (stringArray != null)
+                {
+                    joinedArray = string.Join(" ", stringArray);
+                }
             }
 
             SetNodeValue(name, joinedArray);

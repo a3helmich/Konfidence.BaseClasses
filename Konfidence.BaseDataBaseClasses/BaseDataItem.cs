@@ -10,25 +10,24 @@ namespace Konfidence.BaseData
 {
 	public class BaseDataItem: BaseItem
 	{
-		public const string BaseLanguage = "NL";
+		public const string BASE_LANGUAGE = "NL";
 		public bool WithLanguage = false;
 
-        private bool _IsSelected = false;
-        private bool _IsEditing = false;
+        private bool _IsSelected;
 
-        private string _LoadStoredProcedure = string.Empty;
+	    private string _LoadStoredProcedure = string.Empty;
 		private string _DeleteStoredProcedure = string.Empty;
 		private string _SaveStoredProcedure = string.Empty;
 
-        internal BaseHost _DataHost = null;   // _DataHost is used by the GetFieldXXXX methods
-		internal Dictionary<string, object> _PropertyDictionary = null;
+        internal BaseHost DataHost = null;   // _DataHost is used by the GetFieldXXXX methods
+		internal Dictionary<string, object> PropertyDictionary = null;
 
 		private string _AutoIdField = string.Empty;
         private string _GuidIdField = string.Empty;
         internal int _Id = 0;
         private Guid _GuidIdValue = Guid.Empty;
 
-        private Dictionary<string, DbParameterObject> _AutoUpdateFieldList = null;
+        private Dictionary<string, DbParameterObject> _AutoUpdateFieldList;
 
 		private string _ServiceName = string.Empty;
 
@@ -51,14 +50,13 @@ namespace Konfidence.BaseData
             // nop
         }
 
-        public bool IsEditing
-        {
-            get { return _IsEditing; }
-            set { _IsEditing = value; }
-        }
+	    public bool IsEditing { get; set; }
 
-		public BaseDataItem()
+	    public BaseDataItem()
 		{
+		    _IsSelected = false;
+		    IsEditing = false;
+
 			InitializeDataItem();
             AfterInitializeDataItem();
 		}
@@ -70,11 +68,11 @@ namespace Konfidence.BaseData
 
 		internal void SetProperties(Dictionary<string, object> propertyDictionary)
 		{
-			_PropertyDictionary = propertyDictionary;
+			PropertyDictionary = propertyDictionary;
 
 			GetData();
 
-			_PropertyDictionary = null;
+			PropertyDictionary = null;
 		}
 
 		internal void GetProperties(List<DbParameterObject> properties)
@@ -396,16 +394,14 @@ namespace Konfidence.BaseData
 
         private Int16 GetFieldInt16(string fieldName)
         {
-            if (IsAssigned(_PropertyDictionary))
+            if (IsAssigned(PropertyDictionary))
             {
-                return (Int16)_PropertyDictionary[fieldName];
+                return (Int16)PropertyDictionary[fieldName];
             }
-            else
+
+            if (IsAssigned(DataHost))
             {
-                if (IsAssigned(_DataHost))
-                {
-                    return _DataHost.GetFieldInt16(fieldName);
-                }
+                return DataHost.GetFieldInt16(fieldName);
             }
 
             throw (new Exception("GetFieldInt16: dataHost/_PropertyDictionary is not assigned"));
@@ -413,40 +409,36 @@ namespace Konfidence.BaseData
 
 		private Int32 GetFieldInt32(string fieldName)
 		{
-			if (IsAssigned(_PropertyDictionary))
+			if (IsAssigned(PropertyDictionary))
 			{
-				return (Int32)_PropertyDictionary[fieldName];
-			}
-			else
-			{
-				if (IsAssigned(_DataHost))
-				{
-					return _DataHost.GetFieldInt32(fieldName);
-				}
+				return (Int32)PropertyDictionary[fieldName];
 			}
 
-			throw (new Exception("GetFieldInt32: dataHost/_PropertyDictionary is not assigned"));
+		    if (IsAssigned(DataHost))
+		    {
+		        return DataHost.GetFieldInt32(fieldName);
+		    }
+
+		    throw (new Exception("GetFieldInt32: dataHost/_PropertyDictionary is not assigned"));
 		}
 
         private Guid GetFieldGuid(string fieldName)
         {
-            if (IsAssigned(_PropertyDictionary))
+            if (IsAssigned(PropertyDictionary))
             {
-                return (Guid)_PropertyDictionary[fieldName];
+                return (Guid)PropertyDictionary[fieldName];
             }
-            else
+
+            if (IsAssigned(DataHost))
             {
-                if (IsAssigned(_DataHost))
+                var fieldValue = DataHost.GetFieldGuid(fieldName);
+
+                if (fieldName.Equals(GuidIdField, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Guid fieldValue = _DataHost.GetFieldGuid(fieldName);
-
-                    if (fieldName.Equals(GuidIdField, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        _GuidIdValue = fieldValue;
-                    }
-
-                    return fieldValue;
+                    _GuidIdValue = fieldValue;
                 }
+
+                return fieldValue;
             }
 
             throw (new Exception("GetFieldGuid: dataHost/_PropertyDictionary is not assigned"));
@@ -454,33 +446,29 @@ namespace Konfidence.BaseData
 
 		private string GetFieldString(string fieldName)
 		{
-			if (IsAssigned(_PropertyDictionary))
+			if (IsAssigned(PropertyDictionary))
 			{
-				return _PropertyDictionary[fieldName] as string;
+				return PropertyDictionary[fieldName] as string;
 			}
-			else
-			{
-				if (IsAssigned(_DataHost))
-				{
-					return _DataHost.GetFieldString(fieldName);
-				}
-			}
+		    
+            if (IsAssigned(DataHost))
+		    {
+		        return DataHost.GetFieldString(fieldName);
+		    }
 
-			throw (new Exception("GetFieldString: dataHost/_PropertyDictionary  is not assigned"));
+		    throw (new Exception("GetFieldString: dataHost/_PropertyDictionary  is not assigned"));
 		}
 
         private bool GetFieldBool(string fieldName)
         {
-            if (IsAssigned(_PropertyDictionary))
+            if (IsAssigned(PropertyDictionary))
             {
-                return (bool)_PropertyDictionary[fieldName];
+                return (bool)PropertyDictionary[fieldName];
             }
-            else
+            
+            if (IsAssigned(DataHost))
             {
-                if (IsAssigned(_DataHost))
-                {
-                    return _DataHost.GetFieldBool(fieldName);
-                }
+                return DataHost.GetFieldBool(fieldName);
             }
 
             throw (new Exception("GetFieldBool: dataHost/_PropertyDictionary  is not assigned"));
@@ -488,33 +476,29 @@ namespace Konfidence.BaseData
 
 		private DateTime GetFieldDateTime(string fieldName)
 		{
-			if (IsAssigned(_PropertyDictionary))
+			if (IsAssigned(PropertyDictionary))
 			{
-				return (DateTime)_PropertyDictionary[fieldName];
+				return (DateTime)PropertyDictionary[fieldName];
 			}
-			else
-			{
-				if (IsAssigned(_DataHost))
-				{
-					return _DataHost.GetFieldDateTime(fieldName);
-				}
-			}
+		    
+            if (IsAssigned(DataHost))
+		    {
+		        return DataHost.GetFieldDateTime(fieldName);
+		    }
 
-			throw (new Exception("GetFieldDateTime: dataHost/_PropertyDictionary  is not assigned"));
+		    throw (new Exception("GetFieldDateTime: dataHost/_PropertyDictionary  is not assigned"));
 		}
 
         private TimeSpan GetFieldTimeSpan(string fieldName)
         {
-            if (IsAssigned(_PropertyDictionary))
+            if (IsAssigned(PropertyDictionary))
             {
-                return (TimeSpan)_PropertyDictionary[fieldName];
+                return (TimeSpan)PropertyDictionary[fieldName];
             }
-            else
+            
+            if (IsAssigned(DataHost))
             {
-                if (IsAssigned(_DataHost))
-                {
-                    return _DataHost.GetFieldTimeSpan(fieldName);
-                }
+                return DataHost.GetFieldTimeSpan(fieldName);
             }
 
             throw (new Exception("GetFieldTimeSpan: dataHost/_PropertyDictionary  is not assigned"));
@@ -522,16 +506,14 @@ namespace Konfidence.BaseData
 
         private Decimal GetFieldDecimal(string fieldName)
         {
-            if (IsAssigned(_PropertyDictionary))
+            if (IsAssigned(PropertyDictionary))
             {
-                return (Decimal)_PropertyDictionary[fieldName];
+                return (Decimal)PropertyDictionary[fieldName];
             }
-            else
+            
+            if (IsAssigned(DataHost))
             {
-                if (IsAssigned(_DataHost))
-                {
-                    return _DataHost.GetFieldDecimal(fieldName);
-                }
+                return DataHost.GetFieldDecimal(fieldName);
             }
 
             throw (new Exception("GetFieldDecimal: dataHost/_PropertyDictionary  is not assigned"));
@@ -669,13 +651,13 @@ namespace Konfidence.BaseData
 		{
             BaseHost dataHost = GetHost();
 
-            _DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
+            DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
 
             dataHost.GetItem(this, storedProcedure);
 
             AfterGetDataItem();
 
-            _DataHost = null;
+            DataHost = null;
         }
 
 		protected void GetItem(string storedProcedure, int autoKeyId)
@@ -802,7 +784,8 @@ namespace Konfidence.BaseData
 
         internal List<DbParameterObject> SetParameterData()
         {
-            List<DbParameterObject> parameterObjectList = new List<DbParameterObject>();
+            var parameterObjectList = new List<DbParameterObject>();
+
             foreach (DbParameterObject parameterObject in _ParameterObjectList)
             {
                 parameterObjectList.Add(parameterObject);

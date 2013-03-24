@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Services;
+﻿using System.Web.Services;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
     public class BaseWebService<T> : WebService where T : BaseWebPresenter, new()
     {
-        private T _Presenter = null;
+        private T _Presenter;
 
         public T Presenter
         {
@@ -24,6 +21,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [ContractAnnotation("assignedObject:null => false")]
         protected static bool IsAssigned(object assignedObject)
         {
             return BaseItem.IsAssigned(assignedObject);

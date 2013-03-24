@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Web;
 using System.Web.UI;
 using Konfidence.Base;
-using System.Globalization;
 
 
 namespace Konfidence.BaseUserControlHelpers
 {
     public class BasePageHelper: BaseItem
     {
-        private string[] _UrlParts = new string[0];
-        private string[] _RefererParts = new string[0];
+        private readonly string[] _UrlParts = new string[0];
+        private readonly string[] _RefererParts = new string[0];
 
         private string _CurrentDomainExtension = string.Empty;
         private string _CurrentLanguage = string.Empty;
@@ -152,9 +150,9 @@ namespace Konfidence.BaseUserControlHelpers
 
         private bool IsValidDnsName()
         {
-            string[] UrlNodes = CurrentDnsName.Split('.');
+            var urlNodes = CurrentDnsName.Split('.');
 
-            if (UrlNodes.Length <= 1)
+            if (urlNodes.Length <= 1)
             {
                 SetErrorMessage("dns name is not valid (1 node only)");
             }
@@ -164,19 +162,19 @@ namespace Konfidence.BaseUserControlHelpers
 
         private string GetCurrentDomainExtension()
         {
-            string currentDomainExtension = "nl"; // default
+            var currentDomainExtension = "nl"; // default
 
-            string[] UrlNodes = CurrentDnsName.Split('.');
+            var urlNodes = CurrentDnsName.Split('.');
 
-            if (UrlNodes.Length > 0)
+            if (urlNodes.Length > 0)
             {
-                currentDomainExtension = UrlNodes[UrlNodes.Length - 1];
+                currentDomainExtension = urlNodes[urlNodes.Length - 1];
 
-                if (UrlNodes.Length > 1)
+                if (urlNodes.Length > 1)
                 {
                     if (currentDomainExtension.Equals("uk"))
                     {
-                        currentDomainExtension = UrlNodes[UrlNodes.Length - 2] + "." + UrlNodes[UrlNodes.Length - 1];
+                        currentDomainExtension = urlNodes[urlNodes.Length - 2] + "." + urlNodes[urlNodes.Length - 1];
                     }
                 }
             }
@@ -186,14 +184,12 @@ namespace Konfidence.BaseUserControlHelpers
 
         private string GetCurrentPagePath()
         {
-            string currentPagePath = string.Empty;
-
             // strip the first three nodes from the string array
-            string[] pagePathParts = new string[_UrlParts.Length - 3];
+            var pagePathParts = new string[_UrlParts.Length - 3];
 
             Array.Copy(_UrlParts, 3, pagePathParts, 0, pagePathParts.Length);
 
-            currentPagePath = "/" + string.Join("/", pagePathParts);
+            string currentPagePath = "/" + string.Join("/", pagePathParts);
 
             return currentPagePath;
         }
