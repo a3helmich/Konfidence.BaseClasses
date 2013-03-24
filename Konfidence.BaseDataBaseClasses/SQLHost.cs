@@ -11,7 +11,7 @@ namespace Konfidence.BaseData
 {
 	internal class SqlHost : BaseHost
 	{
-		private IDataReader _DataReader;
+        private IDataReader _DataReader;
 
 		public SqlHost(string dataBaseName): base(string.Empty, dataBaseName)
 		{
@@ -218,6 +218,8 @@ namespace Konfidence.BaseData
 
                 using (IDataReader dataReader = database.ExecuteReader(dbCommand))
                 {
+                    _DataReader = dataReader;
+
                     while (dataReader.Read())
                     {
                         parentDataItemList.AddItem(this);
@@ -236,6 +238,8 @@ namespace Konfidence.BaseData
                     {
                         childDataItemList.AddItem(this);
                     }
+
+                    _DataReader = null;
                 }
             }
         }
@@ -255,10 +259,14 @@ namespace Konfidence.BaseData
 
 				using (IDataReader dataReader = database.ExecuteReader(dbCommand))
 				{
-					while (dataReader.Read())
+				    _DataReader = dataReader;
+
+                    while (dataReader.Read())
 					{
 						baseDataItemList.AddItem(this);
 					}
+
+				    _DataReader = null;
 				}
 			}
 		}   
@@ -379,10 +387,12 @@ namespace Konfidence.BaseData
 		{
 			if (!IsAssigned(_DataReader))
 			{
-				throw new ArgumentNullException("fieldName");
+			    const string message = @"_DataReader: in SQLHost.GetOrdinal(string fieldName);";
+
+			    throw new ArgumentNullException(message);
 			}
 
-			return _DataReader.GetOrdinal(fieldName);
+		    return _DataReader.GetOrdinal(fieldName);
 		}
 
 		private static void SetItemData(BaseDataItem dataItem, Database database, DbCommand dbCommand)
