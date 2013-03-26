@@ -8,7 +8,7 @@ namespace Konfidence.BaseWindowForms
     /// <summary>
     /// Summary description for Form1.
     /// </summary>
-    public sealed class BaseMainform : System.Windows.Forms.Form
+    public class BaseMainform : System.Windows.Forms.Form
     {
         private Type _ConfigClass;
         private BaseConfigClass _Config;
