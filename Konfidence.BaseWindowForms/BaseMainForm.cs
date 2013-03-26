@@ -80,7 +80,7 @@ namespace Konfidence.BaseWindowForms
             _BaseMainframe = BuildMainContainer(null);
         }
 
-        private void BaseInitialize()
+        virtual protected void BaseInitialize()
         {
             // TODO: Supply in derived mainform the application configclass
         }
@@ -363,7 +363,7 @@ namespace Konfidence.BaseWindowForms
         }
 
         [EnvironmentPermissionAttribute(SecurityAction.LinkDemand, Unrestricted = true)]
-        private BaseContainerFrame BuildMainContainer(/*IdEnum*/ BaseContainerFrame mainframe)
+        protected virtual BaseContainerFrame BuildMainContainer(BaseContainerFrame mainframe)
         {
             try
             {
