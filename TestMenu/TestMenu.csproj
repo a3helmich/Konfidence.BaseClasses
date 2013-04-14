@@ -72,8 +72,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>c:\projects\References\Konfidence.BaseUserControlHelpers.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Data.Schema, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.Data.Schema.UnitTesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d0a1a4e466b0ec13, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>c:\projects\References\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
