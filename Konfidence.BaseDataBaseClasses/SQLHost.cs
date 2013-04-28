@@ -2,27 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
-using Konfidence.BaseData.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
-using System.Diagnostics;
 
 namespace Konfidence.BaseData
 {
 	internal class SqlHost : BaseHost
 	{
         private IDataReader _DataReader;
+	    private readonly IDatabaseRepository _DatabaseRepository;
 
 		public SqlHost(string dataBaseName): base(string.Empty, dataBaseName)
 		{
             // TODO : figure out if the Host is properly configured
             //        and if all resources are avalable
+
+            _DatabaseRepository = new DatabaseRepository(dataBaseName);
 		}
 
 		#region GetField Methods
 		internal override Int16 GetFieldInt16(string fieldName)
 		{
-			int fieldOrdinal = GetOrdinal(fieldName);
+			var fieldOrdinal = GetOrdinal(fieldName);
 
 			if (_DataReader.IsDBNull(fieldOrdinal))
 			{
@@ -34,7 +34,7 @@ namespace Konfidence.BaseData
 
         internal override Int32 GetFieldInt32(string fieldName)
         {
-            int fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName);
 
             if (_DataReader.IsDBNull(fieldOrdinal))
             {
@@ -46,7 +46,7 @@ namespace Konfidence.BaseData
 
         internal override Guid GetFieldGuid(string fieldName)
         {
-            int fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName);
 
             if (_DataReader.IsDBNull(fieldOrdinal))
             {
@@ -58,7 +58,7 @@ namespace Konfidence.BaseData
 
 		internal override string GetFieldString(string fieldName)
 		{
-			int fieldOrdinal = GetOrdinal(fieldName);
+			var fieldOrdinal = GetOrdinal(fieldName);
 
 			if (_DataReader.IsDBNull(fieldOrdinal))
 			{
@@ -70,7 +70,7 @@ namespace Konfidence.BaseData
 
 		internal override bool GetFieldBool(string fieldName)
 		{
-			int fieldOrdinal = GetOrdinal(fieldName);
+			var fieldOrdinal = GetOrdinal(fieldName);
 
 			if (_DataReader.IsDBNull(fieldOrdinal))
 			{
@@ -82,7 +82,7 @@ namespace Konfidence.BaseData
 
 		internal override DateTime GetFieldDateTime(string fieldName)
 		{
-			int fieldOrdinal = GetOrdinal(fieldName);
+			var fieldOrdinal = GetOrdinal(fieldName);
 
 			if (_DataReader.IsDBNull(fieldOrdinal))
 			{
@@ -94,7 +94,7 @@ namespace Konfidence.BaseData
 
         internal override TimeSpan GetFieldTimeSpan(string fieldName)
         {
-            int fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName);
 
             if (_DataReader.IsDBNull(fieldOrdinal))
             {
@@ -106,7 +106,7 @@ namespace Konfidence.BaseData
 
         internal override Decimal GetFieldDecimal(string fieldName)
         {
-            int fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName);
 
             if (_DataReader.IsDBNull(fieldOrdinal))
             {
@@ -129,45 +129,47 @@ namespace Konfidence.BaseData
 				throw (new Exception("SaveStoredProcedure not provided"));
 			}
 
-			Database database = GetDatabase();
+		    var executeParameters = new RequestParameters(dataItem);
+		    ResponseParameters resultParameters;
 
-            using (DbCommand dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
+			var database = _DatabaseRepository.GetDatabase();
+
+            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
-                SetItemData(dataItem, database, dbCommand);
+                _DatabaseRepository.SetParameterData(executeParameters, database, dbCommand);
 
-                database.ExecuteNonQuery(dbCommand);
+                _DatabaseRepository.ExecuteNonQuery(dbCommand);
 
-                dataItem.SetKey((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));
+                resultParameters = _DatabaseRepository.GetParameterData(executeParameters, database, dbCommand);
+            }
 
-                foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
+		    dataItem.SetKey(resultParameters.Id);
+
+            foreach (var kvp in dataItem.AutoUpdateFieldList)
+            {
+                kvp.Value.Value = resultParameters.AutoUpdateFieldList[kvp.Key];
+
+                if (DBNull.Value.Equals(kvp.Value.Value))
                 {
-                    kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
-
-                    if (DBNull.Value.Equals(kvp.Value.Value))
-                    {
-                        kvp.Value.Value = null;
-                    }
+                    kvp.Value.Value = null;
                 }
             }
-            // TODO : retrieve database-side updated fields, and make defaults toway fields, instead of readonly
-            //        make update trigers readonly and insert triggers toway fields, instead of readonly
-            //        generate code in the implemented-class instead of the BaseDataItem-class
         }
 
-		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure)
+	    internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure)
 		{
 			if (getStoredProcedure.Equals(string.Empty))
 			{
 				throw (new Exception("GetStoredProcedure not provided"));
 			}
 
-			Database database = GetDatabase();
+            var database = _DatabaseRepository.GetDatabase();
 
-			using (DbCommand dbCommand = database.GetStoredProcCommand(getStoredProcedure))
+            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(getStoredProcedure))
 			{
                 dataItem.SetParameters(getStoredProcedure, database, dbCommand);
 
-				using (IDataReader dataReader = database.ExecuteReader(dbCommand))
+				using (var dataReader = database.ExecuteReader(dbCommand))
 				{
 					if (dataReader.Read())
 					{
@@ -192,13 +194,13 @@ namespace Konfidence.BaseData
 
 			if (id > 0)
 			{
-				Database database = GetDatabase();
+                var database = _DatabaseRepository.GetDatabase();
 
-				using (DbCommand dbCommand = database.GetStoredProcCommand(deleteStoredProcedure))
+                using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(deleteStoredProcedure))
 				{
 					database.AddInParameter(dbCommand, autoIdField, DbType.Int32, id);
 
-					database.ExecuteNonQuery(dbCommand);
+                    _DatabaseRepository.ExecuteNonQuery(dbCommand);
 				}
 			}
 		}
@@ -210,13 +212,13 @@ namespace Konfidence.BaseData
                 throw (new Exception("GetListStoredProcedure not provided"));
             }
 
-            Database database = GetDatabase();
+            var database = _DatabaseRepository.GetDatabase();
 
-            using (DbCommand dbCommand = database.GetStoredProcCommand(getRelatedStoredProcedure))
+            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(getRelatedStoredProcedure))
             {
                 parentDataItemList.SetParameters(getRelatedStoredProcedure, database, dbCommand);
 
-                using (IDataReader dataReader = database.ExecuteReader(dbCommand))
+                using (var dataReader = database.ExecuteReader(dbCommand))
                 {
                     _DataReader = dataReader;
 
@@ -251,13 +253,13 @@ namespace Konfidence.BaseData
 				throw (new Exception("GetListStoredProcedure not provided"));
 			}
 
-			Database database = GetDatabase();
+            var database = _DatabaseRepository.GetDatabase();
 
-			using (DbCommand dbCommand = database.GetStoredProcCommand(getListStoredProcedure))
+            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(getListStoredProcedure))
 			{
 				baseDataItemList.SetParameters(getListStoredProcedure, database, dbCommand);
 
-				using (IDataReader dataReader = database.ExecuteReader(dbCommand))
+				using (var dataReader = database.ExecuteReader(dbCommand))
 				{
 				    _DataReader = dataReader;
 
@@ -274,50 +276,44 @@ namespace Konfidence.BaseData
 		// TODO : Paramaters via de parameter class doorgeven
 		internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
 		{
-			Database database = GetDatabase();
+		    var parameterList = new List<object> {parameters};
 
-			int effectedRows;
-
-			using (DbCommand dbCommand = database.GetStoredProcCommand(storedProcedure, parameters))
+		    using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(storedProcedure, parameterList))
 			{
-				effectedRows = database.ExecuteNonQuery(dbCommand);
+                return _DatabaseRepository.ExecuteNonQuery(dbCommand);
 			}
-
-			return effectedRows;
 		}
 
 		internal override int ExecuteTextCommand(string textCommand)
 		{
-			Database database = GetDatabase();
-
-			return database.ExecuteNonQuery(CommandType.Text, textCommand);
+            return _DatabaseRepository.ExecuteNonQuery(CommandType.Text, textCommand);
 		}
 
 		internal override bool TableExists(string tableName)
 		{
-			return ObjectExists(tableName, "Tables");
+            return _DatabaseRepository.ObjectExists(tableName, "Tables");
 		}
 
 		internal override bool ViewExists(string viewName)
 		{
-			return ObjectExists(viewName, "Views");
+            return _DatabaseRepository.ObjectExists(viewName, "Views");
 		}
 
         internal override bool StoredProcedureExists(string storedProcedureName)
         {
-            return ObjectExists(storedProcedureName, "Procedures");
+            return _DatabaseRepository.ObjectExists(storedProcedureName, "Procedures");
         }
 
         internal override DataTable GetSchemaObject(string collection)
         {
-            Database database = GetDatabase();
+            var database = _DatabaseRepository.GetDatabase();
             DataTable dataTable;
 
-            using (DbConnection dbConnection = database.CreateConnection())
+            using (var dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
-                using (DataTable schemaTable = dbConnection.GetSchema(collection))
+                using (var schemaTable = dbConnection.GetSchema(collection))
                 {
                         dataTable = schemaTable.Copy();
                 }
@@ -325,63 +321,6 @@ namespace Konfidence.BaseData
 
             return dataTable;
         }
-
-		private bool ObjectExists(string objectName, string collection)
-		{
-			// TODO: schema information
-			//DbConnection dbConnection = database.CreateConnection();
-			//DataTable schemaTable = dbConnection.GetSchema("Tables"); 
-			// MetaDataCollections, DataSourceInformation, DataTypes, Restrictions, ReservedWords, 
-			// Users, Databases, Tables, Columns, Views, ViewColumns, ProcedureParameters, 
-			// Procedures, ForeignKeys, IndexColumns, Indexes, UserDefinedTypes
-			Database database = GetDatabase();
-
-			using (DbConnection dbConnection = database.CreateConnection())
-			{
-				dbConnection.Open();
-
-				using (DataTable schemaTable = dbConnection.GetSchema(collection))
-				{
-					foreach (DataRow dataRow in schemaTable.Rows)
-					{
-						string foundName = dataRow[2].ToString();
-
-						if (objectName.Equals(foundName, StringComparison.InvariantCultureIgnoreCase))
-						{
-							return true;
-						}
-					}
-				}
-			}
-
-			return false;
-		}
-
-		private Database GetDatabase()
-		{
-            Database databaseInstance;
-
-			if (DataBaseName.Length > 0)
-			{
-				databaseInstance = DatabaseFactory.CreateDatabase(DataBaseName);
-			}
-			else
-			{
-                databaseInstance = DatabaseFactory.CreateDatabase();
-			}
-
-		    if (Debugger.IsAttached || UnitTest)
-		    {
-		        if (databaseInstance.DbProviderFactory is SqlClientFactory)
-		        {
-		            if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
-		            {
-		            }
-		        }
-		    }
-
-		    return databaseInstance;
-		}
 
 		private int GetOrdinal(string fieldName)
 		{
@@ -393,30 +332,6 @@ namespace Konfidence.BaseData
 			}
 
 		    return _DataReader.GetOrdinal(fieldName);
-		}
-
-		private static void SetItemData(BaseDataItem dataItem, Database database, DbCommand dbCommand)
-		{
-            // autoidfield parameter toevoegen
-			database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
-														dataItem.AutoIdField, DataRowVersion.Proposed, dataItem._Id);
-
-            // alle velden die aan de kant van de database gewijzigd worden als parameter toevoegen
-            foreach (KeyValuePair<string, DbParameterObject> kvp in dataItem.AutoUpdateFieldList)
-            {
-                var parameterObject = kvp.Value;
-
-                database.AddParameter(dbCommand, parameterObject.Field, parameterObject.DbType, ParameterDirection.InputOutput,
-                                                            parameterObject.Field, DataRowVersion.Proposed, parameterObject.Value);
-            }
-
-            // alle overige parameters toevoegen
-            List<DbParameterObject> parameterObjectList = dataItem.SetItemData();
-
-            foreach (DbParameterObject parameterObject in parameterObjectList)
-			{
-                    database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
-			}
 		}
 	}
 }
