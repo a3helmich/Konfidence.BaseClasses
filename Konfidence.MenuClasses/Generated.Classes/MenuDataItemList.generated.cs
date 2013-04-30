@@ -101,7 +101,6 @@ namespace DbSiteMapMenuClasses
 
             public override void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
             {
-
                 if (storedProcedure.Equals(MENU_GETLISTBY_MENUCODE))
                 {
                     database.AddInParameter(dbCommand, MenuDataItem.MENUCODE, DbType.Int32, _MenuCode);
