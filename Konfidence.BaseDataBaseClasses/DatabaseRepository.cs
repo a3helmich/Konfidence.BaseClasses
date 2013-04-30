@@ -55,7 +55,25 @@ namespace Konfidence.BaseData
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure, parameters.ToArray());
         }
 
-        public void SetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
+        public ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters)
+        {
+            var database = GetDatabase();
+
+            ResponseParameters resultParameters;
+
+            using (var dbCommand = GetStoredProcCommand(executeParameters.StoredProcedure))
+            {
+                SetParameterData(executeParameters, database, dbCommand);
+
+                ExecuteNonQuery(dbCommand);
+
+                resultParameters = GetParameterData(executeParameters, database, dbCommand);
+            }
+
+            return resultParameters;
+        }
+
+        private void SetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
         {
             // autoidfield parameter toevoegen
             database.AddParameter(dbCommand, executeParameters.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
@@ -77,7 +95,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        public ResponseParameters GetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
+        private ResponseParameters GetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
         {
             var responseParameters = new ResponseParameters();
 
@@ -96,13 +114,21 @@ namespace Konfidence.BaseData
 
             return responseParameters;
         }
+        
+        public int ExecuteNonQuery(string storedProcedure, List<object> parameterList)
+        {
+            using (var dbCommand = GetStoredProcCommand(storedProcedure, parameterList))
+            {
+                return ExecuteNonQuery(dbCommand);
+            }
+        }
 
         public int ExecuteNonQuery(DbCommand dbCommand)
         {
             return GetDatabase().ExecuteNonQuery(dbCommand);
         }
 
-        public int ExecuteNonQuery(CommandType commandType, string textCommand)
+        public int ExecuteNonQuery(string textCommand)
         {
             return GetDatabase().ExecuteNonQuery(CommandType.Text, textCommand); 
         }

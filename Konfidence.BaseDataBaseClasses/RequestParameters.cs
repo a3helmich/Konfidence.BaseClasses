@@ -6,10 +6,11 @@ namespace Konfidence.BaseData
     internal class RequestParameters : BaseItem
     {
         private readonly BaseDataItem _DataItem;
+        private readonly string _StoredProcedure;
 
-        internal string SaveStoredProcedure
+        internal string StoredProcedure
         {
-            get { return _DataItem.SaveStoredProcedure; }
+            get { return _StoredProcedure; }
         }
 
         internal string AutoIdField
@@ -37,8 +38,10 @@ namespace Konfidence.BaseData
             }
         }
 
-        public RequestParameters(BaseDataItem dataItem)
+        public RequestParameters(BaseDataItem dataItem, string storedProcedure)
         {
+            _StoredProcedure = storedProcedure;
+
             _DataItem = dataItem;
         }
     }

@@ -10,11 +10,10 @@ namespace Konfidence.BaseData
         Database GetDatabase();
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
         DbCommand GetStoredProcCommand(string saveStoredProcedure, List<object> parameters);
-        void SetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand);
-        int ExecuteNonQuery(DbCommand dbCommand);
-        int ExecuteNonQuery(CommandType commandType, string textCommand);
+        ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters);
+        int ExecuteNonQuery(string storedProcedure, List<object> parameterList);
+        int ExecuteNonQuery(string textCommand);
+        int ExecuteNonQuery(DbCommand commandType);
         bool ObjectExists(string objectName, string collection);
-
-        ResponseParameters GetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand);
     }
 }

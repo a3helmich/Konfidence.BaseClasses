@@ -1,22 +1,19 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData
 {
 	internal class SqlHost : BaseHost
 	{
         private IDataReader _DataReader;
-	    private readonly IDatabaseRepository _DatabaseRepository;
+	    private readonly IDatabaseRepository _Repository;
 
 		public SqlHost(string dataBaseName): base(string.Empty, dataBaseName)
 		{
             // TODO : figure out if the Host is properly configured
             //        and if all resources are avalable
 
-            _DatabaseRepository = new DatabaseRepository(dataBaseName);
+            _Repository = new DatabaseRepository(dataBaseName);
 		}
 
 		#region GetField Methods
@@ -126,22 +123,10 @@ namespace Konfidence.BaseData
 
             if (dataItem.SaveStoredProcedure.Equals(string.Empty))
 			{
-				throw (new Exception("SaveStoredProcedure not provided"));
+				throw (new Exception("StoredProcedure not provided"));
 			}
 
-		    var executeParameters = new RequestParameters(dataItem);
-		    ResponseParameters resultParameters;
-
-			var database = _DatabaseRepository.GetDatabase();
-
-            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(dataItem.SaveStoredProcedure))
-            {
-                _DatabaseRepository.SetParameterData(executeParameters, database, dbCommand);
-
-                _DatabaseRepository.ExecuteNonQuery(dbCommand);
-
-                resultParameters = _DatabaseRepository.GetParameterData(executeParameters, database, dbCommand);
-            }
+            var resultParameters = _Repository.ExecuteSaveStoredProcedure(new RequestParameters(dataItem, dataItem.SaveStoredProcedure));
 
 		    dataItem.SetKey(resultParameters.Id);
 
@@ -163,9 +148,9 @@ namespace Konfidence.BaseData
 				throw (new Exception("GetStoredProcedure not provided"));
 			}
 
-            var database = _DatabaseRepository.GetDatabase();
+            var database = _Repository.GetDatabase();
 
-            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(getStoredProcedure))
+            using (var dbCommand = _Repository.GetStoredProcCommand(getStoredProcedure))
 			{
                 dataItem.SetParameters(getStoredProcedure, database, dbCommand);
 
@@ -194,13 +179,13 @@ namespace Konfidence.BaseData
 
 			if (id > 0)
 			{
-                var database = _DatabaseRepository.GetDatabase();
+                var database = _Repository.GetDatabase();
 
-                using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(deleteStoredProcedure))
+                using (var dbCommand = _Repository.GetStoredProcCommand(deleteStoredProcedure))
 				{
 					database.AddInParameter(dbCommand, autoIdField, DbType.Int32, id);
 
-                    _DatabaseRepository.ExecuteNonQuery(dbCommand);
+                    _Repository.ExecuteNonQuery(dbCommand);
 				}
 			}
 		}
@@ -212,9 +197,9 @@ namespace Konfidence.BaseData
                 throw (new Exception("GetListStoredProcedure not provided"));
             }
 
-            var database = _DatabaseRepository.GetDatabase();
+            var database = _Repository.GetDatabase();
 
-            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(getRelatedStoredProcedure))
+            using (var dbCommand = _Repository.GetStoredProcCommand(getRelatedStoredProcedure))
             {
                 parentDataItemList.SetParameters(getRelatedStoredProcedure, database, dbCommand);
 
@@ -253,9 +238,9 @@ namespace Konfidence.BaseData
 				throw (new Exception("GetListStoredProcedure not provided"));
 			}
 
-            var database = _DatabaseRepository.GetDatabase();
+            var database = _Repository.GetDatabase();
 
-            using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(getListStoredProcedure))
+            using (var dbCommand = _Repository.GetStoredProcCommand(getListStoredProcedure))
 			{
 				baseDataItemList.SetParameters(getListStoredProcedure, database, dbCommand);
 
@@ -273,40 +258,34 @@ namespace Konfidence.BaseData
 			}
 		}   
 
-		// TODO : Paramaters via de parameter class doorgeven
-		internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
-		{
-		    var parameterList = new List<object> {parameters};
+        //internal override int ExecuteCommand(string storedProcedure, params object[] parameters) niet gebruikt?
+        //{
+        //    return _Repository.ExecuteNonQuery(storedProcedure, new List<object> {parameters});
+        //}
 
-		    using (var dbCommand = _DatabaseRepository.GetStoredProcCommand(storedProcedure, parameterList))
-			{
-                return _DatabaseRepository.ExecuteNonQuery(dbCommand);
-			}
-		}
-
-		internal override int ExecuteTextCommand(string textCommand)
+	    internal override int ExecuteTextCommand(string textCommand)
 		{
-            return _DatabaseRepository.ExecuteNonQuery(CommandType.Text, textCommand);
+            return _Repository.ExecuteNonQuery(textCommand);
 		}
 
 		internal override bool TableExists(string tableName)
 		{
-            return _DatabaseRepository.ObjectExists(tableName, "Tables");
+            return _Repository.ObjectExists(tableName, "Tables");
 		}
 
 		internal override bool ViewExists(string viewName)
 		{
-            return _DatabaseRepository.ObjectExists(viewName, "Views");
+            return _Repository.ObjectExists(viewName, "Views");
 		}
 
         internal override bool StoredProcedureExists(string storedProcedureName)
         {
-            return _DatabaseRepository.ObjectExists(storedProcedureName, "Procedures");
+            return _Repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
         internal override DataTable GetSchemaObject(string collection)
         {
-            var database = _DatabaseRepository.GetDatabase();
+            var database = _Repository.GetDatabase();
             DataTable dataTable;
 
             using (var dbConnection = database.CreateConnection())
