@@ -26,11 +26,11 @@ namespace Konfidence.BaseData
         private string _GuidIdField = string.Empty;
         private Guid _GuidIdValue = Guid.Empty;
 
-        private Dictionary<string, DbParameterObject> _AutoUpdateFieldList;
+        private Dictionary<string, DbParameterObject> _AutoUpdateFieldDictionary;
 
 		private string _ServiceName = string.Empty;
 
-		private List<DbParameterObject> _ParameterObjectList = new List<DbParameterObject>();
+		private List<DbParameterObject> _DbParameterObjectList = new List<DbParameterObject>();
 		private string _DataBaseName = string.Empty;
 
         public bool IsSelected
@@ -90,16 +90,16 @@ namespace Konfidence.BaseData
 
 		internal void GetProperties(List<DbParameterObject> properties)
 		{
-			_ParameterObjectList = properties;
+			_DbParameterObjectList = properties;
 
 			SetData();
 
-			_ParameterObjectList = null;
+			_DbParameterObjectList = null;
 		}
 
         internal List<DbParameterObject> GetParameterObjectList()
         {
-            return _ParameterObjectList;
+            return _DbParameterObjectList;
         }
 
 		#region properties
@@ -142,16 +142,16 @@ namespace Konfidence.BaseData
         //    get { return _Id.ToString(); }
         //}
 
-        internal protected Dictionary<string, DbParameterObject> AutoUpdateFieldList
+        internal protected Dictionary<string, DbParameterObject> AutoUpdateFieldDictionary
         {
             get
             {
-                if (!IsAssigned(_AutoUpdateFieldList))
+                if (!IsAssigned(_AutoUpdateFieldDictionary))
                 {
-                    _AutoUpdateFieldList = new Dictionary<string, DbParameterObject>();
+                    _AutoUpdateFieldDictionary = new Dictionary<string, DbParameterObject>();
                 }
 
-                return _AutoUpdateFieldList;
+                return _AutoUpdateFieldDictionary;
             }
         }
 
@@ -199,11 +199,11 @@ namespace Konfidence.BaseData
         {
             Int16 fieldValue = 0;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = (Int16)AutoUpdateFieldList[fieldName].Value;
+                    fieldValue = (Int16)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
             
@@ -214,11 +214,11 @@ namespace Konfidence.BaseData
         {
             var fieldValue = 0;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = (Int32)AutoUpdateFieldList[fieldName].Value;
+                    fieldValue = (Int32)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
             
@@ -229,11 +229,11 @@ namespace Konfidence.BaseData
         {
             var fieldValue = Guid.Empty;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = (Guid)AutoUpdateFieldList[fieldName].Value;
+                    fieldValue = (Guid)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
 
@@ -244,11 +244,11 @@ namespace Konfidence.BaseData
         {
             var fieldValue = string.Empty;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = AutoUpdateFieldList[fieldName].Value as string;
+                    fieldValue = AutoUpdateFieldDictionary[fieldName].Value as string;
                 }
             }
 
@@ -259,11 +259,11 @@ namespace Konfidence.BaseData
         {
             var fieldValue = false;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = (bool)AutoUpdateFieldList[fieldName].Value;
+                    fieldValue = (bool)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
 
@@ -274,11 +274,11 @@ namespace Konfidence.BaseData
         {
             var fieldValue = DateTime.MinValue;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = (DateTime)AutoUpdateFieldList[fieldName].Value;
+                    fieldValue = (DateTime)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
 
@@ -289,11 +289,11 @@ namespace Konfidence.BaseData
         {
             var fieldValue = TimeSpan.MinValue;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = (TimeSpan)AutoUpdateFieldList[fieldName].Value;
+                    fieldValue = (TimeSpan)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
 
@@ -304,11 +304,11 @@ namespace Konfidence.BaseData
         {
             Decimal fieldValue = 0;
 
-            if (AutoUpdateFieldList.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldList[fieldName].Value))
+                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
                 {
-                    fieldValue = (Decimal)AutoUpdateFieldList[fieldName].Value;
+                    fieldValue = (Decimal)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
 
@@ -317,7 +317,7 @@ namespace Konfidence.BaseData
 
         internal protected void AddAutoUpdateField(string fieldName, DbType fieldType)
         {
-            AutoUpdateFieldList.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
+            AutoUpdateFieldDictionary.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
         }
 
         internal protected string LoadStoredProcedure
@@ -637,9 +637,9 @@ namespace Konfidence.BaseData
             SetField(fieldName, value);
         }
 
-        protected void SetParameterList(List<DbParameterObject> parameterObjectList)
+        protected void SetParameterList(List<DbParameterObject> dbParameterObjectList)
         {
-            _ParameterObjectList = parameterObjectList;
+            _DbParameterObjectList = dbParameterObjectList;
         }
 		#endregion
 
@@ -785,12 +785,12 @@ namespace Konfidence.BaseData
 
         //internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
         //{
-        //    foreach (var parameterObject in _ParameterObjectList)
+        //    foreach (var parameterObject in _DbParameterObjectList)
         //    {
         //        database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
         //    }
 
-        //    _ParameterObjectList.Clear();
+        //    _DbParameterObjectList.Clear();
         //}
 
 		internal List<DbParameterObject> SetItemData()
@@ -804,19 +804,19 @@ namespace Konfidence.BaseData
         {
             var parameterObjectList = new List<DbParameterObject>();
 
-            foreach (var parameterObject in _ParameterObjectList)
+            foreach (var parameterObject in _DbParameterObjectList)
             {
                 parameterObjectList.Add(parameterObject);
             }
 
-            _ParameterObjectList.Clear();
+            _DbParameterObjectList.Clear();
 
             return parameterObjectList;
         }
 
         private void AddInParameter(string field, DbType dbType, object value)
 		{
-			_ParameterObjectList.Add(new DbParameterObject(field, dbType , value));
+			_DbParameterObjectList.Add(new DbParameterObject(field, dbType , value));
 		}
 
         protected internal virtual void GetAutoUpdateData()
