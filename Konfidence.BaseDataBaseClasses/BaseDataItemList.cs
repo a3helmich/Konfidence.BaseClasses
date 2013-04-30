@@ -8,14 +8,6 @@ using System.Diagnostics;
 
 namespace Konfidence.BaseData
 {
-	public interface IBaseDataItemList
-	{
-		void SetParameters(string storedProcedure, Database database, DbCommand dbCommand);
-		void AddItem(BaseHost dataHost);
-		BaseDataItem GetDataItem();
-		List<List<DbParameterObject>> Convert2ListOfParameterObjectList();
-	}
-
     public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem, new()
 	{
 		private string _GetListStoredProcedure = string.Empty;

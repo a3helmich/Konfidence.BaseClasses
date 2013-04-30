@@ -105,6 +105,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="BaseHost.cs" />
+    <Compile Include="IBaseDataItemList.cs" />
     <Compile Include="IRepositories\IDatabaseRepository.cs" />
     <Compile Include="ParameterObjects\RetrieveParameters.cs" />
     <Compile Include="Repositories\DatabaseRepository.cs" />
