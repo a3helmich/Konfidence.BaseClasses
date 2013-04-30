@@ -1,6 +1,6 @@
 ﻿namespace Konfidence.BaseData
 {
-    internal interface IDatabaseReaderRepository
+    internal interface IReaderRepository
     {
     }
 }

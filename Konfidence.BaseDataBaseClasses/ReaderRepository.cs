@@ -3,11 +3,11 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseData
 {
-    internal class DatabaseReaderRepository : BaseItem, IDatabaseReaderRepository
+    internal class ReaderRepository : BaseItem, IReaderRepository
     {
         private IDataReader _DataReader;
 
-        public DatabaseReaderRepository(IDataReader dataReader)
+        public ReaderRepository(IDataReader dataReader)
         {
             _DataReader = dataReader;
         }
