@@ -1,5 +1,7 @@
 using System;
 using System.Data;
+using Konfidence.BaseData.IRepositories;
+using Konfidence.BaseData.Repositories;
 
 namespace Konfidence.BaseData
 {
