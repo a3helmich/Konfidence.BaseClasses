@@ -13,9 +13,6 @@ namespace Konfidence.BaseData
 
 		public SqlHost(string dataBaseName): base(string.Empty, dataBaseName)
 		{
-            // TODO : figure out if the Host is properly configured
-            //        and if all resources are avalable
-
             _Repository = new DatabaseRepository(dataBaseName);
 		}
 
@@ -200,6 +197,33 @@ namespace Konfidence.BaseData
 			}
 		}
 
+        internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
+        {
+            if (getListStoredProcedure.Equals(string.Empty))
+            {
+                throw (new Exception("GetListStoredProcedure not provided"));
+            }
+
+            var database = _Repository.GetDatabase();
+
+            using (var dbCommand = _Repository.GetStoredProcCommand(getListStoredProcedure))
+            {
+                baseDataItemList.SetParameters(getListStoredProcedure, database, dbCommand);
+
+                using (var dataReader = database.ExecuteReader(dbCommand))
+                {
+                    _DataReader = dataReader;
+
+                    while (dataReader.Read())
+                    {
+                        baseDataItemList.AddItem(this);
+                    }
+
+                    _DataReader = null;
+                }
+            }
+        }   
+
 	    internal override void BuildItemList(IBaseDataItemList parentDataItemList, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
 	    {
             if (getRelatedStoredProcedure.Equals(string.Empty))
@@ -241,36 +265,9 @@ namespace Konfidence.BaseData
             }
         }
 
-	    internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
-		{
-			if (getListStoredProcedure.Equals(string.Empty))
-			{
-				throw (new Exception("GetListStoredProcedure not provided"));
-			}
-
-            var database = _Repository.GetDatabase();
-
-            using (var dbCommand = _Repository.GetStoredProcCommand(getListStoredProcedure))
-			{
-				baseDataItemList.SetParameters(getListStoredProcedure, database, dbCommand);
-
-				using (var dataReader = database.ExecuteReader(dbCommand))
-				{
-				    _DataReader = dataReader;
-
-                    while (dataReader.Read())
-					{
-						baseDataItemList.AddItem(this);
-					}
-
-				    _DataReader = null;
-				}
-			}
-		}   
-
-        //internal override int ExecuteCommand(string storedProcedure, params object[] parameters) niet gebruikt?
+        //internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
         //{
-        //    return _Repository.ExecuteNonQuery(storedProcedure, new List<object> {parameters});
+        //    return _Repository.ExecuteNonQuery(storedProcedure, new List<object> { parameters });
         //}
 
 	    internal override int ExecuteTextCommand(string textCommand)
@@ -293,23 +290,23 @@ namespace Konfidence.BaseData
             return _Repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
-        internal override DataTable GetSchemaObject(string collection)
-        {
-            DataTable dataTable;
+        //internal override DataTable GetSchemaObject(string collection)
+        //{
+        //    DataTable dataTable;
 
-            var database = _Repository.GetDatabase();
+        //    var database = _Repository.GetDatabase();
 
-            using (var dbConnection = database.CreateConnection())
-            {
-                dbConnection.Open();
+        //    using (var dbConnection = database.CreateConnection())
+        //    {
+        //        dbConnection.Open();
 
-                using (var schemaTable = dbConnection.GetSchema(collection))
-                {
-                        dataTable = schemaTable.Copy();
-                }
-            }
+        //        using (var schemaTable = dbConnection.GetSchema(collection))
+        //        {
+        //                dataTable = schemaTable.Copy();
+        //        }
+        //    }
 
-            return dataTable;
-        }
+        //    return dataTable;
+        //}
 	}
 }

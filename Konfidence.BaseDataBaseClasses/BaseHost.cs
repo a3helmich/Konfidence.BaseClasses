@@ -38,18 +38,6 @@ namespace Konfidence.BaseData
 			}
 		}
 
-        //protected Guid GuidId
-        //{
-        //    get
-        //    {
-        //        return _GuidId;
-        //    }
-        //    set
-        //    {
-        //        _GuidId = value;
-        //    }
-        //}
-
 		#endregion
 
 		public BaseHost(string serviceName, string databaseName)
@@ -81,10 +69,10 @@ namespace Konfidence.BaseData
 		{
 		}
 
-		internal virtual int ExecuteCommand(string storedProcedure, params object[] parameters)
-		{
-			return 0;
-		}
+        //internal virtual int ExecuteCommand(string storedProcedure, params object[] parameters)
+        //{
+        //    return 0;
+        //}
 
 		internal virtual int ExecuteTextCommand(string textCommand)
 		{

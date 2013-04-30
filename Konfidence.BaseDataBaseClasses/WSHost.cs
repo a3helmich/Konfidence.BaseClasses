@@ -138,10 +138,10 @@ namespace Konfidence.BaseData
 			base.BuildItemList(baseDataItemList, getListStoredProcedure);
 		}
 
-		internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
-		{
-			return _WsBaseHostService.ExecuteCommand(storedProcedure, parameters);
-		}
+        //internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
+        //{
+        //    return _WsBaseHostService.ExecuteCommand(storedProcedure, parameters);
+        //}
 
 		internal override int ExecuteTextCommand(string textCommand)
 		{

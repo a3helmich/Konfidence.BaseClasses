@@ -74,13 +74,13 @@ namespace Konfidence.BaseData
 			return baseDataItemList.Convert2ListOfParameterObjectList();
 		}
 
-		[WebMethod]
-		public int ExecuteCommand(string storedProcedure, params object[] parameters)
-		{
-			BaseDataItem baseDataItem = GetNewDataItem();
+        //[WebMethod]
+        //public int ExecuteCommand(string storedProcedure, params object[] parameters)
+        //{
+        //    BaseDataItem baseDataItem = GetNewDataItem();
 
-			return baseDataItem.ExecuteCommand(storedProcedure, parameters);
-		}
+        //    return baseDataItem.ExecuteCommand(storedProcedure, parameters);
+        //}
 
 		[WebMethod]
 		public int ExecuteTextCommand(string textCommand)

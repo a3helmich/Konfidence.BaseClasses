@@ -582,12 +582,12 @@ namespace Konfidence.BaseData
 			return dataHost.ExecuteTextCommand(textCommand);
 		}
 
-		protected int ExecuteCommand(string storedProcedure, params object[] parameters)
-		{
-            BaseHost dataHost = GetHost();
+        //protected int ExecuteCommand(string storedProcedure, params object[] parameters)
+        //{
+        //    BaseHost dataHost = GetHost();
 
-			return dataHost.ExecuteCommand(storedProcedure, parameters);
-		}
+        //    return dataHost.ExecuteCommand(storedProcedure, parameters);
+        //}
 
 		protected bool TableExists(string tableName)
 		{

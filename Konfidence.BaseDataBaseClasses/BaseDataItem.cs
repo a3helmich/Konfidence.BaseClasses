@@ -750,12 +750,12 @@ namespace Konfidence.BaseData
             AfterDelete();
         }
 		  
-		protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
-		{
-            var dataHost = GetHost();
+        //protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
+        //{
+        //    var dataHost = GetHost();
 
-			return dataHost.ExecuteCommand(storedProcedure, parameters);
-		}
+        //    return dataHost.ExecuteCommand(storedProcedure, parameters);
+        //}
 
 		protected internal int ExecuteTextCommand(string textCommand)
 		{
