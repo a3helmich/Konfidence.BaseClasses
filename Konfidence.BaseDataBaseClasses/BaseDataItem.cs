@@ -99,6 +99,10 @@ namespace Konfidence.BaseData
 			_ParameterObjectList = null;
 		}
 
+        internal List<DbParameterObject> GetParameterObjectList()
+        {
+            return _ParameterObjectList;
+        }
 
 		#region properties
 		protected string DataBaseName
@@ -781,15 +785,15 @@ namespace Konfidence.BaseData
             return dataHost.StoredProcedureExists(storedProcedureName);
         }
 
-		internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
-		{
-            foreach (var parameterObject in _ParameterObjectList)
-            {
-                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
-            }
+        //internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
+        //{
+        //    foreach (var parameterObject in _ParameterObjectList)
+        //    {
+        //        database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+        //    }
 
-            _ParameterObjectList.Clear();
-		}
+        //    _ParameterObjectList.Clear();
+        //}
 
 		internal List<DbParameterObject> SetItemData()
 		{

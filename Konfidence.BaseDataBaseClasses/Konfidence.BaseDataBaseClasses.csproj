@@ -106,9 +106,10 @@
     </Compile>
     <Compile Include="BaseHost.cs" />
     <Compile Include="IRepositories\IDatabaseRepository.cs" />
+    <Compile Include="ParameterObjects\RetrieveParameters.cs" />
     <Compile Include="Repositories\DatabaseRepository.cs" />
     <Compile Include="DbParameterObject.cs" />
-    <Compile Include="RequestParameters.cs" />
+    <Compile Include="ParameterObjects\RequestParameters.cs" />
     <Compile Include="HostFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -116,7 +117,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ResponseParameters.cs" />
+    <Compile Include="ParameterObjects\ResponseParameters.cs" />
     <Compile Include="SchemaBaseDataItem.cs" />
     <Compile Include="SQLHost.cs" />
     <Compile Include="SqlHostException.cs" />
@@ -195,9 +196,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ParameterObjects\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

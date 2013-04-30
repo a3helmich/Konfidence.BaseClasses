@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using Konfidence.BaseData.IRepositories;
+using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.Repositories;
 
 namespace Konfidence.BaseData
@@ -18,101 +19,114 @@ namespace Konfidence.BaseData
             _Repository = new DatabaseRepository(dataBaseName);
 		}
 
+	    private IDataReader DataReader
+	    {
+	        get
+	        {
+	            if (IsAssigned(_DataReader))
+	            {
+	                return _DataReader;
+	            }
+
+	            return _Repository.DataReader;
+	        }
+	    }
+
 		#region GetField Methods
 		internal override Int16 GetFieldInt16(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
-			if (_DataReader.IsDBNull(fieldOrdinal))
+			if (DataReader.IsDBNull(fieldOrdinal))
 			{
 				return 0;
 			}
 
-			return _DataReader.GetInt16(fieldOrdinal);
+			return DataReader.GetInt16(fieldOrdinal);
 		}
 
         internal override Int32 GetFieldInt32(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (_DataReader.IsDBNull(fieldOrdinal))
+            if (DataReader.IsDBNull(fieldOrdinal))
             {
                 return 0;
             }
 
-            return _DataReader.GetInt32(fieldOrdinal);
+            return DataReader.GetInt32(fieldOrdinal);
         }
 
         internal override Guid GetFieldGuid(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (_DataReader.IsDBNull(fieldOrdinal))
+            if (DataReader.IsDBNull(fieldOrdinal))
             {
                 return Guid.Empty;
             }
 
-            return _DataReader.GetGuid(fieldOrdinal);
+            return DataReader.GetGuid(fieldOrdinal);
         }
 
 		internal override string GetFieldString(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
-			if (_DataReader.IsDBNull(fieldOrdinal))
+            if (DataReader.IsDBNull(fieldOrdinal))
 			{
 				return string.Empty;
 			}
 
-			return _DataReader.GetString(fieldOrdinal);
+            return DataReader.GetString(fieldOrdinal);
 		}
 
 		internal override bool GetFieldBool(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
-			if (_DataReader.IsDBNull(fieldOrdinal))
+            if (DataReader.IsDBNull(fieldOrdinal))
 			{
 				return false;
 			}
 
-			return _DataReader.GetBoolean(fieldOrdinal);
+            return DataReader.GetBoolean(fieldOrdinal);
 		}
 
 		internal override DateTime GetFieldDateTime(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
-			if (_DataReader.IsDBNull(fieldOrdinal))
+            if (DataReader.IsDBNull(fieldOrdinal))
 			{
 				return DateTime.MinValue;
 			}
 
-			return _DataReader.GetDateTime(fieldOrdinal);
+            return DataReader.GetDateTime(fieldOrdinal);
 		}
 
         internal override TimeSpan GetFieldTimeSpan(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (_DataReader.IsDBNull(fieldOrdinal))
+            if (DataReader.IsDBNull(fieldOrdinal))
             {
                 return TimeSpan.MinValue;
             }
 
-            return (TimeSpan)_DataReader.GetValue(fieldOrdinal);
+            return (TimeSpan)DataReader.GetValue(fieldOrdinal);
         }
 
         internal override Decimal GetFieldDecimal(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (_DataReader.IsDBNull(fieldOrdinal))
+            if (DataReader.IsDBNull(fieldOrdinal))
             {
                 return 0;
             }
 
-            return _DataReader.GetDecimal(fieldOrdinal);
+            return DataReader.GetDecimal(fieldOrdinal);
         }
         #endregion
 
@@ -150,7 +164,9 @@ namespace Konfidence.BaseData
 				throw (new Exception("GetStoredProcedure not provided"));
 			}
 
-	        ExecuteGetStoredProcedure(dataItem, getStoredProcedure, () =>
+            var retrieveParameters = new RetrieveParameters(dataItem, getStoredProcedure);
+
+            _Repository.ExecuteGetStoredProcedure(retrieveParameters, () =>
 	            {
 	                dataItem.GetKey();
 	                dataItem.GetData();
@@ -158,33 +174,6 @@ namespace Konfidence.BaseData
 	                return true;
 	            });
         }
-
-        private void ExecuteGetStoredProcedure(BaseDataItem dataItem, string getStoredProcedure, Func<bool> callback)
-	    {
-	        var database = _Repository.GetDatabase();
-
-            var requestParameters  = new RequestParameters(dataItem, dataItem.SaveStoredProcedure);
-
-	        using (var dbCommand = _Repository.GetStoredProcCommand(getStoredProcedure))
-	        {
-	            dataItem.SetParameters(getStoredProcedure, database, dbCommand);
-
-	            using (var dataReader = database.ExecuteReader(dbCommand))
-	            {
-	                if (dataReader.Read())
-	                {
-	                    _DataReader = dataReader;
-
-	                    if (IsAssigned(callback))
-	                    {
-	                        callback();
-	                    }
-
-	                    _DataReader = null;
-	                }
-	            }
-	        }
-	    }
 
 	    internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
@@ -319,14 +308,14 @@ namespace Konfidence.BaseData
 
 		private int GetOrdinal(string fieldName)
 		{
-			if (!IsAssigned(_DataReader))
+            if (!IsAssigned(DataReader))
 			{
 			    const string message = @"_DataReader: in SQLHost.GetOrdinal(string fieldName);";
 
 			    throw new ArgumentNullException(message);
 			}
 
-		    return _DataReader.GetOrdinal(fieldName);
+            return DataReader.GetOrdinal(fieldName);
 		}
 	}
 }

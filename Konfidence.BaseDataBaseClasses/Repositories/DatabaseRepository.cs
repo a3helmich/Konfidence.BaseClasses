@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using Konfidence.Base;
 using Konfidence.BaseData.IRepositories;
+using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
@@ -14,6 +15,12 @@ namespace Konfidence.BaseData.Repositories
     internal class DatabaseRepository : BaseItem, IDatabaseRepository
     {
         private readonly string _DataBasename;
+        private IDataReader _DataReader;
+
+        public IDataReader DataReader
+        {
+            get { return _DataReader; }
+        }
 
         public DatabaseRepository(string databaseName)
         {
@@ -115,7 +122,42 @@ namespace Konfidence.BaseData.Repositories
 
             return responseParameters;
         }
-        
+
+        public void ExecuteGetStoredProcedure(RetrieveParameters retrieveParameters, Func<bool> callback)
+        {
+            var database = GetDatabase();
+
+            using (var dbCommand = GetStoredProcCommand(retrieveParameters.StoredProcedure))
+            {
+                SetParameterData(retrieveParameters, database, dbCommand);
+
+                using (var dataReader = database.ExecuteReader(dbCommand))
+                {
+                    if (dataReader.Read())
+                    {
+                        _DataReader = dataReader;
+
+                        if (IsAssigned(callback))
+                        {
+                            callback();
+                        }
+
+                        _DataReader = null;
+                    }
+                }
+            }
+        }
+
+        private void SetParameterData(RetrieveParameters executeParameters, Database database, DbCommand dbCommand)
+        {
+            foreach (var parameterObject in executeParameters.ParameterObjectList)
+            {
+                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+            }
+
+            executeParameters.ParameterObjectList.Clear();
+        }
+
         public int ExecuteNonQuery(string storedProcedure, List<object> parameterList)
         {
             using (var dbCommand = GetStoredProcCommand(storedProcedure, parameterList))
