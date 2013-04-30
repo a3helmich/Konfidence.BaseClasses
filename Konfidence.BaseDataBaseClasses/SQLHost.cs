@@ -147,7 +147,7 @@ namespace Konfidence.BaseData
 
             foreach (var kvp in dataItem.AutoUpdateFieldList)
             {
-                kvp.Value.Value = resultParameters.AutoUpdateFieldList[kvp.Key];
+                kvp.Value.Value = resultParameters.AutoUpdateFieldList[kvp.Key].Value;
 
                 if (DBNull.Value.Equals(kvp.Value.Value))
                 {
