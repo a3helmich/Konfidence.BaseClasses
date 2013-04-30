@@ -20,7 +20,7 @@ namespace Konfidence.BaseData
 
         internal int Id
         {
-            get { return _DataItem._Id; }
+            get { return _DataItem.GetId(); }
         }
 
         internal Dictionary<string, DbParameterObject> AutoUpdateFieldList

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using Konfidence.Base;
-using Konfidence.BaseData.IRepositories;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Xml;
 
@@ -11,12 +10,11 @@ namespace Konfidence.BaseData
 {
 	public class BaseDataItem: BaseItem
 	{
-	    private IReaderRepository _ReaderRepository;
-
 		public const string BASE_LANGUAGE = "NL";
 		public bool WithLanguage = false;
 
         private bool _IsSelected;
+        private bool _IsEditing;
 
 	    private string _LoadStoredProcedure = string.Empty;
 		private string _DeleteStoredProcedure = string.Empty;
@@ -25,9 +23,9 @@ namespace Konfidence.BaseData
         internal BaseHost DataHost = null;   // _DataHost is used by the GetFieldXXXX methods
 		internal Dictionary<string, object> PropertyDictionary = null;
 
-		private string _AutoIdField = string.Empty;
+        private int _Id;
+        private string _AutoIdField = string.Empty;
         private string _GuidIdField = string.Empty;
-        internal int _Id = 0;
         private Guid _GuidIdValue = Guid.Empty;
 
         private Dictionary<string, DbParameterObject> _AutoUpdateFieldList;
@@ -53,23 +51,32 @@ namespace Konfidence.BaseData
             // nop
         }
 
-	    public bool IsEditing { get; set; }
-
-        internal void SetReader(IReaderRepository readerRepository)
+        protected virtual void IsEditingChanged()
         {
-            _ReaderRepository = readerRepository;
+            // nop
+        }
+
+        public bool IsEditing
+        {
+            get { return _IsEditing; }
+            set
+            {
+                _IsEditing = value;
+                IsEditingChanged();
+            }
         }
 
 	    public BaseDataItem()
-		{
+	    {
+	        _Id = 0;
 		    _IsSelected = false;
-		    IsEditing = false;
+		    _IsEditing = false;
 
 			InitializeDataItem();
             AfterInitializeDataItem();
 		}
 
-		internal void SetKey(int id)
+		internal void SetId(int id)
 		{
 			_Id = id;
 		}
@@ -203,7 +210,7 @@ namespace Konfidence.BaseData
 
         private Int32 GetAutoUpdateFieldInt32(string fieldName)
         {
-            Int32 fieldValue = 0;
+            var fieldValue = 0;
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
@@ -218,7 +225,7 @@ namespace Konfidence.BaseData
 
         private Guid GetAutoUpdateFieldGuid(string fieldName)
         {
-            Guid fieldValue = Guid.Empty;
+            var fieldValue = Guid.Empty;
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
@@ -233,7 +240,7 @@ namespace Konfidence.BaseData
 
         private string GetAutoUpdateFieldString(string fieldName)
         {
-            string fieldValue = string.Empty;
+            var fieldValue = string.Empty;
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
@@ -248,7 +255,7 @@ namespace Konfidence.BaseData
 
         private bool GetAutoUpdateFieldBool(string fieldName)
         {
-            bool fieldValue = false;
+            var fieldValue = false;
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
@@ -263,7 +270,7 @@ namespace Konfidence.BaseData
 
         private DateTime GetAutoUpdateFieldDateTime(string fieldName)
         {
-            DateTime fieldValue = DateTime.MinValue;
+            var fieldValue = DateTime.MinValue;
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
@@ -278,7 +285,7 @@ namespace Konfidence.BaseData
 
         private TimeSpan GetAutoUpdateFieldTimeSpan(string fieldName)
         {
-            TimeSpan fieldValue = TimeSpan.MinValue;
+            var fieldValue = TimeSpan.MinValue;
 
             if (AutoUpdateFieldList.ContainsKey(fieldName))
             {
@@ -352,6 +359,11 @@ namespace Konfidence.BaseData
 				_Id = GetFieldInt32(_AutoIdField);
 			}
 		}
+
+        internal int GetId()
+        {
+            return _Id;
+        }
 
         protected void GetField(string fieldName, out Int16 field)
         {
@@ -574,7 +586,8 @@ namespace Konfidence.BaseData
         {
             if (value > TimeSpan.MinValue)
             {
-                DateTime inbetween = DateTime.Now;
+                var inbetween = DateTime.Now;
+
                 inbetween = new DateTime(inbetween.Year, inbetween.Month, inbetween.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
 
                 AddInParameter(fieldName, DbType.Time, inbetween);
@@ -657,7 +670,7 @@ namespace Konfidence.BaseData
 
 		protected void GetItem(string storedProcedure)
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
             DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
 
@@ -701,7 +714,7 @@ namespace Konfidence.BaseData
 				return;
 			}
 
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			dataHost.Save(this);
 
@@ -722,7 +735,7 @@ namespace Konfidence.BaseData
 
 		public void Delete()
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
             BeforeDelete();
 
@@ -735,47 +748,42 @@ namespace Konfidence.BaseData
 		  
 		protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			return dataHost.ExecuteCommand(storedProcedure, parameters);
 		}
 
 		protected internal int ExecuteTextCommand(string textCommand)
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			return dataHost.ExecuteTextCommand(textCommand);
 		}
 
 		protected internal bool TableExists(string tableName)
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			return dataHost.TableExists(tableName);
 		}
 
 		protected internal bool ViewExists(string viewName)
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			return dataHost.ViewExists(viewName);
 		}
 
         protected internal bool StoredProcedureExists(string storedProcedureName)
         {
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
             return dataHost.StoredProcedureExists(storedProcedureName);
         }
 
 		internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
 		{
-            if (_ParameterObjectList.Count == 0)
-            {
-                // throw (new Exception("No parameters provided."));  // TODO: throw required maken
-            }
-
-            foreach (DbParameterObject parameterObject in _ParameterObjectList)
+            foreach (var parameterObject in _ParameterObjectList)
             {
                 database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
             }
@@ -794,7 +802,7 @@ namespace Konfidence.BaseData
         {
             var parameterObjectList = new List<DbParameterObject>();
 
-            foreach (DbParameterObject parameterObject in _ParameterObjectList)
+            foreach (var parameterObject in _ParameterObjectList)
             {
                 parameterObjectList.Add(parameterObject);
             }

@@ -151,7 +151,7 @@ namespace Konfidence.BaseData
         {
             foreach (T dataItem in this)
             {
-                if (dataItem._Id == id)
+                if (dataItem.GetId() == id)
                 {
                     return dataItem;
                 }
@@ -310,7 +310,7 @@ namespace Konfidence.BaseData
 
             if (IsAssigned(dataItem))
             {
-                SetSelected(dataItem._Id);
+                SetSelected(dataItem.GetId());
             }
 
 
@@ -459,7 +459,7 @@ namespace Konfidence.BaseData
             {
                 dataItem.Save();
 
-                SetSelected(dataItem._Id);
+                SetSelected(dataItem.GetId());
 
                 dataItem.IsEditing = false; // nieuw
             }
@@ -527,7 +527,7 @@ namespace Konfidence.BaseData
 
 				if (baseDataItem.AutoIdField.Length > 0)
 				{
-					var property = new DbParameterObject {Field = "BaseDataItem_KeyValue", Value = baseDataItem._Id};
+					var property = new DbParameterObject {Field = "BaseDataItem_KeyValue", Value = baseDataItem.GetId()};
 
 				    properties.Add(property);
 				}

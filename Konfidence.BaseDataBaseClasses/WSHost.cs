@@ -42,7 +42,7 @@ namespace Konfidence.BaseData
 			    parameterObjectList.Add(parameterObject);
 			}
 
-            dataItem.SetKey(_WsBaseHostService.Save(parameterObjectList.ToArray(), dataItem._Id));
+            dataItem.SetId(_WsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.GetId()));
 		}
 
 		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure) // , string autoIdField, int id)
@@ -124,7 +124,7 @@ namespace Konfidence.BaseData
 				{
 					if (parameterObjectItem.Field.Equals("BaseDataItem_KeyValue"))
 					{
-						baseDataItem.SetKey((int)parameterObjectItem.Value);
+						baseDataItem.SetId((int)parameterObjectItem.Value);
 					}
 					else
 					{

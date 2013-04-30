@@ -23,7 +23,7 @@ namespace Konfidence.BaseData
 
 				baseDataItem.Save();
 
-				return baseDataItem._Id;
+				return baseDataItem.GetId();
 			}
 
 			return 0;
@@ -46,7 +46,7 @@ namespace Konfidence.BaseData
 
             List<DbParameterObject> properties = GetProperties(baseDataItem);
 
-            var idProperty = new DbParameterObject {Field = "AutoIdField", Value = baseDataItem._Id};
+            var idProperty = new DbParameterObject {Field = "AutoIdField", Value = baseDataItem.GetId()};
 
             properties.Insert(0, idProperty);
 
@@ -108,7 +108,7 @@ namespace Konfidence.BaseData
 
 		protected static void SetKey(BaseDataItem baseDataItem, int id)
 		{
-			baseDataItem.SetKey(id);
+			baseDataItem.SetId(id);
 		}
 
 		protected static void SetProperties(BaseDataItem baseDataItem, List<DbParameterObject> properties)

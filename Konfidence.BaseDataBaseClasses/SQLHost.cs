@@ -130,7 +130,7 @@ namespace Konfidence.BaseData
 
             var resultParameters = _Repository.ExecuteSaveStoredProcedure(new RequestParameters(dataItem, dataItem.SaveStoredProcedure));
 
-		    dataItem.SetKey(resultParameters.Id);
+		    dataItem.SetId(resultParameters.Id);
 
             foreach (var kvp in dataItem.AutoUpdateFieldList)
             {
@@ -144,39 +144,49 @@ namespace Konfidence.BaseData
         }
 
 	    internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure)
-		{
-			if (getStoredProcedure.Equals(string.Empty))
+	    {
+	        if (getStoredProcedure.Equals(string.Empty))
 			{
 				throw (new Exception("GetStoredProcedure not provided"));
 			}
 
-            var database = _Repository.GetDatabase();
+	        ExecuteGetStoredProcedure(dataItem, getStoredProcedure, () =>
+	            {
+	                dataItem.GetKey();
+	                dataItem.GetData();
 
-            using (var dbCommand = _Repository.GetStoredProcCommand(getStoredProcedure))
-			{
-                dataItem.SetParameters(getStoredProcedure, database, dbCommand);
+	                return true;
+	            });
+        }
 
-				using (var dataReader = database.ExecuteReader(dbCommand))
-				{
-					if (dataReader.Read())
-					{
-						_DataReader = dataReader;
+        private void ExecuteGetStoredProcedure(BaseDataItem dataItem, string getStoredProcedure, Func<bool> callback)
+	    {
+	        var database = _Repository.GetDatabase();
 
-					    var readerRepository = new ReaderRepository(dataReader);
+            var requestParameters  = new RequestParameters(dataItem, dataItem.SaveStoredProcedure);
 
-                        dataItem.SetReader(readerRepository);
+	        using (var dbCommand = _Repository.GetStoredProcCommand(getStoredProcedure))
+	        {
+	            dataItem.SetParameters(getStoredProcedure, database, dbCommand);
 
-                        dataItem.GetKey();
+	            using (var dataReader = database.ExecuteReader(dbCommand))
+	            {
+	                if (dataReader.Read())
+	                {
+	                    _DataReader = dataReader;
 
-                        dataItem.GetData();
+	                    if (IsAssigned(callback))
+	                    {
+	                        callback();
+	                    }
 
-						_DataReader = null;
-					}
-				}
-			}
-		}
+	                    _DataReader = null;
+	                }
+	            }
+	        }
+	    }
 
-		internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+	    internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 			if (deleteStoredProcedure.Equals(string.Empty))
 			{
