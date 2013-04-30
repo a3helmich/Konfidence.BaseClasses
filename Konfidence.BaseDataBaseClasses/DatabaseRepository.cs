@@ -84,15 +84,15 @@ namespace Konfidence.BaseData
             responseParameters.SetId((int)database.GetParameterValue(dbCommand, executeParameters.AutoIdField));
             responseParameters.SetAutoUpdateFieldList(executeParameters.AutoUpdateFieldList);
 
-            foreach (var kvp in responseParameters.AutoUpdateFieldList)
-            {
-                kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
+            //foreach (var kvp in responseParameters.AutoUpdateFieldList)
+            //{
+            //    kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
 
-                if (DBNull.Value.Equals(kvp.Value.Value))
-                {
-                    kvp.Value.Value = null;
-                }
-            }
+            //    if (DBNull.Value.Equals(kvp.Value.Value))
+            //    {
+            //        kvp.Value.Value = null;
+            //    }
+            //}
 
             return responseParameters;
         }
