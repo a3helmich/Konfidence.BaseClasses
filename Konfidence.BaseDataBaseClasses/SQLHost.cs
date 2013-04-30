@@ -128,6 +128,18 @@ namespace Konfidence.BaseData
 
             return DataReader.GetDecimal(fieldOrdinal);
         }
+
+        private int GetOrdinal(string fieldName)
+        {
+            if (!IsAssigned(DataReader))
+            {
+                const string message = @"_DataReader: in SQLHost.GetOrdinal(string fieldName);";
+
+                throw new ArgumentNullException(message);
+            }
+
+            return DataReader.GetOrdinal(fieldName);
+        }
         #endregion
 
 		internal override void Save(BaseDataItem dataItem)
@@ -305,17 +317,5 @@ namespace Konfidence.BaseData
 
             return dataTable;
         }
-
-		private int GetOrdinal(string fieldName)
-		{
-            if (!IsAssigned(DataReader))
-			{
-			    const string message = @"_DataReader: in SQLHost.GetOrdinal(string fieldName);";
-
-			    throw new ArgumentNullException(message);
-			}
-
-            return DataReader.GetOrdinal(fieldName);
-		}
 	}
 }
