@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using Konfidence.Base;
+using Konfidence.BaseData.IRepositories;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Xml;
 
@@ -10,6 +11,8 @@ namespace Konfidence.BaseData
 {
 	public class BaseDataItem: BaseItem
 	{
+	    private IReaderRepository _ReaderRepository;
+
 		public const string BASE_LANGUAGE = "NL";
 		public bool WithLanguage = false;
 
@@ -51,6 +54,11 @@ namespace Konfidence.BaseData
         }
 
 	    public bool IsEditing { get; set; }
+
+        internal void SetReader(IReaderRepository readerRepository)
+        {
+            _ReaderRepository = readerRepository;
+        }
 
 	    public BaseDataItem()
 		{
@@ -827,5 +835,5 @@ namespace Konfidence.BaseData
 		{
 			return true;
 		}
-	}
+    }
 }

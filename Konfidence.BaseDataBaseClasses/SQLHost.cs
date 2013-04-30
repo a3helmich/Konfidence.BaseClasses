@@ -162,9 +162,13 @@ namespace Konfidence.BaseData
 					{
 						_DataReader = dataReader;
 
+					    var readerRepository = new ReaderRepository(dataReader);
+
+                        dataItem.SetReader(readerRepository);
+
                         dataItem.GetKey();
 
-						dataItem.GetData();
+                        dataItem.GetData();
 
 						_DataReader = null;
 					}

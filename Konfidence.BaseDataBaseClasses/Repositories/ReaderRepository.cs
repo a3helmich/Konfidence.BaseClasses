@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using Konfidence.Base;
+using Konfidence.BaseData.IRepositories;
 
-namespace Konfidence.BaseData
+namespace Konfidence.BaseData.Repositories
 {
     internal class ReaderRepository : BaseItem, IReaderRepository
     {
