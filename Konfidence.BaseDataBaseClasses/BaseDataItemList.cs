@@ -72,7 +72,7 @@ namespace Konfidence.BaseData
         
         protected void BuildItemList()
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			dataHost.BuildItemList(this, GetListStoredProcedure);
 
@@ -81,7 +81,7 @@ namespace Konfidence.BaseData
 
         protected void BuildItemList(IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
         {
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
             dataHost.BuildItemList(this, relatedDataItemList, childDataItemList, GetListStoredProcedure);
 
@@ -149,7 +149,7 @@ namespace Konfidence.BaseData
 
         public T FindById(int id)
         {
-            foreach (T dataItem in this)
+            foreach (var dataItem in this)
             {
                 if (dataItem.GetId() == id)
                 {
@@ -162,7 +162,7 @@ namespace Konfidence.BaseData
 
         public T FindById(Guid guidId)
         {
-            foreach (T dataItem in this)
+            foreach (var dataItem in this)
             {
                 if (dataItem.GuidIdValue == guidId)
                 {
@@ -175,7 +175,7 @@ namespace Konfidence.BaseData
 
         private T FindByIsSelected()
         {
-            foreach (T dataItem in this)
+            foreach (var dataItem in this)
             {
                 if (dataItem.IsSelected)
                 {
@@ -195,7 +195,7 @@ namespace Konfidence.BaseData
 
         protected T FindByIsEditing()
         {
-            foreach (T dataItem in this)
+            foreach (var dataItem in this)
             {
                 if (dataItem.IsEditing)
                 {
@@ -208,7 +208,7 @@ namespace Konfidence.BaseData
 
         public T FindCurrent()
         {
-            T dataItem = FindByIsEditing();
+            var dataItem = FindByIsEditing();
 
             if (!IsAssigned(dataItem))
             {
@@ -222,7 +222,7 @@ namespace Konfidence.BaseData
         {
             get
             {
-                foreach (T dataItem in this)
+                foreach (var dataItem in this)
                 {
                     if (dataItem.IsEditing || dataItem.IsSelected)
                     {
@@ -331,7 +331,7 @@ namespace Konfidence.BaseData
         {
             if (Count > 0)
             {
-                foreach (T dataItem in this)
+                foreach (var dataItem in this)
                 {
                     dataItem.IsSelected = false;
                 }
@@ -432,7 +432,7 @@ namespace Konfidence.BaseData
         #region list dataitem editing
         public void New()
         {
-            T dataItem = FindCurrent();
+            var dataItem = FindCurrent();
 
             if (IsAssigned(dataItem))
             {
@@ -577,7 +577,7 @@ namespace Konfidence.BaseData
 
 		protected int ExecuteTextCommand(string textCommand)
 		{
-            BaseHost dataHost = GetHost(); 
+            var dataHost = GetHost(); 
 
 			return dataHost.ExecuteTextCommand(textCommand);
 		}
@@ -591,21 +591,21 @@ namespace Konfidence.BaseData
 
 		protected bool TableExists(string tableName)
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			return dataHost.TableExists(tableName);
 		}
 
 		protected bool ViewExists(string viewName)
 		{
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
 			return dataHost.ViewExists(viewName);
 		}
 
         protected bool StoredProcedureExists(string storedProcedureName)
         {
-            BaseHost dataHost = GetHost();
+            var dataHost = GetHost();
 
             return dataHost.StoredProcedureExists(storedProcedureName);
         }

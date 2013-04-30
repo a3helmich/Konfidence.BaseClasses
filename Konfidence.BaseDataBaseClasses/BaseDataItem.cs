@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using Konfidence.Base;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Xml;
 
 namespace Konfidence.BaseData
