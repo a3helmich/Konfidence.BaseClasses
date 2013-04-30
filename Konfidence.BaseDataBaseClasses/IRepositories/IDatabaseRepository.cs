@@ -15,6 +15,7 @@ namespace Konfidence.BaseData.IRepositories
         DbCommand GetStoredProcCommand(string saveStoredProcedure, List<object> parameters);
         ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters);
         void ExecuteGetStoredProcedure(RetrieveParameters retrieveParameters, Func<bool> callback);
+        void ExecuteDeleteStoredProcedure(string deleteStoredProcedure, string autoIdField, int id);
         int ExecuteNonQuery(string storedProcedure, List<object> parameterList);
         int ExecuteNonQuery(string textCommand);
         int ExecuteNonQuery(DbCommand commandType);

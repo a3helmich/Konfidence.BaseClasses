@@ -158,6 +158,19 @@ namespace Konfidence.BaseData.Repositories
             executeParameters.ParameterObjectList.Clear();
         }
 
+        public void ExecuteDeleteStoredProcedure(string deleteStoredProcedure, string autoIdField, int id)
+        {
+            var database = GetDatabase();
+
+            using (var dbCommand = GetStoredProcCommand(deleteStoredProcedure))
+            {
+                database.AddInParameter(dbCommand, autoIdField, DbType.Int32, id);
+
+                ExecuteNonQuery(dbCommand);
+            }
+        }
+
+
         public int ExecuteNonQuery(string storedProcedure, List<object> parameterList)
         {
             using (var dbCommand = GetStoredProcCommand(storedProcedure, parameterList))

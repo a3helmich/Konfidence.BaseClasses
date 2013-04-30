@@ -196,18 +196,11 @@ namespace Konfidence.BaseData
 
 			if (id > 0)
 			{
-                var database = _Repository.GetDatabase();
-
-                using (var dbCommand = _Repository.GetStoredProcCommand(deleteStoredProcedure))
-				{
-					database.AddInParameter(dbCommand, autoIdField, DbType.Int32, id);
-
-                    _Repository.ExecuteNonQuery(dbCommand);
-				}
+			    _Repository.ExecuteDeleteStoredProcedure(deleteStoredProcedure, autoIdField, id);
 			}
 		}
 
-        internal override void BuildItemList(IBaseDataItemList parentDataItemList, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
+	    internal override void BuildItemList(IBaseDataItemList parentDataItemList, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
 	    {
             if (getRelatedStoredProcedure.Equals(string.Empty))
             {
@@ -302,8 +295,9 @@ namespace Konfidence.BaseData
 
         internal override DataTable GetSchemaObject(string collection)
         {
-            var database = _Repository.GetDatabase();
             DataTable dataTable;
+
+            var database = _Repository.GetDatabase();
 
             using (var dbConnection = database.CreateConnection())
             {

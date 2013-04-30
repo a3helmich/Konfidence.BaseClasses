@@ -60,14 +60,6 @@
     <SlowCheetahTargets Condition=" '$(SlowCheetahTargets)'=='' ">$(LOCALAPPDATA)\Microsoft\MSBuild\SlowCheetah\v1\SlowCheetah.Transforms.targets</SlowCheetahTargets>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\projects\References\Konfidence.BaseClasses.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.BaseDataBaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>c:\projects\References\Konfidence.BaseDataBaseClasses.dll</HintPath>
-    </Reference>
     <Reference Include="Konfidence.BaseUserControlHelpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>c:\projects\References\Konfidence.BaseUserControlHelpers.dll</HintPath>
@@ -128,6 +120,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
+      <Project>{d71a4677-79c7-443b-900d-218fbcfe8728}</Project>
+      <Name>Konfidence.BaseClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDataBaseClasses.csproj">
+      <Project>{2b4ccfac-0b45-4f69-96bb-a60c4584027f}</Project>
+      <Name>Konfidence.BaseDataBaseClasses</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Konfidence.MenuClasses\DbSiteMapMenuClasses.csproj">
       <Project>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</Project>
       <Name>DbSiteMapMenuClasses</Name>
