@@ -15,6 +15,8 @@ namespace Konfidence.BaseData
 		private string _DataBaseName = string.Empty;
 		private string _ServiceName = string.Empty;
 
+        private readonly DbParameterObjectList _DbParameterObjectList = new DbParameterObjectList();
+
         protected virtual void AfterDataLoad()
         {
             //
@@ -98,15 +100,6 @@ namespace Konfidence.BaseData
         {
             return BaseItem.IsEmpty(assignedString);
         }
-
-        ///// <summary>
-        ///// create and return a xxxDataItem derived from BaseDataItem
-        ///// </summary>
-        ///// <returns></returns>
-        //protected virtual T GetNewDataItem()
-        //{
-        //    throw new NotImplementedException(); // NOP
-        //}
 
 		public BaseDataItem GetDataItem()
 		{
@@ -357,72 +350,7 @@ namespace Konfidence.BaseData
         #endregion list selecting state control
 
         #region list editing state control
-        //public void SetIsEditing(bool isEditing)
-        //{
-        //    SetIsEditing(isEditing, 0);
-        //}
 
-        //public void SetIsEditing(string isEditingText, string idText)
-        //{
-        //    bool isEditing = false;
-        //    int id = 0;
-
-        //    if (int.TryParse(idText, out id))
-        //    {
-        //        if (bool.TryParse(isEditingText, out isEditing))
-        //        {
-        //            this.SetIsEditing(isEditing, id);
-        //        }
-        //    }
-        //}
-
-        //public void SetIsEditing(bool isEditing, int id)
-        //{
-        //    if (isEditing)
-        //    {
-        //        AddEditing(id);
-        //    }
-        //    else
-        //    {
-        //        RemoveEditing();
-        //    }
-        //}
-
-        //private void AddEditing(int id)
-        //{
-        //    T dataItem = null;
-
-        //    dataItem = this.FindById(id);
-
-        //    if (id < 1 || !IsAssigned(dataItem))
-        //    {
-        //        dataItem = new T();
-
-        //        this.Add(dataItem);
-        //    }
-
-        //    dataItem.IsEditing = true;
-        //}
-
-        //private void RemoveEditing()
-        //{
-        //    T dataItem = null;
-
-        //    dataItem = this.FindByIsEditing();
-
-        //    if (IsAssigned(dataItem))
-        //    {
-        //        dataItem.IsEditing = false;
-
-        //        if (dataItem.IsNew)
-        //        {
-        //            this.Remove(dataItem);
-        //        }
-        //    }
-        //}
-        #endregion list editing state control
-
-        #region list dataitem editing
         public void New()
         {
             var dataItem = FindCurrent();
@@ -465,24 +393,6 @@ namespace Konfidence.BaseData
             dataItem.LoadDataItem();
 
             dataItem.IsEditing = false;
-
-            //int dataItemIndex = this.IndexOf(dataItem);
-
-            //if (dataItemIndex > -1)
-            //{
-            //    T canceledDataItem = new T();
-
-            //    canceledDataItem._Id = dataItem._Id;
-
-            //    canceledDataItem.LoadDataItem();
-
-            //    this[dataItemIndex] = canceledDataItem;
-
-            //    if (dataItem.IsSelected)
-            //    {
-            //        this.SetSelected(canceledDataItem._Id);
-            //    }
-            //}
         }
 
         public void Delete(T dataItem)
@@ -539,6 +449,48 @@ namespace Konfidence.BaseData
 
 			return properties;
 		}
+
+        internal DbParameterObjectList GetParameterObjectList()
+        {
+            return _DbParameterObjectList;
+        }
+
+        #region SetParameter Methods
+        protected void SetParameter(string fieldName, int value)
+        {
+            _DbParameterObjectList.SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, Guid value)
+        {
+            _DbParameterObjectList.SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, string value)
+        {
+            _DbParameterObjectList.SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, bool value)
+        {
+            _DbParameterObjectList.SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, DateTime value)
+        {
+            _DbParameterObjectList.SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, TimeSpan value)
+        {
+            _DbParameterObjectList.SetField(fieldName, value);
+        }
+
+        //protected void SetParameterList(DbParameterObjectList dbParameterObjectList)
+        //{
+        //    _DbParameterObjectList = dbParameterObjectList;
+        //}
+        #endregion
 
 		/// <summary>
 		/// Add parameters for filtering

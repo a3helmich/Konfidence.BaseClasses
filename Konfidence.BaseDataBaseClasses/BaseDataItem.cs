@@ -403,8 +403,6 @@ namespace Konfidence.BaseData
             field = GetFieldTimeSpan(fieldName);
         }
 
-        //line = "_" + columnDataItem.Name + ".LoadXml(GetField" + columnDataItem.DbDataType + "(" + columnDataItem.Name.ToUpper() + "));";
-
         protected void GetField(string fieldName, ref XmlDocument field)
         {
             field.LoadXml(GetFieldString(fieldName));
@@ -790,10 +788,10 @@ namespace Konfidence.BaseData
             return parameterObjectList;
         }
 
-        private void AddInParameter(string field, DbType dbType, object value)
-		{
-			_DbParameterObjectList.Add(new DbParameterObject(field, dbType , value));
-		}
+        //private void AddInParameter(string field, DbType dbType, object value)
+        //{
+        //    _DbParameterObjectList.Add(new DbParameterObject(field, dbType , value));
+        //}
 
         protected internal virtual void GetAutoUpdateData()
 		{
