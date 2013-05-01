@@ -28,7 +28,7 @@ namespace Konfidence.BaseData.ParameterObjects
             get { return _DataItem.AutoUpdateFieldDictionary; }
         }
 
-        internal List<DbParameterObject> ParameterObjectList
+        internal DbParameterObjectList ParameterObjectList
         {
             get
             {

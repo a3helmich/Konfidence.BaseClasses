@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
@@ -265,10 +266,10 @@ namespace Konfidence.BaseData
             }
         }
 
-        //internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
-        //{
-        //    return _Repository.ExecuteNonQuery(storedProcedure, new List<object> { parameters });
-        //}
+        internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
+        {
+            return _Repository.ExecuteNonQuery(storedProcedure, new List<object> { parameters });
+        }
 
 	    internal override int ExecuteTextCommand(string textCommand)
 		{

@@ -13,7 +13,7 @@ namespace Konfidence.BaseData.ParameterObjects
             get { return _StoredProcedure; }
         }
 
-        internal List<DbParameterObject> ParameterObjectList
+        internal DbParameterObjectList ParameterObjectList
         {
             get
             {

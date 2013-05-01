@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.WSBaseHost;
 
 namespace Konfidence.BaseData

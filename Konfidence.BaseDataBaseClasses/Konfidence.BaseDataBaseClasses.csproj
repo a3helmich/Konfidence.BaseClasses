@@ -107,9 +107,10 @@
     <Compile Include="BaseHost.cs" />
     <Compile Include="IBaseDataItemList.cs" />
     <Compile Include="IRepositories\IDatabaseRepository.cs" />
+    <Compile Include="ParameterObjects\DbParameterObjectList.cs" />
     <Compile Include="ParameterObjects\RetrieveParameters.cs" />
     <Compile Include="Repositories\DatabaseRepository.cs" />
-    <Compile Include="DbParameterObject.cs" />
+    <Compile Include="ParameterObjects\DbParameterObject.cs" />
     <Compile Include="ParameterObjects\RequestParameters.cs" />
     <Compile Include="HostFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

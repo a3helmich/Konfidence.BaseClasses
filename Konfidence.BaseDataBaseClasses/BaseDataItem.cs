@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Konfidence.Base;
 using System.Xml;
+using Konfidence.BaseData.ParameterObjects;
 
 namespace Konfidence.BaseData
 {
@@ -30,7 +31,7 @@ namespace Konfidence.BaseData
 
 		private string _ServiceName = string.Empty;
 
-		private List<DbParameterObject> _DbParameterObjectList = new List<DbParameterObject>();
+        private DbParameterObjectList _DbParameterObjectList = new DbParameterObjectList();
 		private string _DataBaseName = string.Empty;
 
         public bool IsSelected
@@ -88,7 +89,7 @@ namespace Konfidence.BaseData
 			PropertyDictionary = null;
 		}
 
-		internal void GetProperties(List<DbParameterObject> properties)
+        internal void GetProperties(DbParameterObjectList properties)
 		{
 			_DbParameterObjectList = properties;
 
@@ -97,7 +98,7 @@ namespace Konfidence.BaseData
 			_DbParameterObjectList = null;
 		}
 
-        internal List<DbParameterObject> GetParameterObjectList()
+        internal DbParameterObjectList GetParameterObjectList()
         {
             return _DbParameterObjectList;
         }
@@ -547,62 +548,37 @@ namespace Konfidence.BaseData
 		#region SetField Methods
 		protected void SetField(string fieldName, int value)
 		{
-            AddInParameter(fieldName, DbType.Int32, value);
+		    _DbParameterObjectList.SetField(fieldName, value);
 		}
 
         protected void SetField(string fieldName, Guid value)
         {
-            if (Guid.Empty.Equals(value))
-            {
-                AddInParameter(fieldName, DbType.Guid, null);
-            }
-            else
-            {
-                AddInParameter(fieldName, DbType.Guid, value);
-            }
+            _DbParameterObjectList.SetField(fieldName, value);
         }
 
         protected void SetField(string fieldName, string value)
 		{
-            AddInParameter(fieldName, DbType.String, value);
+            _DbParameterObjectList.SetField(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, bool value)
 		{
-            AddInParameter(fieldName, DbType.Boolean, value);
+            _DbParameterObjectList.SetField(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, DateTime value)
 		{
-			if (value > DateTime.MinValue)
-			{
-                AddInParameter(fieldName, DbType.DateTime, value);
-			}
-			else
-			{
-                AddInParameter(fieldName, DbType.DateTime, null);
-			}
+            _DbParameterObjectList.SetField(fieldName, value);
 		}
 
         protected void SetField(string fieldName, TimeSpan value)
         {
-            if (value > TimeSpan.MinValue)
-            {
-                var inbetween = DateTime.Now;
-
-                inbetween = new DateTime(inbetween.Year, inbetween.Month, inbetween.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
-
-                AddInParameter(fieldName, DbType.Time, inbetween);
-            }
-            else
-            {
-                AddInParameter(fieldName, DbType.Time, null);
-            }
+            _DbParameterObjectList.SetField(fieldName, value);
         }
 
         protected void SetField(string fieldName, Decimal value)
         {
-            AddInParameter(fieldName, DbType.Decimal, value);
+            _DbParameterObjectList.SetField(fieldName, value);
         }
         #endregion
 
@@ -637,10 +613,10 @@ namespace Konfidence.BaseData
             SetField(fieldName, value);
         }
 
-        protected void SetParameterList(List<DbParameterObject> dbParameterObjectList)
-        {
-            _DbParameterObjectList = dbParameterObjectList;
-        }
+        //protected void SetParameterList(DbParameterObjectList dbParameterObjectList)
+        //{
+        //    _DbParameterObjectList = dbParameterObjectList;
+        //}
 		#endregion
 
         internal void LoadDataItem()
@@ -747,13 +723,13 @@ namespace Konfidence.BaseData
 
             AfterDelete();
         }
-		  
-        //protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
-        //{
-        //    var dataHost = GetHost();
 
-        //    return dataHost.ExecuteCommand(storedProcedure, parameters);
-        //}
+        protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
+        {
+            var dataHost = GetHost();
+
+            return dataHost.ExecuteCommand(storedProcedure, parameters);
+        }
 
 		protected internal int ExecuteTextCommand(string textCommand)
 		{
@@ -793,16 +769,16 @@ namespace Konfidence.BaseData
         //    _DbParameterObjectList.Clear();
         //}
 
-		internal List<DbParameterObject> SetItemData()
+        internal DbParameterObjectList SetItemData()
 		{
 			SetData();
 
             return SetParameterData();
 		}
 
-        internal List<DbParameterObject> SetParameterData()
+        internal DbParameterObjectList SetParameterData()
         {
-            var parameterObjectList = new List<DbParameterObject>();
+            var parameterObjectList = new DbParameterObjectList();
 
             foreach (var parameterObject in _DbParameterObjectList)
             {

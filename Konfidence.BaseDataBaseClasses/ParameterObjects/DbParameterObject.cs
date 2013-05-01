@@ -1,8 +1,9 @@
 ﻿using System.Data;
+using Konfidence.Base;
 
-namespace Konfidence.BaseData
+namespace Konfidence.BaseData.ParameterObjects
 {
-    public class DbParameterObject
+    public class DbParameterObject : BaseItem
     {
         public DbParameterObject()
         { }

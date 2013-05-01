@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using JetBrains.Annotations;
 using Konfidence.Base;
+using Konfidence.BaseData.ParameterObjects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Diagnostics;
 
@@ -509,9 +510,9 @@ namespace Konfidence.BaseData
         }
         #endregion list editing
 
-        public List<List<DbParameterObject>> Convert2ListOfParameterObjectList()
+        public List<DbParameterObjectList> Convert2ListOfParameterObjectList()
 		{
-			var baseDataItemListList = new List<List<DbParameterObject>>();
+            var baseDataItemListList = new List<DbParameterObjectList>();
 
 			foreach (var baseDataItem in this)
 			{
@@ -530,9 +531,9 @@ namespace Konfidence.BaseData
 			return baseDataItemListList;
 		}
 
-		private static List<DbParameterObject> GetProperties(BaseDataItem baseDataItem)
+        private static DbParameterObjectList GetProperties(BaseDataItem baseDataItem)
 		{
-			var properties = new List<DbParameterObject>();
+            var properties = new DbParameterObjectList();
 
 			baseDataItem.GetProperties(properties);
 

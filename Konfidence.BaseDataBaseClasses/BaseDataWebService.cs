@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Services;
 using JetBrains.Annotations;
 using Konfidence.Base;
+using Konfidence.BaseData.ParameterObjects;
 
 namespace Konfidence.BaseData
 {
@@ -11,9 +12,9 @@ namespace Konfidence.BaseData
     public class BaseDataWebService : WebService
 	{
 		[WebMethod]
-		public int Save(List<DbParameterObject> properties, int id)
+        public int Save(DbParameterObjectList properties, int id)
 		{
-			BaseDataItem baseDataItem = GetNewDataItem();
+			var baseDataItem = GetNewDataItem();
 
 			if (IsAssigned(baseDataItem))
 			{
@@ -30,21 +31,21 @@ namespace Konfidence.BaseData
 		}
 
 		[WebMethod]
-		public List<DbParameterObject> GetItem(int id)
+        public DbParameterObjectList GetItem(int id)
 		{
-			BaseDataItem baseDataItem = GetNewDataItem(id);
+			var baseDataItem = GetNewDataItem(id);
 
-			List<DbParameterObject> properties = GetProperties(baseDataItem);
+            DbParameterObjectList properties = GetProperties(baseDataItem);
 
 			return properties;
 		}
 
         [WebMethod]
-        public List<DbParameterObject> GetItemByParam(List<DbParameterObject> parameterList)
+        public DbParameterObjectList GetItemByParam(DbParameterObjectList parameterList)
         {
-            BaseDataItem baseDataItem = GetNewDataItem(parameterList);
+            var baseDataItem = GetNewDataItem(parameterList);
 
-            List<DbParameterObject> properties = GetProperties(baseDataItem);
+            DbParameterObjectList properties = GetProperties(baseDataItem);
 
             var idProperty = new DbParameterObject {Field = "AutoIdField", Value = baseDataItem.GetId()};
 
@@ -56,7 +57,7 @@ namespace Konfidence.BaseData
 		[WebMethod]
 		public void Delete(int id)
 		{
-			BaseDataItem baseDataItem = GetNewDataItem();
+			var baseDataItem = GetNewDataItem();
 
 			if (IsAssigned(baseDataItem))
 			{
@@ -67,9 +68,9 @@ namespace Konfidence.BaseData
 		}
 
 		[WebMethod]
-		public List<List<DbParameterObject>> BuildItemList()
+        public List<DbParameterObjectList> BuildItemList()
 		{
-			IBaseDataItemList baseDataItemList = GetNewDataItemList();
+			var baseDataItemList = GetNewDataItemList();
 
 			return baseDataItemList.Convert2ListOfParameterObjectList();
 		}
@@ -85,7 +86,7 @@ namespace Konfidence.BaseData
 		[WebMethod]
 		public int ExecuteTextCommand(string textCommand)
 		{
-			BaseDataItem baseDataItem = GetNewDataItem();
+			var baseDataItem = GetNewDataItem();
 
 			return baseDataItem.ExecuteTextCommand(textCommand);
 		}
@@ -93,7 +94,7 @@ namespace Konfidence.BaseData
 		[WebMethod]
 		public bool TableExists(string tableName)
 		{
-			BaseDataItem baseDataItem = GetNewDataItem();
+			var baseDataItem = GetNewDataItem();
 
 			return baseDataItem.TableExists(tableName);
 		}
@@ -101,7 +102,7 @@ namespace Konfidence.BaseData
 		[WebMethod]
 		public bool ViewExists(string viewName)
 		{
-			BaseDataItem baseDataItem = GetNewDataItem();
+			var baseDataItem = GetNewDataItem();
 
 			return baseDataItem.ViewExists(viewName);
 		}
@@ -111,11 +112,11 @@ namespace Konfidence.BaseData
 			baseDataItem.SetId(id);
 		}
 
-		protected static void SetProperties(BaseDataItem baseDataItem, List<DbParameterObject> properties)
+        protected static void SetProperties(BaseDataItem baseDataItem, DbParameterObjectList properties)
 		{
 			var propertyDictionary = new Dictionary<string, object>();
 
-			foreach (DbParameterObject parameterObject in properties)
+			foreach (var parameterObject in properties)
 			{
 				propertyDictionary.Add(parameterObject.Field, parameterObject.Value);
 			}
@@ -123,9 +124,9 @@ namespace Konfidence.BaseData
 			baseDataItem.SetProperties(propertyDictionary);
 		}
 
-		protected static List<DbParameterObject> GetProperties(BaseDataItem baseDataItem)
+        internal static DbParameterObjectList GetProperties(BaseDataItem baseDataItem)
 		{
-			var properties = new List<DbParameterObject>();
+            var properties = new DbParameterObjectList();
 
 			baseDataItem.GetProperties(properties);
 
@@ -142,7 +143,7 @@ namespace Konfidence.BaseData
 			throw new NotImplementedException(); // NOP
 		}
 
-        protected virtual BaseDataItem GetNewDataItem(List<DbParameterObject> ParameterList)
+        protected virtual BaseDataItem GetNewDataItem(DbParameterObjectList parameterList)
         {
             throw new NotImplementedException(); // NOP
         }
