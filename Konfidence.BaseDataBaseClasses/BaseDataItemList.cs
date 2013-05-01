@@ -49,30 +49,24 @@ namespace Konfidence.BaseData
 			InitializeDataItemList();
 		}
 
-		protected void BuildItemList(string getListStoredProcedure)
-		{
-            var defaultList = GetListStoredProcedure;
-
-			GetListStoredProcedure = getListStoredProcedure;
-
-			BuildItemList();
-
-            GetListStoredProcedure = defaultList;
-		}
-
         private BaseHost GetHost()
         {
             return HostFactory.GetHost(_ServiceName, _DataBaseName);
         }
-        
+
         protected void BuildItemList()
+        {
+            BuildItemList(GetListStoredProcedure);
+        }
+
+		protected void BuildItemList(string getListStoredProcedure)
 		{
             var dataHost = GetHost();
 
-			dataHost.BuildItemList(this, GetListStoredProcedure);
+            dataHost.BuildItemList(this, getListStoredProcedure);
 
             AfterDataLoad();
-		}
+        }
 
         protected void BuildItemList(IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
         {
