@@ -252,11 +252,15 @@ namespace Konfidence.BaseData
                 throw (new Exception("GetListStoredProcedure not provided"));
             }
 
+            parentDataItemList.SetParameters(getRelatedStoredProcedure);
+
+            var retrieveListParameters = new RetrieveListParameters(parentDataItemList, getRelatedStoredProcedure);
+
             var database = _Repository.GetDatabase();
 
             using (var dbCommand = _Repository.GetStoredProcCommand(getRelatedStoredProcedure))
             {
-                //parentDataItemList.SetParameters(getRelatedStoredProcedure, database, dbCommand);
+                SetParameterData(retrieveListParameters, database, dbCommand);
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
