@@ -215,20 +215,9 @@ namespace Konfidence.BaseData
         }
 
         #region list selecting state control
-        //protected virtual void BeforeSetSelected()
-        //{
-
-        //}
-
-        //protected virtual void AfterSetSelected()
-        //{
-        //    // nop
-        //}
 
         public void SetSelected(string idText, string isEditingText)
         {
-            //BeforeSetSelected();
-
             Guid guidId;
             bool isEditing;
 
@@ -252,14 +241,10 @@ namespace Konfidence.BaseData
                     SetSelected(id, isEditing);
                 }
             }
-
-            //AfterSetSelected();
         }
 
         public void SetSelected(string idText)
         {
-            //BeforeSetSelected();
-
             Guid guidId;
 
             if (Guid.TryParse(idText, out guidId))
@@ -280,21 +265,14 @@ namespace Konfidence.BaseData
                     SetSelected(id);
                 }
             }
-
-            //AfterSetSelected();
         }
 
         public void SetSelected(BaseDataItem dataItem)
         {
-            //BeforeSetSelected();
-
             if (IsAssigned(dataItem))
             {
                 SetSelected(dataItem.GetId());
             }
-
-
-            //AfterSetSelected();
         }
 
         private void SetSelected(int id, bool isEditing = false)
@@ -354,8 +332,6 @@ namespace Konfidence.BaseData
                 dataItem.IsSelected = false;
                 dataItem.IsEditing = true; // nieuw
             }
-
-            //this.SetIsEditing(true);
         }
 
         public void Edit(T dataItem)
@@ -363,8 +339,6 @@ namespace Konfidence.BaseData
             if (IsAssigned(dataItem))
             {
                 dataItem.IsEditing = true; // nieuw
-
-                //this.SetIsEditing(true, dataItem.Id);
             }
         }
 
@@ -378,8 +352,6 @@ namespace Konfidence.BaseData
 
                 dataItem.IsEditing = false; // nieuw
             }
-
-            //this.SetIsEditing(false);
         }
 
         public void Cancel(T dataItem)
@@ -479,11 +451,6 @@ namespace Konfidence.BaseData
         {
             _DbParameterObjectList.SetField(fieldName, value);
         }
-
-        //protected void SetParameterList(DbParameterObjectList dbParameterObjectList)
-        //{
-        //    _DbParameterObjectList = dbParameterObjectList;
-        //}
         #endregion
 
 		/// <summary>

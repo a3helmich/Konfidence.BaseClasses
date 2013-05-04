@@ -58,9 +58,19 @@ namespace Konfidence.BaseData.Repositories
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
         }
 
-        public DbCommand GetStoredProcCommand(string saveStoredProcedure, List<object> parameters)
+        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, DbParameterObjectList parameterObjectList)
         {
-            return GetDatabase().GetStoredProcCommand(saveStoredProcedure, parameters.ToArray());
+            var database = GetDatabase();
+
+            using (var dbCommand = GetStoredProcCommand(saveStoredProcedure))
+            {
+                foreach (var parameterObject in parameterObjectList)
+                {
+                    database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+                }
+
+                return ExecuteNonQuery(dbCommand);
+            }
         }
 
         public ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters)
@@ -171,12 +181,9 @@ namespace Konfidence.BaseData.Repositories
         }
 
 
-        public int ExecuteNonQuery(string storedProcedure, List<object> parameterList)
+        public int ExecuteNonQuery(string storedProcedure, DbParameterObjectList parameterList)
         {
-            using (var dbCommand = GetStoredProcCommand(storedProcedure, parameterList))
-            {
-                return ExecuteNonQuery(dbCommand);
-            }
+            return ExecuteNonQueryStoredProcedure(storedProcedure, parameterList);
         }
 
         public int ExecuteNonQuery(DbCommand dbCommand)

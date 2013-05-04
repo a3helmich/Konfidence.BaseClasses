@@ -45,6 +45,11 @@ namespace Konfidence.BaseData
             }
         }
 
+	    protected DbParameterObjectList DbParameterObjectList
+	    {
+            get { return _DbParameterObjectList; }
+	    }
+
         protected virtual void IsSelectedChanged()
         {
             // nop
@@ -610,11 +615,6 @@ namespace Konfidence.BaseData
         {
             SetField(fieldName, value);
         }
-
-        //protected void SetParameterList(DbParameterObjectList dbParameterObjectList)
-        //{
-        //    _DbParameterObjectList = dbParameterObjectList;
-        //}
 		#endregion
 
         internal void LoadDataItem()
@@ -720,13 +720,13 @@ namespace Konfidence.BaseData
 			_Id = 0;
 
             AfterDelete();
-        }
+        } 
 
-        protected internal int ExecuteCommand(string storedProcedure, params object[] parameters)
+        protected internal int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
         {
             var dataHost = GetHost();
 
-            return dataHost.ExecuteCommand(storedProcedure, parameters);
+            return dataHost.ExecuteCommand(storedProcedure, parameterObjectList);
         }
 
 		protected internal int ExecuteTextCommand(string textCommand)
@@ -734,7 +734,7 @@ namespace Konfidence.BaseData
             var dataHost = GetHost();
 
 			return dataHost.ExecuteTextCommand(textCommand);
-		}
+		} 
 
 		protected internal bool TableExists(string tableName)
 		{
@@ -787,11 +787,6 @@ namespace Konfidence.BaseData
 
             return parameterObjectList;
         }
-
-        //private void AddInParameter(string field, DbType dbType, object value)
-        //{
-        //    _DbParameterObjectList.Add(new DbParameterObject(field, dbType , value));
-        //}
 
         protected internal virtual void GetAutoUpdateData()
 		{

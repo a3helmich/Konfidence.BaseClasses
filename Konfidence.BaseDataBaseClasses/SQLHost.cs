@@ -266,9 +266,9 @@ namespace Konfidence.BaseData
             }
         }
 
-        internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
+        internal override int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
         {
-            return _Repository.ExecuteNonQuery(storedProcedure, new List<object> { parameters });
+            return _Repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
         }
 
 	    internal override int ExecuteTextCommand(string textCommand)

@@ -52,7 +52,11 @@ namespace MenuTest
         [TestMethod]
         public void GetSingleMenuItemList()
         {
-            Bl.MenuDataItemList.GetListByMenuCode(1);
+            var list = Bl.MenuDataItemList.GetListByMenuCode(1);
+
+            Assert.AreEqual(9, list.Count, "was expecting to get 9 menu items back");
+
+            Assert.AreEqual("Wijzigen van mijn persoonsgegevens", list[3].MenuText.MenuText, "menu text klopt niet");
         }
 
         [TestMethod]

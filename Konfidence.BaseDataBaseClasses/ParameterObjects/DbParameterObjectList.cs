@@ -7,12 +7,12 @@ namespace Konfidence.BaseData.ParameterObjects
     public class DbParameterObjectList : BaseItemList<DbParameterObject>
     {
         #region SetField Methods
-        internal void SetField(string fieldName, int value)
+        public void SetField(string fieldName, int value)
         {
             AddInParameter(fieldName, DbType.Int32, value);
         }
 
-        internal void SetField(string fieldName, Guid value)
+        public void SetField(string fieldName, Guid value)
         {
             if (Guid.Empty.Equals(value))
             {
@@ -24,17 +24,17 @@ namespace Konfidence.BaseData.ParameterObjects
             }
         }
 
-        internal void SetField(string fieldName, string value)
+        public void SetField(string fieldName, string value)
         {
             AddInParameter(fieldName, DbType.String, value);
         }
 
-        internal void SetField(string fieldName, bool value)
+        public void SetField(string fieldName, bool value)
         {
             AddInParameter(fieldName, DbType.Boolean, value);
         }
 
-        internal void SetField(string fieldName, DateTime value)
+        public void SetField(string fieldName, DateTime value)
         {
             if (value > DateTime.MinValue)
             {
@@ -46,7 +46,7 @@ namespace Konfidence.BaseData.ParameterObjects
             }
         }
 
-        internal void SetField(string fieldName, TimeSpan value)
+        public void SetField(string fieldName, TimeSpan value)
         {
             if (value > TimeSpan.MinValue)
             {
@@ -62,7 +62,7 @@ namespace Konfidence.BaseData.ParameterObjects
             }
         }
 
-        internal void SetField(string fieldName, Decimal value)
+        public void SetField(string fieldName, Decimal value)
         {
             AddInParameter(fieldName, DbType.Decimal, value);
         }

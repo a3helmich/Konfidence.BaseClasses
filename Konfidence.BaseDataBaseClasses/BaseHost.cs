@@ -1,6 +1,7 @@
 using System;
 using Konfidence.Base;
 using System.Data;
+using Konfidence.BaseData.ParameterObjects;
 
 namespace Konfidence.BaseData
 {
@@ -69,7 +70,7 @@ namespace Konfidence.BaseData
 		{
 		}
 
-        internal virtual int ExecuteCommand(string storedProcedure, params object[] parameters)
+        internal virtual int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
         {
             return 0;
         }

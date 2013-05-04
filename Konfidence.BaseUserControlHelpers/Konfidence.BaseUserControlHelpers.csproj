@@ -163,15 +163,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
-      <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
+      <Project>{d71a4677-79c7-443b-900d-218fbcfe8728}</Project>
       <Name>Konfidence.BaseClasses</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDataBaseClasses.csproj">
-      <Project>{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}</Project>
+      <Project>{2b4ccfac-0b45-4f69-96bb-a60c4584027f}</Project>
       <Name>Konfidence.BaseDataBaseClasses</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.MenuClasses\DbSiteMapMenuClasses.csproj">
-      <Project>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</Project>
+      <Project>{411d4b61-9ddf-43f9-ab11-b256dd8287e5}</Project>
       <Name>DbSiteMapMenuClasses</Name>
     </ProjectReference>
   </ItemGroup>
