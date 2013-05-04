@@ -1,16 +1,13 @@
 using System;
 using System.Data;
-using System.Data.Common;
 using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.Repositories;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData
 {
 	internal class SqlHost : BaseHost
 	{
-        private IDataReader _DataReader;
 	    private readonly IDatabaseRepository _Repository;
 
 		public SqlHost(string dataBaseName): base(string.Empty, dataBaseName)
@@ -22,11 +19,6 @@ namespace Konfidence.BaseData
 	    {
 	        get
 	        {
-	            if (IsAssigned(_DataReader))
-	            {
-	                return _DataReader;
-	            }
-
 	            return _Repository.DataReader;
 	        }
 	    }
@@ -197,53 +189,9 @@ namespace Konfidence.BaseData
 
             var retrieveListParameters = new RetrieveListParameters(baseDataItemList, getListStoredProcedure);
 
-            ExecuteGetListStoredProcedure(retrieveListParameters, () =>
-                {
-                    var dataItem = baseDataItemList.GetDataItem();
-
-                    dataItem.DataHost = this;
-
-                    dataItem.GetKey();
-                    dataItem.GetData();
-
-                    return true;
-                });
+            _Repository.ExecuteGetListStoredProcedure(retrieveListParameters, () => GetDataItem(baseDataItemList));
         }
 
-        private void ExecuteGetListStoredProcedure(RetrieveListParameters retrieveListParameters, Func<bool> callback)
-	    {
-	        var database = _Repository.GetDatabase();
-
-            using (var dbCommand = _Repository.GetStoredProcCommand(retrieveListParameters.StoredProcedure))
-	        {
-	            SetParameterData(retrieveListParameters, database, dbCommand);
-
-	            using (var dataReader = database.ExecuteReader(dbCommand))
-	            {
-	                _DataReader = dataReader;
-
-	                while (dataReader.Read())
-	                {
-                        if (IsAssigned(callback))
-                        {
-                            callback();
-                        }
-	                }
-
-	                _DataReader = null;
-	            }
-	        }
-	    }
-
-	    private void SetParameterData(RetrieveListParameters executeParameters, Database database, DbCommand dbCommand)
-        {
-            foreach (var parameterObject in executeParameters.ParameterObjectList)
-            {
-                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
-            }
-
-            executeParameters.ParameterObjectList.Clear();
-        }
 
 	    internal override void BuildItemList(IBaseDataItemList parentDataItemList, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
 	    {
@@ -256,53 +204,22 @@ namespace Konfidence.BaseData
 
             var retrieveListParameters = new RetrieveListParameters(parentDataItemList, getRelatedStoredProcedure);
 
-            var database = _Repository.GetDatabase();
+            _Repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters,
+                () => GetDataItem(parentDataItemList),
+                () => GetDataItem(relatedDataItemList),
+                () => GetDataItem(childDataItemList));
+        }
 
-            using (var dbCommand = _Repository.GetStoredProcCommand(getRelatedStoredProcedure))
-            {
-                SetParameterData(retrieveListParameters, database, dbCommand);
+        private bool GetDataItem(IBaseDataItemList baseDataItemList)
+        {
+            var dataItem = baseDataItemList.GetDataItem();
 
-                using (var dataReader = database.ExecuteReader(dbCommand))
-                {
-                    _DataReader = dataReader;
+            dataItem.DataHost = this;
 
-                    while (dataReader.Read())
-                    {
-                        var dataItem = parentDataItemList.GetDataItem();
+            dataItem.GetKey();
+            dataItem.GetData();
 
-                        dataItem.DataHost = this;
-
-                        dataItem.GetKey();
-                        dataItem.GetData();
-                    }
-
-                    dataReader.NextResult();
-
-                    while (dataReader.Read())
-                    {
-                        var dataItem = relatedDataItemList.GetDataItem();
-
-                        dataItem.DataHost = this;
-
-                        dataItem.GetKey();
-                        dataItem.GetData();
-                    }
-
-                    dataReader.NextResult();
-
-                    while (dataReader.Read())
-                    {
-                        var dataItem = childDataItemList.GetDataItem();
-
-                        dataItem.DataHost = this;
-
-                        dataItem.GetKey();
-                        dataItem.GetData();
-                    }
-
-                    _DataReader = null;
-                }
-            }
+            return true;
         }
 
         internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)

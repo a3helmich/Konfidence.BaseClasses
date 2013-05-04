@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -159,6 +158,86 @@ namespace Konfidence.BaseData.Repositories
         }
 
         private void SetParameterData(RetrieveParameters executeParameters, Database database, DbCommand dbCommand)
+        {
+            foreach (var parameterObject in executeParameters.ParameterObjectList)
+            {
+                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+            }
+
+            executeParameters.ParameterObjectList.Clear();
+        }
+
+        public void ExecuteGetListStoredProcedure(RetrieveListParameters retrieveListParameters, Func<bool> callback)
+        {
+            var database = GetDatabase();
+
+            using (var dbCommand = GetStoredProcCommand(retrieveListParameters.StoredProcedure))
+            {
+                SetParameterData(retrieveListParameters, database, dbCommand);
+
+                using (var dataReader = database.ExecuteReader(dbCommand))
+                {
+                    _DataReader = dataReader;
+
+                    while (dataReader.Read())
+                    {
+                        if (IsAssigned(callback))
+                        {
+                            callback();
+                        }
+                    }
+
+                    _DataReader = null;
+                }
+            }
+        }
+
+        public void ExecuteGetRelatedListStoredProcedure(RetrieveListParameters retrieveListParameters, Func<bool> parentCallback, Func<bool> relatedCallback, Func<bool> childCallback)
+        {
+            var database = GetDatabase();
+
+            using (var dbCommand = GetStoredProcCommand(retrieveListParameters.StoredProcedure))
+            {
+                SetParameterData(retrieveListParameters, database, dbCommand);
+
+                using (var dataReader = database.ExecuteReader(dbCommand))
+                {
+                    _DataReader = dataReader;
+
+                    while (dataReader.Read())
+                    {
+                        if (IsAssigned(parentCallback))
+                        {
+                            parentCallback();
+                        }
+                    }
+
+                    dataReader.NextResult();
+
+                    while (dataReader.Read())
+                    {
+                        if (IsAssigned(relatedCallback))
+                        {
+                            relatedCallback();
+                        }
+                    }
+
+                    dataReader.NextResult();
+
+                    while (dataReader.Read())
+                    {
+                        if (IsAssigned(childCallback))
+                        {
+                            childCallback();
+                        }
+                    }
+
+                    _DataReader = null;
+                }
+            }
+        }
+
+        private void SetParameterData(RetrieveListParameters executeParameters, Database database, DbCommand dbCommand)
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
