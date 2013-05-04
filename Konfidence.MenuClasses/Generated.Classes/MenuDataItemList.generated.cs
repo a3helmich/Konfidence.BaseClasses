@@ -104,7 +104,6 @@ namespace DbSiteMapMenuClasses
                 if (storedProcedure.Equals(MENU_GETLISTBY_MENUCODE))
                 {
                     SetParameter(MenuDataItem.MENUCODE, _MenuCode);
-                    //database.AddInParameter(dbCommand, MenuDataItem.MENUCODE, DbType.Int32, _MenuCode);
                 }
             }
         }
