@@ -99,12 +99,12 @@ namespace DbSiteMapMenuClasses
                 return menuList;
             }
 
-            public override void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
+            public override void SetParameters(string storedProcedure)
             {
                 if (storedProcedure.Equals(MENU_GETLISTBY_MENUCODE))
                 {
                     SetParameter(MenuDataItem.MENUCODE, _MenuCode);
-                    database.AddInParameter(dbCommand, MenuDataItem.MENUCODE, DbType.Int32, _MenuCode);
+                    //database.AddInParameter(dbCommand, MenuDataItem.MENUCODE, DbType.Int32, _MenuCode);
                 }
             }
         }

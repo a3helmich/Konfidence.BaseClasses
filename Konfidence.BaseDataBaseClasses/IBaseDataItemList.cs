@@ -7,9 +7,10 @@ namespace Konfidence.BaseData
 {
     public interface IBaseDataItemList
     {
-        void SetParameters(string storedProcedure, Database database, DbCommand dbCommand);
-        void AddItem(BaseHost dataHost);
+        void SetParameters(string storedProcedure);
+        //void AddItem(BaseHost dataHost);
         BaseDataItem GetDataItem();
         List<DbParameterObjectList> Convert2ListOfParameterObjectList();
+        DbParameterObjectList GetParameterObjectList();
     }
 }

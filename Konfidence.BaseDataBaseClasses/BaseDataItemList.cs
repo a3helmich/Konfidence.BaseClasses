@@ -416,7 +416,7 @@ namespace Konfidence.BaseData
 			return properties;
 		}
 
-        internal DbParameterObjectList GetParameterObjectList()
+        public DbParameterObjectList GetParameterObjectList()
         {
             return _DbParameterObjectList;
         }
@@ -457,7 +457,7 @@ namespace Konfidence.BaseData
 		/// Add parameters for filtering
 		/// </summary>
 		/// <returns></returns>
-		public virtual void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
+		public virtual void SetParameters(string storedProcedure)
 		{
 			// NOP
 		}
@@ -467,19 +467,19 @@ namespace Konfidence.BaseData
 			// NOP
 		}
 
-		public void AddItem(BaseHost dataHost)
-		{
-			var baseDataItem = new T {DataHost = dataHost};
+        //public void AddItem(BaseHost dataHost)
+        //{
+        //    var baseDataItem = new T {DataHost = dataHost};
 
-		    if (IsAssigned(baseDataItem))
-			{
-				baseDataItem.GetKey();
+        //    if (IsAssigned(baseDataItem))
+        //    {
+        //        baseDataItem.GetKey();
 
-				baseDataItem.GetData();
+        //        baseDataItem.GetData();
 
-				Add(baseDataItem);
-			}
-		}
+        //        Add(baseDataItem);
+        //    }
+        //}
 
 		protected int ExecuteTextCommand(string textCommand)
 		{
@@ -515,5 +515,5 @@ namespace Konfidence.BaseData
 
             return dataHost.StoredProcedureExists(storedProcedureName);
         }
-	}
+    }
 }

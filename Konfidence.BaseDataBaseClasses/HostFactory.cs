@@ -10,7 +10,7 @@ namespace Konfidence.BaseData
 		{
 			get
 			{
-				string wsEnabled = ConfigurationManager.AppSettings["WebServicesEnabled"];
+				var wsEnabled = ConfigurationManager.AppSettings["WebServicesEnabled"];
 
                 if (!IsEmpty(wsEnabled))
                 {

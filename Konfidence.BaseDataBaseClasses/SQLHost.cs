@@ -1,8 +1,10 @@
 using System;
 using System.Data;
+using System.Data.Common;
 using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.Repositories;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData
 {
@@ -184,19 +186,6 @@ namespace Konfidence.BaseData
 	            });
         }
 
-	    internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
-		{
-			if (deleteStoredProcedure.Equals(string.Empty))
-			{
-				throw (new Exception("DeleteStoredProcedure not provided"));
-			}
-
-			if (id > 0)
-			{
-			    _Repository.ExecuteDeleteStoredProcedure(deleteStoredProcedure, autoIdField, id);
-			}
-		}
-
         internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
         {
             if (getListStoredProcedure.Equals(string.Empty))
@@ -204,25 +193,57 @@ namespace Konfidence.BaseData
                 throw (new Exception("GetListStoredProcedure not provided"));
             }
 
-            var database = _Repository.GetDatabase();
+            baseDataItemList.SetParameters(getListStoredProcedure);
 
-            using (var dbCommand = _Repository.GetStoredProcCommand(getListStoredProcedure))
-            {
-                baseDataItemList.SetParameters(getListStoredProcedure, database, dbCommand);
+            var retrieveListParameters = new RetrieveListParameters(baseDataItemList, getListStoredProcedure);
 
-                using (var dataReader = database.ExecuteReader(dbCommand))
+            ExecuteGetListStoredProcedure(retrieveListParameters, () =>
                 {
-                    _DataReader = dataReader;
+                    var dataItem = baseDataItemList.GetDataItem();
 
-                    while (dataReader.Read())
-                    {
-                        baseDataItemList.AddItem(this);
-                    }
+                    dataItem.DataHost = this;
 
-                    _DataReader = null;
-                }
+                    dataItem.GetKey();
+                    dataItem.GetData();
+
+                    return true;
+                });
+        }
+
+        private void ExecuteGetListStoredProcedure(RetrieveListParameters retrieveListParameters, Func<bool> callback)
+	    {
+	        var database = _Repository.GetDatabase();
+
+            using (var dbCommand = _Repository.GetStoredProcCommand(retrieveListParameters.StoredProcedure))
+	        {
+	            SetParameterData(retrieveListParameters, database, dbCommand);
+
+	            using (var dataReader = database.ExecuteReader(dbCommand))
+	            {
+	                _DataReader = dataReader;
+
+	                while (dataReader.Read())
+	                {
+                        if (IsAssigned(callback))
+                        {
+                            callback();
+                        }
+	                }
+
+	                _DataReader = null;
+	            }
+	        }
+	    }
+
+	    private void SetParameterData(RetrieveListParameters executeParameters, Database database, DbCommand dbCommand)
+        {
+            foreach (var parameterObject in executeParameters.ParameterObjectList)
+            {
+                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
             }
-        }   
+
+            executeParameters.ParameterObjectList.Clear();
+        }
 
 	    internal override void BuildItemList(IBaseDataItemList parentDataItemList, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
 	    {
@@ -235,7 +256,7 @@ namespace Konfidence.BaseData
 
             using (var dbCommand = _Repository.GetStoredProcCommand(getRelatedStoredProcedure))
             {
-                parentDataItemList.SetParameters(getRelatedStoredProcedure, database, dbCommand);
+                //parentDataItemList.SetParameters(getRelatedStoredProcedure, database, dbCommand);
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
@@ -243,25 +264,53 @@ namespace Konfidence.BaseData
 
                     while (dataReader.Read())
                     {
-                        parentDataItemList.AddItem(this);
+                        var dataItem = parentDataItemList.GetDataItem();
+
+                        dataItem.DataHost = this;
+
+                        dataItem.GetKey();
+                        dataItem.GetData();
                     }
 
                     dataReader.NextResult();
 
                     while (dataReader.Read())
                     {
-                        relatedDataItemList.AddItem(this);
+                        var dataItem = relatedDataItemList.GetDataItem();
+
+                        dataItem.DataHost = this;
+
+                        dataItem.GetKey();
+                        dataItem.GetData();
                     }
 
                     dataReader.NextResult();
 
                     while (dataReader.Read())
                     {
-                        childDataItemList.AddItem(this);
+                        var dataItem = childDataItemList.GetDataItem();
+
+                        dataItem.DataHost = this;
+
+                        dataItem.GetKey();
+                        dataItem.GetData();
                     }
 
                     _DataReader = null;
                 }
+            }
+        }
+
+        internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        {
+            if (deleteStoredProcedure.Equals(string.Empty))
+            {
+                throw (new Exception("DeleteStoredProcedure not provided"));
+            }
+
+            if (id > 0)
+            {
+                _Repository.ExecuteDeleteStoredProcedure(deleteStoredProcedure, autoIdField, id);
             }
         }
 
