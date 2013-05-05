@@ -5,7 +5,7 @@ using Konfidence.BaseData.ParameterObjects;
 
 namespace Konfidence.BaseData
 {
-	public class BaseHost: BaseItem
+	internal class BaseHost: BaseItem
 	{
 	    private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
@@ -51,14 +51,14 @@ namespace Konfidence.BaseData
 		{
 		}
 
-        //internal virtual void GetItem(BaseDataItem dataItem, string getStoredProcedure, string autoIdField, int id)
         internal virtual void GetItem(BaseDataItem dataItem, string getStoredProcedure)
         {
         }
 
-        internal virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        internal protected virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 		}
+
         internal virtual void BuildItemList(IBaseDataItemList parentDataItemList,
                                                    IBaseDataItemList relatedDataItemList,
                                                    IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
@@ -79,7 +79,8 @@ namespace Konfidence.BaseData
 		{
 			return 0;
 		}
-		internal virtual bool TableExists(string tableName)
+		
+        internal virtual bool TableExists(string tableName)
 		{
 			return false;
 		}

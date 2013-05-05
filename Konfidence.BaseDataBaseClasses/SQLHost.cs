@@ -222,7 +222,7 @@ namespace Konfidence.BaseData
             return true;
         }
 
-        internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        internal protected override void Delete(string deleteStoredProcedure, string autoIdField, int id)
         {
             if (deleteStoredProcedure.Equals(string.Empty))
             {

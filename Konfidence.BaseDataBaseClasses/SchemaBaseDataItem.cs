@@ -6,9 +6,7 @@ namespace Konfidence.BaseData
     {
         protected DataTable GetSchemaObject(string objectType)
         {
-            BaseHost dataHost = GetHost();
-
-            return dataHost.GetSchemaObject(objectType);
+            return DataHost.GetSchemaObject(objectType);
         }
     }
 }

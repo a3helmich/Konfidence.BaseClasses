@@ -106,7 +106,7 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+		internal protected override void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 			_WsBaseHostService.Delete(id);
 		}

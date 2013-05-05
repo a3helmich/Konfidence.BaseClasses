@@ -19,7 +19,7 @@ namespace Konfidence.BaseData
 		private string _DeleteStoredProcedure = string.Empty;
 		private string _SaveStoredProcedure = string.Empty;
 
-        internal BaseHost DataHost = null;   // _DataHost is used by the GetFieldXXXX methods
+        private BaseHost _DataHost; 
 		internal Dictionary<string, object> PropertyDictionary = null;
 
         private int _Id;
@@ -68,6 +68,20 @@ namespace Konfidence.BaseData
                 _IsEditing = value;
                 IsEditingChanged();
             }
+        }
+
+        internal BaseHost DataHost
+        {
+            get
+            {
+                if (!IsAssigned(_DataHost))
+                {
+                    _DataHost = HostFactory.GetHost(_ServiceName, _DataBaseName);
+                }
+
+                return _DataHost;
+            }
+            set { _DataHost = value; }
         }
 
 	    public BaseDataItem()
@@ -639,22 +653,11 @@ namespace Konfidence.BaseData
             // NOP
         }
 
-        internal protected BaseHost GetHost()
-        {
-            return HostFactory.GetHost(_ServiceName, _DataBaseName);
-        }
-
 		protected void GetItem(string storedProcedure)
 		{
-            var dataHost = GetHost();
-
-            DataHost = dataHost;  // _DataHost is used by the GetFieldXXXX methods
-
-            dataHost.GetItem(this, storedProcedure);
+            DataHost.GetItem(this, storedProcedure);
 
             AfterGetDataItem();
-
-            DataHost = null;
         }
 
 		protected void GetItem(string storedProcedure, int autoKeyId)
@@ -690,9 +693,7 @@ namespace Konfidence.BaseData
 				return;
 			}
 
-            var dataHost = GetHost();
-
-			dataHost.Save(this);
+			DataHost.Save(this);
 
             GetAutoUpdateData();
 
@@ -711,11 +712,9 @@ namespace Konfidence.BaseData
 
 		public void Delete()
 		{
-            var dataHost = GetHost();
-
             BeforeDelete();
 
-			dataHost.Delete(DeleteStoredProcedure, AutoIdField, _Id);
+			DataHost.Delete(DeleteStoredProcedure, AutoIdField, _Id);
 
 			_Id = 0;
 
@@ -724,37 +723,27 @@ namespace Konfidence.BaseData
 
         protected internal int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
         {
-            var dataHost = GetHost();
-
-            return dataHost.ExecuteCommand(storedProcedure, parameterObjectList);
+            return DataHost.ExecuteCommand(storedProcedure, parameterObjectList);
         }
 
 		protected internal int ExecuteTextCommand(string textCommand)
 		{
-            var dataHost = GetHost();
-
-			return dataHost.ExecuteTextCommand(textCommand);
+            return DataHost.ExecuteTextCommand(textCommand);
 		} 
 
 		protected internal bool TableExists(string tableName)
 		{
-            var dataHost = GetHost();
-
-			return dataHost.TableExists(tableName);
+            return DataHost.TableExists(tableName);
 		}
 
 		protected internal bool ViewExists(string viewName)
 		{
-            var dataHost = GetHost();
-
-			return dataHost.ViewExists(viewName);
+            return DataHost.ViewExists(viewName);
 		}
 
         protected internal bool StoredProcedureExists(string storedProcedureName)
         {
-            var dataHost = GetHost();
-
-            return dataHost.StoredProcedureExists(storedProcedureName);
+            return DataHost.StoredProcedureExists(storedProcedureName);
         }
 
         //internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
