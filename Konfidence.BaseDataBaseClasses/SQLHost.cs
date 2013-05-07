@@ -3,15 +3,36 @@ using System.Data;
 using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.Repositories;
+using Ninject;
+using Ninject.Modules;
 
 namespace Konfidence.BaseData
 {
-	internal class SqlHost : BaseHost
+    internal class RepositoryModule : NinjectModule
+    {
+        public override void Load()
+        {
+            Bind<IDatabaseRepository>().To<DatabaseRepository>();
+        }
+    }
+
+    internal class SqlHost : BaseHost
 	{
 	    private readonly IDatabaseRepository _Repository;
 
-		public SqlHost(string dataBaseName): base(string.Empty, dataBaseName)
+        private readonly IKernel _Kernel;
+
+        public SqlHost(string dataBaseName, NinjectModule ninjectModule = null) : base(string.Empty, dataBaseName)
 		{
+            if (!IsAssigned(ninjectModule))
+            {
+                ninjectModule = new RepositoryModule();
+            }
+
+            _Kernel = new StandardKernel(ninjectModule);
+
+            //_Repository = _Kernel.Get<IDatabaseRepository>(dataBaseName);
+            //_Repository = _Kernel.Get<IDatabaseRepository>();
             _Repository = new DatabaseRepository(dataBaseName);
 		}
 

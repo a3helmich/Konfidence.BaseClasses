@@ -1,5 +1,6 @@
 ﻿using DbSiteMapMenuClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ninject;
 
 namespace MenuTest
 {
@@ -24,8 +25,13 @@ namespace MenuTest
         // You can use the following additional attributes as you write your tests:
         //
         // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
+        [ClassInitialize]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            //IKernel kernel = new StandardKernel();
+
+            //kernel.Bind<IDatabaseRepository>().To<DatabaseRepository>();
+        }
         //
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
