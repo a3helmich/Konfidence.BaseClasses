@@ -60,9 +60,9 @@ namespace Konfidence.BaseData.SqlDbSchema
         }
         #endregion properties
 
-        public TableDataItem()
-        {
-        }
+        //public TableDataItem()
+        //{
+        //}
 
         public TableDataItem(string catalog, string schema, string name)
         {
@@ -152,9 +152,14 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
-        internal System.Data.DataTable GetTables()
+        public TableDataItem()
         {
-            return GetSchemaObject("Tables");
+            throw new NotImplementedException();
         }
+
+        //internal System.Data.DataTable GetTables()
+        //{
+        //    return GetSchemaObject("Tables");
+        //}
     }
 }

@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
-    public class TableDataItemList<T> : BaseDataItemList<TableDataItem> where T : TableDataItem, new()
+    public class TableDataItemList : BaseDataItemList<TableDataItem> 
     {
         private DataTable _DataTableList;
 
@@ -16,9 +16,22 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         protected override void InitializeDataItemList()
         {
-            var tableDataItem = new T();
+            _DataTableList = GetTables();
+        }
 
-            _DataTableList = tableDataItem.GetTables();
+        internal class Xxx : SchemaBaseDataItem
+        {
+            internal DataTable Blabla()
+            {
+                return GetSchemaObject("Tables");
+            }
+        }
+
+        private DataTable GetTables()
+        {
+            var shemaBaseDataItem = new Xxx();
+
+            return shemaBaseDataItem.Blabla();
         }
 
         private void BuildItemList(DataTable dataTableList)

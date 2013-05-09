@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using System.Diagnostics;
 
 namespace Konfidence.BaseData
