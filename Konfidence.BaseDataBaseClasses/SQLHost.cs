@@ -281,23 +281,23 @@ namespace Konfidence.BaseData
             return _Repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
-        //internal override DataTable GetSchemaObject(string collection)
-        //{
-        //    DataTable dataTable;
+        internal override DataTable GetSchemaObject(string collection)
+        {
+            DataTable dataTable;
 
-        //    var database = _Repository.GetDatabase();
+            var database = _Repository.GetDatabase();
 
-        //    using (var dbConnection = database.CreateConnection())
-        //    {
-        //        dbConnection.Open();
+            using (var dbConnection = database.CreateConnection())
+            {
+                dbConnection.Open();
 
-        //        using (var schemaTable = dbConnection.GetSchema(collection))
-        //        {
-        //            dataTable = schemaTable.Copy();
-        //        }
-        //    }
+                using (var schemaTable = dbConnection.GetSchema(collection))
+                {
+                    dataTable = schemaTable.Copy();
+                }
+            }
 
-        //    return dataTable;
-        //}
+            return dataTable;
+        }
 	}
 }
