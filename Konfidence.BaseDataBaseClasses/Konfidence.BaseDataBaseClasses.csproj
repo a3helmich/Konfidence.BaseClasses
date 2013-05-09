@@ -133,6 +133,8 @@
     <Compile Include="SqlDbSchema\SchemaBaseDataItem.cs" />
     <Compile Include="SqlDbSchema\PrimaryKeyDataItem.cs" />
     <Compile Include="SqlDbSchema\SpNames.cs" />
+    <Compile Include="SqlDbSchema\TableDataItem.cs" />
+    <Compile Include="SqlDbSchema\TableDataItemList.cs" />
     <Compile Include="SQLHost.cs" />
     <Compile Include="SqlHostException.cs" />
     <Compile Include="SqlServerDataItem.cs" />
