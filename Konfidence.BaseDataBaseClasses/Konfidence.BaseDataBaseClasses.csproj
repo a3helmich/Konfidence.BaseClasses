@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="ParameterObjects\ResponseParameters.cs" />
     <Compile Include="SqlDbSchema\ColumnDataItem.cs" />
+    <Compile Include="SqlDbSchema\ColumnDataItemList.cs" />
     <Compile Include="SqlDbSchema\DataBaseStructure.cs" />
     <Compile Include="SqlDbSchema\IColumnDataItemList.cs" />
     <Compile Include="SqlDbSchema\IndexColumnsDataItem.cs" />
