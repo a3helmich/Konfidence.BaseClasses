@@ -124,8 +124,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ParameterObjects\ResponseParameters.cs" />
+    <Compile Include="SqlDbSchema\DataBaseStructure.cs" />
     <Compile Include="SqlDbSchema\SchemaBaseDataItem.cs" />
     <Compile Include="SqlDbSchema\PrimaryKeyDataItem.cs" />
+    <Compile Include="SqlDbSchema\SpNames.cs" />
     <Compile Include="SQLHost.cs" />
     <Compile Include="SqlHostException.cs" />
     <Compile Include="SqlServerDataItem.cs" />
@@ -214,6 +216,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).dll" "C:\Projects\References\$(ConfigurationName)" /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).dll" "C:\Projects\References\$(ConfigurationName)" /Y
+xcopy "$(TargetDir)ninject.dll" "C:\Projects\References\$(ConfigurationName)" /Y
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

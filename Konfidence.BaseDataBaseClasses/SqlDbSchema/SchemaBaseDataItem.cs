@@ -2,7 +2,7 @@
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
-    internal class SchemaBaseDataItem : BaseDataItem
+    public class SchemaBaseDataItem : BaseDataItem
     {
         protected DataTable GetSchemaObject(string objectType)
         {
