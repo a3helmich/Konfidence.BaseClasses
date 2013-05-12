@@ -80,7 +80,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                 {
                     _IndexColumnsDataItemList.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
 
-                    columnDataItem.IsPrimaryKey = true;
+                    columnDataItem.SetPrimaryKey(true);;
 
                     break;
                 }
@@ -135,7 +135,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                     case "sysinserttime":
                         break;
                     case "sysupdatetime":
-                        columnDataItem.IsAutoUpdated = true;
+                        columnDataItem.SetAutoUpdated(true);
                         break;
                 }
             }
@@ -146,7 +146,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                 switch (columnDataItem.Name.ToLower())
                 {
                     case "syslock":
-                        columnDataItem.IsLockInfo = true;
+                        columnDataItem.SetLockInfo(true);
                         break;
                 }
             }

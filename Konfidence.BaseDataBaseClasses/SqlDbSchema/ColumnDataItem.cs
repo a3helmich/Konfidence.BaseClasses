@@ -6,6 +6,10 @@ namespace Konfidence.BaseData.SqlDbSchema
     public class ColumnDataItem : SchemaBaseDataItem, IColumnDataItem
     {
         private bool _IsComputed;
+        private bool _IsDefaulted;
+        private bool _IsPrimaryKey;
+        private bool _IsAutoUpdated;
+        private bool _IsLockInfo;
 
         private string _Name = string.Empty;
         private int _OrdinalPosition;
@@ -26,19 +30,31 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         #region properties
 
-        public bool IsPrimaryKey { get; set; }
+        public bool IsPrimaryKey
+        {
+            get { return _IsPrimaryKey; }
+        }
 
-        public bool IsAutoUpdated { get; set; }
+        public bool IsAutoUpdated
+        {
+            get { return _IsAutoUpdated; }
+        }
 
-        public bool IsDefaulted { get; set; }
+        public bool IsDefaulted
+        {
+            get { return _IsDefaulted; }
+        }
 
         public bool IsComputed
         {
             get { return _IsComputed; }
-            set { _IsComputed = value; }
+            //set { _IsComputed = value; }
         }
 
-        public bool IsLockInfo { get; set; }
+        public bool IsLockInfo
+        {
+            get { return _IsLockInfo; }
+        }
 
         public string Name
         {
@@ -82,7 +98,6 @@ namespace Konfidence.BaseData.SqlDbSchema
         public string CharacterMaximumLength
         {
             get { return _CharacterMaximumLength; }
-            set { _CharacterMaximumLength = value; }
         }
 
         //public int CharacterOctetLength
@@ -142,11 +157,11 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         public ColumnDataItem()
         {
-            IsPrimaryKey = false;
-            IsAutoUpdated = false;
-            IsDefaulted = false;
+            _IsPrimaryKey = false;
+            _IsAutoUpdated = false;
+            _IsDefaulted = false;
             _IsComputed = false;
-            IsLockInfo = false;
+            _IsLockInfo = false;
         }
 
         protected internal override void GetData()
@@ -159,7 +174,7 @@ namespace Konfidence.BaseData.SqlDbSchema
 
             if (defaultObjectId > 0)
             {
-                IsDefaulted = true;
+                _IsDefaulted = true;
             }
 
             GetField("Is_Computed", out _IsComputed);
@@ -251,6 +266,21 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
+        public void SetPrimaryKey(bool isPrimaryKey)
+        {
+            _IsPrimaryKey = isPrimaryKey;
+        }
+
+        public void SetAutoUpdated(bool isAutoUpdated)
+        {
+            _IsAutoUpdated = isAutoUpdated;
+        }
+
+        public void SetLockInfo(bool isLockInfo)
+        {
+            _IsLockInfo = isLockInfo;
+        }
+        
         public string NewGuidPropertyValue
         {
             get

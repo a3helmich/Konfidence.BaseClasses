@@ -2,7 +2,14 @@
 {
     public interface IColumnDataItem
     {
-        string Name { get; set; }
+        string Name { get; }
+        bool IsPrimaryKey { get; }
+        bool IsDefaulted { get; }
+        bool IsComputed { get; }
+        bool IsAutoUpdated { get; }
+        string DefaultPropertyValue { get; }
+        string CharacterMaximumLength { get; }
         string DataType { get; }
+        string SqlDataType { get; }
     }
 }
