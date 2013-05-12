@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
-    public class ColumnDataItem : SchemaBaseDataItem
+    public class ColumnDataItem : SchemaBaseDataItem, IColumnDataItem
     {
         private bool _IsComputed;
 

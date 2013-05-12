@@ -127,6 +127,7 @@
     <Compile Include="SqlDbSchema\ColumnDataItem.cs" />
     <Compile Include="SqlDbSchema\ColumnDataItemList.cs" />
     <Compile Include="SqlDbSchema\DataBaseStructure.cs" />
+    <Compile Include="SqlDbSchema\IColumnDataItem.cs" />
     <Compile Include="SqlDbSchema\IColumnDataItemList.cs" />
     <Compile Include="SqlDbSchema\IndexColumnsDataItem.cs" />
     <Compile Include="SqlDbSchema\IndexColumnsDataItemList.cs" />
