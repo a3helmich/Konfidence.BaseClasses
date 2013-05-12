@@ -19,9 +19,9 @@ namespace Konfidence.BaseData.SqlDbSchema
             _DataTableList = GetTables();
         }
 
-        internal class Xxx : SchemaBaseDataItem
+        internal class InternalTableDataItem : SchemaBaseDataItem
         {
-            internal DataTable Blabla()
+            internal DataTable GetTables()
             {
                 return GetSchemaObject("Tables");
             }
@@ -29,9 +29,9 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         private DataTable GetTables()
         {
-            var shemaBaseDataItem = new Xxx();
+            var shemaBaseDataItem = new InternalTableDataItem();
 
-            return shemaBaseDataItem.Blabla();
+            return shemaBaseDataItem.GetTables();
         }
 
         private void BuildItemList(DataTable dataTableList)
