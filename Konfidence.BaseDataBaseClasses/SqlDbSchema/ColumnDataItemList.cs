@@ -57,7 +57,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
-        public ColumnDataItem Find(string columnName)
+        public IColumnDataItem Find(string columnName)
         {
             foreach (var columnDataItem in this)
             {
