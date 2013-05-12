@@ -51,7 +51,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             //set { _IsComputed = value; }
         }
 
-        public bool IsLockInfo
+        protected bool IsLockInfo
         {
             get { return _IsLockInfo; }
         }
@@ -59,7 +59,6 @@ namespace Konfidence.BaseData.SqlDbSchema
         public string Name
         {
             get { return _Name; }
-            set { _Name = value; }
         }
 
         public int OrdinalPosition

@@ -38,10 +38,9 @@ namespace Konfidence.BaseData.SqlDbSchema
             get { return TYPE; }
         }
 
-        public ColumnDataItemList ColumnDataItemList
+        public IColumnDataItemList ColumnDataItemList
         {
             get { return _ColumnDataItemList; }
-            set { _ColumnDataItemList = value; }
         }
 
         public string PrimaryKey
