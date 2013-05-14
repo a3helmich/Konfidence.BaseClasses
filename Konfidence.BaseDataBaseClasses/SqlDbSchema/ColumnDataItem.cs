@@ -51,7 +51,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             //set { _IsComputed = value; }
         }
 
-        protected bool IsLockInfo
+        public bool IsLockInfo
         {
             get { return _IsLockInfo; }
         }
@@ -61,7 +61,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             get { return _Name; }
         }
 
-        public int OrdinalPosition
+        protected int OrdinalPosition
         {
             get { return _OrdinalPosition; }
             set { _OrdinalPosition = value; }
@@ -77,7 +77,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             get { return GetDataType(_DataType); }
         }
 
-        public string DbDataType
+        protected string DbDataType
         {
             get { return GetDbDataType(); }
         }
@@ -190,8 +190,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             _CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
         }
 
-        public ColumnDataItem(string name)
-            : this()
+        public ColumnDataItem(string name) : this()
         {
             _Name = name;
         }
@@ -265,17 +264,17 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
-        public void SetPrimaryKey(bool isPrimaryKey)
+        internal void SetPrimaryKey(bool isPrimaryKey)
         {
             _IsPrimaryKey = isPrimaryKey;
         }
 
-        public void SetAutoUpdated(bool isAutoUpdated)
+        internal void SetAutoUpdated(bool isAutoUpdated)
         {
             _IsAutoUpdated = isAutoUpdated;
         }
 
-        public void SetLockInfo(bool isLockInfo)
+        internal void SetLockInfo(bool isLockInfo)
         {
             _IsLockInfo = isLockInfo;
         }
@@ -288,7 +287,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
-        public bool IsGuidField
+        internal bool IsGuidField
         {
             get
             {
