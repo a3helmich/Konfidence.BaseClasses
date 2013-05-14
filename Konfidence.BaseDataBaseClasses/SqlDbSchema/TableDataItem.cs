@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
-    public class TableDataItem : SchemaBaseDataItem
+    public class TableDataItem : SchemaBaseDataItem, ITableDataItem
     {
         private readonly string _Catalog = string.Empty;
         private readonly string _Schema = string.Empty;
         private readonly string _Name = string.Empty;
         private const string TYPE = "Table";
 
-        private ColumnDataItemList _ColumnDataItemList;
+        private readonly ColumnDataItemList _ColumnDataItemList;
         private readonly IndexColumnsDataItemList _IndexColumnsDataItemList;
         private readonly bool _HasGuidId;
 
@@ -79,7 +76,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                 {
                     _IndexColumnsDataItemList.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
 
-                    columnDataItem.SetPrimaryKey(true);;
+                    columnDataItem.SetPrimaryKey(true);
 
                     break;
                 }

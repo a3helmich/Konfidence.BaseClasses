@@ -131,6 +131,7 @@
     <Compile Include="SqlDbSchema\IColumnDataItemList.cs" />
     <Compile Include="SqlDbSchema\IndexColumnsDataItem.cs" />
     <Compile Include="SqlDbSchema\IndexColumnsDataItemList.cs" />
+    <Compile Include="SqlDbSchema\ITableDataItem.cs" />
     <Compile Include="SqlDbSchema\SchemaBaseDataItem.cs" />
     <Compile Include="SqlDbSchema\PrimaryKeyDataItem.cs" />
     <Compile Include="SqlDbSchema\SpNames.cs" />

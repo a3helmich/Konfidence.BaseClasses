@@ -1,24 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
     //List<T>, IBaseDataItemList
     public interface IColumnDataItemList : IBaseDataItemList, IList<ColumnDataItem>
     {
-        //        bool HasDefaultValueFields { get; }
+        bool HasDefaultValueFields { get; }
+
+        string GetFieldNames(List<string> getListByFieldList);
+        string GetLastField(List<string> findByFieldList);
+        string GetUnderscoreFieldNames(List<string> getListByFieldList);
+        string GetTypedCommaFieldNames(List<string> getListByFieldList);
+        string GetFirstField(List<string> getListByFieldList);
+        string GetCommaFieldNames(List<string> getListByFieldList);
+
+        IColumnDataItem Find(string columnName);
+
         //        bool HasCurrent { get; }
         //        int Capacity { get; set; }
-        //        ColumnDataItem Find(string columnName);
-        //        string GetFieldNames(List<string> getListByFieldList);
-        //        string GetUnderscoreFieldNames(List<string> getListByFieldList);
-        //        string GetTypedCommaFieldNames(List<string> getListByFieldList);
-        //        string GetCommaFieldNames(List<string> getListByFieldList);
-        //        string GetFirstField(List<string> getListByFieldList);
-        //        string GetLastField(List<string> findByFieldList);
-        //        ColumnDataItem FindById(string textId);
-        //        ColumnDataItem FindById(int id);
-        //        ColumnDataItem FindById(Guid guidId);
-        //        ColumnDataItem FindCurrent();
+        //        IColumnDataItem FindById(string textId);
+        //        IColumnDataItem FindById(int id);
+        //        IColumnDataItem FindById(Guid guidId);
+        //        IColumnDataItem FindCurrent();
         //        void SetSelected(string idText, string isEditingText);
         //        void SetSelected(string idText);
         //        void SetSelected(BaseDataItem dataItem);
@@ -35,12 +39,12 @@ namespace Konfidence.BaseData.SqlDbSchema
         //        void CopyTo(ColumnDataItem[] array);
         //        void CopyTo(int index, ColumnDataItem[] array, int arrayIndex, int count);
         //        bool Exists(Predicate<ColumnDataItem> match);
-        //        ColumnDataItem Find(Predicate<ColumnDataItem> match);
-        //        List<ColumnDataItem> FindAll(Predicate<ColumnDataItem> match);
+        //        IColumnDataItem Find(Predicate<ColumnDataItem> match);
+        //        List<IColumnDataItem> FindAll(Predicate<ColumnDataItem> match);
         //        int FindIndex(Predicate<ColumnDataItem> match);
         //        int FindIndex(int startIndex, Predicate<ColumnDataItem> match);
         //        int FindIndex(int startIndex, int count, Predicate<ColumnDataItem> match);
-        //        ColumnDataItem FindLast(Predicate<ColumnDataItem> match);
+        //        IColumnDataItem FindLast(Predicate<ColumnDataItem> match);
         //        int FindLastIndex(Predicate<ColumnDataItem> match);
         //        int FindLastIndex(int startIndex, Predicate<ColumnDataItem> match);
         //        int FindLastIndex(int startIndex, int count, Predicate<ColumnDataItem> match);
@@ -60,7 +64,7 @@ namespace Konfidence.BaseData.SqlDbSchema
         //        void Sort(IComparer<ColumnDataItem> comparer);
         //        void Sort(int index, int count, IComparer<ColumnDataItem> comparer);
         //        void Sort(Comparison<ColumnDataItem> comparison);
-        //        ColumnDataItem[] ToArray();
+        //        IColumnDataItem[] ToArray();
         //        void TrimExcess();
         //        bool TrueForAll(Predicate<ColumnDataItem> match);
     }
