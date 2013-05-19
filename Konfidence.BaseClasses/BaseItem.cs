@@ -59,17 +59,14 @@ namespace Konfidence.Base
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(string assignedGuid)
         {
-            try
-            {
-                // todo : tryparse in framework 4.x
-                var test = new Guid(assignedGuid);
-            }
-            catch
-            {
-                return false;
-            }
+                Guid isGuid;
 
-            return true;
+                if (Guid.TryParse(assignedGuid, out isGuid))
+                {
+                    return true;
+                }
+
+                return false;
         }
 
         // TODO : convert to errorlist 
@@ -93,9 +90,9 @@ namespace Konfidence.Base
         // string extender van maken
         public string ReplaceIgnoreCase(string fromString, string oldValue, string newValue)
         {
-            string toString = fromString;
+            var toString = fromString;
 
-            int codeBehindIndex = fromString.IndexOf(oldValue, StringComparison.InvariantCultureIgnoreCase);
+            var codeBehindIndex = fromString.IndexOf(oldValue, StringComparison.InvariantCultureIgnoreCase);
 
             if (codeBehindIndex > -1)
             {
