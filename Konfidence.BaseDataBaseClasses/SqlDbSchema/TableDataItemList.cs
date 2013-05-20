@@ -43,7 +43,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                         var schema = dataRow["TABLE_SCHEMA"] as string;
                         var name = dataRow["TABLE_NAME"] as string;
 
-                        if (IsAssigned(name) && (!name.ToLower().Equals("dtproperties") && !name.ToLower().StartsWith("sys")))
+                        if (!IsEmpty(name) && (!name.ToLower().Equals("dtproperties") && !name.ToLower().StartsWith("sys")))
                         {
                             var tableDataItem = new TableDataItem(catalog, schema, name);
 
