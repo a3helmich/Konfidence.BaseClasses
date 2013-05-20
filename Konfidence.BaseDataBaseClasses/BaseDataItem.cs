@@ -157,11 +157,6 @@ namespace Konfidence.BaseData
 			get { return _Id; }
 		}
 
-        //public string Code
-        //{
-        //    get { return _Id.ToString(); }
-        //}
-
         internal protected Dictionary<string, DbParameterObject> AutoUpdateFieldDictionary
         {
             get
@@ -704,6 +699,13 @@ namespace Konfidence.BaseData
 
 		public void Save()
 		{
+            if (!_IsInitialized)
+            {
+                _IsInitialized = true;
+
+                InitializeDataItem();
+            }
+
             BeforeSave();
 
 			if (!IsValidDataItem())
@@ -730,6 +732,13 @@ namespace Konfidence.BaseData
 
 		public void Delete()
 		{
+            if (!_IsInitialized)
+            {
+                _IsInitialized = true;
+
+                InitializeDataItem();
+            }
+
             BeforeDelete();
 
 			DataHost.Delete(DeleteStoredProcedure, AutoIdField, _Id);
