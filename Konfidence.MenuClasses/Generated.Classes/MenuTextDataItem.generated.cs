@@ -9,6 +9,7 @@ namespace DbSiteMapMenuClasses
         public partial class MenuTextDataItem : BaseDataItem
         {
             // field definitions
+            internal const string MENUTEXTID = "MenuTextId";
             internal const string MENUID = "MenuId";
             internal const string ID = "Id";
             internal const string SYSINSERTTIME = "SysInsertTime";
@@ -26,6 +27,7 @@ namespace DbSiteMapMenuClasses
             private const string MENUTEXT_GETROWBY_MENUID = "gen_MenuText_GetRowByMenuId";
 
             // property storage
+            private Guid _MenuTextId = Guid.NewGuid();
             private Guid _MenuId = Guid.Empty;
             private DateTime _SysInsertTime = DateTime.MinValue;
             private DateTime _SysUpdateTime = DateTime.MinValue;
@@ -35,6 +37,12 @@ namespace DbSiteMapMenuClasses
             private string _MenuText = string.Empty;
 
             #region generated properties
+
+            public Guid MenuTextId
+            {
+                get { return _MenuTextId; }
+                set { _MenuTextId = value; }
+            }
 
             public Guid MenuId
             {
@@ -85,9 +93,15 @@ namespace DbSiteMapMenuClasses
                 GetItem(MENUTEXT_GETROW, id);
             }
 
+            public MenuTextDataItem(Guid menutextId) : this()
+            {
+                GetItem(MENUTEXT_GETROWBYGUID, menutextId);
+            }
+
             protected override void InitializeDataItem()
             {
                 AutoIdField = ID;
+                GuidIdField = MENUTEXTID;
 
                 AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
                 AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
@@ -107,6 +121,7 @@ namespace DbSiteMapMenuClasses
 
             protected override void GetData()
             {
+                GetField(MENUTEXTID, out _MenuTextId);
                 GetField(MENUID, out _MenuId);
                 GetField(SYSINSERTTIME, out _SysInsertTime);
                 GetField(SYSUPDATETIME, out _SysUpdateTime);
@@ -120,6 +135,7 @@ namespace DbSiteMapMenuClasses
             {
                 base.SetData();
 
+                SetField(MENUTEXTID, _MenuTextId);
                 SetField(MENUID, _MenuId);
                 SetField(SYSLOCK, _SysLock);
                 SetField(DESCRIPTION, _Description);
