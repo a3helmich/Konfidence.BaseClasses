@@ -18,15 +18,6 @@ namespace DbSiteMapMenuClasses
             {
             }
 
-            protected sealed override void InitializeDataItemList()
-            {
-                BeforeInitializeDataItemList();
-
-                GetListStoredProcedure = MENUTEXT_GETLIST;
-
-                AfterInitializeDataItemList();
-            }
-
             static public MenuTextDataItemList GetEmptyList()
             {
                 MenuTextDataItemList menutextList = new MenuTextDataItemList();
@@ -38,7 +29,7 @@ namespace DbSiteMapMenuClasses
             {
                 MenuTextDataItemList menutextList = new MenuTextDataItemList();
 
-                menutextList.BuildItemList();
+                menutextList.BuildItemList(MENUTEXT_GETLIST);
 
                 return menutextList;
             }
