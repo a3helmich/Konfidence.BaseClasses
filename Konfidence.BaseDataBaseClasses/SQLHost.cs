@@ -2,41 +2,27 @@ using System;
 using System.Data;
 using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
-using Konfidence.BaseData.Repositories;
 using Ninject;
-using Ninject.Modules;
 using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
-    internal class RepositoryModule : NinjectModule
-    {
-        public override void Load()
-        {
-            Bind<IDatabaseRepository>().To<DatabaseRepository>();
-        }
-    }
-
     internal class SqlHost : BaseHost
 	{
-	    private readonly IDatabaseRepository _Repository;
+        private readonly NinjectDependencyResolver _Ninject = new NinjectDependencyResolver();
 
-        private readonly IKernel _Kernel;
+        private readonly IDatabaseRepository _Repository;
 
-        public SqlHost(string dataBaseName, NinjectModule ninjectModule = null) : base(string.Empty, dataBaseName)
+        protected IKernel Kernel
+        {
+            get { return _Ninject.Kernel; }
+        }
+
+        public SqlHost(string dataBaseName) : base(string.Empty, dataBaseName)
 		{
-            if (!IsAssigned(ninjectModule))
-            {
-                ninjectModule = new RepositoryModule();
-            }
-
-            _Kernel = new StandardKernel(ninjectModule);
-
             var dataBaseNameParam = new ConstructorArgument("databaseName", dataBaseName);
 
-            _Repository = _Kernel.Get<IDatabaseRepository>(dataBaseNameParam);
-            //_Repository = _Kernel.Get<IDatabaseRepository>();
-            //_Repository = new DatabaseRepository(dataBaseName);
+            _Repository = Kernel.Get<IDatabaseRepository>(dataBaseNameParam);
 		}
 
 	    private IDataReader DataReader

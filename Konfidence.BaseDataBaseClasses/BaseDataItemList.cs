@@ -4,16 +4,38 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
 using System.Diagnostics;
+using Ninject;
+using System.Linq;
 
 namespace Konfidence.BaseData
 {
-    public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem, new()
+    public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem //, new()
 	{
 		private string _GetListStoredProcedure = string.Empty;
 		private string _DataBaseName = string.Empty;
 		private string _ServiceName = string.Empty;
 
         private readonly DbParameterObjectList _DbParameterObjectList = new DbParameterObjectList();
+
+        private NinjectDependencyResolver _Ninject;
+
+        protected IKernel Kernel
+        {
+            get
+            {
+                if (!IsAssigned(_Ninject))
+                {
+                    _Ninject = new NinjectDependencyResolver();
+
+                    if (!_Ninject.Kernel.GetBindings(typeof(T)).Any())
+                    {
+                        _Ninject.Kernel.Bind<T>().To<T>();
+                    }
+                }
+
+                return _Ninject.Kernel;
+            }
+        }
 
         protected virtual void AfterDataLoad()
         {
@@ -89,7 +111,8 @@ namespace Konfidence.BaseData
 
 		public BaseDataItem GetDataItem()
 		{
-			var baseDataItem = new T();
+            //var baseDataItem = new T();
+            var baseDataItem = Kernel.Get<T>();
 
             baseDataItem.InitializeDataItem();
 

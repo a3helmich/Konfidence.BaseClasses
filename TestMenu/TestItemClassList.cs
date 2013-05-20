@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Konfidence.BaseData;
 using Ninject;
 using Ninject.Parameters;
 
@@ -13,7 +14,9 @@ namespace MenuTest
         {
             var ninject = new NinjectDependencyResolver();
 
-            var mystring = "testString";
+            ninject.Bind<ITestItemClass>().To<TestItemClass>();
+
+            const string mystring = "testString";
 
             var param = new ConstructorArgument("something", mystring);
 
