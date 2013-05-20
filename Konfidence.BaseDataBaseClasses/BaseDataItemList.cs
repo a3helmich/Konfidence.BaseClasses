@@ -31,7 +31,6 @@ namespace Konfidence.BaseData
 		protected string GetListStoredProcedure
 		{
 			get { return _GetListStoredProcedure; }
-			set { _GetListStoredProcedure = value; }
 		}
 
 		protected string ServiceName
@@ -42,23 +41,25 @@ namespace Konfidence.BaseData
 
 		#endregion
 
-		public BaseDataItemList()
-		{
-			InitializeDataItemList();
-		}
+        //private BaseDataItemList()
+        //{
+        //    //InitializeDataItemList();
+        //}
 
         private BaseHost GetHost()
         {
             return HostFactory.GetHost(_ServiceName, _DataBaseName);
         }
 
-        protected void BuildItemList()
-        {
-            BuildItemList(GetListStoredProcedure);
-        }
+        //protected void BuildItemList()
+        //{
+        //    BuildItemList(GetListStoredProcedure);
+        //}
 
 		protected void BuildItemList(string getListStoredProcedure)
 		{
+		    _GetListStoredProcedure = getListStoredProcedure;
+            
             var dataHost = GetHost();
 
             dataHost.BuildItemList(this, getListStoredProcedure);
@@ -66,8 +67,10 @@ namespace Konfidence.BaseData
             AfterDataLoad();
         }
 
-        protected void BuildItemList(IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
+        protected void BuildItemList(string getListStoredProcedure, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
         {
+            _GetListStoredProcedure = getListStoredProcedure;
+
             var dataHost = GetHost();
 
             dataHost.BuildItemList(this, relatedDataItemList, childDataItemList, GetListStoredProcedure);
@@ -79,7 +82,7 @@ namespace Konfidence.BaseData
 		{
 			Clear();
 
-			BuildItemList();
+            BuildItemList(GetListStoredProcedure);
 		}
 
         [ContractAnnotation("assignedObject:null => false")]
@@ -88,6 +91,7 @@ namespace Konfidence.BaseData
 			return BaseItem.IsAssigned(assignedObject);
 		}
 
+        [ContractAnnotation("assignedString:null => false")]
         protected static bool IsEmpty(string assignedString)
         {
             return BaseItem.IsEmpty(assignedString);
@@ -116,7 +120,7 @@ namespace Konfidence.BaseData
             {
                 if (Debugger.IsAttached || BaseItem.UnitTest)
                 {
-                    throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.FindById(..))");
+                    throw new Exception("id is niet toegestaan om records op te halen(BaseDataItemList.FindById(..))");
                 }
 
                 return FindById(id);
@@ -460,10 +464,10 @@ namespace Konfidence.BaseData
 			// NOP
 		}
 
-		protected virtual void InitializeDataItemList()
-		{
-			// NOP
-		}
+        //protected virtual void InitializeDataItemList()
+        //{
+        //    // NOP
+        //}
 
         //public void AddItem(BaseHost dataHost)
         //{
