@@ -4,7 +4,6 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class IndexColumnsDataItemList : BaseDataItemList<IndexColumnsDataItem>
     {
-        private DataTable _DataTable;
         private readonly string _TableName;
         private readonly PrimaryKeyDataItem _PrimaryKeyDataItem;
 
@@ -19,14 +18,11 @@ namespace Konfidence.BaseData.SqlDbSchema
 
             _PrimaryKeyDataItem = new PrimaryKeyDataItem(_TableName);
 
-            BuildItemList(_DataTable);
-        }
-
-        protected override void InitializeDataItemList()
-        {
             var indexColumnDataItem = new IndexColumnsDataItem();
 
-            _DataTable = indexColumnDataItem.GetIndexedColumns();
+            var dataTable = indexColumnDataItem.GetIndexedColumns();
+
+            BuildItemList(dataTable);
         }
 
         private void BuildItemList(DataTable dataTable)

@@ -5,6 +5,7 @@ using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.Repositories;
 using Ninject;
 using Ninject.Modules;
+using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
@@ -31,9 +32,11 @@ namespace Konfidence.BaseData
 
             _Kernel = new StandardKernel(ninjectModule);
 
-            //_Repository = _Kernel.Get<IDatabaseRepository>(dataBaseName);
+            var dataBaseNameParam = new ConstructorArgument("databaseName", dataBaseName);
+
+            _Repository = _Kernel.Get<IDatabaseRepository>(dataBaseNameParam);
             //_Repository = _Kernel.Get<IDatabaseRepository>();
-            _Repository = new DatabaseRepository(dataBaseName);
+            //_Repository = new DatabaseRepository(dataBaseName);
 		}
 
 	    private IDataReader DataReader

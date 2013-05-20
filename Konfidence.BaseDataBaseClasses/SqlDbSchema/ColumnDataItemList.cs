@@ -33,11 +33,6 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
-        protected override void InitializeDataItemList()
-        {
-            GetListStoredProcedure = SpNames.COLUMNS_GETLIST;
-        }
-
         public ColumnDataItemList(string tableName)
         {
             _TableName = tableName;
@@ -45,7 +40,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             _HasDefaultValueFields = false;
             _HasDefaultValueFieldsChecked = false;
 
-            BuildItemList();
+            BuildItemList(SpNames.COLUMNS_GETLIST);
         }
 
         public override void SetParameters(string storedProcedure)

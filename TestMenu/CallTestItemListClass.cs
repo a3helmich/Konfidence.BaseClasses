@@ -13,14 +13,17 @@ namespace MenuTest
 
         public void MethodOne()
         {
-            var x = new TestItemClassList();
-
-            //var y = x.IsReadOnly;
-
             foreach (var testItem in TestItemList)
             {
                 testItem.MethodOne();
             }
+        }
+
+        public void MethodTwo()
+        {
+            var testList = new TestItemClassList();
+
+            testList.AddItem();
         }
     }
 }

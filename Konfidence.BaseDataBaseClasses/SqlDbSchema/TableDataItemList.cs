@@ -5,18 +5,13 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class TableDataItemList : BaseDataItemList<TableDataItem> 
     {
-        private DataTable _DataTableList;
-
         public TableDataItemList(string dataBaseName)
         {
             DataBaseName = dataBaseName;
 
-            BuildItemList(_DataTableList);
-        }
+            var dataTableList = GetTables();
 
-        protected override void InitializeDataItemList()
-        {
-            _DataTableList = GetTables();
+            BuildItemList(dataTableList);
         }
 
         internal class InternalTableDataItem : SchemaBaseDataItem

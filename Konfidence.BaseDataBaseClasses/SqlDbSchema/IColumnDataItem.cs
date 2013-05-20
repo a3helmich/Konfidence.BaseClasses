@@ -11,6 +11,7 @@
         string DefaultPropertyValue { get; }
         string CharacterMaximumLength { get; }
         string DataType { get; }
+        string DbDataType { get; }
         string SqlDataType { get; }
     }
 }

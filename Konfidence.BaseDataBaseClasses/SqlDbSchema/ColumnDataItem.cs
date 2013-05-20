@@ -77,7 +77,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             get { return GetDataType(_DataType); }
         }
 
-        protected string DbDataType
+        public string DbDataType
         {
             get { return GetDbDataType(); }
         }

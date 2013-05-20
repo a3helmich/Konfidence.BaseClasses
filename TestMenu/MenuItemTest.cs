@@ -72,5 +72,13 @@ namespace MenuTest
 
             Assert.IsNotNull(test);
         }
+
+        [TestMethod]
+        public void TestNinject()
+        {
+            var callClassMethod = new CallTestItemListClass();
+
+            callClassMethod.MethodTwo();
+        }
     }
 }
