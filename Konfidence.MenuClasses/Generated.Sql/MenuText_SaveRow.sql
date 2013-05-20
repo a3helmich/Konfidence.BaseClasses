@@ -10,6 +10,7 @@ GO
 CREATE PROCEDURE [dbo].[gen_MenuText_SaveRow]
 (
 	@Id int OUTPUT,
+	@MenuTextId uniqueidentifier,
 	@MenuId uniqueidentifier,
 	@SysInsertTime datetime = NULL OUTPUT,
 	@SysUpdateTime datetime = NULL OUTPUT,
@@ -23,6 +24,7 @@ AS
 	begin
 		UPDATE [MenuText] WITH (ROWLOCK)
 		SET
+		[MenuTextId] = @MenuTextId,
 		[MenuId] = @MenuId,
 		[SysLock] = @SysLock,
 		[Description] = @Description,
@@ -36,11 +38,11 @@ AS
 	begin
 		INSERT INTO [MenuText] WITH (ROWLOCK)
 		(
-			[MenuId], [SysLock], [Description], [MenuText]
+			[MenuTextId], [MenuId], [SysLock], [Description], [MenuText]
 		)
 		VALUES
 		(
-			@MenuId, @SysLock, @Description, @MenuText
+			@MenuTextId, @MenuId, @SysLock, @Description, @MenuText
 		)
 		
 		SET @Id = @@IDENTITY
