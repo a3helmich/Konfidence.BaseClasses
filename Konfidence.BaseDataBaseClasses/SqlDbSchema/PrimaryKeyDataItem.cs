@@ -52,7 +52,7 @@
             GetItem(SpNames.PRIMARYKEY_GET);
         }
 
-        protected override void InitializeDataItem()
+        internal protected override void InitializeDataItem()
         {
             AutoIdField = PRIMARYKEYID;
         }

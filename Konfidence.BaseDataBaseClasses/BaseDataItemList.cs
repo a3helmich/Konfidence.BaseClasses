@@ -41,20 +41,10 @@ namespace Konfidence.BaseData
 
 		#endregion
 
-        //private BaseDataItemList()
-        //{
-        //    //InitializeDataItemList();
-        //}
-
         private BaseHost GetHost()
         {
             return HostFactory.GetHost(_ServiceName, _DataBaseName);
         }
-
-        //protected void BuildItemList()
-        //{
-        //    BuildItemList(GetListStoredProcedure);
-        //}
 
 		protected void BuildItemList(string getListStoredProcedure)
 		{
@@ -100,6 +90,8 @@ namespace Konfidence.BaseData
 		public BaseDataItem GetDataItem()
 		{
 			var baseDataItem = new T();
+
+            baseDataItem.InitializeDataItem();
 
 			Add(baseDataItem);
 
@@ -464,38 +456,12 @@ namespace Konfidence.BaseData
 			// NOP
 		}
 
-        //protected virtual void InitializeDataItemList()
-        //{
-        //    // NOP
-        //}
-
-        //public void AddItem(BaseHost dataHost)
-        //{
-        //    var baseDataItem = new T {DataHost = dataHost};
-
-        //    if (IsAssigned(baseDataItem))
-        //    {
-        //        baseDataItem.GetKey();
-
-        //        baseDataItem.GetData();
-
-        //        Add(baseDataItem);
-        //    }
-        //}
-
 		protected int ExecuteTextCommand(string textCommand)
 		{
             var dataHost = GetHost(); 
 
 			return dataHost.ExecuteTextCommand(textCommand);
 		}
-
-        //protected int ExecuteCommand(string storedProcedure, params object[] parameters)
-        //{
-        //    BaseHost dataHost = GetHost();
-
-        //    return dataHost.ExecuteCommand(storedProcedure, parameters);
-        //}
 
 		protected bool TableExists(string tableName)
 		{

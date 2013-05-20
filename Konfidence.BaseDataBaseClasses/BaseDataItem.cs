@@ -14,6 +14,8 @@ namespace Konfidence.BaseData
 
         private bool _IsSelected;
         private bool _IsEditing;
+        private bool _IsInitialized;
+
 
 	    private string _LoadStoredProcedure = string.Empty;
 		private string _DeleteStoredProcedure = string.Empty;
@@ -89,10 +91,8 @@ namespace Konfidence.BaseData
 	        _Id = 0;
 		    _IsSelected = false;
 		    _IsEditing = false;
-
-			InitializeDataItem();
-            AfterInitializeDataItem();
-		}
+	        _IsInitialized = false;
+	    }
 
 		internal void SetId(int id)
 		{
@@ -643,25 +643,35 @@ namespace Konfidence.BaseData
         {
         }
 
-		protected virtual void InitializeDataItem()
+		internal protected virtual void InitializeDataItem()
 		{
 			// NOP
 		}
 
-        protected virtual void AfterInitializeDataItem()
-        {
-            // NOP
-        }
-
 		protected void GetItem(string storedProcedure)
 		{
-            DataHost.GetItem(this, storedProcedure);
+		    if (!_IsInitialized)
+		    {
+                _IsInitialized = true;
+
+                InitializeDataItem();
+		    }
+
+		    DataHost.GetItem(this, storedProcedure);
 
             AfterGetDataItem();
         }
 
 		protected void GetItem(string storedProcedure, int autoKeyId)
 		{
+            if (!_IsInitialized)
+            {
+                _IsInitialized = true;
+
+                InitializeDataItem();
+            }
+
+
             SetField(AutoIdField, autoKeyId);
 
             GetItem(storedProcedure);
@@ -669,6 +679,14 @@ namespace Konfidence.BaseData
 
         protected void GetItem(string storedProcedure, Guid guidId)
         {
+            if (!_IsInitialized)
+            {
+                _IsInitialized = true;
+
+                InitializeDataItem();
+            }
+
+
             SetField(GuidIdField, guidId);
 
             GetItem(storedProcedure);

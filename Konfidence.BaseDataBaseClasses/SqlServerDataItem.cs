@@ -60,10 +60,8 @@ namespace Konfidence.BaseData
         //    GetItem(ParameterList);
         //}
 
-        protected override void InitializeDataItem()
+        internal protected override void InitializeDataItem()
         {
-            base.InitializeDataItem();
-
             AutoIdField = SQLSERVERID;
 
             ServiceName = "SqlServerDataItemService";
