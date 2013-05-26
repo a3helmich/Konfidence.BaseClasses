@@ -29,7 +29,7 @@ namespace Konfidence.Base
             get { return _PathName; }
         }
 
-        public string RootNameSpaceURI
+        public string RootNameSpaceUri
         {
             get { return _RootNameSpaceUri; }
         }
@@ -92,7 +92,7 @@ namespace Konfidence.Base
 
         public void GetAttributeValue(string nodeName, string attributeName, out string value)
         {
-            XmlNode valueNode = Root.SelectSingleNode(nodeName);
+            var valueNode = Root.SelectSingleNode(nodeName);
 
             GetAttributeValue(valueNode, attributeName, out value);
         }
@@ -126,7 +126,7 @@ namespace Konfidence.Base
         {
             value = string.Empty;
 
-            XmlNode valueNode = node.SelectSingleNode(nodeName);
+            var valueNode = node.SelectSingleNode(nodeName);
 
             if (IsAssigned(valueNode))
             {
@@ -143,7 +143,7 @@ namespace Konfidence.Base
         {
             value = false;
 
-            XmlNode valueNode = node.SelectSingleNode(nodeName);
+            var valueNode = node.SelectSingleNode(nodeName);
 
             if (IsAssigned(valueNode))
             {
@@ -153,11 +153,11 @@ namespace Konfidence.Base
 
         public XmlNode SetValue(XmlNode parentNode, string name, string value)
         {
-            XmlNode childElement = parentNode.SelectSingleNode(name);
+            var childElement = parentNode.SelectSingleNode(name);
 
             if (!IsAssigned(childElement))
             {
-                childElement = CreateElement(name, RootNameSpaceURI);
+                childElement = CreateElement(name, RootNameSpaceUri);
 
                 parentNode.AppendChild(childElement);
             }
@@ -175,11 +175,11 @@ namespace Konfidence.Base
         public XmlNode GetNode(XmlNode parentNode, string name)
         {
             //XmlNode childElement = parentNode.SelectSingleNode(name, _XmlNamespaceManager);
-            XmlNode childElement = parentNode.SelectSingleNode(name);
+            var childElement = parentNode.SelectSingleNode(name);
 
             if (!IsAssigned(childElement))
             {
-                childElement = CreateElement(name, RootNameSpaceURI);
+                childElement = CreateElement(name, RootNameSpaceUri);
 
                 parentNode.AppendChild(childElement);
             }
@@ -198,11 +198,13 @@ namespace Konfidence.Base
             return BaseItem.IsAssigned(assignedObject);
         }
 
+        [ContractAnnotation("assignedObject:null => false")]
         protected static bool IsEmpty(string assignedObject)
         {
             return BaseItem.IsEmpty(assignedObject);
         }
 
+        [ContractAnnotation("assignedObject:null => false")]
         protected static bool IsNull(string assignedObject)
         {
             return BaseItem.IsNull(assignedObject);
