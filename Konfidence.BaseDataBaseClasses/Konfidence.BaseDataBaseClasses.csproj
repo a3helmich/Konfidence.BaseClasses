@@ -110,6 +110,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="BaseHost.cs" />
+    <Compile Include="IBaseDataItem.cs" />
     <Compile Include="IBaseDataItemList.cs" />
     <Compile Include="IRepositories\IDatabaseRepository.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />

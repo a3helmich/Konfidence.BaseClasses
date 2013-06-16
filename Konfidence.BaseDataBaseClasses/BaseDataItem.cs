@@ -7,7 +7,7 @@ using Konfidence.BaseData.ParameterObjects;
 
 namespace Konfidence.BaseData
 {
-	public class BaseDataItem: BaseItem
+	public class BaseDataItem: BaseItem, IBaseDataItem
 	{
 		public const string BASE_LANGUAGE = "NL";
 		public bool WithLanguage = false;
