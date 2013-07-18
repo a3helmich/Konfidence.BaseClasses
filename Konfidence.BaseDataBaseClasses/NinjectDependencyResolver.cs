@@ -2,7 +2,6 @@
 using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.Repositories;
 using Ninject;
-using Ninject.MockingKernel.Moq;
 using Ninject.Syntax;
 
 namespace Konfidence.BaseData
@@ -10,16 +9,10 @@ namespace Konfidence.BaseData
     public class NinjectDependencyResolver : BaseItem
     {
         static private IKernel _Kernel;
-        static private IKernel _MockKernel;
 
         public IKernel Kernel
         {
             get { return _Kernel; }
-        }
-
-        public IKernel MockKernel
-        {
-            get { return _MockKernel; }
         }
 
         public NinjectDependencyResolver()
@@ -27,7 +20,6 @@ namespace Konfidence.BaseData
             if (!IsAssigned(_Kernel))
             {
                 _Kernel = new StandardKernel();
-                _MockKernel = new MoqMockingKernel();
 
                 AddBindings();
             }
