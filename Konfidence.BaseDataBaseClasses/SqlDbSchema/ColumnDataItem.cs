@@ -165,28 +165,36 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         protected internal override void GetData()
         {
-            GetField("Name", out _Name);
+            string name;
+            GetField("Name", out name);
 
             int defaultObjectId;
-
             GetField("Default_object_id", out defaultObjectId);
 
-            if (defaultObjectId > 0)
-            {
-                _IsDefaulted = true;
-            }
+            bool isDefaulted = defaultObjectId > 0;
 
-            GetField("Is_Computed", out _IsComputed);
+            bool isComputed;
+            GetField("Is_Computed", out isComputed);
 
-            GetField("column_id", out _OrdinalPosition);
-            //_ColumnDefault = columnDefault;
+            int ordinalPosition;
+            GetField("column_id", out ordinalPosition);
 
-            GetField("datatype", out _DataType);
+            string dataType;
+            GetField("datatype", out dataType);
 
             Int16 characterMaximumLengthInt;
-
             GetField("max_length", out characterMaximumLengthInt);
 
+            SetColumnData(name, isDefaulted, isComputed, ordinalPosition, dataType, characterMaximumLengthInt);
+        }
+
+        public void SetColumnData(string name, bool isDefaulted, bool isComputed, int ordinalPosition, string dataType, Int16 characterMaximumLengthInt)
+        {
+            _Name = name;
+            _IsDefaulted = isDefaulted;
+            _IsComputed = isComputed;
+            _OrdinalPosition = ordinalPosition;
+            _DataType = dataType;
             _CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
         }
 
