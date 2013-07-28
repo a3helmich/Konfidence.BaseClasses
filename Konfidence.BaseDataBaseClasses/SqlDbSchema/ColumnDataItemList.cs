@@ -33,6 +33,11 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
+        public ColumnDataItemList(string tableName, IEnumerable<ColumnDataItem> columnDataItems) : this(tableName)
+        {
+            AddRange(columnDataItems);
+        }
+        
         protected ColumnDataItemList(string tableName)
         {
             _TableName = tableName;
