@@ -33,14 +33,21 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
-        public ColumnDataItemList(string tableName)
+        protected ColumnDataItemList(string tableName)
         {
             _TableName = tableName;
 
             _HasDefaultValueFields = false;
             _HasDefaultValueFieldsChecked = false;
+        }
 
-            BuildItemList(SpNames.COLUMNS_GETLIST);
+        public static ColumnDataItemList GetList(string tableName)
+        {
+            var columnDataItemList = new ColumnDataItemList(tableName);
+
+            columnDataItemList.BuildItemList(SpNames.COLUMNS_GETLIST);
+
+            return columnDataItemList;
         }
 
         public override void SetParameters(string storedProcedure)

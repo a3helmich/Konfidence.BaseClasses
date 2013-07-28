@@ -66,7 +66,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             _Schema = schema;
             _Name = name;
 
-            _ColumnDataItemList = new ColumnDataItemList(name);
+            _ColumnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name);
             _IndexColumnsDataItemList = new IndexColumnsDataItemList(name);
 
             // find out which column is the primaryKey
