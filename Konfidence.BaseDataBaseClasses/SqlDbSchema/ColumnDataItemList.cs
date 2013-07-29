@@ -18,7 +18,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                 {
                     foreach (var columnItem in this)
                     {
-                        if (columnItem.IsAutoUpdated || columnItem.IsAutoUpdated || columnItem.IsAutoUpdated)
+                        if (columnItem.IsAutoUpdated || columnItem.IsComputed || columnItem.IsDefaulted)
                         {
                             _HasDefaultValueFields = true;
 
