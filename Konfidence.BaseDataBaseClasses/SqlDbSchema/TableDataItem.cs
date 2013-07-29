@@ -83,7 +83,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
 
             _HasGuidId = false;
-            // find out if te guidId exists for this tbale
+            // find out if te guidId exists for this table
             foreach (var columnDataItem in _ColumnDataItemList)
             {
                 if (columnDataItem.IsGuidField)

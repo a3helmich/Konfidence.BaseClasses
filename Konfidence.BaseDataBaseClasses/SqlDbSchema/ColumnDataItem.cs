@@ -272,17 +272,17 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
         }
 
-        internal void SetPrimaryKey(bool isPrimaryKey)
+        public void SetPrimaryKey(bool isPrimaryKey)
         {
             _IsPrimaryKey = isPrimaryKey;
         }
 
-        internal void SetAutoUpdated(bool isAutoUpdated)
+        public void SetAutoUpdated(bool isAutoUpdated)
         {
             _IsAutoUpdated = isAutoUpdated;
         }
 
-        internal void SetLockInfo(bool isLockInfo)
+        public void SetLockInfo(bool isLockInfo)
         {
             _IsLockInfo = isLockInfo;
         }
