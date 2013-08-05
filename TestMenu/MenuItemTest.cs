@@ -47,7 +47,7 @@ namespace MenuTest
         //
         #endregion Additional test attributes
 
-        [TestMethod]
+        [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItem()
         {
             var dataItem = new Bl.MenuDataItem(2);
@@ -55,7 +55,7 @@ namespace MenuTest
             Assert.IsNotNull(dataItem);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemList()
         {
             var list = Bl.MenuDataItemList.GetListByMenuCode(1);
@@ -65,7 +65,7 @@ namespace MenuTest
             Assert.AreEqual("Wijzigen van mijn persoonsgegevens", list[3].MenuText.MenuText, "menu text klopt niet");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("MenuItem")]
         public void GetParentMenuItem()
         {
             var test = new Bl.MenuDataItem(1);
@@ -73,7 +73,7 @@ namespace MenuTest
             Assert.IsNotNull(test);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Ninject")]
         public void TestNinject()
         {
             var callClassMethod = new CallTestItemListClass();

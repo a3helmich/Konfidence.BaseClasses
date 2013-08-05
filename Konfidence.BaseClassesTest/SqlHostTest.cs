@@ -5,7 +5,7 @@ namespace Konfidence.TestBaseClasses
     [TestClass]
     public class SqlHostTest
     {
-        [TestMethod]
+        [TestMethod, TestCategory("SqlServer")]
         public void SqlServerExists()
         {
             //TableDataItemList tableList = null;

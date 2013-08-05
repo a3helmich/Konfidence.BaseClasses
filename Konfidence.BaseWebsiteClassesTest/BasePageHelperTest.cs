@@ -48,17 +48,17 @@ namespace Konfidence.BaseWebsiteClassesTest
 
         #region UrlRequestTest
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest00Test()
         {
-            string urlRequest = string.Empty;
+            var urlRequest = string.Empty;
 
             var helper = new BasePageHelper(urlRequest, string.Empty);
 
             Assert.IsFalse(helper.IsValid, "empty url");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest01Test()
         {
             const string urlRequest = "http://localhost";
@@ -68,7 +68,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest02Test()
         {
             const string urlRequest = "http://localhost/";
@@ -78,7 +78,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest03Test()
         {
             const string urlRequest = "http://localhost:8080";
@@ -88,7 +88,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest04Test()
         {
             const string urlRequest = "http://localhost:8080/";
@@ -98,7 +98,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest05Test()
         {
             const string urlRequest = "http://localhost/sitemap.aspx";
@@ -108,7 +108,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest06Test()
         {
             const string urlRequest = "http://localhost:8080/sitemap.aspx";
@@ -118,7 +118,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest07Test()
         {
             const string urlRequest = "http://localhost/sitemap/sitemap.aspx";
@@ -128,7 +128,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest08Test()
         {
             const string urlRequest = "http://localhost:8080/sitemap/sitemap.aspx";
@@ -138,7 +138,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest09Test()
         {
             const string urlRequest = "http://localhost/sitemap/h/h/h/h/h/sitemap.aspx";
@@ -148,7 +148,7 @@ namespace Konfidence.BaseWebsiteClassesTest
             Assert.IsTrue(helper.IsValid, urlRequest);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("UrlRequest")]
         public void UrlRequest10Test()
         {
             const string urlRequest = "http://localhost:8080/sitemap/h/h/h/h/h/sitemap.aspx";
@@ -163,7 +163,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPagePath")]
         public void GetCurrentPagePath01Test()
         {
             const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
@@ -178,7 +178,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPagePath")]
         public void GetCurrentPagePath02Test()
         {
             const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
@@ -193,7 +193,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPagePath")]
         public void GetCurrentPagePath03Test()
         {
             const string requestUrl = "http://www.konfidence.nl";
@@ -208,7 +208,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPagePath
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPagePath")]
         public void GetCurrentPagePath04Test()
         {
             const string requestUrl = "http://www.konfidence.nl/sitemap/h/h/h/h/h/h/h/sitemap.aspx";
@@ -225,7 +225,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName01Test()
         {
             const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
@@ -240,7 +240,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName02Test()
         {
             const string requestUrl = "http://localhost:8080/sitemap/sitemap.aspx";
@@ -255,7 +255,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName03Test()
         {
             const string requestUrl = "http://localhost/sitemap.aspx";
@@ -270,7 +270,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName04Test()
         {
             const string requestUrl = "http://localhost:8080/sitemap.aspx";
@@ -285,7 +285,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName05Test()
         {
             const string requestUrl = "http://localhost/";
@@ -300,7 +300,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName06Test()
         {
             const string requestUrl = "http://localhost:8080/";
@@ -315,7 +315,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName07Test()
         {
             const string requestUrl = "http://localhost";
@@ -330,7 +330,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentPageName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentPageName")]
         public void GetCurrentPageName08Test()
         {
             const string requestUrl = "http://localhost:8080";
@@ -349,7 +349,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentLanguage")]
         public void GetCurrentLanguage01Test()
         {
             const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
@@ -364,7 +364,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentLanguage")]
         public void GetCurrentLanguage02Test()
         {
             const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
@@ -379,7 +379,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentLanguage")]
         public void GetCurrentLanguage03Test()
         {
             const string requestUrl = "http://www.konfidence.be/sitemap/sitemap.aspx";
@@ -394,7 +394,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentLanguage")]
         public void GetCurrentLanguage04Test()
         {
             const string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
@@ -409,7 +409,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentLanguage")]
         public void GetCurrentLanguage05Test()
         {
             const string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
@@ -424,7 +424,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentLanguage
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentLanguage")]
         public void GetCurrentLanguage06Test()
         {
             const string requestUrl = "http://www.konfidence.fr/sitemap/sitemap.aspx";
@@ -443,7 +443,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDomainExtension")]
         public void GetCurrentDomainExtension01Test()
         {
             const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
@@ -458,7 +458,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDomainExtension")]
         public void GetCurrentDomainExtension02Test()
         {
             const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
@@ -473,7 +473,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDomainExtension")]
         public void GetCurrentDomainExtension03Test()
         {
             const string requestUrl = "http://www.konfidence.eu/sitemap/sitemap.aspx";
@@ -488,7 +488,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDomainExtension")]
         public void GetCurrentDomainExtension04Test()
         {
             const string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
@@ -503,7 +503,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDomainExtension
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDomainExtension")]
         public void GetCurrentDomainExtension05Test()
         {
             const string requestUrl = "http://www.konfidence.gov.uk/sitemap/sitemap.aspx";
@@ -522,7 +522,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDnsName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDnsName")]
         public void GetCurrentDnsName01Test()
         {
             const string requestUrl = "http://localhost/sitemap/sitemap.aspx";
@@ -537,7 +537,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDnsName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDnsName")]
         public void GetCurrentDnsName02Test()
         {
             const string requestUrl = "http://www.konfidence.nl/sitemap/sitemap.aspx";
@@ -552,7 +552,7 @@ namespace Konfidence.BaseWebsiteClassesTest
         /// <summary>
         ///A test for GetCurrentDnsName
         ///</summary>
-        [TestMethod]
+        [TestMethod, TestCategory("CurrentDnsName")]
         public void GetCurrentDnsName03Test()
         {
             const string requestUrl = "http://www.konfidence.co.uk/sitemap/sitemap.aspx";
