@@ -640,15 +640,13 @@ namespace Konfidence.BaseData
 
 		internal protected virtual void InitializeDataItem()
 		{
-			// NOP
+		    _IsInitialized = true;
 		}
 
 		protected void GetItem(string storedProcedure)
 		{
 		    if (!_IsInitialized)
 		    {
-                _IsInitialized = true;
-
                 InitializeDataItem();
 		    }
 
@@ -661,8 +659,6 @@ namespace Konfidence.BaseData
 		{
             if (!_IsInitialized)
             {
-                _IsInitialized = true;
-
                 InitializeDataItem();
             }
 
@@ -676,8 +672,6 @@ namespace Konfidence.BaseData
         {
             if (!_IsInitialized)
             {
-                _IsInitialized = true;
-
                 InitializeDataItem();
             }
 
@@ -701,8 +695,6 @@ namespace Konfidence.BaseData
 		{
             if (!_IsInitialized)
             {
-                _IsInitialized = true;
-
                 InitializeDataItem();
             }
 
@@ -734,8 +726,6 @@ namespace Konfidence.BaseData
 		{
             if (!_IsInitialized)
             {
-                _IsInitialized = true;
-
                 InitializeDataItem();
             }
 
