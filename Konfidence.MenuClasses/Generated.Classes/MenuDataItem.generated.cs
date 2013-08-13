@@ -174,6 +174,9 @@ namespace DbSiteMapMenuClasses
                 LoadStoredProcedure = MENU_GETROW;
                 DeleteStoredProcedure = MENU_DELETEROW;
                 SaveStoredProcedure = MENU_SAVEROW;
+
+                base.InitializeDataItem();
+
             }
 
             protected override void GetAutoUpdateData()
