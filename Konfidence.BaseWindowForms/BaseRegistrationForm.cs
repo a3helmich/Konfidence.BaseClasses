@@ -1,14 +1,14 @@
+using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Globalization;
 using System.Resources;
-
+using System.Windows.Forms;
 using Konfidence.UtilHelper;
 
 namespace Konfidence.BaseWindowForms
 {
 
-    public class BaseRegistrationForm : System.Windows.Forms.Form
+    public class BaseRegistrationForm : Form
     {
         private readonly string _EmptyString;
 
@@ -392,7 +392,7 @@ namespace Konfidence.BaseWindowForms
             }
         }
 
-        private void BaseRegistrationForm_Load(object sender, System.EventArgs e)
+        private void BaseRegistrationForm_Load(object sender, EventArgs e)
         {
             _ApplicationLabel.Text = _ApplicationLabel.Text.ToUpper(CultureInfo.CurrentCulture);
 
@@ -474,7 +474,7 @@ namespace Konfidence.BaseWindowForms
             return valid;
         }
 
-        private void buttonOK_Click(object sender, System.EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
             if (DoValidation())
             {
@@ -498,14 +498,14 @@ namespace Konfidence.BaseWindowForms
             }
         }
 
-        private void CancelButton_Click(object sender, System.EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
 
             Close();
         }
 
-        private void ReRegisterbutton_Click(object sender, System.EventArgs e)
+        private void ReRegisterbutton_Click(object sender, EventArgs e)
         {
             // MessageBox.Show("test");
         }

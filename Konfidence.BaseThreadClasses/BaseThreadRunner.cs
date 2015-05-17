@@ -1,6 +1,6 @@
 ﻿using System;
-using Konfidence.Base;
 using System.Threading;
+using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {

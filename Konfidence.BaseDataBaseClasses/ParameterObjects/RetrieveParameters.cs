@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Konfidence.Base;
+﻿using Konfidence.Base;
 
 namespace Konfidence.BaseData.ParameterObjects
 {

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Services;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
 
@@ -16,7 +15,7 @@ namespace Konfidence.BaseData
 		{
 			var baseDataItem = GetNewDataItem();
 
-			if (IsAssigned(baseDataItem))
+			if (baseDataItem.IsAssigned())
 			{
 				SetKey(baseDataItem, id);
 
@@ -59,7 +58,7 @@ namespace Konfidence.BaseData
 		{
 			var baseDataItem = GetNewDataItem();
 
-			if (IsAssigned(baseDataItem))
+            if (baseDataItem.IsAssigned())
 			{
 				SetKey(baseDataItem, id);
 			}
@@ -151,12 +150,6 @@ namespace Konfidence.BaseData
 		protected virtual IBaseDataItemList GetNewDataItemList()
 		{
 			throw new NotImplementedException(); // NOP
-		}
-
-        [ContractAnnotation("assignedObject:null => false")]
-        protected static bool IsAssigned(object assignedObject)
-		{
-			return BaseItem.IsAssigned(assignedObject);
 		}
 
         //protected void LoadParameterList(BaseDataItem dataItem, List<BaseDataItem.ParameterObject> ParameterList)

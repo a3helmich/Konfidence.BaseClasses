@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using JetBrains.Annotations;
 
 namespace Konfidence.Base
@@ -113,7 +114,7 @@ namespace Konfidence.Base
                 decimalString = decimalString.Replace(',', '.');
             }
 
-            if (decimal.TryParse(decimalString, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out returnValue))
             {
                 return returnValue;
             }
@@ -122,7 +123,7 @@ namespace Konfidence.Base
             decimalString = decimalString.Replace('.', ',');
             decimalString = decimalString.Replace('k', '.');
 
-            if (decimal.TryParse(decimalString, System.Globalization.NumberStyles.Currency, System.Globalization.CultureInfo.InvariantCulture, out returnValue))
+            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out returnValue))
             {
                 return returnValue;
             }

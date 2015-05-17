@@ -2,7 +2,6 @@
 using System.Web.UI;
 using Konfidence.Base;
 
-
 namespace Konfidence.BaseUserControlHelpers
 {
     public class BasePageHelper: BaseItem

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Konfidence.BaseHelper;
@@ -14,7 +15,7 @@ namespace Konfidence.BaseWindowForms
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private readonly System.ComponentModel.Container _Components = null;
+        private readonly Container _Components = null;
         public Panel BaseFrameLeftContainerPanel;
         public Panel BaseFrameRightContainerPanel;
         public Splitter FrameSplitter;
@@ -124,18 +125,6 @@ namespace Konfidence.BaseWindowForms
         {
             Application.DoEvents();
         }
-
-        #region helperCode
-        protected bool IsAssigned(object newObject)
-        {
-            if (newObject == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-        #endregion helperCode
     }
 
     //  public class BaseMainframeControlDesigner : ControlDesigner

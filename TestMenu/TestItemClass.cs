@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MenuTest
+﻿namespace MenuTest
 {
     public class TestItemClass : ITestItemClass
     {

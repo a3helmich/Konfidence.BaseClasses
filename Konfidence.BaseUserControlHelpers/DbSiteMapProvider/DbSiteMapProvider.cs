@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Web;
 using DbSiteMapMenuClasses;
-using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
@@ -18,7 +17,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
         {
             get
             {
-                if (!IsAssigned(_RootNode))
+                if (!_RootNode.IsAssigned())
                 {
                     _RootNode = BuildSiteMap();
                 }
@@ -70,7 +69,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             {
                 SiteMapNode rootNode = _RootNode; // default value is null;
 
-                if (!IsAssigned(_RootNode)) // als eenmaal gebouwd, niet verder naar kijken
+                if (!_RootNode.IsAssigned()) // als eenmaal gebouwd, niet verder naar kijken
                 {
                     // Start with a clean slate
                     Clear();
@@ -174,12 +173,6 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             var menuNode = new SiteMapNode(this, menuItem.MenuId.ToString(), menuUrl, menuMenuText);
 
             return menuNode;
-        }
-
-        [ContractAnnotation("assignedObject:null => false")]
-        private static bool IsAssigned(object assignedObject)
-        {
-            return BaseItem.IsAssigned(assignedObject);
         }
     }
 }

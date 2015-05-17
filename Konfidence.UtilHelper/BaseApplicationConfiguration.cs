@@ -1,8 +1,8 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Collections;
+using System.Globalization;
 using System.IO;
 using System.Xml;
-using System.Collections;
-using System;
 using Konfidence.Base;
 
 namespace Konfidence.UtilHelper

@@ -1,14 +1,17 @@
+using System.ComponentModel;
+using System.Windows.Forms;
+
 namespace Konfidence.BaseWindowForms
 {
     /// <summary>
     /// Summary description for BaseMainFrame.
     /// </summary>
-    public class BaseMainFrame : System.Windows.Forms.UserControl
+    public class BaseMainFrame : UserControl
     {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private readonly System.ComponentModel.Container _Components = null;
+        private readonly Container _Components = null;
 
         public BaseMainFrame()
         {

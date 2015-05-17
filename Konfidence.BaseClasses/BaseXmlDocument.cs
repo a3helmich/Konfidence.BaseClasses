@@ -1,6 +1,5 @@
-﻿using System.Xml;
-using System.IO;
-using JetBrains.Annotations;
+﻿using System.IO;
+using System.Xml;
 
 namespace Konfidence.Base
 {
@@ -101,7 +100,7 @@ namespace Konfidence.Base
         {
             value = string.Empty;
 
-            if (IsAssigned(valueNode))
+            if (valueNode.IsAssigned())
             {
                 var attributes = valueNode.Attributes;
 
@@ -109,7 +108,7 @@ namespace Konfidence.Base
                 {
                     var attribute = attributes[attributeName];
 
-                    if (IsAssigned(attribute))
+                    if (attribute.IsAssigned())
                     {
                         value = attribute.Value;
                     }
@@ -128,7 +127,7 @@ namespace Konfidence.Base
 
             var valueNode = node.SelectSingleNode(nodeName);
 
-            if (IsAssigned(valueNode))
+            if (valueNode.IsAssigned())
             {
                 value = valueNode.InnerText;
             }
@@ -145,7 +144,7 @@ namespace Konfidence.Base
 
             var valueNode = node.SelectSingleNode(nodeName);
 
-            if (IsAssigned(valueNode))
+            if (valueNode.IsAssigned())
             {
                 bool.TryParse(valueNode.InnerText, out value);
             }
@@ -155,7 +154,7 @@ namespace Konfidence.Base
         {
             var childElement = parentNode.SelectSingleNode(name);
 
-            if (!IsAssigned(childElement))
+            if (!childElement.IsAssigned())
             {
                 childElement = CreateElement(name, RootNameSpaceUri);
 
@@ -177,7 +176,7 @@ namespace Konfidence.Base
             //XmlNode childElement = parentNode.SelectSingleNode(name, _XmlNamespaceManager);
             var childElement = parentNode.SelectSingleNode(name);
 
-            if (!IsAssigned(childElement))
+            if (!childElement.IsAssigned())
             {
                 childElement = CreateElement(name, RootNameSpaceUri);
 
@@ -190,24 +189,6 @@ namespace Konfidence.Base
         public XmlNode GetNode(string name)
         {
             return GetNode(Root, name);
-        }
-
-        [ContractAnnotation("assignedObject:null => false")]
-        protected static bool IsAssigned(object assignedObject)
-        {
-            return BaseItem.IsAssigned(assignedObject);
-        }
-
-        [ContractAnnotation("assignedObject:null => false")]
-        protected static bool IsEmpty(string assignedObject)
-        {
-            return BaseItem.IsEmpty(assignedObject);
-        }
-
-        [ContractAnnotation("assignedObject:null => false")]
-        protected static bool IsNull(string assignedObject)
-        {
-            return BaseItem.IsNull(assignedObject);
         }
     }
 }

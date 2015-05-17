@@ -26,7 +26,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_Presenter))
+                if (!_Presenter.IsAssigned())
                 {
                     BuildPresenter();
                 }
@@ -86,7 +86,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentDomainExtension;
                 }
@@ -99,7 +99,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentLanguage;
                 }
@@ -112,7 +112,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentDnsName;
                 }
@@ -125,7 +125,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.RefererDnsName;
                 }
@@ -138,7 +138,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentPagePath;
                 }
@@ -151,7 +151,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentPageName;
                 }
@@ -163,13 +163,13 @@ namespace Konfidence.BaseUserControlHelpers
 
         private void BuildPresenter()
         {
-            if (!IsAssigned(_BasePageHelper))
+            if (!_BasePageHelper.IsAssigned())
             {
                 try
                 {
                     string urlReferer = string.Empty;
 
-                    if (IsAssigned(Request.UrlReferrer))
+                    if (Request.UrlReferrer.IsAssigned())
                     {
                         var urlReferrer = Request.UrlReferrer;
 
@@ -187,14 +187,14 @@ namespace Konfidence.BaseUserControlHelpers
                 }
             }
 
-            if (!IsAssigned(_Presenter))
+            if (!_Presenter.IsAssigned())
             {
                 _Presenter = new T();
 
                 DataInitialize();
             }
 
-            if (IsEmpty(_Presenter.PageName))
+            if (_Presenter.PageName.IsEmpty())
             {
                 _Presenter.SetPageName(CurrentPageName);
             }
@@ -209,7 +209,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             string param = Request.QueryString[name];
 
-            if (IsEmpty(param))
+            if (param.IsEmpty())
             {
                 return string.Empty;
             }
@@ -253,7 +253,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Redirect(string url)
         {
-            if (!IsEmpty(url))
+            if (!url.IsEmpty())
             {
                 Response.Redirect(url, false);
 
@@ -265,16 +265,6 @@ namespace Konfidence.BaseUserControlHelpers
         {
             return BasePageHelper.FindUserControlByType(controlCollection, findType);
         }
-
-        protected bool IsEmpty(string assignedString)
-        {
-            return BaseItem.IsEmpty(assignedString);
-        }
-
-		protected bool IsAssigned(object assignedObject)
-		{
-			return BaseItem.IsAssigned(assignedObject);
-		}
 
 		protected override void OnPreLoad(EventArgs e)
 		{
@@ -358,7 +348,7 @@ namespace Konfidence.BaseUserControlHelpers
 			bool asyncPostBack;
 			ScriptManager scriptManager = GetScriptManager();
 
-			if (IsAssigned(scriptManager))
+			if (scriptManager.IsAssigned())
 			{
 				asyncPostBack = scriptManager.IsInAsyncPostBack;
 			}

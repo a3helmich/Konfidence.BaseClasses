@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Konfidence.BaseData;
 using Ninject;
 using Ninject.Parameters;

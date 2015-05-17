@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
-using System.Diagnostics;
 using Ninject;
-using System.Linq;
 
 namespace Konfidence.BaseData
 {

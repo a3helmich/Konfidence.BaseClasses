@@ -20,7 +20,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_Presenter))
+                if (!_Presenter.IsAssigned())
                 {
                     BuildPresenter();
                 }
@@ -43,7 +43,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentDomainExtension;
                 }
@@ -56,7 +56,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentLanguage;
                 }
@@ -69,7 +69,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentDnsName;
                 }
@@ -82,7 +82,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.RefererDnsName;
                 }
@@ -95,7 +95,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentPagePath;
                 }
@@ -108,7 +108,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentPageName;
                 }
@@ -120,17 +120,17 @@ namespace Konfidence.BaseUserControlHelpers
 
         private void BuildPresenter()
         {
-            if (!IsAssigned(_BasePageHelper))
+            if (!_BasePageHelper.IsAssigned())
             {
                 try
                 {
                     string urlReferer = string.Empty;
 
-                    if (IsAssigned(Request.UrlReferrer))
+                    if (Request.UrlReferrer.IsAssigned())
                     {
                         var urlReferrer = Request.UrlReferrer;
 
-                        if (urlReferrer != null)
+                        if (urlReferrer.IsAssigned())
                         {
                             urlReferer = urlReferrer.ToString();
                         }
@@ -144,12 +144,12 @@ namespace Konfidence.BaseUserControlHelpers
                 }
             }
 
-            if (!IsAssigned(_Presenter))
+            if (!_Presenter.IsAssigned())
             {
                 _Presenter = new T();
             }
 
-            if (IsEmpty(_Presenter.PageName))
+            if (_Presenter.PageName.IsEmpty())
             {
                 _Presenter.SetPageName(CurrentPageName);
             }
@@ -175,9 +175,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_MasterPageDictionaryIn))
+                if (!_MasterPageDictionaryIn.IsAssigned())
                 {
-                    if (!IsAssigned(Session["MasterPageDictionaryIn"]))
+                    if (!Session["MasterPageDictionaryIn"].IsAssigned())
                     {
                         Session["MasterPageDictionaryIn"] = new Dictionary<string, string>();
                     }
@@ -193,9 +193,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_MasterPageDictionaryOut))
+                if (!_MasterPageDictionaryOut.IsAssigned())
                 {
-                    if (!IsAssigned(Session["MasterPageDictionaryOut"]))
+                    if (!Session["MasterPageDictionaryOut"].IsAssigned())
                     {
                         Session["MasterPageDictionaryOut"] = new Dictionary<string, string>();
                     }
@@ -253,7 +253,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_MasterPageFileList))
+                if (!_MasterPageFileList.IsAssigned())
                 {
                     _MasterPageFileList = new List<string>();
 
@@ -266,12 +266,12 @@ namespace Konfidence.BaseUserControlHelpers
 
         private void AddMasterPageFile(MasterPage masterPage, string masterPageFile)
         {
-            if (!IsEmpty(masterPageFile))
+            if (masterPageFile.IsAssigned())
             {
                 _MasterPageFileList.Add(masterPageFile);
             }
 
-            if (IsAssigned(masterPage))
+            if (masterPage.IsAssigned())
             {
                 AddMasterPageFile(masterPage.Master, masterPage.MasterPageFile);
             }
@@ -343,16 +343,6 @@ namespace Konfidence.BaseUserControlHelpers
 
                 Response.End();
             }
-        }
-
-        protected bool IsEmpty(string assignedString)
-        {
-            return BaseItem.IsEmpty(assignedString);
-        }
-
-        protected bool IsAssigned(object assignedObject)
-        {
-            return BaseItem.IsAssigned(assignedObject);
         }
     }
 }

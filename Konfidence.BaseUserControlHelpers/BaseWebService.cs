@@ -1,5 +1,4 @@
 ﻿using System.Web.Services;
-using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
@@ -12,7 +11,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_Presenter))
+                if (!_Presenter.IsAssigned())
                 {
                     _Presenter = new T();
                 }
@@ -20,17 +19,5 @@ namespace Konfidence.BaseUserControlHelpers
                 return _Presenter;
             }
         }
-
-        [ContractAnnotation("assignedObject:null => false")]
-        protected static bool IsAssigned(object assignedObject)
-        {
-            return BaseItem.IsAssigned(assignedObject);
-        }
-
-        protected static bool IsEmpty(string assignedString)
-        {
-            return BaseItem.IsEmpty(assignedString);
-        }
-        
     }
 }

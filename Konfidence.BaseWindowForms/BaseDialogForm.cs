@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows.Forms;
 using Konfidence.UtilHelper;
 
@@ -13,7 +14,7 @@ namespace Konfidence.BaseWindowForms
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private readonly System.ComponentModel.Container _Components = null;
+        private readonly Container _Components = null;
 
         private IApplicationSettings _ApplicationSettings;
         private string _ConfigurationName = string.Empty;

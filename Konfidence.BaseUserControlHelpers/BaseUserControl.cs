@@ -1,9 +1,8 @@
 using System;
-using System.Web.UI;
-using JetBrains.Annotations;
-using Konfidence.Base;
-using System.IO;
 using System.Globalization;
+using System.IO;
+using System.Web.UI;
+using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -21,7 +20,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_Presenter))
+                if (!_Presenter.IsAssigned())
                 {
                     BuildPresenter();
                 }
@@ -36,7 +35,7 @@ namespace Konfidence.BaseUserControlHelpers
 			{
                 var refreshPage = Page as BasePage<T>;
 
-				if (IsAssigned(refreshPage))
+                if (refreshPage.IsAssigned())
 				{
 					return refreshPage.IsRefreshed;
 				}
@@ -78,7 +77,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentDomainExtension;
                 }
@@ -91,7 +90,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentLanguage;
                 }
@@ -104,7 +103,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentDnsName;
                 }
@@ -117,7 +116,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.RefererDnsName;
                 }
@@ -130,7 +129,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentPagePath;
                 }
@@ -143,7 +142,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsAssigned(_BasePageHelper))
+                if (_BasePageHelper.IsAssigned())
                 {
                     return _BasePageHelper.CurrentPageName;
                 }
@@ -158,13 +157,13 @@ namespace Konfidence.BaseUserControlHelpers
 
         private void BuildPresenter()
         {
-            if (!IsAssigned(_BasePageHelper))
+            if (!_BasePageHelper.IsAssigned())
             {
                 try
                 {
                     string urlReferer = string.Empty;
 
-                    if (IsAssigned(Request.UrlReferrer))
+                    if (Request.UrlReferrer.IsAssigned())
                     {
                         urlReferer = Request.UrlReferrer.ToString();
                     }
@@ -177,12 +176,12 @@ namespace Konfidence.BaseUserControlHelpers
                 }
             }
 
-            if (!IsAssigned(_Presenter))
+            if (!_Presenter.IsAssigned())
             {
                 _Presenter = new T {IsLoaded = false};
             }
 
-            if (IsEmpty(_Presenter.PageName))
+            if (_Presenter.PageName.IsEmpty())
             {
                 _Presenter.SetPageName(CurrentPageName);
             }
@@ -211,17 +210,6 @@ namespace Konfidence.BaseUserControlHelpers
 
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
         }
-
-        protected bool IsEmpty(string assignedString)
-        {
-            return BaseItem.IsEmpty(assignedString);
-        }
-
-        [ContractAnnotation("assignedObject:null => false")]
-        protected static bool IsAssigned(object assignedObject)
-		{
-			return BaseItem.IsAssigned(assignedObject);
-		}
 
         protected void Redirect(string url)
         {

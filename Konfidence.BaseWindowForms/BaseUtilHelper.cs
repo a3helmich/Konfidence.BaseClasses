@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
 
-
 namespace Konfidence.BaseWindowForms
 {
     /// <summary>

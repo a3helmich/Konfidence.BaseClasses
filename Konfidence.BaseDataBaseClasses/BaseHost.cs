@@ -1,6 +1,6 @@
 using System;
-using Konfidence.Base;
 using System.Data;
+using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
 
 namespace Konfidence.BaseData

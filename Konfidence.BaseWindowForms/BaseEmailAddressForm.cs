@@ -1,21 +1,24 @@
 // Enter your email address and you will recieve your settings file shortly.
 
+using System.ComponentModel;
+using System.Windows.Forms;
+
 namespace Konfidence.BaseWindowForms
 {
     /// <summary>
     /// Summary description for BaseEmailAddressForm.
     /// </summary>
-    public class BaseEmailAddressForm : System.Windows.Forms.Form
+    public class BaseEmailAddressForm : Form
     {
-        private System.Windows.Forms.TextBox _EmailTextBox;
-        private System.Windows.Forms.Button _CancelButton;
-        private System.Windows.Forms.Button _ButtonOk;
-        private System.Windows.Forms.Label _EmailLabel;
-        private System.Windows.Forms.Label _LabelDescription;
+        private TextBox _EmailTextBox;
+        private Button _CancelButton;
+        private Button _ButtonOk;
+        private Label _EmailLabel;
+        private Label _LabelDescription;
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private readonly System.ComponentModel.Container _Components = null;
+        private readonly Container _Components = null;
 
         public BaseEmailAddressForm()
         {

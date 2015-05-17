@@ -1,20 +1,24 @@
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
+
 namespace Konfidence.BaseWindowForms
 {
     public class BaseDatabaseConfigForm : BaseDialogForm
     {
-        private System.Windows.Forms.TextBox _DbServerTextBox;
-        private System.Windows.Forms.Label _DbServerLabel;
-        private System.Windows.Forms.TextBox _DbUserTextBox;
-        private System.Windows.Forms.Label _DbUserLabel;
-        private readonly System.ComponentModel.IContainer components = null;
+        private TextBox _DbServerTextBox;
+        private Label _DbServerLabel;
+        private TextBox _DbUserTextBox;
+        private Label _DbUserLabel;
+        private readonly IContainer components = null;
 
         private readonly string _CurrentDbServer;
         private readonly string _CurrentDatabase;
         private readonly string _CurrentUser;
-        private System.Windows.Forms.Label _DatabaseLabel;
-        private System.Windows.Forms.TextBox _DatabaseTextBox;
-        private System.Windows.Forms.TextBox _DbPasswordTextBox;
-        private System.Windows.Forms.Label _DbPasswordLabel;
+        private Label _DatabaseLabel;
+        private TextBox _DatabaseTextBox;
+        private TextBox _DbPasswordTextBox;
+        private Label _DbPasswordLabel;
         private readonly string _CurrentPassword;
 
 
@@ -178,12 +182,12 @@ namespace Konfidence.BaseWindowForms
         }
         #endregion
 
-        private void DBUserTextBox_TextChanged(object sender, System.EventArgs e)
+        private void DBUserTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void buttonOK_Click(object sender, System.EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
             if (_DbServerTextBox.Text != _CurrentDbServer)
                 ApplicationSettings.SetStringValue("SQLServer", _DbServerTextBox.Text);

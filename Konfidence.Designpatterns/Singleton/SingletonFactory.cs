@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Reflection;
 using System.Threading;
-using System;
 using Konfidence.Base;
 
 namespace Konfidence.DesignPatterns.Singleton

@@ -1,5 +1,5 @@
-﻿using Konfidence.Base;
-using System.Xml;
+﻿using System.Xml;
+using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.PageSetting
 {
@@ -39,13 +39,13 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
         {
             get
             {
-                if (!IsAssigned(_PageSettingDictionary))
+                if (!_PageSettingDictionary.IsAssigned())
                 {
                     _PageSettingDictionary = new PageSettingDictionary();
 
                     XmlNodeList pageSettingNodeList = Root.SelectNodes("Page");
 
-                    if (IsAssigned(pageSettingNodeList))
+                    if (pageSettingNodeList.IsAssigned())
                     {
                         foreach (XmlElement pageSettingElement in pageSettingNodeList)
                         {

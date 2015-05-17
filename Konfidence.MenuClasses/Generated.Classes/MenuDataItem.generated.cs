@@ -1,7 +1,5 @@
 using System;
 using System.Data;
-using System.Data.Common;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.BaseData;
 
 namespace DbSiteMapMenuClasses

@@ -1,6 +1,5 @@
 ﻿using DbSiteMapMenuClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ninject;
 
 namespace MenuTest
 {

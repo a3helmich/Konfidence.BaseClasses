@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MenuTest
+﻿namespace MenuTest
 {
     public class CallTestItemListClass
     {

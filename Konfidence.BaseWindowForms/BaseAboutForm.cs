@@ -1,10 +1,9 @@
 using System;
-using System.Windows.Forms;
-using System.Resources;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Resources;
 using System.Runtime.Serialization;
-
-
+using System.Windows.Forms;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -34,7 +33,7 @@ namespace Konfidence.BaseWindowForms
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private readonly System.ComponentModel.Container _Components = null;
+        private readonly Container _Components = null;
 
         public BaseAboutForm()
         {
@@ -153,7 +152,7 @@ namespace Konfidence.BaseWindowForms
         }
     }
 
-    [SerializableAttribute]
+    [Serializable]
     public class BaseAboutFormException : Exception
     {
         public BaseAboutFormException() : base(new ResourceManager(typeof(BaseAboutForm)).GetString("BaseAboutFormException.DontKnowWarningMessage")) { }

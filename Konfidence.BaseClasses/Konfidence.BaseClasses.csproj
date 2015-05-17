@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="AllowedFileItem.cs" />
     <Compile Include="BaseControlHelper.cs" />
+    <Compile Include="BaseExtender.cs" />
     <Compile Include="BaseItem.cs" />
     <Compile Include="BaseItemList.cs" />
     <Compile Include="BaseParameterObject.cs" />

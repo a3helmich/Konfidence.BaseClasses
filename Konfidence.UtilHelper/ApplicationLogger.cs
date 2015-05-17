@@ -1,7 +1,6 @@
 using System.IO;
 using Konfidence.DesignPatterns.Singleton;
 
-
 namespace Konfidence.UtilHelper
 {
     /// <summary>

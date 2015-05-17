@@ -1,6 +1,10 @@
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Resources;
 using System.Security.Permissions;
+using System.Windows.Forms;
+using Konfidence.Base;
 using Konfidence.BaseHelper;
 
 namespace Konfidence.BaseWindowForms
@@ -8,7 +12,7 @@ namespace Konfidence.BaseWindowForms
     /// <summary>
     /// Summary description for Form1.
     /// </summary>
-    public class BaseMainform : System.Windows.Forms.Form
+    public class BaseMainform : Form
     {
         private Type _ConfigClass;
         private BaseConfigClass _Config;
@@ -17,27 +21,27 @@ namespace Konfidence.BaseWindowForms
         private readonly BaseContainerFrame _BaseMainframe;
         private Type _AboutFormClass;
 
-        private System.Windows.Forms.MainMenu _MainMenu;
-        private System.Windows.Forms.MenuItem _BestandMenuItem;
-        private System.Windows.Forms.MenuItem _AfsluitenMenuItem;
-        private System.Windows.Forms.MenuItem _BeeldMenuItem;
-        private System.Windows.Forms.MenuItem _LijstMenuItem;
-        private System.Windows.Forms.MenuItem _DetailMenuItem;
-        private System.Windows.Forms.MenuItem _ZoekenMenuItem;
-        private System.Windows.Forms.MenuItem _RapportMenuItem;
-        private System.Windows.Forms.MenuItem _InstellingenMenuItem;
-        private System.Windows.Forms.MenuItem _DbConfigMenuItem;
-        private System.Windows.Forms.MenuItem _InfoMenuItem;
+        private MainMenu _MainMenu;
+        private MenuItem _BestandMenuItem;
+        private MenuItem _AfsluitenMenuItem;
+        private MenuItem _BeeldMenuItem;
+        private MenuItem _LijstMenuItem;
+        private MenuItem _DetailMenuItem;
+        private MenuItem _ZoekenMenuItem;
+        private MenuItem _RapportMenuItem;
+        private MenuItem _InstellingenMenuItem;
+        private MenuItem _DbConfigMenuItem;
+        private MenuItem _InfoMenuItem;
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private readonly System.ComponentModel.Container _Components = null;
+        private readonly Container _Components = null;
 
-        private System.Windows.Forms.StatusBar _BaseStatusBar;
-        private System.Windows.Forms.StatusBarPanel _StatusBarPanel;
-        private System.Windows.Forms.MenuItem _AboutMenuItem;
-        private System.Windows.Forms.MenuItem _StatusMenuItem;
-        private System.Windows.Forms.Panel _MainPanel;
+        private StatusBar _BaseStatusBar;
+        private StatusBarPanel _StatusBarPanel;
+        private MenuItem _AboutMenuItem;
+        private MenuItem _StatusMenuItem;
+        private Panel _MainPanel;
 
         public Type ConfigClass
         {
@@ -73,7 +77,7 @@ namespace Konfidence.BaseWindowForms
             //
             BaseInitialize();
 
-            var resources = new System.Resources.ResourceManager(typeof(BaseMainform));
+            var resources = new ResourceManager(typeof(BaseMainform));
 
             _ErrorHeader = resources.GetString("ErrorHeader.Text");
 
@@ -362,7 +366,7 @@ namespace Konfidence.BaseWindowForms
             Close();
         }
 
-        [EnvironmentPermissionAttribute(SecurityAction.LinkDemand, Unrestricted = true)]
+        [EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         protected virtual BaseContainerFrame BuildMainContainer(BaseContainerFrame mainframe)
         {
             try
@@ -403,14 +407,9 @@ namespace Konfidence.BaseWindowForms
             {
                 string errorString = _ErrorHeader + e;
 
-                if (IsAssigned(_Config))
+                if (_Config.IsAssigned())
                 {
-                    if (_Config != null)
-                    {
-                        _Config.EventLog.WriteEntry(errorString, EventLogEntryType.Error);
-                    }
-
-                    throw;
+                    _Config.EventLog.WriteEntry(errorString, EventLogEntryType.Error);
                 }
 
                 throw;
@@ -425,18 +424,5 @@ namespace Konfidence.BaseWindowForms
 
             databaseForm.ShowDialog();
         }
-
-        #region helperCode
-
-        private bool IsAssigned(object newObject)
-        {
-            if (newObject == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
-        #endregion helperCode
     }
 }
