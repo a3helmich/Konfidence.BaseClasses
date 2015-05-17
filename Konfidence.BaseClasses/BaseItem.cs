@@ -48,7 +48,7 @@ namespace Konfidence.Base
         [ContractAnnotation("assignedString:null => false")]
         public static bool IsEmpty(string assignedString) // ToDo : back to protected 
         {
-            if (string.IsNullOrEmpty(assignedString))
+            if (string.IsNullOrWhiteSpace(assignedString))
             {
                 return true;
             }
