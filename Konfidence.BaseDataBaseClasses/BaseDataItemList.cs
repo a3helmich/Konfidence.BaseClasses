@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
 using Ninject;
+using JetBrains.Annotations;
 
 namespace Konfidence.BaseData
 {
