@@ -119,6 +119,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).dll" "C:\Projects\References\$(ConfigurationName)" /Y
 xcopy "$(TargetDir)$(TargetName).pdb" "C:\Projects\References\$(ConfigurationName)" /Y
+xcopy "$(TargetDir)jetbrains.annotations.dll" "C:\Projects\References\$(ConfigurationName)" /Y
 </PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
