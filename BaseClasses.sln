@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig", "{2CE91D47-F20E-41FB-8824-D422D5E2AB85}"
 	ProjectSection(SolutionItems) = preProject
@@ -297,6 +297,9 @@ Global
 		SccProjectUniqueName17 = TestMenu\\TestMenu.csproj
 		SccProjectName17 = TestMenu
 		SccLocalPath17 = TestMenu
+	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BaseClasses1.vsmdi
