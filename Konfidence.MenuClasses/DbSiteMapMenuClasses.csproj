@@ -59,10 +59,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Konfidence.BaseDataBaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Konfidence.BaseDataBaseClasses\bin\Debug\Konfidence.BaseDataBaseClasses.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +94,10 @@
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
       <Project>{d71a4677-79c7-443b-900d-218fbcfe8728}</Project>
       <Name>Konfidence.BaseClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDataBaseClasses.csproj">
+      <Project>{2b4ccfac-0b45-4f69-96bb-a60c4584027f}</Project>
+      <Name>Konfidence.BaseDataBaseClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
