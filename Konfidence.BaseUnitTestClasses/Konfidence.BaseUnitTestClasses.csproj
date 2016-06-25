@@ -55,6 +55,9 @@
     <Compile Include="BaseFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Konfidence.BaseUnitTestClasses.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).dll" "C:\Projects\References\$(ConfigurationName)" /Y</PostBuildEvent>
