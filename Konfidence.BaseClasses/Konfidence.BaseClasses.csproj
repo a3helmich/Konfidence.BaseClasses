@@ -83,6 +83,7 @@
     <Compile Include="SessionAccount.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Konfidence.BaseClasses.nuspec" />
     <None Include="Konfidence.nl.snk" />
     <None Include="packages.config" />
   </ItemGroup>
