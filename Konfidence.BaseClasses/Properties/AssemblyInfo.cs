@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BaseClasses")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("base classes")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Konfidence in it")]
 [assembly: AssemblyProduct("BaseClasses")]
