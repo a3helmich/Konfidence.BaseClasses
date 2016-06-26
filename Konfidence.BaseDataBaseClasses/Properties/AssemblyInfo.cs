@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BaseDataBaseClasses")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyDescription("BaseDataBaseClasses")]
+[assembly: AssemblyConfiguration("BaseDataBaseClasses")]
 [assembly: AssemblyCompany("Konfidence in it")]
 [assembly: AssemblyProduct("BaseDataBaseClasses")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2006")]
