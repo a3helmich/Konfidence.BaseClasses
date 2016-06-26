@@ -92,6 +92,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Konfidence.DesignPatterns.nuspec" />
     <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <ItemGroup>
