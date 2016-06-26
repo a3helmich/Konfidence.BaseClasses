@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Designpatterns")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyDescription("Designpatterns classes")]
+[assembly: AssemblyConfiguration("Designpatterns classes")]
 [assembly: AssemblyCompany("Konfidence in it")]
 [assembly: AssemblyProduct("Designpatterns")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2007")]
