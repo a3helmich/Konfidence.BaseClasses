@@ -14,7 +14,7 @@
       <dependency id="Konfidence.BaseClasses" version="1.0" />
       <dependency id="EnterpriseLibrary.Common" version="6.0" />
       <dependency id="EnterpriseLibrary.Data" version="6.0" />
-      <dependency id="Ninject" version="3.0" />
+      <dependency id="Ninject" version="3.2" />
     </dependencies>
   </metadata>
 </package>
