@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DbSiteMapMenuClasses")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTitle("Konfidence.MenuClasses")]
+[assembly: AssemblyDescription("Konfidence.MenuClasses")]
+[assembly: AssemblyConfiguration("Konfidence.MenuClasses")]
 [assembly: AssemblyCompany("Konfidence in it")]
 [assembly: AssemblyProduct("DbSiteMapMenuClasses")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2012")]

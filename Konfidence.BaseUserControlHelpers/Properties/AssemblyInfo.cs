@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UserControlHelpers")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyTitle("BaseUserControlHelpers")]
+[assembly: AssemblyDescription("BaseUserControlHelpers")]
+[assembly: AssemblyConfiguration("BaseUserControlHelpers")]
 [assembly: AssemblyCompany("Konfidence in it")]
 [assembly: AssemblyProduct("UserControlHelpers")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2006")]

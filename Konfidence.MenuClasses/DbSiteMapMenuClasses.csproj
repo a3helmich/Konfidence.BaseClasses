@@ -86,6 +86,7 @@
     <None Include="Generated.Sql\MenuText_RequiredField.sql" />
     <None Include="Generated.Sql\Menu_GetListByMenuCode.sql" />
     <None Include="Generated.Sql\MenuText_GetRowByMenuId.sql" />
+    <None Include="Konfidence.MenuClasses.nuspec" />
     <None Include="Konfidence.nl.snk" />
     <None Include="Generated.Sql\MenuText_GetRowByGuid.sql" />
     <None Include="packages.config" />
