@@ -74,6 +74,7 @@
     <Compile Include="BaseConfigClass.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Konfidence.BaseHelper.nuspec" />
     <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <ItemGroup>
