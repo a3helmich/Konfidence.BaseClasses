@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Konfidence.Mail")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyDescription("Konfidence.Mail")]
+[assembly: AssemblyConfiguration("Konfidence.Mail")]
 [assembly: AssemblyCompany("Konfidence in it")]
 [assembly: AssemblyProduct("Konfidence.Mail")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2012")]
