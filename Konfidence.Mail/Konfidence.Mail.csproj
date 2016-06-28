@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Konfidence.Mail.nuspec" />
     <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <ItemGroup>
