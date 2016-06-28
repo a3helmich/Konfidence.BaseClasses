@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Konfidence.nl.snk" />
+    <None Include="Konfidence.UtilHelper.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
