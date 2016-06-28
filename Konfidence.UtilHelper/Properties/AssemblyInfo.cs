@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("UtilHelper")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyDescription("UtilHelper")]
+[assembly: AssemblyConfiguration("UtilHelper")]
 [assembly: AssemblyCompany("Konfidence in it")]
 [assembly: AssemblyProduct("UtilHelper")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2008")]
