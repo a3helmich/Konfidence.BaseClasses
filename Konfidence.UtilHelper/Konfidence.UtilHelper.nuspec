@@ -12,7 +12,7 @@
     <tags>Konfidence</tags>
     <dependencies>
       <dependency id="Konfidence.BaseClasses" version="1.0" />
-      <dependency id="Konfidence.UtilHelper" version="1.0" />
+      <dependency id="Konfidence.DesignPatterns" version="1.0" />
     </dependencies>
   </metadata>
 </package>
