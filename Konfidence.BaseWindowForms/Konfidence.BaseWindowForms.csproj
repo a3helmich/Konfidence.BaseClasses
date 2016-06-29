@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Konfidence.BaseWindowForms.nuspec" />
     <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <ItemGroup>
