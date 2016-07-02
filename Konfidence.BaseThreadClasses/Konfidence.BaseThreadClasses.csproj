@@ -67,15 +67,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseThreadAction.cs" />
-    <Compile Include="BaseThreadItem.cs" />
     <Compile Include="BaseThreadManager.cs" />
-    <Compile Include="BaseThreadManagerItem.cs" />
-    <Compile Include="BaseThreadParameterItem.cs" />
     <Compile Include="BaseThreadParameterObject.cs" />
     <Compile Include="BaseThreadRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Konfidence.BaseThreadClasses.nuspec" />
     <None Include="Konfidence.nl.snk" />
   </ItemGroup>
   <ItemGroup>
