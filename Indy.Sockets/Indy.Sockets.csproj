@@ -39,7 +39,6 @@
       <HintPath>refBin\Indy.Sockets.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Mono.Security.3.2.3.0\lib\net45\Mono.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -57,13 +56,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="refBin\Indy.Sockets.dll" />
-    <Content Include="refBin\Mono.Security.dll" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="refBin\Mono.Security.dll.copy" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Indy.Sockets.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
