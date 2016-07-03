@@ -5,14 +5,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Indy.Sockets")]
+[assembly: AssemblyTitle("IndySockets")]
 [assembly: AssemblyDescription("Indy.Sockets")]
 [assembly: AssemblyConfiguration("Indy.Sockets")]
-[assembly: AssemblyCompany("Indy")]
+[assembly: AssemblyCompany("Indy Kuzu")]
 [assembly: AssemblyProduct("Indy.Sockets")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
-[assembly: AssemblyTrademark("Indy")]
-[assembly: AssemblyCulture("Indy")]
+[assembly: AssemblyCopyright("Copyright © Indy Kuzu 2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
