@@ -56,6 +56,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1D94BD
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indy.Sockets", "Indy.Sockets\Indy.Sockets.csproj", "{45611CFC-0567-4374-B7BB-2C50A92D8CF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -235,6 +237,18 @@ Global
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|x86.ActiveCfg = Release|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Debug|x86.Build.0 = Debug|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Release|x86.ActiveCfg = Release|Any CPU
+		{45611CFC-0567-4374-B7BB-2C50A92D8CF5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -243,7 +257,7 @@ Global
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 18
+		SccNumberOfProjects = 19
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://localhost:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -298,6 +312,9 @@ Global
 		SccProjectUniqueName17 = TestMenu\\TestMenu.csproj
 		SccProjectName17 = TestMenu
 		SccLocalPath17 = TestMenu
+		SccProjectUniqueName18 = Indy.Sockets\\Indy.Sockets.csproj
+		SccProjectName18 = Indy.Sockets
+		SccLocalPath18 = Indy.Sockets
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
