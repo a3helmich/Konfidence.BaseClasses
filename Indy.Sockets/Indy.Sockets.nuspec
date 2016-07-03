@@ -15,7 +15,6 @@
     </dependencies>
     <references>
       <reference file="Indy.Sockets.dll" />
-      <reference file="Mono.Security.dll" />
     </references>
   </metadata>
   <files>
