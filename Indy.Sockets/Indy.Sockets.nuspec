@@ -14,11 +14,11 @@
       <dependency id="Mono.Security" version="3.2" />
     </dependencies>
     <references>
-      <reference file="refBin\Indy.Sockets.dll" />
+      <reference file="Indy.Sockets.dll" />
       <reference file="Mono.Security.dll" />
     </references>
   </metadata>
   <files>
-    <file src="bin\Release\Indy.Sockets.dll" target="lib" />
+    <file src="refBin\Indy.Sockets.dll" target="lib" />
   </files>
 </package>
