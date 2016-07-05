@@ -11,7 +11,7 @@
     <copyright>Copyright 2016</copyright>
     <tags>Konfidence</tags>
     <dependencies>
-      <dependency id="Mono.Security" version="3.2" />
+      <dependency id="Mono.Security" />
     </dependencies>
     <references>
       <reference file="Indy.Sockets.dll" />

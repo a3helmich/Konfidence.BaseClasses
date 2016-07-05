@@ -11,7 +11,7 @@
     <copyright>Copyright 2016</copyright>
     <tags>Konfidence</tags>
     <dependencies>
-      <dependency id="Konfidence.BaseDataBaseClasses" version="1.0" />
+      <dependency id="Konfidence.BaseDataBaseClasses" />
     </dependencies>
   </metadata>
 </package>

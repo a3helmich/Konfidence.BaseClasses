@@ -11,8 +11,8 @@
     <copyright>Copyright 2016</copyright>
     <tags>Konfidence</tags>
     <dependencies>
-      <dependency id="Konfidence.UtilHelper" version="1.0" />
-      <dependency id="Konfidence.BaseHelper" version="1.0" />
+      <dependency id="Konfidence.UtilHelper" />
+      <dependency id="Konfidence.BaseHelper"  />
     </dependencies>
   </metadata>
 </package>
