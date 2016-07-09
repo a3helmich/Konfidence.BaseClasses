@@ -13,10 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongName
 		Konfidence.nl.snk = Konfidence.nl.snk
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FAC7656-5009-4A8F-8383-F9488538224F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReBaserConfig", "ReBaserConfig", "{F13754A5-412F-41E5-B228-5F39C3ED476F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses", "Konfidence.BaseClasses\Konfidence.BaseClasses.csproj", "{D71A4677-79C7-443B-900D-218FBCFE8728}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers", "Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj", "{D60A1063-3897-44FA-97F5-85A9C25B1F8C}"
@@ -259,7 +255,7 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 19
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://localhost:8080/tfs/konfidence
+		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Konfidence.BaseClasses\\Konfidence.BaseClasses.csproj
 		SccProjectName1 = Konfidence.BaseClasses

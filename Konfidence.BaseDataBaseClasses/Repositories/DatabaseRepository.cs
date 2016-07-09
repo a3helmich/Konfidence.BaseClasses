@@ -29,14 +29,15 @@ namespace Konfidence.BaseData.Repositories
         public Database GetDatabase()
         {
              Database databaseInstance;
+            DatabaseProviderFactory databaseProviderFactory = new DatabaseProviderFactory();
 
             if (_DataBasename.Length > 0)
             {
-                databaseInstance = DatabaseFactory.CreateDatabase(_DataBasename);
+                databaseInstance = databaseProviderFactory.Create(_DataBasename);
             }
             else
             {
-                databaseInstance = DatabaseFactory.CreateDatabase();
+                databaseInstance = databaseProviderFactory.CreateDefault();
             }
 
             if (Debugger.IsAttached)
