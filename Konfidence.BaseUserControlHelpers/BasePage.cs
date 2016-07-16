@@ -194,7 +194,7 @@ namespace Konfidence.BaseUserControlHelpers
                 DataInitialize();
             }
 
-            if (_Presenter.PageName.IsEmpty())
+            if (!_Presenter.PageName.IsAssigned())
             {
                 _Presenter.SetPageName(CurrentPageName);
             }
@@ -209,7 +209,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             string param = Request.QueryString[name];
 
-            if (param.IsEmpty())
+            if (!param.IsAssigned())
             {
                 return string.Empty;
             }
@@ -253,7 +253,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Redirect(string url)
         {
-            if (!url.IsEmpty())
+            if (url.IsAssigned())
             {
                 Response.Redirect(url, false);
 

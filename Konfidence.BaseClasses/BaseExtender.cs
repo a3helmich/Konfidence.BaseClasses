@@ -26,22 +26,22 @@ namespace Konfidence.Base
             return true;
         }
 
-        [ContractAnnotation("assignedString:null => false")]
-        public static bool IsEmpty(this string assignedString) 
-        {
-            if (String.IsNullOrWhiteSpace(assignedString))
-            {
-                return true;
-            }
+        //[ContractAnnotation("assignedString:null => false")]
+        //public static bool IsEmpty(this string assignedString) 
+        //{
+        //    if (String.IsNullOrWhiteSpace(assignedString))
+        //    {
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        [ContractAnnotation("assignedObject:null => false")]
-        public static bool IsNull(this string assignedObject)
-        {
-            return BaseItem.IsNull(assignedObject);
-        }
+        //[ContractAnnotation("assignedObject:null => false")]
+        //public static bool IsNull(this string assignedObject)
+        //{
+        //    return BaseItem.IsNull(assignedObject);
+        //}
 
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(this string assignedGuid)

@@ -149,7 +149,7 @@ namespace Konfidence.BaseUserControlHelpers
                 _Presenter = new T();
             }
 
-            if (_Presenter.PageName.IsEmpty())
+            if (!_Presenter.PageName.IsAssigned())
             {
                 _Presenter.SetPageName(CurrentPageName);
             }
