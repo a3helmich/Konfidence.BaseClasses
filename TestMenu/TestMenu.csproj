@@ -140,9 +140,9 @@
       <Project>{d60a1063-3897-44fa-97f5-85a9c25b1f8c}</Project>
       <Name>Konfidence.BaseUserControlHelpers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.MenuClasses\DbSiteMapMenuClasses.csproj">
+    <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj">
       <Project>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</Project>
-      <Name>DbSiteMapMenuClasses</Name>
+      <Name>Konfidence.MenuClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
