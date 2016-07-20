@@ -58,7 +58,7 @@ namespace Konfidence.BaseDataBaseClassesTest
 
             target.BuildStructure();
 
-            Assert.AreEqual(12, target.TableList.Count); // newsletter heeft nu 12 tabellen
+            Assert.AreEqual(25, target.TableList.Count); // newsletter heeft nu 25 tabellen
         }
     }
 }
