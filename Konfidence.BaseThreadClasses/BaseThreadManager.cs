@@ -34,7 +34,7 @@ namespace Konfidence.BaseThreadClasses
         {
             get
             {
-                if (IsAssigned(_ThreadRunner))
+                if (_ThreadRunner.IsAssigned())
                 {
                     return _ThreadRunner.IsRunning;
                 }

@@ -213,7 +213,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void Redirect(string url)
         {
-            if (!BaseItem.IsEmpty(url))
+            if (url.IsAssigned())
             {
                 Response.Redirect(url, false);
 

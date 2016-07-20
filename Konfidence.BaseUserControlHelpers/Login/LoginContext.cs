@@ -15,7 +15,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                if (IsAssigned(HttpContext.Current))
+                if (HttpContext.Current.IsAssigned())
                 {
                     return HttpContext.Current.Session[InternalSessionAccount.ACCOUNT_OBJECT] as InternalSessionAccount;
                 }
@@ -28,7 +28,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                if (IsAssigned(HttpContext.Current))
+                if (HttpContext.Current.IsAssigned())
                 {
                     return HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT] as BaseDataItem;
                 }
@@ -37,7 +37,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             }
             set
             {
-                if (IsAssigned(HttpContext.Current))
+                if (HttpContext.Current.IsAssigned())
                 {
                     HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT] = value;
                 }
@@ -52,7 +52,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                if (IsAssigned(SessionAccount))
+                if (SessionAccount.IsAssigned())
                 {
                     return true;
                 }
@@ -78,7 +78,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                if (IsAssigned(SessionAccount))
+                if (SessionAccount.IsAssigned())
                 {
                     return SessionAccount.IsAdministrator;
                 }
@@ -91,9 +91,9 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                if (IsAssigned(SessionAccount))
+                if (SessionAccount.IsAssigned())
                 {
-                    return IsAssigned(HttpContext.Current.Session[InternalSessionAccount.ADMINISTRATOR_REQUIRED]);
+                    return HttpContext.Current.Session[InternalSessionAccount.ADMINISTRATOR_REQUIRED].IsAssigned();
                 }
 
                 return false;
@@ -106,7 +106,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             {
                 var errorText = HttpContext.Current.Session[InternalSessionAccount.LOG_ON_ERROR] as string;
 
-                if (!IsEmpty(errorText))
+                if (errorText.IsAssigned())
                 {
                     HttpContext.Current.Session.Remove(InternalSessionAccount.LOG_ON_ERROR);
 
@@ -121,7 +121,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
         {
             get
             {
-                if (IsAssigned(SessionAccount))
+                if (SessionAccount.IsAssigned())
                 {
                     return SessionAccount.Email;
                 }
@@ -138,7 +138,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
 
         internal void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
         {
-            if (!IsEmpty(password) && !IsEmpty(loginPassword))
+            if (password.IsAssigned() && loginPassword.IsAssigned())
             {
                 if (password.Equals(loginPassword))
                 {
@@ -158,14 +158,14 @@ namespace Konfidence.BaseUserControlHelpers.Login
 
         internal void LogOff()
         {
-            if (IsAssigned(HttpContext.Current))
+            if (HttpContext.Current.IsAssigned())
             {
-                if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.ACCOUNT_OBJECT]))
+                if (HttpContext.Current.Session[InternalSessionAccount.ACCOUNT_OBJECT].IsAssigned())
                 {
                     HttpContext.Current.Session.Remove(InternalSessionAccount.ACCOUNT_OBJECT);
                 }
 
-                if (IsAssigned(HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT]))
+                if (HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT].IsAssigned())
                 {
                     HttpContext.Current.Session.Remove(InternalSessionAccount.CURRENT_ACCOUNT);
                 }

@@ -21,7 +21,7 @@ namespace Konfidence.BaseThreadClasses
         {
             get
             {
-                if (IsAssigned(_ThreadAction))
+                if (_ThreadAction.IsAssigned())
                 {
                     return true;
                 }
@@ -85,9 +85,9 @@ namespace Konfidence.BaseThreadClasses
 
         public void StopThreadRunner()
         {
-            if (IsAssigned(_InternalThread))
+            if (_InternalThread.IsAssigned())
             {
-                if (IsAssigned(ThreadAction))
+                if (ThreadAction.IsAssigned())
                 {
                     ThreadAction.IsTerminating = true;
                 }

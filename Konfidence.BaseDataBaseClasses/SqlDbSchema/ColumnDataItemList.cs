@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Konfidence.Base;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
@@ -87,7 +88,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             {
                 var columnDataItem = Find(getListByField);
 
-                if (IsAssigned(columnDataItem))
+                if (columnDataItem.IsAssigned())
                 {
                     fieldNames += columnDataItem.Name;
                 }
@@ -105,7 +106,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             {
                 var columnDataItem = Find(getListByField);
 
-                if (IsAssigned(columnDataItem))
+                if (columnDataItem.IsAssigned())
                 {
                     fieldNames += delimiter + columnDataItem.Name;
 
@@ -125,7 +126,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             {
                 var columnDataItem = Find(getListByField);
 
-                if (IsAssigned(columnDataItem))
+                if (columnDataItem.IsAssigned())
                 {
                     commaFieldNames += delimiter + columnDataItem.DataType + " " + columnDataItem.Name.ToLower();
 
@@ -145,7 +146,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             {
                 var columnDataItem = Find(getListByField);
 
-                if (IsAssigned(columnDataItem))
+                if (columnDataItem.IsAssigned())
                 {
                     commaFieldNames += delimiter + columnDataItem.Name;
 

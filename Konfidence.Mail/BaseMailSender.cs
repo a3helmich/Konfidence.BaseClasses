@@ -37,7 +37,7 @@ namespace Konfidence.Mail
 
 			mailMessage.Subject = subject;
 
-            if (!IsEmpty(fileName))
+            if (fileName.IsAssigned())
             {
                 var attachment = new Attachment(fileName);
 

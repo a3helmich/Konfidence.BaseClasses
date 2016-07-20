@@ -147,7 +147,7 @@ namespace Konfidence.BaseData.Repositories
                     {
                         _DataReader = dataReader;
 
-                        if (IsAssigned(callback))
+                        if (callback.IsAssigned())
                         {
                             callback();
                         }
@@ -182,7 +182,7 @@ namespace Konfidence.BaseData.Repositories
 
                     while (dataReader.Read())
                     {
-                        if (IsAssigned(callback))
+                        if (callback.IsAssigned())
                         {
                             callback();
                         }
@@ -207,7 +207,7 @@ namespace Konfidence.BaseData.Repositories
 
                     while (dataReader.Read())
                     {
-                        if (IsAssigned(parentCallback))
+                        if (parentCallback.IsAssigned())
                         {
                             parentCallback();
                         }
@@ -217,7 +217,7 @@ namespace Konfidence.BaseData.Repositories
 
                     while (dataReader.Read())
                     {
-                        if (IsAssigned(relatedCallback))
+                        if (relatedCallback.IsAssigned())
                         {
                             relatedCallback();
                         }
@@ -227,7 +227,7 @@ namespace Konfidence.BaseData.Repositories
 
                     while (dataReader.Read())
                     {
-                        if (IsAssigned(childCallback))
+                        if (childCallback.IsAssigned())
                         {
                             childCallback();
                         }

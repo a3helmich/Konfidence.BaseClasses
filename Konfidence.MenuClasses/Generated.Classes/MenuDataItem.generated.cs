@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using Konfidence.Base;
 using Konfidence.BaseData;
 
 namespace DbSiteMapMenuClasses
@@ -138,7 +139,7 @@ namespace DbSiteMapMenuClasses
             {
                 get
                 {
-                    if (!IsAssigned(_MenuText))
+                    if (!_MenuText.IsAssigned())
                     {
                         _MenuText = MenuTextDataItem.GetByMenuId(MenuId);
                     }

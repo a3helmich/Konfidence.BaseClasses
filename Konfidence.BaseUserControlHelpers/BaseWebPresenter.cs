@@ -36,7 +36,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsEmpty(PageSettingDocument.MenuUrl))
+                if (PageSettingDocument.MenuUrl.IsAssigned())
                 {
                     return @"~\" + PageSettingDocument.MenuUrl;
                 }
@@ -57,7 +57,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsEmpty(PageSettingDocument.LogonUrl))
+                if (PageSettingDocument.LogonUrl.IsAssigned())
                 {
                     return @"~\" + PageSettingDocument.LogonUrl;
                 }
@@ -99,11 +99,11 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsEmpty(_DataDirectory))
+                if (!_DataDirectory.IsAssigned())
                 {
                     _DataDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-                    if (AppDomain.CurrentDomain.GetData("DataDirectory") != null)
+                    if (AppDomain.CurrentDomain.GetData("DataDirectory").IsAssigned())
                     {
                         _DataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
                     }
@@ -122,7 +122,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// <returns>the path like 'c:\...\foldername\filename' </returns>
         public static string ResolveServerPath(string url)
         {
-            if (!IsEmpty(url))
+            if (url.IsAssigned())
             {
                 return HttpContext.Current.Server.MapPath(url);
             }
@@ -228,7 +228,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_PageSettingDocument))
+                if (!_PageSettingDocument.IsAssigned())
                 {
                     _PageSettingDocument = new PageSettingXmlDocument();
 
@@ -271,7 +271,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!IsAssigned(_PageSettingDictionary))
+                if (!_PageSettingDictionary.IsAssigned())
                 {
                     _PageSettingDictionary = PageSettingDocument.PageSettingDictionary;
                 }

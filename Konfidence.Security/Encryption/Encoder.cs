@@ -31,7 +31,7 @@ namespace Konfidence.Security.Encryption
         {
             ArrayList byteList = null;
 
-            if (!IsEmpty(rawData))
+            if (rawData.IsAssigned())
             {
                 byteList = new ArrayList();
 
@@ -49,7 +49,7 @@ namespace Konfidence.Security.Encryption
                 byteList.Add(GetEnryptedDataBlock(partialString));
             }
 
-            if (byteList != null)
+            if (byteList.IsAssigned())
             {
                 return byteList.ToArray();
             }

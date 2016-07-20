@@ -17,7 +17,7 @@ namespace Konfidence.Base
 
             if (assignedString != null)
             {
-                if (String.IsNullOrWhiteSpace(assignedString))
+                if (string.IsNullOrWhiteSpace(assignedString))
                 {
                     return false;
                 }
@@ -25,23 +25,6 @@ namespace Konfidence.Base
 
             return true;
         }
-
-        //[ContractAnnotation("assignedString:null => false")]
-        //public static bool IsEmpty(this string assignedString) 
-        //{
-        //    if (String.IsNullOrWhiteSpace(assignedString))
-        //    {
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
-
-        //[ContractAnnotation("assignedObject:null => false")]
-        //public static bool IsNull(this string assignedObject)
-        //{
-        //    return BaseItem.IsNull(assignedObject);
-        //}
 
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(this string assignedGuid)

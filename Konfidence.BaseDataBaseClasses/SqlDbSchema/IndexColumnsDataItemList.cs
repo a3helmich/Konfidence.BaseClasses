@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Konfidence.Base;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
@@ -31,14 +32,14 @@ namespace Konfidence.BaseData.SqlDbSchema
             {
                 var tableName = dataRow["TABLE_NAME"] as string;
 
-                if (!IsEmpty(tableName) && tableName.Equals(_TableName))
+                if (tableName.IsAssigned() && tableName.Equals(_TableName))
                 {
                     var columnName = dataRow["COLUMN_NAME"] as string;
                     var constraintName = dataRow["CONSTRAINT_NAME"] as string;
 
                     var indexColumnDataItem = new IndexColumnsDataItem();
 
-                    if (!IsEmpty(constraintName) && constraintName.Equals(_PrimaryKeyDataItem.ConstraintName))
+                    if (constraintName.IsAssigned() && constraintName.Equals(_PrimaryKeyDataItem.ConstraintName))
                     {
                         _PrimaryKeyDataItem.ColumnName = columnName;
                     }

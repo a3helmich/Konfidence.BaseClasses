@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.WSBaseHost;
 
@@ -93,7 +94,7 @@ namespace Konfidence.BaseData
                 //}B
             }
 
-			if (IsAssigned(parameterObjects))
+			if (parameterObjects.IsAssigned())
 			{
 				var propertyDictionary = new Dictionary<string, object>();
 
@@ -106,7 +107,7 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		internal protected override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+		protected internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 			_WsBaseHostService.Delete(id);
 		}
@@ -163,7 +164,7 @@ namespace Konfidence.BaseData
 		{
 			string wsUrl = ConfigurationManager.AppSettings[serviceName];
 
-            if (!IsEmpty(wsUrl))
+            if (wsUrl.IsAssigned())
 			{
 				return wsUrl;
 			}

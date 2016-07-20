@@ -82,7 +82,7 @@ namespace Konfidence.Security.Encryption
                     keySizeClient = keySizeServer;
                 }
 
-                if (!IsAssigned(_TempRsaProvider) || _TempKeySize != keySizeClient)
+                if (!_TempRsaProvider.IsAssigned() || _TempKeySize != keySizeClient)
                 {
                     if (keySizeClient == 0)
                     {
@@ -207,7 +207,7 @@ namespace Konfidence.Security.Encryption
             {
                 CspParameters cp = GetCspParameters(containerName);
 
-                if (!IsAssigned(_RsaProvider))
+                if (!_RsaProvider.IsAssigned())
                 {
                     try
                     {
@@ -237,7 +237,7 @@ namespace Konfidence.Security.Encryption
                         }
 
 
-                        if (!IsAssigned(_RsaProvider))
+                        if (!_RsaProvider.IsAssigned())
                         {
                             _RsaProvider = new RSACryptoServiceProvider(_MaxBytesServer * 8, cp);
                         }
@@ -264,7 +264,7 @@ namespace Konfidence.Security.Encryption
             {
                 // if a rsaprovider exists, make non persistent, clear it and nullify --> the key is deleted
 
-                if (IsAssigned(_RsaProvider))
+                if (_RsaProvider.IsAssigned())
                 {
                     // Delete the key entry in the container.
                     _RsaProvider.PersistKeyInCsp = false;

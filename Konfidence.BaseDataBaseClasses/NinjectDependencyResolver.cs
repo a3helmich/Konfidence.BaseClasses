@@ -17,7 +17,7 @@ namespace Konfidence.BaseData
 
         public NinjectDependencyResolver()
         {
-            if (!IsAssigned(_Kernel))
+            if (!_Kernel.IsAssigned())
             {
                 _Kernel = new StandardKernel();
 

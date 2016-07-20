@@ -23,7 +23,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsEmpty(_CurrentDomainExtension))
+                if (!_CurrentDomainExtension.IsAssigned())
                 {
                     _CurrentDomainExtension = GetCurrentDomainExtension();
                 }
@@ -36,7 +36,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsEmpty(_CurrentLanguage))
+                if (!_CurrentLanguage.IsAssigned())
                 {
                     _CurrentLanguage = GetCurrentLanguage();
                 }
@@ -49,7 +49,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsEmpty(_CurrentDnsName))
+                if (!_CurrentDnsName.IsAssigned())
                 {
                     _CurrentDnsName = GetCurrentDnsName();
                 }
@@ -62,7 +62,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsEmpty(_RefererDnsName))
+                if (!_RefererDnsName.IsAssigned())
                 {
                     _RefererDnsName = GetRefererDnsName();
                 }
@@ -75,7 +75,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsEmpty(_CurrentPagePath))
+                if (!_CurrentPagePath.IsAssigned())
                 {
                     _CurrentPagePath = GetCurrentPagePath();
                 }
@@ -88,7 +88,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (IsEmpty(_CurrentPageName))
+                if (!_CurrentPageName.IsAssigned())
                 {
                     _CurrentPageName = GetCurrentPageName();
                 }
@@ -97,20 +97,17 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        public bool IsValid
-        {
-            get { return Validate(); }
-        }
+        public bool IsValid => Validate();
 
         #endregion readonly  properties
 
         public BasePageHelper(string requestUrl, string refererUrl)
         {
-            if (!IsEmpty(requestUrl))
+            if (requestUrl.IsAssigned())
             {
                 _UrlParts = requestUrl.ToLowerInvariant().Split('/');
             }
-            if (!IsEmpty(refererUrl))
+            if (refererUrl.IsAssigned())
             {
                 _RefererParts = refererUrl.ToLowerInvariant().Split('/');
             }
@@ -132,7 +129,7 @@ namespace Konfidence.BaseUserControlHelpers
                 return false;
             }
 
-            if (IsEmpty(CurrentDnsName))
+            if (!CurrentDnsName.IsAssigned())
             {
                 SetErrorMessage("dns name is empty");
 
@@ -195,7 +192,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         private string GetCurrentPageName()
         {
-            if (IsEmpty(CurrentPagePath))
+            if (!CurrentPagePath.IsAssigned())
             {
                 return string.Empty;
             }
@@ -233,7 +230,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             string currentLanguage = "nl"; // default language
 
-            if (!IsEmpty(CurrentDomainExtension))
+            if (CurrentDomainExtension.IsAssigned())
             {
                 string[] shortExtension = CurrentDomainExtension.Split('.'); // als uit meerdere nodes bestaat alleen de laatste oppikken
 

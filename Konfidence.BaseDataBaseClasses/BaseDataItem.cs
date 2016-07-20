@@ -76,7 +76,7 @@ namespace Konfidence.BaseData
         {
             get
             {
-                if (!IsAssigned(_DataHost))
+                if (!_DataHost.IsAssigned())
                 {
                     _DataHost = HostFactory.GetHost(_ServiceName, _DataBaseName);
                 }
@@ -161,7 +161,7 @@ namespace Konfidence.BaseData
         {
             get
             {
-                if (!IsAssigned(_AutoUpdateFieldDictionary))
+                if (!_AutoUpdateFieldDictionary.IsAssigned())
                 {
                     _AutoUpdateFieldDictionary = new Dictionary<string, DbParameterObject>();
                 }
@@ -216,7 +216,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = (Int16)AutoUpdateFieldDictionary[fieldName].Value;
                 }
@@ -231,7 +231,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = (Int32)AutoUpdateFieldDictionary[fieldName].Value;
                 }
@@ -246,7 +246,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = (Guid)AutoUpdateFieldDictionary[fieldName].Value;
                 }
@@ -261,7 +261,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = AutoUpdateFieldDictionary[fieldName].Value as string;
                 }
@@ -276,7 +276,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = (bool)AutoUpdateFieldDictionary[fieldName].Value;
                 }
@@ -291,7 +291,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = (DateTime)AutoUpdateFieldDictionary[fieldName].Value;
                 }
@@ -306,7 +306,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = (TimeSpan)AutoUpdateFieldDictionary[fieldName].Value;
                 }
@@ -321,7 +321,7 @@ namespace Konfidence.BaseData
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                if (IsAssigned(AutoUpdateFieldDictionary[fieldName].Value))
+                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
                     fieldValue = (Decimal)AutoUpdateFieldDictionary[fieldName].Value;
                 }
@@ -429,12 +429,12 @@ namespace Konfidence.BaseData
 
         private Int16 GetFieldInt16(string fieldName)
         {
-            if (IsAssigned(PropertyDictionary))
+            if (PropertyDictionary.IsAssigned())
             {
                 return (Int16)PropertyDictionary[fieldName];
             }
 
-            if (IsAssigned(DataHost))
+            if (DataHost.IsAssigned())
             {
                 return DataHost.GetFieldInt16(fieldName);
             }
@@ -444,12 +444,12 @@ namespace Konfidence.BaseData
 
 		private Int32 GetFieldInt32(string fieldName)
 		{
-			if (IsAssigned(PropertyDictionary))
+			if (PropertyDictionary.IsAssigned())
 			{
 				return (Int32)PropertyDictionary[fieldName];
 			}
 
-		    if (IsAssigned(DataHost))
+		    if (DataHost.IsAssigned())
 		    {
 		        return DataHost.GetFieldInt32(fieldName);
 		    }
@@ -459,12 +459,12 @@ namespace Konfidence.BaseData
 
         private Guid GetFieldGuid(string fieldName)
         {
-            if (IsAssigned(PropertyDictionary))
+            if (PropertyDictionary.IsAssigned())
             {
                 return (Guid)PropertyDictionary[fieldName];
             }
 
-            if (IsAssigned(DataHost))
+            if (DataHost.IsAssigned())
             {
                 var fieldValue = DataHost.GetFieldGuid(fieldName);
 
@@ -481,12 +481,12 @@ namespace Konfidence.BaseData
 
 		private string GetFieldString(string fieldName)
 		{
-			if (IsAssigned(PropertyDictionary))
+			if (PropertyDictionary.IsAssigned())
 			{
 				return PropertyDictionary[fieldName] as string;
 			}
 		    
-            if (IsAssigned(DataHost))
+            if (DataHost.IsAssigned())
 		    {
 		        return DataHost.GetFieldString(fieldName);
 		    }
@@ -496,12 +496,12 @@ namespace Konfidence.BaseData
 
         private bool GetFieldBool(string fieldName)
         {
-            if (IsAssigned(PropertyDictionary))
+            if (PropertyDictionary.IsAssigned())
             {
                 return (bool)PropertyDictionary[fieldName];
             }
             
-            if (IsAssigned(DataHost))
+            if (DataHost.IsAssigned())
             {
                 return DataHost.GetFieldBool(fieldName);
             }
@@ -511,12 +511,12 @@ namespace Konfidence.BaseData
 
 		private DateTime GetFieldDateTime(string fieldName)
 		{
-			if (IsAssigned(PropertyDictionary))
+			if (PropertyDictionary.IsAssigned())
 			{
 				return (DateTime)PropertyDictionary[fieldName];
 			}
 		    
-            if (IsAssigned(DataHost))
+            if (DataHost.IsAssigned())
 		    {
 		        return DataHost.GetFieldDateTime(fieldName);
 		    }
@@ -526,12 +526,12 @@ namespace Konfidence.BaseData
 
         private TimeSpan GetFieldTimeSpan(string fieldName)
         {
-            if (IsAssigned(PropertyDictionary))
+            if (PropertyDictionary.IsAssigned())
             {
                 return (TimeSpan)PropertyDictionary[fieldName];
             }
             
-            if (IsAssigned(DataHost))
+            if (DataHost.IsAssigned())
             {
                 return DataHost.GetFieldTimeSpan(fieldName);
             }
@@ -541,12 +541,12 @@ namespace Konfidence.BaseData
 
         private Decimal GetFieldDecimal(string fieldName)
         {
-            if (IsAssigned(PropertyDictionary))
+            if (PropertyDictionary.IsAssigned())
             {
                 return (Decimal)PropertyDictionary[fieldName];
             }
             
-            if (IsAssigned(DataHost))
+            if (DataHost.IsAssigned())
             {
                 return DataHost.GetFieldDecimal(fieldName);
             }
@@ -628,7 +628,7 @@ namespace Konfidence.BaseData
 
         internal void LoadDataItem()
         {
-            if (!IsEmpty(LoadStoredProcedure))
+            if (LoadStoredProcedure.IsAssigned())
             {
                 GetItem(LoadStoredProcedure, Id);
             }

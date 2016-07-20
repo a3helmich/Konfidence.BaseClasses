@@ -152,7 +152,7 @@ namespace Konfidence.UtilHelper
         {
             string joinedArray = string.Empty;
 
-            if (IsAssigned(value))
+            if (value.IsAssigned())
             {
                 var stringArrayList = new ArrayList();
 

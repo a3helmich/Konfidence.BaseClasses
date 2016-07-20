@@ -7,85 +7,26 @@ namespace Konfidence.Base
 {
 	public class BaseItem
 	{
-        private string _ErrorMessage = string.Empty;
-        public static bool UnitTest = false;
+	    public static bool UnitTest = false;
 
-        public string ErrorMessage
-        {
-            get { return _ErrorMessage; }
-        }
+        public string ErrorMessage { get; private set; } = string.Empty;
 
-        [ContractAnnotation("assignedObject:null => false")]
-		public static bool IsAssigned(object assignedObject)
-		{
-            if (Debugger.IsAttached || UnitTest)
-            {
-                // TODO : write exceptions to a logFile (introduce exclusion attribute?)
-                if (assignedObject is string)
-                {
-                    throw new InvalidCastException("IsAssigned is invalid for strings, use IsNull, IsEmpty or string.IsNullOrEmpty");
-                }
-            }
-
-            if (assignedObject == null)
-            {
-                return false;
-            }
-
-			return true;
-		}
-
-        [ContractAnnotation("assignedString:null => false")]
-        public static bool IsNull(string assignedString) // ToDo : back to protected 
-        {
-            if (assignedString == null)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        [ContractAnnotation("assignedString:null => false")]
-        public static bool IsEmpty(string assignedString) // ToDo : back to protected 
-        {
-            if (string.IsNullOrWhiteSpace(assignedString))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        [ContractAnnotation("assignedGuid:null => false")]
-        public static bool IsGuid(string assignedGuid)
-        {
-                Guid isGuid;
-
-                if (Guid.TryParse(assignedGuid, out isGuid))
-                {
-                    return true;
-                }
-
-                return false;
-        }
-
-        // TODO : convert to errorlist 
+	    // TODO : convert to errorlist 
         public bool SetErrorMessage(string errorMessage)
         {
-            _ErrorMessage = errorMessage;
+            ErrorMessage = errorMessage;
 
             return false;
         }
 
         public bool HasErrors()
         {
-            return !IsEmpty(_ErrorMessage);
+            return ErrorMessage.IsAssigned();
         }
 
         public void ClearErrorMessage()
         {
-            _ErrorMessage = string.Empty;
+            ErrorMessage = string.Empty;
         }
 
         // string extender van maken

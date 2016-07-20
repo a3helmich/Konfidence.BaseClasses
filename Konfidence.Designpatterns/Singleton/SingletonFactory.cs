@@ -24,7 +24,7 @@ namespace Konfidence.DesignPatterns.Singleton
         // WORMGAATJES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         static protected ISingleton GetInstance(Type singletonType)
         {
-            if (!IsAssigned(singletonType))
+            if (!singletonType.IsAssigned())
             {
                 return null;
             }
@@ -45,7 +45,7 @@ namespace Konfidence.DesignPatterns.Singleton
 
             object singleton = SingletonTable[singletonType];
 
-            if (!IsAssigned(singleton))
+            if (!singleton.IsAssigned())
             {
                 singleton = Activator.CreateInstance(singletonType);
 

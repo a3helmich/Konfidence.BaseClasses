@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using Konfidence.Base;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
@@ -43,7 +44,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                         var schema = dataRow["TABLE_SCHEMA"] as string;
                         var name = dataRow["TABLE_NAME"] as string;
 
-                        if (!IsEmpty(name) && (!name.ToLower().Equals("dtproperties") && !name.ToLower().StartsWith("sys")))
+                        if (name.IsAssigned() && (!name.Equals("dtproperties", StringComparison.OrdinalIgnoreCase) && !name.StartsWith("sys",StringComparison.OrdinalIgnoreCase)))
                         {
                             var tableDataItem = new TableDataItem(catalog, schema, name);
 

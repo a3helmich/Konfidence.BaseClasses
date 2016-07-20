@@ -27,7 +27,7 @@ namespace Konfidence.Base
 
             string fileExtension = Path.GetExtension(fileName);
 
-            if (!IsAssigned(allowedExtensions))
+            if (!allowedExtensions.IsAssigned())
             {
                 return true;
             }

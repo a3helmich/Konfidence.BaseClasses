@@ -26,7 +26,7 @@ namespace Konfidence.BaseUserControlHelpers
 			{
 			    var parameterObjectHashtable = _Context.Session[PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE] as Hashtable;
 
-				if (!IsAssigned(parameterObjectHashtable))
+				if (!parameterObjectHashtable.IsAssigned())
 				{
 					parameterObjectHashtable = new Hashtable();
 
@@ -45,7 +45,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 				var sessionParameterObject = ParameterObjectHashtable[pageId + "_" + _ControlName] as SessionParameterObject;
 
-				if (!IsAssigned(sessionParameterObject))
+				if (!sessionParameterObject.IsAssigned())
 				{
 					sessionParameterObject = new SessionParameterObject();
 

@@ -15,7 +15,7 @@ namespace Konfidence.Base
                 newNode.InnerText = value;
             }
 
-            if (IsAssigned(root))
+            if (root.IsAssigned())
             {
                 root.AppendChild(newNode);
             }
@@ -34,7 +34,7 @@ namespace Konfidence.Base
         {
             XmlNode root = xmlDocument.DocumentElement;
 
-            if (IsAssigned(root))
+            if (root.IsAssigned())
             {
                 XmlNode subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
 

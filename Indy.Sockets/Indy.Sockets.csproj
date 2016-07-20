@@ -58,7 +58,6 @@
     <Content Include="refBin\Indy.Sockets.dll" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="refBin\Mono.Security.dll.copy" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Indy.Sockets.nuspec">

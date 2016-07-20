@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using Konfidence.Base;
 using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
 using Ninject;
@@ -132,7 +133,7 @@ namespace Konfidence.BaseData
 
         private int GetOrdinal(string fieldName)
         {
-            if (!IsAssigned(DataReader))
+            if (!DataReader.IsAssigned())
             {
                 const string message = @"_DataReader: in SQLHost.GetOrdinal(string fieldName);";
 

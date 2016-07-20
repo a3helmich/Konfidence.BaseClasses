@@ -23,7 +23,7 @@ namespace Konfidence.BaseData
         {
             get
             {
-                if (!IsAssigned(_Ninject))
+                if (!_Ninject.IsAssigned())
                 {
                     _Ninject = new NinjectDependencyResolver();
 
@@ -96,18 +96,6 @@ namespace Konfidence.BaseData
 
             BuildItemList(GetListStoredProcedure);
 		}
-
-        [ContractAnnotation("assignedObject:null => false")]
-        protected static bool IsAssigned(object assignedObject)
-		{
-			return BaseItem.IsAssigned(assignedObject);
-		}
-
-        [ContractAnnotation("assignedString:null => false")]
-        protected static bool IsEmpty(string assignedString)
-        {
-            return BaseItem.IsEmpty(assignedString);
-        }
 
 		public BaseDataItem GetDataItem()
 		{
@@ -207,7 +195,7 @@ namespace Konfidence.BaseData
         {
             var dataItem = FindByIsEditing();
 
-            if (!IsAssigned(dataItem))
+            if (!dataItem.IsAssigned())
             {
                 dataItem = FindByIsSelected();
             }
@@ -286,7 +274,7 @@ namespace Konfidence.BaseData
 
         public void SetSelected(BaseDataItem dataItem)
         {
-            if (IsAssigned(dataItem))
+            if (dataItem.IsAssigned())
             {
                 SetSelected(dataItem.GetId());
             }
@@ -328,7 +316,7 @@ namespace Konfidence.BaseData
                         dataItem = FindById(guidId);
                     }
 
-                    if (IsAssigned(dataItem))
+                    if (dataItem.IsAssigned())
                     {
                         dataItem.IsSelected = true;
                         dataItem.IsEditing = isEditing;
@@ -344,7 +332,7 @@ namespace Konfidence.BaseData
         {
             var dataItem = FindCurrent();
 
-            if (IsAssigned(dataItem))
+            if (dataItem.IsAssigned())
             {
                 dataItem.IsSelected = false;
                 dataItem.IsEditing = true; // nieuw
@@ -353,7 +341,7 @@ namespace Konfidence.BaseData
 
         public void Edit(T dataItem)
         {
-            if (IsAssigned(dataItem))
+            if (dataItem.IsAssigned())
             {
                 dataItem.IsEditing = true; // nieuw
             }
@@ -361,7 +349,7 @@ namespace Konfidence.BaseData
 
         public void Save(T dataItem)
         {
-            if (IsAssigned(dataItem))
+            if (dataItem.IsAssigned())
             {
                 dataItem.Save();
 
@@ -380,7 +368,7 @@ namespace Konfidence.BaseData
 
         public void Delete(T dataItem)
         {
-            if (IsAssigned(dataItem))
+            if (dataItem.IsAssigned())
             {
                 dataItem.Delete();
 

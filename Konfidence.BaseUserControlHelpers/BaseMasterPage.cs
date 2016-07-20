@@ -124,7 +124,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 try
                 {
-                    string urlReferer = string.Empty;
+                    var urlReferer = string.Empty;
 
                     if (Request.UrlReferrer.IsAssigned())
                     {
@@ -209,7 +209,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected string GetViewState(string fieldName)
         {
-            object viewState = ViewState[fieldName];
+            var viewState = ViewState[fieldName];
 
             if (viewState != null)
             {
@@ -222,7 +222,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected string GetSessionState(string fieldName)
         {
-            object sessionState = Session[fieldName];
+            var sessionState = Session[fieldName];
 
             if (sessionState != null)
             {
@@ -238,7 +238,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 MasterPageDictionaryIn.Clear();
 
-                foreach (KeyValuePair<string, string> kvp in MasterPageDictionaryOut)
+                foreach (var kvp in MasterPageDictionaryOut)
                 {
                     MasterPageDictionaryIn.Add(kvp.Key, kvp.Value);
                 }
@@ -279,7 +279,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         private void CheckIsMasterPagePostBack()
         {
-            foreach (string masterPageFile in MasterPageFileList)
+            foreach (var masterPageFile in MasterPageFileList)
             {
                 if (MasterPageDictionaryIn.ContainsKey(masterPageFile))
                 {
@@ -321,7 +321,7 @@ namespace Konfidence.BaseUserControlHelpers
 
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
 
-            foreach (string masterPageFile in MasterPageFileList)
+            foreach (var masterPageFile in MasterPageFileList)
             {
                 if (!MasterPageDictionaryOut.ContainsKey(masterPageFile))
                 {
@@ -330,14 +330,11 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected bool IsMasterPagePostBack
-        {
-            get { return _IsMasterPagePostBack; }
-        }
+        protected bool IsMasterPagePostBack => _IsMasterPagePostBack;
 
         protected void Redirect(string url)
         {
-            if (!BaseItem.IsEmpty(url))
+            if (url.IsAssigned())
             {
                 Response.Redirect(url, false);
 
