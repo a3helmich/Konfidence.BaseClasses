@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Web;
 using System.Web.UI;
+using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
@@ -38,7 +39,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 			var currentTicket = sessionParameterObject.SessionTicket;
 
-			if (!string.IsNullOrEmpty(currentTicket))
+			if (currentTicket.IsAssigned())
 			{
 				return 0;
 			}
@@ -57,7 +58,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 			string currentTicketString = context.Request[CURRENT_REFRESH_TICKET_ENTRY];
 
-			if (!string.IsNullOrEmpty(currentTicketString))
+			if (currentTicketString.IsAssigned())
 			{
 				ticket = sessionTicket;
 			}

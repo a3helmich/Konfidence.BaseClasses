@@ -8,14 +8,14 @@ namespace Konfidence.Security.Encryption
 {
     public class KeyEncryption : BaseItem, IDisposable
     {
-        private RSACryptoServiceProvider _RsaProvider;
+        private RSACryptoServiceProvider _rsaProvider;
 
-        private bool _Disposed;
+        private bool _disposed;
 
-        private RSACryptoServiceProvider _TempRsaProvider;
-        private int _TempKeySize;
+        private RSACryptoServiceProvider _tempRsaProvider;
+        private int _tempKeySize;
 
-        private readonly string _ContainerName;
+        private readonly string _containerName;
 
         // _MaxBytes schijnt uit te vinden te zijn, maar is een 
         // beetje vreemd heb onderstussen het een en ander 
@@ -23,20 +23,20 @@ namespace Konfidence.Security.Encryption
         // niet waar te zijn heb voorlopig gekozen voor halverwege 
         // keysize, dit lijkt te voldoen, moet verder uitgezocht
         //NB nov 2012: zal wel iets te maken hebben met de encoding van de string (onebyte/twobyte)
-        private int _MaxBytesServer; // default voor de serverside
-        private int _MaxBytesClient; // default voor de serverside
+        private int _maxBytesServer; // default voor de serverside
+        private int _maxBytesClient; // default voor de serverside
 
         #region properties
         public RSACryptoServiceProvider RsaProvider
         {
-            get { return _RsaProvider; }
+            get { return _rsaProvider; }
         }
 
         public string PublicKey
         {
             get
             {
-                return _RsaProvider.ToXmlString(false);
+                return _rsaProvider.ToXmlString(false);
             }
         }
 
@@ -44,7 +44,7 @@ namespace Konfidence.Security.Encryption
         {
             get
             {
-                return _RsaProvider.ToXmlString(true);
+                return _rsaProvider.ToXmlString(true);
             }
         }
 
@@ -60,21 +60,21 @@ namespace Konfidence.Security.Encryption
         {
             get
             {
-                return _MaxBytesServer / 2;
+                return _maxBytesServer / 2;
             }
         }
         #endregion properties
 
         public KeyEncryption()
         {
-            _Disposed = false;
+            _disposed = false;
         }
 
         protected RSACryptoServiceProvider TempKeyContainer
         {
             get
             {
-                int keySizeClient = _MaxBytesClient * 8;
+                int keySizeClient = _maxBytesClient * 8;
                 int keySizeServer = GetMaxKeySize(); // dit valt te optimaliseren, door er voor te zorgen dat de oude niet direct wordt weggemikt
 
                 if (keySizeServer < keySizeClient)
@@ -82,21 +82,21 @@ namespace Konfidence.Security.Encryption
                     keySizeClient = keySizeServer;
                 }
 
-                if (!_TempRsaProvider.IsAssigned() || _TempKeySize != keySizeClient)
+                if (!_tempRsaProvider.IsAssigned() || _tempKeySize != keySizeClient)
                 {
                     if (keySizeClient == 0)
                     {
-                        _TempRsaProvider = new RSACryptoServiceProvider();
+                        _tempRsaProvider = new RSACryptoServiceProvider();
                     }
                     else
                     {
-                        _TempRsaProvider = new RSACryptoServiceProvider(keySizeClient);
+                        _tempRsaProvider = new RSACryptoServiceProvider(keySizeClient);
                     }
 
-                    _TempKeySize = _TempRsaProvider.KeySize;
+                    _tempKeySize = _tempRsaProvider.KeySize;
                 }
 
-                return _TempRsaProvider;
+                return _tempRsaProvider;
             }
         }
 
@@ -114,22 +114,22 @@ namespace Konfidence.Security.Encryption
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
                     {
-                        _MaxBytesServer = legalKeySize.MinSize / 8;
+                        _maxBytesServer = legalKeySize.MinSize / 8;
                         break;
                     }
                 default:
                     {
-                        _MaxBytesServer = keyContainer.KeySize / 8;
+                        _maxBytesServer = keyContainer.KeySize / 8;
                         break;
                     }
             }
 
-            if (_MaxBytesClient == 0)
+            if (_maxBytesClient == 0)
             {
-                _MaxBytesClient = _MaxBytesServer;
+                _maxBytesClient = _maxBytesServer;
             }
 
-            return _MaxBytesServer * 8;
+            return _maxBytesServer * 8;
         }
 
         public KeyEncryption(string containerName) : this(0, containerName)
@@ -138,28 +138,28 @@ namespace Konfidence.Security.Encryption
 
         public KeyEncryption(int keySize, string containerName)
         {
-            _MaxBytesClient = keySize / 8;
-            _MaxBytesServer = keySize / 8;
-            _ContainerName = containerName;
+            _maxBytesClient = keySize / 8;
+            _maxBytesServer = keySize / 8;
+            _containerName = containerName;
 
             bool isTemporary = false;
 
-            if (string.IsNullOrEmpty(_ContainerName))
+            if (_containerName.IsAssigned())
             {
                 isTemporary = true;
 
-                _ContainerName = "None";
+                _containerName = "None";
             }
 
-            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) key - " + _ContainerName);
+            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) key - " + _containerName);
 
             if (isTemporary)
             {
-                _RsaProvider = TempKeyContainer;
+                _rsaProvider = TempKeyContainer;
             }
             else
             {
-                GetKeyContainer(_ContainerName);
+                GetKeyContainer(_containerName);
             }
 
             Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
@@ -207,11 +207,11 @@ namespace Konfidence.Security.Encryption
             {
                 CspParameters cp = GetCspParameters(containerName);
 
-                if (!_RsaProvider.IsAssigned())
+                if (!_rsaProvider.IsAssigned())
                 {
                     try
                     {
-                        _RsaProvider = new RSACryptoServiceProvider(_MaxBytesServer * 8, cp);
+                        _rsaProvider = new RSACryptoServiceProvider(_maxBytesServer * 8, cp);
                     }
                     catch (CryptographicException e)
                     {
@@ -221,7 +221,7 @@ namespace Konfidence.Security.Encryption
                     }
                 }
 
-                if (_MaxBytesServer > 0 && _RsaProvider.KeySize != _MaxBytesServer * 8)
+                if (_maxBytesServer > 0 && _rsaProvider.KeySize != _maxBytesServer * 8)
                 {
                     try
                     {
@@ -237,9 +237,9 @@ namespace Konfidence.Security.Encryption
                         }
 
 
-                        if (!_RsaProvider.IsAssigned())
+                        if (!_rsaProvider.IsAssigned())
                         {
-                            _RsaProvider = new RSACryptoServiceProvider(_MaxBytesServer * 8, cp);
+                            _rsaProvider = new RSACryptoServiceProvider(_maxBytesServer * 8, cp);
                         }
                     }
                     catch (CryptographicException e)
@@ -264,15 +264,15 @@ namespace Konfidence.Security.Encryption
             {
                 // if a rsaprovider exists, make non persistent, clear it and nullify --> the key is deleted
 
-                if (_RsaProvider.IsAssigned())
+                if (_rsaProvider.IsAssigned())
                 {
                     // Delete the key entry in the container.
-                    _RsaProvider.PersistKeyInCsp = false;
+                    _rsaProvider.PersistKeyInCsp = false;
 
                     // Call Clear to release resources and delete the key from the container.
-                    _RsaProvider.Clear();
+                    _rsaProvider.Clear();
 
-                    _RsaProvider = null;
+                    _rsaProvider = null;
 
                     return true;
                 }
@@ -289,8 +289,8 @@ namespace Konfidence.Security.Encryption
 
         public void ReadKey(string key)
         {
-            _RsaProvider.FromXmlString(key);
-            _MaxBytesServer = _RsaProvider.KeySize / 8;
+            _rsaProvider.FromXmlString(key);
+            _maxBytesServer = _rsaProvider.KeySize / 8;
         }
 
         #region IDisposable Members
@@ -305,16 +305,16 @@ namespace Konfidence.Security.Encryption
         protected virtual void Dispose(bool disposing)
         {
 
-            if (!_Disposed)
+            if (!_disposed)
             {
-                if (_RsaProvider != null)
+                if (_rsaProvider != null)
                 {
-                    _RsaProvider.Clear(); // resources vrijgeven.
+                    _rsaProvider.Clear(); // resources vrijgeven.
 
-                    _RsaProvider = null;
+                    _rsaProvider = null;
                 }
             }
-            _Disposed = true;
+            _disposed = true;
 
         }
 

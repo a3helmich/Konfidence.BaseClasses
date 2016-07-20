@@ -372,7 +372,7 @@ namespace Konfidence.BaseUserControlHelpers
              //3. Als er een currentSessionId is, en het is een nieuwe sessie. Dan is de sessie 
              //opnieuw opgebouwd en de sessie expired.
 
-			if (String.IsNullOrEmpty(currentSessionId) && currentSessionId == Session.SessionID && Session.IsNewSession)
+			if (!currentSessionId.IsAssigned() && currentSessionId == Session.SessionID && Session.IsNewSession)
 			{
 				_IsExpired = true;
 			}

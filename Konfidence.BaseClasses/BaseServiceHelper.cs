@@ -10,7 +10,7 @@ namespace Konfidence.Base
 
             XmlNode newNode = xmlDocument.CreateElement(field);
 
-            if (!string.IsNullOrEmpty(value))
+            if (value.IsAssigned())
             {
                 newNode.InnerText = value;
             }

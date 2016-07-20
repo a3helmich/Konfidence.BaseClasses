@@ -88,7 +88,7 @@ namespace Konfidence.UtilHelper
 
             try
             {
-                if (!string.IsNullOrEmpty(joinedArray))
+                if (joinedArray.IsAssigned())
                 {
                     var arrayListNodeValue = new ArrayList();
 
@@ -127,7 +127,7 @@ namespace Konfidence.UtilHelper
             }
 
             // remove the node if the assigned value is null or empty
-            if (string.IsNullOrEmpty(value)) 
+            if (!value.IsAssigned())
             {
                 _Root.RemoveChild(valueNode);
             }
