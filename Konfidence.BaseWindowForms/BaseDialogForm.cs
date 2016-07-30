@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Windows.Forms;
+using Konfidence.Base;
 using Konfidence.UtilHelper;
 
 namespace Konfidence.BaseWindowForms
@@ -14,26 +15,14 @@ namespace Konfidence.BaseWindowForms
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private readonly Container _Components = null;
+        private readonly Container _components = null;
 
-        private IApplicationSettings _ApplicationSettings;
-        private string _ConfigurationName = string.Empty;
+        private IApplicationSettings _applicationSettings;
 
-        public IApplicationSettings ApplicationSettings
-        {
-            get
-            {
-                if (_ApplicationSettings == null)
-                    _ApplicationSettings = ApplicationSettingsFactory.ApplicationSettings(Application.ProductName);
-                return _ApplicationSettings;
-            }
-        }
+        public IApplicationSettings ApplicationSettings => _applicationSettings ??
+                                                           (_applicationSettings = ApplicationSettingsFactory.ApplicationSettings(Application.ProductName));
 
-        public string ConfigurationName
-        {
-            get { return _ConfigurationName; }
-            set { _ConfigurationName = value; }
-        }
+        public string ConfigurationName { get; set; }
 
         public BaseDialogForm() : this(Application.ProductName)
         {
@@ -41,9 +30,8 @@ namespace Konfidence.BaseWindowForms
             // Required for Windows Form Designer support
             //
             InitializeComponent();
-            //
-            // TODO: Add any constructor code after InitializeComponent call
-            //
+
+            ConfigurationName = string.Empty;
         }
 
         public BaseDialogForm(string configurationName)
@@ -58,9 +46,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (_Components != null)
+                if (_components.IsAssigned())
                 {
-                    _Components.Dispose();
+                    _components.Dispose();
                 }
             }
             base.Dispose(disposing);

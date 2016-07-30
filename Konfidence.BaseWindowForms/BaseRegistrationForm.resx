@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,657 +118,657 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_EmailLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_emailLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="_EmailLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_emailLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 148</value>
   </data>
-  <data name="_EmailLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_emailLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_EmailLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_emailLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="_EmailLabel.Text" xml:space="preserve">
+  <data name="_emailLabel.Text" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="_EmailLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_emailLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.Name" xml:space="preserve">
-    <value>_EmailLabel</value>
+  <data name="&gt;&gt;_emailLabel.Name" xml:space="preserve">
+    <value>_emailLabel</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_emailLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_emailLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_emailLabel.ZOrder" xml:space="preserve">
     <value>35</value>
   </data>
-  <data name="CityLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_cityLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CityLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_cityLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 148</value>
   </data>
-  <data name="CityLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_cityLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="CityLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_cityLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="CityLabel.Text" xml:space="preserve">
+  <data name="_cityLabel.Text" xml:space="preserve">
     <value>City</value>
   </data>
-  <data name="CityLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_cityLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CityLabel.Name" xml:space="preserve">
-    <value>CityLabel</value>
+  <data name="&gt;&gt;_cityLabel.Name" xml:space="preserve">
+    <value>_cityLabel</value>
   </data>
-  <data name="&gt;&gt;CityLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_cityLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CityLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_cityLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CityLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_cityLabel.ZOrder" xml:space="preserve">
     <value>31</value>
   </data>
-  <data name="ZipcodeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_zipcodeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="ZipcodeLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_zipcodeLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 116</value>
   </data>
-  <data name="ZipcodeLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_zipcodeLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="ZipcodeLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_zipcodeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="ZipcodeLabel.Text" xml:space="preserve">
+  <data name="_zipcodeLabel.Text" xml:space="preserve">
     <value>Zip/Postal Code</value>
   </data>
-  <data name="ZipcodeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_zipcodeLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;ZipcodeLabel.Name" xml:space="preserve">
-    <value>ZipcodeLabel</value>
+  <data name="&gt;&gt;_zipcodeLabel.Name" xml:space="preserve">
+    <value>_zipcodeLabel</value>
   </data>
-  <data name="&gt;&gt;ZipcodeLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_zipcodeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ZipcodeLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_zipcodeLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ZipcodeLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_zipcodeLabel.ZOrder" xml:space="preserve">
     <value>30</value>
   </data>
-  <data name="Address1Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_address1Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Address1Label.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_address1Label.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 52</value>
   </data>
-  <data name="Address1Label.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_address1Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="Address1Label.TabIndex" type="System.Int32, mscorlib">
+  <data name="_address1Label.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Address1Label.Text" xml:space="preserve">
+  <data name="_address1Label.Text" xml:space="preserve">
     <value>Address 1</value>
   </data>
-  <data name="Address1Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_address1Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;Address1Label.Name" xml:space="preserve">
-    <value>Address1Label</value>
+  <data name="&gt;&gt;_address1Label.Name" xml:space="preserve">
+    <value>_address1Label</value>
   </data>
-  <data name="&gt;&gt;Address1Label.Type" xml:space="preserve">
+  <data name="&gt;&gt;_address1Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Address1Label.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_address1Label.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Address1Label.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_address1Label.ZOrder" xml:space="preserve">
     <value>34</value>
   </data>
-  <data name="FirstNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_firstNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="FirstNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_firstNameLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 52</value>
   </data>
-  <data name="FirstNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_firstNameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="FirstNameLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_firstNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="FirstNameLabel.Text" xml:space="preserve">
+  <data name="_firstNameLabel.Text" xml:space="preserve">
     <value>First Name</value>
   </data>
-  <data name="FirstNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_firstNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;FirstNameLabel.Name" xml:space="preserve">
-    <value>FirstNameLabel</value>
+  <data name="&gt;&gt;_firstNameLabel.Name" xml:space="preserve">
+    <value>_firstNameLabel</value>
   </data>
-  <data name="&gt;&gt;FirstNameLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FirstNameLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;FirstNameLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameLabel.ZOrder" xml:space="preserve">
     <value>33</value>
   </data>
-  <data name="StateLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_stateLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="StateLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_stateLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 180</value>
   </data>
-  <data name="StateLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_stateLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="StateLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_stateLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="StateLabel.Text" xml:space="preserve">
+  <data name="_stateLabel.Text" xml:space="preserve">
     <value>State</value>
   </data>
-  <data name="StateLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_stateLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;StateLabel.Name" xml:space="preserve">
-    <value>StateLabel</value>
+  <data name="&gt;&gt;_stateLabel.Name" xml:space="preserve">
+    <value>_stateLabel</value>
   </data>
-  <data name="&gt;&gt;StateLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_stateLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;StateLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_stateLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;StateLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_stateLabel.ZOrder" xml:space="preserve">
     <value>29</value>
   </data>
-  <data name="CountryLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_countryLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CountryLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_countryLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 212</value>
   </data>
-  <data name="CountryLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_countryLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="CountryLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_countryLabel.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="CountryLabel.Text" xml:space="preserve">
+  <data name="_countryLabel.Text" xml:space="preserve">
     <value>Country</value>
   </data>
-  <data name="CountryLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_countryLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CountryLabel.Name" xml:space="preserve">
-    <value>CountryLabel</value>
+  <data name="&gt;&gt;_countryLabel.Name" xml:space="preserve">
+    <value>_countryLabel</value>
   </data>
-  <data name="&gt;&gt;CountryLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_countryLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CountryLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_countryLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CountryLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_countryLabel.ZOrder" xml:space="preserve">
     <value>28</value>
   </data>
-  <data name="Address2Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_address2Label.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Address2Label.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_address2Label.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 84</value>
   </data>
-  <data name="Address2Label.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_address2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="Address2Label.TabIndex" type="System.Int32, mscorlib">
+  <data name="_address2Label.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="Address2Label.Text" xml:space="preserve">
+  <data name="_address2Label.Text" xml:space="preserve">
     <value>Address 2</value>
   </data>
-  <data name="Address2Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_address2Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;Address2Label.Name" xml:space="preserve">
-    <value>Address2Label</value>
+  <data name="&gt;&gt;_address2Label.Name" xml:space="preserve">
+    <value>_address2Label</value>
   </data>
-  <data name="&gt;&gt;Address2Label.Type" xml:space="preserve">
+  <data name="&gt;&gt;_address2Label.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Address2Label.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_address2Label.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Address2Label.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_address2Label.ZOrder" xml:space="preserve">
     <value>32</value>
   </data>
-  <data name="CompanyLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_companyLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CompanyLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_companyLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 116</value>
   </data>
-  <data name="CompanyLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_companyLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="CompanyLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_companyLabel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="CompanyLabel.Text" xml:space="preserve">
+  <data name="_companyLabel.Text" xml:space="preserve">
     <value>Company</value>
   </data>
-  <data name="CompanyLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_companyLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CompanyLabel.Name" xml:space="preserve">
-    <value>CompanyLabel</value>
+  <data name="&gt;&gt;_companyLabel.Name" xml:space="preserve">
+    <value>_companyLabel</value>
   </data>
-  <data name="&gt;&gt;CompanyLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_companyLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CompanyLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_companyLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;CompanyLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_companyLabel.ZOrder" xml:space="preserve">
     <value>27</value>
   </data>
-  <data name="PhoneLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_phoneLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="PhoneLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_phoneLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 180</value>
   </data>
-  <data name="PhoneLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_phoneLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="PhoneLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_phoneLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="PhoneLabel.Text" xml:space="preserve">
+  <data name="_phoneLabel.Text" xml:space="preserve">
     <value>Phone</value>
   </data>
-  <data name="PhoneLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_phoneLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;PhoneLabel.Name" xml:space="preserve">
-    <value>PhoneLabel</value>
+  <data name="&gt;&gt;_phoneLabel.Name" xml:space="preserve">
+    <value>_phoneLabel</value>
   </data>
-  <data name="&gt;&gt;PhoneLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_phoneLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PhoneLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_phoneLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;PhoneLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_phoneLabel.ZOrder" xml:space="preserve">
     <value>26</value>
   </data>
-  <data name="LastNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_lastNameLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="LastNameLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lastNameLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 84</value>
   </data>
-  <data name="LastNameLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lastNameLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="LastNameLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lastNameLabel.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="LastNameLabel.Text" xml:space="preserve">
+  <data name="_lastNameLabel.Text" xml:space="preserve">
     <value>Last Name</value>
   </data>
-  <data name="LastNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_lastNameLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;LastNameLabel.Name" xml:space="preserve">
-    <value>LastNameLabel</value>
+  <data name="&gt;&gt;_lastNameLabel.Name" xml:space="preserve">
+    <value>_lastNameLabel</value>
   </data>
-  <data name="&gt;&gt;LastNameLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LastNameLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;LastNameLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameLabel.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
-  <data name="_ApplicationLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_applicationLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="_ApplicationLabel.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_applicationLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 12pt, style=Bold</value>
   </data>
-  <data name="_ApplicationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_applicationLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_ApplicationLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_applicationLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="_ApplicationLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_applicationLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>532, 24</value>
   </data>
-  <data name="_ApplicationLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_applicationLabel.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="_ApplicationLabel.Text" xml:space="preserve">
+  <data name="_applicationLabel.Text" xml:space="preserve">
     <value>Application Registration</value>
   </data>
-  <data name="_ApplicationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_applicationLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;_ApplicationLabel.Name" xml:space="preserve">
-    <value>_ApplicationLabel</value>
+  <data name="&gt;&gt;_applicationLabel.Name" xml:space="preserve">
+    <value>_applicationLabel</value>
   </data>
-  <data name="&gt;&gt;_ApplicationLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_applicationLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_ApplicationLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_applicationLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_ApplicationLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_applicationLabel.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
-  <data name="_LastNameTextBox.AccessibleName" xml:space="preserve">
+  <data name="_lastNameTextBox.AccessibleName" xml:space="preserve">
     <value>Last Name</value>
   </data>
-  <data name="_LastNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lastNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 82</value>
   </data>
-  <data name="_LastNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lastNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_LastNameTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lastNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;_LastNameTextBox.Name" xml:space="preserve">
-    <value>_LastNameTextBox</value>
+  <data name="&gt;&gt;_lastNameTextBox.Name" xml:space="preserve">
+    <value>_lastNameTextBox</value>
   </data>
-  <data name="&gt;&gt;_LastNameTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_LastNameTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_LastNameTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameTextBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="_CompanyTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_companyTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 114</value>
   </data>
-  <data name="_CompanyTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_companyTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_CompanyTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_companyTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;_CompanyTextBox.Name" xml:space="preserve">
-    <value>_CompanyTextBox</value>
+  <data name="&gt;&gt;_companyTextBox.Name" xml:space="preserve">
+    <value>_companyTextBox</value>
   </data>
-  <data name="&gt;&gt;_CompanyTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_companyTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_CompanyTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_companyTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_CompanyTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_companyTextBox.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="_EmailTextBox.AccessibleName" xml:space="preserve">
+  <data name="_emailTextBox.AccessibleName" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="_EmailTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_emailTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 146</value>
   </data>
-  <data name="_EmailTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_emailTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_EmailTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_emailTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.Name" xml:space="preserve">
-    <value>_EmailTextBox</value>
+  <data name="&gt;&gt;_emailTextBox.Name" xml:space="preserve">
+    <value>_emailTextBox</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_emailTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_emailTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_emailTextBox.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="_PhoneTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_phoneTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 178</value>
   </data>
-  <data name="_PhoneTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_phoneTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_PhoneTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_phoneTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;_PhoneTextBox.Name" xml:space="preserve">
-    <value>_PhoneTextBox</value>
+  <data name="&gt;&gt;_phoneTextBox.Name" xml:space="preserve">
+    <value>_phoneTextBox</value>
   </data>
-  <data name="&gt;&gt;_PhoneTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_phoneTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_PhoneTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_phoneTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_PhoneTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_phoneTextBox.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="_Address1TextBox.AccessibleName" xml:space="preserve">
+  <data name="_address1TextBox.AccessibleName" xml:space="preserve">
     <value>Address1</value>
   </data>
-  <data name="_Address1TextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_address1TextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 50</value>
   </data>
-  <data name="_Address1TextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_address1TextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_Address1TextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_address1TextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;_Address1TextBox.Name" xml:space="preserve">
-    <value>_Address1TextBox</value>
+  <data name="&gt;&gt;_address1TextBox.Name" xml:space="preserve">
+    <value>_address1TextBox</value>
   </data>
-  <data name="&gt;&gt;_Address1TextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_address1TextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_Address1TextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_address1TextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_Address1TextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_address1TextBox.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="_Address2TextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_address2TextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 82</value>
   </data>
-  <data name="_Address2TextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_address2TextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_Address2TextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_address2TextBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;_Address2TextBox.Name" xml:space="preserve">
-    <value>_Address2TextBox</value>
+  <data name="&gt;&gt;_address2TextBox.Name" xml:space="preserve">
+    <value>_address2TextBox</value>
   </data>
-  <data name="&gt;&gt;_Address2TextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_address2TextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_Address2TextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_address2TextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_Address2TextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_address2TextBox.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="_ZipTextBox.AccessibleName" xml:space="preserve">
+  <data name="_zipTextBox.AccessibleName" xml:space="preserve">
     <value>Zip/Postal Code</value>
   </data>
-  <data name="_ZipTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_zipTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 114</value>
   </data>
-  <data name="_ZipTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_zipTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_ZipTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_zipTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;_ZipTextBox.Name" xml:space="preserve">
-    <value>_ZipTextBox</value>
+  <data name="&gt;&gt;_zipTextBox.Name" xml:space="preserve">
+    <value>_zipTextBox</value>
   </data>
-  <data name="&gt;&gt;_ZipTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_zipTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_ZipTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_zipTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_ZipTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_zipTextBox.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="_CityTextBox.AccessibleName" xml:space="preserve">
+  <data name="_cityTextBox.AccessibleName" xml:space="preserve">
     <value>City</value>
   </data>
-  <data name="_CityTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_cityTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 146</value>
   </data>
-  <data name="_CityTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_cityTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_CityTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_cityTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;_CityTextBox.Name" xml:space="preserve">
-    <value>_CityTextBox</value>
+  <data name="&gt;&gt;_cityTextBox.Name" xml:space="preserve">
+    <value>_cityTextBox</value>
   </data>
-  <data name="&gt;&gt;_CityTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_cityTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_CityTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_cityTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_CityTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_cityTextBox.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="_StateTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_stateTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 178</value>
   </data>
-  <data name="_StateTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_stateTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_StateTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_stateTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;_StateTextBox.Name" xml:space="preserve">
-    <value>_StateTextBox</value>
+  <data name="&gt;&gt;_stateTextBox.Name" xml:space="preserve">
+    <value>_stateTextBox</value>
   </data>
-  <data name="&gt;&gt;_StateTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_stateTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_StateTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_stateTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_StateTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_stateTextBox.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="_CountryTextBox.AccessibleName" xml:space="preserve">
+  <data name="_countryTextBox.AccessibleName" xml:space="preserve">
     <value>Country</value>
   </data>
-  <data name="_CountryTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_countryTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 210</value>
   </data>
-  <data name="_CountryTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_countryTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_CountryTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_countryTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;_CountryTextBox.Name" xml:space="preserve">
-    <value>_CountryTextBox</value>
+  <data name="&gt;&gt;_countryTextBox.Name" xml:space="preserve">
+    <value>_countryTextBox</value>
   </data>
-  <data name="&gt;&gt;_CountryTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_countryTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_CountryTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_countryTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_CountryTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_countryTextBox.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="_FirstNameTextBox.AccessibleName" xml:space="preserve">
+  <data name="_firstNameTextBox.AccessibleName" xml:space="preserve">
     <value>First Name</value>
   </data>
-  <data name="_FirstNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_firstNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 50</value>
   </data>
-  <data name="_FirstNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_firstNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
   </data>
-  <data name="_FirstNameTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_firstNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;_FirstNameTextBox.Name" xml:space="preserve">
-    <value>_FirstNameTextBox</value>
+  <data name="&gt;&gt;_firstNameTextBox.Name" xml:space="preserve">
+    <value>_firstNameTextBox</value>
   </data>
-  <data name="&gt;&gt;_FirstNameTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_FirstNameTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_FirstNameTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameTextBox.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="_ButtonOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="_buttonOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="_ButtonOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_buttonOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_ButtonOk.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_buttonOk.Location" type="System.Drawing.Point, System.Drawing">
     <value>348, 242</value>
   </data>
-  <data name="_ButtonOk.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_buttonOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="_ButtonOk.TabIndex" type="System.Int32, mscorlib">
+  <data name="_buttonOk.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="_ButtonOk.Text" xml:space="preserve">
+  <data name="_buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Name" xml:space="preserve">
-    <value>_ButtonOk</value>
+  <data name="&gt;&gt;_buttonOk.Name" xml:space="preserve">
+    <value>_buttonOk</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Type" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <metadata name="_ErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="_errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -777,355 +777,355 @@
   <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
     <value>5, 14</value>
   </data>
-  <data name="_ButtonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="_buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="_ButtonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_ButtonCancel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>432, 242</value>
   </data>
-  <data name="_ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="_ButtonCancel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_buttonCancel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="_ButtonCancel.Text" xml:space="preserve">
+  <data name="_buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;_ButtonCancel.Name" xml:space="preserve">
-    <value>_ButtonCancel</value>
+  <data name="&gt;&gt;_buttonCancel.Name" xml:space="preserve">
+    <value>_buttonCancel</value>
   </data>
-  <data name="&gt;&gt;_ButtonCancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_buttonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_ButtonCancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_buttonCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_ButtonCancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_buttonCancel.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>532, 273</value>
   </data>
-  <data name="buttonReRegister.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="_buttonReRegister.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="buttonReRegister.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_buttonReRegister.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonReRegister.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_buttonReRegister.Location" type="System.Drawing.Point, System.Drawing">
     <value>264, 242</value>
   </data>
-  <data name="buttonReRegister.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_buttonReRegister.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="buttonReRegister.TabIndex" type="System.Int32, mscorlib">
+  <data name="_buttonReRegister.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="buttonReRegister.Text" xml:space="preserve">
+  <data name="_buttonReRegister.Text" xml:space="preserve">
     <value>Re-register</value>
   </data>
-  <data name="&gt;&gt;buttonReRegister.Name" xml:space="preserve">
-    <value>buttonReRegister</value>
+  <data name="&gt;&gt;_buttonReRegister.Name" xml:space="preserve">
+    <value>_buttonReRegister</value>
   </data>
-  <data name="&gt;&gt;buttonReRegister.Type" xml:space="preserve">
+  <data name="&gt;&gt;_buttonReRegister.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonReRegister.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_buttonReRegister.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;buttonReRegister.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_buttonReRegister.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="SerialLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_serialLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="SerialLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_serialLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 212</value>
   </data>
-  <data name="SerialLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_serialLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 18</value>
   </data>
-  <data name="SerialLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_serialLabel.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="SerialLabel.Text" xml:space="preserve">
+  <data name="_serialLabel.Text" xml:space="preserve">
     <value>Serial</value>
   </data>
-  <data name="SerialLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_serialLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;SerialLabel.Name" xml:space="preserve">
-    <value>SerialLabel</value>
+  <data name="&gt;&gt;_serialLabel.Name" xml:space="preserve">
+    <value>_serialLabel</value>
   </data>
-  <data name="&gt;&gt;SerialLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_serialLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SerialLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_serialLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;SerialLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_serialLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="_SerialTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="_serialTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="_SerialTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_serialTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 215</value>
   </data>
-  <data name="_SerialTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_serialTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 14</value>
   </data>
-  <data name="_SerialTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_serialTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="&gt;&gt;_SerialTextBox.Name" xml:space="preserve">
-    <value>_SerialTextBox</value>
+  <data name="&gt;&gt;_serialTextBox.Name" xml:space="preserve">
+    <value>_serialTextBox</value>
   </data>
-  <data name="&gt;&gt;_SerialTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_serialTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_SerialTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_serialTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_SerialTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_serialTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="_FirstErrorTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="_firstErrorTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="_FirstErrorTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_firstErrorTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 248</value>
   </data>
-  <data name="_FirstErrorTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_firstErrorTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 14</value>
   </data>
-  <data name="_FirstErrorTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_firstErrorTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;_FirstErrorTextBox.Name" xml:space="preserve">
-    <value>_FirstErrorTextBox</value>
+  <data name="&gt;&gt;_firstErrorTextBox.Name" xml:space="preserve">
+    <value>_firstErrorTextBox</value>
   </data>
-  <data name="&gt;&gt;_FirstErrorTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_firstErrorTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_FirstErrorTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_firstErrorTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_FirstErrorTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_firstErrorTextBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="_CountryRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_countryRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_CountryRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_countryRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 212</value>
   </data>
-  <data name="_CountryRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_countryRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>8, 18</value>
   </data>
-  <data name="_CountryRequiredLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_countryRequiredLabel.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="_CountryRequiredLabel.Text" xml:space="preserve">
+  <data name="_countryRequiredLabel.Text" xml:space="preserve">
     <value>*</value>
   </data>
-  <data name="_CountryRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_countryRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_CountryRequiredLabel.Name" xml:space="preserve">
-    <value>_CountryRequiredLabel</value>
+  <data name="&gt;&gt;_countryRequiredLabel.Name" xml:space="preserve">
+    <value>_countryRequiredLabel</value>
   </data>
-  <data name="&gt;&gt;_CountryRequiredLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_countryRequiredLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_CountryRequiredLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_countryRequiredLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_CountryRequiredLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_countryRequiredLabel.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="_CityRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_cityRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_CityRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_cityRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 148</value>
   </data>
-  <data name="_CityRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_cityRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>8, 18</value>
   </data>
-  <data name="_CityRequiredLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_cityRequiredLabel.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="_CityRequiredLabel.Text" xml:space="preserve">
+  <data name="_cityRequiredLabel.Text" xml:space="preserve">
     <value>*</value>
   </data>
-  <data name="_CityRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_cityRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_CityRequiredLabel.Name" xml:space="preserve">
-    <value>_CityRequiredLabel</value>
+  <data name="&gt;&gt;_cityRequiredLabel.Name" xml:space="preserve">
+    <value>_cityRequiredLabel</value>
   </data>
-  <data name="&gt;&gt;_CityRequiredLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_cityRequiredLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_CityRequiredLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_cityRequiredLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_CityRequiredLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_cityRequiredLabel.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="_ZipRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_zipRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_ZipRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_zipRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 116</value>
   </data>
-  <data name="_ZipRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_zipRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>8, 18</value>
   </data>
-  <data name="_ZipRequiredLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_zipRequiredLabel.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="_ZipRequiredLabel.Text" xml:space="preserve">
+  <data name="_zipRequiredLabel.Text" xml:space="preserve">
     <value>*</value>
   </data>
-  <data name="_ZipRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_zipRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_ZipRequiredLabel.Name" xml:space="preserve">
-    <value>_ZipRequiredLabel</value>
+  <data name="&gt;&gt;_zipRequiredLabel.Name" xml:space="preserve">
+    <value>_zipRequiredLabel</value>
   </data>
-  <data name="&gt;&gt;_ZipRequiredLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_zipRequiredLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_ZipRequiredLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_zipRequiredLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_ZipRequiredLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_zipRequiredLabel.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="_Address1RequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_address1RequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_Address1RequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_address1RequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 52</value>
   </data>
-  <data name="_Address1RequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_address1RequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>8, 18</value>
   </data>
-  <data name="_Address1RequiredLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_address1RequiredLabel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="_Address1RequiredLabel.Text" xml:space="preserve">
+  <data name="_address1RequiredLabel.Text" xml:space="preserve">
     <value>*</value>
   </data>
-  <data name="_Address1RequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_address1RequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_Address1RequiredLabel.Name" xml:space="preserve">
-    <value>_Address1RequiredLabel</value>
+  <data name="&gt;&gt;_address1RequiredLabel.Name" xml:space="preserve">
+    <value>_address1RequiredLabel</value>
   </data>
-  <data name="&gt;&gt;_Address1RequiredLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_address1RequiredLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_Address1RequiredLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_address1RequiredLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_Address1RequiredLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_address1RequiredLabel.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="_EMailRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_eMailRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_EMailRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_eMailRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 148</value>
   </data>
-  <data name="_EMailRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_eMailRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>8, 18</value>
   </data>
-  <data name="_EMailRequiredLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_eMailRequiredLabel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="_EMailRequiredLabel.Text" xml:space="preserve">
+  <data name="_eMailRequiredLabel.Text" xml:space="preserve">
     <value>*</value>
   </data>
-  <data name="_EMailRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_eMailRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_EMailRequiredLabel.Name" xml:space="preserve">
-    <value>_EMailRequiredLabel</value>
+  <data name="&gt;&gt;_eMailRequiredLabel.Name" xml:space="preserve">
+    <value>_eMailRequiredLabel</value>
   </data>
-  <data name="&gt;&gt;_EMailRequiredLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_eMailRequiredLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_EMailRequiredLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_eMailRequiredLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_EMailRequiredLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_eMailRequiredLabel.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="_LastNameRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_lastNameRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_LastNameRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lastNameRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 84</value>
   </data>
-  <data name="_LastNameRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lastNameRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>8, 18</value>
   </data>
-  <data name="_LastNameRequiredLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lastNameRequiredLabel.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="_LastNameRequiredLabel.Text" xml:space="preserve">
+  <data name="_lastNameRequiredLabel.Text" xml:space="preserve">
     <value>*</value>
   </data>
-  <data name="_LastNameRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_lastNameRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_LastNameRequiredLabel.Name" xml:space="preserve">
-    <value>_LastNameRequiredLabel</value>
+  <data name="&gt;&gt;_lastNameRequiredLabel.Name" xml:space="preserve">
+    <value>_lastNameRequiredLabel</value>
   </data>
-  <data name="&gt;&gt;_LastNameRequiredLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameRequiredLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_LastNameRequiredLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameRequiredLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_LastNameRequiredLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lastNameRequiredLabel.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="_FirstNameRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_firstNameRequiredLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_FirstNameRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_firstNameRequiredLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 52</value>
   </data>
-  <data name="_FirstNameRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_firstNameRequiredLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>8, 18</value>
   </data>
-  <data name="_FirstNameRequiredLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_firstNameRequiredLabel.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="_FirstNameRequiredLabel.Text" xml:space="preserve">
+  <data name="_firstNameRequiredLabel.Text" xml:space="preserve">
     <value>*</value>
   </data>
-  <data name="_FirstNameRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_firstNameRequiredLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_FirstNameRequiredLabel.Name" xml:space="preserve">
-    <value>_FirstNameRequiredLabel</value>
+  <data name="&gt;&gt;_firstNameRequiredLabel.Name" xml:space="preserve">
+    <value>_firstNameRequiredLabel</value>
   </data>
-  <data name="&gt;&gt;_FirstNameRequiredLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameRequiredLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_FirstNameRequiredLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameRequiredLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_FirstNameRequiredLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_firstNameRequiredLabel.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
@@ -1143,10 +1143,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Registration</value>
   </data>
-  <data name="&gt;&gt;_ErrorProvider.Name" xml:space="preserve">
-    <value>_ErrorProvider</value>
+  <data name="&gt;&gt;_errorProvider.Name" xml:space="preserve">
+    <value>_errorProvider</value>
   </data>
-  <data name="&gt;&gt;_ErrorProvider.Type" xml:space="preserve">
+  <data name="&gt;&gt;_errorProvider.Type" xml:space="preserve">
     <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
@@ -1155,7 +1155,7 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="_ErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="_errorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//

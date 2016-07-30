@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Windows.Forms;
+using Konfidence.Base;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -11,7 +12,7 @@ namespace Konfidence.BaseWindowForms
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private readonly Container _Components = null;
+        private readonly Container _components = null;
 
         public BaseMainFrame()
         {
@@ -33,9 +34,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (_Components != null)
+                if (_components.IsAssigned())
                 {
-                    _Components.Dispose();
+                    _components.Dispose();
                 }
             }
             base.Dispose(disposing);

@@ -8,9 +8,9 @@ namespace Konfidence.BaseUserControlHelpers
 {
 	public abstract class BaseUserControl<T>: UserControl where T : BaseWebPresenter, new()
 	{
-	    private BasePageHelper _BasePageHelper; // TODO : --> zie BasePage
+	    private BasePageHelper _basePageHelper; // TODO : --> zie BasePage
 
-        private T _Presenter;
+        private T _presenter;
 
         protected abstract void RestoreViewState();
         protected abstract void FormToPresenter();
@@ -20,12 +20,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_Presenter.IsAssigned())
+                if (!_presenter.IsAssigned())
                 {
                     BuildPresenter();
                 }
 
-                return _Presenter;
+                return _presenter;
             }
         }
 
@@ -64,7 +64,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             object viewState = ViewState[fieldName];
 
-            if (viewState != null)
+            if (viewState.IsAssigned())
             {
                 return viewState.ToString();
             }
@@ -77,9 +77,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentDomainExtension;
+                    return _basePageHelper.CurrentDomainExtension;
                 }
 
                 return string.Empty;
@@ -90,9 +90,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentLanguage;
+                    return _basePageHelper.CurrentLanguage;
                 }
 
                 return string.Empty;
@@ -103,9 +103,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentDnsName;
+                    return _basePageHelper.CurrentDnsName;
                 }
 
                 return string.Empty;
@@ -116,9 +116,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.RefererDnsName;
+                    return _basePageHelper.RefererDnsName;
                 }
 
                 return string.Empty;
@@ -129,9 +129,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentPagePath;
+                    return _basePageHelper.CurrentPagePath;
                 }
 
                 return string.Empty;
@@ -142,9 +142,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentPageName;
+                    return _basePageHelper.CurrentPageName;
                 }
 
                 return string.Empty;
@@ -157,7 +157,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         private void BuildPresenter()
         {
-            if (!_BasePageHelper.IsAssigned())
+            if (!_basePageHelper.IsAssigned())
             {
                 try
                 {
@@ -168,7 +168,7 @@ namespace Konfidence.BaseUserControlHelpers
                         urlReferer = Request.UrlReferrer.ToString();
                     }
 
-                    _BasePageHelper = new BasePageHelper(Request.Url.ToString(), urlReferer);
+                    _basePageHelper = new BasePageHelper(Request.Url.ToString(), urlReferer);
                 }
                 catch (NullReferenceException)
                 {
@@ -176,14 +176,14 @@ namespace Konfidence.BaseUserControlHelpers
                 }
             }
 
-            if (!_Presenter.IsAssigned())
+            if (!_presenter.IsAssigned())
             {
-                _Presenter = new T {IsLoaded = false};
+                _presenter = new T {IsLoaded = false};
             }
 
-            if (!_Presenter.PageName.IsAssigned())
+            if (!_presenter.PageName.IsAssigned())
             {
-                _Presenter.SetPageName(CurrentPageName);
+                _presenter.SetPageName(CurrentPageName);
             }
         }
 
@@ -235,7 +235,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected void SwitchLanguagePanel(Control languageNl, Control languageDe, Control languageUk)
         {
-            if (languageDe != null && languageNl != null && languageUk != null)
+            if (languageDe.IsAssigned() && languageNl.IsAssigned() && languageUk.IsAssigned())
             {
                 languageNl.Visible = true;
                 languageDe.Visible = true;

@@ -15,8 +15,6 @@ namespace Konfidence.Security.Encryption
         private RSACryptoServiceProvider _tempRsaProvider;
         private int _tempKeySize;
 
-        private readonly string _containerName;
-
         // _MaxBytes schijnt uit te vinden te zijn, maar is een 
         // beetje vreemd heb onderstussen het een en ander 
         // uitgezocht, maar de maximum datasize = keysize lijkt
@@ -27,42 +25,16 @@ namespace Konfidence.Security.Encryption
         private int _maxBytesClient; // default voor de serverside
 
         #region properties
-        public RSACryptoServiceProvider RsaProvider
-        {
-            get { return _rsaProvider; }
-        }
+        public RSACryptoServiceProvider RsaProvider => _rsaProvider;
 
-        public string PublicKey
-        {
-            get
-            {
-                return _rsaProvider.ToXmlString(false);
-            }
-        }
+        public string PublicKey => _rsaProvider.ToXmlString(false);
 
-        public string PrivateKey
-        {
-            get
-            {
-                return _rsaProvider.ToXmlString(true);
-            }
-        }
+        public string PrivateKey => _rsaProvider.ToXmlString(true);
 
-        public int KeySize
-        {
-            get
-            {
-                return TempKeyContainer.KeySize;
-            }
-        }
+        public int KeySize => TempKeyContainer.KeySize;
 
-        public int PackageSize
-        {
-            get
-            {
-                return _maxBytesServer / 2;
-            }
-        }
+        public int PackageSize => _maxBytesServer / 2;
+
         #endregion properties
 
         public KeyEncryption()
@@ -84,14 +56,7 @@ namespace Konfidence.Security.Encryption
 
                 if (!_tempRsaProvider.IsAssigned() || _tempKeySize != keySizeClient)
                 {
-                    if (keySizeClient == 0)
-                    {
-                        _tempRsaProvider = new RSACryptoServiceProvider();
-                    }
-                    else
-                    {
-                        _tempRsaProvider = new RSACryptoServiceProvider(keySizeClient);
-                    }
+                    _tempRsaProvider = keySizeClient == 0 ? new RSACryptoServiceProvider() : new RSACryptoServiceProvider(keySizeClient);
 
                     _tempKeySize = _tempRsaProvider.KeySize;
                 }
@@ -140,18 +105,18 @@ namespace Konfidence.Security.Encryption
         {
             _maxBytesClient = keySize / 8;
             _maxBytesServer = keySize / 8;
-            _containerName = containerName;
+            var containerName1 = containerName;
 
             bool isTemporary = false;
 
-            if (_containerName.IsAssigned())
+            if (containerName1.IsAssigned())
             {
                 isTemporary = true;
 
-                _containerName = "None";
+                containerName1 = "None";
             }
 
-            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) key - " + _containerName);
+            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) key - " + containerName1);
 
             if (isTemporary)
             {
@@ -159,7 +124,7 @@ namespace Konfidence.Security.Encryption
             }
             else
             {
-                GetKeyContainer(_containerName);
+                GetKeyContainer(containerName1);
             }
 
             Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
@@ -307,7 +272,7 @@ namespace Konfidence.Security.Encryption
 
             if (!_disposed)
             {
-                if (_rsaProvider != null)
+                if (_rsaProvider.IsAssigned())
                 {
                     _rsaProvider.Clear(); // resources vrijgeven.
 

@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Windows.Forms;
+using Konfidence.Base;
 
 namespace Konfidence.BaseWindowComponents
 {
@@ -10,16 +11,16 @@ namespace Konfidence.BaseWindowComponents
 	{
     public Splitter Splitter;
     public Panel Panel2;
-    private Panel _Panel1;
+    private Panel _panel1;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private readonly Container _Components = null;
+		private readonly Container _components = null;
 
     public Panel Panel1
     {
-      get { return _Panel1; }
-      set { _Panel1 = value; }
+      get { return _panel1; }
+      set { _panel1 = value; }
     }
 
 
@@ -39,8 +40,8 @@ namespace Konfidence.BaseWindowComponents
 		{
 			if( disposing )
 			{
-				if( _Components != null )
-					_Components.Dispose();
+				if( _components.IsAssigned())
+					_components.Dispose();
 			}
 			base.Dispose( disposing );
 		}
@@ -52,19 +53,19 @@ namespace Konfidence.BaseWindowComponents
 		/// </summary>
 		private void InitializeComponent()
 		{
-      this._Panel1 = new System.Windows.Forms.Panel();
+      this._panel1 = new System.Windows.Forms.Panel();
       this.Splitter = new System.Windows.Forms.Splitter();
       this.Panel2 = new System.Windows.Forms.Panel();
       this.SuspendLayout();
       // 
       // _panel1
       // 
-      this._Panel1.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
-      this._Panel1.Dock = System.Windows.Forms.DockStyle.Left;
-      this._Panel1.Location = new System.Drawing.Point(0, 0);
-      this._Panel1.Name = "_Panel1";
-      this._Panel1.Size = new System.Drawing.Size(128, 240);
-      this._Panel1.TabIndex = 0;
+      this._panel1.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(255)), ((System.Byte)(255)), ((System.Byte)(192)));
+      this._panel1.Dock = System.Windows.Forms.DockStyle.Left;
+      this._panel1.Location = new System.Drawing.Point(0, 0);
+      this._panel1.Name = "_panel1";
+      this._panel1.Size = new System.Drawing.Size(128, 240);
+      this._panel1.TabIndex = 0;
       // 
       // splitter
       // 
@@ -87,7 +88,7 @@ namespace Konfidence.BaseWindowComponents
       // 
       this.Controls.Add(this.Panel2);
       this.Controls.Add(this.Splitter);
-      this.Controls.Add(this._Panel1);
+      this.Controls.Add(this._panel1);
       this.Name = "SplitterPanel";
       this.Size = new System.Drawing.Size(280, 240);
       this.ResumeLayout(false);

@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Konfidence.Base;
 using Konfidence.BaseHelper;
 
 namespace Konfidence.BaseWindowForms
@@ -62,7 +63,7 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (_Components != null)
+                if (_Components.IsAssigned())
                 {
                     _Components.Dispose();
                 }

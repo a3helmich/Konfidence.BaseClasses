@@ -14,56 +14,51 @@ namespace Konfidence.BaseWindowForms
     /// </summary>
     public class BaseMainform : Form
     {
-        private Type _ConfigClass;
-        private BaseConfigClass _Config;
-        private readonly string _ErrorHeader;
+        private Type _configClass;
+        private BaseConfigClass _config;
+        private readonly string _errorHeader;
 
-        private readonly BaseContainerFrame _BaseMainframe;
-        private Type _AboutFormClass;
+        private Type _aboutFormClass;
 
-        private MainMenu _MainMenu;
-        private MenuItem _BestandMenuItem;
-        private MenuItem _AfsluitenMenuItem;
-        private MenuItem _BeeldMenuItem;
-        private MenuItem _LijstMenuItem;
-        private MenuItem _DetailMenuItem;
-        private MenuItem _ZoekenMenuItem;
-        private MenuItem _RapportMenuItem;
-        private MenuItem _InstellingenMenuItem;
-        private MenuItem _DbConfigMenuItem;
-        private MenuItem _InfoMenuItem;
+        private MainMenu _mainMenu;
+        private MenuItem _bestandMenuItem;
+        private MenuItem _afsluitenMenuItem;
+        private MenuItem _beeldMenuItem;
+        private MenuItem _lijstMenuItem;
+        private MenuItem _detailMenuItem;
+        private MenuItem _zoekenMenuItem;
+        private MenuItem _rapportMenuItem;
+        private MenuItem _instellingenMenuItem;
+        private MenuItem _dbConfigMenuItem;
+        private MenuItem _infoMenuItem;
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private readonly Container _Components = null;
+        private readonly Container _components = null;
 
-        private StatusBar _BaseStatusBar;
-        private StatusBarPanel _StatusBarPanel;
-        private MenuItem _AboutMenuItem;
-        private MenuItem _StatusMenuItem;
-        private Panel _MainPanel;
+        private StatusBar _baseStatusBar;
+        private StatusBarPanel _statusBarPanel;
+        private MenuItem _aboutMenuItem;
+        private MenuItem _statusMenuItem;
+        private Panel _mainPanel;
 
         public Type ConfigClass
         {
-            get { return _ConfigClass; }
-            set { _ConfigClass = value; }
+            get { return _configClass; }
+            set { _configClass = value; }
         }
 
         public Type AboutFormClass
         {
-            get { return _AboutFormClass; }
+            get { return _aboutFormClass; }
             set
             {
                 if (BaseAboutForm.IsDerivedClass(value))
-                    _AboutFormClass = value;
+                    _aboutFormClass = value;
             }
         }
 
-        public BaseContainerFrame BaseMainframe
-        {
-            get { return _BaseMainframe; }
-        }
-
+        public BaseContainerFrame BaseMainframe { get; }
 
         public BaseMainform()
         {
@@ -72,19 +67,16 @@ namespace Konfidence.BaseWindowForms
             //
             InitializeComponent();
 
-            //
-            // TODO: Add any constructor code after InitializeComponent call
-            //
             BaseInitialize();
 
             var resources = new ResourceManager(typeof(BaseMainform));
 
-            _ErrorHeader = resources.GetString("ErrorHeader.Text");
+            _errorHeader = resources.GetString("ErrorHeader.Text");
 
-            _BaseMainframe = BuildMainContainer(null);
+            BaseMainframe = BuildMainContainer(null);
         }
 
-        virtual protected void BaseInitialize()
+        private void BaseInitialize()
         {
             // TODO: Supply in derived mainform the application configclass
         }
@@ -96,9 +88,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (_Components != null)
+                if (_components.IsAssigned())
                 {
-                    _Components.Dispose();
+                    _components.Dispose();
                 }
             }
             base.Dispose(disposing);
@@ -113,209 +105,209 @@ namespace Konfidence.BaseWindowForms
         private void InitializeComponent()
         {
             System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(BaseMainform));
-            this._MainMenu = new System.Windows.Forms.MainMenu();
-            this._BestandMenuItem = new System.Windows.Forms.MenuItem();
-            this._AfsluitenMenuItem = new System.Windows.Forms.MenuItem();
-            this._BeeldMenuItem = new System.Windows.Forms.MenuItem();
-            this._LijstMenuItem = new System.Windows.Forms.MenuItem();
-            this._DetailMenuItem = new System.Windows.Forms.MenuItem();
-            this._ZoekenMenuItem = new System.Windows.Forms.MenuItem();
-            this._RapportMenuItem = new System.Windows.Forms.MenuItem();
-            this._InstellingenMenuItem = new System.Windows.Forms.MenuItem();
-            this._DbConfigMenuItem = new System.Windows.Forms.MenuItem();
-            this._InfoMenuItem = new System.Windows.Forms.MenuItem();
-            this._BaseStatusBar = new System.Windows.Forms.StatusBar();
-            this._StatusBarPanel = new System.Windows.Forms.StatusBarPanel();
-            this._MainPanel = new System.Windows.Forms.Panel();
-            this._AboutMenuItem = new System.Windows.Forms.MenuItem();
-            this._StatusMenuItem = new System.Windows.Forms.MenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this._StatusBarPanel)).BeginInit();
+            this._mainMenu = new System.Windows.Forms.MainMenu();
+            this._bestandMenuItem = new System.Windows.Forms.MenuItem();
+            this._afsluitenMenuItem = new System.Windows.Forms.MenuItem();
+            this._beeldMenuItem = new System.Windows.Forms.MenuItem();
+            this._lijstMenuItem = new System.Windows.Forms.MenuItem();
+            this._detailMenuItem = new System.Windows.Forms.MenuItem();
+            this._zoekenMenuItem = new System.Windows.Forms.MenuItem();
+            this._rapportMenuItem = new System.Windows.Forms.MenuItem();
+            this._instellingenMenuItem = new System.Windows.Forms.MenuItem();
+            this._dbConfigMenuItem = new System.Windows.Forms.MenuItem();
+            this._infoMenuItem = new System.Windows.Forms.MenuItem();
+            this._baseStatusBar = new System.Windows.Forms.StatusBar();
+            this._statusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this._mainPanel = new System.Windows.Forms.Panel();
+            this._aboutMenuItem = new System.Windows.Forms.MenuItem();
+            this._statusMenuItem = new System.Windows.Forms.MenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this._statusBarPanel)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
             // 
-            this._MainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                             this._BestandMenuItem,
-                                                                             this._BeeldMenuItem,
-                                                                             this._RapportMenuItem,
-                                                                             this._InstellingenMenuItem,
-                                                                             this._InfoMenuItem});
-            this._MainMenu.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("mainMenu.RightToLeft")));
+            this._mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                             this._bestandMenuItem,
+                                                                             this._beeldMenuItem,
+                                                                             this._rapportMenuItem,
+                                                                             this._instellingenMenuItem,
+                                                                             this._infoMenuItem});
+            this._mainMenu.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("mainMenu.RightToLeft")));
             // 
             // BestandMenuItem
             // 
-            this._BestandMenuItem.Enabled = ((bool)(resources.GetObject("BestandMenuItem.Enabled")));
-            this._BestandMenuItem.Index = 0;
-            this._BestandMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                    this._AfsluitenMenuItem});
-            this._BestandMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("BestandMenuItem.Shortcut")));
-            this._BestandMenuItem.ShowShortcut = ((bool)(resources.GetObject("BestandMenuItem.ShowShortcut")));
-            this._BestandMenuItem.Text = resources.GetString("BestandMenuItem.Text");
-            this._BestandMenuItem.Visible = ((bool)(resources.GetObject("BestandMenuItem.Visible")));
+            this._bestandMenuItem.Enabled = ((bool)(resources.GetObject("BestandMenuItem.Enabled")));
+            this._bestandMenuItem.Index = 0;
+            this._bestandMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                                    this._afsluitenMenuItem});
+            this._bestandMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("BestandMenuItem.Shortcut")));
+            this._bestandMenuItem.ShowShortcut = ((bool)(resources.GetObject("BestandMenuItem.ShowShortcut")));
+            this._bestandMenuItem.Text = resources.GetString("BestandMenuItem.Text");
+            this._bestandMenuItem.Visible = ((bool)(resources.GetObject("BestandMenuItem.Visible")));
             // 
             // AfsluitenMenuItem
             // 
-            this._AfsluitenMenuItem.Enabled = ((bool)(resources.GetObject("AfsluitenMenuItem.Enabled")));
-            this._AfsluitenMenuItem.Index = 0;
-            this._AfsluitenMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("AfsluitenMenuItem.Shortcut")));
-            this._AfsluitenMenuItem.ShowShortcut = ((bool)(resources.GetObject("AfsluitenMenuItem.ShowShortcut")));
-            this._AfsluitenMenuItem.Text = resources.GetString("AfsluitenMenuItem.Text");
-            this._AfsluitenMenuItem.Visible = ((bool)(resources.GetObject("AfsluitenMenuItem.Visible")));
-            this._AfsluitenMenuItem.Click += new System.EventHandler(this.AfsluitenMenuItem_Click);
+            this._afsluitenMenuItem.Enabled = ((bool)(resources.GetObject("AfsluitenMenuItem.Enabled")));
+            this._afsluitenMenuItem.Index = 0;
+            this._afsluitenMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("AfsluitenMenuItem.Shortcut")));
+            this._afsluitenMenuItem.ShowShortcut = ((bool)(resources.GetObject("AfsluitenMenuItem.ShowShortcut")));
+            this._afsluitenMenuItem.Text = resources.GetString("AfsluitenMenuItem.Text");
+            this._afsluitenMenuItem.Visible = ((bool)(resources.GetObject("AfsluitenMenuItem.Visible")));
+            this._afsluitenMenuItem.Click += new System.EventHandler(this.AfsluitenMenuItem_Click);
             // 
             // BeeldMenuItem
             // 
-            this._BeeldMenuItem.Enabled = ((bool)(resources.GetObject("BeeldMenuItem.Enabled")));
-            this._BeeldMenuItem.Index = 1;
-            this._BeeldMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                  this._LijstMenuItem,
-                                                                                  this._DetailMenuItem,
-                                                                                  this._ZoekenMenuItem});
-            this._BeeldMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("BeeldMenuItem.Shortcut")));
-            this._BeeldMenuItem.ShowShortcut = ((bool)(resources.GetObject("BeeldMenuItem.ShowShortcut")));
-            this._BeeldMenuItem.Text = resources.GetString("BeeldMenuItem.Text");
-            this._BeeldMenuItem.Visible = ((bool)(resources.GetObject("BeeldMenuItem.Visible")));
+            this._beeldMenuItem.Enabled = ((bool)(resources.GetObject("BeeldMenuItem.Enabled")));
+            this._beeldMenuItem.Index = 1;
+            this._beeldMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                                  this._lijstMenuItem,
+                                                                                  this._detailMenuItem,
+                                                                                  this._zoekenMenuItem});
+            this._beeldMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("BeeldMenuItem.Shortcut")));
+            this._beeldMenuItem.ShowShortcut = ((bool)(resources.GetObject("BeeldMenuItem.ShowShortcut")));
+            this._beeldMenuItem.Text = resources.GetString("BeeldMenuItem.Text");
+            this._beeldMenuItem.Visible = ((bool)(resources.GetObject("BeeldMenuItem.Visible")));
             // 
             // LijstMenuItem
             // 
-            this._LijstMenuItem.Enabled = ((bool)(resources.GetObject("LijstMenuItem.Enabled")));
-            this._LijstMenuItem.Index = 0;
-            this._LijstMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("LijstMenuItem.Shortcut")));
-            this._LijstMenuItem.ShowShortcut = ((bool)(resources.GetObject("LijstMenuItem.ShowShortcut")));
-            this._LijstMenuItem.Text = resources.GetString("LijstMenuItem.Text");
-            this._LijstMenuItem.Visible = ((bool)(resources.GetObject("LijstMenuItem.Visible")));
+            this._lijstMenuItem.Enabled = ((bool)(resources.GetObject("LijstMenuItem.Enabled")));
+            this._lijstMenuItem.Index = 0;
+            this._lijstMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("LijstMenuItem.Shortcut")));
+            this._lijstMenuItem.ShowShortcut = ((bool)(resources.GetObject("LijstMenuItem.ShowShortcut")));
+            this._lijstMenuItem.Text = resources.GetString("LijstMenuItem.Text");
+            this._lijstMenuItem.Visible = ((bool)(resources.GetObject("LijstMenuItem.Visible")));
             // 
             // DetailMenuItem
             // 
-            this._DetailMenuItem.Enabled = ((bool)(resources.GetObject("DetailMenuItem.Enabled")));
-            this._DetailMenuItem.Index = 1;
-            this._DetailMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("DetailMenuItem.Shortcut")));
-            this._DetailMenuItem.ShowShortcut = ((bool)(resources.GetObject("DetailMenuItem.ShowShortcut")));
-            this._DetailMenuItem.Text = resources.GetString("DetailMenuItem.Text");
-            this._DetailMenuItem.Visible = ((bool)(resources.GetObject("DetailMenuItem.Visible")));
+            this._detailMenuItem.Enabled = ((bool)(resources.GetObject("DetailMenuItem.Enabled")));
+            this._detailMenuItem.Index = 1;
+            this._detailMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("DetailMenuItem.Shortcut")));
+            this._detailMenuItem.ShowShortcut = ((bool)(resources.GetObject("DetailMenuItem.ShowShortcut")));
+            this._detailMenuItem.Text = resources.GetString("DetailMenuItem.Text");
+            this._detailMenuItem.Visible = ((bool)(resources.GetObject("DetailMenuItem.Visible")));
             // 
             // ZoekenMenuItem
             // 
-            this._ZoekenMenuItem.Enabled = ((bool)(resources.GetObject("ZoekenMenuItem.Enabled")));
-            this._ZoekenMenuItem.Index = 2;
-            this._ZoekenMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("ZoekenMenuItem.Shortcut")));
-            this._ZoekenMenuItem.ShowShortcut = ((bool)(resources.GetObject("ZoekenMenuItem.ShowShortcut")));
-            this._ZoekenMenuItem.Text = resources.GetString("ZoekenMenuItem.Text");
-            this._ZoekenMenuItem.Visible = ((bool)(resources.GetObject("ZoekenMenuItem.Visible")));
+            this._zoekenMenuItem.Enabled = ((bool)(resources.GetObject("ZoekenMenuItem.Enabled")));
+            this._zoekenMenuItem.Index = 2;
+            this._zoekenMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("ZoekenMenuItem.Shortcut")));
+            this._zoekenMenuItem.ShowShortcut = ((bool)(resources.GetObject("ZoekenMenuItem.ShowShortcut")));
+            this._zoekenMenuItem.Text = resources.GetString("ZoekenMenuItem.Text");
+            this._zoekenMenuItem.Visible = ((bool)(resources.GetObject("ZoekenMenuItem.Visible")));
             // 
             // RapportMenuItem
             // 
-            this._RapportMenuItem.Enabled = ((bool)(resources.GetObject("RapportMenuItem.Enabled")));
-            this._RapportMenuItem.Index = 2;
-            this._RapportMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("RapportMenuItem.Shortcut")));
-            this._RapportMenuItem.ShowShortcut = ((bool)(resources.GetObject("RapportMenuItem.ShowShortcut")));
-            this._RapportMenuItem.Text = resources.GetString("RapportMenuItem.Text");
-            this._RapportMenuItem.Visible = ((bool)(resources.GetObject("RapportMenuItem.Visible")));
+            this._rapportMenuItem.Enabled = ((bool)(resources.GetObject("RapportMenuItem.Enabled")));
+            this._rapportMenuItem.Index = 2;
+            this._rapportMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("RapportMenuItem.Shortcut")));
+            this._rapportMenuItem.ShowShortcut = ((bool)(resources.GetObject("RapportMenuItem.ShowShortcut")));
+            this._rapportMenuItem.Text = resources.GetString("RapportMenuItem.Text");
+            this._rapportMenuItem.Visible = ((bool)(resources.GetObject("RapportMenuItem.Visible")));
             // 
             // InstellingenMenuItem
             // 
-            this._InstellingenMenuItem.Enabled = ((bool)(resources.GetObject("InstellingenMenuItem.Enabled")));
-            this._InstellingenMenuItem.Index = 3;
-            this._InstellingenMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                         this._DbConfigMenuItem});
-            this._InstellingenMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("InstellingenMenuItem.Shortcut")));
-            this._InstellingenMenuItem.ShowShortcut = ((bool)(resources.GetObject("InstellingenMenuItem.ShowShortcut")));
-            this._InstellingenMenuItem.Text = resources.GetString("InstellingenMenuItem.Text");
-            this._InstellingenMenuItem.Visible = ((bool)(resources.GetObject("InstellingenMenuItem.Visible")));
+            this._instellingenMenuItem.Enabled = ((bool)(resources.GetObject("InstellingenMenuItem.Enabled")));
+            this._instellingenMenuItem.Index = 3;
+            this._instellingenMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                                         this._dbConfigMenuItem});
+            this._instellingenMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("InstellingenMenuItem.Shortcut")));
+            this._instellingenMenuItem.ShowShortcut = ((bool)(resources.GetObject("InstellingenMenuItem.ShowShortcut")));
+            this._instellingenMenuItem.Text = resources.GetString("InstellingenMenuItem.Text");
+            this._instellingenMenuItem.Visible = ((bool)(resources.GetObject("InstellingenMenuItem.Visible")));
             // 
             // DbConfigMenuItem
             // 
-            this._DbConfigMenuItem.Enabled = ((bool)(resources.GetObject("DbConfigMenuItem.Enabled")));
-            this._DbConfigMenuItem.Index = 0;
-            this._DbConfigMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("DbConfigMenuItem.Shortcut")));
-            this._DbConfigMenuItem.ShowShortcut = ((bool)(resources.GetObject("DbConfigMenuItem.ShowShortcut")));
-            this._DbConfigMenuItem.Text = resources.GetString("DbConfigMenuItem.Text");
-            this._DbConfigMenuItem.Visible = ((bool)(resources.GetObject("DbConfigMenuItem.Visible")));
-            this._DbConfigMenuItem.Click += new System.EventHandler(this.DbConfigMenuItem_Click);
+            this._dbConfigMenuItem.Enabled = ((bool)(resources.GetObject("DbConfigMenuItem.Enabled")));
+            this._dbConfigMenuItem.Index = 0;
+            this._dbConfigMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("DbConfigMenuItem.Shortcut")));
+            this._dbConfigMenuItem.ShowShortcut = ((bool)(resources.GetObject("DbConfigMenuItem.ShowShortcut")));
+            this._dbConfigMenuItem.Text = resources.GetString("DbConfigMenuItem.Text");
+            this._dbConfigMenuItem.Visible = ((bool)(resources.GetObject("DbConfigMenuItem.Visible")));
+            this._dbConfigMenuItem.Click += new System.EventHandler(this.DbConfigMenuItem_Click);
             // 
             // infoMenuItem
             // 
-            this._InfoMenuItem.Enabled = ((bool)(resources.GetObject("infoMenuItem.Enabled")));
-            this._InfoMenuItem.Index = 4;
-            this._InfoMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                 this._AboutMenuItem,
-                                                                                 this._StatusMenuItem});
-            this._InfoMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("infoMenuItem.Shortcut")));
-            this._InfoMenuItem.ShowShortcut = ((bool)(resources.GetObject("infoMenuItem.ShowShortcut")));
-            this._InfoMenuItem.Text = resources.GetString("infoMenuItem.Text");
-            this._InfoMenuItem.Visible = ((bool)(resources.GetObject("infoMenuItem.Visible")));
+            this._infoMenuItem.Enabled = ((bool)(resources.GetObject("infoMenuItem.Enabled")));
+            this._infoMenuItem.Index = 4;
+            this._infoMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                                 this._aboutMenuItem,
+                                                                                 this._statusMenuItem});
+            this._infoMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("infoMenuItem.Shortcut")));
+            this._infoMenuItem.ShowShortcut = ((bool)(resources.GetObject("infoMenuItem.ShowShortcut")));
+            this._infoMenuItem.Text = resources.GetString("infoMenuItem.Text");
+            this._infoMenuItem.Visible = ((bool)(resources.GetObject("infoMenuItem.Visible")));
             // 
             // baseStatusBar
             // 
-            this._BaseStatusBar.AccessibleDescription = resources.GetString("baseStatusBar.AccessibleDescription");
-            this._BaseStatusBar.AccessibleName = resources.GetString("baseStatusBar.AccessibleName");
-            this._BaseStatusBar.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("baseStatusBar.Anchor")));
-            this._BaseStatusBar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("baseStatusBar.BackgroundImage")));
-            this._BaseStatusBar.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("baseStatusBar.Dock")));
-            this._BaseStatusBar.Enabled = ((bool)(resources.GetObject("baseStatusBar.Enabled")));
-            this._BaseStatusBar.Font = ((System.Drawing.Font)(resources.GetObject("baseStatusBar.Font")));
-            this._BaseStatusBar.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("baseStatusBar.ImeMode")));
-            this._BaseStatusBar.Location = ((System.Drawing.Point)(resources.GetObject("baseStatusBar.Location")));
-            this._BaseStatusBar.Name = "_BaseStatusBar";
-            this._BaseStatusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
-                                                                                     this._StatusBarPanel});
-            this._BaseStatusBar.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("baseStatusBar.RightToLeft")));
-            this._BaseStatusBar.ShowPanels = true;
-            this._BaseStatusBar.Size = ((System.Drawing.Size)(resources.GetObject("baseStatusBar.Size")));
-            this._BaseStatusBar.TabIndex = ((int)(resources.GetObject("baseStatusBar.TabIndex")));
-            this._BaseStatusBar.Text = resources.GetString("baseStatusBar.Text");
-            this._BaseStatusBar.Visible = ((bool)(resources.GetObject("baseStatusBar.Visible")));
+            this._baseStatusBar.AccessibleDescription = resources.GetString("baseStatusBar.AccessibleDescription");
+            this._baseStatusBar.AccessibleName = resources.GetString("baseStatusBar.AccessibleName");
+            this._baseStatusBar.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("baseStatusBar.Anchor")));
+            this._baseStatusBar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("baseStatusBar.BackgroundImage")));
+            this._baseStatusBar.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("baseStatusBar.Dock")));
+            this._baseStatusBar.Enabled = ((bool)(resources.GetObject("baseStatusBar.Enabled")));
+            this._baseStatusBar.Font = ((System.Drawing.Font)(resources.GetObject("baseStatusBar.Font")));
+            this._baseStatusBar.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("baseStatusBar.ImeMode")));
+            this._baseStatusBar.Location = ((System.Drawing.Point)(resources.GetObject("baseStatusBar.Location")));
+            this._baseStatusBar.Name = "_baseStatusBar";
+            this._baseStatusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
+                                                                                     this._statusBarPanel});
+            this._baseStatusBar.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("baseStatusBar.RightToLeft")));
+            this._baseStatusBar.ShowPanels = true;
+            this._baseStatusBar.Size = ((System.Drawing.Size)(resources.GetObject("baseStatusBar.Size")));
+            this._baseStatusBar.TabIndex = ((int)(resources.GetObject("baseStatusBar.TabIndex")));
+            this._baseStatusBar.Text = resources.GetString("baseStatusBar.Text");
+            this._baseStatusBar.Visible = ((bool)(resources.GetObject("baseStatusBar.Visible")));
             // 
             // statusBarPanel
             // 
-            this._StatusBarPanel.Alignment = ((System.Windows.Forms.HorizontalAlignment)(resources.GetObject("statusBarPanel.Alignment")));
-            this._StatusBarPanel.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
-            this._StatusBarPanel.Icon = ((System.Drawing.Icon)(resources.GetObject("statusBarPanel.Icon")));
-            this._StatusBarPanel.MinWidth = ((int)(resources.GetObject("statusBarPanel.MinWidth")));
-            this._StatusBarPanel.Text = resources.GetString("statusBarPanel.Text");
-            this._StatusBarPanel.ToolTipText = resources.GetString("statusBarPanel.ToolTipText");
-            this._StatusBarPanel.Width = ((int)(resources.GetObject("statusBarPanel.Width")));
+            this._statusBarPanel.Alignment = ((System.Windows.Forms.HorizontalAlignment)(resources.GetObject("statusBarPanel.Alignment")));
+            this._statusBarPanel.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
+            this._statusBarPanel.Icon = ((System.Drawing.Icon)(resources.GetObject("statusBarPanel.Icon")));
+            this._statusBarPanel.MinWidth = ((int)(resources.GetObject("statusBarPanel.MinWidth")));
+            this._statusBarPanel.Text = resources.GetString("statusBarPanel.Text");
+            this._statusBarPanel.ToolTipText = resources.GetString("statusBarPanel.ToolTipText");
+            this._statusBarPanel.Width = ((int)(resources.GetObject("statusBarPanel.Width")));
             // 
             // mainPanel
             // 
-            this._MainPanel.AccessibleDescription = resources.GetString("mainPanel.AccessibleDescription");
-            this._MainPanel.AccessibleName = resources.GetString("mainPanel.AccessibleName");
-            this._MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("mainPanel.Anchor")));
-            this._MainPanel.AutoScroll = ((bool)(resources.GetObject("mainPanel.AutoScroll")));
-            this._MainPanel.AutoScrollMargin = ((System.Drawing.Size)(resources.GetObject("mainPanel.AutoScrollMargin")));
-            this._MainPanel.AutoScrollMinSize = ((System.Drawing.Size)(resources.GetObject("mainPanel.AutoScrollMinSize")));
-            this._MainPanel.BackColor = System.Drawing.SystemColors.Info;
-            this._MainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mainPanel.BackgroundImage")));
-            this._MainPanel.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("mainPanel.Dock")));
-            this._MainPanel.Enabled = ((bool)(resources.GetObject("mainPanel.Enabled")));
-            this._MainPanel.Font = ((System.Drawing.Font)(resources.GetObject("mainPanel.Font")));
-            this._MainPanel.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("mainPanel.ImeMode")));
-            this._MainPanel.Location = ((System.Drawing.Point)(resources.GetObject("mainPanel.Location")));
-            this._MainPanel.Name = "_MainPanel";
-            this._MainPanel.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("mainPanel.RightToLeft")));
-            this._MainPanel.Size = ((System.Drawing.Size)(resources.GetObject("mainPanel.Size")));
-            this._MainPanel.TabIndex = ((int)(resources.GetObject("mainPanel.TabIndex")));
-            this._MainPanel.Text = resources.GetString("mainPanel.Text");
-            this._MainPanel.Visible = ((bool)(resources.GetObject("mainPanel.Visible")));
+            this._mainPanel.AccessibleDescription = resources.GetString("mainPanel.AccessibleDescription");
+            this._mainPanel.AccessibleName = resources.GetString("mainPanel.AccessibleName");
+            this._mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(resources.GetObject("mainPanel.Anchor")));
+            this._mainPanel.AutoScroll = ((bool)(resources.GetObject("mainPanel.AutoScroll")));
+            this._mainPanel.AutoScrollMargin = ((System.Drawing.Size)(resources.GetObject("mainPanel.AutoScrollMargin")));
+            this._mainPanel.AutoScrollMinSize = ((System.Drawing.Size)(resources.GetObject("mainPanel.AutoScrollMinSize")));
+            this._mainPanel.BackColor = System.Drawing.SystemColors.Info;
+            this._mainPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("mainPanel.BackgroundImage")));
+            this._mainPanel.Dock = ((System.Windows.Forms.DockStyle)(resources.GetObject("mainPanel.Dock")));
+            this._mainPanel.Enabled = ((bool)(resources.GetObject("mainPanel.Enabled")));
+            this._mainPanel.Font = ((System.Drawing.Font)(resources.GetObject("mainPanel.Font")));
+            this._mainPanel.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("mainPanel.ImeMode")));
+            this._mainPanel.Location = ((System.Drawing.Point)(resources.GetObject("mainPanel.Location")));
+            this._mainPanel.Name = "_mainPanel";
+            this._mainPanel.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("mainPanel.RightToLeft")));
+            this._mainPanel.Size = ((System.Drawing.Size)(resources.GetObject("mainPanel.Size")));
+            this._mainPanel.TabIndex = ((int)(resources.GetObject("mainPanel.TabIndex")));
+            this._mainPanel.Text = resources.GetString("mainPanel.Text");
+            this._mainPanel.Visible = ((bool)(resources.GetObject("mainPanel.Visible")));
             // 
             // aboutMenuItem
             // 
-            this._AboutMenuItem.Enabled = ((bool)(resources.GetObject("aboutMenuItem.Enabled")));
-            this._AboutMenuItem.Index = 0;
-            this._AboutMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("aboutMenuItem.Shortcut")));
-            this._AboutMenuItem.ShowShortcut = ((bool)(resources.GetObject("aboutMenuItem.ShowShortcut")));
-            this._AboutMenuItem.Text = resources.GetString("aboutMenuItem.Text");
-            this._AboutMenuItem.Visible = ((bool)(resources.GetObject("aboutMenuItem.Visible")));
-            this._AboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
+            this._aboutMenuItem.Enabled = ((bool)(resources.GetObject("aboutMenuItem.Enabled")));
+            this._aboutMenuItem.Index = 0;
+            this._aboutMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("aboutMenuItem.Shortcut")));
+            this._aboutMenuItem.ShowShortcut = ((bool)(resources.GetObject("aboutMenuItem.ShowShortcut")));
+            this._aboutMenuItem.Text = resources.GetString("aboutMenuItem.Text");
+            this._aboutMenuItem.Visible = ((bool)(resources.GetObject("aboutMenuItem.Visible")));
+            this._aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
             // 
             // statusMenuItem
             // 
-            this._StatusMenuItem.Enabled = ((bool)(resources.GetObject("statusMenuItem.Enabled")));
-            this._StatusMenuItem.Index = 1;
-            this._StatusMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("statusMenuItem.Shortcut")));
-            this._StatusMenuItem.ShowShortcut = ((bool)(resources.GetObject("statusMenuItem.ShowShortcut")));
-            this._StatusMenuItem.Text = resources.GetString("statusMenuItem.Text");
-            this._StatusMenuItem.Visible = ((bool)(resources.GetObject("statusMenuItem.Visible")));
+            this._statusMenuItem.Enabled = ((bool)(resources.GetObject("statusMenuItem.Enabled")));
+            this._statusMenuItem.Index = 1;
+            this._statusMenuItem.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("statusMenuItem.Shortcut")));
+            this._statusMenuItem.ShowShortcut = ((bool)(resources.GetObject("statusMenuItem.ShowShortcut")));
+            this._statusMenuItem.Text = resources.GetString("statusMenuItem.Text");
+            this._statusMenuItem.Visible = ((bool)(resources.GetObject("statusMenuItem.Visible")));
             // 
             // BaseMainform
             // 
@@ -327,21 +319,21 @@ namespace Konfidence.BaseWindowForms
             this.AutoScrollMinSize = ((System.Drawing.Size)(resources.GetObject("$this.AutoScrollMinSize")));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = ((System.Drawing.Size)(resources.GetObject("$this.ClientSize")));
-            this.Controls.Add(this._MainPanel);
-            this.Controls.Add(this._BaseStatusBar);
+            this.Controls.Add(this._mainPanel);
+            this.Controls.Add(this._baseStatusBar);
             this.Enabled = ((bool)(resources.GetObject("$this.Enabled")));
             this.Font = ((System.Drawing.Font)(resources.GetObject("$this.Font")));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("$this.ImeMode")));
             this.Location = ((System.Drawing.Point)(resources.GetObject("$this.Location")));
             this.MaximumSize = ((System.Drawing.Size)(resources.GetObject("$this.MaximumSize")));
-            this.Menu = this._MainMenu;
+            this.Menu = this._mainMenu;
             this.MinimumSize = ((System.Drawing.Size)(resources.GetObject("$this.MinimumSize")));
             this.Name = "BaseMainform";
             this.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("$this.RightToLeft")));
             this.StartPosition = ((System.Windows.Forms.FormStartPosition)(resources.GetObject("$this.StartPosition")));
             this.Text = resources.GetString("$this.Text");
-            ((System.ComponentModel.ISupportInitialize)(this._StatusBarPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._statusBarPanel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -350,11 +342,11 @@ namespace Konfidence.BaseWindowForms
 
         private void aboutMenuItem_Click(object sender, EventArgs e)
         {
-            if (_AboutFormClass != null)
+            if (_aboutFormClass.IsAssigned())
             {
-                var aboutForm = Activator.CreateInstance(_AboutFormClass) as BaseAboutForm;
+                var aboutForm = Activator.CreateInstance(_aboutFormClass) as BaseAboutForm;
 
-                if (aboutForm != null)
+                if (aboutForm.IsAssigned())
                 {
                     aboutForm.ShowDialog();
                 }
@@ -367,7 +359,7 @@ namespace Konfidence.BaseWindowForms
         }
 
         [EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-        protected virtual BaseContainerFrame BuildMainContainer(BaseContainerFrame mainframe)
+        private BaseContainerFrame BuildMainContainer(BaseContainerFrame mainframe)
         {
             try
             {
@@ -380,36 +372,36 @@ namespace Konfidence.BaseWindowForms
                 //        FrameFactory.Free;
 
                 // TODO: same construction as in aboutform --> do the same in delphi.
-                if (mainframe == null)
+                if (!mainframe.IsAssigned())
                 {
                     mainframe = new BaseContainerFrame();
                 }
 
-                mainframe.Height = _MainPanel.Height;
-                mainframe.Width = _MainPanel.Width;
-                mainframe.Anchor = _MainPanel.Anchor;
+                mainframe.Height = _mainPanel.Height;
+                mainframe.Width = _mainPanel.Width;
+                mainframe.Anchor = _mainPanel.Anchor;
 
-                if (_Config == null)
+                if (!_config.IsAssigned())
                 {
-                    if (_ConfigClass != null)
+                    if (_configClass.IsAssigned())
                     {
-                        _Config = Activator.CreateInstance(_ConfigClass) as BaseConfigClass;
+                        _config = Activator.CreateInstance(_configClass) as BaseConfigClass;
                     }
                 }
 
-                mainframe.Config = _Config;  // this is not the way to make this a singleton!!!  ---> must be an applicationsettings class
+                mainframe.Config = _config;  // this is not the way to make this a singleton!!!  ---> must be an applicationsettings class
 
-                _MainPanel.Controls.Add(mainframe);
+                _mainPanel.Controls.Add(mainframe);
 
                 mainframe.AfterCreate();
             }
             catch (Exception e)
             {
-                string errorString = _ErrorHeader + e;
+                string errorString = _errorHeader + e;
 
-                if (_Config.IsAssigned())
+                if (_config.IsAssigned())
                 {
-                    _Config.EventLog.WriteEntry(errorString, EventLogEntryType.Error);
+                    _config.EventLog.WriteEntry(errorString, EventLogEntryType.Error);
                 }
 
                 throw;

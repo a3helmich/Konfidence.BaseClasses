@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Resources;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
+using Konfidence.Base;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -54,7 +55,7 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (_Components != null)
+                if (_Components.IsAssigned())
                 {
                     _Components.Dispose();
                 }
@@ -125,12 +126,12 @@ namespace Konfidence.BaseWindowForms
 
         public static bool IsDerivedClass(Type classType)
         {
-            if (classType == null || !classType.IsSubclassOf(typeof(BaseAboutForm)))
+            if (!classType.IsAssigned() || !classType.IsSubclassOf(typeof(BaseAboutForm)))
             {
                 var resources = new ResourceManager(typeof(BaseAboutForm));
                 var warningMessage = resources.GetString("BaseAboutFormException.WarningMessage");
 
-                if (classType == null)
+                if (!classType.IsAssigned())
                 {
                     throw new BaseAboutFormException(resources.GetString("BaseAboutFormException.NullWarningMessage") + warningMessage);
                 }

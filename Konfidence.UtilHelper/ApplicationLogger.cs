@@ -1,4 +1,5 @@
 using System.IO;
+using Konfidence.Base;
 using Konfidence.DesignPatterns.Singleton;
 
 namespace Konfidence.UtilHelper
@@ -15,33 +16,33 @@ namespace Konfidence.UtilHelper
 
     internal class ApplicationLogger : IApplicationLogger
     {
-        private string _LogFile;
-        private StreamWriter _LogStream;
-        private bool _Disposed; //  = false; // default :(
+        private string _logFile;
+        private StreamWriter _logStream;
+        private bool _disposed; //  = false; // default :(
 
         private StreamWriter LogStream
         {
             get
             {
-                if (_LogStream == null)
+                if (!_logStream.IsAssigned())
                 {
-                    _LogStream = File.AppendText(_LogFile);
+                    _logStream = File.AppendText(_logFile);
                 }
-                return _LogStream;
+                return _logStream;
             }
         }
 
         public string LogFile
         {
-            get { return _LogFile; }
+            get { return _logFile; }
             set
             {
-                if (_LogFile != null)
+                if (_logFile.IsAssigned())
                 {
                     LogStream.Close();
-                    _LogStream = null;
+                    _logStream = null;
                 }
-                _LogFile = value;
+                _logFile = value;
             }
         }
 
@@ -58,7 +59,7 @@ namespace Konfidence.UtilHelper
 
         ~ApplicationLogger()
         {
-            if (_Disposed)
+            if (_disposed)
             {
                 LogStream.Flush();
                 LogStream.Close();
@@ -69,19 +70,19 @@ namespace Konfidence.UtilHelper
         {
             LogStream.Flush();
             LogStream.Close();
-            _Disposed = true;
+            _disposed = true;
         }
 
 
     }
 
-    sealed public class ApplicationLoggerFactory : SingletonFactory
+    public sealed class ApplicationLoggerFactory : SingletonFactory
     {
-        static public IApplicationLogger ApplicationLogger(string logFile)
+        public static IApplicationLogger ApplicationLogger(string logFile)
         {
             var applicationLogger = GetInstance(typeof(ApplicationLogger)) as IApplicationLogger;
 
-            if (applicationLogger != null)
+            if (applicationLogger.IsAssigned())
             {
                 applicationLogger.LogFile = logFile;
 

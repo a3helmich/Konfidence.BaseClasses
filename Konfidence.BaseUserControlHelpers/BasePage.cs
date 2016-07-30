@@ -7,9 +7,9 @@ namespace Konfidence.BaseUserControlHelpers
 {
 	public abstract class BasePage<T>: Page where T: BaseWebPresenter, new()
 	{
-        private BasePageHelper _BasePageHelper;  // TODO : aanpassen conform nieuwe werkwijze -> naar BaseWebPresenter verplaatsen
+        private BasePageHelper _basePageHelper;  // TODO : aanpassen conform nieuwe werkwijze -> naar BaseWebPresenter verplaatsen
 
-        private T _Presenter;
+        private T _presenter;
 
         protected abstract void DataInitialize();
         protected abstract void RestoreViewState();
@@ -18,34 +18,28 @@ namespace Konfidence.BaseUserControlHelpers
         protected abstract void PresenterToForm();
         protected abstract void SaveDefaults();
 
-        private bool _IsExpired; 
-		private bool _IsRefreshed;
+        private bool _isExpired; 
+		private bool _isRefreshed;
 
 		#region properties
         public T Presenter
         {
             get
             {
-                if (!_Presenter.IsAssigned())
+                if (!_presenter.IsAssigned())
                 {
                     BuildPresenter();
                 }
 
-                return _Presenter;
+                return _presenter;
             }
         }
 
-		public bool IsRefreshed
-		{
-			get { return _IsRefreshed; }
-		}
+		public bool IsRefreshed => _isRefreshed;
 
-        public bool IsExpired
-        {
-            get { return _IsExpired; }
-        }
+	    public bool IsExpired => _isExpired;
 
-        protected bool IsRestoreViewState
+	    protected bool IsRestoreViewState
         {
             get
             {
@@ -63,9 +57,9 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected string GetViewState(string fieldName)
         {
-            object viewState = ViewState[fieldName];
+            var viewState = ViewState[fieldName];
 
-            if (viewState != null)
+            if (viewState.IsAssigned())
             {
                 return viewState.ToString();
             }
@@ -77,8 +71,8 @@ namespace Konfidence.BaseUserControlHelpers
 
 	    protected BasePage()
         {
-            _IsExpired = false;
-            _IsRefreshed = false;
+            _isExpired = false;
+            _isRefreshed = false;
         }
 
         #region readonly session properties
@@ -86,9 +80,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentDomainExtension;
+                    return _basePageHelper.CurrentDomainExtension;
                 }
 
                 return string.Empty;
@@ -99,9 +93,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentLanguage;
+                    return _basePageHelper.CurrentLanguage;
                 }
 
                 return string.Empty;
@@ -112,9 +106,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentDnsName;
+                    return _basePageHelper.CurrentDnsName;
                 }
 
                 return string.Empty;
@@ -125,9 +119,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.RefererDnsName;
+                    return _basePageHelper.RefererDnsName;
                 }
 
                 return string.Empty;
@@ -138,9 +132,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentPagePath;
+                    return _basePageHelper.CurrentPagePath;
                 }
 
                 return string.Empty;
@@ -151,9 +145,9 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (_BasePageHelper.IsAssigned())
+                if (_basePageHelper.IsAssigned())
                 {
-                    return _BasePageHelper.CurrentPageName;
+                    return _basePageHelper.CurrentPageName;
                 }
 
                 return string.Empty;
@@ -163,23 +157,23 @@ namespace Konfidence.BaseUserControlHelpers
 
         private void BuildPresenter()
         {
-            if (!_BasePageHelper.IsAssigned())
+            if (!_basePageHelper.IsAssigned())
             {
                 try
                 {
-                    string urlReferer = string.Empty;
+                    var urlReferer = string.Empty;
 
                     if (Request.UrlReferrer.IsAssigned())
                     {
                         var urlReferrer = Request.UrlReferrer;
 
-                        if (urlReferrer != null)
+                        if (urlReferrer.IsAssigned())
                         {
                             urlReferer = urlReferrer.ToString();
                         }
                     }
 
-                    _BasePageHelper = new BasePageHelper(Request.Url.ToString(), urlReferer);
+                    _basePageHelper = new BasePageHelper(Request.Url.ToString(), urlReferer);
                 }
                 catch (NullReferenceException)
                 {
@@ -187,16 +181,16 @@ namespace Konfidence.BaseUserControlHelpers
                 }
             }
 
-            if (!_Presenter.IsAssigned())
+            if (!_presenter.IsAssigned())
             {
-                _Presenter = new T();
+                _presenter = new T();
 
                 DataInitialize();
             }
 
-            if (!_Presenter.PageName.IsAssigned())
+            if (!_presenter.PageName.IsAssigned())
             {
-                _Presenter.SetPageName(CurrentPageName);
+                _presenter.SetPageName(CurrentPageName);
             }
         }
 
@@ -207,7 +201,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected string GetParameter(string name)
         {
-            string param = Request.QueryString[name];
+            var param = Request.QueryString[name];
 
             if (!param.IsAssigned())
             {
@@ -295,7 +289,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 		private void UpdatePageIdentifier()
 		{
-			string pageId = Guid.NewGuid().ToString("N");
+			var pageId = Guid.NewGuid().ToString("N");
 
 			ClientScript.RegisterHiddenField(SessionHelper.PAGE_ID_VALUE, pageId);
 			Context.Items[SessionHelper.PAGE_ID_VALUE] = pageId;
@@ -303,18 +297,9 @@ namespace Konfidence.BaseUserControlHelpers
 
 		private void CreatePageIdentifier()
 		{
-			string pageId;
+		    var pageId = IsPostBack ? Request[SessionHelper.PAGE_ID_VALUE] : Guid.NewGuid().ToString("N");
 
-			if (!IsPostBack)
-			{
-				pageId = Guid.NewGuid().ToString("N");
-			}
-			else
-			{
-				pageId = Request[SessionHelper.PAGE_ID_VALUE];
-			}
-
-			ClientScript.RegisterHiddenField(SessionHelper.PAGE_ID_VALUE, pageId);
+            ClientScript.RegisterHiddenField(SessionHelper.PAGE_ID_VALUE, pageId);
 			Context.Items[SessionHelper.PAGE_ID_VALUE] = pageId;
 		}
 
@@ -345,24 +330,16 @@ namespace Konfidence.BaseUserControlHelpers
 
 		private void UpdateRefreshState()
 		{
-			bool asyncPostBack;
-			ScriptManager scriptManager = GetScriptManager();
+		    var scriptManager = GetScriptManager();
 
-			if (scriptManager.IsAssigned())
-			{
-				asyncPostBack = scriptManager.IsInAsyncPostBack;
-			}
-			else
-			{
-				asyncPostBack = IsAsync;
-			}
+			var asyncPostBack = scriptManager.IsAssigned() ? scriptManager.IsInAsyncPostBack : IsAsync;
 
-			_IsRefreshed = PageRefreshHelper.Check(Page, Context, asyncPostBack);
+			_isRefreshed = PageRefreshHelper.Check(Page, Context, asyncPostBack);
 		}
 
 		private void UpdateSessionState()
 		{
-			string currentSessionId = Request[SessionHelper.SESSION_ID_VALUE];
+			var currentSessionId = Request[SessionHelper.SESSION_ID_VALUE];
 
              //check of de sessie expired is.
              //1. Om te kunnen verlopen, moet er een currentSessionId zijn. is die
@@ -374,7 +351,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 			if (!currentSessionId.IsAssigned() && currentSessionId == Session.SessionID && Session.IsNewSession)
 			{
-				_IsExpired = true;
+				_isExpired = true;
 			}
 
              //bewaar de currentSessionId, zodat deze voor UpdateSessionState() bij de 

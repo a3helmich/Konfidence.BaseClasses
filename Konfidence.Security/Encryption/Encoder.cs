@@ -87,7 +87,7 @@ namespace Konfidence.Security.Encryption
 
             if (!_Disposed)
             {
-                if (_Encoder != null)
+                if (_Encoder.IsAssigned())
                 {
                     _Encoder.Dispose(); // resources vrijgeven.
 

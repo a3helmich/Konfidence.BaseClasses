@@ -5,45 +5,31 @@ namespace Konfidence.Base
 {
     public class BaseXmlDocument : XmlDocument
     {
-        private XmlElement _Root;
+        private XmlElement _root;
 
-        private string _FullFileName = string.Empty;
-        private string _PathName = string.Empty;
-        private string _RootNameSpaceUri;
-        private XmlNamespaceManager _XmlNamespaceManager;
+        private string _fullFileName = string.Empty;
+        private string _pathName = string.Empty;
+        private string _rootNameSpaceUri;
+        private XmlNamespaceManager _xmlNamespaceManager;
 
         #region read only properties
-        public XmlElement Root
-        {
-            get { return _Root; }
-        }
+        public XmlElement Root => _root;
 
-        public string FileName
-        {
-            get { return _FullFileName; }
-        }
+        public string FileName => _fullFileName;
 
-        public string PathName
-        {
-            get { return _PathName; }
-        }
+        public string PathName => _pathName;
 
-        public string RootNameSpaceUri
-        {
-            get { return _RootNameSpaceUri; }
-        }
+        public string RootNameSpaceUri => _rootNameSpaceUri;
 
-        public XmlNamespaceManager XmlNamespaceManager
-        {
-            get { return _XmlNamespaceManager; }
-        }
+        public XmlNamespaceManager XmlNamespaceManager => _xmlNamespaceManager;
+
         #endregion read only properties
 
         public override void Load(string filename)
         {
-            _FullFileName = filename;
+            _fullFileName = filename;
 
-            _PathName = Path.GetDirectoryName(filename) + @"\";
+            _pathName = Path.GetDirectoryName(filename) + @"\";
 
             base.Load(filename);
 
@@ -52,13 +38,13 @@ namespace Konfidence.Base
 
         private void PostLoad()
         {
-            _Root = DocumentElement;
+            _root = DocumentElement;
 
-            _RootNameSpaceUri = Root.NamespaceURI;
+            _rootNameSpaceUri = Root.NamespaceURI;
 
             // create a shortcut namespace reference
-            _XmlNamespaceManager = new XmlNamespaceManager(NameTable);
-            _XmlNamespaceManager.AddNamespace("p", _RootNameSpaceUri);
+            _xmlNamespaceManager = new XmlNamespaceManager(NameTable);
+            _xmlNamespaceManager.AddNamespace("p", _rootNameSpaceUri);
         }
 
         public override void Load(Stream inStream)
@@ -104,7 +90,7 @@ namespace Konfidence.Base
             {
                 var attributes = valueNode.Attributes;
 
-                if (attributes != null)
+                if (attributes.IsAssigned())
                 {
                     var attribute = attributes[attributeName];
 

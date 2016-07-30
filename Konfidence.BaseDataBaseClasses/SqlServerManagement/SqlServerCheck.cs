@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using Konfidence.Base;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData.SqlServerManagement
@@ -14,7 +15,7 @@ namespace Konfidence.BaseData.SqlServerManagement
 
             var sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
 
-            if (sqlConnection != null)
+            if (sqlConnection.IsAssigned())
             {
                 string[] connectionParameters = sqlConnection.ConnectionString.Split(';'); 
 

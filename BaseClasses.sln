@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.MenuClasses", "Konfidence.MenuClasses\Konfidence.MenuClasses.csproj", "{411D4B61-9DDF-43F9-AB11-B256DD8287E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMenu", "TestMenu\TestMenu.csproj", "{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MenuClasses", "TestMenu\Test.MenuClasses.csproj", "{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1D94BDD9-A879-4163-BB2C-225088B97A67}"
 	ProjectSection(SolutionItems) = preProject
@@ -302,15 +302,15 @@ Global
 		SccProjectUniqueName15 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
 		SccProjectName15 = Konfidence.BaseUnitTestClasses
 		SccLocalPath15 = Konfidence.BaseUnitTestClasses
-		SccProjectUniqueName16 = TestMenu\\TestMenu.csproj
-		SccProjectName16 = TestMenu
-		SccLocalPath16 = TestMenu
-		SccProjectUniqueName17 = Indy.Sockets\\Indy.Sockets.csproj
-		SccProjectName17 = Indy.Sockets
-		SccLocalPath17 = Indy.Sockets
-		SccProjectUniqueName18 = Konfidence.MenuClasses\\Konfidence.MenuClasses.csproj
-		SccProjectName18 = Konfidence.MenuClasses
-		SccLocalPath18 = Konfidence.MenuClasses
+		SccProjectUniqueName16 = Indy.Sockets\\Indy.Sockets.csproj
+		SccProjectName16 = Indy.Sockets
+		SccLocalPath16 = Indy.Sockets
+		SccProjectUniqueName17 = Konfidence.MenuClasses\\Konfidence.MenuClasses.csproj
+		SccProjectName17 = Konfidence.MenuClasses
+		SccLocalPath17 = Konfidence.MenuClasses
+		SccProjectUniqueName18 = TestMenu\\Test.MenuClasses.csproj
+		SccProjectName18 = TestMenu
+		SccLocalPath18 = TestMenu
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77

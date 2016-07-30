@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Security.Permissions;
+using Konfidence.Base;
 
 namespace Konfidence.BaseHelper
 {
@@ -15,18 +16,18 @@ namespace Konfidence.BaseHelper
     public class BaseConfigClass
     {
         // statics
-        private static string _ApplicationEventLogName = "FrameWork";
-        private static EventLog _EventLog;
+        private static string _applicationEventLogName = "FrameWork";
+        private static EventLog _eventLog;
 
-        private const string EVENT_LOG_NAME_PREFIX = "Kit_";
-        private string _EventLogName;
+        private const string EventLogNamePrefix = "Kit_";
+        private string _eventLogName;
 
         #region ApplicationName
         public static string ApplicationName
         {
             get
             {
-                return _ApplicationEventLogName;
+                return _applicationEventLogName;
             }
         }
         #endregion
@@ -36,41 +37,41 @@ namespace Konfidence.BaseHelper
         {
             get
             {
-                if (_EventLog == null)
+                if (!_eventLog.IsAssigned())
                 {
                     try
                     {
-                        _EventLogName = EVENT_LOG_NAME_PREFIX + _ApplicationEventLogName;
+                        _eventLogName = EventLogNamePrefix + _applicationEventLogName;
 
                         // the next thing works when we are not deiling with a webapp or service
-                        if (!EventLog.SourceExists(_EventLogName))
+                        if (!EventLog.SourceExists(_eventLogName))
                         {
-                            EventLog.CreateEventSource(_EventLogName, "Application");
+                            EventLog.CreateEventSource(_eventLogName, "Application");
                         }
 
-                        _EventLog = new EventLog { Source = _EventLogName };
+                        _eventLog = new EventLog { Source = _eventLogName };
                     }
                     catch 
                     {
-                        _EventLog = null;
+                        _eventLog = null;
                     }
                 }
 
-                return _EventLog;
+                return _eventLog;
             }
         }
 
         public BaseConfigClass(string applicationName)
         {
-            if (applicationName != null)
+            if (applicationName.IsAssigned())
             {
-                if (applicationName.Length == 0 && !_ApplicationEventLogName.Equals("FrameWork"))
+                if (applicationName.Length == 0 && !_applicationEventLogName.Equals("FrameWork"))
                 {
-                    _ApplicationEventLogName = "FrameWork";
+                    _applicationEventLogName = "FrameWork";
                 }
-                if (applicationName.Length != 0 && !_ApplicationEventLogName.Equals(applicationName))
+                if (applicationName.Length != 0 && !_applicationEventLogName.Equals(applicationName))
                 {
-                    _ApplicationEventLogName = applicationName;
+                    _applicationEventLogName = applicationName;
                 }
             }
         }

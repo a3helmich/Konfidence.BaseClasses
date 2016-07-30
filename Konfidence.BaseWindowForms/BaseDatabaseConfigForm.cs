@@ -1,25 +1,26 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Konfidence.Base;
 
 namespace Konfidence.BaseWindowForms
 {
     public class BaseDatabaseConfigForm : BaseDialogForm
     {
-        private TextBox _DbServerTextBox;
-        private Label _DbServerLabel;
-        private TextBox _DbUserTextBox;
-        private Label _DbUserLabel;
-        private readonly IContainer components = null;
+        private TextBox _dbServerTextBox;
+        private Label _dbServerLabel;
+        private TextBox _dbUserTextBox;
+        private Label _dbUserLabel;
+        private readonly IContainer Components = null;
 
-        private readonly string _CurrentDbServer;
-        private readonly string _CurrentDatabase;
-        private readonly string _CurrentUser;
-        private Label _DatabaseLabel;
-        private TextBox _DatabaseTextBox;
-        private TextBox _DbPasswordTextBox;
-        private Label _DbPasswordLabel;
-        private readonly string _CurrentPassword;
+        private readonly string _currentDbServer;
+        private readonly string _currentDatabase;
+        private readonly string _currentUser;
+        private Label _databaseLabel;
+        private TextBox _databaseTextBox;
+        private TextBox _dbPasswordTextBox;
+        private Label _dbPasswordLabel;
+        private readonly string _currentPassword;
 
 
         public BaseDatabaseConfigForm()
@@ -28,15 +29,15 @@ namespace Konfidence.BaseWindowForms
             InitializeComponent();
 
             // TODO: Add any initialization after the InitializeComponent call
-            _CurrentDbServer = ApplicationSettings.GetStringValue("SQLServer");
-            _CurrentDatabase = ApplicationSettings.GetStringValue("SQLDatabase");
-            _CurrentUser = ApplicationSettings.GetStringValue("SQLUsername");
-            _CurrentPassword = ApplicationSettings.GetStringValue("SQLPassword");
+            _currentDbServer = ApplicationSettings.GetStringValue("SQLServer");
+            _currentDatabase = ApplicationSettings.GetStringValue("SQLDatabase");
+            _currentUser = ApplicationSettings.GetStringValue("SQLUsername");
+            _currentPassword = ApplicationSettings.GetStringValue("SQLPassword");
 
-            _DbServerTextBox.Text = _CurrentDbServer;
-            _DatabaseTextBox.Text = _CurrentDatabase;
-            _DbUserTextBox.Text = _CurrentUser;
-            _DbPasswordTextBox.Text = _CurrentPassword;
+            _dbServerTextBox.Text = _currentDbServer;
+            _databaseTextBox.Text = _currentDatabase;
+            _dbUserTextBox.Text = _currentUser;
+            _dbPasswordTextBox.Text = _currentPassword;
         }
 
         /// <summary>
@@ -46,9 +47,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (components != null)
+                if (Components.IsAssigned())
                 {
-                    components.Dispose();
+                    Components.Dispose();
                 }
             }
             base.Dispose(disposing);
@@ -61,14 +62,14 @@ namespace Konfidence.BaseWindowForms
         /// </summary>
         private void InitializeComponent()
         {
-            this._DbServerTextBox = new System.Windows.Forms.TextBox();
-            this._DbServerLabel = new System.Windows.Forms.Label();
-            this._DbUserTextBox = new System.Windows.Forms.TextBox();
-            this._DbUserLabel = new System.Windows.Forms.Label();
-            this._DatabaseTextBox = new System.Windows.Forms.TextBox();
-            this._DatabaseLabel = new System.Windows.Forms.Label();
-            this._DbPasswordTextBox = new System.Windows.Forms.TextBox();
-            this._DbPasswordLabel = new System.Windows.Forms.Label();
+            this._dbServerTextBox = new System.Windows.Forms.TextBox();
+            this._dbServerLabel = new System.Windows.Forms.Label();
+            this._dbUserTextBox = new System.Windows.Forms.TextBox();
+            this._dbUserLabel = new System.Windows.Forms.Label();
+            this._databaseTextBox = new System.Windows.Forms.TextBox();
+            this._databaseLabel = new System.Windows.Forms.Label();
+            this._dbPasswordTextBox = new System.Windows.Forms.TextBox();
+            this._dbPasswordLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -82,100 +83,100 @@ namespace Konfidence.BaseWindowForms
             // 
             // DBServerTextBox
             // 
-            this._DbServerTextBox.AccessibleName = "First Name";
-            this._DbServerTextBox.Location = new System.Drawing.Point(151, 16);
-            this._DbServerTextBox.Name = "_DbServerTextBox";
-            this._DbServerTextBox.Size = new System.Drawing.Size(128, 20);
-            this._DbServerTextBox.TabIndex = 0;
+            this._dbServerTextBox.AccessibleName = "First Name";
+            this._dbServerTextBox.Location = new System.Drawing.Point(151, 16);
+            this._dbServerTextBox.Name = "_dbServerTextBox";
+            this._dbServerTextBox.Size = new System.Drawing.Size(128, 20);
+            this._dbServerTextBox.TabIndex = 0;
             // 
             // DBServerLabel
             // 
-            this._DbServerLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._DbServerLabel.Location = new System.Drawing.Point(17, 17);
-            this._DbServerLabel.Name = "_DbServerLabel";
-            this._DbServerLabel.Size = new System.Drawing.Size(96, 18);
-            this._DbServerLabel.TabIndex = 18;
-            this._DbServerLabel.Text = "Database server";
-            this._DbServerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._dbServerLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this._dbServerLabel.Location = new System.Drawing.Point(17, 17);
+            this._dbServerLabel.Name = "_dbServerLabel";
+            this._dbServerLabel.Size = new System.Drawing.Size(96, 18);
+            this._dbServerLabel.TabIndex = 18;
+            this._dbServerLabel.Text = "Database server";
+            this._dbServerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DBUserTextBox
             // 
-            this._DbUserTextBox.AccessibleName = "First Name";
-            this._DbUserTextBox.Location = new System.Drawing.Point(151, 72);
-            this._DbUserTextBox.Name = "_DbUserTextBox";
-            this._DbUserTextBox.Size = new System.Drawing.Size(128, 20);
-            this._DbUserTextBox.TabIndex = 2;
-            this._DbUserTextBox.TextChanged += new System.EventHandler(this.DBUserTextBox_TextChanged);
+            this._dbUserTextBox.AccessibleName = "First Name";
+            this._dbUserTextBox.Location = new System.Drawing.Point(151, 72);
+            this._dbUserTextBox.Name = "_dbUserTextBox";
+            this._dbUserTextBox.Size = new System.Drawing.Size(128, 20);
+            this._dbUserTextBox.TabIndex = 2;
+            this._dbUserTextBox.TextChanged += new System.EventHandler(this.DBUserTextBox_TextChanged);
             // 
             // DBUserLabel
             // 
-            this._DbUserLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._DbUserLabel.Location = new System.Drawing.Point(17, 72);
-            this._DbUserLabel.Name = "_DbUserLabel";
-            this._DbUserLabel.Size = new System.Drawing.Size(96, 18);
-            this._DbUserLabel.TabIndex = 20;
-            this._DbUserLabel.Text = "Username";
-            this._DbUserLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._dbUserLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this._dbUserLabel.Location = new System.Drawing.Point(17, 72);
+            this._dbUserLabel.Name = "_dbUserLabel";
+            this._dbUserLabel.Size = new System.Drawing.Size(96, 18);
+            this._dbUserLabel.TabIndex = 20;
+            this._dbUserLabel.Text = "Username";
+            this._dbUserLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DatabaseTextBox
             // 
-            this._DatabaseTextBox.AccessibleName = "First Name";
-            this._DatabaseTextBox.Location = new System.Drawing.Point(151, 44);
-            this._DatabaseTextBox.Name = "_DatabaseTextBox";
-            this._DatabaseTextBox.Size = new System.Drawing.Size(128, 20);
-            this._DatabaseTextBox.TabIndex = 1;
+            this._databaseTextBox.AccessibleName = "First Name";
+            this._databaseTextBox.Location = new System.Drawing.Point(151, 44);
+            this._databaseTextBox.Name = "_databaseTextBox";
+            this._databaseTextBox.Size = new System.Drawing.Size(128, 20);
+            this._databaseTextBox.TabIndex = 1;
             // 
             // DatabaseLabel
             // 
-            this._DatabaseLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._DatabaseLabel.Location = new System.Drawing.Point(17, 44);
-            this._DatabaseLabel.Name = "_DatabaseLabel";
-            this._DatabaseLabel.Size = new System.Drawing.Size(96, 18);
-            this._DatabaseLabel.TabIndex = 22;
-            this._DatabaseLabel.Text = "Database";
-            this._DatabaseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._databaseLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this._databaseLabel.Location = new System.Drawing.Point(17, 44);
+            this._databaseLabel.Name = "_databaseLabel";
+            this._databaseLabel.Size = new System.Drawing.Size(96, 18);
+            this._databaseLabel.TabIndex = 22;
+            this._databaseLabel.Text = "Database";
+            this._databaseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DBPasswordTextBox
             // 
-            this._DbPasswordTextBox.AccessibleName = "First Name";
-            this._DbPasswordTextBox.Location = new System.Drawing.Point(151, 100);
-            this._DbPasswordTextBox.Name = "_DbPasswordTextBox";
-            this._DbPasswordTextBox.Size = new System.Drawing.Size(128, 20);
-            this._DbPasswordTextBox.TabIndex = 3;
+            this._dbPasswordTextBox.AccessibleName = "First Name";
+            this._dbPasswordTextBox.Location = new System.Drawing.Point(151, 100);
+            this._dbPasswordTextBox.Name = "_dbPasswordTextBox";
+            this._dbPasswordTextBox.Size = new System.Drawing.Size(128, 20);
+            this._dbPasswordTextBox.TabIndex = 3;
             // 
             // DBPasswordLabel
             // 
-            this._DbPasswordLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._DbPasswordLabel.Location = new System.Drawing.Point(17, 100);
-            this._DbPasswordLabel.Name = "_DbPasswordLabel";
-            this._DbPasswordLabel.Size = new System.Drawing.Size(96, 18);
-            this._DbPasswordLabel.TabIndex = 24;
-            this._DbPasswordLabel.Text = "Password";
-            this._DbPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._dbPasswordLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this._dbPasswordLabel.Location = new System.Drawing.Point(17, 100);
+            this._dbPasswordLabel.Name = "_dbPasswordLabel";
+            this._dbPasswordLabel.Size = new System.Drawing.Size(96, 18);
+            this._dbPasswordLabel.TabIndex = 24;
+            this._dbPasswordLabel.Text = "Password";
+            this._dbPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // BaseDatabaseConfigForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(296, 174);
-            this.Controls.Add(this._DbPasswordTextBox);
-            this.Controls.Add(this._DbPasswordLabel);
-            this.Controls.Add(this._DatabaseTextBox);
-            this.Controls.Add(this._DatabaseLabel);
-            this.Controls.Add(this._DbUserTextBox);
-            this.Controls.Add(this._DbUserLabel);
-            this.Controls.Add(this._DbServerTextBox);
-            this.Controls.Add(this._DbServerLabel);
+            this.Controls.Add(this._dbPasswordTextBox);
+            this.Controls.Add(this._dbPasswordLabel);
+            this.Controls.Add(this._databaseTextBox);
+            this.Controls.Add(this._databaseLabel);
+            this.Controls.Add(this._dbUserTextBox);
+            this.Controls.Add(this._dbUserLabel);
+            this.Controls.Add(this._dbServerTextBox);
+            this.Controls.Add(this._dbServerLabel);
             this.Name = "BaseDatabaseConfigForm";
             this.Controls.SetChildIndex(this.ButtonOk, 0);
             this.Controls.SetChildIndex(this.ButtonCancel, 0);
-            this.Controls.SetChildIndex(this._DbServerLabel, 0);
-            this.Controls.SetChildIndex(this._DbServerTextBox, 0);
-            this.Controls.SetChildIndex(this._DbUserLabel, 0);
-            this.Controls.SetChildIndex(this._DbUserTextBox, 0);
-            this.Controls.SetChildIndex(this._DatabaseLabel, 0);
-            this.Controls.SetChildIndex(this._DatabaseTextBox, 0);
-            this.Controls.SetChildIndex(this._DbPasswordLabel, 0);
-            this.Controls.SetChildIndex(this._DbPasswordTextBox, 0);
+            this.Controls.SetChildIndex(this._dbServerLabel, 0);
+            this.Controls.SetChildIndex(this._dbServerTextBox, 0);
+            this.Controls.SetChildIndex(this._dbUserLabel, 0);
+            this.Controls.SetChildIndex(this._dbUserTextBox, 0);
+            this.Controls.SetChildIndex(this._databaseLabel, 0);
+            this.Controls.SetChildIndex(this._databaseTextBox, 0);
+            this.Controls.SetChildIndex(this._dbPasswordLabel, 0);
+            this.Controls.SetChildIndex(this._dbPasswordTextBox, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,14 +190,14 @@ namespace Konfidence.BaseWindowForms
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (_DbServerTextBox.Text != _CurrentDbServer)
-                ApplicationSettings.SetStringValue("SQLServer", _DbServerTextBox.Text);
-            if (_DatabaseTextBox.Text != _CurrentDatabase)
-                ApplicationSettings.SetStringValue("SQLDatabase", _DatabaseTextBox.Text);
-            if (_DbUserTextBox.Text != _CurrentUser)
-                ApplicationSettings.SetStringValue("SQLUsername", _DbUserTextBox.Text);
-            if (_DbPasswordTextBox.Text != _CurrentPassword)
-                ApplicationSettings.SetStringValue("SQLPassword", _DbPasswordTextBox.Text);
+            if (_dbServerTextBox.Text != _currentDbServer)
+                ApplicationSettings.SetStringValue("SQLServer", _dbServerTextBox.Text);
+            if (_databaseTextBox.Text != _currentDatabase)
+                ApplicationSettings.SetStringValue("SQLDatabase", _databaseTextBox.Text);
+            if (_dbUserTextBox.Text != _currentUser)
+                ApplicationSettings.SetStringValue("SQLUsername", _dbUserTextBox.Text);
+            if (_dbPasswordTextBox.Text != _currentPassword)
+                ApplicationSettings.SetStringValue("SQLPassword", _dbPasswordTextBox.Text);
 
             ApplicationSettings.Flush();
 

@@ -1,5 +1,6 @@
 using System.IO;
 using System.Xml;
+using Konfidence.Base;
 using Konfidence.DesignPatterns.Singleton;
 
 namespace Konfidence.UtilHelper
@@ -16,28 +17,28 @@ namespace Konfidence.UtilHelper
         void Flush();
     }
 
-    sealed public class ApplicationSettingsFactory : SingletonFactory
+    public sealed class ApplicationSettingsFactory : SingletonFactory
     {
-        static private string _RootPath = string.Empty;
+        private static string _rootPath = string.Empty;
 
-        static public IApplicationSettings ApplicationSettings(string application, string rootPath)
+        public static IApplicationSettings ApplicationSettings(string application, string rootPath)
         {
-            _RootPath = rootPath;
-            if (!_RootPath.EndsWith(@"\"))
-                _RootPath += @"\";
-            if (!_RootPath.EndsWith(@"settings\"))
-                _RootPath += @"settings\";
+            _rootPath = rootPath;
+            if (!_rootPath.EndsWith(@"\"))
+                _rootPath += @"\";
+            if (!_rootPath.EndsWith(@"settings\"))
+                _rootPath += @"settings\";
             return ApplicationSettings(application);
         }
 
-        static public IApplicationSettings ApplicationSettings(string application)
+        public static IApplicationSettings ApplicationSettings(string application)
         {
             var applicationSettings = GetInstance(typeof(ApplicationSettings)) as ApplicationSettings;
 
-            if (applicationSettings != null)
+            if (applicationSettings.IsAssigned())
             {
                 applicationSettings.Application = application;
-                applicationSettings.RootPath = _RootPath;
+                applicationSettings.RootPath = _rootPath;
 
                 return applicationSettings;
             }
@@ -52,9 +53,9 @@ namespace Konfidence.UtilHelper
 
     internal class ApplicationSettings : IApplicationSettings
     {
-        private readonly XmlDocument _XmlDocument = new XmlDocument();
-        private XmlNodeList _ElementList;
-        private string _FileName = string.Empty;
+        private readonly XmlDocument _xmlDocument = new XmlDocument();
+        private XmlNodeList _elementList;
+        private string _fileName = string.Empty;
 
         internal string Application;
         internal string RootPath = string.Empty;
@@ -63,20 +64,20 @@ namespace Konfidence.UtilHelper
         {
             get
             {
-                if (_ElementList == null)
+                if (!_elementList.IsAssigned())
                 {
-                    _FileName = RootPath + Application + ".settings";
-                    if (File.Exists(_FileName))
-                        _XmlDocument.Load(_FileName);
+                    _fileName = RootPath + Application + ".settings";
+                    if (File.Exists(_fileName))
+                        _xmlDocument.Load(_fileName);
                     else
                     {
-                        _XmlDocument.LoadXml("<configuration />");
+                        _xmlDocument.LoadXml("<configuration />");
                     }
 
-                    _ElementList = _XmlDocument.GetElementsByTagName("configuration");
+                    _elementList = _xmlDocument.GetElementsByTagName("configuration");
                 }
 
-                return _ElementList;
+                return _elementList;
             }
         }
 
@@ -101,7 +102,7 @@ namespace Konfidence.UtilHelper
 
         public void Flush()
         {
-            _XmlDocument.Save(_FileName);
+            _xmlDocument.Save(_fileName);
         }
 
         public void SetStringValue(string keyName, string keyValue)
@@ -124,15 +125,15 @@ namespace Konfidence.UtilHelper
                 }
             }
 
-            if (keyNode == null)
+            if (!keyNode.IsAssigned())
             {
-                keyNode = _XmlDocument.CreateNode(XmlNodeType.Element, keyName, string.Empty);
+                keyNode = _xmlDocument.CreateNode(XmlNodeType.Element, keyName, string.Empty);
 
                 keyNode.InnerText = keyValue;
 
-                XmlElement root = _XmlDocument.DocumentElement;
+                XmlElement root = _xmlDocument.DocumentElement;
 
-                if (root != null)
+                if (root.IsAssigned())
                 {
                     root.AppendChild(keyNode);
                 }

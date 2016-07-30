@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Text;
+using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
 {
@@ -55,7 +56,7 @@ namespace Konfidence.Security.Encryption
 
             if (!_Disposed)
             {
-                if (_Decoder != null)
+                if (_Decoder.IsAssigned())
                 {
                     _Decoder.Dispose(); // resources vrijgeven.
 

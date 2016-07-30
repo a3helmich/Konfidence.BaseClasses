@@ -9,55 +9,52 @@ namespace Konfidence.UtilHelper
 {
     public class BaseApplicationConfiguration: BaseItem
     {
-        private XmlDocument _Configuration;
-        private XmlNode _Root;
+        private XmlDocument _configuration;
+        private XmlNode _root;
 
-        private readonly string _ConfigFileName;
+        private readonly string _configFileName;
 
-        protected string ConfigFileName
-        {
-            get { return _ConfigFileName; }
-        }
+        protected string ConfigFileName => _configFileName;
 
         public BaseApplicationConfiguration(string configFileName)
         {
-            _ConfigFileName = configFileName;
+            _configFileName = configFileName;
 
             OpenConfiguration();
         }
 
         private void OpenConfiguration()
         {
-            _Root = null;
-            _Configuration = new XmlDocument();
+            _root = null;
+            _configuration = new XmlDocument();
 
-            if (File.Exists(_ConfigFileName))
+            if (File.Exists(_configFileName))
             {
-                _Configuration.Load(_ConfigFileName);
+                _configuration.Load(_configFileName);
 
-                _Root = _Configuration.DocumentElement;
+                _root = _configuration.DocumentElement;
             }
 
-            if (_Root == null)
+            if (!_root.IsAssigned())
             {
-                _Configuration.LoadXml("<configuration />");
+                _configuration.LoadXml("<configuration />");
 
-                _Root = _Configuration.DocumentElement;
+                _root = _configuration.DocumentElement;
             }
         }
 
         public void Save()
         {
-            _Configuration.Save(_ConfigFileName);
+            _configuration.Save(_configFileName);
         }
 
         protected string GetNodeValue(string name)
         {
             string nodeValue = string.Empty;
 
-            XmlNode xmlNode = _Root.SelectSingleNode(name);
+            XmlNode xmlNode = _root.SelectSingleNode(name);
 
-            if (xmlNode != null)
+            if (xmlNode.IsAssigned())
             {
                 nodeValue = xmlNode.InnerText;
             }
@@ -69,9 +66,9 @@ namespace Konfidence.UtilHelper
         {
             bool nodeValue = false;
 
-            XmlNode xmlNode = _Root.SelectSingleNode(name);
+            XmlNode xmlNode = _root.SelectSingleNode(name);
 
-            if (xmlNode != null)
+            if (xmlNode.IsAssigned())
             {
                 nodeValue = bool.Parse(xmlNode.InnerText);
             }
@@ -101,8 +98,12 @@ namespace Konfidence.UtilHelper
                         arrayByteListNodeValue.Add(Convert.ToByte(byteString));
                     }
                 }
+                var arrayByteListNode = arrayByteListNodeValue.ToArray(typeof(byte)) as byte[];
 
-                arrayArrayList.Add(arrayByteListNodeValue.ToArray(typeof(byte)) as byte[]);
+                if (arrayByteListNode.IsAssigned())
+                {
+                    arrayArrayList.Add(arrayByteListNode);
+                }
             }
             catch (Exception)
             {
@@ -116,20 +117,20 @@ namespace Konfidence.UtilHelper
 
         protected void SetNodeValue(string name, string value)
         {
-            XmlNode valueNode = _Root.SelectSingleNode(name);
+            XmlNode valueNode = _root.SelectSingleNode(name);
 
             // Create the node if it doens't exist yet
-            if (valueNode == null)
+            if (!valueNode.IsAssigned())
             {
-                valueNode = _Configuration.CreateNode(XmlNodeType.Element, name, null);
+                valueNode = _configuration.CreateNode(XmlNodeType.Element, name, null);
 
-                _Root.AppendChild(valueNode);
+                _root.AppendChild(valueNode);
             }
 
             // remove the node if the assigned value is null or empty
             if (!value.IsAssigned())
             {
-                _Root.RemoveChild(valueNode);
+                _root.RemoveChild(valueNode);
             }
             else
             {
@@ -166,7 +167,7 @@ namespace Konfidence.UtilHelper
 
                 var stringArray = stringArrayList.ToArray(typeof(string)) as string[];
 
-                if (stringArray != null)
+                if (stringArray.IsAssigned())
                 {
                     joinedArray = string.Join(" ", stringArray);
                 }
