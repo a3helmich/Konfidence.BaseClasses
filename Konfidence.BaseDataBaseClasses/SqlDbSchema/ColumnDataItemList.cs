@@ -6,31 +6,31 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class ColumnDataItemList : BaseDataItemList<ColumnDataItem>, IColumnDataItemList
     {
-        private readonly string _TableName;
+        private readonly string _tableName;
 
-        private bool _HasDefaultValueFields;
-        private bool _HasDefaultValueFieldsChecked;
+        private bool _hasDefaultValueFields;
+        private bool _hasDefaultValueFieldsChecked;
 
         public bool HasDefaultValueFields
         {
             get
             {
-                if (!_HasDefaultValueFieldsChecked)
+                if (!_hasDefaultValueFieldsChecked)
                 {
                     foreach (var columnItem in this)
                     {
                         if (columnItem.IsAutoUpdated || columnItem.IsComputed || columnItem.IsDefaulted)
                         {
-                            _HasDefaultValueFields = true;
+                            _hasDefaultValueFields = true;
 
                             break;
                         }
                     }
 
-                    _HasDefaultValueFieldsChecked = true;
+                    _hasDefaultValueFieldsChecked = true;
                 }
 
-                return _HasDefaultValueFields;
+                return _hasDefaultValueFields;
             }
         }
 
@@ -41,17 +41,17 @@ namespace Konfidence.BaseData.SqlDbSchema
         
         protected ColumnDataItemList(string tableName)
         {
-            _TableName = tableName;
+            _tableName = tableName;
 
-            _HasDefaultValueFields = false;
-            _HasDefaultValueFieldsChecked = false;
+            _hasDefaultValueFields = false;
+            _hasDefaultValueFieldsChecked = false;
         }
 
         public static ColumnDataItemList GetList(string tableName)
         {
             var columnDataItemList = new ColumnDataItemList(tableName);
 
-            columnDataItemList.BuildItemList(SpNames.COLUMNS_GETLIST);
+            columnDataItemList.BuildItemList(SpNames.ColumnsGetlist);
 
             return columnDataItemList;
         }
@@ -59,9 +59,9 @@ namespace Konfidence.BaseData.SqlDbSchema
         public override void SetParameters(string storedProcedure)
         {
 
-            if (storedProcedure.Equals(SpNames.COLUMNS_GETLIST))
+            if (storedProcedure.Equals(SpNames.ColumnsGetlist))
             {
-                SetParameter("TableName", _TableName);
+                SetParameter("TableName", _tableName);
             }
         }
 

@@ -9,11 +9,11 @@ namespace Konfidence.BaseData
 {
 	internal class WsHost : BaseHost
 	{
-		private readonly WSBaseHostService _WsBaseHostService;
+		private readonly WSBaseHostService _wsBaseHostService;
 
         public WsHost(string serviceName, string dataBaseName) : base(serviceName, dataBaseName)
 		{
-            _WsBaseHostService = new WSBaseHostService();
+            _wsBaseHostService = new WSBaseHostService();
 
 			// _WsBaseHostService.UseDefaultCredentials = true;
 
@@ -24,7 +24,7 @@ namespace Konfidence.BaseData
 				throw new Exception("No URL provided for WebService : " + serviceName);
 			}
 
-			_WsBaseHostService.Url = wsUrl;
+			_wsBaseHostService.Url = wsUrl;
 		}
 
 		#region GetField Methods
@@ -44,7 +44,7 @@ namespace Konfidence.BaseData
 			    parameterObjectList.Add(parameterObject);
 			}
 
-            dataItem.SetId(_WsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.GetId()));
+            dataItem.SetId(_wsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.GetId()));
 		}
 
 		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure) // , string autoIdField, int id)
@@ -81,7 +81,7 @@ namespace Konfidence.BaseData
                     parameterObjectList.Add(parameterObject);
                 }
 
-                parameterObjects = _WsBaseHostService.GetItemByParam(parameterObjectList.ToArray());
+                parameterObjects = _wsBaseHostService.GetItemByParam(parameterObjectList.ToArray());
 
                 //if (parameterObjects.Length > 0)
                 //{
@@ -109,12 +109,12 @@ namespace Konfidence.BaseData
 
 		protected internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
-			_WsBaseHostService.Delete(id);
+			_wsBaseHostService.Delete(id);
 		}
 
 		internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
 		{
-			ParameterObject[][] parameterObjectsList = _WsBaseHostService.BuildItemList();
+			ParameterObject[][] parameterObjectsList = _wsBaseHostService.BuildItemList();
 
 			foreach (ParameterObject[] parameterObjectList in parameterObjectsList)
 			{
@@ -147,17 +147,17 @@ namespace Konfidence.BaseData
 
 		internal override int ExecuteTextCommand(string textCommand)
 		{
-			return _WsBaseHostService.ExecuteTextCommand(textCommand);
+			return _wsBaseHostService.ExecuteTextCommand(textCommand);
 		}
 
 		internal override bool TableExists(string tableName)
 		{
-			return _WsBaseHostService.TableExists(tableName);
+			return _wsBaseHostService.TableExists(tableName);
 		}
 
 		internal override bool ViewExists(string viewName)
 		{
-			return _WsBaseHostService.ViewExists(viewName);
+			return _wsBaseHostService.ViewExists(viewName);
 		}
 
 		private static string GetWsUrl(string serviceName)

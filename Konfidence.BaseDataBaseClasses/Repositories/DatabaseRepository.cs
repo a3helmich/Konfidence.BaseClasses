@@ -13,17 +13,13 @@ namespace Konfidence.BaseData.Repositories
 {
     internal class DatabaseRepository : BaseItem, IDatabaseRepository
     {
-        private readonly string _DataBasename;
-        private IDataReader _DataReader;
+        private readonly string _dataBasename;
 
-        public IDataReader DataReader
-        {
-            get { return _DataReader; }
-        }
+        public IDataReader DataReader { get; private set; }
 
         public DatabaseRepository(string databaseName)
         {
-            _DataBasename = databaseName;
+            _dataBasename = databaseName;
         }
 
         public Database GetDatabase()
@@ -31,9 +27,9 @@ namespace Konfidence.BaseData.Repositories
              Database databaseInstance;
             DatabaseProviderFactory databaseProviderFactory = new DatabaseProviderFactory();
 
-            if (_DataBasename.Length > 0)
+            if (_dataBasename.Length > 0)
             {
-                databaseInstance = databaseProviderFactory.Create(_DataBasename);
+                databaseInstance = databaseProviderFactory.Create(_dataBasename);
             }
             else
             {
@@ -145,14 +141,14 @@ namespace Konfidence.BaseData.Repositories
                 {
                     if (dataReader.Read())
                     {
-                        _DataReader = dataReader;
+                        DataReader = dataReader;
 
                         if (callback.IsAssigned())
                         {
                             callback();
                         }
 
-                        _DataReader = null;
+                        DataReader = null;
                     }
                 }
             }
@@ -178,7 +174,7 @@ namespace Konfidence.BaseData.Repositories
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
-                    _DataReader = dataReader;
+                    DataReader = dataReader;
 
                     while (dataReader.Read())
                     {
@@ -188,7 +184,7 @@ namespace Konfidence.BaseData.Repositories
                         }
                     }
 
-                    _DataReader = null;
+                    DataReader = null;
                 }
             }
         }
@@ -203,7 +199,7 @@ namespace Konfidence.BaseData.Repositories
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
-                    _DataReader = dataReader;
+                    DataReader = dataReader;
 
                     while (dataReader.Read())
                     {
@@ -233,7 +229,7 @@ namespace Konfidence.BaseData.Repositories
                         }
                     }
 
-                    _DataReader = null;
+                    DataReader = null;
                 }
             }
         }

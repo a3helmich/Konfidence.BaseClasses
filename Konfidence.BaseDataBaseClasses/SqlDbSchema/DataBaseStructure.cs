@@ -4,13 +4,9 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class DataBaseStructure : SchemaBaseDataItem
     {
-        private TableDataItemList _TableList;
-
         #region readonly properties
-        public TableDataItemList TableList
-        {
-            get { return _TableList; }
-        }
+        public TableDataItemList TableList { get; private set; }
+
         #endregion readonly properties
 
         public DataBaseStructure()
@@ -28,21 +24,21 @@ namespace Konfidence.BaseData.SqlDbSchema
 
             CreateStoredProcedures();
 
-            _TableList = new TableDataItemList(DataBaseName);
+            TableList = new TableDataItemList(DataBaseName);
 
             DeleteStoredProcedures();
         }
 
         private void CreateStoredProcedures()
         {
-            CreateSPPrimaryKey_Get(SpNames.PRIMARYKEY_GET);
-            CreateSPColumns_GetList(SpNames.COLUMNS_GETLIST);
+            CreateSPPrimaryKey_Get(SpNames.PrimarykeyGet);
+            CreateSPColumns_GetList(SpNames.ColumnsGetlist);
         }
 
         private void DeleteStoredProcedures()
         {
-            DeleteSp(SpNames.PRIMARYKEY_GET);
-            DeleteSp(SpNames.COLUMNS_GETLIST);
+            DeleteSp(SpNames.PrimarykeyGet);
+            DeleteSp(SpNames.ColumnsGetlist);
         }
 
         private void CreateSPPrimaryKey_Get(string storedProcedure)

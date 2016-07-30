@@ -4,40 +4,25 @@
     {
         // field definitions
         private const string CONSTRAINT_NAME = "Constraint_Name";
-        private const string PRIMARYKEYID = "PrimaryKeyId";
+        private const string Primarykeyid = "PrimaryKeyId";
 
-        private const string TABLENAME = "tableName";
+        private const string Tablename = "tableName";
 
-        private string _ConstraintName = string.Empty;
-        private string _ColumnName = string.Empty;
-        private string _DataType = string.Empty;
+        private string _constraintName = string.Empty;
 
         #region properties
-        public int PrimaryKeyId
-        {
-            get
-            {
-                return Id;
-            }
-        }
+        public int PrimaryKeyId => Id;
 
         public string ConstraintName
         {
-            get { return _ConstraintName; }
-            set { _ConstraintName = value; }
+            get { return _constraintName; }
+            set { _constraintName = value; }
         }
 
-        public string ColumnName
-        {
-            get { return _ColumnName; }
-            set { _ColumnName = value; }
-        }
+        public string ColumnName { get; set; } = string.Empty;
 
-        public string DataType
-        {
-            get { return _DataType; }
-            set { _DataType = value; }
-        }
+        public string DataType { get; set; } = string.Empty;
+
         #endregion properties
 
         public PrimaryKeyDataItem()
@@ -47,19 +32,19 @@
         public PrimaryKeyDataItem(string tableName)
             : this()
         {
-            SetParameter(TABLENAME, tableName);
+            SetParameter(Tablename, tableName);
 
-            GetItem(SpNames.PRIMARYKEY_GET);
+            GetItem(SpNames.PrimarykeyGet);
         }
 
-        internal protected override void InitializeDataItem()
+        protected internal override void InitializeDataItem()
         {
-            AutoIdField = PRIMARYKEYID;
+            AutoIdField = Primarykeyid;
         }
 
         protected internal override void GetData()
         {
-            GetField(CONSTRAINT_NAME, out _ConstraintName);
+            GetField(CONSTRAINT_NAME, out _constraintName);
         }
     }
 }

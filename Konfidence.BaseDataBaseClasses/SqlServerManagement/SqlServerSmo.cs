@@ -8,15 +8,15 @@ namespace Konfidence.BaseData.SqlServerManagement
 {
     internal class SqlServerSmo: BaseItem
     {
-        private string _DatabaseServerName = string.Empty;
-        private string _UserName = string.Empty;
-        private string _Password = string.Empty;
+        private string _databaseServerName = string.Empty;
+        private string _userName = string.Empty;
+        private string _password = string.Empty;
 
-        private bool _PingSucceeded;
+        private bool _pingSucceeded;
 
         public SqlServerSmo()
         {
-            _PingSucceeded = false;
+            _pingSucceeded = false;
         }
 
         internal static bool VerifyDatabaseServer(string databaseServerName, string userName, string password)
@@ -30,9 +30,9 @@ namespace Konfidence.BaseData.SqlServerManagement
         {
             if (databaseServerName.IsAssigned())
             {
-                _DatabaseServerName = databaseServerName;
-                _UserName = userName;
-                _Password = password;
+                _databaseServerName = databaseServerName;
+                _userName = userName;
+                _password = password;
 
                 var executerThread = new Thread(PingSqlServerVersionExecuter);
 
@@ -42,7 +42,7 @@ namespace Konfidence.BaseData.SqlServerManagement
                 // NB. the thread is not going to stop immediately -> the application will not stop right away. 
                 // but the response is really fast.
 
-                return _PingSucceeded;
+                return _pingSucceeded;
             }
 
             return true;
@@ -50,29 +50,29 @@ namespace Konfidence.BaseData.SqlServerManagement
 
         private void PingSqlServerVersionExecuter()
         {
-            _PingSucceeded = false;
+            _pingSucceeded = false;
 
             try
             {
-                if (_UserName.IsAssigned() && _Password.IsAssigned())
+                if (_userName.IsAssigned() && _password.IsAssigned())
                 {
-                    var serverConnection = new ServerConnection(_DatabaseServerName, _UserName, _Password)
+                    var serverConnection = new ServerConnection(_databaseServerName, _userName, _password)
                         {
                             LoginSecure = false
                         };
 
                     var server = new Server(serverConnection);
 
-                    server.PingSqlServerVersion(_DatabaseServerName, _UserName, _Password);
+                    server.PingSqlServerVersion(_databaseServerName, _userName, _password);
                 }
                 else
                 {
                     var server = new Server();
 
-                    server.PingSqlServerVersion(_DatabaseServerName);
+                    server.PingSqlServerVersion(_databaseServerName);
                 }
 
-                _PingSucceeded = true;
+                _pingSucceeded = true;
             }
             catch (FailedOperationException cfEx)
             {

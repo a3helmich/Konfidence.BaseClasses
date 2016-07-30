@@ -84,7 +84,7 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
             LoadXml(pageSettingElement.OuterXml);
         }
 
-        public override sealed void LoadXml(string xml)
+        public sealed override void LoadXml(string xml)
         {
             base.LoadXml(xml);
         }

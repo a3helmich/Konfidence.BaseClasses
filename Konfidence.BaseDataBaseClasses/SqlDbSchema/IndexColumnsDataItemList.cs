@@ -5,19 +5,15 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class IndexColumnsDataItemList : BaseDataItemList<IndexColumnsDataItem>
     {
-        private readonly string _TableName;
-        private readonly PrimaryKeyDataItem _PrimaryKeyDataItem;
+        private readonly string _tableName;
 
-        public PrimaryKeyDataItem PrimaryKeyDataItem
-        {
-            get { return _PrimaryKeyDataItem; }
-        }
+        public PrimaryKeyDataItem PrimaryKeyDataItem { get; }
 
         public IndexColumnsDataItemList(string tableName)
         {
-            _TableName = tableName;
+            _tableName = tableName;
 
-            _PrimaryKeyDataItem = new PrimaryKeyDataItem(_TableName);
+            PrimaryKeyDataItem = new PrimaryKeyDataItem(_tableName);
 
             var indexColumnDataItem = new IndexColumnsDataItem();
 
@@ -32,16 +28,16 @@ namespace Konfidence.BaseData.SqlDbSchema
             {
                 var tableName = dataRow["TABLE_NAME"] as string;
 
-                if (tableName.IsAssigned() && tableName.Equals(_TableName))
+                if (tableName.IsAssigned() && tableName.Equals(_tableName))
                 {
                     var columnName = dataRow["COLUMN_NAME"] as string;
                     var constraintName = dataRow["CONSTRAINT_NAME"] as string;
 
                     var indexColumnDataItem = new IndexColumnsDataItem();
 
-                    if (constraintName.IsAssigned() && constraintName.Equals(_PrimaryKeyDataItem.ConstraintName))
+                    if (constraintName.IsAssigned() && constraintName.Equals(PrimaryKeyDataItem.ConstraintName))
                     {
-                        _PrimaryKeyDataItem.ColumnName = columnName;
+                        PrimaryKeyDataItem.ColumnName = columnName;
                     }
 
                     Add(indexColumnDataItem);

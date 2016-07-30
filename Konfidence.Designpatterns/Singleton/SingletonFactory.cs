@@ -8,10 +8,10 @@ namespace Konfidence.DesignPatterns.Singleton
 {
     public class SingletonFactory : BaseItem
     {
-        static private readonly Hashtable SingletonTable = new Hashtable();
-        static private readonly TypeFilter SingletonFilter = SingletonInterfaceFilter;
+        private static readonly Hashtable SingletonTable = new Hashtable();
+        private static readonly TypeFilter SingletonFilter = SingletonInterfaceFilter;
 
-        static private bool SingletonInterfaceFilter(Type typeObject, Object criteriaObject)
+        private static bool SingletonInterfaceFilter(Type typeObject, Object criteriaObject)
         {
             if (typeObject.ToString() == criteriaObject.ToString())
             {
@@ -22,7 +22,7 @@ namespace Konfidence.DesignPatterns.Singleton
         }
 
         // WORMGAATJES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        static protected ISingleton GetInstance(Type singletonType)
+        protected static ISingleton GetInstance(Type singletonType)
         {
             if (!singletonType.IsAssigned())
             {

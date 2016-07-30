@@ -2,19 +2,15 @@
 {
     class RetrieveListParameters
     {
-        private readonly IBaseDataItemList _DataItemList;
-        private readonly string _StoredProcedure;
+        private readonly IBaseDataItemList _dataItemList;
 
-        internal string StoredProcedure
-        {
-            get { return _StoredProcedure; }
-        }
+        internal string StoredProcedure { get; }
 
         internal DbParameterObjectList ParameterObjectList
         {
             get
             {
-                var parameterObjectList = _DataItemList.GetParameterObjectList();
+                var parameterObjectList = _dataItemList.GetParameterObjectList();
 
                 return parameterObjectList;
             }
@@ -22,9 +18,9 @@
 
         public RetrieveListParameters(IBaseDataItemList dataItemList, string storedProcedure)
         {
-            _StoredProcedure = storedProcedure;
+            StoredProcedure = storedProcedure;
 
-            _DataItemList = dataItemList;
+            _dataItemList = dataItemList;
         }
     }
 }

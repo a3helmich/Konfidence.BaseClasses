@@ -5,19 +5,9 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class ColumnDataItem : SchemaBaseDataItem, IColumnDataItem
     {
-        private bool _IsComputed;
-        private bool _IsDefaulted;
-        private bool _IsPrimaryKey;
-        private bool _IsAutoUpdated;
-        private bool _IsLockInfo;
-
-        private string _Name = string.Empty;
-        private int _OrdinalPosition;
-        private string _DataType = string.Empty;
         //private string _ColumnDefault = string.Empty;
 
         //private bool _IsNullable = false;
-        private string _CharacterMaximumLength = string.Empty;
         //private int _CharacterOctetLength = 0;
         //private int _NumericPrecision = 0;
         //private int _NumericPrecisionRadix = 0;
@@ -30,57 +20,25 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         #region properties
 
-        public bool IsPrimaryKey
-        {
-            get { return _IsPrimaryKey; }
-        }
+        public bool IsPrimaryKey { get; private set; }
 
-        public bool IsAutoUpdated
-        {
-            get { return _IsAutoUpdated; }
-        }
+        public bool IsAutoUpdated { get; private set; }
 
-        public bool IsDefaulted
-        {
-            get { return _IsDefaulted; }
-        }
+        public bool IsDefaulted { get; private set; }
 
-        public bool IsComputed
-        {
-            get { return _IsComputed; }
-            //set { _IsComputed = value; }
-        }
+        public bool IsComputed { get; private set; }
 
-        public bool IsLockInfo
-        {
-            get { return _IsLockInfo; }
-        }
+        public bool IsLockInfo { get; private set; }
 
-        public string Name
-        {
-            get { return _Name; }
-        }
+        public string Name { get; private set; } = string.Empty;
 
-        protected int OrdinalPosition
-        {
-            get { return _OrdinalPosition; }
-            set { _OrdinalPosition = value; }
-        }
+        protected int OrdinalPosition { get; set; }
 
-        public string SqlDataType
-        {
-            get { return _DataType; }
-        }
+        public string SqlDataType { get; private set; } = string.Empty;
 
-        public string DataType
-        {
-            get { return GetDataType(_DataType); }
-        }
+        public string DataType => GetDataType(SqlDataType);
 
-        public string DbDataType
-        {
-            get { return GetDbDataType(); }
-        }
+        public string DbDataType => GetDbDataType();
 
         //public string ColumnDefault
         //{
@@ -94,10 +52,7 @@ namespace Konfidence.BaseData.SqlDbSchema
         //    set { _IsNullable = value; }
         //}
 
-        public string CharacterMaximumLength
-        {
-            get { return _CharacterMaximumLength; }
-        }
+        public string CharacterMaximumLength { get; private set; } = string.Empty;
 
         //public int CharacterOctetLength
         //{
@@ -156,11 +111,11 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         public ColumnDataItem()
         {
-            _IsPrimaryKey = false;
-            _IsAutoUpdated = false;
-            _IsDefaulted = false;
-            _IsComputed = false;
-            _IsLockInfo = false;
+            IsPrimaryKey = false;
+            IsAutoUpdated = false;
+            IsDefaulted = false;
+            IsComputed = false;
+            IsLockInfo = false;
         }
 
         protected internal override void GetData()
@@ -190,17 +145,17 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         public void SetColumnData(string name, bool isDefaulted, bool isComputed, int ordinalPosition, string dataType, Int16 characterMaximumLengthInt)
         {
-            _Name = name;
-            _IsDefaulted = isDefaulted;
-            _IsComputed = isComputed;
-            _OrdinalPosition = ordinalPosition;
-            _DataType = dataType;
-            _CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
+            Name = name;
+            IsDefaulted = isDefaulted;
+            IsComputed = isComputed;
+            OrdinalPosition = ordinalPosition;
+            SqlDataType = dataType;
+            CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
         }
 
         public ColumnDataItem(string name) : this()
         {
-            _Name = name;
+            Name = name;
         }
 
         private string GetDataType(string dataType)
@@ -264,42 +219,30 @@ namespace Konfidence.BaseData.SqlDbSchema
             return dataType;
         }
 
-        public string DefaultPropertyValue
-        {
-            get
-            {
-                return GetDefaultPropertyValue(_DataType, string.Empty);
-            }
-        }
+        public string DefaultPropertyValue => GetDefaultPropertyValue(SqlDataType, string.Empty);
 
         public void SetPrimaryKey(bool isPrimaryKey)
         {
-            _IsPrimaryKey = isPrimaryKey;
+            IsPrimaryKey = isPrimaryKey;
         }
 
         public void SetAutoUpdated(bool isAutoUpdated)
         {
-            _IsAutoUpdated = isAutoUpdated;
+            IsAutoUpdated = isAutoUpdated;
         }
 
         public void SetLockInfo(bool isLockInfo)
         {
-            _IsLockInfo = isLockInfo;
+            IsLockInfo = isLockInfo;
         }
         
-        public string NewGuidPropertyValue
-        {
-            get
-            {
-                return GetDefaultPropertyValue(_DataType, "newguid");
-            }
-        }
+        public string NewGuidPropertyValue => GetDefaultPropertyValue(SqlDataType, "newguid");
 
         internal bool IsGuidField
         {
             get
             {
-                if (_DataType.Equals("uniqueidentifier", StringComparison.InvariantCultureIgnoreCase))
+                if (SqlDataType.Equals("uniqueidentifier", StringComparison.InvariantCultureIgnoreCase))
                 {
                     return true;
                 }

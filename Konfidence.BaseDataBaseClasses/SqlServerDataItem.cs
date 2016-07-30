@@ -4,29 +4,21 @@ namespace Konfidence.BaseData
 {
     public class SqlServerDataItem: BaseDataItem
     {
-        private readonly int _SqlServerId;
+        private readonly int _sqlServerId;
 
-        private const string SQLSERVER_GET = "SqlServer_Get";
+        private const string SqlserverGet = "SqlServer_Get";
 
-        private const string SQLSERVERID = "SqlServerId";
+        private const string Sqlserverid = "SqlServerId";
 
-        private const string AVAILABLE = "Available";
+        private const string Available = "Available";
 
-        private bool _IsAvailable = true;
+        private bool _isAvailable = true;
 
         #region properties
-        public int SqlServerId
-        {
-            get
-            {
-                return Id;
-            }
-        }
+        public int SqlServerId => Id;
 
-        public bool IsAvailable
-        {
-            get { return _IsAvailable; }
-        }
+        public bool IsAvailable => _isAvailable;
+
         #endregion properties
 
         public SqlServerDataItem() 
@@ -36,7 +28,7 @@ namespace Konfidence.BaseData
 
         public SqlServerDataItem(int sqlServerId)
         {
-            _SqlServerId = sqlServerId;
+            _sqlServerId = sqlServerId;
 
             SqlServerGetItem();
         }
@@ -45,11 +37,11 @@ namespace Konfidence.BaseData
         {
             try
             {
-                GetItem(SQLSERVER_GET, 1);
+                GetItem(SqlserverGet, 1);
             }
             catch(SqlException sqlException)
             {
-                _IsAvailable = false;
+                _isAvailable = false;
 
                 SetErrorMessage(sqlException.Message);
             }
@@ -60,16 +52,16 @@ namespace Konfidence.BaseData
         //    GetItem(ParameterList);
         //}
 
-        internal protected override void InitializeDataItem()
+        protected internal override void InitializeDataItem()
         {
-            AutoIdField = SQLSERVERID;
+            AutoIdField = Sqlserverid;
 
             ServiceName = "SqlServerDataItemService";
         }
 
         protected internal override void GetData()
         {
-            GetField(AVAILABLE, out _IsAvailable);
+            GetField(Available, out _isAvailable);
         }
     }
 }

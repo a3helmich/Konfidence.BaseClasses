@@ -10,41 +10,20 @@ namespace Konfidence.BaseData
 	    private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
 
-		private readonly string _DataBaseName = string.Empty;
-		private readonly string _ServiceName = string.Empty;
+	    #region properties
 
-		#region properties
+		protected string DataBaseName { get; } = string.Empty;
 
-		protected string DataBaseName
-		{
-			get
-			{
-				return _DataBaseName;
-			}
-		}
+	    protected string ServiceName { get; } = string.Empty;
 
-		protected string ServiceName
-		{
-			get
-			{
-				return _ServiceName;
-			}
-		}
+	    public int Id => ID;
 
-		public int Id
-		{
-			get
-			{
-				return ID;
-			}
-		}
-
-		#endregion
+	    #endregion
 
 		public BaseHost(string serviceName, string databaseName)
 		{
-			_ServiceName = serviceName;
-			_DataBaseName = databaseName;
+			ServiceName = serviceName;
+			DataBaseName = databaseName;
 		}
 
 		internal virtual void Save(BaseDataItem dataItem)
@@ -55,7 +34,7 @@ namespace Konfidence.BaseData
         {
         }
 
-        internal protected virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        protected internal virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 		}
 

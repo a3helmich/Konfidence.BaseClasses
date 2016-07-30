@@ -4,56 +4,29 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class TableDataItem : SchemaBaseDataItem, ITableDataItem
     {
-        private readonly string _Catalog = string.Empty;
-        private readonly string _Schema = string.Empty;
-        private readonly string _Name = string.Empty;
         private const string TYPE = "Table";
 
-        private readonly ColumnDataItemList _ColumnDataItemList;
-        private readonly IndexColumnsDataItemList _IndexColumnsDataItemList;
-        private readonly bool _HasGuidId;
+        private readonly ColumnDataItemList _columnDataItemList;
+        private readonly IndexColumnsDataItemList _indexColumnsDataItemList;
 
         #region properties
 
-        public string Catalog
-        {
-            get { return _Catalog; }
-        }
+        public string Catalog { get; } = string.Empty;
 
-        public string Schema
-        {
-            get { return _Schema; }
-        }
+        public string Schema { get; } = string.Empty;
 
-        public string Name
-        {
-            get { return _Name; }
-        }
+        public string Name { get; } = string.Empty;
 
-        public string Type
-        {
-            get { return TYPE; }
-        }
+        public string Type => TYPE;
 
-        public IColumnDataItemList ColumnDataItemList
-        {
-            get { return _ColumnDataItemList; }
-        }
+        public IColumnDataItemList ColumnDataItemList => _columnDataItemList;
 
-        public string PrimaryKey
-        {
-            get { return _IndexColumnsDataItemList.PrimaryKeyDataItem.ColumnName; }
-        }
+        public string PrimaryKey => _indexColumnsDataItemList.PrimaryKeyDataItem.ColumnName;
 
-        public string PrimaryKeyDataType
-        {
-            get { return _IndexColumnsDataItemList.PrimaryKeyDataItem.DataType; }
-        }
+        public string PrimaryKeyDataType => _indexColumnsDataItemList.PrimaryKeyDataItem.DataType;
 
-        public bool HasGuidId
-        {
-            get { return _HasGuidId; }
-        }
+        public bool HasGuidId { get; }
+
         #endregion properties
 
         //public TableDataItem()
@@ -62,19 +35,19 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         public TableDataItem(string catalog, string schema, string name)
         {
-            _Catalog = catalog;
-            _Schema = schema;
-            _Name = name;
+            Catalog = catalog;
+            Schema = schema;
+            Name = name;
 
-            _ColumnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name);
-            _IndexColumnsDataItemList = new IndexColumnsDataItemList(name);
+            _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name);
+            _indexColumnsDataItemList = new IndexColumnsDataItemList(name);
 
             // find out which column is the primaryKey
-            foreach (var columnDataItem in _ColumnDataItemList)
+            foreach (var columnDataItem in _columnDataItemList)
             {
                 if (columnDataItem.Name.Equals(PrimaryKey, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    _IndexColumnsDataItemList.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
+                    _indexColumnsDataItemList.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
 
                     columnDataItem.SetPrimaryKey(true);
 
@@ -82,15 +55,15 @@ namespace Konfidence.BaseData.SqlDbSchema
                 }
             }
 
-            _HasGuidId = false;
+            HasGuidId = false;
             // find out if te guidId exists for this table
-            foreach (var columnDataItem in _ColumnDataItemList)
+            foreach (var columnDataItem in _columnDataItemList)
             {
                 if (columnDataItem.IsGuidField)
                 {
                     if (columnDataItem.Name.Equals(Name + "Id", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        _HasGuidId = true;
+                        HasGuidId = true;
 
                         break;
                     }
@@ -124,7 +97,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             //COALESCE(OBJECT_NAME(object_id), 'x'),
             //COALESCE(COL_NAME(object_id, column_id), 'a') 
 
-            foreach (var columnDataItem in _ColumnDataItemList)
+            foreach (var columnDataItem in _columnDataItemList)
             {
                 switch (columnDataItem.Name.ToLower())
                 {
@@ -137,7 +110,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
 
             // DataItem specific lockinfo
-            foreach (var columnDataItem in _ColumnDataItemList)
+            foreach (var columnDataItem in _columnDataItemList)
             {
                 switch (columnDataItem.Name.ToLower())
                 {

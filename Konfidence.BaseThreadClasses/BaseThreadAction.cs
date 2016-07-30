@@ -4,7 +4,7 @@ namespace Konfidence.BaseThreadClasses
 {
     public abstract class BaseThreadAction : BaseItem 
     {
-        internal protected abstract void Execute();
+        protected internal abstract void Execute();
 
         public BaseThreadAction()
         {

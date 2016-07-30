@@ -10,31 +10,22 @@ namespace Konfidence.BaseData
 {
     internal class SqlHost : BaseHost
 	{
-        private readonly NinjectDependencyResolver _Ninject = new NinjectDependencyResolver();
+        private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
 
-        private readonly IDatabaseRepository _Repository;
+        private readonly IDatabaseRepository _repository;
 
-        protected IKernel Kernel
-        {
-            get { return _Ninject.Kernel; }
-        }
+        protected IKernel Kernel => _ninject.Kernel;
 
         public SqlHost(string dataBaseName) : base(string.Empty, dataBaseName)
 		{
             var dataBaseNameParam = new ConstructorArgument("databaseName", dataBaseName);
 
-            _Repository = Kernel.Get<IDatabaseRepository>(dataBaseNameParam);
+            _repository = Kernel.Get<IDatabaseRepository>(dataBaseNameParam);
 		}
 
-	    private IDataReader DataReader
-	    {
-	        get
-	        {
-	            return _Repository.DataReader;
-	        }
-	    }
+	    private IDataReader DataReader => _repository.DataReader;
 
-		#region GetField Methods
+        #region GetField Methods
 		internal override Int16 GetFieldInt16(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
@@ -156,7 +147,7 @@ namespace Konfidence.BaseData
 				throw (new Exception("StoredProcedure not provided"));
 			}
 
-            var resultParameters = _Repository.ExecuteSaveStoredProcedure(new RequestParameters(dataItem, dataItem.SaveStoredProcedure));
+            var resultParameters = _repository.ExecuteSaveStoredProcedure(new RequestParameters(dataItem, dataItem.SaveStoredProcedure));
 
 		    dataItem.SetId(resultParameters.Id);
 
@@ -180,7 +171,7 @@ namespace Konfidence.BaseData
 
             var retrieveParameters = new RetrieveParameters(dataItem, getStoredProcedure);
 
-            _Repository.ExecuteGetStoredProcedure(retrieveParameters, () =>
+            _repository.ExecuteGetStoredProcedure(retrieveParameters, () =>
 	            {
 	                dataItem.GetKey();
 	                dataItem.GetData();
@@ -200,7 +191,7 @@ namespace Konfidence.BaseData
 
             var retrieveListParameters = new RetrieveListParameters(baseDataItemList, getListStoredProcedure);
 
-            _Repository.ExecuteGetListStoredProcedure(retrieveListParameters, () => GetDataItem(baseDataItemList));
+            _repository.ExecuteGetListStoredProcedure(retrieveListParameters, () => GetDataItem(baseDataItemList));
         }
 
 
@@ -215,7 +206,7 @@ namespace Konfidence.BaseData
 
             var retrieveListParameters = new RetrieveListParameters(parentDataItemList, getRelatedStoredProcedure);
 
-            _Repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters,
+            _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters,
                 () => GetDataItem(parentDataItemList),
                 () => GetDataItem(relatedDataItemList),
                 () => GetDataItem(childDataItemList));
@@ -233,7 +224,7 @@ namespace Konfidence.BaseData
             return true;
         }
 
-        internal protected override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        protected internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
         {
             if (deleteStoredProcedure.Equals(string.Empty))
             {
@@ -242,40 +233,40 @@ namespace Konfidence.BaseData
 
             if (id > 0)
             {
-                _Repository.ExecuteDeleteStoredProcedure(deleteStoredProcedure, autoIdField, id);
+                _repository.ExecuteDeleteStoredProcedure(deleteStoredProcedure, autoIdField, id);
             }
         }
 
         internal override int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
         {
-            return _Repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
+            return _repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
         }
 
 	    internal override int ExecuteTextCommand(string textCommand)
 		{
-            return _Repository.ExecuteNonQuery(textCommand);
+            return _repository.ExecuteNonQuery(textCommand);
 		}
 
 		internal override bool TableExists(string tableName)
 		{
-            return _Repository.ObjectExists(tableName, "Tables");
+            return _repository.ObjectExists(tableName, "Tables");
 		}
 
 		internal override bool ViewExists(string viewName)
 		{
-            return _Repository.ObjectExists(viewName, "Views");
+            return _repository.ObjectExists(viewName, "Views");
 		}
 
         internal override bool StoredProcedureExists(string storedProcedureName)
         {
-            return _Repository.ObjectExists(storedProcedureName, "Procedures");
+            return _repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
         internal override DataTable GetSchemaObject(string collection)
         {
             DataTable dataTable;
 
-            var database = _Repository.GetDatabase();
+            var database = _repository.GetDatabase();
 
             using (var dbConnection = database.CreateConnection())
             {

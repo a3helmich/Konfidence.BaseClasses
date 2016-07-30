@@ -5,7 +5,7 @@ namespace Konfidence.BaseWindowForms
     /// <summary>
     /// Summary description for NzbUtilHelper.
     /// </summary>
-    abstract public class BaseUtilHelper
+    public abstract class BaseUtilHelper
     {
         public static bool IsValidEmail(string eMail)
         {

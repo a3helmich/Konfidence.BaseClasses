@@ -5,34 +5,21 @@ namespace Konfidence.BaseData.ParameterObjects
 {
     internal class RequestParameters : BaseItem
     {
-        private readonly BaseDataItem _DataItem;
-        private readonly string _StoredProcedure;
+        private readonly BaseDataItem _dataItem;
 
-        internal string StoredProcedure
-        {
-            get { return _StoredProcedure; }
-        }
+        internal string StoredProcedure { get; }
 
-        internal string AutoIdField
-        {
-            get { return _DataItem.AutoIdField; }
-        }
+        internal string AutoIdField => _dataItem.AutoIdField;
 
-        internal int Id
-        {
-            get { return _DataItem.GetId(); }
-        }
+        internal int Id => _dataItem.GetId();
 
-        internal Dictionary<string, DbParameterObject> AutoUpdateFieldList
-        {
-            get { return _DataItem.AutoUpdateFieldDictionary; }
-        }
+        internal Dictionary<string, DbParameterObject> AutoUpdateFieldList => _dataItem.AutoUpdateFieldDictionary;
 
         internal DbParameterObjectList ParameterObjectList
         {
             get
             {
-                var parameterObjectList = _DataItem.SetItemData();
+                var parameterObjectList = _dataItem.SetItemData();
 
                 return parameterObjectList;
             }
@@ -40,9 +27,9 @@ namespace Konfidence.BaseData.ParameterObjects
 
         public RequestParameters(BaseDataItem dataItem, string storedProcedure)
         {
-            _StoredProcedure = storedProcedure;
+            StoredProcedure = storedProcedure;
 
-            _DataItem = dataItem;
+            _dataItem = dataItem;
         }
     }
 }

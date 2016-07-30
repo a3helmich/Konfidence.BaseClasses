@@ -8,18 +8,15 @@ namespace Konfidence.BaseData
 {
     public class NinjectDependencyResolver : BaseItem
     {
-        static private IKernel _Kernel;
+        private static IKernel _kernel;
 
-        public IKernel Kernel
-        {
-            get { return _Kernel; }
-        }
+        public IKernel Kernel => _kernel;
 
         public NinjectDependencyResolver()
         {
-            if (!_Kernel.IsAssigned())
+            if (!_kernel.IsAssigned())
             {
-                _Kernel = new StandardKernel();
+                _kernel = new StandardKernel();
 
                 AddBindings();
             }
@@ -27,7 +24,7 @@ namespace Konfidence.BaseData
 
         public IBindingToSyntax<T> Bind<T>()
         {
-            return _Kernel.Bind<T>();
+            return _kernel.Bind<T>();
         }
 
         private void AddBindings()

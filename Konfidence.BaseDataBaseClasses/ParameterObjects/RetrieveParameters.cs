@@ -4,19 +4,15 @@ namespace Konfidence.BaseData.ParameterObjects
 {
     internal class RetrieveParameters : BaseItem
     {
-        private readonly BaseDataItem _DataItem;
-        private readonly string _StoredProcedure;
+        private readonly BaseDataItem _dataItem;
 
-        internal string StoredProcedure
-        {
-            get { return _StoredProcedure; }
-        }
+        internal string StoredProcedure { get; }
 
         internal DbParameterObjectList ParameterObjectList
         {
             get
             {
-                var parameterObjectList = _DataItem.GetParameterObjectList();
+                var parameterObjectList = _dataItem.GetParameterObjectList();
 
                 return parameterObjectList;
             }
@@ -24,9 +20,9 @@ namespace Konfidence.BaseData.ParameterObjects
 
         public RetrieveParameters(BaseDataItem dataItem, string storedProcedure)
         {
-            _StoredProcedure = storedProcedure;
+            StoredProcedure = storedProcedure;
 
-            _DataItem = dataItem;
+            _dataItem = dataItem;
         }
     }
 }

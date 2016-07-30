@@ -11,29 +11,25 @@ namespace Konfidence.BaseData
 {
     public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem //, new()
 	{
-		private string _GetListStoredProcedure = string.Empty;
-		private string _DataBaseName = string.Empty;
-		private string _ServiceName = string.Empty;
+        private readonly DbParameterObjectList _dbParameterObjectList = new DbParameterObjectList();
 
-        private readonly DbParameterObjectList _DbParameterObjectList = new DbParameterObjectList();
-
-        private NinjectDependencyResolver _Ninject;
+        private NinjectDependencyResolver _ninject;
 
         protected IKernel Kernel
         {
             get
             {
-                if (!_Ninject.IsAssigned())
+                if (!_ninject.IsAssigned())
                 {
-                    _Ninject = new NinjectDependencyResolver();
+                    _ninject = new NinjectDependencyResolver();
 
-                    if (!_Ninject.Kernel.GetBindings(typeof(T)).Any())
+                    if (!_ninject.Kernel.GetBindings(typeof(T)).Any())
                     {
-                        _Ninject.Kernel.Bind<T>().To<T>();
+                        _ninject.Kernel.Bind<T>().To<T>();
                     }
                 }
 
-                return _Ninject.Kernel;
+                return _ninject.Kernel;
             }
         }
 
@@ -44,33 +40,22 @@ namespace Konfidence.BaseData
 
 		#region properties
 
-		protected string DataBaseName
-		{
-			get { return _DataBaseName; }
-			set { _DataBaseName = value; }
-		}
+		protected string DataBaseName { get; set; } = string.Empty;
 
-		protected string GetListStoredProcedure
-		{
-			get { return _GetListStoredProcedure; }
-		}
+        protected string GetListStoredProcedure { get; private set; } = string.Empty;
 
-		protected string ServiceName
-		{
-			get { return _ServiceName; }
-			set { _ServiceName = value; }
-		}
+        protected string ServiceName { get; set; } = string.Empty;
 
-		#endregion
+        #endregion
 
         private BaseHost GetHost()
         {
-            return HostFactory.GetHost(_ServiceName, _DataBaseName);
+            return HostFactory.GetHost(ServiceName, DataBaseName);
         }
 
 		protected void BuildItemList(string getListStoredProcedure)
 		{
-		    _GetListStoredProcedure = getListStoredProcedure;
+		    GetListStoredProcedure = getListStoredProcedure;
             
             var dataHost = GetHost();
 
@@ -81,7 +66,7 @@ namespace Konfidence.BaseData
 
         protected void BuildItemList(string getListStoredProcedure, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
         {
-            _GetListStoredProcedure = getListStoredProcedure;
+            GetListStoredProcedure = getListStoredProcedure;
 
             var dataHost = GetHost();
 
@@ -423,38 +408,38 @@ namespace Konfidence.BaseData
 
         public DbParameterObjectList GetParameterObjectList()
         {
-            return _DbParameterObjectList;
+            return _dbParameterObjectList;
         }
 
         #region SetParameter Methods
         protected void SetParameter(string fieldName, int value)
         {
-            _DbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjectList.SetField(fieldName, value);
         }
 
         protected void SetParameter(string fieldName, Guid value)
         {
-            _DbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjectList.SetField(fieldName, value);
         }
 
         protected void SetParameter(string fieldName, string value)
         {
-            _DbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjectList.SetField(fieldName, value);
         }
 
         protected void SetParameter(string fieldName, bool value)
         {
-            _DbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjectList.SetField(fieldName, value);
         }
 
         protected void SetParameter(string fieldName, DateTime value)
         {
-            _DbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjectList.SetField(fieldName, value);
         }
 
         protected void SetParameter(string fieldName, TimeSpan value)
         {
-            _DbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjectList.SetField(fieldName, value);
         }
         #endregion
 

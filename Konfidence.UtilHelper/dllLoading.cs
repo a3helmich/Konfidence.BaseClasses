@@ -27,7 +27,7 @@ namespace Konfidence.UtilHelper
         /// <param name="dllPointer">Pointer to Dll witch was returned from LoadLibraryEx</param>
         /// <returns>If unloaded library was correct then true, else false</returns>
         [DllImport("kernel32.dll")]
-        public extern static bool FreeLibrary(IntPtr dllPointer);
+        public static extern bool FreeLibrary(IntPtr dllPointer);
  
         /// <summary>
         /// To get function pointer from loaded dll 
@@ -39,7 +39,7 @@ namespace Konfidence.UtilHelper
 
 
         [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
-        public extern static IntPtr GetProcAddress(IntPtr dllPointer, string functionName);
+        public static extern IntPtr GetProcAddress(IntPtr dllPointer, string functionName);
 
         private const uint LOAD_WITH_ALTERED_SEARCH_PATH = 0x00000008;
 
