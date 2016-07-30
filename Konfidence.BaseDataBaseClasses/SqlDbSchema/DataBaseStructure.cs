@@ -2,27 +2,27 @@
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
-    public class DataBaseStructure : SchemaBaseDataItem
+    public class DatabaseStructure : SchemaBaseDataItem
     {
         #region readonly properties
         public TableDataItemList TableList { get; private set; }
 
         #endregion readonly properties
 
-        //public DataBaseStructure()
+        //public DatabaseStructure()
         //{
         //}
 
-        public DataBaseStructure(string dataBaseName)
+        public DatabaseStructure(string databaseName)
         {
-            DataBaseName = dataBaseName;
+            DatabaseName = databaseName;
         }
 
         public void BuildStructure()
         {
             CreateStoredProcedures();
 
-            TableList = new TableDataItemList(DataBaseName);
+            TableList = new TableDataItemList(DatabaseName);
 
             DeleteStoredProcedures();
         }

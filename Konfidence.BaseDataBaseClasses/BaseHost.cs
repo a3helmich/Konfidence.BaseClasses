@@ -12,9 +12,9 @@ namespace Konfidence.BaseData
 
 	    #region properties
 
-		protected string DataBaseName { get; } = string.Empty;
+		protected string DatabaseName { get; }
 
-	    protected string ServiceName { get; } = string.Empty;
+	    protected string ServiceName { get; }
 
 	    public int Id => ID;
 
@@ -23,7 +23,7 @@ namespace Konfidence.BaseData
 		public BaseHost(string serviceName, string databaseName)
 		{
 			ServiceName = serviceName;
-			DataBaseName = databaseName;
+			DatabaseName = databaseName;
 		}
 
 		internal virtual void Save(BaseDataItem dataItem)

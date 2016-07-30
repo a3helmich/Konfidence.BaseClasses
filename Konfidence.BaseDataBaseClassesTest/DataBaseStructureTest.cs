@@ -1,16 +1,16 @@
 ﻿using Konfidence.BaseData.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.BaseDataBaseClassesTest
+namespace Konfidence.BaseDatabaseClassesTest
 {
     
     
     /// <summary>
-    ///This is a test class for DataBaseStructureTest and is intended
-    ///to contain all DataBaseStructureTest Unit Tests
+    ///This is a test class for DatabaseStructureTest and is intended
+    ///to contain all DatabaseStructureTest Unit Tests
     ///</summary>
     [TestClass]
-    public class DataBaseStructureTest
+    public class DatabaseStructureTest
     {
         /// <summary>
         ///Gets or sets the test context which provides
@@ -51,10 +51,10 @@ namespace Konfidence.BaseDataBaseClassesTest
         /// <summary>
         ///A test for BuildStructure
         ///</summary>
-        [TestMethod, TestCategory("DataBaseStructure")]
+        [TestMethod, TestCategory("DatabaseStructure")]
         public void BuildStructureTest()
         {
-            DataBaseStructure target = new DataBaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
+            DatabaseStructure target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 

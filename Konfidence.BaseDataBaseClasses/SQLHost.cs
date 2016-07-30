@@ -16,11 +16,11 @@ namespace Konfidence.BaseData
 
         protected IKernel Kernel => _ninject.Kernel;
 
-        public SqlHost(string dataBaseName) : base(string.Empty, dataBaseName)
+        public SqlHost(string databaseName) : base(string.Empty, databaseName)
 		{
-            var dataBaseNameParam = new ConstructorArgument("databaseName", dataBaseName);
+            var databaseNameParam = new ConstructorArgument("databaseName", databaseName);
 
-            _repository = Kernel.Get<IDatabaseRepository>(dataBaseNameParam);
+            _repository = Kernel.Get<IDatabaseRepository>(databaseNameParam);
 		}
 
 	    private IDataReader DataReader => _repository.DataReader;

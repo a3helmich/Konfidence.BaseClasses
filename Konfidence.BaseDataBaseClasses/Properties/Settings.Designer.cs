@@ -27,9 +27,9 @@ namespace Konfidence.BaseData.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/RegistrationWebservice/BaseService.asmx")]
-        public string BaseDataBaseClasses_WSBaseHost_WSBaseHostService {
+        public string BaseDatabaseClasses_WSBaseHost_WSBaseHostService {
             get {
-                return ((string)(this["BaseDataBaseClasses_WSBaseHost_WSBaseHostService"]));
+                return ((string)(this["BaseDatabaseClasses_WSBaseHost_WSBaseHostService"]));
             }
         }
     }

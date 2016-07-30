@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Konfidence.BaseData</RootNamespace>
-    <AssemblyName>Konfidence.BaseDataBaseClasses</AssemblyName>
+    <AssemblyName>Konfidence.BaseDatabaseClasses</AssemblyName>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>

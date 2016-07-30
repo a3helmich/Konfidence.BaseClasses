@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BaseDataBaseClasses")]
-[assembly: AssemblyDescription("BaseDataBaseClasses")]
-[assembly: AssemblyConfiguration("BaseDataBaseClasses")]
+[assembly: AssemblyTitle("BaseDatabaseClasses")]
+[assembly: AssemblyDescription("BaseDatabaseClasses")]
+[assembly: AssemblyConfiguration("BaseDatabaseClasses")]
 [assembly: AssemblyCompany("Konfidence in it")]
-[assembly: AssemblyProduct("BaseDataBaseClasses")]
+[assembly: AssemblyProduct("BaseDatabaseClasses")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2006")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

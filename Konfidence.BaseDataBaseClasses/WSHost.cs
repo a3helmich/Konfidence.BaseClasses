@@ -11,7 +11,7 @@ namespace Konfidence.BaseData
 	{
 		private readonly WSBaseHostService _wsBaseHostService;
 
-        public WsHost(string serviceName, string dataBaseName) : base(serviceName, dataBaseName)
+        public WsHost(string serviceName, string databaseName) : base(serviceName, databaseName)
 		{
             _wsBaseHostService = new WSBaseHostService();
 

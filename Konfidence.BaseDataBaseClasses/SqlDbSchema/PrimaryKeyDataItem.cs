@@ -32,7 +32,7 @@
         public PrimaryKeyDataItem(string databaseName, string tableName)
             : this()
         {
-            DataBaseName = databaseName;
+            DatabaseName = databaseName;
 
             SetParameter(Tablename, tableName);
 

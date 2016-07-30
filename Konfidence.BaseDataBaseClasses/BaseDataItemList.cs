@@ -39,7 +39,7 @@ namespace Konfidence.BaseData
 
 		#region properties
 
-		protected string DataBaseName { get; set; } = string.Empty;
+		protected string DatabaseName { get; set; } = string.Empty;
 
         protected string GetListStoredProcedure { get; private set; } = string.Empty;
 
@@ -49,7 +49,7 @@ namespace Konfidence.BaseData
 
         private BaseHost GetHost()
         {
-            return HostFactory.GetHost(ServiceName, DataBaseName);
+            return HostFactory.GetHost(ServiceName, DatabaseName);
         }
 
 		protected void BuildItemList(string getListStoredProcedure)

@@ -183,9 +183,9 @@
       <Project>{d71a4677-79c7-443b-900d-218fbcfe8728}</Project>
       <Name>Konfidence.BaseClasses</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDataBaseClasses.csproj">
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj">
       <Project>{2b4ccfac-0b45-4f69-96bb-a60c4584027f}</Project>
-      <Name>Konfidence.BaseDataBaseClasses</Name>
+      <Name>Konfidence.BaseDatabaseClasses</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj">
       <Project>{411d4b61-9ddf-43f9-ab11-b256dd8287e5}</Project>

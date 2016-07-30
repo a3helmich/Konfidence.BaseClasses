@@ -61,7 +61,7 @@ namespace Konfidence.BaseData
             {
                 if (!_dataHost.IsAssigned())
                 {
-                    _dataHost = HostFactory.GetHost(ServiceName, DataBaseName);
+                    _dataHost = HostFactory.GetHost(ServiceName, DatabaseName);
                 }
 
                 return _dataHost;
@@ -106,7 +106,7 @@ namespace Konfidence.BaseData
         }
 
 		#region properties
-		protected string DataBaseName { get; set; } = string.Empty;
+		protected string DatabaseName { get; set; } = string.Empty;
 
 	    protected string ServiceName { get; set; } = string.Empty;
 

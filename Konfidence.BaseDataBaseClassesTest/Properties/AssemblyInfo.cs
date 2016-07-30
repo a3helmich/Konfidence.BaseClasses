@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Konfidence.BaseDataBaseClassesTest")]
+[assembly: AssemblyTitle("Konfidence.BaseDatabaseClassesTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Konfidence in it")]
-[assembly: AssemblyProduct("Konfidence.BaseDataBaseClassesTest")]
+[assembly: AssemblyProduct("Konfidence.BaseDatabaseClassesTest")]
 [assembly: AssemblyCopyright("Copyright © Konfidence in it 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses", "K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers", "Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj", "{D60A1063-3897-44FA-97F5-85A9C25B1F8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDataBaseClasses", "Konfidence.BaseDataBaseClasses\Konfidence.BaseDataBaseClasses.csproj", "{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDatabaseClasses", "Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj", "{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseThreadClasses", "Konfidence.BaseThreadClasses\Konfidence.BaseThreadClasses.csproj", "{536AED59-A354-4905-AFC9-6FF981B06413}"
 EndProject
@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWebsiteClassesTest", "Konfidence.BaseWebsiteClassesTest\Konfidence.BaseWebsiteClassesTest.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDataBaseClassesTest", "Konfidence.BaseDataBaseClassesTest\Konfidence.BaseDataBaseClassesTest.csproj", "{99197855-9052-499C-B7B4-EAF2F9D52512}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDatabaseClassesTest", "Konfidence.BaseDataBaseClassesTest\Konfidence.BaseDatabaseClassesTest.csproj", "{99197855-9052-499C-B7B4-EAF2F9D52512}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}"
 EndProject

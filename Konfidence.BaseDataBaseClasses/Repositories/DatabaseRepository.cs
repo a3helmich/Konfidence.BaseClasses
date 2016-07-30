@@ -13,13 +13,13 @@ namespace Konfidence.BaseData.Repositories
 {
     internal class DatabaseRepository : BaseItem, IDatabaseRepository
     {
-        private readonly string _dataBasename;
+        private readonly string _databaseName;
 
         public IDataReader DataReader { get; private set; }
 
         public DatabaseRepository(string databaseName)
         {
-            _dataBasename = databaseName;
+            _databaseName = databaseName;
         }
 
         public Database GetDatabase()
@@ -27,9 +27,9 @@ namespace Konfidence.BaseData.Repositories
              Database databaseInstance;
             DatabaseProviderFactory databaseProviderFactory = new DatabaseProviderFactory();
 
-            if (_dataBasename.IsAssigned())
+            if (_databaseName.IsAssigned())
             {
-                databaseInstance = databaseProviderFactory.Create(_dataBasename);
+                databaseInstance = databaseProviderFactory.Create(_databaseName);
             }
             else
             {

@@ -51,7 +51,7 @@ namespace Konfidence.BaseData.WSBaseHost {
         
         /// <remarks/>
         public WSBaseHostService() {
-            this.Url = global::Konfidence.BaseData.Properties.Settings.Default.BaseDataBaseClasses_WSBaseHost_WSBaseHostService;
+            this.Url = global::Konfidence.BaseData.Properties.Settings.Default.BaseDatabaseClasses_WSBaseHost_WSBaseHostService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

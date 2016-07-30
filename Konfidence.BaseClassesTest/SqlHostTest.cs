@@ -18,7 +18,7 @@ namespace Konfidence.TestBaseClasses
         [TestMethod, TestCategory("SqlServer")]
         public void SqlServerExists()
         {
-            DataBaseStructure target = new DataBaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
+            DatabaseStructure target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 

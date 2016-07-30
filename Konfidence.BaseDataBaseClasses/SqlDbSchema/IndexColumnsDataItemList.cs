@@ -13,11 +13,11 @@ namespace Konfidence.BaseData.SqlDbSchema
         {
             _tableName = tableName;
 
-            DataBaseName = databaseName;
+            DatabaseName = databaseName;
 
-            PrimaryKeyDataItem = new PrimaryKeyDataItem(DataBaseName, _tableName);
+            PrimaryKeyDataItem = new PrimaryKeyDataItem(DatabaseName, _tableName);
 
-            var indexColumnDataItem = new IndexColumnsDataItem(DataBaseName);
+            var indexColumnDataItem = new IndexColumnsDataItem(DatabaseName);
 
             var dataTable = indexColumnDataItem.GetIndexedColumns();
 
@@ -35,7 +35,7 @@ namespace Konfidence.BaseData.SqlDbSchema
                     var columnName = dataRow["COLUMN_NAME"] as string;
                     var constraintName = dataRow["CONSTRAINT_NAME"] as string;
 
-                    var indexColumnDataItem = new IndexColumnsDataItem(DataBaseName);
+                    var indexColumnDataItem = new IndexColumnsDataItem(DatabaseName);
 
                     if (constraintName.IsAssigned() && constraintName.Equals(PrimaryKeyDataItem.ConstraintName))
                     {

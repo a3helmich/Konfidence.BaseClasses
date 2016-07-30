@@ -6,7 +6,7 @@ namespace Konfidence.BaseData.SqlDbSchema
     {
         public IndexColumnsDataItem(string databaseName)
         {
-            DataBaseName = databaseName;
+            DatabaseName = databaseName;
         }
 
         public DataTable GetIndexedColumns()
