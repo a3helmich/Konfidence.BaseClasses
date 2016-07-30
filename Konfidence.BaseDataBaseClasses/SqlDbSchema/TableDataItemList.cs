@@ -17,6 +17,11 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         internal class InternalTableDataItem : SchemaBaseDataItem
         {
+            public InternalTableDataItem(string dataBaseName)
+            {
+                DataBaseName = dataBaseName;
+            }
+
             internal DataTable GetTables()
             {
                 return GetSchemaObject("Tables");
@@ -25,7 +30,7 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         private DataTable GetTables()
         {
-            var shemaBaseDataItem = new InternalTableDataItem();
+            var shemaBaseDataItem = new InternalTableDataItem(DataBaseName);
 
             return shemaBaseDataItem.GetTables();
         }

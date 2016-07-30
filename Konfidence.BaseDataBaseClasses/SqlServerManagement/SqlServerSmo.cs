@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using Konfidence.Base;
 using Microsoft.SqlServer.Management.Common;
@@ -6,7 +9,7 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace Konfidence.BaseData.SqlServerManagement
 {
-    internal class SqlServerSmo: BaseItem
+    internal class SqlServerSmo : BaseItem
     {
         private string _databaseServerName = string.Empty;
         private string _userName = string.Empty;
@@ -37,10 +40,17 @@ namespace Konfidence.BaseData.SqlServerManagement
                 var executerThread = new Thread(PingSqlServerVersionExecuter);
 
                 executerThread.Start();
+                if (Debugger.IsAttached)
+                {
+                    executerThread.Join();
 
-                executerThread.Join(3000); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
-                // NB. the thread is not going to stop immediately -> the application will not stop right away. 
-                // but the response is really fast.
+                }
+                else
+                {
+                    executerThread.Join(3000); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
+                                               // NB. the thread is not going to stop immediately -> the application will not stop right away. 
+                                               // but the response is really fast.
+                }
 
                 return _pingSucceeded;
             }
@@ -57,9 +67,9 @@ namespace Konfidence.BaseData.SqlServerManagement
                 if (_userName.IsAssigned() && _password.IsAssigned())
                 {
                     var serverConnection = new ServerConnection(_databaseServerName, _userName, _password)
-                        {
-                            LoginSecure = false
-                        };
+                    {
+                        LoginSecure = false
+                    };
 
                     var server = new Server(serverConnection);
 
@@ -78,9 +88,10 @@ namespace Konfidence.BaseData.SqlServerManagement
             {
                 throw cfEx.InnerException;
             }
-            catch
+            catch (Exception ex)
             {
                 // if this fails, a timeout has already occured
+                var message = ex.Message;
             }
 
         }
@@ -92,9 +103,9 @@ namespace Konfidence.BaseData.SqlServerManagement
             if (userName.IsAssigned() && password.IsAssigned())
             {
                 var serverConnection = new ServerConnection(databaseServerName, userName, password)
-                    {
-                        LoginSecure = false
-                    };
+                {
+                    LoginSecure = false
+                };
 
                 server = new Server(serverConnection);
             }
@@ -110,12 +121,9 @@ namespace Konfidence.BaseData.SqlServerManagement
                 databaseList.Add(database.Name.ToLower());
             }
 
-            if (!databaseList.Contains(databaseName.ToLower()))
-            {
-                return false;
-            }
+            var foundDatabase = databaseList.Any(name => name.Equals(databaseName, StringComparison.OrdinalIgnoreCase));
 
-            return true;
+            return foundDatabase;
         }
     }
 }

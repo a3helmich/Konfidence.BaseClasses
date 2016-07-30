@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using Konfidence.Base;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
@@ -21,28 +22,28 @@ namespace Konfidence.BaseData.SqlServerManagement
 
                 foreach(string param in connectionParameters)
                 {
-                    if (param.ToLower().StartsWith("server="))
+                    if (param.StartsWith("server=", StringComparison.OrdinalIgnoreCase))
                     {
                         string[] paramParts = param.Split('=');
 
                         serverName = paramParts[1];
                     }
 
-                    if (param.ToLower().StartsWith("database="))
+                    if (param.StartsWith("database=", StringComparison.OrdinalIgnoreCase))
                     {
                         string[] paramParts = param.Split('=');
 
                         databaseName = paramParts[1];
                     }
 
-                    if (param.ToLower().StartsWith("user id="))
+                    if (param.StartsWith("user id=", StringComparison.OrdinalIgnoreCase))
                     {
                         string[] paramParts = param.Split('=');
 
                         userName = paramParts[1];
                     }
 
-                    if (param.ToLower().StartsWith("password="))
+                    if (param.StartsWith("password=", StringComparison.OrdinalIgnoreCase))
                     {
                         string[] paramParts = param.Split('=');
 

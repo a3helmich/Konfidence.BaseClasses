@@ -27,7 +27,7 @@ namespace Konfidence.BaseData.Repositories
              Database databaseInstance;
             DatabaseProviderFactory databaseProviderFactory = new DatabaseProviderFactory();
 
-            if (_dataBasename.Length > 0)
+            if (_dataBasename.IsAssigned())
             {
                 databaseInstance = databaseProviderFactory.Create(_dataBasename);
             }

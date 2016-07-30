@@ -5,7 +5,6 @@ using System.Linq;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
 using Ninject;
-using JetBrains.Annotations;
 
 namespace Konfidence.BaseData
 {
