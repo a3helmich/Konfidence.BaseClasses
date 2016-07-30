@@ -55,6 +55,16 @@ namespace MenuTest
         }
 
         [TestMethod, TestCategory("MenuItem")]
+        public void GetTwoSingleMenuItem()
+        {
+            var dataItem1 = new Bl.MenuDataItem(1);
+            var dataItem2 = new Bl.MenuDataItem(2);
+
+            Assert.IsNotNull(dataItem1);
+            Assert.IsNotNull(dataItem2);
+        }
+
+        [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemList()
         {
             var list = Bl.MenuDataItemList.GetListByMenuCode(1);
