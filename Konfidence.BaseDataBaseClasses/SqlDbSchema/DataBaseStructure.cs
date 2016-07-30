@@ -9,9 +9,9 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         #endregion readonly properties
 
-        public DataBaseStructure()
-        {
-        }
+        //public DataBaseStructure()
+        //{
+        //}
 
         public DataBaseStructure(string dataBaseName)
         {
@@ -20,8 +20,6 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         public void BuildStructure()
         {
-            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
-
             CreateStoredProcedures();
 
             TableList = new TableDataItemList(DataBaseName);
@@ -31,6 +29,8 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         private void CreateStoredProcedures()
         {
+            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
+
             CreateSPPrimaryKey_Get(SpNames.PrimarykeyGet);
             CreateSPColumns_GetList(SpNames.ColumnsGetlist);
         }

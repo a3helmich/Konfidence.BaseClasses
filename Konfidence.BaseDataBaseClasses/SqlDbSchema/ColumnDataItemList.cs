@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using Konfidence.Base;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
@@ -47,9 +49,9 @@ namespace Konfidence.BaseData.SqlDbSchema
             _hasDefaultValueFieldsChecked = false;
         }
 
-        public static ColumnDataItemList GetList(string tableName)
+        public static ColumnDataItemList GetList(string databaseName, string tableName)
         {
-            var columnDataItemList = new ColumnDataItemList(tableName);
+            var columnDataItemList = new ColumnDataItemList(tableName) {DataBaseName = databaseName};
 
             columnDataItemList.BuildItemList(SpNames.ColumnsGetlist);
 

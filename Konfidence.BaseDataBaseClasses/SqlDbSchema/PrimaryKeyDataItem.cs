@@ -29,9 +29,11 @@
         {
         }
 
-        public PrimaryKeyDataItem(string tableName)
+        public PrimaryKeyDataItem(string databaseName, string tableName)
             : this()
         {
+            DataBaseName = databaseName;
+
             SetParameter(Tablename, tableName);
 
             GetItem(SpNames.PrimarykeyGet);

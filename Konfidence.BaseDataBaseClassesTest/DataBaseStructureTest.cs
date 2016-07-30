@@ -54,7 +54,7 @@ namespace Konfidence.BaseDataBaseClassesTest
         [TestMethod, TestCategory("DataBaseStructure")]
         public void BuildStructureTest()
         {
-            DataBaseStructure target = new DataBaseStructure(); // TODO: Initialize to an appropriate value
+            DataBaseStructure target = new DataBaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 

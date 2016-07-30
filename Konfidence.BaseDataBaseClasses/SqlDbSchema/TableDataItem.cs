@@ -39,8 +39,8 @@ namespace Konfidence.BaseData.SqlDbSchema
             Schema = schema;
             Name = name;
 
-            _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name);
-            _indexColumnsDataItemList = new IndexColumnsDataItemList(name);
+            _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(Catalog, name);
+            _indexColumnsDataItemList = new IndexColumnsDataItemList(Catalog, name);
 
             // find out which column is the primaryKey
             foreach (var columnDataItem in _columnDataItemList)
@@ -56,6 +56,7 @@ namespace Konfidence.BaseData.SqlDbSchema
             }
 
             HasGuidId = false;
+
             // find out if te guidId exists for this table
             foreach (var columnDataItem in _columnDataItemList)
             {
