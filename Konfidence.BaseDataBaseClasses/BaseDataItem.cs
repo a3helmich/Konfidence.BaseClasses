@@ -588,30 +588,34 @@ namespace Konfidence.BaseData
         {
         }
 
-		protected internal virtual void InitializeDataItem()
-		{
-		    _isInitialized = true;
-		}
+	    private void InternalInitializeDataItem()
+	    {
+	        if (!_isInitialized)
+	        {
+	            InitializeDataItem();
 
-		protected void GetItem(string storedProcedure)
-		{
-		    if (!_isInitialized)
-		    {
-                InitializeDataItem();
-		    }
+	            _isInitialized = true;
+	        }
+	    }
 
-		    DataHost.GetItem(this, storedProcedure);
+
+        protected internal virtual void InitializeDataItem()
+		{
+            // NOP
+        }
+
+        protected void GetItem(string storedProcedure)
+		{
+            InternalInitializeDataItem();
+
+            DataHost.GetItem(this, storedProcedure);
 
             AfterGetDataItem();
         }
 
 		protected void GetItem(string storedProcedure, int autoKeyId)
 		{
-            if (!_isInitialized)
-            {
-                InitializeDataItem();
-            }
-
+            InternalInitializeDataItem();
 
             SetField(AutoIdField, autoKeyId);
 
@@ -620,11 +624,7 @@ namespace Konfidence.BaseData
 
         protected void GetItem(string storedProcedure, Guid guidId)
         {
-            if (!_isInitialized)
-            {
-                InitializeDataItem();
-            }
-
+            InternalInitializeDataItem();
 
             SetField(GuidIdField, guidId);
 
@@ -643,10 +643,7 @@ namespace Konfidence.BaseData
 
 		public void Save()
 		{
-            if (!_isInitialized)
-            {
-                InitializeDataItem();
-            }
+            InternalInitializeDataItem();
 
             BeforeSave();
 
@@ -674,10 +671,7 @@ namespace Konfidence.BaseData
 
 		public void Delete()
 		{
-            if (!_isInitialized)
-            {
-                InitializeDataItem();
-            }
+            InternalInitializeDataItem();
 
             BeforeDelete();
 
