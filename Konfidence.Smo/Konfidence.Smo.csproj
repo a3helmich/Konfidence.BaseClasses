@@ -81,6 +81,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlDbSchema\ColumnDataItem.cs" />
+    <Compile Include="SqlDbSchema\ColumnDataItemList.cs" />
+    <Compile Include="SqlDbSchema\DataBaseStructure.cs" />
+    <Compile Include="SqlDbSchema\IColumnDataItem.cs" />
+    <Compile Include="SqlDbSchema\IColumnDataItemList.cs" />
+    <Compile Include="SqlDbSchema\IndexColumnsDataItem.cs" />
+    <Compile Include="SqlDbSchema\IndexColumnsDataItemList.cs" />
+    <Compile Include="SqlDbSchema\ITableDataItem.cs" />
+    <Compile Include="SqlDbSchema\PrimaryKeyDataItem.cs" />
+    <Compile Include="SqlDbSchema\SchemaBaseDataItem.cs" />
+    <Compile Include="SqlDbSchema\SpName.cs" />
+    <Compile Include="SqlDbSchema\SqlConstant.cs" />
+    <Compile Include="SqlDbSchema\TableDataItem.cs" />
+    <Compile Include="SqlDbSchema\TableDataItemList.cs" />
+    <Compile Include="SqlServerManagement\SqlServerCheck.cs" />
+    <Compile Include="SqlServerManagement\SqlServerSmo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
