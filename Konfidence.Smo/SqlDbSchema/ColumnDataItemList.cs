@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Konfidence.Base;
+using Konfidence.BaseData;
 
-namespace Konfidence.BaseData.SqlDbSchema
+namespace Konfidence.Smo.SqlDbSchema
 {
     public class ColumnDataItemList : BaseDataItemList<ColumnDataItem>, IColumnDataItemList
     {

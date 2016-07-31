@@ -7,7 +7,7 @@ using Konfidence.Base;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Konfidence.BaseData.SqlServerManagement
+namespace Konfidence.Smo.SqlServerManagement
 {
     internal class SqlServerSmo : BaseItem
     {

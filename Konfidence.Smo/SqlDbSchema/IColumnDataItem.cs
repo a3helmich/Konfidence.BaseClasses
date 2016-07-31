@@ -1,4 +1,4 @@
-﻿namespace Konfidence.BaseData.SqlDbSchema
+﻿namespace Konfidence.Smo.SqlDbSchema
 {
     public interface IColumnDataItem 
     {

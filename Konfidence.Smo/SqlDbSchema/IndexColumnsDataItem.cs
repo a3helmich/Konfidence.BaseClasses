@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Konfidence.BaseData.SqlDbSchema
+namespace Konfidence.Smo.SqlDbSchema
 {
     public class IndexColumnsDataItem : SchemaBaseDataItem
     {

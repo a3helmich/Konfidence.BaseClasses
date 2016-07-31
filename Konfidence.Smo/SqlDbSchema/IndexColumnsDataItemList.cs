@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using Konfidence.Base;
+using Konfidence.BaseData;
 
-namespace Konfidence.BaseData.SqlDbSchema
+namespace Konfidence.Smo.SqlDbSchema
 {
     public class IndexColumnsDataItemList : BaseDataItemList<IndexColumnsDataItem>
     {

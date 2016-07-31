@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Konfidence.BaseData.SqlDbSchema
+namespace Konfidence.Smo.SqlDbSchema
 {
     public class ColumnDataItem : SchemaBaseDataItem, IColumnDataItem
     {

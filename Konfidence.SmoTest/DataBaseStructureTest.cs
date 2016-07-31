@@ -1,4 +1,4 @@
-﻿using Konfidence.BaseData.SqlDbSchema;
+﻿using Konfidence.Smo.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.BaseDatabaseClassesTest

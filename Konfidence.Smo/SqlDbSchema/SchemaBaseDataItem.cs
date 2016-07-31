@@ -1,6 +1,7 @@
 ﻿using System.Data;
+using Konfidence.BaseData;
 
-namespace Konfidence.BaseData.SqlDbSchema
+namespace Konfidence.Smo.SqlDbSchema
 {
     public class SchemaBaseDataItem : BaseDataItem
     {

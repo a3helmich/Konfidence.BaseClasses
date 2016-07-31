@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Konfidence.Base;
+using Konfidence.BaseData;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Konfidence.BaseData.SqlServerManagement
+namespace Konfidence.Smo.SqlServerManagement
 {
     internal class SqlServerCheck
     {
