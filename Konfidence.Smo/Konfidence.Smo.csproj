@@ -99,6 +99,7 @@
     <Compile Include="SqlServerManagement\SqlServerSmo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Konfidence.Smo.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
