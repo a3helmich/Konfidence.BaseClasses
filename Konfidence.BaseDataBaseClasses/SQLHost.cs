@@ -262,7 +262,8 @@ namespace Konfidence.BaseData
             return _repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
-        internal override DataTable GetSchemaObject(string collection)
+        // TODO: internal
+        public override DataTable GetSchemaObject(string collection)
         {
             DataTable dataTable;
 

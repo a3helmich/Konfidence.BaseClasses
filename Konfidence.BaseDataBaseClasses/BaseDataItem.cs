@@ -55,7 +55,8 @@ namespace Konfidence.BaseData
             }
         }
 
-        internal BaseHost DataHost
+        // TODO: internal
+        public BaseHost DataHost
         {
             get
             {

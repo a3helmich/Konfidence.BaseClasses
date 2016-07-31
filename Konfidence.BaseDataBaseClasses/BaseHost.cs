@@ -5,7 +5,8 @@ using Konfidence.BaseData.ParameterObjects;
 
 namespace Konfidence.BaseData
 {
-	internal class BaseHost: BaseItem
+    // TODO: internal
+    public class BaseHost: BaseItem
 	{
 	    private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
@@ -74,7 +75,8 @@ namespace Konfidence.BaseData
             return false;
         }
         
-        internal virtual DataTable GetSchemaObject(string collection)
+        // TODO: make internal again 
+        public virtual DataTable GetSchemaObject(string collection)
         {
             return null;
         }

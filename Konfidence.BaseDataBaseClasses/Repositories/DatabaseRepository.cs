@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
-using Konfidence.BaseData.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData.Repositories
@@ -39,9 +38,10 @@ namespace Konfidence.BaseData.Repositories
             {
                 if (databaseInstance.DbProviderFactory is SqlClientFactory)
                 {
-                    if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
-                    {
-                    }
+                    // not with Smo!!! -> try a simulair trick as in VerifyDatabaseServer  (Konfidence.Smo)
+                    //if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
+                    //{
+                    //}
                 }
             }
 

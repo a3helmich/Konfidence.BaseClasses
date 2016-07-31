@@ -145,6 +145,10 @@
       <Project>{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}</Project>
       <Name>Konfidence.BaseDatabaseClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Konfidence.Smo\Konfidence.Smo.csproj">
+      <Project>{6CEE30A7-D859-496D-9899-9DE1654DF995}</Project>
+      <Name>Konfidence.Smo</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

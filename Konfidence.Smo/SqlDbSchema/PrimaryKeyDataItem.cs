@@ -33,12 +33,14 @@
             GetItem(SpName.PrimarykeyGet);
         }
 
-        protected internal override void InitializeDataItem()
+        // TODO: internal
+        protected override void InitializeDataItem()
         {
             AutoIdField = SqlConstant.PrimaryKeyId;
         }
 
-        protected internal override void GetData()
+        // TODO: internal
+        protected override void GetData()
         {
             GetField(SqlConstant.ConstraintNameField, out _constraintName);
         }

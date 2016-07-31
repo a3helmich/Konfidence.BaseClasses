@@ -118,7 +118,8 @@ namespace Konfidence.BaseData.SqlDbSchema
             IsLockInfo = false;
         }
 
-        protected internal override void GetData()
+        // TODO : internal
+        protected override void GetData()
         {
             string name;
             GetField("Name", out name);

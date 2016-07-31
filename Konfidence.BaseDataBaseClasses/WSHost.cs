@@ -7,7 +7,8 @@ using Konfidence.BaseData.WSBaseHost;
 
 namespace Konfidence.BaseData
 {
-	internal class WsHost : BaseHost
+    // TODO: internal
+    public class WsHost : BaseHost
 	{
 		private readonly WSBaseHostService _wsBaseHostService;
 
