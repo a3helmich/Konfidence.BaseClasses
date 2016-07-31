@@ -4,8 +4,6 @@ namespace Konfidence.BaseData.SqlDbSchema
 {
     public class TableDataItem : SchemaBaseDataItem, ITableDataItem
     {
-        private const string TYPE = "Table";
-
         private readonly ColumnDataItemList _columnDataItemList;
         private readonly IndexColumnsDataItemList _indexColumnsDataItemList;
 
@@ -17,7 +15,7 @@ namespace Konfidence.BaseData.SqlDbSchema
 
         public string Name { get; } = string.Empty;
 
-        public string Type => TYPE;
+        public string TableType => SqlConstant.TableType;
 
         public IColumnDataItemList ColumnDataItemList => _columnDataItemList;
 

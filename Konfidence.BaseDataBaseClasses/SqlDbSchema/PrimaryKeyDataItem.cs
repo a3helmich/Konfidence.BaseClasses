@@ -3,14 +3,9 @@
     public class PrimaryKeyDataItem : SchemaBaseDataItem
     {
         // field definitions
-        private const string CONSTRAINT_NAME = "Constraint_Name";
-        private const string Primarykeyid = "PrimaryKeyId";
-
-        private const string Tablename = "tableName";
 
         private string _constraintName = string.Empty;
 
-        #region properties
         public int PrimaryKeyId => Id;
 
         public string ConstraintName
@@ -23,7 +18,6 @@
 
         public string DataType { get; set; } = string.Empty;
 
-        #endregion properties
 
         public PrimaryKeyDataItem()
         {
@@ -34,19 +28,19 @@
         {
             DatabaseName = databaseName;
 
-            SetParameter(Tablename, tableName);
+            SetParameter(SqlConstant.TableName, tableName);
 
-            GetItem(SpNames.PrimarykeyGet);
+            GetItem(SpName.PrimarykeyGet);
         }
 
         protected internal override void InitializeDataItem()
         {
-            AutoIdField = Primarykeyid;
+            AutoIdField = SqlConstant.PrimaryKeyId;
         }
 
         protected internal override void GetData()
         {
-            GetField(CONSTRAINT_NAME, out _constraintName);
+            GetField(SqlConstant.ConstraintNameField, out _constraintName);
         }
     }
 }

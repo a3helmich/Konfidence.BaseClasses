@@ -1,8 +1,8 @@
 using System;
 using System.Data;
 using Konfidence.Base;
-using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseData.Repositories;
 using Ninject;
 using Ninject.Parameters;
 

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition.Hosting;
 using Konfidence.Base;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData.SqlDbSchema
 {
@@ -53,7 +51,7 @@ namespace Konfidence.BaseData.SqlDbSchema
         {
             var columnDataItemList = new ColumnDataItemList(tableName) {DatabaseName = databaseName};
 
-            columnDataItemList.BuildItemList(SpNames.ColumnsGetlist);
+            columnDataItemList.BuildItemList(SpName.ColumnsGetlist);
 
             return columnDataItemList;
         }
@@ -61,7 +59,7 @@ namespace Konfidence.BaseData.SqlDbSchema
         public override void SetParameters(string storedProcedure)
         {
 
-            if (storedProcedure.Equals(SpNames.ColumnsGetlist))
+            if (storedProcedure.Equals(SpName.ColumnsGetlist))
             {
                 SetParameter("TableName", _tableName);
             }

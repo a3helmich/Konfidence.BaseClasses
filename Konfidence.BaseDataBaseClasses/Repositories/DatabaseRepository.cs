@@ -4,7 +4,6 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using Konfidence.Base;
-using Konfidence.BaseData.IRepositories;
 using Konfidence.BaseData.ParameterObjects;
 using Konfidence.BaseData.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;

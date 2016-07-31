@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://konfidence.nl/DataItemService" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://konfidence.nl/DataItemService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://konfidence.nl/DataItemService">
       <s:element name="Save">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="properties" type="tns:ArrayOfParameterObject" />
             <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
-      <s:complexType name="ArrayOfParameterObject">
+      <s:complexTableType name="ArrayOfParameterObject">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="ParameterObject" nillable="true" type="tns:ParameterObject" />
         </s:sequence>
-      </s:complexType>
-      <s:complexType name="ParameterObject">
+      </s:complexTableType>
+      <s:complexTableType name="ParameterObject">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="Field" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="DbType" type="tns:DbType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DbTableType" type="tns:DbTableType" />
           <s:element minOccurs="0" maxOccurs="1" name="Value" />
         </s:sequence>
-      </s:complexType>
-      <s:simpleType name="DbType">
+      </s:complexTableType>
+      <s:simpleTableType name="DbTableType">
         <s:restriction base="s:string">
           <s:enumeration value="AnsiString" />
           <s:enumeration value="Binary" />
@@ -52,128 +52,128 @@
           <s:enumeration value="DateTime2" />
           <s:enumeration value="DateTimeOffset" />
         </s:restriction>
-      </s:simpleType>
+      </s:simpleTableType>
       <s:element name="SaveResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="SaveResult" type="s:int" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="GetItem">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="GetItemResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetItemResult" type="tns:ArrayOfParameterObject" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="GetItemByParam">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="ParameterList" type="tns:ArrayOfParameterObject" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="GetItemByParamResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetItemByParamResult" type="tns:ArrayOfParameterObject" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="Delete">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="DeleteResponse">
-        <s:complexType />
+        <s:complexTableType />
       </s:element>
       <s:element name="BuildItemList">
-        <s:complexType />
+        <s:complexTableType />
       </s:element>
-      <s:complexType name="ArrayOfArrayOfParameterObject">
+      <s:complexTableType name="ArrayOfArrayOfParameterObject">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfParameterObject" nillable="true" type="tns:ArrayOfParameterObject" />
         </s:sequence>
-      </s:complexType>
+      </s:complexTableType>
       <s:element name="BuildItemListResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="BuildItemListResult" type="tns:ArrayOfArrayOfParameterObject" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="ExecuteCommand">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="storedProcedure" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfAnyType" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfAnyTableType" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
-      <s:complexType name="ArrayOfAnyType">
+      <s:complexTableType name="ArrayOfAnyTableType">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyTableType" nillable="true" />
         </s:sequence>
-      </s:complexType>
+      </s:complexTableType>
       <s:element name="ExecuteCommandResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="ExecuteCommandResult" type="s:int" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="ExecuteTextCommand">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="textCommand" type="s:string" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="ExecuteTextCommandResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="ExecuteTextCommandResult" type="s:int" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="TableExists">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="tableName" type="s:string" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="TableExistsResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="TableExistsResult" type="s:boolean" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="ViewExists">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="viewName" type="s:string" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
       <s:element name="ViewExistsResponse">
-        <s:complexType>
+        <s:complexTableType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="ViewExistsResult" type="s:boolean" />
           </s:sequence>
-        </s:complexType>
+        </s:complexTableType>
       </s:element>
     </s:schema>
   </wsdl:types>
@@ -231,7 +231,7 @@
   <wsdl:message name="ViewExistsSoapOut">
     <wsdl:part name="parameters" element="tns:ViewExistsResponse" />
   </wsdl:message>
-  <wsdl:portType name="WSBaseHostServiceSoap">
+  <wsdl:portTableType name="WSBaseHostServiceSoap">
     <wsdl:operation name="Save">
       <wsdl:input message="tns:SaveSoapIn" />
       <wsdl:output message="tns:SaveSoapOut" />
@@ -268,7 +268,7 @@
       <wsdl:input message="tns:ViewExistsSoapIn" />
       <wsdl:output message="tns:ViewExistsSoapOut" />
     </wsdl:operation>
-  </wsdl:portType>
+  </wsdl:portTableType>
   <wsdl:binding name="WSBaseHostServiceSoap" type="tns:WSBaseHostServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="Save">

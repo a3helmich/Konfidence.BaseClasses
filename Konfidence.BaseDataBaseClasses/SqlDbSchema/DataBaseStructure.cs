@@ -31,14 +31,14 @@ namespace Konfidence.BaseData.SqlDbSchema
         {
             DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
 
-            CreateSPPrimaryKey_Get(SpNames.PrimarykeyGet);
-            CreateSPColumns_GetList(SpNames.ColumnsGetlist);
+            CreateSPPrimaryKey_Get(SpName.PrimarykeyGet);
+            CreateSPColumns_GetList(SpName.ColumnsGetlist);
         }
 
         private void DeleteStoredProcedures()
         {
-            DeleteSp(SpNames.PrimarykeyGet);
-            DeleteSp(SpNames.ColumnsGetlist);
+            DeleteSp(SpName.PrimarykeyGet);
+            DeleteSp(SpName.ColumnsGetlist);
         }
 
         private void CreateSPPrimaryKey_Get(string storedProcedure)

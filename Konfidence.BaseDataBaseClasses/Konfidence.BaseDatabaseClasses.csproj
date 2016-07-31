@@ -123,7 +123,7 @@
     <Compile Include="BaseHost.cs" />
     <Compile Include="IBaseDataItem.cs" />
     <Compile Include="IBaseDataItemList.cs" />
-    <Compile Include="IRepositories\IDatabaseRepository.cs" />
+    <Compile Include="Repositories\IDatabaseRepository.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="ParameterObjects\DbParameterObjectList.cs" />
     <Compile Include="ParameterObjects\RetrieveListParameters.cs" />
@@ -149,12 +149,12 @@
     <Compile Include="SqlDbSchema\ITableDataItem.cs" />
     <Compile Include="SqlDbSchema\SchemaBaseDataItem.cs" />
     <Compile Include="SqlDbSchema\PrimaryKeyDataItem.cs" />
-    <Compile Include="SqlDbSchema\SpNames.cs" />
+    <Compile Include="SqlDbSchema\SpName.cs" />
+    <Compile Include="SqlDbSchema\SqlConstant.cs" />
     <Compile Include="SqlDbSchema\TableDataItem.cs" />
     <Compile Include="SqlDbSchema\TableDataItemList.cs" />
     <Compile Include="SQLHost.cs" />
     <Compile Include="SqlHostException.cs" />
-    <Compile Include="SqlServerDataItem.cs" />
     <Compile Include="SqlServerManagement\SqlServerCheck.cs" />
     <Compile Include="SqlServerManagement\SqlServerSmo.cs" />
     <Compile Include="Web References\WSBaseHost\Reference.cs">
@@ -231,7 +231,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="IRepositories\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

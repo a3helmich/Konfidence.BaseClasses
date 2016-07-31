@@ -1,6 +1,6 @@
 ﻿namespace Konfidence.BaseData.SqlDbSchema
 {
-    internal static class SpNames
+    internal static class SpName
     {
         public const string PrimarykeyGet = "CG_PrimaryKey_Get";
 
