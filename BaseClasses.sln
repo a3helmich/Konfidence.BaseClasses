@@ -37,8 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWebsiteClassesTest", "Konfidence.BaseWebsiteClassesTest\Konfidence.BaseWebsiteClassesTest.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDatabaseClassesTest", "Konfidence.BaseDataBaseClassesTest\Konfidence.BaseDatabaseClassesTest.csproj", "{99197855-9052-499C-B7B4-EAF2F9D52512}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUnitTestClasses", "Konfidence.BaseUnitTestClasses\Konfidence.BaseUnitTestClasses.csproj", "{04F8ACA5-F277-4A6B-A25C-3B6493CB2A14}"
@@ -186,15 +184,6 @@ Global
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|x86.ActiveCfg = Release|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{99197855-9052-499C-B7B4-EAF2F9D52512}.Release|x86.ActiveCfg = Release|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -269,7 +258,7 @@ Global
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 20
+		SccNumberOfProjects = 19
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.konfidence.nl:8080/tfs/konfidence
 		SccLocalPath0 = .
@@ -306,30 +295,27 @@ Global
 		SccProjectUniqueName11 = Konfidence.BaseWebsiteClassesTest\\Konfidence.BaseWebsiteClassesTest.csproj
 		SccProjectName11 = Konfidence.BaseWebsiteClassesTest
 		SccLocalPath11 = Konfidence.BaseWebsiteClassesTest
-		SccProjectUniqueName12 = Konfidence.BaseDataBaseClassesTest\\Konfidence.BaseDatabaseClassesTest.csproj
-		SccProjectName12 = Konfidence.BaseDataBaseClassesTest
-		SccLocalPath12 = Konfidence.BaseDataBaseClassesTest
-		SccProjectUniqueName13 = Konfidence.Mail\\Konfidence.Mail.csproj
-		SccProjectName13 = Konfidence.Mail
-		SccLocalPath13 = Konfidence.Mail
-		SccProjectUniqueName14 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
-		SccProjectName14 = Konfidence.BaseUnitTestClasses
-		SccLocalPath14 = Konfidence.BaseUnitTestClasses
-		SccProjectUniqueName15 = Indy.Sockets\\Indy.Sockets.csproj
-		SccProjectName15 = Indy.Sockets
-		SccLocalPath15 = Indy.Sockets
-		SccProjectUniqueName16 = Konfidence.MenuClasses\\Konfidence.MenuClasses.csproj
-		SccProjectName16 = Konfidence.MenuClasses
-		SccLocalPath16 = Konfidence.MenuClasses
-		SccProjectUniqueName17 = Konfidence.Smo\\Konfidence.Smo.csproj
-		SccProjectName17 = Konfidence.Smo
-		SccLocalPath17 = Konfidence.Smo
-		SccProjectUniqueName18 = Test.MenuClasses\\Test.MenuClasses.csproj
-		SccProjectName18 = Test.MenuClasses
-		SccLocalPath18 = Test.MenuClasses
-		SccProjectUniqueName19 = Konfidence.SmoTest\\Konfidence.SmoTest.csproj
-		SccProjectName19 = Konfidence.SmoTest
-		SccLocalPath19 = Konfidence.SmoTest
+		SccProjectUniqueName12 = Konfidence.Mail\\Konfidence.Mail.csproj
+		SccProjectName12 = Konfidence.Mail
+		SccLocalPath12 = Konfidence.Mail
+		SccProjectUniqueName13 = Konfidence.BaseUnitTestClasses\\Konfidence.BaseUnitTestClasses.csproj
+		SccProjectName13 = Konfidence.BaseUnitTestClasses
+		SccLocalPath13 = Konfidence.BaseUnitTestClasses
+		SccProjectUniqueName14 = Indy.Sockets\\Indy.Sockets.csproj
+		SccProjectName14 = Indy.Sockets
+		SccLocalPath14 = Indy.Sockets
+		SccProjectUniqueName15 = Konfidence.MenuClasses\\Konfidence.MenuClasses.csproj
+		SccProjectName15 = Konfidence.MenuClasses
+		SccLocalPath15 = Konfidence.MenuClasses
+		SccProjectUniqueName16 = Konfidence.Smo\\Konfidence.Smo.csproj
+		SccProjectName16 = Konfidence.Smo
+		SccLocalPath16 = Konfidence.Smo
+		SccProjectUniqueName17 = Test.MenuClasses\\Test.MenuClasses.csproj
+		SccProjectName17 = Test.MenuClasses
+		SccLocalPath17 = Test.MenuClasses
+		SccProjectUniqueName18 = Konfidence.SmoTest\\Konfidence.SmoTest.csproj
+		SccProjectName18 = Konfidence.SmoTest
+		SccLocalPath18 = Konfidence.SmoTest
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
