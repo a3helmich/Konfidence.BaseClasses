@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.UtilHelper", "Ko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.DesignPatterns", "Konfidence.Designpatterns\Konfidence.DesignPatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.SmoTest", "Konfidence.BaseClassesTest\Konfidence.SmoTest.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.SmoTest", "Konfidence.SmoTest\Konfidence.SmoTest.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{EA37BC31-3523-495C-A0A0-3828065EE218}"
 EndProject
@@ -324,12 +324,12 @@ Global
 		SccProjectUniqueName17 = Konfidence.Smo\\Konfidence.Smo.csproj
 		SccProjectName17 = Konfidence.Smo
 		SccLocalPath17 = Konfidence.Smo
-		SccProjectUniqueName18 = Konfidence.BaseClassesTest\\Konfidence.SmoTest.csproj
-		SccProjectName18 = Konfidence.BaseClassesTest
-		SccLocalPath18 = Konfidence.BaseClassesTest
-		SccProjectUniqueName19 = Test.MenuClasses\\Test.MenuClasses.csproj
-		SccProjectName19 = Test.MenuClasses
-		SccLocalPath19 = Test.MenuClasses
+		SccProjectUniqueName18 = Test.MenuClasses\\Test.MenuClasses.csproj
+		SccProjectName18 = Test.MenuClasses
+		SccLocalPath18 = Test.MenuClasses
+		SccProjectUniqueName19 = Konfidence.SmoTest\\Konfidence.SmoTest.csproj
+		SccProjectName19 = Konfidence.SmoTest
+		SccLocalPath19 = Konfidence.SmoTest
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
