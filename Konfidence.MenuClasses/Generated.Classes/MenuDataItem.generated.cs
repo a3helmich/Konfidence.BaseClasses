@@ -14,8 +14,8 @@ namespace DbSiteMapMenuClasses
             internal const string PARENTMENUID = "ParentMenuId";
             internal const string ID = "Id";
             internal const string MENUCODE = "MenuCode";
-            internal const string SYSINSERTTIME = "SysInsertTime";
-            internal const string SYSUPDATETIME = "SysUpdateTime";
+            //internal const string SYSINSERTTIME = "SysInsertTime";
+            //internal const string SYSUPDATETIME = "SysUpdateTime";
             internal const string ISROOT = "IsRoot";
             internal const string ISVISIBLE = "IsVisible";
             internal const string ISLOGONVISIBLE = "IsLogonVisible";
@@ -24,7 +24,7 @@ namespace DbSiteMapMenuClasses
             internal const string ISLOCALVISIBLE = "IsLocalVisible";
             internal const string URL = "Url";
             internal const string APPLICATIONID = "ApplicationId";
-            internal const string SYSLOCK = "SysLock";
+            //internal const string SYSLOCK = "SysLock";
 
             // stored procedures
             private const string MENU_GETROW = "gen_Menu_GetRow";
@@ -36,8 +36,8 @@ namespace DbSiteMapMenuClasses
             private Guid _MenuId = Guid.NewGuid();
             private Guid _ParentMenuId = Guid.Empty;
             private int _MenuCode = 0;
-            private DateTime _SysInsertTime = DateTime.MinValue;
-            private DateTime _SysUpdateTime = DateTime.MinValue;
+            //private DateTime _SysInsertTime = DateTime.MinValue;
+            //private DateTime _SysUpdateTime = DateTime.MinValue;
             private bool _IsRoot = false;
             private bool _IsVisible = false;
             private bool _IsLogonVisible = false;
@@ -46,7 +46,7 @@ namespace DbSiteMapMenuClasses
             private bool _IsLocalVisible = false;
             private string _Url = string.Empty;
             private string _ApplicationId = string.Empty;
-            private string _SysLock = string.Empty;
+            //private string _SysLock = string.Empty;
 
             private MenuTextDataItem _MenuText = null;
 
@@ -70,15 +70,15 @@ namespace DbSiteMapMenuClasses
                 set { _MenuCode = value; }
             }
 
-            public DateTime SysInsertTime
-            {
-                get { return _SysInsertTime; }
-            }
+            //public DateTime SysInsertTime
+            //{
+            //    get { return _SysInsertTime; }
+            //}
 
-            public DateTime SysUpdateTime
-            {
-                get { return _SysUpdateTime; }
-            }
+            //public DateTime SysUpdateTime
+            //{
+            //    get { return _SysUpdateTime; }
+            //}
 
             public bool IsRoot
             {
@@ -128,11 +128,11 @@ namespace DbSiteMapMenuClasses
                 set { _ApplicationId = value; }
             }
 
-            public string SysLock
-            {
-                get { return _SysLock; }
-                set { _SysLock = value; }
-            }
+            //public string SysLock
+            //{
+            //    get { return _SysLock; }
+            //    set { _SysLock = value; }
+            //}
             #endregion generated properties
 
             public MenuTextDataItem MenuText
@@ -167,8 +167,8 @@ namespace DbSiteMapMenuClasses
                 AutoIdField = ID;
                 GuidIdField = MENUID;
 
-                AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
-                AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
+                //AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
+                //AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
 
                 LoadStoredProcedure = MENU_GETROW;
                 DeleteStoredProcedure = MENU_DELETEROW;
@@ -178,19 +178,19 @@ namespace DbSiteMapMenuClasses
 
             }
 
-            protected override void GetAutoUpdateData()
-            {
-                GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
-                GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
-            }
+            //protected override void GetAutoUpdateData()
+            //{
+            //    GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
+            //    GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
+            //}
 
             protected override void GetData()
             {
                 GetField(MENUID, out _MenuId);
                 GetField(PARENTMENUID, out _ParentMenuId);
                 GetField(MENUCODE, out _MenuCode);
-                GetField(SYSINSERTTIME, out _SysInsertTime);
-                GetField(SYSUPDATETIME, out _SysUpdateTime);
+                //GetField(SYSINSERTTIME, out _SysInsertTime);
+                //GetField(SYSUPDATETIME, out _SysUpdateTime);
                 GetField(ISROOT, out _IsRoot);
                 GetField(ISVISIBLE, out _IsVisible);
                 GetField(ISLOGONVISIBLE, out _IsLogonVisible);
@@ -199,7 +199,7 @@ namespace DbSiteMapMenuClasses
                 GetField(ISLOCALVISIBLE, out _IsLocalVisible);
                 GetField(URL, out _Url);
                 GetField(APPLICATIONID, out _ApplicationId);
-                GetField(SYSLOCK, out _SysLock);
+                //GetField(SYSLOCK, out _SysLock);
             }
 
             protected override void SetData()
@@ -217,7 +217,7 @@ namespace DbSiteMapMenuClasses
                 SetField(ISLOCALVISIBLE, _IsLocalVisible);
                 SetField(URL, _Url);
                 SetField(APPLICATIONID, _ApplicationId);
-                SetField(SYSLOCK, _SysLock);
+                //SetField(SYSLOCK, _SysLock);
             }
         }
     }

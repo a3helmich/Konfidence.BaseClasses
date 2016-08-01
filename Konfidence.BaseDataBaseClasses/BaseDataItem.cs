@@ -758,7 +758,7 @@ namespace Konfidence.BaseData
             return parameterObjectList;
         }
 
-        protected virtual void GetAutoUpdateData()
+        private void GetAutoUpdateData()
         {
             GetAutoUpdateField(SYSINSERTTIME, out _sysInsertTime);
             GetAutoUpdateField(SYSUPDATETIME, out _sysUpdateTime);
@@ -774,10 +774,10 @@ namespace Konfidence.BaseData
 
         protected virtual void SetData()
 		{
-			// NOP
-		}
+            SetField(SYSLOCK, _sysLock);
+        }
 
-		protected virtual bool IsValidDataItem()
+        protected virtual bool IsValidDataItem()
 		{
 			return true;
 		}
