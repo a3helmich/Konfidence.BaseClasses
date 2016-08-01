@@ -56,7 +56,7 @@ namespace Konfidence.BaseData
         }
 
         // TODO: internal
-        protected BaseHost DataHost
+        public BaseHost DataHost
         {
             get
             {
