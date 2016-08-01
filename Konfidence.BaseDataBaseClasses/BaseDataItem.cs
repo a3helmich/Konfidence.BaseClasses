@@ -56,7 +56,7 @@ namespace Konfidence.BaseData
         }
 
         // TODO: internal
-        public BaseHost DataHost
+        protected BaseHost DataHost
         {
             get
             {
@@ -106,8 +106,21 @@ namespace Konfidence.BaseData
             return DbParameterObjectList;
         }
 
-		#region properties
-		protected string DatabaseName { get; set; } = string.Empty;
+        protected internal void GetKey()
+        {
+            if (AutoIdField.Length > 0)
+            {
+                Id = GetFieldInt32(AutoIdField);
+            }
+        }
+
+        internal int GetId()
+        {
+            return Id;
+        }
+
+        #region properties
+        protected string DatabaseName { get; set; } = string.Empty;
 
 	    protected string ServiceName { get; set; } = string.Empty;
 
@@ -316,21 +329,8 @@ namespace Konfidence.BaseData
 		}
 
 		#endregion
-		
-		#region GetField Methods
 
-		protected internal void GetKey()
-		{
-			if (AutoIdField.Length > 0)
-			{
-				Id = GetFieldInt32(AutoIdField);
-			}
-		}
-
-        internal int GetId()
-        {
-            return Id;
-        }
+        #region GetField Methods
 
         protected void GetField(string fieldName, out Int16 field)
         {
@@ -754,11 +754,6 @@ namespace Konfidence.BaseData
 		{
 			// NOP
 		}
-
-        //protected virtual void SetQueryParameters(string storedProcedure)
-        //{
-        //    // NOP
-        //}
 
 		protected virtual bool IsValidDataItem()
 		{

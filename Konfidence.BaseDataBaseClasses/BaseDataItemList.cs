@@ -63,16 +63,17 @@ namespace Konfidence.BaseData
             AfterDataLoad();
         }
 
-        protected void BuildItemList(string getListStoredProcedure, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
-        {
-            GetListStoredProcedure = getListStoredProcedure;
+        // TODO : figure out if this is used
+        //protected void BuildItemList(string getListStoredProcedure, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
+        //{
+        //    GetListStoredProcedure = getListStoredProcedure;
 
-            var dataHost = GetHost();
+        //    var dataHost = GetHost();
 
-            dataHost.BuildItemList(this, relatedDataItemList, childDataItemList, GetListStoredProcedure);
+        //    dataHost.BuildItemList(this, relatedDataItemList, childDataItemList, GetListStoredProcedure);
 
-            AfterDataLoad();
-        }
+        //    AfterDataLoad();
+        //}
 
 		protected void RebuildItemList()
 		{
