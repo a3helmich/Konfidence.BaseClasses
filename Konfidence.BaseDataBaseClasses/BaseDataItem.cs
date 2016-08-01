@@ -9,15 +9,22 @@ namespace Konfidence.BaseData
 {
 	public class BaseDataItem: BaseItem, IBaseDataItem
 	{
-		public const string BaseLanguage = "NL";
+        internal const string SYSINSERTTIME = "SysInsertTime";
+        internal const string SYSUPDATETIME = "SysUpdateTime";
+        internal const string SYSLOCK = "SysLock";
+
+        public const string BaseLanguage = "NL";
 		public bool WithLanguage = false;
 
         private bool _isSelected;
         private bool _isEditing;
         private bool _isInitialized;
 
+        private DateTime _sysInsertTime = DateTime.MinValue;
+        private DateTime _sysUpdateTime = DateTime.MinValue;
+        private string _sysLock = string.Empty;
 
-	    private BaseHost _dataHost; 
+        private BaseHost _dataHost; 
 		internal Dictionary<string, object> PropertyDictionary;
 
 	    private Dictionary<string, DbParameterObject> _autoUpdateFieldDictionary;
@@ -33,7 +40,19 @@ namespace Konfidence.BaseData
             }
         }
 
-	    protected DbParameterObjectList DbParameterObjectList { get; private set; } = new DbParameterObjectList();
+
+        public DateTime SysInsertTime => _sysInsertTime;
+
+	    public DateTime SysUpdateTime => _sysUpdateTime;
+
+	    public string SysLock
+        {
+            get { return _sysLock; }
+            set { _sysLock = value; }
+        }
+
+
+        protected DbParameterObjectList DbParameterObjectList { get; private set; } = new DbParameterObjectList();
 
 	    protected virtual void IsSelectedChanged()
         {
@@ -601,7 +620,8 @@ namespace Konfidence.BaseData
 
         protected internal virtual void InitializeDataItem()
 		{
-            // NOP
+            AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
+            AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
         }
 
         protected void GetItem(string storedProcedure)
@@ -738,19 +758,21 @@ namespace Konfidence.BaseData
             return parameterObjectList;
         }
 
-        protected internal virtual void GetAutoUpdateData()
-		{
-			// NOP
-			throw new NotImplementedException();
-		}
+        protected virtual void GetAutoUpdateData()
+        {
+            GetAutoUpdateField(SYSINSERTTIME, out _sysInsertTime);
+            GetAutoUpdateField(SYSUPDATETIME, out _sysUpdateTime);
+        }
 
         protected internal virtual void GetData()
 		{
-			// NOP
-			throw new NotImplementedException();
-		}
 
-		protected virtual void SetData()
+            GetField(SYSINSERTTIME, out _sysInsertTime);
+            GetField(SYSUPDATETIME, out _sysUpdateTime);
+            GetField(SYSLOCK, out _sysLock);
+        }
+
+        protected virtual void SetData()
 		{
 			// NOP
 		}
