@@ -1,4 +1,4 @@
-﻿namespace MenuTest
+﻿namespace Konfidence.Test.MenuClasses
 {
     public interface ITestItemClass
     {

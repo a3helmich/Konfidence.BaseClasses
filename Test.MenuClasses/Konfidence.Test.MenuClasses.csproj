@@ -8,8 +8,8 @@
     <ProjectGuid>{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MenuTest</RootNamespace>
-    <AssemblyName>MenuTest</AssemblyName>
+    <RootNamespace>Konfidence.Test.MenuClasses</RootNamespace>
+    <AssemblyName>Konfidence.Test.MenuClasses</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

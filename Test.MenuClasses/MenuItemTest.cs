@@ -1,7 +1,7 @@
 ﻿using DbSiteMapMenuClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MenuTest
+namespace Konfidence.Test.MenuClasses
 {
     /// <summary>
     /// Summary description for UnitTest1

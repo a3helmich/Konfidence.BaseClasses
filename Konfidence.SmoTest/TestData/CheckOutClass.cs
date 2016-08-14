@@ -1,4 +1,4 @@
-﻿namespace Konfidence.TestBaseClasses.TestData
+﻿namespace Konfidence.Test.BaseClasses.TestData
 {
     class CheckOutClass
     {

@@ -1,8 +1,7 @@
-﻿using Konfidence.BaseData;
-using Konfidence.Smo.SqlDbSchema;
+﻿using Konfidence.Smo.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.TestBaseClasses
+namespace Konfidence.Test.BaseClasses
 {
     [TestClass]
     public class SqlHostTest

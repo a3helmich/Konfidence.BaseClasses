@@ -3,7 +3,7 @@ using Konfidence.BaseData;
 using Ninject;
 using Ninject.Parameters;
 
-namespace MenuTest
+namespace Konfidence.Test.MenuClasses
 {
     public class TestItemClassList : List<TestItemClass>, ITestItemClassList
     {
