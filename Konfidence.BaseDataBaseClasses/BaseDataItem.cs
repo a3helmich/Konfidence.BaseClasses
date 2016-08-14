@@ -14,6 +14,7 @@ namespace Konfidence.BaseData
         internal const string SYSLOCK = "SysLock";
 
         public const string BaseLanguage = "NL";
+
 		public bool WithLanguage = false;
 
         private bool _isSelected;
