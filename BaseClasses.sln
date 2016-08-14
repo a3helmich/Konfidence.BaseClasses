@@ -31,11 +31,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.UtilHelper", "Ko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.DesignPatterns", "Konfidence.Designpatterns\Konfidence.DesignPatterns.csproj", "{3D3FD6C6-3583-4047-B960-EF45030FBDE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.Smo", "Konfidence.SmoTest\Konfidence.Test.Smo.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.Smo", "Konfidence.Test.Smo\Konfidence.Test.Smo.csproj", "{060F714F-AC6B-4834-964B-AB46CE23E5A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{EA37BC31-3523-495C-A0A0-3828065EE218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.BaseWebsiteClasses", "Konfidence.BaseWebsiteClassesTest\Konfidence.Test.BaseWebsiteClasses.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.BaseWebsiteClasses", "Konfidence.Test.BaseWebsiteClasses\Konfidence.Test.BaseWebsiteClasses.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}"
 EndProject
@@ -52,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indy.Sockets", "Indy.Socket
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Smo", "Konfidence.Smo\Konfidence.Smo.csproj", "{6CEE30A7-D859-496D-9899-9DE1654DF995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.MenuClasses", "Test.MenuClasses\Konfidence.Test.MenuClasses.csproj", "{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.MenuClasses", "Konfidence.Test.MenuClasses\Konfidence.Test.MenuClasses.csproj", "{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{35800589-CB56-4489-A217-2108E97ECFAC}"
 EndProject
@@ -314,18 +314,18 @@ Global
 		SccProjectUniqueName15 = Konfidence.Smo\\Konfidence.Smo.csproj
 		SccProjectName15 = Konfidence.Smo
 		SccLocalPath15 = Konfidence.Smo
-		SccProjectUniqueName16 = Konfidence.BaseWebsiteClassesTest\\Konfidence.Test.BaseWebsiteClasses.csproj
+		SccProjectUniqueName16 = Konfidence.Test.BaseWebsiteClasses\\Konfidence.Test.BaseWebsiteClasses.csproj
 		SccProjectTopLevelParentUniqueName16 = BaseClasses.sln
-		SccProjectName16 = Konfidence.BaseWebsiteClassesTest
-		SccLocalPath16 = Konfidence.BaseWebsiteClassesTest
-		SccProjectUniqueName17 = Konfidence.SmoTest\\Konfidence.Test.Smo.csproj
+		SccProjectName16 = Konfidence.Test.BaseWebsiteClasses
+		SccLocalPath16 = Konfidence.Test.BaseWebsiteClasses
+		SccProjectUniqueName17 = Konfidence.Test.MenuClasses\\Konfidence.Test.MenuClasses.csproj
 		SccProjectTopLevelParentUniqueName17 = BaseClasses.sln
-		SccProjectName17 = Konfidence.SmoTest
-		SccLocalPath17 = Konfidence.SmoTest
-		SccProjectUniqueName18 = Test.MenuClasses\\Konfidence.Test.MenuClasses.csproj
+		SccProjectName17 = Konfidence.Test.MenuClasses
+		SccLocalPath17 = Konfidence.Test.MenuClasses
+		SccProjectUniqueName18 = Konfidence.Test.Smo\\Konfidence.Test.Smo.csproj
 		SccProjectTopLevelParentUniqueName18 = BaseClasses.sln
-		SccProjectName18 = Test.MenuClasses
-		SccLocalPath18 = Test.MenuClasses
+		SccProjectName18 = Konfidence.Test.Smo
+		SccLocalPath18 = Konfidence.Test.Smo
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
