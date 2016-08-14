@@ -8,7 +8,7 @@ namespace Konfidence.BaseData
     // TODO: internal
     public class BaseHost: BaseItem
 	{
-	    private const int ID = 0;
+	    //private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
 
 	    #region properties
@@ -17,7 +17,7 @@ namespace Konfidence.BaseData
 
 	    protected string ServiceName { get; }
 
-	    public int Id => ID;
+	    //public int Id => ID;
 
 	    #endregion
 
