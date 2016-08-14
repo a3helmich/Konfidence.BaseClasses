@@ -759,7 +759,7 @@ namespace Konfidence.BaseData
             return parameterObjectList;
         }
 
-        private void GetAutoUpdateData()
+        protected virtual void GetAutoUpdateData()
         {
             GetAutoUpdateField(SYSINSERTTIME, out _sysInsertTime);
             GetAutoUpdateField(SYSUPDATETIME, out _sysUpdateTime);

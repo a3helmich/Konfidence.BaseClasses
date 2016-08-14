@@ -115,12 +115,12 @@ namespace DbSiteMapMenuClasses
 
             }
 
-            //protected override void GetAutoUpdateData()
-            //{
-            //    GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
-            //    GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
-            //    GetAutoUpdateField(LANGUAGE, out _Language);
-            //}
+            protected override void GetAutoUpdateData()
+            {
+                base.GetAutoUpdateData();
+                //GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
+                //GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
+            }
 
             protected override void GetData()
             {
