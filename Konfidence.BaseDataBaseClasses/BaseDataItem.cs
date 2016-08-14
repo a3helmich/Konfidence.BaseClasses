@@ -9,10 +9,6 @@ namespace Konfidence.BaseData
 {
 	public class BaseDataItem: BaseItem, IBaseDataItem
 	{
-        internal const string SYSINSERTTIME = "SysInsertTime";
-        internal const string SYSUPDATETIME = "SysUpdateTime";
-        internal const string SYSLOCK = "SysLock";
-
         public const string BaseLanguage = "NL";
 
 		public bool WithLanguage = false;
@@ -20,10 +16,6 @@ namespace Konfidence.BaseData
         private bool _isSelected;
         private bool _isEditing;
         private bool _isInitialized;
-
-        private DateTime _sysInsertTime = DateTime.MinValue;
-        private DateTime _sysUpdateTime = DateTime.MinValue;
-        private string _sysLock = string.Empty;
 
         private BaseHost _dataHost; 
 		internal Dictionary<string, object> PropertyDictionary;
@@ -40,18 +32,6 @@ namespace Konfidence.BaseData
                 IsSelectedChanged();
             }
         }
-
-
-        public DateTime SysInsertTime => _sysInsertTime;
-
-	    public DateTime SysUpdateTime => _sysUpdateTime;
-
-	    public string SysLock
-        {
-            get { return _sysLock; }
-            set { _sysLock = value; }
-        }
-
 
         protected DbParameterObjectList DbParameterObjectList { get; private set; } = new DbParameterObjectList();
 
@@ -92,7 +72,6 @@ namespace Konfidence.BaseData
 
 	    public BaseDataItem()
 	    {
-	        Id = 0;
 		    _isSelected = false;
 		    _isEditing = false;
 	        _isInitialized = false;
@@ -165,12 +144,12 @@ namespace Konfidence.BaseData
             }
         }
 
-        protected internal void GetAutoUpdateField(string fieldName, out Int16 fieldValue)
+        protected internal void GetAutoUpdateField(string fieldName, out short fieldValue)
         {
             fieldValue = GetAutoUpdateFieldInt16(fieldName);
         }
 
-        protected internal void GetAutoUpdateField(string fieldName, out Int32 fieldValue)
+        protected internal void GetAutoUpdateField(string fieldName, out int fieldValue)
         {
             fieldValue = GetAutoUpdateFieldInt32(fieldName);
         }
@@ -205,22 +184,22 @@ namespace Konfidence.BaseData
             fieldValue = GetAutoUpdateFieldDecimal(fieldName);
         }
 
-        private Int16 GetAutoUpdateFieldInt16(string fieldName)
+        private short GetAutoUpdateFieldInt16(string fieldName)
         {
-            Int16 fieldValue = 0;
+            short fieldValue = 0;
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
                 if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
-                    fieldValue = (Int16)AutoUpdateFieldDictionary[fieldName].Value;
+                    fieldValue = (short)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
             
             return fieldValue;
         }
 
-        private Int32 GetAutoUpdateFieldInt32(string fieldName)
+        private int GetAutoUpdateFieldInt32(string fieldName)
         {
             var fieldValue = 0;
 
@@ -228,7 +207,7 @@ namespace Konfidence.BaseData
             {
                 if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
-                    fieldValue = (Int32)AutoUpdateFieldDictionary[fieldName].Value;
+                    fieldValue = (int)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
             
@@ -312,13 +291,13 @@ namespace Konfidence.BaseData
 
         private Decimal GetAutoUpdateFieldDecimal(string fieldName)
         {
-            Decimal fieldValue = 0;
+            decimal fieldValue = 0;
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
                 if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
-                    fieldValue = (Decimal)AutoUpdateFieldDictionary[fieldName].Value;
+                    fieldValue = (decimal)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
 
@@ -621,8 +600,6 @@ namespace Konfidence.BaseData
 
         protected internal virtual void InitializeDataItem()
 		{
-            AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
-            AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
         }
 
         protected void GetItem(string storedProcedure)
@@ -728,16 +705,6 @@ namespace Konfidence.BaseData
             return DataHost.StoredProcedureExists(storedProcedureName);
         }
 
-        //internal void SetParameters(string storedProcedure, Database database, DbCommand dbCommand)
-        //{
-        //    foreach (var parameterObject in _DbParameterObjectList)
-        //    {
-        //        database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
-        //    }
-
-        //    _DbParameterObjectList.Clear();
-        //}
-
         internal DbParameterObjectList SetItemData()
 		{
 			SetData();
@@ -761,21 +728,14 @@ namespace Konfidence.BaseData
 
         protected virtual void GetAutoUpdateData()
         {
-            GetAutoUpdateField(SYSINSERTTIME, out _sysInsertTime);
-            GetAutoUpdateField(SYSUPDATETIME, out _sysUpdateTime);
         }
 
         protected internal virtual void GetData()
 		{
-
-            GetField(SYSINSERTTIME, out _sysInsertTime);
-            GetField(SYSUPDATETIME, out _sysUpdateTime);
-            GetField(SYSLOCK, out _sysLock);
         }
 
         protected virtual void SetData()
 		{
-            SetField(SYSLOCK, _sysLock);
         }
 
         protected virtual bool IsValidDataItem()

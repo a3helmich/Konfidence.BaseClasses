@@ -34,7 +34,7 @@ namespace Konfidence.Base
         {
             var toString = fromString;
 
-            var codeBehindIndex = fromString.IndexOf(oldValue, StringComparison.InvariantCultureIgnoreCase);
+            var codeBehindIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
 
             if (codeBehindIndex > -1)
             {

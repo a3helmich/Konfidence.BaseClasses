@@ -12,10 +12,10 @@ namespace DbSiteMapMenuClasses
             internal const string MENUTEXTID = "MenuTextId";
             internal const string MENUID = "MenuId";
             internal const string ID = "Id";
-            //internal const string SYSINSERTTIME = "SysInsertTime";
-            //internal const string SYSUPDATETIME = "SysUpdateTime";
+            internal const string SYSINSERTTIME = "SysInsertTime";
+            internal const string SYSUPDATETIME = "SysUpdateTime";
             internal const string LANGUAGE = "Language";
-            //internal const string SYSLOCK = "SysLock";
+            internal const string SYSLOCK = "SysLock";
             internal const string DESCRIPTION = "Description";
             internal const string MENUTEXT = "MenuText";
 
@@ -29,10 +29,10 @@ namespace DbSiteMapMenuClasses
             // property storage
             private Guid _MenuTextId = Guid.NewGuid();
             private Guid _MenuId = Guid.Empty;
-            //private DateTime _SysInsertTime = DateTime.MinValue;
-            //private DateTime _SysUpdateTime = DateTime.MinValue;
+            private DateTime _SysInsertTime = DateTime.MinValue;
+            private DateTime _SysUpdateTime = DateTime.MinValue;
             private string _Language = string.Empty;
-            //private string _SysLock = string.Empty;
+            private string _SysLock = string.Empty;
             private string _Description = string.Empty;
             private string _MenuText = string.Empty;
 
@@ -50,26 +50,26 @@ namespace DbSiteMapMenuClasses
                 set { _MenuId = value; }
             }
 
-            //public DateTime SysInsertTime
-            //{
-            //    get { return _SysInsertTime; }
-            //}
+            public DateTime SysInsertTime
+            {
+                get { return _SysInsertTime; }
+            }
 
-            //public DateTime SysUpdateTime
-            //{
-            //    get { return _SysUpdateTime; }
-            //}
+            public DateTime SysUpdateTime
+            {
+                get { return _SysUpdateTime; }
+            }
 
             public string Language
             {
                 get { return _Language; }
             }
 
-            //public string SysLock
-            //{
-            //    get { return _SysLock; }
-            //    set { _SysLock = value; }
-            //}
+            public string SysLock
+            {
+                get { return _SysLock; }
+                set { _SysLock = value; }
+            }
 
             public string Description
             {
@@ -103,8 +103,8 @@ namespace DbSiteMapMenuClasses
                 AutoIdField = ID;
                 GuidIdField = MENUTEXTID;
 
-                //AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
-                //AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
+                AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
+                AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
                 AddAutoUpdateField(LANGUAGE, DbType.String);
 
                 LoadStoredProcedure = MENUTEXT_GETROW;
@@ -117,19 +117,18 @@ namespace DbSiteMapMenuClasses
 
             protected override void GetAutoUpdateData()
             {
-                base.GetAutoUpdateData();
-                //GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
-                //GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
+                GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
+                GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
             }
 
             protected override void GetData()
             {
                 GetField(MENUTEXTID, out _MenuTextId);
                 GetField(MENUID, out _MenuId);
-                //GetField(SYSINSERTTIME, out _SysInsertTime);
-                //GetField(SYSUPDATETIME, out _SysUpdateTime);
+                GetField(SYSINSERTTIME, out _SysInsertTime);
+                GetField(SYSUPDATETIME, out _SysUpdateTime);
                 GetField(LANGUAGE, out _Language);
-                //GetField(SYSLOCK, out _SysLock);
+                GetField(SYSLOCK, out _SysLock);
                 GetField(DESCRIPTION, out _Description);
                 GetField(MENUTEXT, out _MenuText);
             }
@@ -140,7 +139,7 @@ namespace DbSiteMapMenuClasses
 
                 SetField(MENUTEXTID, _MenuTextId);
                 SetField(MENUID, _MenuId);
-                //SetField(SYSLOCK, _SysLock);
+                SetField(SYSLOCK, _SysLock);
                 SetField(DESCRIPTION, _Description);
                 SetField(MENUTEXT, _MenuText);
             }

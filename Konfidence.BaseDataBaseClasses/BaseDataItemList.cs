@@ -63,18 +63,6 @@ namespace Konfidence.BaseData
             AfterDataLoad();
         }
 
-        // TODO : figure out if this is used
-        //protected void BuildItemList(string getListStoredProcedure, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList)
-        //{
-        //    GetListStoredProcedure = getListStoredProcedure;
-
-        //    var dataHost = GetHost();
-
-        //    dataHost.BuildItemList(this, relatedDataItemList, childDataItemList, GetListStoredProcedure);
-
-        //    AfterDataLoad();
-        //}
-
 		protected void RebuildItemList()
 		{
 			Clear();
@@ -119,45 +107,31 @@ namespace Konfidence.BaseData
 
         public T FindById(int id)
         {
-            foreach (var dataItem in this)
-            {
-                if (dataItem.GetId() == id)
-                {
-                    return dataItem;
-                }
-            }
-
-            return null;
+            return this.FirstOrDefault(x => x.GetId() == id);
         }
 
         public T FindById(Guid guidId)
         {
-            foreach (var dataItem in this)
-            {
-                if (dataItem.GuidIdValue == guidId)
-                {
-                    return dataItem;
-                }
-            }
-
-            return null;
+            return this.FirstOrDefault(x => x.GuidIdValue == guidId);
         }
 
         private T FindByIsSelected()
         {
-            foreach (var dataItem in this)
+            var firstSelected = this.FirstOrDefault(x => x.IsSelected);
+
+            if (firstSelected.IsAssigned())
             {
-                if (dataItem.IsSelected)
-                {
-                    return dataItem;
-                }
+                return firstSelected;
             }
 
-            if (Count > 0)
+            // if none selected, make first selected
+            if (this.Any())
             {
-                this[0].IsSelected = true;
+                var first = this.First();
 
-                return this[0];
+                first.IsSelected = true;
+
+                return first;
             }
 
             return null;
@@ -165,42 +139,26 @@ namespace Konfidence.BaseData
 
         protected T FindByIsEditing()
         {
-            foreach (var dataItem in this)
-            {
-                if (dataItem.IsEditing)
-                {
-                    return dataItem;
-                }
-            }
-
-            return null;
+            return this.FirstOrDefault(x => x.IsEditing);
         }
 
         public T FindCurrent()
         {
             var dataItem = FindByIsEditing();
 
-            if (!dataItem.IsAssigned())
+            if (dataItem.IsAssigned())
             {
-                dataItem = FindByIsSelected();
+                return dataItem;
             }
 
-            return dataItem;
+            return FindByIsSelected(); ;
         }
 
         public bool HasCurrent
         {
             get
             {
-                foreach (var dataItem in this)
-                {
-                    if (dataItem.IsEditing || dataItem.IsSelected)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
+                return this.Any(x => x.IsEditing || x.IsSelected);
             }
         }
 
@@ -284,7 +242,7 @@ namespace Konfidence.BaseData
                     dataItem.IsSelected = false;
                 }
 
-                if (id < 1 && Guid.Empty.Equals(guidId))
+                if (id < 1 && !guidId.IsAssigned())
                 {
                     this[0].IsSelected = true;
                 }
