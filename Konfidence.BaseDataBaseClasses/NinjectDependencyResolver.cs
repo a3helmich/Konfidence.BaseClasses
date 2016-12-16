@@ -7,7 +7,7 @@ namespace Konfidence.BaseData
 {
     public class NinjectDependencyResolver : BaseItem
     {
-        private static IKernel _kernel;
+        private static IKernel _kernel = null;
 
         public IKernel Kernel => _kernel;
 
