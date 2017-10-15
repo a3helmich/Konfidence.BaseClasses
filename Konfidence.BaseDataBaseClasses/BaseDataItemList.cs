@@ -151,7 +151,7 @@ namespace Konfidence.BaseData
                 return dataItem;
             }
 
-            return FindByIsSelected(); ;
+            return FindByIsSelected(); 
         }
 
         public bool HasCurrent
