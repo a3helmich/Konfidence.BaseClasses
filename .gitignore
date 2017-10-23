@@ -1,0 +1,12 @@
+*.user
+*.cache
+*.ncb
+*.suo
+*.ri
+*/bin/*
+*/obj/*
+packages/*
+**/.vs/*
+**/App.debug.config
+**/*.sln.dotsettings
+**/*.lock.json
