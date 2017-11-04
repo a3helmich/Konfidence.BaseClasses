@@ -52,7 +52,9 @@ namespace Konfidence.Base
                 decimalString = decimalString.Replace(',', '.');
             }
 
-            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out var returnValue))
+            decimal returnValue;
+
+            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out returnValue))
             {
                 return returnValue;
             }
