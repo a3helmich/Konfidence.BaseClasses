@@ -42,10 +42,33 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6517.31113, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6517.31113\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6517.31113, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6517.31113\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseUserControlHelpers, Version=1.0.6517.27926, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseUserControlHelpers.1.0.6517.27926\lib\net46\Konfidence.BaseUserControlHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.MenuClasses, Version=1.0.6517.31114, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.MenuClasses.1.0.6517.31114\lib\net46\Konfidence.MenuClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -76,16 +99,6 @@
   <ItemGroup>
     <Compile Include="BasePageHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
-      <Project>{d71a4677-79c7-443b-900d-218fbcfe8728}</Project>
-      <Name>Konfidence.BaseClasses</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj">
-      <Project>{D60A1063-3897-44FA-97F5-85A9C25B1F8C}</Project>
-      <Name>Konfidence.BaseUserControlHelpers</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

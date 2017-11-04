@@ -1,7 +1,5 @@
 using System;
-using System.Diagnostics;
 using System.Globalization;
-using JetBrains.Annotations;
 
 namespace Konfidence.Base
 {
@@ -32,28 +30,29 @@ namespace Konfidence.Base
         // string extender van maken
         public string ReplaceIgnoreCase(string fromString, string oldValue, string newValue)
         {
-            var toString = fromString;
-
             var codeBehindIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
 
             if (codeBehindIndex > -1)
             {
-                toString = fromString.Substring(0, codeBehindIndex);
+                var toString = fromString.Substring(0, codeBehindIndex);
+
                 toString += newValue;
                 toString += fromString.Substring(codeBehindIndex + oldValue.Length);
+
+                return toString;
             }
 
-            return toString;
+            return fromString;
         }
 
         public decimal ToDecimal(string decimalString,  decimal defaultValue)
         {
-            decimal returnValue;
-
             if (decimalString.IndexOf('.') < 0 && decimalString.IndexOf(',') >= 0)
             {
                 decimalString = decimalString.Replace(',', '.');
             }
+
+            decimal returnValue;
 
             if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out returnValue))
             {

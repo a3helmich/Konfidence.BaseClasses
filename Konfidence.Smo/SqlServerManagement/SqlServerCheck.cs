@@ -6,7 +6,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.Smo.SqlServerManagement
 {
-    internal class SqlServerCheck
+    public class SqlServerCheck
     {
         public static bool VerifyDatabaseServer(Database databaseInstance)
         {

@@ -17,7 +17,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -61,20 +61,31 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6517.31113, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6517.31113\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
     <Compile Include="ContainerSecurity\ContainerPermission.cs" />
     <Compile Include="Encryption\Decoder.cs" />
     <Compile Include="Encryption\Encoder.cs" />
     <Compile Include="Encryption\KeyEncryption.cs" />
+    <Compile Include="IConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Konfidence.nl.snk" />
+    <None Include="..\Konfidence.nl.snk">
+      <Link>Konfidence.nl.snk</Link>
+    </None>
     <None Include="Konfidence.Security.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -92,12 +103,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
-      <Project>{d71a4677-79c7-443b-900d-218fbcfe8728}</Project>
-      <Name>Konfidence.BaseClasses</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

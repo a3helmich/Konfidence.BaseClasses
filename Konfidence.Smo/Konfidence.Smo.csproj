@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6517.31113, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6517.31113\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6517.31113, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6517.31113\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
       <Private>True</Private>
@@ -70,6 +79,9 @@
       <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.SqlEnum.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -99,18 +111,9 @@
     <Compile Include="SqlServerManagement\SqlServerSmo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Konfidence.Smo.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj">
-      <Project>{D71A4677-79C7-443B-900D-218FBCFE8728}</Project>
-      <Name>Konfidence.BaseClasses</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj">
-      <Project>{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}</Project>
-      <Name>Konfidence.BaseDatabaseClasses</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
