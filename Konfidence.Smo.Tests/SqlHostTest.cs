@@ -12,28 +12,28 @@ namespace Konfidence.Smo.Tests
     [TestClass]
     public class SqlHostTest
     {
-        [TestMethod, TestCategory("SqlServer")]
-        [ExpectedException(typeof(SqlHostException))]
-        public void SqlServerNotFound()
-        {
-            // Arrange
-            var databaseProviderFactory = new DatabaseProviderFactory();
+        //[TestMethod, TestCategory("SqlServer")]
+        //[ExpectedException(typeof(SqlHostException))]
+        //public void SqlServerNotFound()
+        //{
+        //    // Arrange
+        //    var databaseProviderFactory = new DatabaseProviderFactory();
 
-            var database = databaseProviderFactory.Create("TestDatabase");
+        //    var database = databaseProviderFactory.Create("TestDatabase");
 
-            // Act 
-            try
-            {
-                //SqlServerCheck.VerifyDatabaseServer(database); // "TestDatabase" does not exist, and throws exception SqlHostException
-            }
-            catch (Exception e)
-            {
-                // Assert
-                Assert.AreEqual("Database TestDatabase does not exist", e.Message);
+        //    // Act 
+        //    try
+        //    {
+        //        //SqlServerCheck.VerifyDatabaseServer(database); // "TestDatabase" does not exist, and throws exception SqlHostException
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        // Assert
+        //        Assert.AreEqual("Database TestDatabase does not exist", e.Message);
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
 
         [TestMethod, TestCategory("SqlServer")]
         public void SqlServerExists()
