@@ -1,7 +1,7 @@
 ﻿using Konfidence.Smo.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.Test.BaseClasses
+namespace Konfidence.Smo.Tests
 {
     
     

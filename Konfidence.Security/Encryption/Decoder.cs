@@ -14,7 +14,7 @@ namespace Konfidence.Security.Encryption
         {
             _Disposed = false;
 
-            _Decoder = new KeyEncryption(string.Empty);
+            _Decoder = new KeyEncryption(string.Empty, new Configuration());
 
             _Decoder.ReadKey(privateKey);
         }
