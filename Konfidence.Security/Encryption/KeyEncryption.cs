@@ -15,16 +15,13 @@ namespace Konfidence.Security.Encryption
         private RSACryptoServiceProvider _tempRsaProvider;
         private int _tempKeySize;
 
-        // _MaxBytes schijnt uit te vinden te zijn, maar is een 
-        // beetje vreemd heb onderstussen het een en ander 
-        // uitgezocht, maar de maximum datasize = keysize lijkt
-        // niet waar te zijn heb voorlopig gekozen voor halverwege 
-        // keysize, dit lijkt te voldoen, moet verder uitgezocht
-        //NB nov 2012: zal wel iets te maken hebben met de encoding van de string (onebyte/twobyte)
+        // _MaxBytes schijnt uit te vinden te zijn, maar is een beetje vreemd, heb onderstussen het een en ander 
+        // uitgezocht, maar de maximum datasize = keysize lijkt niet waar te zijn heb voorlopig gekozen voor halverwege 
+        // de keysize, dit lijkt te voldoen, moet verder uitgezocht.
+        //NB nov 2012: zal wel iets te maken hebben met de encoding van de string (onebyte/twobyte).
         private int _maxBytesServer; // default voor de serverside
         private int _maxBytesClient; // default voor de serverside
 
-        #region properties
         public RSACryptoServiceProvider RsaProvider => _rsaProvider;
 
         public string PublicKey => _rsaProvider.ToXmlString(false);
@@ -35,11 +32,44 @@ namespace Konfidence.Security.Encryption
 
         public int PackageSize => _maxBytesServer / 2;
 
-        #endregion properties
+        private IConfiguration _configuration;
 
-        public KeyEncryption()
+        public KeyEncryption(IConfiguration configuration)
         {
             _disposed = false;
+            _configuration = configuration;
+        }
+
+        public KeyEncryption(string containerName, IConfiguration configuration) : this(0, containerName, configuration)
+        {
+        }
+
+        public KeyEncryption(int keySize, string containerName, IConfiguration configuration) : this(configuration)
+        {
+            _maxBytesClient = keySize / 8;
+            _maxBytesServer = keySize / 8;
+
+            bool isTemporary = false;
+
+            if (!containerName.IsAssigned())
+            {
+                isTemporary = true;
+
+                containerName = "None";
+            }
+
+            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) key - " + containerName);
+
+            if (isTemporary)
+            {
+                _rsaProvider = TempKeyContainer;
+            }
+            else
+            {
+                GetKeyContainer(containerName);
+            }
+
+            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
         }
 
         protected RSACryptoServiceProvider TempKeyContainer
@@ -65,18 +95,17 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-        private int GetMaxKeySize()
+        public int GetMaxKeySize()
         {
-            // at first i wanted to remove redundant keys etc. but keeping them in 
+            // at first I wanted to remove redundant keys etc. but keeping them in 
             // store is faster for non-key generating actions. like here, but also for encoding and decoding
             // Rsa.PersistKeyInCsp = false;  // don't want to keep this in storage
             var keyContainer = new RSACryptoServiceProvider();
 
             KeySizes legalKeySize = keyContainer.LegalKeySizes[0];
 
-            switch (Environment.OSVersion.Platform)
+            switch (_configuration.OSVersionPlatform)
             {
-                case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
                     {
                         _maxBytesServer = legalKeySize.MinSize / 8;
@@ -95,47 +124,6 @@ namespace Konfidence.Security.Encryption
             }
 
             return _maxBytesServer * 8;
-        }
-
-        public KeyEncryption(string containerName) : this(0, containerName)
-        {
-        }
-
-        public KeyEncryption(int keySize, string containerName)
-        {
-            _maxBytesClient = keySize / 8;
-            _maxBytesServer = keySize / 8;
-            var containerName1 = containerName;
-
-            bool isTemporary = false;
-
-            if (containerName1.IsAssigned())
-            {
-                isTemporary = true;
-
-                containerName1 = "None";
-            }
-
-            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) key - " + containerName1);
-
-            if (isTemporary)
-            {
-                _rsaProvider = TempKeyContainer;
-            }
-            else
-            {
-                GetKeyContainer(containerName1);
-            }
-
-            Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
-        }
-
-        public static int MaxKeySize()
-        {
-            using (var keyEncryption = new KeyEncryption(string.Empty))
-            {
-                return keyEncryption.KeySize;
-            }
         }
 
         private CspParameters GetCspParameters(string containerName)

@@ -22,17 +22,10 @@ namespace Konfidence.BaseData.Repositories
 
         public Database GetDatabase()
         {
-             Database databaseInstance;
+            Database databaseInstance;
             DatabaseProviderFactory databaseProviderFactory = new DatabaseProviderFactory();
 
-            if (_databaseName.IsAssigned())
-            {
-                databaseInstance = databaseProviderFactory.Create(_databaseName);
-            }
-            else
-            {
-                databaseInstance = databaseProviderFactory.CreateDefault();
-            }
+            databaseInstance = _databaseName.IsAssigned() ? databaseProviderFactory.Create(_databaseName) : databaseProviderFactory.CreateDefault();
 
             if (Debugger.IsAttached)
             {
