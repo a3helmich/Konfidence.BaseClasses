@@ -142,7 +142,6 @@
     <Compile Include="SessionParameterObject.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Konfidence.BaseUserControlHelpers.nuspec" />
     <None Include="Konfidence.nl.snk" />
     <None Include="packages.config" />
