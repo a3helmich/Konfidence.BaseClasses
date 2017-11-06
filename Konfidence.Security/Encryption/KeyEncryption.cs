@@ -32,7 +32,7 @@ namespace Konfidence.Security.Encryption
 
         public int PackageSize => _maxBytesServer / 2;
 
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public KeyEncryption(IConfiguration configuration)
         {
