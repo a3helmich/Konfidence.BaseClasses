@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using Konfidence.BaseData;
 using Konfidence.Smo.SqlDbSchema;
 using Konfidence.Smo.SqlServerManagement;
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.Smo.Tests
+namespace Konfidence.Smo.Tests.SqlServerManagement
 {
+    [ExcludeFromCodeCoverage]
     [TestClass]
-    public class SqlHostTest
+    public class SqlServerCheckTests
     {
         [TestMethod, TestCategory("SqlServer")]
         [ExpectedException(typeof(SqlHostException))]
-        public void SqlServerNotFound()
+        public void VerifyDatabaseServer_WhenInvalidDatabase_ShouldReturnDoesNotExist()
         {
             // Arrange
             var databaseProviderFactory = new DatabaseProviderFactory();
@@ -31,8 +31,23 @@ namespace Konfidence.Smo.Tests
                 // Assert
                 Assert.AreEqual("Database TestDatabase does not exist", e.Message);
 
-                throw;
+                throw; // [ExpectedException(typeof(SqlHostException))] 
             }
+        }
+
+        [TestMethod, TestCategory("SqlServer")]
+        public void VerifyDatabaseServer_WhenValidDatabase_ShouldReturnOk()
+        {
+            // Arrange
+            var databaseProviderFactory = new DatabaseProviderFactory();
+
+            var database = databaseProviderFactory.Create("Newsletter");
+
+            // Act 
+            var result = SqlServerCheck.VerifyDatabaseServer(database); // "TestDatabase" does not exist, and throws exception SqlHostException
+
+            // Assert
+            Assert.IsTrue(result);
         }
 
         [TestMethod, TestCategory("SqlServer")]

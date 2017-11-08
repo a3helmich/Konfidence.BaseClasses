@@ -1,11 +1,13 @@
-﻿using DbSiteMapMenuClasses;
+﻿using System.Diagnostics.CodeAnalysis;
+using DbSiteMapMenuClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.Test.MenuClasses
+namespace Konfidence.MenuClasses.Tests
 {
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [TestClass]
     public class MenuItemTest
     {

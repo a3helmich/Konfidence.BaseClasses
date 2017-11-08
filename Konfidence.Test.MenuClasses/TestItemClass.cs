@@ -1,5 +1,8 @@
-﻿namespace Konfidence.Test.MenuClasses
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Konfidence.MenuClasses.Tests
 {
+    [ExcludeFromCodeCoverage]
     public class TestItemClass : ITestItemClass
     {
         private string _Something;
