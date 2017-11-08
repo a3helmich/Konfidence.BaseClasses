@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.DesignPatterns",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{EA37BC31-3523-495C-A0A0-3828065EE218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.BaseWebsiteClasses", "Konfidence.Test.BaseWebsiteClasses\Konfidence.Test.BaseWebsiteClasses.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers.Tests", "Konfidence.Test.BaseWebsiteClasses\Konfidence.BaseUserControlHelpers.Tests.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}"
 EndProject
@@ -51,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indy.Sockets", "Indy.Socket
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Smo", "Konfidence.Smo\Konfidence.Smo.csproj", "{6CEE30A7-D859-496D-9899-9DE1654DF995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Test.MenuClasses", "Konfidence.Test.MenuClasses\Konfidence.Test.MenuClasses.csproj", "{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.MenuClasses.Tests", "Konfidence.Test.MenuClasses\Konfidence.MenuClasses.Tests.csproj", "{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{35800589-CB56-4489-A217-2108E97ECFAC}"
 EndProject
@@ -280,8 +280,8 @@ Global
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
