@@ -8,8 +8,8 @@
     <ProjectGuid>{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.Test.MenuClasses</RootNamespace>
-    <AssemblyName>Konfidence.Test.MenuClasses</AssemblyName>
+    <RootNamespace>Konfidence.MenuClasses.Tests</RootNamespace>
+    <AssemblyName>Konfidence.MenuClasses.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -68,17 +68,11 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6517.31113, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6517.31113\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6521.1265, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6521.1265\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6517.31113, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6517.31113\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.BaseUserControlHelpers, Version=1.0.6517.27926, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseUserControlHelpers.1.0.6517.27926\lib\net46\Konfidence.BaseUserControlHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.MenuClasses, Version=1.0.6517.31114, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.MenuClasses.1.0.6517.31114\lib\net46\Konfidence.MenuClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6521.1265, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6521.1265\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -153,6 +147,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj">
+      <Project>{d60a1063-3897-44fa-97f5-85a9c25b1f8c}</Project>
+      <Name>Konfidence.BaseUserControlHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj">
+      <Project>{411d4b61-9ddf-43f9-ab11-b256dd8287e5}</Project>
+      <Name>Konfidence.MenuClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" />

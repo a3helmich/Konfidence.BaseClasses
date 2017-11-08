@@ -1,7 +1,6 @@
-﻿using Konfidence.BaseUserControlHelpers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.Test.BaseWebsiteClasses
+namespace Konfidence.BaseUserControlHelpers.Tests
 {
     /// <summary>
     ///This is a test class for BasePageHelperTest and is intended
