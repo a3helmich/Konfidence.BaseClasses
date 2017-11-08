@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using Konfidence.Base;
 using Konfidence.BaseData;
@@ -15,7 +16,7 @@ namespace Konfidence.Smo.SqlServerManagement
             string userName = string.Empty;
             string password = string.Empty;
 
-            var sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
+            IDbConnection sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
 
             if (sqlConnection.IsAssigned())
             {

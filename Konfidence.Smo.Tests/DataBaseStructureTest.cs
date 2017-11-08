@@ -1,14 +1,14 @@
-﻿using Konfidence.Smo.SqlDbSchema;
+﻿using System.Diagnostics.CodeAnalysis;
+using Konfidence.Smo.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.Smo.Tests
 {
-    
-    
     /// <summary>
     ///This is a test class for DatabaseStructureTest and is intended
     ///to contain all DatabaseStructureTest Unit Tests
     ///</summary>
+    [ExcludeFromCodeCoverage]
     [TestClass]
     public class DatabaseStructureTest
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Konfidence.Test.MenuClasses
+namespace Konfidence.MenuClasses.Tests
 {
     public interface ITestItemClassList : IList<TestItemClass>
     {

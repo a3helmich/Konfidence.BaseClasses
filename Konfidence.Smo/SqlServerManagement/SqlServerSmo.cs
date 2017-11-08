@@ -43,7 +43,6 @@ namespace Konfidence.Smo.SqlServerManagement
                 if (Debugger.IsAttached)
                 {
                     executerThread.Join();
-
                 }
                 else
                 {
@@ -86,7 +85,7 @@ namespace Konfidence.Smo.SqlServerManagement
             }
             catch (FailedOperationException cfEx)
             {
-                throw cfEx.InnerException;
+                if (cfEx.InnerException != null) throw cfEx.InnerException;
             }
             catch (Exception ex)
             {
