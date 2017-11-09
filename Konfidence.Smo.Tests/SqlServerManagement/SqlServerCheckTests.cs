@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using FluentAssertions;
 using Konfidence.BaseData;
 using Konfidence.Smo.SqlDbSchema;
 using Konfidence.Smo.SqlServerManagement;
@@ -13,7 +14,6 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
     public class SqlServerCheckTests
     {
         [TestMethod, TestCategory("SqlServer")]
-        [ExpectedException(typeof(SqlHostException))]
         public void VerifyDatabaseServer_WhenInvalidDatabase_ShouldReturnDoesNotExist()
         {
             // Arrange
@@ -22,17 +22,10 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
             var database = databaseProviderFactory.Create("TestDatabase");
 
             // Act 
-            try
-            {
-                SqlServerCheck.VerifyDatabaseServer(database); // "TestDatabase" does not exist, and throws exception SqlHostException
-            }
-            catch (Exception e)
-            {
-                // Assert
-                Assert.AreEqual("Database TestDatabase does not exist", e.Message);
+            Action action = () => SqlServerCheck.VerifyDatabaseServer(database); 
 
-                throw; // [ExpectedException(typeof(SqlHostException))] 
-            }
+            // Assert
+            action.ShouldThrow<SqlHostException>().WithMessage("Database TestDatabase does not exist");
         }
 
         [TestMethod, TestCategory("SqlServer")]
@@ -44,7 +37,7 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
             var database = databaseProviderFactory.Create("Newsletter");
 
             // Act 
-            var result = SqlServerCheck.VerifyDatabaseServer(database); // "TestDatabase" does not exist, and throws exception SqlHostException
+            var result = SqlServerCheck.VerifyDatabaseServer(database); 
 
             // Assert
             Assert.IsTrue(result);

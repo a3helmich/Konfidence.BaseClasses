@@ -94,6 +94,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions, Version=4.19.4.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.19.4\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.19.4.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.19.4\lib\net45\FluentAssertions.Core.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -145,6 +151,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseStructureTest.cs" />
