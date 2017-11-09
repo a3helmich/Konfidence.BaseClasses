@@ -78,6 +78,7 @@
     <Compile Include="Encryption\Encoder.cs" />
     <Compile Include="Encryption\KeyEncryption.cs" />
     <Compile Include="IConfiguration.cs" />
+    <Compile Include="PrivatePublicKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
