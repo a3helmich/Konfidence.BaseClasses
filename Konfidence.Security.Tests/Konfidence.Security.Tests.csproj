@@ -67,6 +67,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PrivatePublicKeyTests.cs" />
     <Compile Include="Security.KeyEncryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
