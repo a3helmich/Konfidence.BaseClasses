@@ -1,4 +1,5 @@
-﻿using Konfidence.Base;
+﻿using System.Diagnostics.CodeAnalysis;
+using Konfidence.Base;
 using Konfidence.Security.Encryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,6 +8,7 @@ namespace Konfidence.Security.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [TestClass]
     public class PrivatePublicKeyTest
     {

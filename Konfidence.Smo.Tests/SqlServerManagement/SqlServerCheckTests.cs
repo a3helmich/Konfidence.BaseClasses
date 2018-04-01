@@ -25,7 +25,7 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
             Action action = () => SqlServerCheck.VerifyDatabaseServer(database); 
 
             // Assert
-            action.ShouldThrow<SqlHostException>().WithMessage("Database TestDatabase does not exist");
+            action.Should().Throw<SqlHostException>().WithMessage("Database TestDatabase does not exist");
         }
 
         [TestMethod, TestCategory("SqlServer")]
@@ -46,7 +46,7 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
         [TestMethod, TestCategory("SqlServer")]
         public void SqlServerExists()
         {
-            DatabaseStructure target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
+            var target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
