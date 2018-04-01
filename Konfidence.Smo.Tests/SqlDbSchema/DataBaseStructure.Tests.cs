@@ -1,38 +1,22 @@
-﻿using Konfidence.TeamFoundation;
+﻿using System.Diagnostics.CodeAnalysis;
+using Konfidence.Smo.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace TeamFoundationTest
+namespace Konfidence.Smo.Tests.SqlDbSchema
 {
-    
-    
     /// <summary>
-    ///This is a test class for SolutionTextDocumentTest and is intended
-    ///to contain all SolutionTextDocumentTest Unit Tests
+    ///This is a test class for DatabaseStructureTest and is intended
+    ///to contain all DatabaseStructureTest Unit Tests
     ///</summary>
-    [TestClass()]
-    public class SolutionTextDocumentTest
+    [ExcludeFromCodeCoverage]
+    [TestClass]
+    public class DatabaseStructureTest
     {
-
-        #region test context
-        private TestContext testContextInstance;
-
         /// <summary>
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-        #endregion test context
+        public TestContext TestContext { get; set; }
 
         #region Additional test attributes
         // 
@@ -64,17 +48,17 @@ namespace TeamFoundationTest
         //
         #endregion
 
-
         /// <summary>
-        ///A test for AddProjectFile
+        ///A test for BuildStructure
         ///</summary>
-        [TestMethod()]
-        public void AddProjectFileTest()
+        [TestMethod, TestCategory("DatabaseStructure")]
+        public void BuildStructureTest()
         {
-            SolutionTextDocument target = new SolutionTextDocument(""); // TODO: Initialize to an appropriate value
-            string projectFile = string.Empty; // TODO: Initialize to an appropriate value
-            target.AddProjectFile(projectFile);
-            Assert.Inconclusive("A method that does not return a value cannot be verified.");
+            var target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            Assert.AreEqual(25, target.TableList.Count); // newsletter heeft nu 25 tabellen
         }
     }
 }
