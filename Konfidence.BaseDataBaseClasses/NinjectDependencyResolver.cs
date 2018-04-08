@@ -28,7 +28,7 @@ namespace Konfidence.BaseData
 
         private void AddBindings()
         {
-            Bind<IDatabaseRepository>().To<DatabaseRepository>();
+            Bind<IDatabaseRepository>().To<SqlServerRepository>();
         }
     }
 }

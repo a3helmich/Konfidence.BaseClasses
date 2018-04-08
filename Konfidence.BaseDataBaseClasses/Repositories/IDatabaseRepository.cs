@@ -6,7 +6,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData.Repositories
 {
-    internal interface IDatabaseRepository
+    public interface IDatabaseRepository
     {
         Database GetDatabase();
 

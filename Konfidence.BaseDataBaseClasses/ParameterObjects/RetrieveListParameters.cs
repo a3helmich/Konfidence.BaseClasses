@@ -1,6 +1,6 @@
 ﻿namespace Konfidence.BaseData.ParameterObjects
 {
-    class RetrieveListParameters
+    public class RetrieveListParameters
     {
         private readonly IBaseDataItemList _dataItemList;
 

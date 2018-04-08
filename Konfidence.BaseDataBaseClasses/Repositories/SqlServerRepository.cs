@@ -1,42 +1,28 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.BaseData.Repositories
 {
-    internal class DatabaseRepository : BaseItem, IDatabaseRepository
+    internal class SqlServerRepository : IDatabaseRepository
     {
         private readonly string _databaseName;
 
         public IDataReader DataReader { get; private set; }
 
-        public DatabaseRepository(string databaseName)
+        public SqlServerRepository(string databaseName)
         {
             _databaseName = databaseName;
         }
 
         public Database GetDatabase()
         {
-            Database databaseInstance;
-            DatabaseProviderFactory databaseProviderFactory = new DatabaseProviderFactory();
+            var databaseProviderFactory = new DatabaseProviderFactory();
 
-            databaseInstance = _databaseName.IsAssigned() ? databaseProviderFactory.Create(_databaseName) : databaseProviderFactory.CreateDefault();
-
-            if (Debugger.IsAttached)
-            {
-                if (databaseInstance.DbProviderFactory is SqlClientFactory)
-                {
-                    // not with Smo!!! -> try a simulair trick as in VerifyDatabaseServer  (Konfidence.Smo)
-                    //if (!SqlServerCheck.VerifyDatabaseServer(databaseInstance))
-                    //{
-                    //}
-                }
-            }
+            var databaseInstance = _databaseName.IsAssigned() ? databaseProviderFactory.Create(_databaseName) : databaseProviderFactory.CreateDefault();
 
             return databaseInstance;
         }
