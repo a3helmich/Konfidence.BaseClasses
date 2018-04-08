@@ -6,9 +6,9 @@ namespace Konfidence.BaseData.ParameterObjects
     {
         private readonly BaseDataItem _dataItem;
 
-        internal string StoredProcedure { get; }
+        public string StoredProcedure { get; }
 
-        internal DbParameterObjectList ParameterObjectList
+        public DbParameterObjectList ParameterObjectList
         {
             get
             {

@@ -7,15 +7,15 @@ namespace Konfidence.BaseData.ParameterObjects
     {
         private readonly BaseDataItem _dataItem;
 
-        internal string StoredProcedure { get; }
+        public string StoredProcedure { get; }
 
-        internal string AutoIdField => _dataItem.AutoIdField;
+        public string AutoIdField => _dataItem.AutoIdField;
 
-        internal int Id => _dataItem.GetId();
+        public int Id => _dataItem.GetId();
 
-        internal Dictionary<string, DbParameterObject> AutoUpdateFieldList => _dataItem.AutoUpdateFieldDictionary;
+        public Dictionary<string, DbParameterObject> AutoUpdateFieldList => _dataItem.AutoUpdateFieldDictionary;
 
-        internal DbParameterObjectList ParameterObjectList
+        public DbParameterObjectList ParameterObjectList
         {
             get
             {

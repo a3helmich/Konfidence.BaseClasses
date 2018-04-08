@@ -5,16 +5,16 @@ namespace Konfidence.BaseData.ParameterObjects
 {
     public class ResponseParameters : BaseItem
     {
-        internal int Id { get; private set; }
+        public int Id { get; private set; }
 
-        internal Dictionary<string, DbParameterObject> AutoUpdateFieldList { get; private set; }
+        public Dictionary<string, DbParameterObject> AutoUpdateFieldList { get; private set; }
 
-        internal void SetId(int id)
+        public void SetId(int id)
         {
             Id = id;
         }
 
-        internal void SetAutoUpdateFieldList(Dictionary<string, DbParameterObject> autoUpdateFieldList)
+        public void SetAutoUpdateFieldList(Dictionary<string, DbParameterObject> autoUpdateFieldList)
         {
             AutoUpdateFieldList = autoUpdateFieldList;
         }

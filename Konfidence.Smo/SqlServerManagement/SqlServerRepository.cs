@@ -247,7 +247,7 @@
 
 //        public int ExecuteNonQuery(string textCommand)
 //        {
-//            return GetDatabase().ExecuteNonQuery(CommandType.Text, textCommand); 
+//            return GetDatabase().ExecuteNonQuery(CommandType.Text, textCommand);
 //        }
 
 //        public bool ObjectExists(string objectName, string collection)
