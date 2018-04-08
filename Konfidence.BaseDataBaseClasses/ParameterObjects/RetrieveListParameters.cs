@@ -4,9 +4,9 @@
     {
         private readonly IBaseDataItemList _dataItemList;
 
-        internal string StoredProcedure { get; }
+        public string StoredProcedure { get; }
 
-        internal DbParameterObjectList ParameterObjectList
+        public DbParameterObjectList ParameterObjectList
         {
             get
             {
