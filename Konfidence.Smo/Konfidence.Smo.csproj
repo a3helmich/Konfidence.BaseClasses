@@ -108,6 +108,7 @@
     <Compile Include="SqlDbSchema\TableDataItem.cs" />
     <Compile Include="SqlDbSchema\TableDataItemList.cs" />
     <Compile Include="SqlServerManagement\SqlServerCheck.cs" />
+    <Compile Include="SqlServerManagement\SqlServerRepository.cs" />
     <Compile Include="SqlServerManagement\SqlServerSmo.cs" />
   </ItemGroup>
   <ItemGroup>

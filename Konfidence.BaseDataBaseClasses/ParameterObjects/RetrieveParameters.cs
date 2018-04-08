@@ -2,7 +2,7 @@
 
 namespace Konfidence.BaseData.ParameterObjects
 {
-    internal class RetrieveParameters : BaseItem
+    public class RetrieveParameters : BaseItem
     {
         private readonly BaseDataItem _dataItem;
 

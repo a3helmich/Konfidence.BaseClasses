@@ -3,7 +3,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseData.ParameterObjects
 {
-    internal class RequestParameters : BaseItem
+    public class RequestParameters : BaseItem
     {
         private readonly BaseDataItem _dataItem;
 
