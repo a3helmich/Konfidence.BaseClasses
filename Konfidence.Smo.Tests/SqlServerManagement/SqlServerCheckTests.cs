@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
-using Konfidence.BaseData;
+using Konfidence.SqlHostProvider.Exceptions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.SqlHostProvider.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
