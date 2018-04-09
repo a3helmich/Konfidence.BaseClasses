@@ -56,9 +56,7 @@ namespace Konfidence.Base
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(this string assignedGuid)
         {
-            Guid isGuid;
-
-            if (Guid.TryParse(assignedGuid, out isGuid))
+            if (Guid.TryParse(assignedGuid, out var isGuid))
             {
                 return true;
             }

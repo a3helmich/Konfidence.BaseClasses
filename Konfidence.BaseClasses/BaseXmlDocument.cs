@@ -126,13 +126,16 @@ namespace Konfidence.Base
 
         public void GetValue(XmlNode node,string nodeName, out bool value)
         {
-            value = false;
-
             var valueNode = node.SelectSingleNode(nodeName);
+
+            value = false;
 
             if (valueNode.IsAssigned())
             {
-                bool.TryParse(valueNode.InnerText, out value);
+                if (bool.TryParse(valueNode.InnerText, out var outvalue))
+                {
+                    value = outvalue;
+                }
             }
         }
 
