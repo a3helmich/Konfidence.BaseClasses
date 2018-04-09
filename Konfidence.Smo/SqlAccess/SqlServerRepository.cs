@@ -65,7 +65,7 @@ namespace Konfidence.BaseData.Repositories
             return resultParameters;
         }
 
-        private void SetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
+        private static void SetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
         {
             // autoidfield parameter toevoegen
             database.AddParameter(dbCommand, executeParameters.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
@@ -87,7 +87,7 @@ namespace Konfidence.BaseData.Repositories
             }
         }
 
-        private ResponseParameters GetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
+        private static ResponseParameters GetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
         {
             var responseParameters = new ResponseParameters();
 
@@ -132,7 +132,7 @@ namespace Konfidence.BaseData.Repositories
             }
         }
 
-        private void SetParameterData(RetrieveParameters executeParameters, Database database, DbCommand dbCommand)
+        private static void SetParameterData(RetrieveParameters executeParameters, Database database, DbCommand dbCommand)
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
@@ -212,7 +212,7 @@ namespace Konfidence.BaseData.Repositories
             }
         }
 
-        private void SetParameterData(RetrieveListParameters executeParameters, Database database, DbCommand dbCommand)
+        private static void SetParameterData(RetrieveListParameters executeParameters, Database database, DbCommand dbCommand)
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
@@ -233,7 +233,6 @@ namespace Konfidence.BaseData.Repositories
                 ExecuteNonQuery(dbCommand);
             }
         }
-
 
         public int ExecuteNonQuery(string storedProcedure, DbParameterObjectList parameterList)
         {

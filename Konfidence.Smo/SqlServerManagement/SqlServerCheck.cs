@@ -11,43 +11,43 @@ namespace Konfidence.Smo.SqlServerManagement
     {
         public static bool VerifyDatabaseServer(Database databaseInstance)
         {
-            string serverName = string.Empty;
-            string databaseName = string.Empty;
-            string userName = string.Empty;
-            string password = string.Empty;
+            var serverName = string.Empty;
+            var databaseName = string.Empty;
+            var userName = string.Empty;
+            var password = string.Empty;
 
             IDbConnection sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
 
             if (sqlConnection.IsAssigned())
             {
-                string[] connectionParameters = sqlConnection.ConnectionString.Split(';'); 
+                var connectionParameters = sqlConnection.ConnectionString.Split(';'); 
 
-                foreach(string param in connectionParameters)
+                foreach(var param in connectionParameters)
                 {
                     if (param.StartsWith("server=", StringComparison.OrdinalIgnoreCase))
                     {
-                        string[] paramParts = param.Split('=');
+                        var paramParts = param.Split('=');
 
                         serverName = paramParts[1];
                     }
 
                     if (param.StartsWith("database=", StringComparison.OrdinalIgnoreCase))
                     {
-                        string[] paramParts = param.Split('=');
+                        var paramParts = param.Split('=');
 
                         databaseName = paramParts[1];
                     }
 
                     if (param.StartsWith("user id=", StringComparison.OrdinalIgnoreCase))
                     {
-                        string[] paramParts = param.Split('=');
+                        var paramParts = param.Split('=');
 
                         userName = paramParts[1];
                     }
 
                     if (param.StartsWith("password=", StringComparison.OrdinalIgnoreCase))
                     {
-                        string[] paramParts = param.Split('=');
+                        var paramParts = param.Split('=');
 
                         password = paramParts[1];
                     }

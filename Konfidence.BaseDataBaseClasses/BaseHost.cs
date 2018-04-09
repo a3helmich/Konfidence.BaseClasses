@@ -81,12 +81,12 @@ namespace Konfidence.BaseData
             return null;
         }
 
-        internal virtual Int16 GetFieldInt16(string fieldName)
+        internal virtual short GetFieldInt16(string fieldName)
         {
             throw new NotImplementedException();
         }
 
-		internal virtual Int32 GetFieldInt32(string fieldName)
+		internal virtual int GetFieldInt32(string fieldName)
 		{
 			throw new NotImplementedException();
 		}
@@ -116,7 +116,7 @@ namespace Konfidence.BaseData
             throw new NotImplementedException();
         }
 
-        internal virtual Decimal GetFieldDecimal(string fieldName)
+        internal virtual decimal GetFieldDecimal(string fieldName)
         {
             throw new NotImplementedException();
         }
