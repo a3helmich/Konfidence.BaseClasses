@@ -5,7 +5,7 @@ using Ninject.Syntax;
 
 namespace Konfidence.BaseData
 {
-    public class NinjectDependencyResolver : BaseItem
+    public class NinjectDependencyResolver
     {
         private static IKernel _kernel = null;
 
@@ -28,7 +28,7 @@ namespace Konfidence.BaseData
 
         private void AddBindings()
         {
-            Bind<IDatabaseRepository>().To<SqlServerRepository>();
+            //Bind<IDatabaseRepository>().To<SqlServerRepository>();
         }
     }
 }

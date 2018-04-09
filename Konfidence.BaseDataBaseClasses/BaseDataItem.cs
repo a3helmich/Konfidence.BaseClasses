@@ -24,8 +24,8 @@ namespace Konfidence.BaseData
 
 	    public bool IsSelected
         {
-            get { return _isSelected; }
-            set
+            get => _isSelected;
+	        set
             {
                 _isSelected = value;
 
@@ -47,7 +47,7 @@ namespace Konfidence.BaseData
 
         public bool IsEditing
         {
-            get { return _isEditing; }
+            get => _isEditing;
             set
             {
                 _isEditing = value;
@@ -67,7 +67,7 @@ namespace Konfidence.BaseData
 
                 return _dataHost;
             }
-            set { _dataHost = value; }
+            set => _dataHost = value;
         }
 
 	    public BaseDataItem()
@@ -179,7 +179,7 @@ namespace Konfidence.BaseData
             fieldValue = GetAutoUpdateFieldTimeSpan(fieldName);
         }
 
-        protected internal void GetAutoUpdateField(string fieldName, out Decimal fieldValue)
+        protected internal void GetAutoUpdateField(string fieldName, out decimal fieldValue)
         {
             fieldValue = GetAutoUpdateFieldDecimal(fieldName);
         }
@@ -289,7 +289,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-        private Decimal GetAutoUpdateFieldDecimal(string fieldName)
+        private decimal GetAutoUpdateFieldDecimal(string fieldName)
         {
             decimal fieldValue = 0;
 
@@ -331,12 +331,12 @@ namespace Konfidence.BaseData
 
         #region GetField Methods
 
-        protected void GetField(string fieldName, out Int16 field)
+        protected void GetField(string fieldName, out short field)
         {
             field = GetFieldInt16(fieldName);
         }
 
-        protected void GetField(string fieldName, out Int32 field)
+        protected void GetField(string fieldName, out int field)
         {
             field = GetFieldInt32(fieldName);
         }
@@ -371,16 +371,16 @@ namespace Konfidence.BaseData
             field.LoadXml(GetFieldString(fieldName));
         }
 
-        protected void GetField(string fieldName, out Decimal field)
+        protected void GetField(string fieldName, out decimal field)
         {
             field = GetFieldDecimal(fieldName);
         }
 
-        private Int16 GetFieldInt16(string fieldName)
+        private short GetFieldInt16(string fieldName)
         {
             if (PropertyDictionary.IsAssigned())
             {
-                return (Int16)PropertyDictionary[fieldName];
+                return (short)PropertyDictionary[fieldName];
             }
 
             if (DataHost.IsAssigned())
@@ -391,11 +391,11 @@ namespace Konfidence.BaseData
             throw (new Exception("GetFieldInt16: dataHost/_PropertyDictionary is not assigned"));
         }
 
-		private Int32 GetFieldInt32(string fieldName)
+		private int GetFieldInt32(string fieldName)
 		{
 			if (PropertyDictionary.IsAssigned())
 			{
-				return (Int32)PropertyDictionary[fieldName];
+				return (int)PropertyDictionary[fieldName];
 			}
 
 		    if (DataHost.IsAssigned())
@@ -488,11 +488,11 @@ namespace Konfidence.BaseData
             throw (new Exception("GetFieldTimeSpan: dataHost/_PropertyDictionary  is not assigned"));
         }
 
-        private Decimal GetFieldDecimal(string fieldName)
+        private decimal GetFieldDecimal(string fieldName)
         {
             if (PropertyDictionary.IsAssigned())
             {
-                return (Decimal)PropertyDictionary[fieldName];
+                return (decimal)PropertyDictionary[fieldName];
             }
             
             if (DataHost.IsAssigned())
@@ -537,7 +537,7 @@ namespace Konfidence.BaseData
             DbParameterObjectList.SetField(fieldName, value);
         }
 
-        protected void SetField(string fieldName, Decimal value)
+        protected void SetField(string fieldName, decimal value)
         {
             DbParameterObjectList.SetField(fieldName, value);
         }

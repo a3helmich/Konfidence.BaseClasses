@@ -52,23 +52,21 @@ namespace Konfidence.Base
                 decimalString = decimalString.Replace(',', '.');
             }
 
-            decimal returnValue;
-
-            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out returnValue))
+            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out var returnValue1))
             {
-                return returnValue;
+                return returnValue1;
             }
 
             decimalString = decimalString.Replace(',', 'k');
             decimalString = decimalString.Replace('.', ',');
             decimalString = decimalString.Replace('k', '.');
 
-            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out returnValue))
+            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out var returnValue2))
             {
-                return returnValue;
+                return returnValue2;
             }
 
-            return returnValue; // default teruggeven
+            return 0; // default teruggeven
         }
     }
 }

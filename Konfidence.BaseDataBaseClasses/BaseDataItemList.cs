@@ -84,15 +84,12 @@ namespace Konfidence.BaseData
 
         public T FindById(string textId)
         {
-            Guid guidId;
-            int id;
-
-            if (Guid.TryParse(textId, out guidId))
+            if (Guid.TryParse(textId, out var guidId))
             {
                 return FindById(guidId);
             }
 
-            if (int.TryParse(textId, out id))
+            if (int.TryParse(textId, out var id))
             {
                 if (Debugger.IsAttached || BaseItem.UnitTest)
                 {
@@ -166,20 +163,16 @@ namespace Konfidence.BaseData
 
         public void SetSelected(string idText, string isEditingText)
         {
-            Guid guidId;
-            bool isEditing;
+            bool.TryParse(isEditingText, out var isEditing);
 
-            bool.TryParse(isEditingText, out isEditing);
-
-            if (Guid.TryParse(idText, out guidId))
+            if (Guid.TryParse(idText, out var guidId))
             {
                 SetSelected(guidId, isEditing);
             }
             else
             {
-                int id;
 
-                if (int.TryParse(idText, out id))
+                if (int.TryParse(idText, out var id))
                 {
                     if (Debugger.IsAttached || BaseItem.UnitTest)
                     {
@@ -193,17 +186,13 @@ namespace Konfidence.BaseData
 
         public void SetSelected(string idText)
         {
-            Guid guidId;
-
-            if (Guid.TryParse(idText, out guidId))
+            if (Guid.TryParse(idText, out var guidId))
             {
                 SetSelected(guidId, false);
             }
             else
             {
-                int id;
-
-                if (int.TryParse(idText, out id))
+                if (int.TryParse(idText, out var id))
                 {
                     if (Debugger.IsAttached || BaseItem.UnitTest)
                     {
