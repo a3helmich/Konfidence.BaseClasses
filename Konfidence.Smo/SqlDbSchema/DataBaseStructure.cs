@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Konfidence.Smo.SqlDbSchema
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class DatabaseStructure : SchemaBaseDataItem
     {

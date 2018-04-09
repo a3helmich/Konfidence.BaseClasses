@@ -3,9 +3,10 @@ using System.Data;
 using System.Data.Common;
 using Konfidence.Base;
 using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseData.Repositories;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Konfidence.BaseData.Repositories
+namespace Konfidence.SqlHostProvider.SqlAccess
 {
     internal class SqlServerRepository : IDatabaseRepository
     {

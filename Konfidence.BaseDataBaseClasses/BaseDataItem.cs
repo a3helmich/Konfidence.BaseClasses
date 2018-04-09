@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Xml;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseData.Objects;
+using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData
 {
@@ -17,10 +18,10 @@ namespace Konfidence.BaseData
         private bool _isEditing;
         private bool _isInitialized;
 
-        private BaseHost _dataHost; 
+        private IBaseHost _dataHost; 
 		internal Dictionary<string, object> PropertyDictionary;
 
-	    private Dictionary<string, DbParameterObject> _autoUpdateFieldDictionary;
+	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
 
 	    public bool IsSelected
         {
@@ -33,7 +34,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        protected DbParameterObjectList DbParameterObjectList { get; private set; } = new DbParameterObjectList();
+        protected IDbParameterObjectList DbParameterObjectList { get; private set; } = new DbParameterObjectList();
 
 	    protected virtual void IsSelectedChanged()
         {
@@ -56,7 +57,7 @@ namespace Konfidence.BaseData
         }
 
         // TODO: internal
-        public BaseHost DataHost
+        public IBaseHost DataHost
         {
             get
             {
@@ -77,12 +78,12 @@ namespace Konfidence.BaseData
 	        _isInitialized = false;
 	    }
 
-		internal void SetId(int id)
+		public  void SetId(int id)
 		{
 			Id = id;
 		}
 
-		internal void SetProperties(Dictionary<string, object> propertyDictionary)
+		public void SetProperties(Dictionary<string, object> propertyDictionary)
 		{
 			PropertyDictionary = propertyDictionary;
 
@@ -91,7 +92,7 @@ namespace Konfidence.BaseData
 			PropertyDictionary = null;
 		}
 
-        internal void GetProperties(DbParameterObjectList properties)
+        public void GetProperties(IDbParameterObjectList properties)
 		{
 			DbParameterObjectList = properties;
 
@@ -100,12 +101,12 @@ namespace Konfidence.BaseData
 			DbParameterObjectList = null;
 		}
 
-        internal DbParameterObjectList GetParameterObjectList()
+        public IDbParameterObjectList GetParameterObjectList()
         {
             return DbParameterObjectList;
         }
 
-        protected internal void GetKey()
+        public void GetKey()
         {
             if (AutoIdField.Length > 0)
             {
@@ -113,7 +114,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        internal int GetId()
+        public int GetId()
         {
             return Id;
         }
@@ -123,21 +124,21 @@ namespace Konfidence.BaseData
 
 	    protected string ServiceName { get; set; } = string.Empty;
 
-	    protected internal string AutoIdField { get; set; } = string.Empty;
+	    public string AutoIdField { get; set; } = string.Empty;
 
 	    protected internal string GuidIdField { get; set; } = string.Empty;
 
-	    internal Guid GuidIdValue { get; private set; } = Guid.Empty;
+	    public Guid GuidIdValue { get; private set; } = Guid.Empty;
 
 	    protected int Id { get; private set; }
 
-	    protected internal Dictionary<string, DbParameterObject> AutoUpdateFieldDictionary
+	    public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary
         {
             get
             {
                 if (!_autoUpdateFieldDictionary.IsAssigned())
                 {
-                    _autoUpdateFieldDictionary = new Dictionary<string, DbParameterObject>();
+                    _autoUpdateFieldDictionary = new Dictionary<string, IDbParameterObject>();
                 }
 
                 return _autoUpdateFieldDictionary;
@@ -309,11 +310,11 @@ namespace Konfidence.BaseData
             AutoUpdateFieldDictionary.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
         }
 
-        protected internal string LoadStoredProcedure { get; set; } = string.Empty;
+	    public string LoadStoredProcedure { get; set; } = string.Empty;
 
-	    protected internal string DeleteStoredProcedure { get; set; } = string.Empty;
+	    public string DeleteStoredProcedure { get; set; } = string.Empty;
 
-	    protected internal string SaveStoredProcedure { get; set; } = string.Empty;
+	    public string SaveStoredProcedure { get; set; } = string.Empty;
 
 	    public bool IsNew
 		{
@@ -575,7 +576,7 @@ namespace Konfidence.BaseData
         }
 		#endregion
 
-        internal void LoadDataItem()
+        public void LoadDataItem()
         {
             if (LoadStoredProcedure.IsAssigned())
             {
@@ -598,7 +599,7 @@ namespace Konfidence.BaseData
 	    }
 
 
-        protected internal virtual void InitializeDataItem()
+        public virtual void InitializeDataItem()
 		{
         }
 
@@ -705,7 +706,7 @@ namespace Konfidence.BaseData
             return DataHost.StoredProcedureExists(storedProcedureName);
         }
 
-        internal DbParameterObjectList SetItemData()
+        public IDbParameterObjectList SetItemData()
 		{
 			SetData();
 
@@ -730,7 +731,7 @@ namespace Konfidence.BaseData
         {
         }
 
-        protected internal virtual void GetData()
+        public virtual void GetData()
 		{
         }
 

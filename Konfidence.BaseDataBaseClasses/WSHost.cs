@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseData.Objects;
 using Konfidence.BaseData.WSBaseHost;
+using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    public class WsHost : BaseHost
+    internal class WsHost : BaseHost
 	{
 		private readonly WSBaseHostService _wsBaseHostService;
 
@@ -18,7 +19,7 @@ namespace Konfidence.BaseData
 
 			// _WsBaseHostService.UseDefaultCredentials = true;
 
-			string wsUrl = GetWsUrl(serviceName);
+			var wsUrl = GetWsUrl(serviceName);
 
 			if (wsUrl.Equals(string.Empty))
 			{
@@ -32,7 +33,7 @@ namespace Konfidence.BaseData
 
 	    #endregion
 
-		internal override void Save(BaseDataItem dataItem)
+		public void Save(BaseDataItem dataItem)
 		{
 			var parameterDataItemList = dataItem.SetItemData();
 
@@ -48,7 +49,7 @@ namespace Konfidence.BaseData
             dataItem.SetId(_wsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.GetId()));
 		}
 
-		internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure) // , string autoIdField, int id)
+	    public void GetItem(BaseDataItem dataItem, string getStoredProcedure) // , string autoIdField, int id)
 		{
             ParameterObject[] parameterObjects;
 
@@ -99,7 +100,7 @@ namespace Konfidence.BaseData
 			{
 				var propertyDictionary = new Dictionary<string, object>();
 
-				foreach(ParameterObject parameterObject in parameterObjects)
+				foreach(var parameterObject in parameterObjects)
 				{
 					propertyDictionary.Add(parameterObject.Field, parameterObject.Value);
 				}
@@ -108,22 +109,22 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		protected internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+	    public override void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 			_wsBaseHostService.Delete(id);
 		}
 
-		internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
-		{
-			ParameterObject[][] parameterObjectsList = _wsBaseHostService.BuildItemList();
+		internal override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) 
+        {
+			var parameterObjectsList = _wsBaseHostService.BuildItemList();
 
-			foreach (ParameterObject[] parameterObjectList in parameterObjectsList)
+			foreach (var parameterObjectList in parameterObjectsList)
 			{
 				var baseDataItem = baseDataItemList.GetDataItem();
 
 				var parameterDictionary = new Dictionary<string, object>();
 
-				foreach (ParameterObject parameterObjectItem in parameterObjectList)
+				foreach (var parameterObjectItem in parameterObjectList)
 				{
 					if (parameterObjectItem.Field.Equals("BaseDataItem_KeyValue"))
 					{
@@ -146,24 +147,24 @@ namespace Konfidence.BaseData
         //    return _WsBaseHostService.ExecuteCommand(storedProcedure, parameters);
         //}
 
-		internal override int ExecuteTextCommand(string textCommand)
+	    public override int ExecuteTextCommand(string textCommand)
 		{
 			return _wsBaseHostService.ExecuteTextCommand(textCommand);
 		}
 
-		internal override bool TableExists(string tableName)
+	    public override bool TableExists(string tableName)
 		{
 			return _wsBaseHostService.TableExists(tableName);
 		}
 
-		internal override bool ViewExists(string viewName)
+	    public override bool ViewExists(string viewName)
 		{
 			return _wsBaseHostService.ViewExists(viewName);
 		}
 
 		private static string GetWsUrl(string serviceName)
 		{
-			string wsUrl = ConfigurationManager.AppSettings[serviceName];
+			var wsUrl = ConfigurationManager.AppSettings[serviceName];
 
             if (wsUrl.IsAssigned())
 			{

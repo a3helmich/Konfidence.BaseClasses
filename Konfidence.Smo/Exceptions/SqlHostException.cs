@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Konfidence.BaseData
+namespace Konfidence.SqlHostProvider.Exceptions
 {
     public class SqlHostException : Exception
     {

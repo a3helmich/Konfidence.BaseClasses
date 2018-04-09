@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Konfidence.Smo.SqlDbSchema
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class ColumnDataItem : SchemaBaseDataItem, IColumnDataItem
     {
@@ -32,7 +32,7 @@ namespace Konfidence.Smo.SqlDbSchema
 
         public string Name { get; private set; } = string.Empty;
 
-        protected int OrdinalPosition { get; set; }
+        protected int OrdinalPosition { get; private set; }
 
         public string SqlDataType { get; private set; } = string.Empty;
 

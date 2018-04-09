@@ -1,14 +1,15 @@
 ﻿using Konfidence.Base;
+using Konfidence.BaseDataInterfaces;
 
-namespace Konfidence.BaseData.ParameterObjects
+namespace Konfidence.HostProviderInterface.Objects
 {
     public class RetrieveParameters : BaseItem
     {
-        private readonly BaseDataItem _dataItem;
+        private readonly IBaseDataItem _dataItem;
 
         public string StoredProcedure { get; }
 
-        public DbParameterObjectList ParameterObjectList
+        public IDbParameterObjectList ParameterObjectList
         {
             get
             {
@@ -18,7 +19,7 @@ namespace Konfidence.BaseData.ParameterObjects
             }
         }
 
-        public RetrieveParameters(BaseDataItem dataItem, string storedProcedure)
+        public RetrieveParameters(IBaseDataItem dataItem, string storedProcedure)
         {
             StoredProcedure = storedProcedure;
 

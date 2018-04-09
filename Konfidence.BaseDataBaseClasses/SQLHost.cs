@@ -1,8 +1,9 @@
 using System;
 using System.Data;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
-using Konfidence.BaseData.Repositories;
+using Konfidence.BaseDataInterfaces;
+using Konfidence.HostProviderInterface;
+using Konfidence.HostProviderInterface.Objects;
 using Ninject;
 using Ninject.Parameters;
 
@@ -12,7 +13,7 @@ namespace Konfidence.BaseData
 	{
         private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
 
-        private readonly IDatabaseRepository _repository;
+        private readonly IDataRepository _repository;
 
         protected IKernel Kernel => _ninject.Kernel;
 
@@ -20,13 +21,13 @@ namespace Konfidence.BaseData
 		{
             var databaseNameParam = new ConstructorArgument("databaseName", databaseName);
 
-            _repository = Kernel.Get<IDatabaseRepository>(databaseNameParam);
+            _repository = Kernel.Get<IDataRepository>(databaseNameParam);
 		}
 
 	    private IDataReader DataReader => _repository.DataReader;
 
         #region GetField Methods
-		internal override Int16 GetFieldInt16(string fieldName)
+		public override Int16 GetFieldInt16(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -38,7 +39,7 @@ namespace Konfidence.BaseData
 			return DataReader.GetInt16(fieldOrdinal);
 		}
 
-        internal override Int32 GetFieldInt32(string fieldName)
+	    public override Int32 GetFieldInt32(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -50,7 +51,7 @@ namespace Konfidence.BaseData
             return DataReader.GetInt32(fieldOrdinal);
         }
 
-        internal override Guid GetFieldGuid(string fieldName)
+	    public override Guid GetFieldGuid(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -62,7 +63,7 @@ namespace Konfidence.BaseData
             return DataReader.GetGuid(fieldOrdinal);
         }
 
-		internal override string GetFieldString(string fieldName)
+	    public override string GetFieldString(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -74,7 +75,7 @@ namespace Konfidence.BaseData
             return DataReader.GetString(fieldOrdinal);
 		}
 
-		internal override bool GetFieldBool(string fieldName)
+	    public override bool GetFieldBool(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -86,7 +87,7 @@ namespace Konfidence.BaseData
             return DataReader.GetBoolean(fieldOrdinal);
 		}
 
-		internal override DateTime GetFieldDateTime(string fieldName)
+	    public override DateTime GetFieldDateTime(string fieldName)
 		{
 			var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -98,7 +99,7 @@ namespace Konfidence.BaseData
             return DataReader.GetDateTime(fieldOrdinal);
 		}
 
-        internal override TimeSpan GetFieldTimeSpan(string fieldName)
+	    public override TimeSpan GetFieldTimeSpan(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -110,7 +111,7 @@ namespace Konfidence.BaseData
             return (TimeSpan)DataReader.GetValue(fieldOrdinal);
         }
 
-        internal override Decimal GetFieldDecimal(string fieldName)
+	    public override Decimal GetFieldDecimal(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -135,7 +136,7 @@ namespace Konfidence.BaseData
         }
         #endregion
 
-		internal override void Save(BaseDataItem dataItem)
+	    public override void Save(IBaseDataItem dataItem)
 		{
 			if (dataItem.AutoIdField.Equals(string.Empty))
 			{
@@ -162,7 +163,7 @@ namespace Konfidence.BaseData
             }
         }
 
-	    internal override void GetItem(BaseDataItem dataItem, string getStoredProcedure)
+	    public override void GetItem(IBaseDataItem dataItem, string getStoredProcedure)
 	    {
 	        if (getStoredProcedure.Equals(string.Empty))
 			{
@@ -180,7 +181,7 @@ namespace Konfidence.BaseData
 	            });
         }
 
-        internal override void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
+        internal override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure)
         {
             if (getListStoredProcedure.Equals(string.Empty))
             {
@@ -189,30 +190,31 @@ namespace Konfidence.BaseData
 
             baseDataItemList.SetParameters(getListStoredProcedure);
 
-            var retrieveListParameters = new RetrieveListParameters(baseDataItemList, getListStoredProcedure);
+            var retrieveListParameters = new RetrieveListParameters<T>(baseDataItemList, getListStoredProcedure);
 
             _repository.ExecuteGetListStoredProcedure(retrieveListParameters, () => GetDataItem(baseDataItemList));
         }
 
 
-	    internal override void BuildItemList(IBaseDataItemList parentDataItemList, IBaseDataItemList relatedDataItemList, IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
-	    {
-            if (getRelatedStoredProcedure.Equals(string.Empty))
-            {
-                throw (new Exception("GetListStoredProcedure not provided"));
-            }
+	    internal override void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
+	        IBaseDataItemList<T> childDataItemList, string getRelatedStoredProcedure) 
+        {
+	        if (getRelatedStoredProcedure.Equals(string.Empty))
+	        {
+	            throw (new Exception("GetListStoredProcedure not provided"));
+	        }
 
-            parentDataItemList.SetParameters(getRelatedStoredProcedure);
+	        parentDataItemList.SetParameters(getRelatedStoredProcedure);
 
-            var retrieveListParameters = new RetrieveListParameters(parentDataItemList, getRelatedStoredProcedure);
+	        var retrieveListParameters = new RetrieveListParameters<T>(parentDataItemList, getRelatedStoredProcedure);
 
-            _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters,
-                () => GetDataItem(parentDataItemList),
-                () => GetDataItem(relatedDataItemList),
-                () => GetDataItem(childDataItemList));
-        }
+	        _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters,
+	            () => GetDataItem(parentDataItemList),
+	            () => GetDataItem(relatedDataItemList),
+	            () => GetDataItem(childDataItemList));
+	    }
 
-        private bool GetDataItem(IBaseDataItemList baseDataItemList)
+        private bool GetDataItem<T>(IBaseDataItemList<T> baseDataItemList) where T : IBaseDataItem
         {
             var dataItem = baseDataItemList.GetDataItem();
 
@@ -224,7 +226,7 @@ namespace Konfidence.BaseData
             return true;
         }
 
-        protected internal override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+	    public override void Delete(string deleteStoredProcedure, string autoIdField, int id)
         {
             if (deleteStoredProcedure.Equals(string.Empty))
             {
@@ -237,27 +239,27 @@ namespace Konfidence.BaseData
             }
         }
 
-        internal override int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
+	    public override int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList)
         {
             return _repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
         }
 
-	    internal override int ExecuteTextCommand(string textCommand)
+	    public override int ExecuteTextCommand(string textCommand)
 		{
             return _repository.ExecuteNonQuery(textCommand);
 		}
 
-		internal override bool TableExists(string tableName)
+	    public override bool TableExists(string tableName)
 		{
             return _repository.ObjectExists(tableName, "Tables");
 		}
 
-		internal override bool ViewExists(string viewName)
+	    public override bool ViewExists(string viewName)
 		{
             return _repository.ObjectExists(viewName, "Views");
 		}
 
-        internal override bool StoredProcedureExists(string storedProcedureName)
+	    public override bool StoredProcedureExists(string storedProcedureName)
         {
             return _repository.ObjectExists(storedProcedureName, "Procedures");
         }

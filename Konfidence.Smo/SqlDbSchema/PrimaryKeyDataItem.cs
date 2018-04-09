@@ -1,4 +1,4 @@
-﻿namespace Konfidence.Smo.SqlDbSchema
+﻿namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class PrimaryKeyDataItem : SchemaBaseDataItem
     {

@@ -2,7 +2,7 @@
 using Konfidence.Base;
 using Konfidence.BaseData;
 
-namespace Konfidence.Smo.SqlDbSchema
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class IndexColumnsDataItemList : BaseDataItemList<IndexColumnsDataItem>
     {

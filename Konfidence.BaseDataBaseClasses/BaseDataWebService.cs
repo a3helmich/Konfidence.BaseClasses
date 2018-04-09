@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Web.Services;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseData.Objects;
+using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData
 {
@@ -67,14 +68,19 @@ namespace Konfidence.BaseData
 		}
 
 		[WebMethod]
-        public List<DbParameterObjectList> BuildItemList()
+        public List<IDbParameterObjectList> BuildItemList()
 		{
 			var baseDataItemList = GetNewDataItemList();
 
-			return baseDataItemList.Convert2ListOfParameterObjectList();
+			return baseDataItemList.ConvertToListOfParameterObjectList();
 		}
 
-        //[WebMethod]
+	    private static DbParameterObjectList GetNewDataItemList()
+	    {
+	        throw new NotImplementedException();
+	    }
+
+	    //[WebMethod]
         //public int ExecuteCommand(string storedProcedure, params object[] parameters)
         //{
         //    BaseDataItem baseDataItem = GetNewDataItem();
@@ -146,11 +152,6 @@ namespace Konfidence.BaseData
         {
             throw new NotImplementedException(); // NOP
         }
-
-		protected virtual IBaseDataItemList GetNewDataItemList()
-		{
-			throw new NotImplementedException(); // NOP
-		}
 
         //protected void LoadParameterList(BaseDataItem dataItem, List<BaseDataItem.ParameterObject> ParameterList)
         //{

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Konfidence.BaseData;
 
-namespace Konfidence.Smo.SqlDbSchema
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     //List<T>, IBaseDataItemList
     public interface IColumnDataItemList : IBaseDataItemList, IList<ColumnDataItem>

@@ -2,10 +2,10 @@
 using System.Data;
 using System.Data.SqlClient;
 using Konfidence.Base;
-using Konfidence.BaseData;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using SqlHostException = Konfidence.SqlHostProvider.Exceptions.SqlHostException;
 
-namespace Konfidence.Smo.SqlServerManagement
+namespace Konfidence.SqlHostProvider.SqlServerManagement
 {
     public class SqlServerCheck
     {

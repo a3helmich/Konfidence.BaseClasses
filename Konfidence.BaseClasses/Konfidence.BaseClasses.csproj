@@ -81,6 +81,7 @@
     <Compile Include="BaseXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionAccount.cs" />
+    <Compile Include="StringExtender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Konfidence.BaseClasses.nuspec" />
@@ -107,7 +108,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseInterfaces.csproj">
+      <Project>{763d72bf-c9bf-433d-8908-244135dc2ae2}</Project>
+      <Name>Konfidence.BaseInterfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -65,8 +65,8 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6672.27262, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6672.27262\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6672.27365, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6672.27365\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -94,16 +94,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="BaseHost.cs" />
-    <Compile Include="IBaseDataItem.cs" />
-    <Compile Include="IBaseDataItemList.cs" />
-    <Compile Include="Repositories\IDatabaseRepository.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
-    <Compile Include="ParameterObjects\DbParameterObjectList.cs" />
-    <Compile Include="ParameterObjects\RetrieveListParameters.cs" />
-    <Compile Include="ParameterObjects\RetrieveParameters.cs" />
+    <Compile Include="Objects\DbParameterObject.cs" />
+    <Compile Include="Objects\DbParameterObjectList.cs" />
     <Compile Include="Repositories\SqlServerRepository.cs" />
-    <Compile Include="ParameterObjects\DbParameterObject.cs" />
-    <Compile Include="ParameterObjects\RequestParameters.cs" />
     <Compile Include="HostFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -111,9 +105,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ParameterObjects\ResponseParameters.cs" />
     <Compile Include="SQLHost.cs" />
-    <Compile Include="SqlHostException.cs" />
     <Compile Include="Web References\WSBaseHost\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,7 +174,16 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
+      <Project>{5c710054-52b1-405e-a754-f0f9682f07d6}</Project>
+      <Name>Konfidence.BaseDataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.HostProviderInterface\Konfidence.HostProviderInterface.csproj">
+      <Project>{cd62101d-fc81-48ef-9476-581f025a87c9}</Project>
+      <Name>Konfidence.HostProviderInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

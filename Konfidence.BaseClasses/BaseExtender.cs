@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using JetBrains.Annotations;
 
 namespace Konfidence.Base
@@ -9,9 +8,7 @@ namespace Konfidence.Base
         [ContractAnnotation("assignedObject:null => false")]
         public static bool IsAssigned(this object assignedObject)
         {
-            var assignedString = assignedObject as string;
-
-            if (assignedString != null)
+            if (assignedObject is string assignedString)
             {
                 if (string.IsNullOrWhiteSpace(assignedString))
                 {
@@ -56,7 +53,7 @@ namespace Konfidence.Base
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(this string assignedGuid)
         {
-            if (Guid.TryParse(assignedGuid, out var isGuid))
+            if (Guid.TryParse(assignedGuid, out var _))
             {
                 return true;
             }

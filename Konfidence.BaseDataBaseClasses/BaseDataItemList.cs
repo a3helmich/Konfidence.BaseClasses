@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseData.Objects;
+using Konfidence.BaseDataInterfaces;
 using Ninject;
 
 namespace Konfidence.BaseData
 {
-    public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem //, new()
+    public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem //, new()
 	{
         private readonly DbParameterObjectList _dbParameterObjectList = new DbParameterObjectList();
 
@@ -70,7 +71,7 @@ namespace Konfidence.BaseData
             BuildItemList(GetListStoredProcedure);
 		}
 
-		public BaseDataItem GetDataItem()
+		public T GetDataItem()
 		{
             //var baseDataItem = new T();
             var baseDataItem = Kernel.Get<T>();
@@ -99,7 +100,7 @@ namespace Konfidence.BaseData
                 return FindById(id);
             }
 
-            return null;
+            return default(T);
         }
 
         public T FindById(int id)
@@ -131,7 +132,7 @@ namespace Konfidence.BaseData
                 return first;
             }
 
-            return null;
+            return default(T);
         }
 
         protected T FindByIsEditing()
@@ -239,14 +240,7 @@ namespace Konfidence.BaseData
                 {
                     T dataItem;
 
-                    if (id > 0)
-                    {
-                        dataItem = FindById(id);
-                    }
-                    else
-                    {
-                        dataItem = FindById(guidId);
-                    }
+                    dataItem = id > 0 ? FindById(id) : FindById(guidId);
 
                     if (dataItem.IsAssigned())
                     {
@@ -323,9 +317,9 @@ namespace Konfidence.BaseData
         }
         #endregion list editing
 
-        public List<DbParameterObjectList> Convert2ListOfParameterObjectList()
+        public List<IDbParameterObjectList> ConvertToListOfParameterObjectList()
 		{
-            var baseDataItemListList = new List<DbParameterObjectList>();
+            var baseDataItemListList = new List<IDbParameterObjectList>();
 
 			foreach (var baseDataItem in this)
 			{
@@ -344,7 +338,7 @@ namespace Konfidence.BaseData
 			return baseDataItemListList;
 		}
 
-        private static DbParameterObjectList GetProperties(BaseDataItem baseDataItem)
+        private static IDbParameterObjectList GetProperties(IBaseDataItem baseDataItem)
 		{
             var properties = new DbParameterObjectList();
 
@@ -353,7 +347,7 @@ namespace Konfidence.BaseData
 			return properties;
 		}
 
-        public DbParameterObjectList GetParameterObjectList()
+        public IDbParameterObjectList GetParameterObjectList()
         {
             return _dbParameterObjectList;
         }

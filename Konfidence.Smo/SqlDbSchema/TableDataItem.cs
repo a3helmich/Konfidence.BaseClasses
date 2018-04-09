@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Konfidence.Smo.SqlDbSchema
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class TableDataItem : SchemaBaseDataItem, ITableDataItem
     {
