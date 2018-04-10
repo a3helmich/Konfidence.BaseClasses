@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.Exceptions;
-using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.SqlHostProvider.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,7 +24,7 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
             Action action = () => SqlServerCheck.VerifyDatabaseServer(database); 
 
             // Assert
-            action.Should().Throw<SqlHostException>().WithMessage("Database TestDatabase does not exist");
+            action.Should().Throw<SqlClientException>().WithMessage("Database TestDatabase does not exist");
         }
 
         [TestMethod, TestCategory("SqlServer")]

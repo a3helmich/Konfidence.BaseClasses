@@ -48,18 +48,18 @@ namespace Konfidence.BaseData
 
         #endregion
 
-        private BaseClient GetHost()
+        private BaseClient GetClient()
         {
-            return ClientFactory.GetHost(ServiceName, DatabaseName);
+            return ClientFactory.GetClient(ServiceName, DatabaseName);
         }
 
 		protected void BuildItemList(string getListStoredProcedure)
 		{
 		    GetListStoredProcedure = getListStoredProcedure;
             
-            var dataHost = GetHost();
+            var client = GetClient();
 
-            dataHost.BuildItemList(this, getListStoredProcedure);
+            client.BuildItemList(this, getListStoredProcedure);
 
             AfterDataLoad();
         }
@@ -401,30 +401,30 @@ namespace Konfidence.BaseData
 
 		protected int ExecuteTextCommand(string textCommand)
 		{
-            var dataHost = GetHost(); 
+            var client = GetClient(); 
 
-			return dataHost.ExecuteTextCommand(textCommand);
+			return client.ExecuteTextCommand(textCommand);
 		}
 
 		protected bool TableExists(string tableName)
 		{
-            var dataHost = GetHost();
+            var client = GetClient();
 
-			return dataHost.TableExists(tableName);
+			return client.TableExists(tableName);
 		}
 
 		protected bool ViewExists(string viewName)
 		{
-            var dataHost = GetHost();
+            var client = GetClient();
 
-			return dataHost.ViewExists(viewName);
+			return client.ViewExists(viewName);
 		}
 
         protected bool StoredProcedureExists(string storedProcedureName)
         {
-            var dataHost = GetHost();
+            var client = GetClient();
 
-            return dataHost.StoredProcedureExists(storedProcedureName);
+            return client.StoredProcedureExists(storedProcedureName);
         }
     }
 }

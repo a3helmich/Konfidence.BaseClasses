@@ -10,13 +10,13 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    internal class SqlServerRepository : IDataRepository
+    internal class SqlClientRepository : IDataRepository
     {
         private readonly string _databaseName;
 
         public IDataReader DataReader { get; private set; }
 
-        public SqlServerRepository(string databaseName)
+        public SqlClientRepository(string databaseName)
         {
             _databaseName = databaseName;
         }

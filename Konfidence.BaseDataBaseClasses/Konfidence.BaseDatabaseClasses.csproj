@@ -105,13 +105,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SQLHost.cs" />
+    <Compile Include="SqlClient.cs" />
     <Compile Include="Web References\WSBaseHost\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="WSHost.cs" />
+    <Compile Include="WsClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />

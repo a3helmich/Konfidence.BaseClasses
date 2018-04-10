@@ -29,7 +29,7 @@ namespace Konfidence.BaseData
             }
 		}
 
-		public static BaseClient GetHost(string serviceName, string databaseName)
+		public static BaseClient GetClient(string serviceName, string databaseName)
 		{
 			if (WsEnabled)
 			{
@@ -38,10 +38,10 @@ namespace Konfidence.BaseData
 					throw new Exception("WebServices is enabled but the webservice is not declared");
 				}
 
-				return new WsHost(serviceName, databaseName);
+				return new WsClient(serviceName, databaseName);
 			}
 
-			return new SqlHost(databaseName);
+			return new SqlClient(databaseName);
 		}
 	}
 }

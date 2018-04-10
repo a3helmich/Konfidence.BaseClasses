@@ -9,7 +9,7 @@ using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
-    internal class SqlHost : BaseClient
+    internal class SqlClient : BaseClient
 	{
         private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
 
@@ -17,7 +17,7 @@ namespace Konfidence.BaseData
 
         protected IKernel Kernel => _ninject.Kernel;
 
-        public SqlHost(string databaseName) : base(string.Empty, databaseName)
+        public SqlClient(string databaseName) : base(string.Empty, databaseName)
 		{
             var databaseNameParam = new ConstructorArgument("databaseName", databaseName);
 
@@ -127,7 +127,7 @@ namespace Konfidence.BaseData
         {
             if (!DataReader.IsAssigned())
             {
-                const string message = @"_DataReader: in SQLHost.GetOrdinal(string fieldName);";
+                const string message = @"_DataReader: in SQLClient.GetOrdinal(string fieldName);";
 
                 throw new ArgumentNullException(message);
             }
@@ -218,7 +218,7 @@ namespace Konfidence.BaseData
         {
             var dataItem = baseDataItemList.GetDataItem();
 
-            dataItem.DataHost = this;
+            dataItem.Client = this;
 
             dataItem.GetKey();
             dataItem.GetData();

@@ -2,8 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using Konfidence.Base;
+using Konfidence.SqlHostProvider.Exceptions;
 using Microsoft.Practices.EnterpriseLibrary.Data;
-using SqlHostException = Konfidence.SqlHostProvider.Exceptions.SqlHostException;
 
 namespace Konfidence.SqlHostProvider.SqlServerManagement
 {
@@ -56,12 +56,12 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
 
             if (!SqlServerSmo.VerifyDatabaseServer(serverName, userName, password))
             {
-                throw new SqlHostException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
+                throw new SqlClientException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
             }
 
             if (!SqlServerSmo.FindDatabase(serverName, databaseName, userName, password))
             {
-                throw new SqlHostException("Database " + databaseName + " does not exist");
+                throw new SqlClientException("Database " + databaseName + " does not exist");
             }
 
             return true;

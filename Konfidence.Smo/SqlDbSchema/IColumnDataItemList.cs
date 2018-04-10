@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema

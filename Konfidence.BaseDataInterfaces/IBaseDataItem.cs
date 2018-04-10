@@ -15,7 +15,7 @@ namespace Konfidence.BaseDataInterfaces
 
         bool IsEditing { get; set; }
 
-        IBaseClient DataHost { get; set; }
+        IBaseClient Client { get; set; }
 
         string LoadStoredProcedure { get; set; }
 

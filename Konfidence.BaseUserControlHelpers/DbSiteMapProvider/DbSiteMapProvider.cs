@@ -5,7 +5,6 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
-    //	[AspNetHostingPermission(SecurityAction.Demand, Level=AspNetHostingPermissionLevel.Minimal)]
     public class DbSiteMapProvider : StaticSiteMapProvider
     {
         private SiteMapNode _RootNode;
