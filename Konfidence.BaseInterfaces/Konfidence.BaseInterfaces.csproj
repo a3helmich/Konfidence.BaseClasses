@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5C710054-52B1-405E-A754-F0F9682F07D6}</ProjectGuid>
+    <ProjectGuid>{763D72BF-C9BF-433D-8908-244135DC2AE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.BaseDataInterfaces</RootNamespace>
-    <AssemblyName>Konfidence.BaseDataInterfaces</AssemblyName>
+    <RootNamespace>Konfidence.BaseInterfaces</RootNamespace>
+    <AssemblyName>Konfidence.BaseInterfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,18 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseDataItem.cs" />
-    <Compile Include="IBaseDataItemList.cs" />
-    <Compile Include="IBaseClient.cs" />
-    <Compile Include="IDbParameterObject.cs" />
-    <Compile Include="IDbParameterObjectList.cs" />
+    <Compile Include="IBaseItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseInterfaces.csproj">
-      <Project>{763d72bf-c9bf-433d-8908-244135dc2ae2}</Project>
-      <Name>Konfidence.BaseInterfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Konfidence.nl.snk">

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{763D72BF-C9BF-433D-8908-244135DC2AE2}</ProjectGuid>
+    <ProjectGuid>{FEF04C6C-A57E-446E-B0F6-861B5A7A2C90}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Konfidence.BaseClassInterfaces</RootNamespace>

@@ -106,9 +106,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseClassInterfaces.csproj">
+    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseInterfaces.csproj">
       <Project>{763d72bf-c9bf-433d-8908-244135dc2ae2}</Project>
-      <Name>Konfidence.BaseClassInterfaces</Name>
+      <Name>Konfidence.BaseInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
