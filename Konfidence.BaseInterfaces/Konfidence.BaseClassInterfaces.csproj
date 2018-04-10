@@ -7,8 +7,8 @@
     <ProjectGuid>{763D72BF-C9BF-433D-8908-244135DC2AE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.BaseInterfaces</RootNamespace>
-    <AssemblyName>Konfidence.BaseInterfaces</AssemblyName>
+    <RootNamespace>Konfidence.BaseClassInterfaces</RootNamespace>
+    <AssemblyName>Konfidence.BaseClassInterfaces</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

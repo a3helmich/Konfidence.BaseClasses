@@ -2,8 +2,8 @@ using System;
 using System.Data;
 using Konfidence.Base;
 using Konfidence.BaseDataInterfaces;
-using Konfidence.HostProviderInterface;
-using Konfidence.HostProviderInterface.Objects;
+using Konfidence.RepositoryInterface;
+using Konfidence.RepositoryInterface.Objects;
 using Ninject;
 using Ninject.Parameters;
 

@@ -4,8 +4,8 @@ using System.Data.Common;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
-using Konfidence.HostProviderInterface;
-using Konfidence.HostProviderInterface.Objects;
+using Konfidence.RepositoryInterface;
+using Konfidence.RepositoryInterface.Objects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess

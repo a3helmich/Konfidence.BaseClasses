@@ -65,8 +65,8 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6674.24466, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6674.24466\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6674.24803, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6674.24803\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -179,13 +179,13 @@
       <Project>{5c710054-52b1-405e-a754-f0f9682f07d6}</Project>
       <Name>Konfidence.BaseDataInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseInterfaces.csproj">
+    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseClassInterfaces.csproj">
       <Project>{763d72bf-c9bf-433d-8908-244135dc2ae2}</Project>
-      <Name>Konfidence.BaseInterfaces</Name>
+      <Name>Konfidence.BaseClassInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.HostProviderInterface\Konfidence.HostProviderInterface.csproj">
+    <ProjectReference Include="..\Konfidence.HostProviderInterface\Konfidence.RepositoryInterface.csproj">
       <Project>{cd62101d-fc81-48ef-9476-581f025a87c9}</Project>
-      <Name>Konfidence.HostProviderInterface</Name>
+      <Name>Konfidence.RepositoryInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
