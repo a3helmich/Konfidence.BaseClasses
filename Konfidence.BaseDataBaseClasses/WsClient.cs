@@ -114,7 +114,7 @@ namespace Konfidence.BaseData
 			_wsBaseHostService.Delete(id);
 		}
 
-		internal override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) 
+		public override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) 
         {
 			var parameterObjectsList = _wsBaseHostService.BuildItemList();
 

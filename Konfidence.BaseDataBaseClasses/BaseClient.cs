@@ -39,14 +39,14 @@ namespace Konfidence.BaseData
 		{
 		}
 
-        internal virtual void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList,
+	    public virtual void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList,
                                                    IBaseDataItemList<T> relatedDataItemList,
                                                    IBaseDataItemList<T> childDataItemList, string getRelatedStoredProcedure) where T : IBaseDataItem
         {
             
         }
 
-		internal virtual void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem
+		public virtual void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem
         {
 		}
 

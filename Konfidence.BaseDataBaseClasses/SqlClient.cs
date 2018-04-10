@@ -181,7 +181,7 @@ namespace Konfidence.BaseData
 	            });
         }
 
-        internal override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure)
+        public override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure)
         {
             if (getListStoredProcedure.Equals(string.Empty))
             {
@@ -196,7 +196,7 @@ namespace Konfidence.BaseData
         }
 
 
-	    internal override void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
+	    public override void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
 	        IBaseDataItemList<T> childDataItemList, string getRelatedStoredProcedure) 
         {
 	        if (getRelatedStoredProcedure.Equals(string.Empty))
