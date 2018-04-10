@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Konfidence.BaseDataInterfaces
 {
-    public interface IBaseHost
+    public interface IBaseClient
     {
         void Save(IBaseDataItem dataItem);
 
