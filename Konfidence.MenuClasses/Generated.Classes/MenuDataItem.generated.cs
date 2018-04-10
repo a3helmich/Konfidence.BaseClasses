@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
+using Konfidence.BaseDataInterfaces;
 
 namespace DbSiteMapMenuClasses
 {
@@ -160,6 +161,11 @@ namespace DbSiteMapMenuClasses
             public MenuDataItem(Guid menuId) : this()
             {
                 GetItem(MENU_GETROWBYGUID, menuId);
+            }
+
+            public override IBaseClient ClientBind<SqlClient>()
+            {
+                return base.ClientBind<SqlClient>();
             }
 
             public override void InitializeDataItem()

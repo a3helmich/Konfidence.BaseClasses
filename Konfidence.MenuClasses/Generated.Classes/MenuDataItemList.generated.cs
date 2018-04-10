@@ -1,5 +1,6 @@
 using System;
 using Konfidence.BaseData;
+using Konfidence.BaseDataInterfaces;
 
 namespace DbSiteMapMenuClasses
 {
@@ -18,6 +19,11 @@ namespace DbSiteMapMenuClasses
 
             protected MenuDataItemList() : base()
             {
+            }
+
+            public override IBaseClient ClientBind<SqlClient>()
+            {
+                return base.ClientBind<SqlClient>();
             }
 
             static public MenuDataItemList GetEmptyList()

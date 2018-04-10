@@ -4,6 +4,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class IndexColumnsDataItem : SchemaBaseDataItem
     {
+        public IndexColumnsDataItem() { }
+
         public IndexColumnsDataItem(string databaseName)
         {
             DatabaseName = databaseName;

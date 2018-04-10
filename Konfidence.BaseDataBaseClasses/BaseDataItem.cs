@@ -39,7 +39,7 @@ namespace Konfidence.BaseData
 	            return _ninject.Kernel;
 	        }
 	    }
-	    public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+	    protected virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
 	    {
 	        if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
@@ -56,7 +56,9 @@ namespace Konfidence.BaseData
 	        {
 	            if (!_client.IsAssigned())
 	            {
-	                _client = ClientFactory.GetClient(ServiceName, DatabaseName);
+	                _client = ClientBind<IBaseClient>();
+
+                    //_client = ClientFactory.GetClient(ServiceName, DatabaseName);
 	            }
 
 	            return _client;

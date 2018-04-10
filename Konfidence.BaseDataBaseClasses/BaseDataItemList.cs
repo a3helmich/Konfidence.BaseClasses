@@ -9,7 +9,6 @@ using Ninject;
 namespace Konfidence.BaseData
 {
     public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem, new()
-//, new()
 	{
         private readonly DbParameterObjectList _dbParameterObjectList = new DbParameterObjectList();
 	    private IBaseClient _client;
@@ -34,7 +33,7 @@ namespace Konfidence.BaseData
             }
         }
 
-	    public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
+	    protected virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
 	    {
 	        if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
