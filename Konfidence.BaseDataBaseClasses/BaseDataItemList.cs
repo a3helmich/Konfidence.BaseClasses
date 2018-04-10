@@ -92,10 +92,12 @@ namespace Konfidence.BaseData
 
             if (int.TryParse(textId, out var id))
             {
-                if (Debugger.IsAttached || BaseItem.UnitTest)
-                {
-                    throw new Exception("id is niet toegestaan om records op te halen(BaseDataItemList.FindById(..))");
-                }
+                // TODO : remove comment start
+                //if (Debugger.IsAttached || BaseItem.UnitTest)
+                //{
+                //    throw new Exception("id is niet toegestaan om records op te halen(BaseDataItemList.FindById(..))");
+                //}
+                // TODO : remove comment end
 
                 return FindById(id);
             }
@@ -175,10 +177,12 @@ namespace Konfidence.BaseData
 
                 if (int.TryParse(idText, out var id))
                 {
-                    if (Debugger.IsAttached || BaseItem.UnitTest)
-                    {
-                        throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
-                    }
+                    // TODO : remove comment start
+                    //if (Debugger.IsAttached || BaseItem.UnitTest)
+                    //{
+                    //    throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
+                    //}
+                    // TODO : remove comment end
 
                     SetSelected(id, isEditing);
                 }
@@ -195,10 +199,12 @@ namespace Konfidence.BaseData
             {
                 if (int.TryParse(idText, out var id))
                 {
-                    if (Debugger.IsAttached || BaseItem.UnitTest)
-                    {
-                        throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
-                    }
+                    // TODO : remove comment start
+                    //if (Debugger.IsAttached || BaseItem.UnitTest)
+                    //{
+                    //    throw new Exception("id is niet toegestaan om reocrds op te halen(BaseDataItemList.SetSelected(..))");
+                    //}
+                    // TODO : remove comment end
 
                     SetSelected(id);
                 }

@@ -4,7 +4,7 @@ namespace Konfidence.Base
 {
 	public class BaseItem : IBaseItem
     {
-	    protected static bool UnitTest = false;
+	    public static bool UnitTest = false;
 
         public string ErrorMessage { get; private set; } = string.Empty;
 

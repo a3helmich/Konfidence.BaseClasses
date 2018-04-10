@@ -98,7 +98,7 @@ namespace DbSiteMapMenuClasses
                 GetItem(MENUTEXT_GETROWBYGUID, menutextId);
             }
 
-            protected override void InitializeDataItem()
+            public override void InitializeDataItem()
             {
                 AutoIdField = ID;
                 GuidIdField = MENUTEXTID;
@@ -121,7 +121,7 @@ namespace DbSiteMapMenuClasses
                 GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
             }
 
-            protected override void GetData()
+            public override void GetData()
             {
                 GetField(MENUTEXTID, out _MenuTextId);
                 GetField(MENUID, out _MenuId);

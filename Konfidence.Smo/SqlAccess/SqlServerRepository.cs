@@ -2,13 +2,15 @@
 using System.Data;
 using System.Data.Common;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
-using Konfidence.BaseData.Repositories;
+using Konfidence.BaseData.Objects;
+using Konfidence.BaseDataInterfaces;
+using Konfidence.HostProviderInterface;
+using Konfidence.HostProviderInterface.Objects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    internal class SqlServerRepository : IDatabaseRepository
+    internal class SqlServerRepository : IDataRepository
     {
         private readonly string _databaseName;
 
@@ -33,7 +35,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
         }
 
-        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, DbParameterObjectList parameterObjectList)
+        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, IDbParameterObjectList parameterObjectList)
         {
             var database = GetDatabase();
 
@@ -143,7 +145,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             executeParameters.ParameterObjectList.Clear();
         }
 
-        public void ExecuteGetListStoredProcedure(RetrieveListParameters retrieveListParameters, Func<bool> callback)
+        public void ExecuteGetListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, Func<bool> callback) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -168,7 +170,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public void ExecuteGetRelatedListStoredProcedure(RetrieveListParameters retrieveListParameters, Func<bool> parentCallback, Func<bool> relatedCallback, Func<bool> childCallback)
+        public void ExecuteGetRelatedListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, Func<bool> parentCallback, Func<bool> relatedCallback, Func<bool> childCallback) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -213,7 +215,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData(RetrieveListParameters executeParameters, Database database, DbCommand dbCommand)
+        private static void SetParameterData<T>(RetrieveListParameters<T> executeParameters, Database database, DbCommand dbCommand) where T : IBaseDataItem
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
