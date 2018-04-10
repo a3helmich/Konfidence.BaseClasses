@@ -119,7 +119,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO : internal
-        protected override void GetData()
+        public override void GetData()
         {
             GetField("Name", out string name);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace Konfidence.BaseDataInterfaces
 {
@@ -35,5 +36,7 @@ namespace Konfidence.BaseDataInterfaces
         TimeSpan GetFieldTimeSpan(string fieldName);
 
         decimal GetFieldDecimal(string fieldName);
+
+        DataTable GetSchemaObject(string objectType);
     }
 }

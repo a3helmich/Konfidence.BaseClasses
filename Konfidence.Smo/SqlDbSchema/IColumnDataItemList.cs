@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Konfidence.BaseData;
+using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     //List<T>, IBaseDataItemList
-    public interface IColumnDataItemList : IBaseDataItemList, IList<ColumnDataItem>
+    public interface IColumnDataItemList : IBaseDataItemList<ColumnDataItem>
     {
         bool HasDefaultValueFields { get; }
 
