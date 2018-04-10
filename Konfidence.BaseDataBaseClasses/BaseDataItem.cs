@@ -63,7 +63,7 @@ namespace Konfidence.BaseData
             {
                 if (!_dataHost.IsAssigned())
                 {
-                    _dataHost = HostFactory.GetHost(ServiceName, DatabaseName);
+                    _dataHost = ClientFactory.GetHost(ServiceName, DatabaseName);
                 }
 
                 return _dataHost;

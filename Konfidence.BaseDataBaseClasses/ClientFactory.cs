@@ -4,7 +4,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseData
 {
-	internal class HostFactory
+	internal class ClientFactory
 	{
 		private static bool WsEnabled
 		{
@@ -29,7 +29,7 @@ namespace Konfidence.BaseData
             }
 		}
 
-		public static BaseHost GetHost(string serviceName, string databaseName)
+		public static BaseClient GetHost(string serviceName, string databaseName)
 		{
 			if (WsEnabled)
 			{

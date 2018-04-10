@@ -9,7 +9,7 @@ using Konfidence.BaseDataInterfaces;
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    internal class WsHost : BaseHost
+    internal class WsHost : BaseClient
 	{
 		private readonly WSBaseHostService _wsBaseHostService;
 

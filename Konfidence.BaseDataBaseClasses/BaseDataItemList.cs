@@ -48,9 +48,9 @@ namespace Konfidence.BaseData
 
         #endregion
 
-        private BaseHost GetHost()
+        private BaseClient GetHost()
         {
-            return HostFactory.GetHost(ServiceName, DatabaseName);
+            return ClientFactory.GetHost(ServiceName, DatabaseName);
         }
 
 		protected void BuildItemList(string getListStoredProcedure)

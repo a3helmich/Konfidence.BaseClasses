@@ -9,7 +9,7 @@ using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
-    internal class SqlHost : BaseHost
+    internal class SqlHost : BaseClient
 	{
         private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
 

@@ -6,7 +6,7 @@ using Konfidence.BaseDataInterfaces;
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    internal class BaseHost: BaseItem, IBaseClient
+    internal class BaseClient: BaseItem, IBaseClient
 	{
 	    //private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
@@ -21,7 +21,7 @@ namespace Konfidence.BaseData
 
 	    #endregion
 
-		public BaseHost(string serviceName, string databaseName)
+		public BaseClient(string serviceName, string databaseName)
 		{
 			ServiceName = serviceName;
 			DatabaseName = databaseName;

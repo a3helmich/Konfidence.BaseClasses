@@ -8,9 +8,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         protected DataTable GetSchemaObject(string objectType)
         {
             // TODO : enable again
-            //return DataHost.GetSchemaObject(objectType);
-
-            return null;
+            return DataHost.GetSchemaObject(objectType);
         }
     }
 }
