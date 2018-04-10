@@ -18,7 +18,7 @@ namespace Konfidence.BaseData
         private bool _isEditing;
         private bool _isInitialized;
 
-        private IBaseHost _dataHost; 
+        private IBaseClient _dataHost; 
 		internal Dictionary<string, object> PropertyDictionary;
 
 	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
@@ -57,7 +57,7 @@ namespace Konfidence.BaseData
         }
 
         // TODO: internal
-        public IBaseHost DataHost
+        public IBaseClient DataHost
         {
             get
             {
