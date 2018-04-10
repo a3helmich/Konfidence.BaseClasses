@@ -6,7 +6,7 @@ using Konfidence.BaseDataInterfaces;
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    internal class BaseClient: BaseItem, IBaseClient
+    public class BaseClient: BaseItem, IBaseClient
 	{
 	    //private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
