@@ -21,7 +21,7 @@ namespace DbSiteMapMenuClasses
             {
             }
 
-            public override IBaseClient ClientBind<SqlClient>()
+            protected override IBaseClient ClientBind<SqlClient>()
             {
                 return base.ClientBind<SqlClient>();
             }

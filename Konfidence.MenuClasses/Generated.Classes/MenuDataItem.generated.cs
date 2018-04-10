@@ -163,7 +163,7 @@ namespace DbSiteMapMenuClasses
                 GetItem(MENU_GETROWBYGUID, menuId);
             }
 
-            public override IBaseClient ClientBind<SqlClient>()
+            protected override IBaseClient ClientBind<SqlClient>()
             {
                 return base.ClientBind<SqlClient>();
             }
