@@ -20,7 +20,9 @@ namespace Konfidence.Security.Tests
             // TODO: Add constructor logic here
             //
 
-            BaseItem.UnitTest = true;
+            // TODO : remove comment start
+            //BaseItem.UnitTest = true;
+            // TODO : remove comment end
         }
 
         /// <summary>
