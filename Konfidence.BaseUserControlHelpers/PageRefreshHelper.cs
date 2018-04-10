@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using System.Web;
 using System.Web.UI;
@@ -44,8 +43,7 @@ namespace Konfidence.BaseUserControlHelpers
 				return 0;
 			}
 
-			int returnValue;
-			if (Int32.TryParse(currentTicket, out returnValue))
+		    if (int.TryParse(currentTicket, out var returnValue))
 			{
 				return returnValue;
 			}
@@ -56,7 +54,7 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			int ticket;
 
-			string currentTicketString = context.Request[CURRENT_REFRESH_TICKET_ENTRY];
+			var currentTicketString = context.Request[CURRENT_REFRESH_TICKET_ENTRY];
 
 			if (currentTicketString.IsAssigned())
 			{
@@ -64,8 +62,7 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 			else
 			{
-				int ticketValue;
-				if (Int32.TryParse(currentTicketString, out ticketValue))  // TODO: tryparse and null
+			    if (int.TryParse(currentTicketString, out var ticketValue))  // TODO: tryparse and null
 				{
 					ticket = ticketValue;
 				}
@@ -82,7 +79,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 		private static void UpdateTickets(Page page, HttpContext context, int assignedTicket)
 		{
-			string ticket = assignedTicket.ToString(CultureInfo.InvariantCulture);
+			var ticket = assignedTicket.ToString(CultureInfo.InvariantCulture);
 
 			page.ClientScript.RegisterHiddenField(CURRENT_REFRESH_TICKET_ENTRY, ticket);
 

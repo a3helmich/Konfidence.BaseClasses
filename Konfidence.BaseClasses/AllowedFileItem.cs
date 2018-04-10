@@ -8,13 +8,7 @@ namespace Konfidence.Base
     /// </summary>
     public class AllowedFileItem: BaseItem
     {
-        public virtual string AllowedExtensions
-        {
-            get
-            {
-                return "all";
-            }
-        }
+        public virtual string AllowedExtensions => "all";
 
         protected virtual string[] GetAllowedExtensions()
         {
@@ -23,16 +17,16 @@ namespace Konfidence.Base
 
         public bool IsAllowedExtension(string fileName)
         {
-            string[] allowedExtensions = GetAllowedExtensions();
+            var allowedExtensions = GetAllowedExtensions();
 
-            string fileExtension = Path.GetExtension(fileName);
+            var fileExtension = Path.GetExtension(fileName);
 
             if (!allowedExtensions.IsAssigned())
             {
                 return true;
             }
 
-            foreach (string allowedExtension in allowedExtensions)
+            foreach (var allowedExtension in allowedExtensions)
             {
                 if (string.Compare(fileExtension, allowedExtension, true, CultureInfo.InvariantCulture) == 0)
                 {

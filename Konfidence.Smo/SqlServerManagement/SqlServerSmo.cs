@@ -7,7 +7,7 @@ using Konfidence.Base;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
-namespace Konfidence.Smo.SqlServerManagement
+namespace Konfidence.SqlHostProvider.SqlServerManagement
 {
     internal class SqlServerSmo : BaseItem
     {
@@ -87,10 +87,9 @@ namespace Konfidence.Smo.SqlServerManagement
             {
                 if (cfEx.InnerException != null) throw cfEx.InnerException;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // if this fails, a timeout has already occured
-                var message = ex.Message;
             }
 
         }

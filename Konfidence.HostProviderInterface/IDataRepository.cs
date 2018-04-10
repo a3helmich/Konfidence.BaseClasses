@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
-using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseDataInterfaces;
+using Konfidence.HostProviderInterface.Objects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Konfidence.BaseData.Repositories
+namespace Konfidence.HostProviderInterface
 {
-    public interface IDatabaseRepository
+    public interface IDataRepository
     {
         Database GetDatabase();
 
@@ -14,17 +15,17 @@ namespace Konfidence.BaseData.Repositories
 
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
 
-        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, DbParameterObjectList parameterObjectList);
+        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, IDbParameterObjectList parameterObjectList);
 
         ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters);
 
         void ExecuteGetStoredProcedure(RetrieveParameters retrieveParameters, Func<bool> callback);
 
-        void ExecuteGetListStoredProcedure(RetrieveListParameters retrieveListParameters, Func<bool> callback);
+        void ExecuteGetListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, Func<bool> callback) where T : IBaseDataItem;
 
-        void ExecuteGetRelatedListStoredProcedure(RetrieveListParameters retrieveListParameters,
+        void ExecuteGetRelatedListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters,
                                                   Func<bool> parentCallback, Func<bool> relatedCallback,
-                                                  Func<bool> childCallback);
+                                                  Func<bool> childCallback) where T : IBaseDataItem;
 
         void ExecuteDeleteStoredProcedure(string deleteStoredProcedure, string autoIdField, int id);
 

@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Konfidence.Smo.SqlDbSchema;
+using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.Smo.Tests.SqlDbSchema

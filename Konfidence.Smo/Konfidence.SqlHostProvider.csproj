@@ -7,8 +7,8 @@
     <ProjectGuid>{6CEE30A7-D859-496D-9899-9DE1654DF995}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.Smo</RootNamespace>
-    <AssemblyName>Konfidence.Smo</AssemblyName>
+    <RootNamespace>Konfidence.SqlHostProvider</RootNamespace>
+    <AssemblyName>Konfidence.SqlHostProvider</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -37,11 +37,11 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6672.26762, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6672.26762\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6672.27365, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6672.27365\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6672.26765, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6672.26765\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6672.27368, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6672.27368\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\SqlHostException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlDbSchema\ColumnDataItem.cs" />
     <Compile Include="SqlDbSchema\ColumnDataItemList.cs" />
@@ -108,13 +109,19 @@
     <Compile Include="SqlDbSchema\TableDataItem.cs" />
     <Compile Include="SqlDbSchema\TableDataItemList.cs" />
     <Compile Include="SqlServerManagement\SqlServerCheck.cs" />
-    <Compile Include="SqlServerManagement\SqlServerRepository.cs" />
+    <Compile Include="SqlAccess\SqlServerRepository.cs" />
     <Compile Include="SqlServerManagement\SqlServerSmo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Konfidence.Smo.nuspec" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.HostProviderInterface\Konfidence.HostProviderInterface.csproj">
+      <Project>{cd62101d-fc81-48ef-9476-581f025a87c9}</Project>
+      <Name>Konfidence.HostProviderInterface</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

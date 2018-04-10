@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseData.Objects;
+using Konfidence.BaseDataInterfaces;
 using Ninject;
 
 namespace Konfidence.BaseData
 {
-    public class BaseDataItemList<T> : List<T>, IBaseDataItemList where T : BaseDataItem //, new()
+    public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem //, new()
 	{
         private readonly DbParameterObjectList _dbParameterObjectList = new DbParameterObjectList();
 
@@ -70,7 +71,7 @@ namespace Konfidence.BaseData
             BuildItemList(GetListStoredProcedure);
 		}
 
-		public BaseDataItem GetDataItem()
+		public T GetDataItem()
 		{
             //var baseDataItem = new T();
             var baseDataItem = Kernel.Get<T>();
@@ -84,15 +85,12 @@ namespace Konfidence.BaseData
 
         public T FindById(string textId)
         {
-            Guid guidId;
-            int id;
-
-            if (Guid.TryParse(textId, out guidId))
+            if (Guid.TryParse(textId, out var guidId))
             {
                 return FindById(guidId);
             }
 
-            if (int.TryParse(textId, out id))
+            if (int.TryParse(textId, out var id))
             {
                 if (Debugger.IsAttached || BaseItem.UnitTest)
                 {
@@ -102,7 +100,7 @@ namespace Konfidence.BaseData
                 return FindById(id);
             }
 
-            return null;
+            return default(T);
         }
 
         public T FindById(int id)
@@ -134,7 +132,7 @@ namespace Konfidence.BaseData
                 return first;
             }
 
-            return null;
+            return default(T);
         }
 
         protected T FindByIsEditing()
@@ -166,20 +164,16 @@ namespace Konfidence.BaseData
 
         public void SetSelected(string idText, string isEditingText)
         {
-            Guid guidId;
-            bool isEditing;
+            bool.TryParse(isEditingText, out var isEditing);
 
-            bool.TryParse(isEditingText, out isEditing);
-
-            if (Guid.TryParse(idText, out guidId))
+            if (Guid.TryParse(idText, out var guidId))
             {
                 SetSelected(guidId, isEditing);
             }
             else
             {
-                int id;
 
-                if (int.TryParse(idText, out id))
+                if (int.TryParse(idText, out var id))
                 {
                     if (Debugger.IsAttached || BaseItem.UnitTest)
                     {
@@ -193,17 +187,13 @@ namespace Konfidence.BaseData
 
         public void SetSelected(string idText)
         {
-            Guid guidId;
-
-            if (Guid.TryParse(idText, out guidId))
+            if (Guid.TryParse(idText, out var guidId))
             {
                 SetSelected(guidId, false);
             }
             else
             {
-                int id;
-
-                if (int.TryParse(idText, out id))
+                if (int.TryParse(idText, out var id))
                 {
                     if (Debugger.IsAttached || BaseItem.UnitTest)
                     {
@@ -250,14 +240,7 @@ namespace Konfidence.BaseData
                 {
                     T dataItem;
 
-                    if (id > 0)
-                    {
-                        dataItem = FindById(id);
-                    }
-                    else
-                    {
-                        dataItem = FindById(guidId);
-                    }
+                    dataItem = id > 0 ? FindById(id) : FindById(guidId);
 
                     if (dataItem.IsAssigned())
                     {
@@ -334,9 +317,9 @@ namespace Konfidence.BaseData
         }
         #endregion list editing
 
-        public List<DbParameterObjectList> Convert2ListOfParameterObjectList()
+        public List<IDbParameterObjectList> ConvertToListOfParameterObjectList()
 		{
-            var baseDataItemListList = new List<DbParameterObjectList>();
+            var baseDataItemListList = new List<IDbParameterObjectList>();
 
 			foreach (var baseDataItem in this)
 			{
@@ -355,7 +338,7 @@ namespace Konfidence.BaseData
 			return baseDataItemListList;
 		}
 
-        private static DbParameterObjectList GetProperties(BaseDataItem baseDataItem)
+        private static IDbParameterObjectList GetProperties(IBaseDataItem baseDataItem)
 		{
             var properties = new DbParameterObjectList();
 
@@ -364,7 +347,7 @@ namespace Konfidence.BaseData
 			return properties;
 		}
 
-        public DbParameterObjectList GetParameterObjectList()
+        public IDbParameterObjectList GetParameterObjectList()
         {
             return _dbParameterObjectList;
         }

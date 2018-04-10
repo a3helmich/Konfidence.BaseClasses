@@ -1,12 +1,12 @@
 using System;
 using System.Data;
 using Konfidence.Base;
-using Konfidence.BaseData.ParameterObjects;
+using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    public class BaseHost: BaseItem
+    internal class BaseHost: BaseItem, IBaseHost
 	{
 	    //private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
@@ -27,50 +27,50 @@ namespace Konfidence.BaseData
 			DatabaseName = databaseName;
 		}
 
-		internal virtual void Save(BaseDataItem dataItem)
+		public virtual void Save(IBaseDataItem dataItem)
 		{
 		}
 
-        internal virtual void GetItem(BaseDataItem dataItem, string getStoredProcedure)
+        public virtual void GetItem(IBaseDataItem dataItem, string getStoredProcedure)
         {
         }
 
-        protected internal virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        public virtual void Delete(string deleteStoredProcedure, string autoIdField, int id)
 		{
 		}
 
-        internal virtual void BuildItemList(IBaseDataItemList parentDataItemList,
-                                                   IBaseDataItemList relatedDataItemList,
-                                                   IBaseDataItemList childDataItemList, string getRelatedStoredProcedure)
+        internal virtual void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList,
+                                                   IBaseDataItemList<T> relatedDataItemList,
+                                                   IBaseDataItemList<T> childDataItemList, string getRelatedStoredProcedure) where T : IBaseDataItem
         {
             
         }
 
-		internal virtual void BuildItemList(IBaseDataItemList baseDataItemList, string getListStoredProcedure)
-		{
+		internal virtual void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem
+        {
 		}
 
-        internal virtual int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
+        public virtual int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList)
         {
             return 0;
         }
 
-		internal virtual int ExecuteTextCommand(string textCommand)
+		public virtual int ExecuteTextCommand(string textCommand)
 		{
 			return 0;
 		}
 		
-        internal virtual bool TableExists(string tableName)
+        public virtual bool TableExists(string tableName)
 		{
 			return false;
 		}
 
-		internal virtual bool ViewExists(string viewName)
+		public virtual bool ViewExists(string viewName)
 		{
 			return false;			
 		}
 
-        internal virtual bool StoredProcedureExists(string storedPprocedureName)
+	    public virtual bool StoredProcedureExists(string storedPprocedureName)
         {
             return false;
         }
@@ -81,42 +81,42 @@ namespace Konfidence.BaseData
             return null;
         }
 
-        internal virtual Int16 GetFieldInt16(string fieldName)
+        public virtual short GetFieldInt16(string fieldName)
         {
             throw new NotImplementedException();
         }
 
-		internal virtual Int32 GetFieldInt32(string fieldName)
+		public virtual int GetFieldInt32(string fieldName)
 		{
 			throw new NotImplementedException();
 		}
 
-		internal virtual string GetFieldString(string fieldName)
+		public virtual string GetFieldString(string fieldName)
 		{
 			throw new NotImplementedException();
 		}
 
-        internal virtual Guid GetFieldGuid(string fieldName)
+        public virtual Guid GetFieldGuid(string fieldName)
         {
             throw new NotImplementedException();
         }
 
-		internal virtual bool GetFieldBool(string fieldName)
+		public virtual bool GetFieldBool(string fieldName)
 		{
 			throw new NotImplementedException();
 		}
 
-		internal virtual DateTime GetFieldDateTime(string fieldName)
+		public virtual DateTime GetFieldDateTime(string fieldName)
 		{
 			throw new NotImplementedException();
 		}
 
-        internal virtual TimeSpan GetFieldTimeSpan(string fieldName)
+        public virtual TimeSpan GetFieldTimeSpan(string fieldName)
         {
             throw new NotImplementedException();
         }
 
-        internal virtual Decimal GetFieldDecimal(string fieldName)
+        public virtual decimal GetFieldDecimal(string fieldName)
         {
             throw new NotImplementedException();
         }

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Konfidence.Base;
+using Konfidence.BaseDataInterfaces;
 
-namespace Konfidence.BaseData.ParameterObjects
+namespace Konfidence.HostProviderInterface.Objects
 {
     public class RequestParameters : BaseItem
     {
-        private readonly BaseDataItem _dataItem;
+        private readonly IBaseDataItem _dataItem;
 
         public string StoredProcedure { get; }
 
@@ -13,9 +14,9 @@ namespace Konfidence.BaseData.ParameterObjects
 
         public int Id => _dataItem.GetId();
 
-        public Dictionary<string, DbParameterObject> AutoUpdateFieldList => _dataItem.AutoUpdateFieldDictionary;
+        public Dictionary<string, IDbParameterObject> AutoUpdateFieldList => _dataItem.AutoUpdateFieldDictionary;
 
-        public DbParameterObjectList ParameterObjectList
+        public IDbParameterObjectList ParameterObjectList
         {
             get
             {
@@ -25,7 +26,7 @@ namespace Konfidence.BaseData.ParameterObjects
             }
         }
 
-        public RequestParameters(BaseDataItem dataItem, string storedProcedure)
+        public RequestParameters(IBaseDataItem dataItem, string storedProcedure)
         {
             StoredProcedure = storedProcedure;
 

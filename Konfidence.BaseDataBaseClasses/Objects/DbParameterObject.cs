@@ -1,12 +1,11 @@
 ﻿using System.Data;
-using Konfidence.Base;
+using Konfidence.BaseDataInterfaces;
 
-namespace Konfidence.BaseData.ParameterObjects
+namespace Konfidence.BaseData.Objects
 {
-    public class DbParameterObject : BaseItem
+    public class DbParameterObject : BaseDataItem, IDbParameterObject
     {
-        public DbParameterObject()
-        { }
+        public DbParameterObject() { }
 
         public DbParameterObject(string field, DbType dbType, object value)
         {
@@ -15,14 +14,10 @@ namespace Konfidence.BaseData.ParameterObjects
             Value = value;
         }
 
-        #region ParameterObject properties
-
         public string Field { get; set; }
 
         public DbType DbType { get; set; }
 
         public object Value { get; set; }
-
-        #endregion
     }
 }

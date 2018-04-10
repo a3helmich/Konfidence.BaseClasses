@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Data;
-using Konfidence.Base;
+using Konfidence.BaseDataInterfaces;
 
-namespace Konfidence.BaseData.ParameterObjects
+namespace Konfidence.BaseData.Objects
 {
-    public class DbParameterObjectList : BaseItemList<DbParameterObject>
+    public class DbParameterObjectList : BaseDataItemList<IDbParameterObject>, IDbParameterObjectList
     {
-        #region SetField Methods
         public void SetField(string fieldName, int value)
         {
             AddInParameter(fieldName, DbType.Int32, value);
@@ -62,11 +61,10 @@ namespace Konfidence.BaseData.ParameterObjects
             }
         }
 
-        public void SetField(string fieldName, Decimal value)
+        public void SetField(string fieldName, decimal value)
         {
             AddInParameter(fieldName, DbType.Decimal, value);
         }
-        #endregion
 
         private void AddInParameter(string field, DbType dbType, object value)
         {

@@ -1,4 +1,4 @@
-﻿namespace Konfidence.Smo.SqlDbSchema
+﻿namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class PrimaryKeyDataItem : SchemaBaseDataItem
     {
@@ -10,8 +10,8 @@
 
         public string ConstraintName
         {
-            get { return _constraintName; }
-            set { _constraintName = value; }
+            get => _constraintName;
+            set => _constraintName = value;
         }
 
         public string ColumnName { get; set; } = string.Empty;

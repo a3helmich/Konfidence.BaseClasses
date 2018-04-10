@@ -4,7 +4,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseData
 {
-	internal class HostFactory : BaseItem
+	internal class HostFactory
 	{
 		private static bool WsEnabled
 		{

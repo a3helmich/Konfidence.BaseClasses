@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
-using Konfidence.BaseData;
-using Konfidence.Smo.SqlDbSchema;
-using Konfidence.Smo.SqlServerManagement;
+using Konfidence.SqlHostProvider.Exceptions;
+using Konfidence.SqlHostProvider.SqlDbSchema;
+using Konfidence.SqlHostProvider.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -68,14 +68,14 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6672.26762, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6672.26762\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6672.27365, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6672.27365\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6672.26765, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6672.26765\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6672.27368, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6672.27368\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.MenuClasses, Version=1.0.6672.26765, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.MenuClasses.1.0.6672.26765\lib\net46\Konfidence.MenuClasses.dll</HintPath>
+    <Reference Include="Konfidence.MenuClasses, Version=1.0.6672.27368, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.MenuClasses.1.0.6672.27368\lib\net46\Konfidence.MenuClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>

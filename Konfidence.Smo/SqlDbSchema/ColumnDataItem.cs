@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Konfidence.Smo.SqlDbSchema
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class ColumnDataItem : SchemaBaseDataItem, IColumnDataItem
     {
@@ -32,7 +32,7 @@ namespace Konfidence.Smo.SqlDbSchema
 
         public string Name { get; private set; } = string.Empty;
 
-        protected int OrdinalPosition { get; set; }
+        protected int OrdinalPosition { get; private set; }
 
         public string SqlDataType { get; private set; } = string.Empty;
 
@@ -121,25 +121,19 @@ namespace Konfidence.Smo.SqlDbSchema
         // TODO : internal
         protected override void GetData()
         {
-            string name;
-            GetField("Name", out name);
+            GetField("Name", out string name);
 
-            int defaultObjectId;
-            GetField("Default_object_id", out defaultObjectId);
+            GetField("Default_object_id", out int defaultObjectId);
 
-            bool isDefaulted = defaultObjectId > 0;
+            var isDefaulted = defaultObjectId > 0;
 
-            bool isComputed;
-            GetField("Is_Computed", out isComputed);
+            GetField("Is_Computed", out bool isComputed);
 
-            int ordinalPosition;
-            GetField("column_id", out ordinalPosition);
+            GetField("column_id", out int ordinalPosition);
 
-            string dataType;
-            GetField("datatype", out dataType);
+            GetField("datatype", out string dataType);
 
-            Int16 characterMaximumLengthInt;
-            GetField("max_length", out characterMaximumLengthInt);
+            GetField("max_length", out short characterMaximumLengthInt);
 
             SetColumnData(name, isDefaulted, isComputed, ordinalPosition, dataType, characterMaximumLengthInt);
         }
@@ -159,7 +153,7 @@ namespace Konfidence.Smo.SqlDbSchema
             Name = name;
         }
 
-        private string GetDataType(string dataType)
+        private static string GetDataType(string dataType)
         {
             dataType = dataType.ToLower();
 
@@ -252,7 +246,7 @@ namespace Konfidence.Smo.SqlDbSchema
             }
         }
 
-        private string GetDefaultPropertyValue(string dataType, string newValue)
+        private static string GetDefaultPropertyValue(string dataType, string newValue)
         {
             var defaultPropertyValuelinePart = string.Empty;
 
