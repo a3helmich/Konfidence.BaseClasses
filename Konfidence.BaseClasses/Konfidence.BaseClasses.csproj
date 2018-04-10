@@ -113,10 +113,6 @@
       <Project>{fef04c6c-a57e-446e-b0f6-861b5a7a2c90}</Project>
       <Name>Konfidence.BaseClassInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseInterfaces.csproj">
-      <Project>{763d72bf-c9bf-433d-8908-244135dc2ae2}</Project>
-      <Name>Konfidence.BaseInterfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
