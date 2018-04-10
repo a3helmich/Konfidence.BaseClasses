@@ -4,7 +4,7 @@ using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData.Objects
 {
-    public class DbParameterObjectList : BaseDataItemList<IDbParameterObject>, IDbParameterObjectList
+    public class DbParameterObjectList : BaseDataItemList<DbParameterObject>, IDbParameterObjectList
     {
         public void SetField(string fieldName, int value)
         {

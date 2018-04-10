@@ -15,19 +15,12 @@ namespace Konfidence.BaseData
             if (!_kernel.IsAssigned())
             {
                 _kernel = new StandardKernel();
-
-                AddBindings();
             }
         }
 
         public IBindingToSyntax<T> Bind<T>()
         {
             return _kernel.Bind<T>();
-        }
-
-        private void AddBindings()
-        {
-            //Bind<IDatabaseRepository>().To<SqlServerRepository>();
         }
     }
 }

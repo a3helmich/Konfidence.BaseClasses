@@ -38,5 +38,9 @@ namespace Konfidence.BaseDataInterfaces
         decimal GetFieldDecimal(string fieldName);
 
         DataTable GetSchemaObject(string objectType);
+
+        void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem;
+
+        void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList, IBaseDataItemList<T> childDataItemList, string getRelatedStoredProcedure) where T : IBaseDataItem;
     }
 }

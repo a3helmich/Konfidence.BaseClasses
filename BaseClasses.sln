@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDataInterfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClassInterfaces", "Konfidence.BaseClassInterfaces\Konfidence.BaseClassInterfaces.csproj", "{FEF04C6C-A57E-446E-B0F6-861B5A7A2C90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.RestProvider", "Konfidence.RestProvider\Konfidence.RestProvider.csproj", "{1FC56015-7C87-4B9B-8490-009210FC2CEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,6 +313,18 @@ Global
 		{FEF04C6C-A57E-446E-B0F6-861B5A7A2C90}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FEF04C6C-A57E-446E-B0F6-861B5A7A2C90}.Release|x86.ActiveCfg = Release|Any CPU
 		{FEF04C6C-A57E-446E-B0F6-861B5A7A2C90}.Release|x86.Build.0 = Release|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|x86.Build.0 = Debug|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|x86.ActiveCfg = Release|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

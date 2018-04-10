@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
@@ -9,13 +8,15 @@ using Ninject;
 
 namespace Konfidence.BaseData
 {
-    public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem //, new()
+    public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem, new()
+//, new()
 	{
         private readonly DbParameterObjectList _dbParameterObjectList = new DbParameterObjectList();
+	    private IBaseClient _client;
 
         private NinjectDependencyResolver _ninject;
 
-        protected IKernel Kernel
+        private IKernel Kernel
         {
             get
             {
@@ -33,6 +34,32 @@ namespace Konfidence.BaseData
             }
         }
 
+	    public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
+	    {
+	        if (!Kernel.GetBindings(typeof(TC)).Any())
+	        {
+	            Kernel.Bind<IBaseClient>().To<TC>();
+	        }
+
+	       return Kernel.Get<TC>();
+	    }
+
+	    public IBaseClient Client
+	    {
+	        get
+	        {
+	            if (!_client.IsAssigned())
+	            {
+	                _client = ClientBind<IBaseClient>();
+
+	                //_client = ClientFactory.GetClient(ServiceName, DatabaseName);
+	            }
+
+	            return _client;
+	        }
+	        set => _client = value;
+	    }
+
         protected virtual void AfterDataLoad()
         {
             //
@@ -48,18 +75,11 @@ namespace Konfidence.BaseData
 
         #endregion
 
-        private BaseClient GetClient()
-        {
-            return ClientFactory.GetClient(ServiceName, DatabaseName);
-        }
-
-		protected void BuildItemList(string getListStoredProcedure)
+        protected void BuildItemList(string getListStoredProcedure)
 		{
 		    GetListStoredProcedure = getListStoredProcedure;
-            
-            var client = GetClient();
 
-            client.BuildItemList(this, getListStoredProcedure);
+		    Client.BuildItemList(this, getListStoredProcedure);
 
             AfterDataLoad();
         }
@@ -73,8 +93,8 @@ namespace Konfidence.BaseData
 
 		public T GetDataItem()
 		{
-            //var baseDataItem = new T();
-            var baseDataItem = Kernel.Get<T>();
+            var baseDataItem = new T();
+            //var baseDataItem = Kernel.Get<T>();
 
             baseDataItem.InitializeDataItem();
 
@@ -401,30 +421,22 @@ namespace Konfidence.BaseData
 
 		protected int ExecuteTextCommand(string textCommand)
 		{
-            var client = GetClient(); 
-
-			return client.ExecuteTextCommand(textCommand);
+			return Client.ExecuteTextCommand(textCommand);
 		}
 
 		protected bool TableExists(string tableName)
 		{
-            var client = GetClient();
-
-			return client.TableExists(tableName);
+			return Client.TableExists(tableName);
 		}
 
 		protected bool ViewExists(string viewName)
 		{
-            var client = GetClient();
-
-			return client.ViewExists(viewName);
+			return Client.ViewExists(viewName);
 		}
 
         protected bool StoredProcedureExists(string storedProcedureName)
         {
-            var client = GetClient();
-
-            return client.StoredProcedureExists(storedProcedureName);
+            return Client.StoredProcedureExists(storedProcedureName);
         }
     }
 }

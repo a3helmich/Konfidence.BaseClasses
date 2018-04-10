@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Xml;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
+using Ninject;
 
 namespace Konfidence.BaseData
 {
@@ -23,7 +25,46 @@ namespace Konfidence.BaseData
 
 	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
 
-	    public bool IsSelected
+	    private NinjectDependencyResolver _ninject;
+
+	    private IKernel Kernel
+	    {
+	        get
+	        {
+	            if (!_ninject.IsAssigned())
+	            {
+	                _ninject = new NinjectDependencyResolver();
+	            }
+
+	            return _ninject.Kernel;
+	        }
+	    }
+	    public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+	    {
+	        if (!Kernel.GetBindings(typeof(TC)).Any())
+	        {
+	            Kernel.Bind<IBaseClient>().To<TC>();
+	        }
+
+	        return Kernel.Get<TC>();
+	    }
+
+	    // TODO: internal
+	    public IBaseClient Client
+	    {
+	        get
+	        {
+	            if (!_client.IsAssigned())
+	            {
+	                _client = ClientFactory.GetClient(ServiceName, DatabaseName);
+	            }
+
+	            return _client;
+	        }
+	        set => _client = value;
+	    }
+
+        public bool IsSelected
         {
             get => _isSelected;
 	        set
@@ -56,22 +97,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        // TODO: internal
-        public IBaseClient Client
-        {
-            get
-            {
-                if (!_client.IsAssigned())
-                {
-                    _client = ClientFactory.GetClient(ServiceName, DatabaseName);
-                }
-
-                return _client;
-            }
-            set => _client = value;
-        }
-
-	    public BaseDataItem()
+        public BaseDataItem()
 	    {
 		    _isSelected = false;
 		    _isEditing = false;

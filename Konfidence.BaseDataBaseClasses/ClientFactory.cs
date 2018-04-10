@@ -41,7 +41,8 @@ namespace Konfidence.BaseData
 				return new WsClient(serviceName, databaseName);
 			}
 
-			return new SqlClient(databaseName);
+			//return new SqlClient(databaseName);
+		    return null;
 		}
 	}
 }
