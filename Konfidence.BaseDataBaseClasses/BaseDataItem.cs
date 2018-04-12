@@ -7,6 +7,7 @@ using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
 using Ninject;
+using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
@@ -42,16 +43,18 @@ namespace Konfidence.BaseData
 	        }
 	    }
 
-	    public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+	    public virtual IBaseClient ClientBind<TC>(string databaseName) where TC : IBaseClient
 	    {
 	        Console.WriteLine("ClientBind<TC>");
+
+	        var databaseNameParam = new ConstructorArgument("databaseName", databaseName);
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
 	            Kernel.Bind<IBaseClient>().To<TC>();
 	        }
 
-	        return Kernel.Get<TC>();
+	        return Kernel.Get<TC>(databaseNameParam);
 	    }
 
 	    protected abstract IBaseClient ClientBind();
