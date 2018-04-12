@@ -18,7 +18,5 @@ namespace Konfidence.BaseDataInterfaces
         void SetField(string fieldName, TimeSpan value);
 
         void SetField(string fieldName, decimal value);
-
-        //void Add(IDbParameterObject property);
     }
 }

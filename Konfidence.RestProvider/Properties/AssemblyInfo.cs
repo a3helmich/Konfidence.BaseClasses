@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Konfidence.BaseInterfaces")]
+[assembly: AssemblyTitle("Konfidence.RestProvider")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Konfidence.BaseInterfaces")]
+[assembly: AssemblyProduct("Konfidence.RestProvider")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("763d72bf-c9bf-433d-8908-244135dc2ae2")]
+[assembly: Guid("1fc56015-7c87-4b9b-8490-009210fc2cee")]
 
 // Version information for an assembly consists of the following four values:
 //

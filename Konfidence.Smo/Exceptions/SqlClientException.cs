@@ -2,9 +2,9 @@
 
 namespace Konfidence.SqlHostProvider.Exceptions
 {
-    public class SqlHostException : Exception
+    public class SqlClientException : Exception
     {
-        public SqlHostException(string description)
+        public SqlClientException(string description)
             : base(description)
         {
         }

@@ -1,4 +1,4 @@
-using Konfidence.BaseInterfaces;
+using Konfidence.BaseClassInterfaces;
 
 namespace Konfidence.Base
 {

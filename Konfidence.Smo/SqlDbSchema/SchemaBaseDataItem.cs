@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using Konfidence.BaseData;
+using Konfidence.BaseDataInterfaces;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -7,10 +9,12 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         protected DataTable GetSchemaObject(string objectType)
         {
-            // TODO : enable again
-            //return DataHost.GetSchemaObject(objectType);
+            return Client.GetSchemaObject(objectType);
+        }
 
-            return null;
+        protected override IBaseClient ClientBind()
+        {
+            return base.ClientBind<SqlClient>();
         }
     }
 }

@@ -6,7 +6,7 @@ using Konfidence.BaseDataInterfaces;
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    internal class BaseHost: BaseItem, IBaseClient
+    public class BaseClient: BaseItem, IBaseClient
 	{
 	    //private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;
@@ -21,7 +21,7 @@ namespace Konfidence.BaseData
 
 	    #endregion
 
-		public BaseHost(string serviceName, string databaseName)
+		public BaseClient(string serviceName, string databaseName)
 		{
 			ServiceName = serviceName;
 			DatabaseName = databaseName;
@@ -39,14 +39,14 @@ namespace Konfidence.BaseData
 		{
 		}
 
-        internal virtual void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList,
+	    public virtual void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList,
                                                    IBaseDataItemList<T> relatedDataItemList,
                                                    IBaseDataItemList<T> childDataItemList, string getRelatedStoredProcedure) where T : IBaseDataItem
         {
             
         }
 
-		internal virtual void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem
+		public virtual void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem
         {
 		}
 

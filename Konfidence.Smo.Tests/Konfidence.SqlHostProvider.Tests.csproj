@@ -94,17 +94,20 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions, Version=5.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.5.2.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6674.22108, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6674.22108\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6676.28392, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6676.28392\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6674.22109, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6674.22109\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6676.28393, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6676.28393\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -141,14 +144,21 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.8.2\lib\net45\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -188,13 +198,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseClassInterfaces\Konfidence.BaseClassInterfaces.csproj">
+      <Project>{fef04c6c-a57e-446e-b0f6-861b5a7a2c90}</Project>
+      <Name>Konfidence.BaseClassInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
       <Project>{5c710054-52b1-405e-a754-f0f9682f07d6}</Project>
       <Name>Konfidence.BaseDataInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseInterfaces\Konfidence.BaseInterfaces.csproj">
-      <Project>{763d72bf-c9bf-433d-8908-244135dc2ae2}</Project>
-      <Name>Konfidence.BaseInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.Smo\Konfidence.SqlHostProvider.csproj">
       <Project>{6cee30a7-d859-496d-9899-9de1654df995}</Project>

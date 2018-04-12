@@ -2,10 +2,10 @@
 using System.Data;
 using System.Data.Common;
 using Konfidence.BaseDataInterfaces;
-using Konfidence.HostProviderInterface.Objects;
+using Konfidence.RepositoryInterface.Objects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Konfidence.HostProviderInterface
+namespace Konfidence.RepositoryInterface
 {
     public interface IDataRepository
     {

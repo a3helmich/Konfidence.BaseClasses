@@ -1,4 +1,4 @@
-﻿namespace Konfidence.BaseInterfaces
+﻿namespace Konfidence.BaseClassInterfaces
 {
     public interface IBaseItem
     {

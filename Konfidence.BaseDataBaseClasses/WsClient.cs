@@ -9,11 +9,11 @@ using Konfidence.BaseDataInterfaces;
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    internal class WsHost : BaseHost
+    internal class WsClient : BaseClient
 	{
 		private readonly WSBaseHostService _wsBaseHostService;
 
-        public WsHost(string serviceName, string databaseName) : base(serviceName, databaseName)
+        public WsClient(string serviceName, string databaseName) : base(serviceName, databaseName)
 		{
             _wsBaseHostService = new WSBaseHostService();
 
@@ -114,7 +114,7 @@ namespace Konfidence.BaseData
 			_wsBaseHostService.Delete(id);
 		}
 
-		internal override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) 
+		public override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) 
         {
 			var parameterObjectsList = _wsBaseHostService.BuildItemList();
 

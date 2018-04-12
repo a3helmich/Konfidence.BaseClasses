@@ -72,10 +72,12 @@ namespace Konfidence.BaseData
 		{
 			var baseDataItemList = GetNewDataItemList();
 
-			return baseDataItemList.ConvertToListOfParameterObjectList();
+			//return baseDataItemList.ConvertToListOfParameterObjectList();
+
+		    return null;
 		}
 
-	    private static DbParameterObjectList GetNewDataItemList()
+	    private static IDbParameterObjectList GetNewDataItemList()
 	    {
 	        throw new NotImplementedException();
 	    }

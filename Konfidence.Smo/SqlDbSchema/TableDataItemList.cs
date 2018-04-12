@@ -2,6 +2,8 @@
 using System.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
+using Konfidence.BaseDataInterfaces;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -14,6 +16,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             var dataTableList = GetTables();
 
             BuildItemList(dataTableList);
+        }
+
+        protected override IBaseClient ClientBind()
+        {
+            return base.ClientBind<SqlClient>();
         }
 
         internal class InternalTableDataItem : SchemaBaseDataItem

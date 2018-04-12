@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DbSiteMapMenuClasses;
+using Konfidence.MenuClasses.Tests.objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.MenuClasses.Tests
@@ -51,42 +52,37 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItem()
         {
-            // TODO  :enable test again
-            //var dataItem = new Bl.MenuDataItem(2);
+            var dataItem = new Bl.MenuDataItem(2);
 
-            //Assert.IsNotNull(dataItem);
+            Assert.IsNotNull(dataItem);
         }
 
         [TestMethod, TestCategory("MenuItem")]
         public void GetTwoSingleMenuItem()
         {
-            // TODO  :enable test again
+            var dataItem1 = new Bl.MenuDataItem(1);
+            var dataItem2 = new Bl.MenuDataItem(2);
 
-            //var dataItem1 = new Bl.MenuDataItem(1);
-            //var dataItem2 = new Bl.MenuDataItem(2);
-
-            //Assert.IsNotNull(dataItem1);
-            //Assert.IsNotNull(dataItem2);
+            Assert.IsNotNull(dataItem1);
+            Assert.IsNotNull(dataItem2);
         }
 
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemList()
         {
-            //var list = Bl.MenuDataItemList.GetListByMenuCode(1);
+            var list = Bl.MenuDataItemList.GetListByMenuCode(1);
 
-            //Assert.AreEqual(9, list.Count, "was expecting to get 9 menu items back");
+            Assert.AreEqual(9, list.Count, "was expecting to get 9 menu items back");
 
-            //Assert.AreEqual("Wijzigen van mijn persoonsgegevens", list[3].MenuText.MenuText, "menu text klopt niet");
+            Assert.AreEqual("Wijzigen van mijn persoonsgegevens", list[3].MenuText.MenuText, "menu text klopt niet");
         }
 
         [TestMethod, TestCategory("MenuItem")]
         public void GetParentMenuItem()
         {
-            // TODO  :enable test again
+            var test = new Bl.MenuDataItem(1);
 
-            //var test = new Bl.MenuDataItem(1);
-
-            //Assert.IsNotNull(test);
+            Assert.IsNotNull(test);
         }
 
         [TestMethod, TestCategory("Ninject")]

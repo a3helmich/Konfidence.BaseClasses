@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{763D72BF-C9BF-433D-8908-244135DC2AE2}</ProjectGuid>
+    <ProjectGuid>{1FC56015-7C87-4B9B-8490-009210FC2CEE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konfidence.BaseInterfaces</RootNamespace>
-    <AssemblyName>Konfidence.BaseInterfaces</AssemblyName>
+    <RootNamespace>Konfidence.RestProvider</RootNamespace>
+    <AssemblyName>Konfidence.RestProvider</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,6 +36,12 @@
     <AssemblyOriginatorKeyFile>..\Konfidence.nl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6676.28392, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6676.28392\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,13 +52,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WsClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Konfidence.nl.snk">
       <Link>Konfidence.nl.snk</Link>
     </None>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj">
+      <Project>{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}</Project>
+      <Name>Konfidence.BaseDatabaseClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
+      <Project>{5C710054-52B1-405E-A754-F0F9682F07D6}</Project>
+      <Name>Konfidence.BaseDataInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

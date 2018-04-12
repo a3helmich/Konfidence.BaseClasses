@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Konfidence.MenuClasses.Tests.interfaces;
 
-namespace Konfidence.MenuClasses.Tests
+namespace Konfidence.MenuClasses.Tests.objects
 {
     [ExcludeFromCodeCoverage]
     public class CallTestItemListClass

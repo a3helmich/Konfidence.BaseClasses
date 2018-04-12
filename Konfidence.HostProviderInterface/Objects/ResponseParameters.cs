@@ -2,7 +2,7 @@
 using Konfidence.Base;
 using Konfidence.BaseDataInterfaces;
 
-namespace Konfidence.HostProviderInterface.Objects
+namespace Konfidence.RepositoryInterface.Objects
 {
     public class ResponseParameters : BaseItem
     {

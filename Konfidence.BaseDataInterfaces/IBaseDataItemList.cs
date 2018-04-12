@@ -6,7 +6,7 @@ namespace Konfidence.BaseDataInterfaces
     {
         void SetParameters(string storedProcedure);
 
-        //void AddItem(BaseHost dataHost);
+        //void AddItem(BaseClient client);
         T GetDataItem();
 
         List<IDbParameterObjectList> ConvertToListOfParameterObjectList();

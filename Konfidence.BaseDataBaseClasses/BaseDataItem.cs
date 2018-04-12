@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Xml;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
+using Ninject;
+using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
-	public class BaseDataItem: BaseItem, IBaseDataItem
+	public abstract class BaseDataItem: BaseItem, IBaseDataItem
 	{
         public const string BaseLanguage = "NL";
 
@@ -18,12 +21,58 @@ namespace Konfidence.BaseData
         private bool _isEditing;
         private bool _isInitialized;
 
-        private IBaseClient _dataHost; 
+        private IBaseClient _client; 
 		internal Dictionary<string, object> PropertyDictionary;
 
 	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
 
-	    public bool IsSelected
+	    private NinjectDependencyResolver _ninject;
+
+	    private IKernel Kernel
+	    {
+	        get
+	        {
+	            if (!_ninject.IsAssigned())
+	            {
+	                _ninject = new NinjectDependencyResolver();
+	            }
+
+	            return _ninject.Kernel;
+	        }
+	    }
+
+	    public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+	    {
+	        var databaseNameParam = new ConstructorArgument("databaseName", DatabaseName);
+
+            if (!Kernel.GetBindings(typeof(TC)).Any())
+	        {
+	            Kernel.Bind<IBaseClient>().To<TC>();
+	        }
+
+	        return Kernel.Get<TC>(databaseNameParam);
+	    }
+
+	    protected abstract IBaseClient ClientBind();
+
+	    // TODO: internal
+	    public IBaseClient Client
+	    {
+	        get
+	        {
+	            if (!_client.IsAssigned())
+	            {
+	                _client = ClientBind();
+
+                    //_client = ClientFactory.GetClient(ServiceName, DatabaseName);
+	            }
+
+	            return _client;
+	        }
+	        set => _client = value;
+	    }
+
+        public bool IsSelected
         {
             get => _isSelected;
 	        set
@@ -34,7 +83,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        protected IDbParameterObjectList DbParameterObjectList { get; private set; } = new DbParameterObjectList();
+        protected IDbParameterObjectList DbParameterObjectList { get; private set; }
 
 	    protected virtual void IsSelectedChanged()
         {
@@ -56,27 +105,14 @@ namespace Konfidence.BaseData
             }
         }
 
-        // TODO: internal
-        public IBaseClient DataHost
-        {
-            get
-            {
-                if (!_dataHost.IsAssigned())
-                {
-                    _dataHost = HostFactory.GetHost(ServiceName, DatabaseName);
-                }
-
-                return _dataHost;
-            }
-            set => _dataHost = value;
-        }
-
-	    public BaseDataItem()
+	    protected BaseDataItem()
 	    {
-		    _isSelected = false;
+            _isSelected = false;
 		    _isEditing = false;
 	        _isInitialized = false;
-	    }
+
+	        DbParameterObjectList = new DbParameterObjectList();
+        }
 
 		public  void SetId(int id)
 		{
@@ -384,12 +420,12 @@ namespace Konfidence.BaseData
                 return (short)PropertyDictionary[fieldName];
             }
 
-            if (DataHost.IsAssigned())
+            if (Client.IsAssigned())
             {
-                return DataHost.GetFieldInt16(fieldName);
+                return Client.GetFieldInt16(fieldName);
             }
 
-            throw (new Exception("GetFieldInt16: dataHost/_PropertyDictionary is not assigned"));
+            throw (new Exception("GetFieldInt16: client/_PropertyDictionary is not assigned"));
         }
 
 		private int GetFieldInt32(string fieldName)
@@ -399,12 +435,12 @@ namespace Konfidence.BaseData
 				return (int)PropertyDictionary[fieldName];
 			}
 
-		    if (DataHost.IsAssigned())
+		    if (Client.IsAssigned())
 		    {
-		        return DataHost.GetFieldInt32(fieldName);
+		        return Client.GetFieldInt32(fieldName);
 		    }
 
-		    throw (new Exception("GetFieldInt32: dataHost/_PropertyDictionary is not assigned"));
+		    throw (new Exception("GetFieldInt32: client/_PropertyDictionary is not assigned"));
 		}
 
         private Guid GetFieldGuid(string fieldName)
@@ -414,9 +450,9 @@ namespace Konfidence.BaseData
                 return (Guid)PropertyDictionary[fieldName];
             }
 
-            if (DataHost.IsAssigned())
+            if (Client.IsAssigned())
             {
-                var fieldValue = DataHost.GetFieldGuid(fieldName);
+                var fieldValue = Client.GetFieldGuid(fieldName);
 
                 if (fieldName.Equals(GuidIdField, StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -426,7 +462,7 @@ namespace Konfidence.BaseData
                 return fieldValue;
             }
 
-            throw (new Exception("GetFieldGuid: dataHost/_PropertyDictionary is not assigned"));
+            throw (new Exception("GetFieldGuid: client/_PropertyDictionary is not assigned"));
         }
 
 		private string GetFieldString(string fieldName)
@@ -436,12 +472,12 @@ namespace Konfidence.BaseData
 				return PropertyDictionary[fieldName] as string;
 			}
 		    
-            if (DataHost.IsAssigned())
+            if (Client.IsAssigned())
 		    {
-		        return DataHost.GetFieldString(fieldName);
+		        return Client.GetFieldString(fieldName);
 		    }
 
-		    throw (new Exception("GetFieldString: dataHost/_PropertyDictionary  is not assigned"));
+		    throw (new Exception("GetFieldString: client/_PropertyDictionary  is not assigned"));
 		}
 
         private bool GetFieldBool(string fieldName)
@@ -451,12 +487,12 @@ namespace Konfidence.BaseData
                 return (bool)PropertyDictionary[fieldName];
             }
             
-            if (DataHost.IsAssigned())
+            if (Client.IsAssigned())
             {
-                return DataHost.GetFieldBool(fieldName);
+                return Client.GetFieldBool(fieldName);
             }
 
-            throw (new Exception("GetFieldBool: dataHost/_PropertyDictionary  is not assigned"));
+            throw (new Exception("GetFieldBool: client/_PropertyDictionary  is not assigned"));
         }
 
 		private DateTime GetFieldDateTime(string fieldName)
@@ -466,12 +502,12 @@ namespace Konfidence.BaseData
 				return (DateTime)PropertyDictionary[fieldName];
 			}
 		    
-            if (DataHost.IsAssigned())
+            if (Client.IsAssigned())
 		    {
-		        return DataHost.GetFieldDateTime(fieldName);
+		        return Client.GetFieldDateTime(fieldName);
 		    }
 
-		    throw (new Exception("GetFieldDateTime: dataHost/_PropertyDictionary  is not assigned"));
+		    throw (new Exception("GetFieldDateTime: client/_PropertyDictionary  is not assigned"));
 		}
 
         private TimeSpan GetFieldTimeSpan(string fieldName)
@@ -481,12 +517,12 @@ namespace Konfidence.BaseData
                 return (TimeSpan)PropertyDictionary[fieldName];
             }
             
-            if (DataHost.IsAssigned())
+            if (Client.IsAssigned())
             {
-                return DataHost.GetFieldTimeSpan(fieldName);
+                return Client.GetFieldTimeSpan(fieldName);
             }
 
-            throw (new Exception("GetFieldTimeSpan: dataHost/_PropertyDictionary  is not assigned"));
+            throw (new Exception("GetFieldTimeSpan: client/_PropertyDictionary  is not assigned"));
         }
 
         private decimal GetFieldDecimal(string fieldName)
@@ -496,12 +532,12 @@ namespace Konfidence.BaseData
                 return (decimal)PropertyDictionary[fieldName];
             }
             
-            if (DataHost.IsAssigned())
+            if (Client.IsAssigned())
             {
-                return DataHost.GetFieldDecimal(fieldName);
+                return Client.GetFieldDecimal(fieldName);
             }
 
-            throw (new Exception("GetFieldDecimal: dataHost/_PropertyDictionary  is not assigned"));
+            throw (new Exception("GetFieldDecimal: client/_PropertyDictionary  is not assigned"));
         }
 
 
@@ -607,7 +643,7 @@ namespace Konfidence.BaseData
 		{
             InternalInitializeDataItem();
 
-            DataHost.GetItem(this, storedProcedure);
+            Client.GetItem(this, storedProcedure);
 
             AfterGetDataItem();
         }
@@ -651,7 +687,7 @@ namespace Konfidence.BaseData
 				return;
 			}
 
-			DataHost.Save(this);
+			Client.Save(this);
 
             GetAutoUpdateData();
 
@@ -674,7 +710,7 @@ namespace Konfidence.BaseData
 
             BeforeDelete();
 
-			DataHost.Delete(DeleteStoredProcedure, AutoIdField, Id);
+			Client.Delete(DeleteStoredProcedure, AutoIdField, Id);
 
 			Id = 0;
 
@@ -683,27 +719,27 @@ namespace Konfidence.BaseData
 
         protected internal int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
         {
-            return DataHost.ExecuteCommand(storedProcedure, parameterObjectList);
+            return Client.ExecuteCommand(storedProcedure, parameterObjectList);
         }
 
 		protected internal int ExecuteTextCommand(string textCommand)
 		{
-            return DataHost.ExecuteTextCommand(textCommand);
+            return Client.ExecuteTextCommand(textCommand);
 		} 
 
 		protected internal bool TableExists(string tableName)
 		{
-            return DataHost.TableExists(tableName);
+            return Client.TableExists(tableName);
 		}
 
 		protected internal bool ViewExists(string viewName)
 		{
-            return DataHost.ViewExists(viewName);
+            return Client.ViewExists(viewName);
 		}
 
         protected internal bool StoredProcedureExists(string storedProcedureName)
         {
-            return DataHost.StoredProcedureExists(storedProcedureName);
+            return Client.StoredProcedureExists(storedProcedureName);
         }
 
         public IDbParameterObjectList SetItemData()

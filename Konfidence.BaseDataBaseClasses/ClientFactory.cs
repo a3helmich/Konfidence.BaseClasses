@@ -4,7 +4,7 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseData
 {
-	internal class HostFactory
+	internal class ClientFactory
 	{
 		private static bool WsEnabled
 		{
@@ -29,7 +29,7 @@ namespace Konfidence.BaseData
             }
 		}
 
-		public static BaseHost GetHost(string serviceName, string databaseName)
+		public static BaseClient GetClient(string serviceName, string databaseName)
 		{
 			if (WsEnabled)
 			{
@@ -38,10 +38,11 @@ namespace Konfidence.BaseData
 					throw new Exception("WebServices is enabled but the webservice is not declared");
 				}
 
-				return new WsHost(serviceName, databaseName);
+				return new WsClient(serviceName, databaseName);
 			}
 
-			return new SqlHost(databaseName);
+			//return new SqlClient(databaseName);
+		    return null;
 		}
 	}
 }

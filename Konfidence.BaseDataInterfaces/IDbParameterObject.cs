@@ -1,8 +1,9 @@
 ﻿using System.Data;
+using Konfidence.BaseClassInterfaces;
 
 namespace Konfidence.BaseDataInterfaces
 {
-    public interface IDbParameterObject : IBaseDataItem
+    public interface IDbParameterObject 
     {
         string Field { get; set; }
 
