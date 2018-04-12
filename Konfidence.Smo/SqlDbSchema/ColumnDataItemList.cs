@@ -52,7 +52,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         protected override IBaseClient ClientBind()
         {
-            return base.ClientBind<SqlClient>(DatabaseName);
+            return base.ClientBind<SqlClient>();
         }
 
         public static ColumnDataItemList GetList(string databaseName, string tableName)

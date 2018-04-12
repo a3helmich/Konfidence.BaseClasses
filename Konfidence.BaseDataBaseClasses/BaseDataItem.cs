@@ -32,8 +32,6 @@ namespace Konfidence.BaseData
 	    {
 	        get
 	        {
-                Console.WriteLine("Kernel.get");
-
 	            if (!_ninject.IsAssigned())
 	            {
 	                _ninject = new NinjectDependencyResolver();
@@ -45,8 +43,6 @@ namespace Konfidence.BaseData
 
 	    public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
 	    {
-	        Console.WriteLine("ClientBind<TC>");
-
 	        var databaseNameParam = new ConstructorArgument("databaseName", DatabaseName);
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
@@ -64,8 +60,6 @@ namespace Konfidence.BaseData
 	    {
 	        get
 	        {
-	            Console.WriteLine("Client");
-
 	            if (!_client.IsAssigned())
 	            {
 	                _client = ClientBind();
@@ -111,10 +105,8 @@ namespace Konfidence.BaseData
             }
         }
 
-        public BaseDataItem()
+	    protected BaseDataItem()
 	    {
-	        Console.WriteLine("BaseDataItem()");
-
             _isSelected = false;
 		    _isEditing = false;
 	        _isInitialized = false;

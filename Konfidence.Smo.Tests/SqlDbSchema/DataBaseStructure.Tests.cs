@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.Smo.Tests.SqlDbSchema
@@ -53,13 +54,11 @@ namespace Konfidence.Smo.Tests.SqlDbSchema
         [TestMethod, TestCategory("DatabaseStructure")]
         public void BuildStructureTest()
         {
-            // TODO  :enable test again
+            var target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
 
-            //var target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
+            target.BuildStructure();
 
-            //target.BuildStructure();
-
-            //Assert.AreEqual(25, target.TableList.Count); // newsletter heeft nu 25 tabellen
+            Assert.AreEqual(25, target.TableList.Count); // newsletter heeft nu 25 tabellen
         }
     }
 }

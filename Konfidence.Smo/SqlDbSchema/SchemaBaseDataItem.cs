@@ -9,14 +9,12 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         protected DataTable GetSchemaObject(string objectType)
         {
-            // TODO : enable again
-            //return Client.GetSchemaObject(objectType);
-            return null;
+            return Client.GetSchemaObject(objectType);
         }
 
         protected override IBaseClient ClientBind()
         {
-            return base.ClientBind<SqlClient>(DatabaseName);
+            return base.ClientBind<SqlClient>();
         }
     }
 }

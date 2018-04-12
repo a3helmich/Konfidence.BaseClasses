@@ -20,7 +20,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         protected override IBaseClient ClientBind()
         {
-            return base.ClientBind<SqlClient>(DatabaseName);
+            return base.ClientBind<SqlClient>();
         }
 
         internal class InternalTableDataItem : SchemaBaseDataItem
