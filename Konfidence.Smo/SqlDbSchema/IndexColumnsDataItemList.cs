@@ -29,7 +29,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         protected override IBaseClient ClientBind()
         {
-            return base.ClientBind<SqlClient>();
+            return base.ClientBind<SqlClient>(DatabaseName);
         }
 
         private void BuildItemList(DataTable dataTable)

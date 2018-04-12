@@ -35,10 +35,10 @@ namespace Konfidence.BaseData
             }
         }
 
-	    public virtual IBaseClient ClientBind<TC>(string databaseName) where TC: IBaseClient
+	    public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
 	    {
 
-	        var databaseNameParam = new ConstructorArgument("databaseName", databaseName);
+	        var databaseNameParam = new ConstructorArgument("databaseName", DatabaseName);
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
