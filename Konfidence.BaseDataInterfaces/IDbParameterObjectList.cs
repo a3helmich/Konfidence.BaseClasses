@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Konfidence.BaseData.Objects;
 
 namespace Konfidence.BaseDataInterfaces
 {
-    public interface IDbParameterObjectList: IList<DbParameterObject>
+    public interface IDbParameterObjectList: IList<IDbParameterObject>
     {
         void SetField(string fieldName, int value);
 

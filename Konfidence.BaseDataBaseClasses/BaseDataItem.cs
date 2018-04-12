@@ -41,6 +41,7 @@ namespace Konfidence.BaseData
 	            return _ninject.Kernel;
 	        }
 	    }
+
 	    protected virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
 	    {
 	        Console.WriteLine("ClientBind<TC>");
@@ -83,7 +84,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        protected IDbParameterObjectList DbParameterObjectList { get; private set; } = new DbParameterObjectList();
+        protected IDbParameterObjectList DbParameterObjectList { get; private set; }
 
 	    protected virtual void IsSelectedChanged()
         {
@@ -112,7 +113,9 @@ namespace Konfidence.BaseData
             _isSelected = false;
 		    _isEditing = false;
 	        _isInitialized = false;
-	    }
+
+	        DbParameterObjectList = new DbParameterObjectList();
+        }
 
 		public  void SetId(int id)
 		{

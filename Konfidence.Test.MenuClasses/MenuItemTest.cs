@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DbSiteMapMenuClasses;
+using Konfidence.MenuClasses.Tests.objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.MenuClasses.Tests
@@ -52,9 +53,9 @@ namespace Konfidence.MenuClasses.Tests
         public void GetSingleMenuItem()
         {
             // TODO  :enable test again
-            //var dataItem = new Bl.MenuDataItem(2);
+            var dataItem = new Bl.MenuDataItem(2);
 
-            //Assert.IsNotNull(dataItem);
+            Assert.IsNotNull(dataItem);
         }
 
         [TestMethod, TestCategory("MenuItem")]

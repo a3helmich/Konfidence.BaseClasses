@@ -8,9 +8,10 @@ using Ninject;
 
 namespace Konfidence.BaseData
 {
-    public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem, new()
-	{
-        private readonly DbParameterObjectList _dbParameterObjectList = new DbParameterObjectList();
+    public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem
+    {
+        private readonly DbParameterObjectList _dbParameterObjectList;
+
 	    private IBaseClient _client;
 
         private NinjectDependencyResolver _ninject;
@@ -74,6 +75,11 @@ namespace Konfidence.BaseData
 
         #endregion
 
+	    public BaseDataItemList()
+	    {
+	        _dbParameterObjectList = new DbParameterObjectList();
+        }
+
         protected void BuildItemList(string getListStoredProcedure)
 		{
 		    GetListStoredProcedure = getListStoredProcedure;
@@ -92,8 +98,8 @@ namespace Konfidence.BaseData
 
 		public T GetDataItem()
 		{
-            var baseDataItem = new T();
-            //var baseDataItem = Kernel.Get<T>();
+            //var baseDataItem = new T();
+            var baseDataItem = Kernel.Get<T>();
 
             baseDataItem.InitializeDataItem();
 

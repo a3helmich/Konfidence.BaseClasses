@@ -68,11 +68,11 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6674.30230, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6674.30230\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6674.31020, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6674.31020\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6674.30231, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6674.30231\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6674.31022, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6674.31022\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -107,13 +107,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CallTestItemListClass.cs" />
-    <Compile Include="ITestItemClass.cs" />
-    <Compile Include="ITestItemClassList.cs" />
+    <Compile Include="objects\CallTestItemListClass.cs" />
+    <Compile Include="interfaces\ITestItemClass.cs" />
+    <Compile Include="interfaces\ITestItemClassList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MenuItemTest.cs" />
-    <Compile Include="TestItemClass.cs" />
-    <Compile Include="TestItemClassList.cs" />
+    <Compile Include="objects\TestItemClass.cs" />
+    <Compile Include="objects\TestItemClassList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -164,6 +164,10 @@
     <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj">
       <Project>{411d4b61-9ddf-43f9-ab11-b256dd8287e5}</Project>
       <Name>Konfidence.MenuClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.Smo\Konfidence.SqlHostProvider.csproj">
+      <Project>{6cee30a7-d859-496d-9899-9de1654df995}</Project>
+      <Name>Konfidence.SqlHostProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

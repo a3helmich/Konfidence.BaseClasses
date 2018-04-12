@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData.Objects
 {
-    public class DbParameterObjectList : BaseDataItemList<DbParameterObject>, IDbParameterObjectList
+    public class DbParameterObjectList : List<IDbParameterObject>, IDbParameterObjectList
     {
         public void SetField(string fieldName, int value)
         {
