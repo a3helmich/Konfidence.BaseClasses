@@ -10,7 +10,7 @@ using Ninject;
 
 namespace Konfidence.BaseData
 {
-	public class BaseDataItem: BaseItem, IBaseDataItem
+	public abstract class BaseDataItem: BaseItem, IBaseDataItem
 	{
         public const string BaseLanguage = "NL";
 
@@ -54,6 +54,8 @@ namespace Konfidence.BaseData
 	        return Kernel.Get<TC>();
 	    }
 
+	    public abstract IBaseClient ClientBind();
+
 	    // TODO: internal
 	    public IBaseClient Client
 	    {
@@ -63,7 +65,7 @@ namespace Konfidence.BaseData
 
 	            if (!_client.IsAssigned())
 	            {
-	                _client = ClientBind<IBaseClient>();
+	                _client = ClientBind();
 
                     //_client = ClientFactory.GetClient(ServiceName, DatabaseName);
 	            }

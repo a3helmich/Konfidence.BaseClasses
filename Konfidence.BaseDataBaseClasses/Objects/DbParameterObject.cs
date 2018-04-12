@@ -3,7 +3,7 @@ using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData.Objects
 {
-    public class DbParameterObject : BaseDataItem, IDbParameterObject
+    public class DbParameterObject : IDbParameterObject
     {
         public DbParameterObject() { }
 

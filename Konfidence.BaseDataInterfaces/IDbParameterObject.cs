@@ -3,7 +3,7 @@ using Konfidence.BaseClassInterfaces;
 
 namespace Konfidence.BaseDataInterfaces
 {
-    public interface IDbParameterObject : IBaseItem
+    public interface IDbParameterObject 
     {
         string Field { get; set; }
 

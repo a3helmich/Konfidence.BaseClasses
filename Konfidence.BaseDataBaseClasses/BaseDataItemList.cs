@@ -8,7 +8,7 @@ using Ninject;
 
 namespace Konfidence.BaseData
 {
-    public class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem
+    public abstract class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem
     {
         private readonly DbParameterObjectList _dbParameterObjectList;
 
@@ -44,13 +44,15 @@ namespace Konfidence.BaseData
 	       return Kernel.Get<TC>();
 	    }
 
-	    public IBaseClient Client
+        public abstract IBaseClient ClientBind();
+
+        public IBaseClient Client
 	    {
 	        get
 	        {
 	            if (!_client.IsAssigned())
 	            {
-	                _client = ClientBind<IBaseClient>();
+	                _client = ClientBind();
 
 	                //_client = ClientFactory.GetClient(ServiceName, DatabaseName);
 	            }

@@ -8,11 +8,11 @@ namespace Konfidence.BaseDatabaseClasses.Tests
     public class BaseDataItemTest
     {
         //[TestMethod]
-        //public void BaseDataItemWhenInstatiatedShouldSelectClient()
-        //{
-        //    var x = "my string";
+        public void BaseDataItemWhenInstatiatedShouldSelectClient()
+        {
+            var x = "my string";
 
-        //    var dataItem = new DataItem();
-        //}
+            var dataItem = new DataItem();
+        }
     }
 }
