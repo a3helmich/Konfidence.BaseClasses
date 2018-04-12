@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -13,11 +14,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return null;
         }
 
-        public override IBaseClient ClientBind()
+        protected override IBaseClient ClientBind()
         {
-            // TODO : enable
-            //return base.ClientBind<SqlClient>();
-            return null;
+            return base.ClientBind<SqlClient>();
         }
     }
 }

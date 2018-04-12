@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -49,11 +50,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             _hasDefaultValueFieldsChecked = false;
         }
 
-        public override IBaseClient ClientBind()
+        protected override IBaseClient ClientBind()
         {
-            // TODO : enable
-            //return base.ClientBind<SqlClient>();
-            return null;
+            return base.ClientBind<SqlClient>();
         }
 
         public static ColumnDataItemList GetList(string databaseName, string tableName)

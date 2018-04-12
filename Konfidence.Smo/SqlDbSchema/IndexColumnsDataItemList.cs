@@ -2,6 +2,7 @@
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -26,11 +27,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             BuildItemList(dataTable);
         }
 
-        public override IBaseClient ClientBind()
+        protected override IBaseClient ClientBind()
         {
-            // TODO : enable
-            //return base.ClientBind<SqlClient>();
-            return null;
+            return base.ClientBind<SqlClient>();
         }
 
         private void BuildItemList(DataTable dataTable)
