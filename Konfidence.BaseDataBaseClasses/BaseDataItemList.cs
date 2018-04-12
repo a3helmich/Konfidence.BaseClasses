@@ -34,7 +34,7 @@ namespace Konfidence.BaseData
             }
         }
 
-	    protected virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
+	    public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
 	    {
 	        if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
@@ -44,7 +44,7 @@ namespace Konfidence.BaseData
 	       return Kernel.Get<TC>();
 	    }
 
-        public abstract IBaseClient ClientBind();
+        protected abstract IBaseClient ClientBind();
 
         public IBaseClient Client
 	    {

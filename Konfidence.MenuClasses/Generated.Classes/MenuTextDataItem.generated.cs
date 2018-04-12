@@ -99,9 +99,13 @@ namespace DbSiteMapMenuClasses
                 GetItem(MENUTEXT_GETROWBYGUID, menutextId);
             }
 
-            protected override IBaseClient ClientBind<SqlClient>()
+            public override IBaseClient ClientBind()
             {
-                return base.ClientBind<SqlClient>();
+                // TODO : enable
+
+//                return base.ClientBind<SqlClient>();
+
+                return null;
             }
 
             public override void InitializeDataItem()

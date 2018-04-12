@@ -6,7 +6,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests.Objects
 {
     public class DataItem: BaseDataItem
     {
-        public override IBaseClient ClientBind()
+        protected override IBaseClient ClientBind()
         {
             var sqlClientMock = new Mock<IBaseClient>();
 

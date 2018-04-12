@@ -1,8 +1,8 @@
 using System;
-using System.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace DbSiteMapMenuClasses
 {
@@ -163,9 +163,11 @@ namespace DbSiteMapMenuClasses
                 GetItem(MENU_GETROWBYGUID, menuId);
             }
 
-            protected override IBaseClient ClientBind<SqlClient>()
+            public override IBaseClient ClientBind()
             {
-                return base.ClientBind<SqlClient>();
+                // TODO : enable
+                //return base.ClientBind<SqlClient>();
+                return null;
             }
 
             public override void InitializeDataItem()

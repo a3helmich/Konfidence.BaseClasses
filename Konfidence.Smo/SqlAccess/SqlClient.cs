@@ -11,7 +11,7 @@ using Ninject.Parameters;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    internal class SqlClient : BaseClient
+    public class SqlClient : BaseClient
     {
         private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
 

@@ -7,7 +7,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
     [TestClass]
     public class BaseDataItemTest
     {
-        //[TestMethod]
+        [TestMethod]
         public void BaseDataItemWhenInstatiatedShouldSelectClient()
         {
             var x = "my string";

@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
+using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -23,6 +24,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             var dataTable = indexColumnDataItem.GetIndexedColumns();
 
             BuildItemList(dataTable);
+        }
+
+        public override IBaseClient ClientBind()
+        {
+            // TODO : enable
+            //return base.ClientBind<SqlClient>();
+            return null;
         }
 
         private void BuildItemList(DataTable dataTable)

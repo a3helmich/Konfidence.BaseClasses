@@ -42,7 +42,7 @@ namespace Konfidence.BaseData
 	        }
 	    }
 
-	    protected virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+	    public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
 	    {
 	        Console.WriteLine("ClientBind<TC>");
 
@@ -54,7 +54,7 @@ namespace Konfidence.BaseData
 	        return Kernel.Get<TC>();
 	    }
 
-	    public abstract IBaseClient ClientBind();
+	    protected abstract IBaseClient ClientBind();
 
 	    // TODO: internal
 	    public IBaseClient Client
