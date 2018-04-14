@@ -15,7 +15,7 @@
       <dependency id="JetBrains.Annotations" />
     </dependencies>
     <references>
-      <reference id="Konfidence.BaseClassInterfaces" />
+      <reference file="Konfidence.BaseClassInterfaces" />
     </references>
   </metadata>
   <files>
