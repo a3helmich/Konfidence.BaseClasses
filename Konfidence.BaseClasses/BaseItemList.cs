@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Konfidence.BaseClassInterfaces;
-using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.Base
 {
