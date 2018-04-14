@@ -7,18 +7,9 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>base class</description>
-    <releaseNotes>nuget tryout nr1.</releaseNotes>
-    <copyright>Copyright 2016</copyright>
-    <tags>Konfidence</tags>
-    <dependencies>
-      <dependency id="JetBrains.Annotations" />
-    </dependencies>
-    <references>
-      <reference file="Konfidence.BaseClassInterfaces" />
-    </references>
+    <description>base classes</description>
+    <releaseNotes>none</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Konfidence BaseClass</tags>
   </metadata>
-  <files>
-    <file src="*\Konfidence.BaseClassInterfaces.dll" target="lib" />
-  </files>
 </package>
