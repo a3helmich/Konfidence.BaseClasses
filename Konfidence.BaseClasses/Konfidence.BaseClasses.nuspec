@@ -13,7 +13,12 @@
     <tags>Konfidence</tags>
     <dependencies>
       <dependency id="JetBrains.Annotations" />
-      <dependency id="Konfidence.BaseClassInterfaces" />
     </dependencies>
+    <references>
+      <reference id="Konfidence.BaseClassInterfaces" />
+    </references>
   </metadata>
+  <files>
+    <file src="*\Konfidence.BaseClassInterfaces.dll" target="lib" />
+  </files>
 </package>
