@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.Exceptions;
-using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.SqlHostProvider.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,23 +33,13 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
             // Arrange
             var databaseProviderFactory = new DatabaseProviderFactory();
 
-            var database = databaseProviderFactory.Create("Newsletter");
+            var database = databaseProviderFactory.Create("TestClassGenerator");
 
             // Act 
             var result = SqlServerCheck.VerifyDatabaseServer(database);
 
             // Assert
             Assert.IsTrue(result);
-        }
-
-        [TestMethod, TestCategory("SqlServer")]
-        public void SqlServerExists()
-        {
-            var target = new DatabaseStructure("Newsletter"); // TODO: Initialize to an appropriate value
-
-            target.BuildStructure();
-
-            Assert.AreEqual(25, target.TableList.Count); // newsletter heeft nu 25 tabellen
         }
     }
 }

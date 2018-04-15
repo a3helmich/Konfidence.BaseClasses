@@ -46,7 +46,9 @@
       <HintPath>..\packages\Konfidence.BaseClasses.1.0.6678.26634\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

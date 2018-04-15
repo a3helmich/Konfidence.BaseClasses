@@ -35,7 +35,7 @@ namespace Konfidence.BaseData
 		{
 			var baseDataItem = GetNewDataItem(id);
 
-            DbParameterObjectList properties = GetProperties(baseDataItem);
+            var properties = GetProperties(baseDataItem);
 
 			return properties;
 		}
@@ -45,7 +45,7 @@ namespace Konfidence.BaseData
         {
             var baseDataItem = GetNewDataItem(parameterList);
 
-            DbParameterObjectList properties = GetProperties(baseDataItem);
+            var properties = GetProperties(baseDataItem);
 
             var idProperty = new DbParameterObject {Field = "AutoIdField", Value = baseDataItem.GetId()};
 
