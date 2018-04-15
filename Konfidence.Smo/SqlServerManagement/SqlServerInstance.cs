@@ -9,7 +9,7 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace Konfidence.SqlHostProvider.SqlServerManagement
 {
-    internal class SqlServerSmo : BaseItem
+    internal class SqlServerInstance : BaseItem
     {
         private string _databaseServerName = string.Empty;
         private string _userName = string.Empty;
@@ -17,14 +17,14 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
 
         private bool _pingSucceeded;
 
-        public SqlServerSmo()
+        public SqlServerInstance()
         {
             _pingSucceeded = false;
         }
 
         internal static bool VerifyDatabaseServer(string databaseServerName, string userName, string password)
         {
-            var executer = new SqlServerSmo();
+            var executer = new SqlServerInstance();
 
             return executer.PingSqlServerVersion(databaseServerName, userName, password);
         }

@@ -120,7 +120,7 @@
     <Compile Include="SqlDbSchema\TableDataItemList.cs" />
     <Compile Include="SqlServerManagement\SqlServerCheck.cs" />
     <Compile Include="SqlAccess\SqlClientRepository.cs" />
-    <Compile Include="SqlServerManagement\SqlServerSmo.cs" />
+    <Compile Include="SqlServerManagement\SqlServerInstance.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Konfidence.nl.snk">

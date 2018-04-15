@@ -12,20 +12,20 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 {
     internal class SqlClientRepository : IDataRepository
     {
-        private readonly string _databaseName;
+        private readonly string _connectionName;
 
         public IDataReader DataReader { get; private set; }
 
-        public SqlClientRepository(string databaseName)
+        public SqlClientRepository(string connectionName)
         {
-            _databaseName = databaseName;
+            _connectionName = connectionName;
         }
 
         public Database GetDatabase()
         {
             var databaseProviderFactory = new DatabaseProviderFactory();
 
-            var databaseInstance = _databaseName.IsAssigned() ? databaseProviderFactory.Create(_databaseName) : databaseProviderFactory.CreateDefault();
+            var databaseInstance = _connectionName.IsAssigned() ? databaseProviderFactory.Create(_connectionName) : databaseProviderFactory.CreateDefault();
 
             return databaseInstance;
         }

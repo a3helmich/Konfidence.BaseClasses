@@ -13,7 +13,7 @@ namespace Konfidence.RestProvider
     {
         private readonly WSBaseHostService _wsBaseHostService;
 
-        public WsClient(string serviceName, string databaseName) : base(serviceName, databaseName)
+        public WsClient(string serviceName, string connectionName) : base(serviceName, connectionName)
         {
             _wsBaseHostService = new WSBaseHostService();
 
