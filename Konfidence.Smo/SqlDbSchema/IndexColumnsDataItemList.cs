@@ -12,11 +12,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public PrimaryKeyDataItem PrimaryKeyDataItem { get; }
 
-        public IndexColumnsDataItemList(string databaseName, string tableName)
+        public IndexColumnsDataItemList(string connectionName, string tableName)
         {
             _tableName = tableName;
 
-             ConnectionName = databaseName;
+             ConnectionName = connectionName;
 
             PrimaryKeyDataItem = new PrimaryKeyDataItem(ConnectionName, _tableName);
 

@@ -54,11 +54,11 @@ namespace Konfidence.Smo.Tests.SqlDbSchema
         [TestMethod, TestCategory("DatabaseStructure")]
         public void BuildStructureTest()
         {
-            //var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
+            var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
 
-            //target.BuildStructure();
+            target.BuildStructure();
 
-            //Assert.AreEqual(4, target.TableList.Count); // TestClassGenerator heeft nu 4 tabellen
+            Assert.AreEqual(4, target.TableList.Count); // TestClassGenerator heeft nu 4 tabellen
         }
     }
 }

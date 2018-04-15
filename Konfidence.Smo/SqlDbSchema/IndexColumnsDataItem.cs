@@ -6,9 +6,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         public IndexColumnsDataItem() { }
 
-        public IndexColumnsDataItem(string databaseName)
+        public IndexColumnsDataItem(string connectionName)
         {
-            ConnectionName = databaseName;
+            ConnectionName = connectionName;
         }
 
         public DataTable GetIndexedColumns()

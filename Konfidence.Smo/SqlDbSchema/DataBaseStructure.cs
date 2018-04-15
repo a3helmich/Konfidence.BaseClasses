@@ -13,9 +13,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         //{
         //}
 
-        public DatabaseStructure(string databaseName)
+        public DatabaseStructure(string connectionName)
         {
-            ConnectionName = databaseName;
+            ConnectionName = connectionName;
         }
 
         public void BuildStructure()

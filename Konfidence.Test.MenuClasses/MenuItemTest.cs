@@ -70,11 +70,11 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemList()
         {
-            //var list = Bl.MenuDataItemList.GetListByMenuCode(1);
+            var list = Bl.MenuDataItemList.GetListByMenuCode(1);
 
-            //Assert.AreEqual(9, list.Count, "was expecting to get 9 menu items back");
+            Assert.AreEqual(9, list.Count, "was expecting to get 9 menu items back");
 
-            //Assert.AreEqual("Wijzigen van mijn persoonsgegevens", list[3].MenuText.MenuText, "menu text klopt niet");
+            Assert.AreEqual("Wijzigen van mijn persoonsgegevens", list[3].MenuText.MenuText, "menu text klopt niet");
         }
 
         [TestMethod, TestCategory("MenuItem")]
