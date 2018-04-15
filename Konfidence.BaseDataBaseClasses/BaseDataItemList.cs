@@ -38,7 +38,7 @@ namespace Konfidence.BaseData
 	    public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
 	    {
 
-	        var connectionNameParam = new ConstructorArgument("clientName", ConnectionName);
+	        var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
