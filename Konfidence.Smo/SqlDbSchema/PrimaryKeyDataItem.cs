@@ -26,7 +26,7 @@
         public PrimaryKeyDataItem(string databaseName, string tableName)
             : this()
         {
-            DatabaseName = databaseName;
+            ConnectionName = databaseName;
 
             SetParameter(SqlConstant.TableName, tableName);
 

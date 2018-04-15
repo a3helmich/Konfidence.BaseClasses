@@ -57,7 +57,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public static ColumnDataItemList GetList(string databaseName, string tableName)
         {
-            var columnDataItemList = new ColumnDataItemList(tableName) {DatabaseName = databaseName};
+            var columnDataItemList = new ColumnDataItemList(tableName) {ConnectionName = databaseName};
 
             columnDataItemList.BuildItemList(SpName.ColumnsGetlist);
 

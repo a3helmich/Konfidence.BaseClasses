@@ -15,14 +15,14 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public DatabaseStructure(string databaseName)
         {
-            DatabaseName = databaseName;
+            ConnectionName = databaseName;
         }
 
         public void BuildStructure()
         {
             CreateStoredProcedures();
 
-            TableList = new TableDataItemList(DatabaseName);
+            TableList = new TableDataItemList(ConnectionName);
 
             DeleteStoredProcedures();
         }

@@ -16,11 +16,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             _tableName = tableName;
 
-            DatabaseName = databaseName;
+             ConnectionName = databaseName;
 
-            PrimaryKeyDataItem = new PrimaryKeyDataItem(DatabaseName, _tableName);
+            PrimaryKeyDataItem = new PrimaryKeyDataItem(ConnectionName, _tableName);
 
-            var indexColumnDataItem = new IndexColumnsDataItem(DatabaseName);
+            var indexColumnDataItem = new IndexColumnsDataItem(ConnectionName);
 
             var dataTable = indexColumnDataItem.GetIndexedColumns();
 
@@ -43,7 +43,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                     var columnName = dataRow["COLUMN_NAME"] as string;
                     var constraintName = dataRow["CONSTRAINT_NAME"] as string;
 
-                    var indexColumnDataItem = new IndexColumnsDataItem(DatabaseName);
+                    var indexColumnDataItem = new IndexColumnsDataItem(ConnectionName);
 
                     if (constraintName.IsAssigned() && constraintName.Equals(PrimaryKeyDataItem.ConstraintName))
                     {

@@ -11,7 +11,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         public TableDataItemList(string databaseName)
         {
-            DatabaseName = databaseName;
+            ConnectionName = databaseName;
 
             var dataTableList = GetTables();
 
@@ -27,7 +27,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             public InternalTableDataItem(string databaseName)
             {
-                DatabaseName = databaseName;
+                ConnectionName = databaseName;
             }
 
             internal DataTable GetTables()
@@ -38,7 +38,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private DataTable GetTables()
         {
-            var shemaBaseDataItem = new InternalTableDataItem(DatabaseName);
+            var shemaBaseDataItem = new InternalTableDataItem(ConnectionName);
 
             return shemaBaseDataItem.GetTables();
         }
