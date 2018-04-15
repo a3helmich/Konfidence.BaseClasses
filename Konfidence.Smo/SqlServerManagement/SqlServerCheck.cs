@@ -12,7 +12,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
         public static bool VerifyDatabaseServer(Database databaseInstance)
         {
             var serverName = string.Empty;
-            var databaseName = string.Empty;
+            var connectionName = string.Empty;
             var userName = string.Empty;
             var password = string.Empty;
 
@@ -35,7 +35,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
                     {
                         var paramParts = param.Split('=');
 
-                        databaseName = paramParts[1];
+                        connectionName = paramParts[1];
                     }
 
                     if (param.StartsWith("user id=", StringComparison.OrdinalIgnoreCase))
@@ -54,14 +54,14 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
                 }
             }
 
-            if (!SqlServerSmo.VerifyDatabaseServer(serverName, userName, password))
+            if (!SqlServerInstance.VerifyDatabaseServer(serverName, userName, password))
             {
                 throw new SqlClientException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
             }
 
-            if (!SqlServerSmo.FindDatabase(serverName, databaseName, userName, password))
+            if (!SqlServerInstance.FindDatabase(serverName, connectionName, userName, password))
             {
-                throw new SqlClientException("Database " + databaseName + " does not exist");
+                throw new SqlClientException("Database " + connectionName + " does not exist");
             }
 
             return true;

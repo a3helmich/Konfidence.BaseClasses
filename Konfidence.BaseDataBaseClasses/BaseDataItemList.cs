@@ -38,14 +38,14 @@ namespace Konfidence.BaseData
 	    public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
 	    {
 
-	        var databaseNameParam = new ConstructorArgument("databaseName", DatabaseName);
+	        var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
 	            Kernel.Bind<IBaseClient>().To<TC>();
 	        }
 
-	       return Kernel.Get<TC>(databaseNameParam);
+	       return Kernel.Get<TC>(connectionNameParam);
 	    }
 
         protected abstract IBaseClient ClientBind();
@@ -57,8 +57,6 @@ namespace Konfidence.BaseData
 	            if (!_client.IsAssigned())
 	            {
 	                _client = ClientBind();
-
-	                //_client = ClientFactory.GetClient(ServiceName, DatabaseName);
 	            }
 
 	            return _client;
@@ -73,7 +71,7 @@ namespace Konfidence.BaseData
 
 		#region properties
 
-		protected string DatabaseName { get; set; } = string.Empty;
+		protected string ConnectionName { get; set; } = string.Empty;
 
         protected string GetListStoredProcedure { get; private set; } = string.Empty;
 

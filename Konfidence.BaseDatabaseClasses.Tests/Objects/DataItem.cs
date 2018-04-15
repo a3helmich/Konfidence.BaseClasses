@@ -1,9 +1,11 @@
-﻿using Konfidence.BaseData;
+﻿using System.Diagnostics.CodeAnalysis;
+using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 using Moq;
 
 namespace Konfidence.BaseDatabaseClasses.Tests.Objects
 {
+    [ExcludeFromCodeCoverage]
     public class DataItem: BaseDataItem
     {
         protected override IBaseClient ClientBind()

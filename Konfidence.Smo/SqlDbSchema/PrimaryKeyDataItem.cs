@@ -23,10 +23,10 @@
         {
         }
 
-        public PrimaryKeyDataItem(string databaseName, string tableName)
+        public PrimaryKeyDataItem(string connectionName, string tableName)
             : this()
         {
-            DatabaseName = databaseName;
+            ConnectionName = connectionName;
 
             SetParameter(SqlConstant.TableName, tableName);
 

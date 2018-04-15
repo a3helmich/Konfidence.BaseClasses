@@ -55,9 +55,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return base.ClientBind<SqlClient>();
         }
 
-        public static ColumnDataItemList GetList(string databaseName, string tableName)
+        public static ColumnDataItemList GetList(string connectionName, string tableName)
         {
-            var columnDataItemList = new ColumnDataItemList(tableName) {DatabaseName = databaseName};
+            var columnDataItemList = new ColumnDataItemList(tableName) {ConnectionName = connectionName};
 
             columnDataItemList.BuildItemList(SpName.ColumnsGetlist);
 

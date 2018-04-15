@@ -65,11 +65,11 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6678.26634, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6678.26634\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6679.21511, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6679.21511\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Konfidence.BaseClassInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6678.26634\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6679.21511\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -93,28 +93,24 @@
   <ItemGroup>
     <Compile Include="BaseDataItem.cs" />
     <Compile Include="BaseDataItemList.cs" />
+    <Compile Include="BaseClient.cs" />
     <Compile Include="BaseDataWebService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BaseClient.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="Objects\DbParameterObject.cs" />
     <Compile Include="Objects\DbParameterObjectList.cs" />
-    <Compile Include="Repositories\SqlServerRepository.cs" />
-    <Compile Include="ClientFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SqlClient.cs" />
     <Compile Include="Web References\WSBaseHost\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="WsClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />

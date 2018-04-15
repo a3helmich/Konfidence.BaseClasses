@@ -1,176 +1,179 @@
-//using System;
-//using System.Collections.Generic;
-//using Konfidence.BaseData;
-//using Konfidence.BaseData.Objects;
-//using Konfidence.BaseData.WSBaseHost;
-//using Konfidence.BaseDataInterfaces;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using Konfidence.Base;
+using Konfidence.BaseData;
+using Konfidence.BaseData.WSBaseHost;
+using Konfidence.BaseDataInterfaces;
 
-//namespace Konfidence.RestProvider
-//{
-//    // TODO: internal
-//    internal class WsClient : BaseClient
-//	{
-//		private readonly WSBaseHostService _wsBaseHostService;
+namespace Konfidence.RestProvider
+{
+    // TODO: internal
+    internal class WsClient : BaseClient
+    {
+        private readonly WSBaseHostService _wsBaseHostService;
 
-//        public WsClient(string serviceName, string databaseName) : base(serviceName, databaseName)
-//		{
-//            _wsBaseHostService = new WSBaseHostService();
+        public WsClient(string serviceName, string connectionName) : base(serviceName, connectionName)
+        {
+            _wsBaseHostService = new WSBaseHostService();
 
-//			// _WsBaseHostService.UseDefaultCredentials = true;
+            // _WsBaseHostService.UseDefaultCredentials = true;
 
-//			var wsUrl = GetWsUrl(serviceName);
+            var wsUrl = GetWsUrl(serviceName);
 
-//			if (wsUrl.Equals(string.Empty))
-//			{
-//				throw new Exception("No URL provided for WebService : " + serviceName);
-//			}
+            if (wsUrl.Equals(string.Empty))
+            {
+                throw new Exception("No URL provided for WebService : " + serviceName);
+            }
 
-//			_wsBaseHostService.Url = wsUrl;
-//		}
+            _wsBaseHostService.Url = wsUrl;
+        }
 
-//		#region GetField Methods
+        #region GetField Methods
 
-//	    #endregion
+        #endregion
 
-//		public void Save(BaseDataItem dataItem)
-//		{
-//			var parameterDataItemList = dataItem.SetItemData();
+        public void Save(BaseDataItem dataItem)
+        {
+            var parameterDataItemList = dataItem.SetItemData();
 
-//			var parameterObjectList = new List<ParameterObject>();
+            var parameterObjectList = new List<ParameterObject>();
 
-//			foreach(DbParameterObject parameterDataItem in parameterDataItemList)
-//			{
-//				var parameterObject = new ParameterObject {Field = parameterDataItem.Field, Value = parameterDataItem.Value};
+            foreach (var parameterDataItem in parameterDataItemList)
+            {
+                var parameterObject = new ParameterObject { Field = parameterDataItem.Field, Value = parameterDataItem.Value };
 
-//			    parameterObjectList.Add(parameterObject);
-//			}
+                parameterObjectList.Add(parameterObject);
+            }
 
-//            dataItem.SetId(_wsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.GetId()));
-//		}
+            dataItem.SetId(_wsBaseHostService.Save(parameterObjectList.ToArray(), dataItem.GetId()));
+        }
 
-//	    public void GetItem(BaseDataItem dataItem, string getStoredProcedure) // , string autoIdField, int id)
-//		{
-//            ParameterObject[] parameterObjects;
 
-//            //if (id > 0)
-//            //{
-//            //    parameterObjects = _WsBaseHostService.GetItem(id);
+        // TODO: Enable again
+        //public void GetItem(BaseDataItem dataItem, string getStoredProcedure) // , string autoIdField, int id)
+        //{
+        //    ParameterObject[] parameterObjects;
 
-//            //    if (IsAssigned(parameterObjects))
-//            //    {
-//            //        ItemId = id;
-//            //    }
-//            //}
-//            //else
-//            {
-//                var parameterDataItemList = dataItem.SetParameterData();
+        //    //if (id > 0)
+        //    //{
+        //    //    parameterObjects = _WsBaseHostService.GetItem(id);
 
-//                var parameterObjectList = new List<ParameterObject>();
+        //    //    if (IsAssigned(parameterObjects))
+        //    //    {
+        //    //        ItemId = id;
+        //    //    }
+        //    //}
+        //    //else
+        //    {
+        //        var parameterDataItemList = dataItem.SetParameterData();
 
-//                var parameterObject = new ParameterObject {Field = "StoredProcedure", Value = getStoredProcedure};
+        //        var parameterObjectList = new List<ParameterObject>();
 
-//                parameterObjectList.Add(parameterObject);
+        //        var parameterObject = new ParameterObject { Field = "StoredProcedure", Value = getStoredProcedure };
 
-//                foreach (DbParameterObject parameterDataItem in parameterDataItemList)
-//                {
-//                    parameterObject = new ParameterObject
-//                        {
-//                            Field = parameterDataItem.Field,
-//                            Value = parameterDataItem.Value
-//                        };
+        //        parameterObjectList.Add(parameterObject);
 
-//                    parameterObjectList.Add(parameterObject);
-//                }
+        //        foreach (var parameterDataItem in parameterDataItemList)
+        //        {
+        //            parameterObject = new ParameterObject
+        //            {
+        //                Field = parameterDataItem.Field,
+        //                Value = parameterDataItem.Value
+        //            };
 
-//                parameterObjects = _wsBaseHostService.GetItemByParam(parameterObjectList.ToArray());
+        //            parameterObjectList.Add(parameterObject);
+        //        }
 
-//                //if (parameterObjects.Length > 0)
-//                //{
-//                //    parameterObject = parameterObjects[0];
+        //        parameterObjects = _wsBaseHostService.GetItemByParam(parameterObjectList.ToArray());
 
-//                //    if (parameterObject.Field.Equals("AutoIdField"))
-//                //    {
-//                //        ItemId = (int)parameterObject.Value;
-//                //    }
-//                //}B
-//            }
+        //        //if (parameterObjects.Length > 0)
+        //        //{
+        //        //    parameterObject = parameterObjects[0];
 
-//			if (parameterObjects.IsAssigned())
-//			{
-//				var propertyDictionary = new Dictionary<string, object>();
+        //        //    if (parameterObject.Field.Equals("AutoIdField"))
+        //        //    {
+        //        //        ItemId = (int)parameterObject.Value;
+        //        //    }
+        //        //}B
+        //    }
 
-//				foreach(var parameterObject in parameterObjects)
-//				{
-//					propertyDictionary.Add(parameterObject.Field, parameterObject.Value);
-//				}
+        //    if (parameterObjects.IsAssigned())
+        //    {
+        //        var propertyDictionary = new Dictionary<string, object>();
 
-//				dataItem.SetProperties(propertyDictionary);
-//			}
-//		}
+        //        foreach (var parameterObject in parameterObjects)
+        //        {
+        //            propertyDictionary.Add(parameterObject.Field, parameterObject.Value);
+        //        }
 
-//	    public override void Delete(string deleteStoredProcedure, string autoIdField, int id)
-//		{
-//			_wsBaseHostService.Delete(id);
-//		}
+        //        dataItem.SetProperties(propertyDictionary);
+        //    }
+        //}
 
-//		public override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) 
-//        {
-//			var parameterObjectsList = _wsBaseHostService.BuildItemList();
+        public override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        {
+            _wsBaseHostService.Delete(id);
+        }
 
-//			foreach (var parameterObjectList in parameterObjectsList)
-//			{
-//				var baseDataItem = baseDataItemList.GetDataItem();
+        public override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure)
+        {
+            var parameterObjectsList = _wsBaseHostService.BuildItemList();
 
-//				var parameterDictionary = new Dictionary<string, object>();
+            foreach (var parameterObjectList in parameterObjectsList)
+            {
+                var baseDataItem = baseDataItemList.GetDataItem();
 
-//				foreach (var parameterObjectItem in parameterObjectList)
-//				{
-//					if (parameterObjectItem.Field.Equals("BaseDataItem_KeyValue"))
-//					{
-//						baseDataItem.SetId((int)parameterObjectItem.Value);
-//					}
-//					else
-//					{
-//						parameterDictionary.Add(parameterObjectItem.Field, parameterObjectItem.Value);
-//					}
-//				}
+                var parameterDictionary = new Dictionary<string, object>();
 
-//				baseDataItem.SetProperties(parameterDictionary);
-//			}
+                foreach (var parameterObjectItem in parameterObjectList)
+                {
+                    if (parameterObjectItem.Field.Equals("BaseDataItem_KeyValue"))
+                    {
+                        baseDataItem.SetId((int)parameterObjectItem.Value);
+                    }
+                    else
+                    {
+                        parameterDictionary.Add(parameterObjectItem.Field, parameterObjectItem.Value);
+                    }
+                }
 
-//			base.BuildItemList(baseDataItemList, getListStoredProcedure);
-//		}
+                baseDataItem.SetProperties(parameterDictionary);
+            }
 
-//        //internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
-//        //{
-//        //    return _WsBaseHostService.ExecuteCommand(storedProcedure, parameters);
-//        //}
+            base.BuildItemList(baseDataItemList, getListStoredProcedure);
+        }
 
-//	    public override int ExecuteTextCommand(string textCommand)
-//		{
-//			return _wsBaseHostService.ExecuteTextCommand(textCommand);
-//		}
+        //internal override int ExecuteCommand(string storedProcedure, params object[] parameters)
+        //{
+        //    return _WsBaseHostService.ExecuteCommand(storedProcedure, parameters);
+        //}
 
-//	    public override bool TableExists(string tableName)
-//		{
-//			return _wsBaseHostService.TableExists(tableName);
-//		}
+        public override int ExecuteTextCommand(string textCommand)
+        {
+            return _wsBaseHostService.ExecuteTextCommand(textCommand);
+        }
 
-//	    public override bool ViewExists(string viewName)
-//		{
-//			return _wsBaseHostService.ViewExists(viewName);
-//		}
+        public override bool TableExists(string tableName)
+        {
+            return _wsBaseHostService.TableExists(tableName);
+        }
 
-//		private static string GetWsUrl(string serviceName)
-//		{
-//			var wsUrl = ConfigurationManager.AppSettings[serviceName];
+        public override bool ViewExists(string viewName)
+        {
+            return _wsBaseHostService.ViewExists(viewName);
+        }
 
-//            if (wsUrl.IsAssigned())
-//			{
-//				return wsUrl;
-//			}
+        private static string GetWsUrl(string serviceName)
+        {
+            var wsUrl = ConfigurationManager.AppSettings[serviceName];
 
-//			return string.Empty;
-//		}
-//	}
-//}
+            if (wsUrl.IsAssigned())
+            {
+                return wsUrl;
+            }
+
+            return string.Empty;
+        }
+    }
+}

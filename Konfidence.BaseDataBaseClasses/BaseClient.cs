@@ -13,7 +13,7 @@ namespace Konfidence.BaseData
 
 	    #region properties
 
-		protected string DatabaseName { get; }
+		protected string ConnectionName { get; }
 
 	    protected string ServiceName { get; }
 
@@ -21,10 +21,10 @@ namespace Konfidence.BaseData
 
 	    #endregion
 
-		public BaseClient(string serviceName, string databaseName)
+		public BaseClient(string serviceName, string connectionName)
 		{
 			ServiceName = serviceName;
-			DatabaseName = databaseName;
+			ConnectionName = connectionName;
 		}
 
 		public virtual void Save(IBaseDataItem dataItem)

@@ -19,16 +19,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         protected IKernel Kernel => _ninject.Kernel;
 
-        public SqlClient(string databaseName) : base(string.Empty, databaseName)
+        public SqlClient(string connectionName) : base(string.Empty, connectionName)
         {
-            var databaseNameParam = new ConstructorArgument("databaseName", databaseName);
+            var connectionNameParam = new ConstructorArgument("connectionName", connectionName);
 
             if (!_ninject.Kernel.GetBindings(typeof(IDataRepository)).Any())
             {
                 _ninject.Bind<IDataRepository>().To<SqlClientRepository>();
             }
 
-            _repository = Kernel.Get<IDataRepository>(databaseNameParam);
+            _repository = Kernel.Get<IDataRepository>(connectionNameParam);
         }
 
         private IDataReader DataReader => _repository.DataReader;
@@ -38,96 +38,56 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return 0;
-            }
-
-            return DataReader.GetInt16(fieldOrdinal);
+            return DataReader.IsDBNull(fieldOrdinal) ? (short) 0 : DataReader.GetInt16(fieldOrdinal);
         }
 
         public override Int32 GetFieldInt32(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return 0;
-            }
-
-            return DataReader.GetInt32(fieldOrdinal);
+            return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt32(fieldOrdinal);
         }
 
         public override Guid GetFieldGuid(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return Guid.Empty;
-            }
-
-            return DataReader.GetGuid(fieldOrdinal);
+            return DataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : DataReader.GetGuid(fieldOrdinal);
         }
 
         public override string GetFieldString(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return string.Empty;
-            }
-
-            return DataReader.GetString(fieldOrdinal);
+            return DataReader.IsDBNull(fieldOrdinal) ? string.Empty : DataReader.GetString(fieldOrdinal);
         }
 
         public override bool GetFieldBool(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return false;
-            }
-
-            return DataReader.GetBoolean(fieldOrdinal);
+            return !DataReader.IsDBNull(fieldOrdinal) && DataReader.GetBoolean(fieldOrdinal);
         }
 
         public override DateTime GetFieldDateTime(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return DateTime.MinValue;
-            }
-
-            return DataReader.GetDateTime(fieldOrdinal);
+            return DataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : DataReader.GetDateTime(fieldOrdinal);
         }
 
         public override TimeSpan GetFieldTimeSpan(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return TimeSpan.MinValue;
-            }
-
-            return (TimeSpan)DataReader.GetValue(fieldOrdinal);
+            return DataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan) DataReader.GetValue(fieldOrdinal);
         }
 
         public override Decimal GetFieldDecimal(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
-            if (DataReader.IsDBNull(fieldOrdinal))
-            {
-                return 0;
-            }
-
-            return DataReader.GetDecimal(fieldOrdinal);
+            return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetDecimal(fieldOrdinal);
         }
 
         private int GetOrdinal(string fieldName)
@@ -237,7 +197,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (deleteStoredProcedure.Equals(string.Empty))
             {
-                throw (new Exception("DeleteStoredProcedure not provided"));
+                throw new Exception("DeleteStoredProcedure not provided");
             }
 
             if (id > 0)

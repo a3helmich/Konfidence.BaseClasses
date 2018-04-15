@@ -13,16 +13,16 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         //{
         //}
 
-        public DatabaseStructure(string databaseName)
+        public DatabaseStructure(string connectionName)
         {
-            DatabaseName = databaseName;
+            ConnectionName = connectionName;
         }
 
         public void BuildStructure()
         {
             CreateStoredProcedures();
 
-            TableList = new TableDataItemList(DatabaseName);
+            TableList = new TableDataItemList(ConnectionName);
 
             DeleteStoredProcedures();
         }
