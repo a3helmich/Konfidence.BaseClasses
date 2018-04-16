@@ -9,6 +9,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         protected DataTable GetSchemaObject(string objectType)
         {
+
             return Client.GetSchemaObject(objectType);
         }
 

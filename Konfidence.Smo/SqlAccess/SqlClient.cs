@@ -21,6 +21,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public SqlClient(string connectionName) : base(string.Empty, connectionName)
         {
+            Console.WriteLine("SqlClient.connectionName:" + connectionName);
+
             var connectionNameParam = new ConstructorArgument("connectionName", connectionName);
 
             if (!_ninject.Kernel.GetBindings(typeof(IDataRepository)).Any())
