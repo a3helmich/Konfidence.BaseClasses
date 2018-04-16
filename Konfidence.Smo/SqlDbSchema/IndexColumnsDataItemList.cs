@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
@@ -14,6 +15,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public IndexColumnsDataItemList(string connectionName, string tableName)
         {
+            Console.WriteLine("IndexColumnsDataItemList.connectionName:" + connectionName);
+
             _tableName = tableName;
 
              ConnectionName = connectionName;

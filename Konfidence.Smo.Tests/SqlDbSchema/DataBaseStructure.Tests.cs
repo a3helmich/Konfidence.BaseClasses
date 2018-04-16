@@ -48,13 +48,20 @@ namespace Konfidence.Smo.Tests.SqlDbSchema
         //
         #endregion
 
-        /// <summary>
-        ///A test for BuildStructure
-        ///</summary>
         [TestMethod, TestCategory("DatabaseStructure")]
         public void BuildStructureTest()
         {
             var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            Assert.AreEqual(4, target.TableList.Count); // TestClassGenerator heeft nu 4 tabellen
+        }
+
+        [TestMethod, TestCategory("DatabaseStructure")]
+        public void BuildStructureWithDifferentConnectionNameTest()
+        {
+            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
