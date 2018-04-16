@@ -18,6 +18,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             ConnectionName = connectionName;
         }
 
+        public string SelectedConnectionName => ConnectionName ?? string.Empty;
+
         public void BuildStructure()
         {
             CreateStoredProcedures();
