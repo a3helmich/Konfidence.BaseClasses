@@ -36,14 +36,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 return _hasDefaultValueFields;
             }
         }
-
-        public ColumnDataItemList(string tableName, IEnumerable<ColumnDataItem> columnDataItems) : this(tableName)
-        {
-            AddRange(columnDataItems);
-        }
         
-        protected ColumnDataItemList(string tableName)
+        protected ColumnDataItemList(string tableName, string connectionName)
         {
+            Console.WriteLine("ColumnDataItemList.connectionName:" + connectionName);
+
+            ConnectionName = connectionName;
+
             _tableName = tableName;
 
             _hasDefaultValueFields = false;
@@ -57,9 +56,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public static ColumnDataItemList GetList(string connectionName, string tableName)
         {
-            Console.WriteLine("ColumnDataItemList.connectionName:" + connectionName);
+            Console.WriteLine("ColumnDataItemList.getlist.connectionName:" + connectionName);
 
-            var columnDataItemList = new ColumnDataItemList(tableName) {ConnectionName = connectionName};
+            var columnDataItemList = new ColumnDataItemList(tableName, connectionName);
 
             columnDataItemList.BuildItemList(SpName.ColumnsGetlist);
 
