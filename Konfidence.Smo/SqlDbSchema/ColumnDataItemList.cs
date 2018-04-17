@@ -37,7 +37,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             }
         }
         
-        protected ColumnDataItemList(string tableName, string connectionName)
+        public ColumnDataItemList(string tableName, string connectionName)
         {
             ConnectionName = connectionName;
 
