@@ -11,7 +11,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         public TableDataItemList(string connectionName)
         {
-            Console.WriteLine("TableDataItemList.connectionName:" + connectionName);
             ConnectionName = connectionName;
 
             var dataTableList = GetTables();
