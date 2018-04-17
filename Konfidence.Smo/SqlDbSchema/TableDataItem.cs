@@ -7,7 +7,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         private readonly ColumnDataItemList _columnDataItemList;
         private readonly IndexColumnsDataItemList _indexColumnsDataItemList;
 
-        //public string Catalog { get; } = string.Empty;
+        public string Catalog { get; } = string.Empty;
 
         //public string Schema { get; } = string.Empty;
 
@@ -27,9 +27,10 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         //{
         //}
 
-        public TableDataItem(string connectionName, string name)
+        public TableDataItem(string connectionName, string catalog, string name)
         {
             ConnectionName = connectionName;
+            Catalog = catalog;
             Name = name;
 
             _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name, ConnectionName);

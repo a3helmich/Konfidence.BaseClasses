@@ -2,7 +2,7 @@
 {
     public interface ITableDataItem
     {
-        //string Catalog { get; }
+        string Catalog { get; }
         IColumnDataItemList ColumnDataItemList { get; }
         string Name { get; }
         string PrimaryKey { get; }
