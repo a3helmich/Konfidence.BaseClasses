@@ -133,7 +133,7 @@
       <Link>Konfidence.nl.snk</Link>
     </None>
     <None Include="app.config" />
-    <None Include="Konfidence.Smo.nuspec" />
+    <None Include="Konfidence.SqlHostProvider.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
