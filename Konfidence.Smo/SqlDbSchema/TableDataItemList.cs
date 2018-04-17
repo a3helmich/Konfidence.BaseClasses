@@ -11,7 +11,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         public TableDataItemList(string connectionName)
         {
-            Console.WriteLine("TableDataItemList.connectionName:" + connectionName);
             ConnectionName = connectionName;
 
             var dataTableList = GetTables();
@@ -55,12 +54,12 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                     case "BASE TABLE":
 
                         var catalog = dataRow["TABLE_CATALOG"] as string;
-                        var schema = dataRow["TABLE_SCHEMA"] as string;
+                        //var schema = dataRow["TABLE_SCHEMA"] as string;
                         var name = dataRow["TABLE_NAME"] as string;
 
                         if (name.IsAssigned() && (!name.Equals("dtproperties", StringComparison.OrdinalIgnoreCase) && !name.StartsWith("sys",StringComparison.OrdinalIgnoreCase)))
                         {
-                            var tableDataItem = new TableDataItem(catalog, schema, name);
+                            var tableDataItem = new TableDataItem(ConnectionName, catalog, name);
 
                             Add(tableDataItem);
                         }

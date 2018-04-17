@@ -15,8 +15,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public IndexColumnsDataItemList(string connectionName, string tableName)
         {
-            Console.WriteLine("IndexColumnsDataItemList.connectionName:" + connectionName);
-
             _tableName = tableName;
 
              ConnectionName = connectionName;

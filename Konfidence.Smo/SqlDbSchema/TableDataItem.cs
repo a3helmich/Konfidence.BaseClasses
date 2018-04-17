@@ -7,11 +7,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         private readonly ColumnDataItemList _columnDataItemList;
         private readonly IndexColumnsDataItemList _indexColumnsDataItemList;
 
-        #region properties
-
         public string Catalog { get; } = string.Empty;
 
-        public string Schema { get; } = string.Empty;
+        //public string Schema { get; } = string.Empty;
 
         public string Name { get; } = string.Empty;
 
@@ -25,20 +23,18 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public bool HasGuidId { get; }
 
-        #endregion properties
-
         //public TableDataItem()
         //{
         //}
 
-        public TableDataItem(string catalog, string schema, string name)
+        public TableDataItem(string connectionName, string catalog, string name)
         {
+            ConnectionName = connectionName;
             Catalog = catalog;
-            Schema = schema;
             Name = name;
 
-            _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(Catalog, name);
-            _indexColumnsDataItemList = new IndexColumnsDataItemList(Catalog, name);
+            _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name, ConnectionName);
+            _indexColumnsDataItemList = new IndexColumnsDataItemList(ConnectionName, name);
 
             // find out which column is the primaryKey
             foreach (var columnDataItem in _columnDataItemList)
