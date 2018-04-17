@@ -7,12 +7,9 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <copyright>Copyright 2016</copyright>
-    <tags>Konfidence</tags>
-    <dependencies>
-      <dependency id="Konfidence.UtilHelper" />
-      <dependency id="Konfidence.BaseHelper"  />
-    </dependencies>
+    <description>BaseWindowForms</description>
+    <releaseNotes>none</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Konfidence BaseWindowForms</tags>
   </metadata>
 </package>

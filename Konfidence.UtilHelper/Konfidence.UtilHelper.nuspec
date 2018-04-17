@@ -7,12 +7,8 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <copyright>Copyright 2016</copyright>
-    <tags>Konfidence</tags>
-    <dependencies>
-      <dependency id="Konfidence.BaseClasses"  />
-      <dependency id="Konfidence.DesignPatterns" />
-    </dependencies>
+    <description>UtilHelper</description>
+    <copyright>Copyright 2018</copyright>
+    <tags>Konfidence UtilHelper</tags>
   </metadata>
 </package>
