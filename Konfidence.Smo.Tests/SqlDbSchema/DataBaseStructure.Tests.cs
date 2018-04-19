@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -55,7 +56,7 @@ namespace Konfidence.Smo.Tests.SqlDbSchema
 
             target.BuildStructure();
 
-            Assert.AreEqual(4, target.TableList.Count); // TestClassGenerator heeft nu 4 tabellen
+            target.TableList.Should().HaveCount(5); // TestClassGenerator heeft nu 5 tabellen
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -65,7 +66,7 @@ namespace Konfidence.Smo.Tests.SqlDbSchema
 
             target.BuildStructure();
 
-            Assert.AreEqual(4, target.TableList.Count); // TestClassGenerator heeft nu 4 tabellen
+            target.TableList.Should().HaveCount(5); // TestClassGenerator heeft nu 5 tabellen
         }
     }
 }

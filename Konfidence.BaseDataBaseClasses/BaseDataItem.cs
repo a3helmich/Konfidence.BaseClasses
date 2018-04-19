@@ -341,7 +341,10 @@ namespace Konfidence.BaseData
 
         protected internal void AddAutoUpdateField(string fieldName, DbType fieldType)
         {
-            AutoUpdateFieldDictionary.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
+            if (!AutoUpdateFieldDictionary.ContainsKey(fieldName))
+            {
+                AutoUpdateFieldDictionary.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
+            }
         }
 
 	    public string LoadStoredProcedure { get; set; } = string.Empty;
