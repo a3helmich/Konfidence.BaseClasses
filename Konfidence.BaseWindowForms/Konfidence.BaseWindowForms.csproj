@@ -80,9 +80,6 @@
     <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.25041\lib\net46\Konfidence.BaseDataInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseHelper.1.0.0.0\lib\net46\Konfidence.BaseHelper.dll</HintPath>
-    </Reference>
     <Reference Include="Konfidence.Designpatterns, Version=1.0.6690.25041, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.Designpatterns.1.0.6690.25041\lib\net46\Konfidence.Designpatterns.dll</HintPath>
     </Reference>

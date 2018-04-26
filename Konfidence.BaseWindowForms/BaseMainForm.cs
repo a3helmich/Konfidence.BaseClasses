@@ -5,7 +5,7 @@ using System.Resources;
 using System.Security.Permissions;
 using System.Windows.Forms;
 using Konfidence.Base;
-using Konfidence.BaseHelper;
+//using Konfidence.BaseHelper;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -15,7 +15,7 @@ namespace Konfidence.BaseWindowForms
     public class BaseMainform : Form
     {
         private Type _configClass;
-        private BaseConfigClass _config;
+        //private BaseConfigClass _config;
         private readonly string _errorHeader;
 
         private Type _aboutFormClass;
@@ -381,15 +381,15 @@ namespace Konfidence.BaseWindowForms
                 mainframe.Width = _mainPanel.Width;
                 mainframe.Anchor = _mainPanel.Anchor;
 
-                if (!_config.IsAssigned())
-                {
-                    if (_configClass.IsAssigned())
-                    {
-                        _config = Activator.CreateInstance(_configClass) as BaseConfigClass;
-                    }
-                }
+                //if (!_config.IsAssigned())
+                //{
+                //    if (_configClass.IsAssigned())
+                //    {
+                //        _config = Activator.CreateInstance(_configClass) as BaseConfigClass;
+                //    }
+                //}
 
-                mainframe.Config = _config;  // this is not the way to make this a singleton!!!  ---> must be an applicationsettings class
+                //mainframe.Config = _config;  // this is not the way to make this a singleton!!!  ---> must be an applicationsettings class
 
                 _mainPanel.Controls.Add(mainframe);
 
@@ -399,10 +399,10 @@ namespace Konfidence.BaseWindowForms
             {
                 string errorString = _errorHeader + e;
 
-                if (_config.IsAssigned())
-                {
-                    _config.EventLog.WriteEntry(errorString, EventLogEntryType.Error);
-                }
+                //if (_config.IsAssigned())
+                //{
+                //    _config.EventLog.WriteEntry(errorString, EventLogEntryType.Error);
+                //}
 
                 throw;
             }

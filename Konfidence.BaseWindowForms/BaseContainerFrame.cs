@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Konfidence.Base;
-using Konfidence.BaseHelper;
+//using Konfidence.BaseHelper;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -120,7 +120,7 @@ namespace Konfidence.BaseWindowForms
         }
         #endregion
 
-        public BaseConfigClass Config { get; set; }
+        //public BaseConfigClass Config { get; set; }
 
         public virtual void AfterCreate()
         {
