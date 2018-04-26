@@ -68,14 +68,14 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6683.23931, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6683.23931\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6690.25041, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6690.25041\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="Konfidence.BaseClassInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6683.23931\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6690.25041\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.Designpatterns, Version=1.0.6683.23931, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.Designpatterns.1.0.6683.23931\lib\net46\Konfidence.Designpatterns.dll</HintPath>
+    <Reference Include="Konfidence.Designpatterns, Version=1.0.6690.25041, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.Designpatterns.1.0.6690.25041\lib\net46\Konfidence.Designpatterns.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
