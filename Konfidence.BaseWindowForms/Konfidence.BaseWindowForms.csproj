@@ -68,32 +68,32 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6683.23931, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6683.23931\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6690.25705, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6690.25705\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClassInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6683.23932\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
+    <Reference Include="Konfidence.BaseClassInterfaces, Version=1.0.6690.25704, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.25705\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6683.23932, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6683.23932\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6690.25705, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.25705\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6683.23932\lib\net46\Konfidence.BaseDataInterfaces.dll</HintPath>
+    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.6690.25705, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.25705\lib\net46\Konfidence.BaseDataInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseHelper.1.0.0.0\lib\net46\Konfidence.BaseHelper.dll</HintPath>
+    <Reference Include="Konfidence.BaseHelper, Version=1.0.6690.25704, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseHelper.1.0.6690.25704\lib\net46\Konfidence.BaseHelper.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.Designpatterns, Version=1.0.6683.23931, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.Designpatterns.1.0.6683.23931\lib\net46\Konfidence.Designpatterns.dll</HintPath>
+    <Reference Include="Konfidence.Designpatterns, Version=1.0.6690.25704, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.Designpatterns.1.0.6690.25704\lib\net46\Konfidence.Designpatterns.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6683.23932\lib\net46\Konfidence.RepositoryInterface.dll</HintPath>
+    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.6690.25705, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.25705\lib\net46\Konfidence.RepositoryInterface.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.6683.23931, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.6683.23931\lib\net46\Konfidence.SqlHostProvider.dll</HintPath>
+    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.6690.25705, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.6690.25705\lib\net46\Konfidence.SqlHostProvider.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.UtilHelper, Version=1.0.6683.23931, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.UtilHelper.1.0.6683.23931\lib\net46\Konfidence.UtilHelper.dll</HintPath>
+    <Reference Include="Konfidence.UtilHelper, Version=1.0.6690.25704, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.UtilHelper.1.0.6690.25704\lib\net46\Konfidence.UtilHelper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
