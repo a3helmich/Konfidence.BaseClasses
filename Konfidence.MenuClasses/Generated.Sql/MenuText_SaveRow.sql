@@ -9,45 +9,43 @@ GO
 
 CREATE PROCEDURE [dbo].[gen_MenuText_SaveRow]
 (
-	@Id int OUTPUT,
-	@MenuTextId uniqueidentifier,
-	@MenuId uniqueidentifier,
+	@NodeId int OUTPUT,
+	@MenuId int,
 	@SysInsertTime datetime = NULL OUTPUT,
 	@SysUpdateTime datetime = NULL OUTPUT,
 	@Language varchar(3) = NULL OUTPUT,
+	@Description varchar(300),
 	@SysLock varchar(75),
-	@Description nvarchar(max),
-	@MenuText nvarchar(256)
+	@MenuText nvarchar(100)
 )
 AS
-	if (@Id > 0)
+	if (@NodeId > 0)
 	begin
 		UPDATE [MenuText] WITH (ROWLOCK)
 		SET
-		[MenuTextId] = @MenuTextId,
 		[MenuId] = @MenuId,
-		[SysLock] = @SysLock,
 		[Description] = @Description,
+		[SysLock] = @SysLock,
 		[MenuText] = @MenuText
 		WHERE
-		[Id] = @Id
+		[NodeId] = @NodeId
 		
-		SELECT @SysUpdateTime = [SysUpdateTime] FROM [MenuText] WHERE [Id] = @Id
+		SELECT @SysUpdateTime = [SysUpdateTime] FROM [MenuText] WHERE [NodeId] = @NodeId
 	end
 	else
 	begin
 		INSERT INTO [MenuText] WITH (ROWLOCK)
 		(
-			[MenuTextId], [MenuId], [SysLock], [Description], [MenuText]
+			[MenuId], [Description], [SysLock], [MenuText]
 		)
 		VALUES
 		(
-			@MenuTextId, @MenuId, @SysLock, @Description, @MenuText
+			@MenuId, @Description, @SysLock, @MenuText
 		)
 		
-		SET @Id = @@IDENTITY
+		SET @NodeId = @@IDENTITY
 		
-		SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime], @Language = [Language] FROM [MenuText] WHERE [Id] = @Id
+		SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime], @Language = [Language] FROM [MenuText] WHERE [NodeId] = @NodeId
 	end
 	
 RETURN

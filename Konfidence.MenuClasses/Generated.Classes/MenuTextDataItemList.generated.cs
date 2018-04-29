@@ -2,7 +2,7 @@ using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 using Konfidence.SqlHostProvider.SqlAccess;
 
-namespace DbSiteMapMenuClasses
+namespace DbMenuClasses
 {
     public partial class Bl
     {

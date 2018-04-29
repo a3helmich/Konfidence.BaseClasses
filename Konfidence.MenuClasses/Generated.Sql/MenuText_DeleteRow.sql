@@ -9,10 +9,10 @@ GO
 
 CREATE PROCEDURE [dbo].[gen_MenuText_DeleteRow]
 (
-	@Id int
+	@NodeId int
 )
 AS
 	DELETE FROM [MenuText] WITH(ROWLOCK)
-	WHERE [Id] = @Id
+	WHERE [NodeId] = @NodeId
 	
 RETURN

@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using DbSiteMapMenuClasses;
+using DbMenuClasses;
 using Konfidence.MenuClasses.Tests.objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,7 +18,7 @@ namespace Konfidence.MenuClasses.Tests
         ///Gets or sets the test context which provides
         ///information about and functionality for the current test run.
         ///</summary>
-        public TestContext TestContext { get; set; }
+        //public TestContext TestContext { get; set; }
 
         #endregion properties
 
@@ -70,7 +70,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemList()
         {
-            var list = Bl.MenuDataItemList.GetListByMenuCode(1);
+            var list = Bl.MenuDataItemList.GetListByMenuId(1);
 
             Assert.AreEqual(9, list.Count, "was expecting to get 9 menu items back");
 
@@ -90,6 +90,7 @@ namespace Konfidence.MenuClasses.Tests
         {
             var callClassMethod = new CallTestItemListClass();
 
+            callClassMethod.MethodOne();
             callClassMethod.MethodTwo();
         }
     }

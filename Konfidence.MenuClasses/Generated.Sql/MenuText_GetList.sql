@@ -11,6 +11,6 @@ CREATE PROCEDURE [dbo].[gen_MenuText_GetList]
 AS
 	SELECT *
 	FROM [MenuText]
-	ORDER BY [Id]
+	ORDER BY [NodeId]
 	
 RETURN

@@ -1,0 +1,44 @@
+{
+  "Database": "DbMenu",
+  "DevelopmentServer": "konfidence2",
+  "DeploymentServer": "",
+  "TargetProjectDirectory": "Konfidence.MenuClasses",
+  "WebServiceDirectory": "MenuClassesWebService",
+  "SolutionDirectory": "C:\\Projects\\Konfidence\\BaseClasses",
+  "OneToOneItems": [
+    {
+      "Name": "Menu",
+      "ChildTable": {
+        "Name": "MenuText"
+      },
+      "Fields": [
+        "NodeId"
+      ]
+    }
+  ],
+  "GetListBy": [
+    {
+      "Name": "Menu",
+      "Fields": [
+        "MenuId"
+      ]
+    }
+  ],
+  "FindBy": [
+    {
+      "Name": "Menu",
+      "Fields": [
+        "ParentNodeId"
+      ]
+    }
+  ],
+  "FindListBy": [
+    {
+      "Name": "Menu",
+      "Fields": [
+        "ParentNodeId"
+      ]
+    }
+  ],
+  "DataBaseExplicit": false
+}

@@ -9,11 +9,11 @@ GO
 
 CREATE PROCEDURE [dbo].[gen_Menu_GetRow]
 (
-	@Id int
+	@NodeId int
 )
 AS
 	SELECT *
 	FROM [Menu]
-	WHERE [Id] = @Id
+	WHERE [NodeId] = @NodeId
 	
 RETURN

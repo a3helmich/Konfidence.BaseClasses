@@ -5,6 +5,7 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig", "{2CE91D47-F20E-41FB-8824-D422D5E2AB85}"
 	ProjectSection(SolutionItems) = preProject
+		ClassModelGenerator.config.json = ClassModelGenerator.config.json
 		DataItemGenerator.config.xml = DataItemGenerator.config.xml
 	EndProjectSection
 EndProject
@@ -23,8 +24,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseThreadClasses", "Konfidence.BaseThreadClasses\Konfidence.BaseThreadClasses.csproj", "{536AED59-A354-4905-AFC9-6FF981B06413}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseHelper", "Konfidence.BaseHelper\Konfidence.BaseHelper.csproj", "{687FBFF3-F978-48F9-BF2B-AF242FC8214C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWindowComponents", "Konfidence.BaseWindowComponents\Konfidence.BaseWindowComponents.csproj", "{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWindowForms", "Konfidence.BaseWindowForms\Konfidence.BaseWindowForms.csproj", "{0D53566A-235C-47C3-8DE0-60538050FD9C}"
 EndProject
@@ -129,16 +128,6 @@ Global
 		{687FBFF3-F978-48F9-BF2B-AF242FC8214C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{687FBFF3-F978-48F9-BF2B-AF242FC8214C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{687FBFF3-F978-48F9-BF2B-AF242FC8214C}.Release|x86.ActiveCfg = Release|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D1AE74F0-8D30-4F7B-983B-46466C7DBB5C}.Release|x86.ActiveCfg = Release|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -351,8 +340,8 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77

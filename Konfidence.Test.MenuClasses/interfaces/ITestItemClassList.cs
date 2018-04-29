@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Konfidence.MenuClasses.Tests.objects;
+﻿using Konfidence.MenuClasses.Tests.objects;
+using System.Collections.Generic;
 
 namespace Konfidence.MenuClasses.Tests.interfaces
 {

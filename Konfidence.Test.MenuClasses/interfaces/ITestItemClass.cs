@@ -2,6 +2,6 @@
 {
     public interface ITestItemClass
     {
-        void MethodOne();
+        void MethodOne(); 
     }
 }

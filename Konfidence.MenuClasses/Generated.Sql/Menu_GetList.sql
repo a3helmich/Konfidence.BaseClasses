@@ -11,6 +11,6 @@ CREATE PROCEDURE [dbo].[gen_Menu_GetList]
 AS
 	SELECT *
 	FROM [Menu]
-	ORDER BY [Id]
+	ORDER BY [NodeId]
 	
 RETURN

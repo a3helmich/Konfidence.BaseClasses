@@ -1,17 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Konfidence.MenuClasses.Tests.interfaces;
+﻿using Konfidence.MenuClasses.Tests.interfaces;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Konfidence.MenuClasses.Tests.objects
 {
     [ExcludeFromCodeCoverage]
     public class CallTestItemListClass
     {
-        private readonly ITestItemClassList _TestItemList = new TestItemClassList();
-
-        protected ITestItemClassList TestItemList
-        {
-            get { return _TestItemList; } // as List<ITestItemClass>; }
-        }
+        protected ITestItemClassList TestItemList { get; } = new TestItemClassList();// as List<ITestItemClass>; }
 
         public void MethodOne()
         {

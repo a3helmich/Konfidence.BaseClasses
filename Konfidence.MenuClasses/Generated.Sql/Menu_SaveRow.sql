@@ -9,10 +9,9 @@ GO
 
 CREATE PROCEDURE [dbo].[gen_Menu_SaveRow]
 (
-	@Id int OUTPUT,
-	@MenuId uniqueidentifier,
-	@ParentMenuId uniqueidentifier,
-	@MenuCode int,
+	@NodeId int OUTPUT,
+	@ParentNodeId int,
+	@MenuId int,
 	@SysInsertTime datetime = NULL OUTPUT,
 	@SysUpdateTime datetime = NULL OUTPUT,
 	@IsRoot bit,
@@ -21,18 +20,17 @@ CREATE PROCEDURE [dbo].[gen_Menu_SaveRow]
 	@IsAdministrator bit,
 	@IsNotLogonVisible bit,
 	@IsLocalVisible bit,
-	@Url varchar(256),
+	@Url varchar(100),
 	@ApplicationId varchar(100),
 	@SysLock varchar(75)
 )
 AS
-	if (@Id > 0)
+	if (@NodeId > 0)
 	begin
 		UPDATE [Menu] WITH (ROWLOCK)
 		SET
+		[ParentNodeId] = @ParentNodeId,
 		[MenuId] = @MenuId,
-		[ParentMenuId] = @ParentMenuId,
-		[MenuCode] = @MenuCode,
 		[IsRoot] = @IsRoot,
 		[IsVisible] = @IsVisible,
 		[IsLogonVisible] = @IsLogonVisible,
@@ -43,24 +41,24 @@ AS
 		[ApplicationId] = @ApplicationId,
 		[SysLock] = @SysLock
 		WHERE
-		[Id] = @Id
+		[NodeId] = @NodeId
 		
-		SELECT @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [Id] = @Id
+		SELECT @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [NodeId] = @NodeId
 	end
 	else
 	begin
 		INSERT INTO [Menu] WITH (ROWLOCK)
 		(
-			[MenuId], [ParentMenuId], [MenuCode], [IsRoot], [IsVisible], [IsLogonVisible], [IsAdministrator], [IsNotLogonVisible], [IsLocalVisible], [Url], [ApplicationId], [SysLock]
+			[ParentNodeId], [MenuId], [IsRoot], [IsVisible], [IsLogonVisible], [IsAdministrator], [IsNotLogonVisible], [IsLocalVisible], [Url], [ApplicationId], [SysLock]
 		)
 		VALUES
 		(
-			@MenuId, @ParentMenuId, @MenuCode, @IsRoot, @IsVisible, @IsLogonVisible, @IsAdministrator, @IsNotLogonVisible, @IsLocalVisible, @Url, @ApplicationId, @SysLock
+			@ParentNodeId, @MenuId, @IsRoot, @IsVisible, @IsLogonVisible, @IsAdministrator, @IsNotLogonVisible, @IsLocalVisible, @Url, @ApplicationId, @SysLock
 		)
 		
-		SET @Id = @@IDENTITY
+		SET @NodeId = @@IDENTITY
 		
-		SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [Id] = @Id
+		SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [NodeId] = @NodeId
 	end
 	
 RETURN

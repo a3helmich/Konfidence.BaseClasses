@@ -1,9 +1,10 @@
-using System;
+using System.Data.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 using Konfidence.SqlHostProvider.SqlAccess;
 
-namespace DbSiteMapMenuClasses
+namespace DbMenuClasses
 {
     public partial class Bl
     {
@@ -14,9 +15,9 @@ namespace DbSiteMapMenuClasses
             partial void AfterInitializeDataItemList();
 
             private const string MENU_GETLIST = "gen_Menu_GetList";
-            private const string MENU_GETLISTBY_MENUCODE = "gen_Menu_GetListByMenuCode";
+            private const string MENU_GETLISTBY_MENUID = "gen_Menu_GetListByMenuId";
 
-            private int _MenuCode = 0;
+            private int _MenuId = 0;
 
             protected MenuDataItemList() : base()
             {
@@ -43,22 +44,22 @@ namespace DbSiteMapMenuClasses
                 return menuList;
             }
 
-            static public MenuDataItemList GetListByMenuCode(int menucode)
+            static public MenuDataItemList GetListByMenuId(int menuid)
             {
                 MenuDataItemList menuList = new MenuDataItemList();
 
-                menuList._MenuCode = menucode;
+                menuList._MenuId = menuid;
 
-                menuList.BuildItemList(MENU_GETLISTBY_MENUCODE);
+                menuList.BuildItemList(MENU_GETLISTBY_MENUID);
 
                 return menuList;
             }
 
-            public MenuDataItem FindByParentMenuId(Guid parentmenuid)
+            public MenuDataItem FindByParentNodeId(int parentnodeid)
             {
                 foreach (MenuDataItem menu in this)
                 {
-                    if (menu.ParentMenuId.Equals(parentmenuid))
+                    if (menu.ParentNodeId.Equals(parentnodeid))
                     {
                         return menu;
                     }
@@ -79,13 +80,13 @@ namespace DbSiteMapMenuClasses
                 return menuList;
             }
 
-            public MenuDataItemList FindListByParentMenuId(Guid parentmenuid)
+            public MenuDataItemList FindListByParentNodeId(int parentnodeid)
             {
                 MenuDataItemList menuList = new MenuDataItemList();
 
                 foreach (MenuDataItem menu in this)
                 {
-                    if (menu.ParentMenuId.Equals(parentmenuid))
+                    if (menu.ParentNodeId.Equals(parentnodeid))
                     {
                         menuList.Add(menu);
                     }
@@ -96,9 +97,9 @@ namespace DbSiteMapMenuClasses
 
             public override void SetParameters(string storedProcedure)
             {
-                if (storedProcedure.Equals(MENU_GETLISTBY_MENUCODE))
+                if (storedProcedure.Equals(MENU_GETLISTBY_MENUID))
                 {
-                    SetParameter(MenuDataItem.MENUCODE, _MenuCode);
+                    SetParameter(MenuDataItem.MENUID, _MenuId);
                 }
             }
         }

@@ -36,5 +36,5 @@ AS
 		UPDATE [MenuText]
 		SET [SysUpdateTime] = getdate()
 		FROM inserted i
-		WHERE i.[Id] = [MenuText].[Id]
+		WHERE i.[NodeId] = [MenuText].[NodeId]
 	end
