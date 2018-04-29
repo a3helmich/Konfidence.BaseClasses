@@ -5,7 +5,6 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 using Konfidence.SqlHostProvider.SqlAccess;
-using Konfidence.Base;
 
 namespace DbMenuClasses
 {

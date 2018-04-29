@@ -8,7 +8,7 @@
     <ProjectGuid>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DbSiteMapMenuClasses</RootNamespace>
+    <RootNamespace>DbMenuClasses</RootNamespace>
     <AssemblyName>Konfidence.MenuClasses</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -111,35 +111,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Generated.Classes\MenuDataItem.generated.cs" />
     <Compile Include="Generated.Classes\MenuDataItemList.generated.cs" />
-    <Compile Include="MenuDataItem.cs" />
-    <Compile Include="MenuDataItemList.cs" />
     <Compile Include="Generated.Classes\MenuTextDataItem.generated.cs" />
     <Compile Include="Generated.Classes\MenuTextDataItemList.generated.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MenuDataItem.cs" />
+    <Compile Include="MenuDataItemList.cs" />
     <Compile Include="MenuTextDataItem.cs" />
     <Compile Include="MenuTextDataItemList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Generated.Sql\Menu_SaveRow.sql" />
-    <None Include="Generated.Sql\Menu_GetRow.sql" />
-    <None Include="Generated.Sql\Menu_GetRowByGuid.sql" />
-    <None Include="Generated.Sql\Menu_DeleteRow.sql" />
-    <None Include="Generated.Sql\Menu_GetList.sql" />
-    <None Include="Generated.Sql\Menu_RequiredField.sql" />
-    <None Include="Generated.Sql\MenuText_SaveRow.sql" />
-    <None Include="Generated.Sql\MenuText_GetRow.sql" />
-    <None Include="Generated.Sql\MenuText_DeleteRow.sql" />
-    <None Include="Generated.Sql\MenuText_GetList.sql" />
-    <None Include="Generated.Sql\MenuText_RequiredField.sql" />
-    <None Include="Generated.Sql\Menu_GetListByMenuCode.sql" />
-    <None Include="Generated.Sql\MenuText_GetRowByMenuId.sql" />
     <None Include="Konfidence.MenuClasses.nuspec" />
     <None Include="Konfidence.nl.snk" />
-    <None Include="Generated.Sql\MenuText_GetRowByGuid.sql" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Generated.Sql\MenuText_DeleteRow.sql" />
+    <Content Include="Generated.Sql\MenuText_GetList.sql" />
+    <Content Include="Generated.Sql\MenuText_GetRow.sql" />
+    <Content Include="Generated.Sql\MenuText_GetRowByMenuId.sql" />
+    <Content Include="Generated.Sql\MenuText_RequiredField.sql" />
+    <Content Include="Generated.Sql\MenuText_SaveRow.sql" />
+    <Content Include="Generated.Sql\Menu_DeleteRow.sql" />
+    <Content Include="Generated.Sql\Menu_GetList.sql" />
+    <Content Include="Generated.Sql\Menu_GetListByMenuId.sql" />
+    <Content Include="Generated.Sql\Menu_GetRow.sql" />
+    <Content Include="Generated.Sql\Menu_RequiredField.sql" />
+    <Content Include="Generated.Sql\Menu_SaveRow.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

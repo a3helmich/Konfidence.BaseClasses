@@ -1,6 +1,6 @@
 using Konfidence.BaseData;
 
-namespace DbSiteMapMenuClasses
+namespace DbMenuClasses
 {
 	public partial class Bl
 	{

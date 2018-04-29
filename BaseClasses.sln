@@ -3,8 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClassGeneratorConfig", "ClassGeneratorConfig", "{36786862-305D-446D-8B01-BDAC2476260C}"
+	ProjectSection(SolutionItems) = preProject
+		ClassModelGenerator.config.json = ClassModelGenerator.config.json
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig", "{2CE91D47-F20E-41FB-8824-D422D5E2AB85}"
 	ProjectSection(SolutionItems) = preProject
+		ClassModelGenerator.config.json = ClassModelGenerator.config.json
 		DataItemGenerator.config.xml = DataItemGenerator.config.xml
 	EndProjectSection
 EndProject
@@ -68,6 +74,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.RestProvider", "Konfidence.RestProvider\Konfidence.RestProvider.csproj", "{1FC56015-7C87-4B9B-8490-009210FC2CEE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDatabaseClasses.Tests", "Konfidence.BaseDatabaseClasses.Tests\Konfidence.BaseDatabaseClasses.Tests.csproj", "{A0D7E2E0-144C-409B-B5F2-107780F69B6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMenuClasses", "Konfidence.MenuClasses\DbMenuClasses.csproj", "{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -339,6 +347,18 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D}.Release|x86.ActiveCfg = Release|Any CPU
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D}.Release|x86.Build.0 = Release|Any CPU
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Debug|Mixed Platforms = Debug|Mixed Platforms
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Debug|Mixed Platforms = Debug|Mixed Platforms
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Debug|x86 = Debug|x86
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Debug|x86 = Debug|x86
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Release|Mixed Platforms = Release|Mixed Platforms
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Release|Mixed Platforms = Release|Mixed Platforms
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Release|x86 = Release|x86
+		{02E7194E-8DEB-457A-A4D2-C52612B8DFBA}.Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -351,8 +371,8 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
