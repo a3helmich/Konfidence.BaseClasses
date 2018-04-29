@@ -127,12 +127,11 @@
     <None Include="Konfidence.nl.snk" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Generated.Sql\MenuText_DeleteRow.sql" />
     <Content Include="Generated.Sql\MenuText_GetList.sql" />
     <Content Include="Generated.Sql\MenuText_GetRow.sql" />
-    <Content Include="Generated.Sql\MenuText_GetRowByMenuId.sql" />
+    <Content Include="Generated.Sql\MenuText_GetRowByNodeId.sql" />
     <Content Include="Generated.Sql\MenuText_RequiredField.sql" />
     <Content Include="Generated.Sql\MenuText_SaveRow.sql" />
     <Content Include="Generated.Sql\Menu_DeleteRow.sql" />

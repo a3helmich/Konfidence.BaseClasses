@@ -12,7 +12,7 @@
         "Name": "MenuText"
       },
       "Fields": [
-        "MenuId"
+        "NodeId"
       ]
     }
   ],

@@ -24,7 +24,7 @@ namespace DbMenuClasses
             private const string MENUTEXT_GETROW = "gen_MenuText_GetRow";
             private const string MENUTEXT_SAVEROW = "gen_MenuText_SaveRow";
             private const string MENUTEXT_DELETEROW = "gen_MenuText_DeleteRow";
-            private const string MENUTEXT_GETROWBY_MENUID = "gen_MenuText_GetRowByMenuId";
+            private const string MENUTEXT_GETROWBY_NODEID = "gen_MenuText_GetRowByNodeId";
 
             // property storage
             private int _MenuId = 0;
@@ -140,13 +140,13 @@ namespace DbMenuClasses
                 SetField(MENUTEXT, _MenuText);
             }
 
-            public static MenuTextDataItem GetByMenuId(int menuid)
+            public static MenuTextDataItem GetByNodeId(int nodeid)
             {
                 MenuTextDataItem menutextDataItem = new MenuTextDataItem();
 
-                menutextDataItem.SetParameter(MENUID, menuid);
+                menutextDataItem.SetParameter(NODEID, nodeid);
 
-                menutextDataItem.GetItem(MENUTEXT_GETROWBY_MENUID);
+                menutextDataItem.GetItem(MENUTEXT_GETROWBY_NODEID);
 
                 if (!menutextDataItem.IsNew)
                 {

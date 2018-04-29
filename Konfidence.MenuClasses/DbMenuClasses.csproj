@@ -114,6 +114,8 @@
     <None Include="Generated.Sql\MenuText_DeleteRow.sql" />
     <None Include="Generated.Sql\MenuText_GetList.sql" />
     <None Include="Generated.Sql\MenuText_RequiredField.sql" />
+    <None Include="Generated.Sql\Menu_GetListByNodeId.sql" />
+    <None Include="Generated.Sql\MenuText_GetRowByNodeId.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Generated.Classes\" />

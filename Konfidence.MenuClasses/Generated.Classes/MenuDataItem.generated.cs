@@ -1,11 +1,11 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using Konfidence.Base;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 using Konfidence.SqlHostProvider.SqlAccess;
-using Konfidence.Base;
 
 namespace DbMenuClasses
 {
@@ -141,7 +141,7 @@ namespace DbMenuClasses
                 {
                     if (!_MenuText.IsAssigned())
                     {
-                        _MenuText = MenuTextDataItem.GetByMenuId(MenuId);
+                        _MenuText = MenuTextDataItem.GetByNodeId(NodeId);
                     }
 
                     return _MenuText;
