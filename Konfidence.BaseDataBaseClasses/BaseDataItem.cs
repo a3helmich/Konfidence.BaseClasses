@@ -718,7 +718,7 @@ namespace Konfidence.BaseData
             AfterDelete();
         } 
 
-        protected internal int ExecuteCommand(string storedProcedure, DbParameterObjectList parameterObjectList)
+        protected internal int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList)
         {
             return Client.ExecuteCommand(storedProcedure, parameterObjectList);
         }
