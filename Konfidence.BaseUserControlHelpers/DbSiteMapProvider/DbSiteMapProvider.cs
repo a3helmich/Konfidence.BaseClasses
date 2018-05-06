@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Web;
-using DbSiteMapMenuClasses;
+using DbMenuClasses;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
@@ -73,7 +73,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
                     // Start with a clean slate
                     Clear();
 
-                    Bl.MenuDataItemList menuItemList = Bl.MenuDataItemList.GetListByMenuCode(1);
+                    Bl.MenuDataItemList menuItemList = Bl.MenuDataItemList.GetListByMenuId(1);
 
                     Bl.MenuDataItem rootMenu = GetMenuRootNode(menuItemList);
 
@@ -94,7 +94,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
         {
             foreach (Bl.MenuDataItem childItem in childNodes)
             {
-                if (childItem.MenuId != childItem.ParentMenuId && rootMenu.MenuId == childItem.ParentMenuId)
+                if (childItem.NodeId != childItem.ParentNodeId && rootMenu.NodeId == childItem.ParentNodeId)
                 {
                     bool showItem = false;
 
@@ -149,7 +149,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
         {
             foreach (Bl.MenuDataItem menuItem in menuList)
             {
-                if (menuItem.MenuId == menuItem.ParentMenuId)
+                if (menuItem.NodeId == menuItem.ParentNodeId)
                 {
                     return menuItem;
                 }

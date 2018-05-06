@@ -12,9 +12,9 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         [TestMethod]
         public void BaseDataItemWhenInstatiatedShouldSelectClient()
         {
-            var x = "my string";
+            //var x = "my string";
 
-            var dataItem = new DataItem();
+            //var dataItem = new DataItem();
         }
     }
 }

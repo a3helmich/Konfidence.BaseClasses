@@ -51,26 +51,26 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6690.26047, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6690.26047\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6700.29024, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6700.29024\lib\net46\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClassInterfaces, Version=1.0.6690.26047, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.26049\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
+    <Reference Include="Konfidence.BaseClassInterfaces, Version=1.0.6700.29024, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6700.29025\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6690.26049, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.26049\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6700.29025, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6700.29025\lib\net46\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.6690.26047, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.26049\lib\net46\Konfidence.BaseDataInterfaces.dll</HintPath>
+    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.6700.29024, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6700.29025\lib\net46\Konfidence.BaseDataInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.MenuClasses, Version=1.0.6690.26048, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.MenuClasses.1.0.6690.26048\lib\net46\Konfidence.MenuClasses.dll</HintPath>
+    <Reference Include="Konfidence.MenuClasses, Version=1.0.6700.29024, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.MenuClasses.1.0.6700.29024\lib\net46\Konfidence.MenuClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.6690.26048, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6690.26049\lib\net46\Konfidence.RepositoryInterface.dll</HintPath>
+    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.6700.29025, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6700.29025\lib\net46\Konfidence.RepositoryInterface.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.6690.26048, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.6690.26048\lib\net46\Konfidence.SqlHostProvider.dll</HintPath>
+    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.6700.29024, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.6700.29024\lib\net46\Konfidence.SqlHostProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -123,8 +123,8 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.5\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.4.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -133,11 +133,11 @@
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http, Version=5.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.5\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.5\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -160,6 +160,20 @@
       <Project>{d60a1063-3897-44fa-97f5-85a9c25b1f8c}</Project>
       <Name>Konfidence.BaseUserControlHelpers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Generated.Sql\MenuText_DeleteRow.sql" />
+    <Content Include="Generated.Sql\MenuText_GetList.sql" />
+    <Content Include="Generated.Sql\MenuText_GetRow.sql" />
+    <Content Include="Generated.Sql\MenuText_GetRowByNodeId.sql" />
+    <Content Include="Generated.Sql\MenuText_RequiredField.sql" />
+    <Content Include="Generated.Sql\MenuText_SaveRow.sql" />
+    <Content Include="Generated.Sql\Menu_DeleteRow.sql" />
+    <Content Include="Generated.Sql\Menu_GetList.sql" />
+    <Content Include="Generated.Sql\Menu_GetListByMenuId.sql" />
+    <Content Include="Generated.Sql\Menu_GetRow.sql" />
+    <Content Include="Generated.Sql\Menu_RequiredField.sql" />
+    <Content Include="Generated.Sql\Menu_SaveRow.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

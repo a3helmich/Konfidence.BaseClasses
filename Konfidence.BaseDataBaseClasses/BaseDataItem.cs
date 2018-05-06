@@ -449,11 +449,11 @@ namespace Konfidence.BaseData
 		    throw (new Exception("GetFieldInt32: client/_PropertyDictionary is not assigned"));
 		}
 
-	    private int GetFieldInt64(string fieldName)
+	    private long GetFieldInt64(string fieldName)
 	    {
 	        if (PropertyDictionary.IsAssigned())
 	        {
-	            return (int)PropertyDictionary[fieldName];
+	            return (long)PropertyDictionary[fieldName];
 	        }
 
 	        if (Client.IsAssigned())
