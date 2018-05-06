@@ -48,12 +48,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt32(fieldOrdinal);
         }
 
-        //public override long GetFieldInt64(string fieldName)
-        //{
-        //    var fieldOrdinal = GetOrdinal(fieldName);
+        public override long GetFieldInt64(string fieldName)
+        {
+            var fieldOrdinal = GetOrdinal(fieldName);
 
-        //    return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt64(fieldOrdinal);
-        //}
+            return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt64(fieldOrdinal);
+        }
 
         public override Guid GetFieldGuid(string fieldName)
         {
