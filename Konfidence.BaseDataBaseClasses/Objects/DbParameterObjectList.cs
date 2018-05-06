@@ -12,6 +12,16 @@ namespace Konfidence.BaseData.Objects
             AddInParameter(fieldName, DbType.Int32, value);
         }
 
+        public void SetField(string fieldName, short value)
+        {
+            AddInParameter(fieldName, DbType.Int16, value);
+        }
+
+        public void SetField(string fieldName, long value)
+        {
+            AddInParameter(fieldName, DbType.Int64, value);
+        }
+
         public void SetField(string fieldName, Guid value)
         {
             if (Guid.Empty.Equals(value))

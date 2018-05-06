@@ -569,6 +569,16 @@ namespace Konfidence.BaseData
 		{
 		    DbParameterObjectList.SetField(fieldName, value);
 		}
+	    protected void SetField(string fieldName, short value)
+	    {
+	        DbParameterObjectList.SetField(fieldName, value);
+	    }
+
+	    protected void SetField(string fieldName, long value)
+	    {
+	        DbParameterObjectList.SetField(fieldName, value);
+	    }
+
 
         protected void SetField(string fieldName, Guid value)
         {
@@ -606,6 +616,21 @@ namespace Konfidence.BaseData
 		{
 			SetField(fieldName, value);
 		}
+
+	    protected void SetParameter(string fieldName, short value)
+	    {
+	        SetField(fieldName, value);
+	    }
+
+	    protected void SetParameter(string fieldName, long value)
+	    {
+	        SetField(fieldName, value);
+	    }
+
+	    protected void SetParameter(string fieldName, decimal value)
+	    {
+	        SetField(fieldName, value);
+	    }
 
         protected void SetParameter(string fieldName, Guid value)
         {
