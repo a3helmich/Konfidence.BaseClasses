@@ -183,7 +183,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                     dataType = "XmlDocument";
                     break;
                 case "money":
-                    dataType = "Decimal";
+                    dataType = "decimal";
+                    break;
+                case "tinyint":
+                    dataType = "short";
+                    break;
+                case "bigint":
+                    dataType = "long";
                     break;
             }
 
@@ -197,6 +203,16 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             if (dataType.Equals("int", StringComparison.InvariantCultureIgnoreCase))
             {
                 dataType += "32";
+            }
+
+            if (dataType.Equals("short", StringComparison.InvariantCultureIgnoreCase))
+            {
+                dataType += "16";
+            }
+
+            if (dataType.Equals("long", StringComparison.InvariantCultureIgnoreCase))
+            {
+                dataType += "64";
             }
 
             if (DataType.Equals("XmlDocument", StringComparison.InvariantCultureIgnoreCase))
@@ -253,6 +269,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             switch (dataType)
             {
                 case "int":
+                case "tinyint":
+                case "bigint":
                     defaultPropertyValuelinePart = " = 0";
                     break;
                 case "bit":

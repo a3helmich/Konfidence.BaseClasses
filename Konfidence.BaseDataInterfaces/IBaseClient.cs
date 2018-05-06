@@ -25,6 +25,8 @@ namespace Konfidence.BaseDataInterfaces
 
         int GetFieldInt32(string fieldName);
 
+        int GetFieldInt64(string fieldName);
+
         Guid GetFieldGuid(string fieldName);
 
         string GetFieldString(string fieldName);

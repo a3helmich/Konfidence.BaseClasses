@@ -34,19 +34,26 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         private IDataReader DataReader => _repository.DataReader;
 
         #region GetField Methods
-        public override Int16 GetFieldInt16(string fieldName)
+        public override short GetFieldInt16(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? (short) 0 : DataReader.GetInt16(fieldOrdinal);
         }
 
-        public override Int32 GetFieldInt32(string fieldName)
+        public override int GetFieldInt32(string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt32(fieldOrdinal);
         }
+
+        //public override long GetFieldInt64(string fieldName)
+        //{
+        //    var fieldOrdinal = GetOrdinal(fieldName);
+
+        //    return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt64(fieldOrdinal);
+        //}
 
         public override Guid GetFieldGuid(string fieldName)
         {
