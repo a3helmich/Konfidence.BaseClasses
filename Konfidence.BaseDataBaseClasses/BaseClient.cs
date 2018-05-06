@@ -91,7 +91,12 @@ namespace Konfidence.BaseData
 			throw new NotImplementedException();
 		}
 
-		public virtual string GetFieldString(string fieldName)
+	    public virtual long GetFieldInt64(string fieldName)
+	    {
+	        throw new NotImplementedException();
+	    }
+
+        public virtual string GetFieldString(string fieldName)
 		{
 			throw new NotImplementedException();
 		}

@@ -379,6 +379,11 @@ namespace Konfidence.BaseData
             field = GetFieldInt32(fieldName);
         }
 
+	    protected void GetField(string fieldName, out long field)
+	    {
+	        field = GetFieldInt64(fieldName);
+	    }
+
         protected void GetField(string fieldName, out Guid field)
         {
             field = GetFieldGuid(fieldName);
@@ -443,6 +448,21 @@ namespace Konfidence.BaseData
 
 		    throw (new Exception("GetFieldInt32: client/_PropertyDictionary is not assigned"));
 		}
+
+	    private long GetFieldInt64(string fieldName)
+	    {
+	        if (PropertyDictionary.IsAssigned())
+	        {
+	            return (long)PropertyDictionary[fieldName];
+	        }
+
+	        if (Client.IsAssigned())
+	        {
+	            return Client.GetFieldInt64(fieldName);
+	        }
+
+	        throw (new Exception("GetFieldInt64: client/_PropertyDictionary is not assigned"));
+	    }
 
         private Guid GetFieldGuid(string fieldName)
         {
