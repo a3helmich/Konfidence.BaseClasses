@@ -629,7 +629,13 @@ namespace Konfidence.BaseData
 		{
 		    DbParameterObjectList.SetField(fieldName, value);
 		}
-	    protected void SetField(string fieldName, short value)
+
+	    protected void SetField(string fieldName, byte value)
+	    {
+	        DbParameterObjectList.SetField(fieldName, value);
+	    }
+
+        protected void SetField(string fieldName, short value)
 	    {
 	        DbParameterObjectList.SetField(fieldName, value);
 	    }
@@ -671,8 +677,13 @@ namespace Konfidence.BaseData
         }
         #endregion
 
-		#region SetParameter Methods
-		protected void SetParameter(string fieldName, int value)
+        #region SetParameter Methods
+	    protected void SetParameter(string fieldName, byte value)
+	    {
+	        SetField(fieldName, value);
+	    }
+
+	    protected void SetParameter(string fieldName, int value)
 		{
 			SetField(fieldName, value);
 		}

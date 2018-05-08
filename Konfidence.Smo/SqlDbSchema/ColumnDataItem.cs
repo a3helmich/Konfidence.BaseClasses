@@ -138,7 +138,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             SetColumnData(name, isDefaulted, isComputed, ordinalPosition, dataType, characterMaximumLengthInt);
         }
 
-        public void SetColumnData(string name, bool isDefaulted, bool isComputed, int ordinalPosition, string dataType, Int16 characterMaximumLengthInt)
+        public void SetColumnData(string name, bool isDefaulted, bool isComputed, int ordinalPosition, string dataType, short characterMaximumLengthInt)
         {
             Name = name;
             IsDefaulted = isDefaulted;

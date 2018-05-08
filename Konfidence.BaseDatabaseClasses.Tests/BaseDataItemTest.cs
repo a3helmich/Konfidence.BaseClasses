@@ -21,7 +21,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         [TestMethod]
         public void TestIntDataItemShouldResturnShortAndLong()
         {
-            //var x = Bl.TestIntDataItemList.GetList();
+            var x = Bl.TestIntDataItemList.GetList();
 
 
             //var dataItem = new DataItem();
