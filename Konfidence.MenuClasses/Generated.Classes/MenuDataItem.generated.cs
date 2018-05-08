@@ -1,8 +1,8 @@
-using System;
 using System.Data;
+using System;
 using System.Data.Common;
-using Konfidence.Base;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 using Konfidence.SqlHostProvider.SqlAccess;

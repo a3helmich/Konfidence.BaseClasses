@@ -179,15 +179,25 @@ namespace Konfidence.BaseData
             }
         }
 
-        protected internal void GetAutoUpdateField(string fieldName, out short fieldValue)
-        {
-            fieldValue = GetAutoUpdateFieldInt16(fieldName);
-        }
+	    protected internal void GetAutoUpdateField(string fieldName, out byte fieldValue)
+	    {
+	        fieldValue = GetAutoUpdateFieldInt8(fieldName);
+	    }
+
+	    protected internal void GetAutoUpdateField(string fieldName, out short fieldValue)
+	    {
+	        fieldValue = GetAutoUpdateFieldInt16(fieldName);
+	    }
 
         protected internal void GetAutoUpdateField(string fieldName, out int fieldValue)
         {
             fieldValue = GetAutoUpdateFieldInt32(fieldName);
         }
+
+	    protected internal void GetAutoUpdateField(string fieldName, out long fieldValue)
+	    {
+	        fieldValue = GetAutoUpdateFieldInt64(fieldName);
+	    }
 
         protected internal void GetAutoUpdateField(string fieldName, out Guid fieldValue)
         {
@@ -219,20 +229,35 @@ namespace Konfidence.BaseData
             fieldValue = GetAutoUpdateFieldDecimal(fieldName);
         }
 
-        private short GetAutoUpdateFieldInt16(string fieldName)
+        private byte GetAutoUpdateFieldInt8(string fieldName)
         {
-            short fieldValue = 0;
+            byte fieldValue = 0;
 
             if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
                 if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
                 {
-                    fieldValue = (short)AutoUpdateFieldDictionary[fieldName].Value;
+                    fieldValue = (byte)AutoUpdateFieldDictionary[fieldName].Value;
                 }
             }
             
             return fieldValue;
         }
+
+	    private short GetAutoUpdateFieldInt16(string fieldName)
+	    {
+	        short fieldValue = 0;
+
+	        if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
+	        {
+	            if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
+	            {
+	                fieldValue = (short)AutoUpdateFieldDictionary[fieldName].Value;
+	            }
+	        }
+
+	        return fieldValue;
+	    }
 
         private int GetAutoUpdateFieldInt32(string fieldName)
         {
@@ -248,6 +273,21 @@ namespace Konfidence.BaseData
             
             return fieldValue;
         }
+
+	    private long GetAutoUpdateFieldInt64(string fieldName)
+	    {
+	        long fieldValue = 0;
+
+	        if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
+	        {
+	            if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
+	            {
+	                fieldValue = (long)AutoUpdateFieldDictionary[fieldName].Value;
+	            }
+	        }
+
+	        return fieldValue;
+	    }
 
         private Guid GetAutoUpdateFieldGuid(string fieldName)
         {
@@ -365,9 +405,14 @@ namespace Konfidence.BaseData
 			}
 		}
 
-		#endregion
+        #endregion
 
         #region GetField Methods
+
+	    protected void GetField(string fieldName, out byte field)
+	    {
+	        field = GetFieldInt8(fieldName);
+	    }
 
         protected void GetField(string fieldName, out short field)
         {
@@ -419,22 +464,37 @@ namespace Konfidence.BaseData
             field = GetFieldDecimal(fieldName);
         }
 
-        private short GetFieldInt16(string fieldName)
+        private byte GetFieldInt8(string fieldName)
         {
             if (PropertyDictionary.IsAssigned())
             {
-                return (short)PropertyDictionary[fieldName];
+                return (byte)PropertyDictionary[fieldName];
             }
 
             if (Client.IsAssigned())
             {
-                return Client.GetFieldInt16(fieldName);
+                return Client.GetFieldInt8(fieldName);
             }
 
-            throw (new Exception("GetFieldInt16: client/_PropertyDictionary is not assigned"));
+            throw (new Exception("GetFieldInt8: client/_PropertyDictionary is not assigned"));
         }
 
-		private int GetFieldInt32(string fieldName)
+	    private short GetFieldInt16(string fieldName)
+	    {
+	        if (PropertyDictionary.IsAssigned())
+	        {
+	            return (short)PropertyDictionary[fieldName];
+	        }
+
+	        if (Client.IsAssigned())
+	        {
+	            return Client.GetFieldInt16(fieldName);
+	        }
+
+	        throw (new Exception("GetFieldInt16: client/_PropertyDictionary is not assigned"));
+	    }
+
+        private int GetFieldInt32(string fieldName)
 		{
 			if (PropertyDictionary.IsAssigned())
 			{

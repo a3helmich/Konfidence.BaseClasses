@@ -228,20 +228,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Generated.Sql\MenuText_DeleteRow.sql" />
-    <Content Include="Generated.Sql\MenuText_GetList.sql" />
-    <Content Include="Generated.Sql\MenuText_GetRow.sql" />
-    <Content Include="Generated.Sql\MenuText_GetRowByNodeId.sql" />
-    <Content Include="Generated.Sql\MenuText_RequiredField.sql" />
-    <Content Include="Generated.Sql\MenuText_SaveRow.sql" />
-    <Content Include="Generated.Sql\Menu_DeleteRow.sql" />
-    <Content Include="Generated.Sql\Menu_GetList.sql" />
-    <Content Include="Generated.Sql\Menu_GetListByMenuId.sql" />
-    <Content Include="Generated.Sql\Menu_GetRow.sql" />
-    <Content Include="Generated.Sql\Menu_RequiredField.sql" />
-    <Content Include="Generated.Sql\Menu_SaveRow.sql" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

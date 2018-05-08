@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Konfidence.Security.Tests</RootNamespace>
     <AssemblyName>Konfidence.Security.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -19,6 +19,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,12 +53,6 @@
     </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6700.30501, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6700.30501\lib\net46\Konfidence.BaseClasses.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.BaseClassInterfaces, Version=1.0.6700.30500, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6700.30501\lib\net46\Konfidence.BaseClassInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -93,9 +88,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.Security\Konfidence.Security.csproj">
-      <Project>{ea37bc31-3523-495c-a0a0-3828065ee218}</Project>
-      <Name>Konfidence.Security</Name>
+    <ProjectReference Include="..\Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj">
+      <Project>{1caf59c3-b155-40e6-a904-3ebc5874e6df}</Project>
+      <Name>Konfidence.BaseClasses.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseClassInterfaces\Konfidence.BaseClassInterfaces.csproj">
+      <Project>{fef04c6c-a57e-446e-b0f6-861b5a7a2c90}</Project>
+      <Name>Konfidence.BaseClassInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.Security.Code\Konfidence.Security.Code.csproj">
+      <Project>{43e53231-5c0c-455c-be26-b4655a38316e}</Project>
+      <Name>Konfidence.Security.Code</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
