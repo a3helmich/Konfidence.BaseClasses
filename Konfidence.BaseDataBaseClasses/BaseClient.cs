@@ -81,12 +81,17 @@ namespace Konfidence.BaseData
             return null;
         }
 
-        public virtual short GetFieldInt16(string fieldName)
+        public virtual byte GetFieldInt8(string fieldName)
         {
             throw new NotImplementedException();
         }
 
-		public virtual int GetFieldInt32(string fieldName)
+	    public virtual short GetFieldInt16(string fieldName)
+	    {
+	        throw new NotImplementedException();
+	    }
+
+        public virtual int GetFieldInt32(string fieldName)
 		{
 			throw new NotImplementedException();
 		}

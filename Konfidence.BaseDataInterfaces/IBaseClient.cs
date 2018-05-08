@@ -21,6 +21,8 @@ namespace Konfidence.BaseDataInterfaces
 
         bool StoredProcedureExists(string storedPprocedureName);
 
+        byte GetFieldInt8(string fieldName);
+
         short GetFieldInt16(string fieldName);
 
         int GetFieldInt32(string fieldName);

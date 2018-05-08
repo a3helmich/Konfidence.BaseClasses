@@ -7,6 +7,8 @@ namespace Konfidence.BaseDataInterfaces
     {
         void SetField(string fieldName, int value);
 
+        void SetField(string fieldName, byte value);
+
         void SetField(string fieldName, short value);
 
         void SetField(string fieldName, long value);

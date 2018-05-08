@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{60D5C141-9292-4B6D-937F-5DEFDD01CAA3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Konfidence.MenuClasses.Code</RootNamespace>
+    <AssemblyName>Konfidence.MenuClasses.Code</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Konfidence.MenuClasses\Generated.Classes\MenuDataItem.generated.cs">
+      <Link>Generated.Classes\MenuDataItem.generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\Generated.Classes\MenuDataItemList.generated.cs">
+      <Link>Generated.Classes\MenuDataItemList.generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\Generated.Classes\MenuTextDataItem.generated.cs">
+      <Link>Generated.Classes\MenuTextDataItem.generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\Generated.Classes\MenuTextDataItemList.generated.cs">
+      <Link>Generated.Classes\MenuTextDataItemList.generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\Generated.Classes\TestIntDataItem.generated.cs">
+      <Link>Generated.Classes\TestIntDataItem.generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\Generated.Classes\TestIntDataItemList.generated.cs">
+      <Link>Generated.Classes\TestIntDataItemList.generated.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\MenuDataItem.cs">
+      <Link>MenuDataItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\MenuDataItemList.cs">
+      <Link>MenuDataItemList.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\MenuTextDataItem.cs">
+      <Link>MenuTextDataItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\MenuTextDataItemList.cs">
+      <Link>MenuTextDataItemList.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\TestIntDataItem.cs">
+      <Link>TestIntDataItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Konfidence.MenuClasses\TestIntDataItemList.cs">
+      <Link>TestIntDataItemList.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj">
+      <Project>{1caf59c3-b155-40e6-a904-3ebc5874e6df}</Project>
+      <Name>Konfidence.BaseClasses.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseClassInterfaces\Konfidence.BaseClassInterfaces.csproj">
+      <Project>{fef04c6c-a57e-446e-b0f6-861b5a7a2c90}</Project>
+      <Name>Konfidence.BaseClassInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj">
+      <Project>{ac595ed8-f17a-4d6c-a801-480433be4d34}</Project>
+      <Name>Konfidence.BaseDatabaseClasses.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
+      <Project>{5c710054-52b1-405e-a754-f0f9682f07d6}</Project>
+      <Name>Konfidence.BaseDataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj">
+      <Project>{dcab3a56-9d42-4ce4-9300-d72b9f9e2f64}</Project>
+      <Name>Konfidence.RepositoryInterface.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.SqlHostProvider.Code\Konfidence.SqlHostProvider.Code.csproj">
+      <Project>{45d19995-b114-4a65-87ad-3e4a7fbb0a26}</Project>
+      <Name>Konfidence.SqlHostProvider.Code</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

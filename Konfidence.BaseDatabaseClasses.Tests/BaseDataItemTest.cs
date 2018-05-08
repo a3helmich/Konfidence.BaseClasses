@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using DbMenuClasses;
+using FluentAssertions;
 using Konfidence.BaseDatabaseClasses.Tests.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,6 +17,16 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             //var x = "my string";
 
             //var dataItem = new DataItem();
+        }
+
+        [TestMethod]
+        public void TestIntDataItemShouldResturnShortAndLong()
+        {
+            var testIntDataItemList = Bl.TestIntDataItemList.GetList();
+
+
+            var dataItem = testIntDataItemList[0];
+            dataItem.testInt.Should().BeGreaterThan(1);
         }
     }
 }

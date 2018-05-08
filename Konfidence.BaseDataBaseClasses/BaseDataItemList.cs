@@ -393,6 +393,21 @@ namespace Konfidence.BaseData
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        protected void SetParameter(string fieldName, byte value)
+        {
+            _dbParameterObjectList.SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, short value)
+        {
+            _dbParameterObjectList.SetField(fieldName, value);
+        }
+
+        protected void SetParameter(string fieldName, long value)
+        {
+            _dbParameterObjectList.SetField(fieldName, value);
+        }
+
         protected void SetParameter(string fieldName, Guid value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
