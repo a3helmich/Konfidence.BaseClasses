@@ -113,10 +113,6 @@
   <ItemGroup>
     <Compile Include="BaseDataItemTest.cs" />
     <Compile Include="Objects\DataItem.cs" />
-    <Compile Include="Objects\TestIntDataItem.cs" />
-    <Compile Include="Objects\TestIntDataItem.generated.cs" />
-    <Compile Include="Objects\TestIntDataItemList.cs" />
-    <Compile Include="Objects\TestIntDataItemList.generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +135,10 @@
     <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
       <Project>{5c710054-52b1-405e-a754-f0f9682f07d6}</Project>
       <Name>Konfidence.BaseDataInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Konfidence.MenuClasses.Code\Konfidence.MenuClasses.Code.csproj">
+      <Project>{60d5c141-9292-4b6d-937f-5defdd01caa3}</Project>
+      <Name>Konfidence.MenuClasses.Code</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj">
       <Project>{dcab3a56-9d42-4ce4-9300-d72b9f9e2f64}</Project>

@@ -26,7 +26,7 @@ namespace DbMenuClasses
             private const string TESTINT_DELETEROW = "gen_TestInt_DeleteRow";
 
             // property storage
-            private short _testTinyInt = 0;
+            private byte _testTinyInt = 0;
             private int _testInt = 0;
             private DateTime _SysInsertTime = DateTime.MinValue;
             private DateTime _SysUpdateTime = DateTime.MinValue;
@@ -40,7 +40,7 @@ namespace DbMenuClasses
                 get { return Id; }
             }
 
-            public short testTinyInt
+            public byte testTinyInt
             {
                 get { return _testTinyInt; }
                 set { _testTinyInt = value; }
