@@ -164,6 +164,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 case "varchar":
                 case "nvarchar":
                 case "text":
+                case "ntext":
                     dataType = "string";
                     break;
                 case "date":
@@ -289,18 +290,12 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 case "char":
                 case "nvarchar":
                 case "text":
+                case "ntext":
                 case "nchar":
                     defaultPropertyValuelinePart = " = string.Empty";
                     break;
                 case "uniqueidentifier":
-                    if (newValue.Equals("newguid", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        defaultPropertyValuelinePart = " = Guid.NewGuid()";
-                    }
-                    else
-                    {
-                        defaultPropertyValuelinePart = " = Guid.Empty";
-                    }
+                    defaultPropertyValuelinePart = newValue.Equals("newguid", StringComparison.InvariantCultureIgnoreCase) ? " = Guid.NewGuid()" : " = Guid.Empty";
                     break;
                 case "xml":
                     defaultPropertyValuelinePart = " = new XmlDocument()";
