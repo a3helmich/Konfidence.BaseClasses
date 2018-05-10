@@ -36,6 +36,8 @@ namespace DbMenuClasses
             {
                 MenuTextDataItemList menutextList = new MenuTextDataItemList();
 
+                menutextList.BeforeInitializeDataItemList();
+
                 menutextList.BuildItemList(MENUTEXT_GETLIST);
 
                 return menutextList;

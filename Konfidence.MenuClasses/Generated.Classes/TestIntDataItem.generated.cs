@@ -17,6 +17,7 @@ namespace DbMenuClasses
             internal const string TESTINT = "testInt";
             internal const string SYSINSERTTIME = "SysInsertTime";
             internal const string SYSUPDATETIME = "SysUpdateTime";
+            internal const string TESTNTEXT = "testNtext";
             internal const string TESTBIGINT = "testBigInt";
             internal const string SYSLOCK = "SysLock";
 
@@ -30,6 +31,7 @@ namespace DbMenuClasses
             private int _testInt = 0;
             private DateTime _SysInsertTime = DateTime.MinValue;
             private DateTime _SysUpdateTime = DateTime.MinValue;
+            private string _testNtext;
             private long _testBigInt = 0;
             private string _SysLock = string.Empty;
 
@@ -60,6 +62,12 @@ namespace DbMenuClasses
             public DateTime SysUpdateTime
             {
                 get { return _SysUpdateTime; }
+            }
+
+            public string testNtext
+            {
+                get { return _testNtext; }
+                set { _testNtext = value; }
             }
 
             public long testBigInt
@@ -116,6 +124,7 @@ namespace DbMenuClasses
                 GetField(TESTINT, out _testInt);
                 GetField(SYSINSERTTIME, out _SysInsertTime);
                 GetField(SYSUPDATETIME, out _SysUpdateTime);
+                GetField(TESTNTEXT, out _testNtext);
                 GetField(TESTBIGINT, out _testBigInt);
                 GetField(SYSLOCK, out _SysLock);
             }
@@ -126,6 +135,7 @@ namespace DbMenuClasses
 
                 SetField(TESTTINYINT, _testTinyInt);
                 SetField(TESTINT, _testInt);
+                SetField(TESTNTEXT, _testNtext);
                 SetField(TESTBIGINT, _testBigInt);
                 SetField(SYSLOCK, _SysLock);
             }
