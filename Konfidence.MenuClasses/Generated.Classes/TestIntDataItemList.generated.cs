@@ -36,6 +36,8 @@ namespace DbMenuClasses
             {
                 TestIntDataItemList testintList = new TestIntDataItemList();
 
+                testintList.BeforeInitializeDataItemList();
+
                 testintList.BuildItemList(TESTINT_GETLIST);
 
                 return testintList;

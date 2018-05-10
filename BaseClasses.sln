@@ -73,8 +73,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.RestProvider", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDatabaseClasses.Tests", "Konfidence.BaseDatabaseClasses.Tests\Konfidence.BaseDatabaseClasses.Tests.csproj", "{A0D7E2E0-144C-409B-B5F2-107780F69B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMenuClasses", "Konfidence.MenuClasses\DbMenuClasses.csproj", "{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses.Code", "Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj", "{1CAF59C3-B155-40E6-A904-3EBC5874E6DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDatabaseClasses.Code", "Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj", "{AC595ED8-F17A-4D6C-A801-480433BE4D34}"
@@ -349,18 +347,6 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D}.Release|x86.ActiveCfg = Release|Any CPU
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D}.Release|x86.Build.0 = Release|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Debug|x86.Build.0 = Debug|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Release|x86.ActiveCfg = Release|Any CPU
-		{083B6D6F-8DC1-47B4-B5A5-C5E9FC3BE9C2}.Release|x86.Build.0 = Release|Any CPU
 		{1CAF59C3-B155-40E6-A904-3EBC5874E6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CAF59C3-B155-40E6-A904-3EBC5874E6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CAF59C3-B155-40E6-A904-3EBC5874E6DF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -457,8 +443,8 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77

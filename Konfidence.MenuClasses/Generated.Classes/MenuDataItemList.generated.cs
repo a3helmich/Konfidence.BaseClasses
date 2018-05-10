@@ -41,6 +41,8 @@ namespace DbMenuClasses
             {
                 MenuDataItemList menuList = new MenuDataItemList();
 
+                menuList.BeforeInitializeDataItemList();
+
                 menuList.BuildItemList(MENU_GETLIST);
 
                 return menuList;

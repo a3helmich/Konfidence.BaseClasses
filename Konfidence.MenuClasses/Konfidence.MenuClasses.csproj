@@ -8,7 +8,7 @@
     <ProjectGuid>{411D4B61-9DDF-43F9-AB11-B256DD8287E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DbMenuClasses</RootNamespace>
+    <RootNamespace>Konfidence.MenuClasses</RootNamespace>
     <AssemblyName>Konfidence.MenuClasses</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -62,8 +62,8 @@
     <Reference Include="Konfidence.RepositoryInterface, Version=1.0.6702.26893, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6702.26893\lib\net46\Konfidence.RepositoryInterface.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.6702.26893, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.6702.26893\lib\net46\Konfidence.SqlHostProvider.dll</HintPath>
+    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.6704.24508, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.6704.24508\lib\net46\Konfidence.SqlHostProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>

@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[gen_TestInt_SaveRow]
 	@testInt int,
 	@SysInsertTime datetime = NULL OUTPUT,
 	@SysUpdateTime datetime = NULL OUTPUT,
+	@testNtext ntext,
 	@testBigInt bigint,
 	@SysLock varchar(75)
 )
@@ -24,6 +25,7 @@ AS
 		SET
 		[testTinyInt] = @testTinyInt,
 		[testInt] = @testInt,
+		[testNtext] = @testNtext,
 		[testBigInt] = @testBigInt,
 		[SysLock] = @SysLock
 		WHERE
@@ -35,11 +37,11 @@ AS
 	begin
 		INSERT INTO [TestInt] WITH (ROWLOCK)
 		(
-			[testTinyInt], [testInt], [testBigInt], [SysLock]
+			[testTinyInt], [testInt], [testNtext], [testBigInt], [SysLock]
 		)
 		VALUES
 		(
-			@testTinyInt, @testInt, @testBigInt, @SysLock
+			@testTinyInt, @testInt, @testNtext, @testBigInt, @SysLock
 		)
 		
 		SET @TestId = @@IDENTITY
