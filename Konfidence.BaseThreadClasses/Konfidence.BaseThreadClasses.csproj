@@ -124,11 +124,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseThreadAction.cs" />
-    <Compile Include="BaseThreadManager.cs" />
-    <Compile Include="BaseThreadParameterObject.cs" />
-    <Compile Include="BaseThreadRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SleepUnit.cs" />
+    <Compile Include="ThreadAction.cs" />
+    <Compile Include="ThreadManager.cs" />
+    <Compile Include="ThreadRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
