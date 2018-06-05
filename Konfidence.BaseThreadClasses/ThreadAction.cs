@@ -1,4 +1,4 @@
-﻿namespace ThreadingClasses
+﻿namespace Konfidence.BaseThreadClasses
 {
     public abstract class ThreadAction
     {

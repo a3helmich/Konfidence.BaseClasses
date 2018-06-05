@@ -1,6 +1,6 @@
 ﻿using Konfidence.Base;
 
-namespace ThreadingClasses
+namespace Konfidence.BaseThreadClasses
 {
     public delegate void BeforeExecute<in T>(T baseThreadAction);
     public delegate void AfterExecute<in T>(T baseThreadAction);

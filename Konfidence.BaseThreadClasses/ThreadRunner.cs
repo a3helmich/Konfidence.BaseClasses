@@ -2,7 +2,7 @@
 using System.Threading;
 using Konfidence.Base;
 
-namespace ThreadingClasses
+namespace Konfidence.BaseThreadClasses
 {
     internal class ThreadRunner<TAction> where TAction : ThreadAction, new()
     {
