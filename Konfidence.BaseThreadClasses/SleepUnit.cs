@@ -1,4 +1,4 @@
-﻿namespace ThreadingClasses
+﻿namespace Konfidence.BaseThreadClasses
 {
     public enum SleepUnit
     {
