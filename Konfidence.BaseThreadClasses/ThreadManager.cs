@@ -9,9 +9,9 @@ namespace Konfidence.BaseThreadClasses
 
     public class ThreadManager<TAction> where TAction : ThreadAction, new()
     {
-        public InitializeAction<TAction> InitializeAction;
-        public BeforeExecute<TAction> BeforeExecuteAction;
-        public AfterExecute<TAction> AfterExecuteAction;
+        private InitializeAction<TAction> _initializeAction;
+        private BeforeExecute<TAction> _beforeExecuteAction;
+        private AfterExecute<TAction> _afterExecuteAction;
 
         private ThreadRunner<TAction> ThreadRunner { get; }
 
@@ -25,7 +25,7 @@ namespace Konfidence.BaseThreadClasses
         [UsedImplicitly]
         public ThreadManager<TAction> SetInitializeAction(InitializeAction<TAction> initializeAction)
         {
-            InitializeAction = initializeAction;
+            _initializeAction = initializeAction;
 
             return this;
         }
@@ -33,7 +33,7 @@ namespace Konfidence.BaseThreadClasses
         [UsedImplicitly]
         public ThreadManager<TAction> SetBeforeExecuteAction(BeforeExecute<TAction> beforeExecuteAction)
         {
-            BeforeExecuteAction = beforeExecuteAction;
+            _beforeExecuteAction = beforeExecuteAction;
 
             return this;
         }
@@ -41,7 +41,7 @@ namespace Konfidence.BaseThreadClasses
         [UsedImplicitly]
         public ThreadManager<TAction> SetAfterExecuteAction(AfterExecute<TAction> afterExecuteAction)
         {
-            AfterExecuteAction = afterExecuteAction;
+            _afterExecuteAction = afterExecuteAction;
 
             return this;
         }
@@ -70,25 +70,25 @@ namespace Konfidence.BaseThreadClasses
 
         internal void InternalInitializeAction(TAction threadAction)
         {
-            if (InitializeAction.IsAssigned())
+            if (_initializeAction.IsAssigned())
             {
-                InitializeAction(threadAction);
+                _initializeAction(threadAction);
             }
         }
 
         internal void InternalBeforeExecuteAction(TAction threadAction)
         {
-            if (BeforeExecuteAction.IsAssigned())
+            if (_beforeExecuteAction.IsAssigned())
             {
-                BeforeExecuteAction(threadAction);
+                _beforeExecuteAction(threadAction);
             }
         }
 
         internal void InternalAfterExecuteAction(TAction threadAction)
         {
-            if (AfterExecuteAction.IsAssigned())
+            if (_afterExecuteAction.IsAssigned())
             {
-                AfterExecuteAction(threadAction);
+                _afterExecuteAction(threadAction);
             }
         }
     }
