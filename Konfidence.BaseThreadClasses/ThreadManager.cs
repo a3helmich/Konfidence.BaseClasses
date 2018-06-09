@@ -1,4 +1,5 @@
-﻿using Konfidence.Base;
+﻿using JetBrains.Annotations;
+using Konfidence.Base;
 
 namespace Konfidence.BaseThreadClasses
 {
@@ -6,17 +7,11 @@ namespace Konfidence.BaseThreadClasses
     public delegate void AfterExecute<in T>(T baseThreadAction);
     public delegate void InitializeAction<in T>(T baseThreadAction);
 
-    public delegate void AfterStart();
-    public delegate void AfterStop();
-
     public class ThreadManager<TAction> where TAction : ThreadAction, new()
     {
+        public InitializeAction<TAction> InitializeAction;
         public BeforeExecute<TAction> BeforeExecuteAction;
         public AfterExecute<TAction> AfterExecuteAction;
-        public InitializeAction<TAction> InitializeAction;
-
-        public AfterStart AfterStart;
-        public AfterStop AfterStop;
 
         private ThreadRunner<TAction> ThreadRunner { get; }
 
@@ -27,6 +22,31 @@ namespace Konfidence.BaseThreadClasses
             ThreadRunner = new ThreadRunner<TAction>(this);
         }
 
+        [UsedImplicitly]
+        public ThreadManager<TAction> SetInitializeAction(InitializeAction<TAction> initializeAction)
+        {
+            InitializeAction = initializeAction;
+
+            return this;
+        }
+
+        [UsedImplicitly]
+        public ThreadManager<TAction> SetBeforeExecuteAction(BeforeExecute<TAction> beforeExecuteAction)
+        {
+            BeforeExecuteAction = beforeExecuteAction;
+
+            return this;
+        }
+
+        [UsedImplicitly]
+        public ThreadManager<TAction> SetAfterExecuteAction(AfterExecute<TAction> afterExecuteAction)
+        {
+            AfterExecuteAction = afterExecuteAction;
+
+            return this;
+        }
+
+        [UsedImplicitly]
         public void StartThread(int sleepTime = 1, SleepUnit sleepUnit = SleepUnit.Seconds)
         {
             if (IsRunning)
@@ -35,13 +55,9 @@ namespace Konfidence.BaseThreadClasses
             }
 
             ThreadRunner.StartThreadRunner(sleepTime, sleepUnit);
-
-            if (AfterStart.IsAssigned())
-            {
-                AfterStart();
-            }
         }
 
+        [UsedImplicitly]
         public void StopThread()
         {
             if (!IsRunning)
@@ -50,11 +66,6 @@ namespace Konfidence.BaseThreadClasses
             }
 
             ThreadRunner.StopThreadRunner();
-
-            if (AfterStop.IsAssigned())
-            {
-                AfterStop();
-            }
         }
 
         internal void InternalInitializeAction(TAction threadAction)
