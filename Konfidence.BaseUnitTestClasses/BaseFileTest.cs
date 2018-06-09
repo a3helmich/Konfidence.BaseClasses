@@ -1,8 +1,10 @@
 ﻿using System.IO;
+using JetBrains.Annotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.BaseUnitTestClasses
 {
+    [UsedImplicitly]
     public class BaseFileTest
     {
         public static bool BitmapsEqual(string file1, string file2)
