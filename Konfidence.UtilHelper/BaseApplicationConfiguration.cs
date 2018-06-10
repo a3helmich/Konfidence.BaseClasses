@@ -9,7 +9,7 @@ using Konfidence.Base;
 namespace Konfidence.UtilHelper
 {
     [UsedImplicitly]
-    public class BaseApplicationConfiguration: BaseItem
+    public class BaseApplicationConfiguration
     {
         private XmlDocument _configuration;
         private XmlNode _root;

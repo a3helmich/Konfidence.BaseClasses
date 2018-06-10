@@ -6,7 +6,7 @@ using Konfidence.Base;
 
 namespace Konfidence.DesignPatterns.Singleton
 {
-    public class SingletonFactory : BaseItem
+    public class SingletonFactory
     {
         private static readonly Hashtable SingletonTable = new Hashtable();
         private static readonly TypeFilter SingletonFilter = SingletonInterfaceFilter;

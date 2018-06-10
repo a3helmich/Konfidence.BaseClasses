@@ -6,7 +6,7 @@ using Konfidence.Base;
 namespace Konfidence.Mail
 {
     [UsedImplicitly]
-	public class BaseMailSender : BaseItem
+	public class BaseMailSender 
 	{
         private readonly string _fromAddress;
         private readonly string _mailHost;
