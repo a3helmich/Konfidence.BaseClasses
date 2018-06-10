@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.Exceptions;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlServerManagement
 {
+    [UsedImplicitly]
     public class SqlServerCheck
     {
+        [UsedImplicitly]
         public static bool VerifyDatabaseServer(Database databaseInstance)
         {
             var serverName = string.Empty;

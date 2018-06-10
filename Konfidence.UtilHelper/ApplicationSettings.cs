@@ -1,5 +1,6 @@
 using System.IO;
 using System.Xml;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DesignPatterns.Singleton;
 
@@ -21,6 +22,7 @@ namespace Konfidence.UtilHelper
     {
         private static string _rootPath = string.Empty;
 
+        [UsedImplicitly]
         public static IApplicationSettings ApplicationSettings(string application, string rootPath)
         {
             _rootPath = rootPath;
@@ -131,7 +133,7 @@ namespace Konfidence.UtilHelper
 
                 keyNode.InnerText = keyValue;
 
-                XmlElement root = _xmlDocument.DocumentElement;
+                var root = _xmlDocument.DocumentElement;
 
                 if (root.IsAssigned())
                 {

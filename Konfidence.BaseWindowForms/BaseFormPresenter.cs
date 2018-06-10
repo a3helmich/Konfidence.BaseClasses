@@ -1,8 +1,9 @@
-﻿using Konfidence.Base;
+﻿using JetBrains.Annotations;
 
 namespace Konfidence.BaseWindowForms
 {
-    public class BaseFormPresenter : BaseItem
+    [UsedImplicitly]
+    public class BaseFormPresenter 
     {
     }
 }

@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Web.UI;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class BasePageHelper: BaseItem
+    public class BasePageHelper
     {
-        private readonly string[] _UrlParts = new string[0];
-        private readonly string[] _RefererParts = new string[0];
+        private readonly string[] _urlParts = new string[0];
+        private readonly string[] _refererParts = new string[0];
 
-        private string _CurrentDomainExtension = string.Empty;
-        private string _CurrentLanguage = string.Empty;
-        private string _CurrentDnsName = string.Empty;
-        private string _CurrentPagePath = string.Empty;
-        private string _CurrentPageName = string.Empty;
+        private string _currentDomainExtension = string.Empty;
+        private string _currentLanguage = string.Empty;
+        private string _currentDnsName = string.Empty;
+        private string _currentPagePath = string.Empty;
+        private string _currentPageName = string.Empty;
 
-        private string _RefererDnsName = string.Empty;
+        private string _refererDnsName = string.Empty;
 
         #region readonly properties
 
@@ -23,12 +24,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_CurrentDomainExtension.IsAssigned())
+                if (!_currentDomainExtension.IsAssigned())
                 {
-                    _CurrentDomainExtension = GetCurrentDomainExtension();
+                    _currentDomainExtension = GetCurrentDomainExtension();
                 }
 
-                return _CurrentDomainExtension;
+                return _currentDomainExtension;
             }
         }
 
@@ -36,12 +37,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_CurrentLanguage.IsAssigned())
+                if (!_currentLanguage.IsAssigned())
                 {
-                    _CurrentLanguage = GetCurrentLanguage();
+                    _currentLanguage = GetCurrentLanguage();
                 }
 
-                return _CurrentLanguage;
+                return _currentLanguage;
             }
         }
 
@@ -49,12 +50,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_CurrentDnsName.IsAssigned())
+                if (!_currentDnsName.IsAssigned())
                 {
-                    _CurrentDnsName = GetCurrentDnsName();
+                    _currentDnsName = GetCurrentDnsName();
                 }
 
-                return _CurrentDnsName;
+                return _currentDnsName;
             }
         }
 
@@ -62,12 +63,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_RefererDnsName.IsAssigned())
+                if (!_refererDnsName.IsAssigned())
                 {
-                    _RefererDnsName = GetRefererDnsName();
+                    _refererDnsName = GetRefererDnsName();
                 }
 
-                return _RefererDnsName;
+                return _refererDnsName;
             }
         }
 
@@ -75,12 +76,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_CurrentPagePath.IsAssigned())
+                if (!_currentPagePath.IsAssigned())
                 {
-                    _CurrentPagePath = GetCurrentPagePath();
+                    _currentPagePath = GetCurrentPagePath();
                 }
 
-                return _CurrentPagePath;
+                return _currentPagePath;
             }
         }
 
@@ -88,12 +89,12 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_CurrentPageName.IsAssigned())
+                if (!_currentPageName.IsAssigned())
                 {
-                    _CurrentPageName = GetCurrentPageName();
+                    _currentPageName = GetCurrentPageName();
                 }
 
-                return _CurrentPageName;
+                return _currentPageName;
             }
         }
 
@@ -105,24 +106,24 @@ namespace Konfidence.BaseUserControlHelpers
         {
             if (requestUrl.IsAssigned())
             {
-                _UrlParts = requestUrl.ToLowerInvariant().Split('/');
+                _urlParts = requestUrl.ToLowerInvariant().Split('/');
             }
             if (refererUrl.IsAssigned())
             {
-                _RefererParts = refererUrl.ToLowerInvariant().Split('/');
+                _refererParts = refererUrl.ToLowerInvariant().Split('/');
             }
         }
 
         private bool Validate()
         {
-            if (_UrlParts.Length < 3)
+            if (_urlParts.Length < 3)
             {
                 SetErrorMessage("Url is too short to be true");
 
                 return false;
             }
 
-            if (_UrlParts[0] != "http:")
+            if (_urlParts[0] != "http:")
             {
                 SetErrorMessage("Url does not start with http:");
 
@@ -181,11 +182,11 @@ namespace Konfidence.BaseUserControlHelpers
         private string GetCurrentPagePath()
         {
             // strip the first three nodes from the string array
-            var pagePathParts = new string[_UrlParts.Length - 3];
+            var pagePathParts = new string[_urlParts.Length - 3];
 
-            Array.Copy(_UrlParts, 3, pagePathParts, 0, pagePathParts.Length);
+            Array.Copy(_urlParts, 3, pagePathParts, 0, pagePathParts.Length);
 
-            string currentPagePath = "/" + string.Join("/", pagePathParts);
+            var currentPagePath = "/" + string.Join("/", pagePathParts);
 
             return currentPagePath;
         }
@@ -197,18 +198,18 @@ namespace Konfidence.BaseUserControlHelpers
                 return string.Empty;
             }
 
-            string[] pagePathParts = CurrentPagePath.Split('/');
+            var pagePathParts = CurrentPagePath.Split('/');
 
             return pagePathParts[pagePathParts.Length - 1]; // laatste element is altijd pageName
         }
 
         private string GetRefererDnsName()
         {
-            string refererSite = "www.konfidence.nl";
+            var refererSite = "www.konfidence.nl";
 
-            if (!_RefererParts[2].Equals("localhost"))
+            if (!_refererParts[2].Equals("localhost"))
             {
-                refererSite = _RefererParts[2];
+                refererSite = _refererParts[2];
             }
 
             return refererSite;
@@ -216,11 +217,11 @@ namespace Konfidence.BaseUserControlHelpers
 
         private string GetCurrentDnsName()
         {
-            string currentSite = "www.konfidence.nl";
+            var currentSite = "www.konfidence.nl";
 
-            if (!_UrlParts[2].Equals("localhost"))
+            if (!_urlParts[2].Equals("localhost"))
             {
-                currentSite = _UrlParts[2];
+                currentSite = _urlParts[2];
             }
 
             return currentSite;
@@ -228,13 +229,13 @@ namespace Konfidence.BaseUserControlHelpers
 
         private string GetCurrentLanguage()
         {
-            string currentLanguage = "nl"; // default language
+            var currentLanguage = "nl"; // default language
 
             if (CurrentDomainExtension.IsAssigned())
             {
-                string[] shortExtension = CurrentDomainExtension.Split('.'); // als uit meerdere nodes bestaat alleen de laatste oppikken
+                var shortExtension = CurrentDomainExtension.Split('.'); // als uit meerdere nodes bestaat alleen de laatste oppikken
 
-                string testExtension = shortExtension[shortExtension.Length - 1];
+                var testExtension = shortExtension[shortExtension.Length - 1];
 
                 switch (testExtension.ToLowerInvariant())
                 {
@@ -265,7 +266,7 @@ namespace Konfidence.BaseUserControlHelpers
         {
             foreach (Control x in controlCollection)
             {
-                Type wantType = x.GetType();
+                var wantType = x.GetType();
 
                 if (wantType.IsSubclassOf(findType))
                 {
@@ -274,6 +275,27 @@ namespace Konfidence.BaseUserControlHelpers
             }
 
             return null;
+        }
+        public string ErrorMessage { get; private set; } = string.Empty;
+
+        // TODO : convert to errorlist 
+        public bool SetErrorMessage(string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+
+            return false;
+        }
+
+        [UsedImplicitly]
+        public bool HasErrors()
+        {
+            return ErrorMessage.IsAssigned();
+        }
+
+        [UsedImplicitly]
+        public void ClearErrorMessage()
+        {
+            ErrorMessage = string.Empty;
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseData.WSBaseHost;
@@ -9,6 +10,7 @@ using Konfidence.BaseDataInterfaces;
 namespace Konfidence.RestProvider
 {
     // TODO: internal
+    [UsedImplicitly]
     internal class WsClient : BaseClient
     {
         private readonly WSBaseHostService _wsBaseHostService;
@@ -33,6 +35,7 @@ namespace Konfidence.RestProvider
 
         #endregion
 
+        [UsedImplicitly]
         public void Save(BaseDataItem dataItem)
         {
             var parameterDataItemList = dataItem.SetItemData();

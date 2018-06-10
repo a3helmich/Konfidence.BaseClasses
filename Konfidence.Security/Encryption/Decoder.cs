@@ -7,16 +7,16 @@ namespace Konfidence.Security.Encryption
 {
     public class Decoder : IDisposable
     {
-        private KeyEncryption _Decoder;
-        private bool _Disposed;
+        private KeyEncryption _decoder;
+        private bool _disposed;
 
         public Decoder(string privateKey)
         {
-            _Disposed = false;
+            _disposed = false;
 
-            _Decoder = new KeyEncryption(string.Empty, new Configuration());
+            _decoder = new KeyEncryption(string.Empty, new Configuration());
 
-            _Decoder.ReadKey(privateKey);
+            _decoder.ReadKey(privateKey);
         }
 
         public string Decrypt(object[] encryptedData)
@@ -25,14 +25,14 @@ namespace Konfidence.Security.Encryption
             var encryptedDataList = new ArrayList();
             var rawData = new StringBuilder();
 
-            foreach (object objectItem in encryptedData)
+            foreach (var objectItem in encryptedData)
             {
                 encryptedDataList.Add(objectItem);
             }
 
             foreach (byte[] byteData in encryptedDataList)
             {
-                byte[] decryptedByteData = _Decoder.RsaProvider.Decrypt(byteData, false);
+                var decryptedByteData = _decoder.RsaProvider.Decrypt(byteData, false);
 
                 rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
             }
@@ -54,16 +54,16 @@ namespace Konfidence.Security.Encryption
         protected virtual void Dispose(bool disposing)
         {
 
-            if (!_Disposed)
+            if (!_disposed)
             {
-                if (_Decoder.IsAssigned())
+                if (_decoder.IsAssigned())
                 {
-                    _Decoder.Dispose(); // resources vrijgeven.
+                    _decoder.Dispose(); // resources vrijgeven.
 
-                    _Decoder = null;
+                    _decoder = null;
                 }
             }
-            _Disposed = true;
+            _disposed = true;
 
         }
 

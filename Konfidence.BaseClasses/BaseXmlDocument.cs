@@ -12,7 +12,6 @@ namespace Konfidence.Base
         private string _rootNameSpaceUri;
         private XmlNamespaceManager _xmlNamespaceManager;
 
-        #region read only properties
         public XmlElement Root => _root;
 
         public string FileName => _fullFileName;
@@ -22,8 +21,6 @@ namespace Konfidence.Base
         public string RootNameSpaceUri => _rootNameSpaceUri;
 
         public XmlNamespaceManager XmlNamespaceManager => _xmlNamespaceManager;
-
-        #endregion read only properties
 
         public override void Load(string filename)
         {

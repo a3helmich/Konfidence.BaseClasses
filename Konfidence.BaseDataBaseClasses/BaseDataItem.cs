@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Xml;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
@@ -11,11 +12,12 @@ using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
-	public abstract class BaseDataItem: BaseItem, IBaseDataItem
+	public abstract class BaseDataItem: IBaseDataItem
 	{
+	    [UsedImplicitly]
         public const string BaseLanguage = "NL";
 
-		public bool WithLanguage = false;
+		public bool WithLanguage;
 
         private bool _isSelected;
         private bool _isEditing;
@@ -28,7 +30,17 @@ namespace Konfidence.BaseData
 
 	    private NinjectDependencyResolver _ninject;
 
-	    private IKernel Kernel
+	    protected BaseDataItem()
+	    {
+	        WithLanguage = false;
+	        _isSelected = false;
+	        _isEditing = false;
+	        _isInitialized = false;
+
+	        DbParameterObjectList = new DbParameterObjectList();
+	    }
+
+        private IKernel Kernel
 	    {
 	        get
 	        {
@@ -103,15 +115,6 @@ namespace Konfidence.BaseData
             }
         }
 
-	    protected BaseDataItem()
-	    {
-            _isSelected = false;
-		    _isEditing = false;
-	        _isInitialized = false;
-
-	        DbParameterObjectList = new DbParameterObjectList();
-        }
-
 		public  void SetId(int id)
 		{
 			Id = id;
@@ -156,6 +159,7 @@ namespace Konfidence.BaseData
         #region properties
         protected string ConnectionName { get; set; } = string.Empty;
 
+        [UsedImplicitly]
 	    protected string ServiceName { get; set; } = string.Empty;
 
 	    public string AutoIdField { get; set; } = string.Empty;
@@ -179,36 +183,43 @@ namespace Konfidence.BaseData
             }
         }
 
+        [UsedImplicitly]
 	    protected internal void GetAutoUpdateField(string fieldName, out byte fieldValue)
 	    {
 	        fieldValue = GetAutoUpdateFieldInt8(fieldName);
 	    }
 
+	    [UsedImplicitly]
 	    protected internal void GetAutoUpdateField(string fieldName, out short fieldValue)
 	    {
 	        fieldValue = GetAutoUpdateFieldInt16(fieldName);
 	    }
 
+	    [UsedImplicitly]
         protected internal void GetAutoUpdateField(string fieldName, out int fieldValue)
         {
             fieldValue = GetAutoUpdateFieldInt32(fieldName);
         }
 
+	    [UsedImplicitly]
 	    protected internal void GetAutoUpdateField(string fieldName, out long fieldValue)
 	    {
 	        fieldValue = GetAutoUpdateFieldInt64(fieldName);
 	    }
 
+	    [UsedImplicitly]
         protected internal void GetAutoUpdateField(string fieldName, out Guid fieldValue)
         {
             fieldValue = GetAutoUpdateFieldGuid(fieldName);
         }
 
+	    [UsedImplicitly]
         protected internal void GetAutoUpdateField(string fieldName, out string fieldValue)
         {
             fieldValue = GetAutoUpdateFieldString(fieldName);
         }
 
+	    [UsedImplicitly]
         protected internal void GetAutoUpdateField(string fieldName, out bool fieldValue)
         {
             fieldValue = GetAutoUpdateFieldBool(fieldName);
@@ -219,11 +230,13 @@ namespace Konfidence.BaseData
             fieldValue = GetAutoUpdateFieldDateTime(fieldName);
         }
 
+	    [UsedImplicitly]
         protected internal void GetAutoUpdateField(string fieldName, out TimeSpan fieldValue)
         {
             fieldValue = GetAutoUpdateFieldTimeSpan(fieldName);
         }
 
+	    [UsedImplicitly]
         protected internal void GetAutoUpdateField(string fieldName, out decimal fieldValue)
         {
             fieldValue = GetAutoUpdateFieldDecimal(fieldName);
@@ -429,6 +442,7 @@ namespace Konfidence.BaseData
 	        field = GetFieldInt64(fieldName);
 	    }
 
+	    [UsedImplicitly]
         protected void GetField(string fieldName, out Guid field)
         {
             field = GetFieldGuid(fieldName);
@@ -449,16 +463,19 @@ namespace Konfidence.BaseData
             field = GetFieldDateTime(fieldName);
         }
 
+	    [UsedImplicitly]
         protected void GetField(string fieldName, out TimeSpan field)
         {
             field = GetFieldTimeSpan(fieldName);
         }
 
+	    [UsedImplicitly]
         protected void GetField(string fieldName, ref XmlDocument field)
         {
             field.LoadXml(GetFieldString(fieldName));
         }
 
+	    [UsedImplicitly]
         protected void GetField(string fieldName, out decimal field)
         {
             field = GetFieldDecimal(fieldName);
@@ -678,6 +695,7 @@ namespace Konfidence.BaseData
         #endregion
 
         #region SetParameter Methods
+	    [UsedImplicitly]
 	    protected void SetParameter(string fieldName, byte value)
 	    {
 	        SetField(fieldName, value);
@@ -688,21 +706,25 @@ namespace Konfidence.BaseData
 			SetField(fieldName, value);
 		}
 
+	    [UsedImplicitly]
 	    protected void SetParameter(string fieldName, short value)
 	    {
 	        SetField(fieldName, value);
 	    }
 
+	    [UsedImplicitly]
 	    protected void SetParameter(string fieldName, long value)
 	    {
 	        SetField(fieldName, value);
 	    }
 
+	    [UsedImplicitly]
 	    protected void SetParameter(string fieldName, decimal value)
 	    {
 	        SetField(fieldName, value);
 	    }
 
+	    [UsedImplicitly]
         protected void SetParameter(string fieldName, Guid value)
         {
             SetField(fieldName, value);
@@ -713,16 +735,19 @@ namespace Konfidence.BaseData
 			SetField(fieldName, value);
 		}
 
+	    [UsedImplicitly]
 		protected void SetParameter(string fieldName, bool value)
 		{
 			SetField(fieldName, value);
 		}
 
+	    [UsedImplicitly]
 		protected void SetParameter(string fieldName, DateTime value)
 		{
 			SetField(fieldName, value);
 		}
 
+	    [UsedImplicitly]
         protected void SetParameter(string fieldName, TimeSpan value)
         {
             SetField(fieldName, value);
@@ -774,6 +799,7 @@ namespace Konfidence.BaseData
             GetItem(storedProcedure);
 		}
 
+	    [UsedImplicitly]
         protected void GetItem(string storedProcedure, Guid guidId)
         {
             InternalInitializeDataItem();
@@ -832,8 +858,9 @@ namespace Konfidence.BaseData
 			Id = 0;
 
             AfterDelete();
-        } 
+        }
 
+	    [UsedImplicitly]
         protected internal int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList)
         {
             return Client.ExecuteCommand(storedProcedure, parameterObjectList);

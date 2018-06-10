@@ -1,9 +1,8 @@
-﻿using Konfidence.Base;
-using Konfidence.BaseDataInterfaces;
+﻿using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.RepositoryInterface.Objects
 {
-    public class RetrieveParameters : BaseItem
+    public class RetrieveParameters 
     {
         private readonly IBaseDataItem _dataItem;
 

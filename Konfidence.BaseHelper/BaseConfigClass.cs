@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Security.Permissions;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseHelper
@@ -22,15 +23,8 @@ namespace Konfidence.BaseHelper
         private const string EventLogNamePrefix = "Kit_";
         private string _eventLogName;
 
-        #region ApplicationName
-        public static string ApplicationName
-        {
-            get
-            {
-                return _applicationEventLogName;
-            }
-        }
-        #endregion
+        [UsedImplicitly]
+        public static string ApplicationName => _applicationEventLogName;
 
 
         public EventLog EventLog
@@ -76,8 +70,8 @@ namespace Konfidence.BaseHelper
             }
         }
 
-        public BaseConfigClass()
-            : this(string.Empty)
+        [UsedImplicitly]
+        public BaseConfigClass() : this(string.Empty)
         {
 
         }

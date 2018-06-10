@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Services;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
@@ -70,13 +71,14 @@ namespace Konfidence.BaseData
 		[WebMethod]
         public List<IDbParameterObjectList> BuildItemList()
 		{
-			var baseDataItemList = GetNewDataItemList();
+			//var baseDataItemList = GetNewDataItemList();
 
 			//return baseDataItemList.ConvertToListOfParameterObjectList();
 
 		    return null;
 		}
 
+        [UsedImplicitly]
 	    private static IDbParameterObjectList GetNewDataItemList()
 	    {
 	        throw new NotImplementedException();

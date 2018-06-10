@@ -62,9 +62,6 @@
     <Compile Include="..\Konfidence.BaseClasses\BaseItem.cs">
       <Link>BaseItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.BaseClasses\BaseItemList.cs">
-      <Link>BaseItemList.cs</Link>
-    </Compile>
     <Compile Include="..\Konfidence.BaseClasses\BaseParameterObject.cs">
       <Link>BaseParameterObject.cs</Link>
     </Compile>

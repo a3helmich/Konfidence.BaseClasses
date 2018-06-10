@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
@@ -237,6 +238,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
+        [UsedImplicitly]
         public int ExecuteNonQuery(string storedProcedure, DbParameterObjectList parameterList)
         {
             return ExecuteNonQueryStoredProcedure(storedProcedure, parameterList);

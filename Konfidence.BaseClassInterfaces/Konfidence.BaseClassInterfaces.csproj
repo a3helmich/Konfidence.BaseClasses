@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBaseItem.cs" />
-    <Compile Include="IBaseItemList.cs" />
+    <Compile Include="IBaseItem.obsolete.cs" />
+    <Compile Include="IBaseItemList.obsolete.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

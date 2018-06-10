@@ -1,5 +1,8 @@
-﻿namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
+﻿using JetBrains.Annotations;
+
+namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
+    [UsedImplicitly]
     public class DbSiteMapProviderLocal : DbSiteMapProvider
     {
         public DbSiteMapProviderLocal()

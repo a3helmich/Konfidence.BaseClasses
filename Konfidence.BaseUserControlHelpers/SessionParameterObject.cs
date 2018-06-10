@@ -1,61 +1,20 @@
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
     public class SessionParameterObject : BaseParameterObject
 	{
-		private int _PrimaryKey; // default value 0 
-		private int _ForeignKey; // default value 0
+		public int PrimaryKey { get; set; }
 
-        #region properties
-		public int PrimaryKey
-		{
-			get
-			{
-				return _PrimaryKey;
-			}
-			set
-			{
-				_PrimaryKey = value;
-			}
-		}
+	    [UsedImplicitly]
+	    public bool IsPrimaryKeyAssigned => PrimaryKey >= 1;
 
-		public bool IsPrimaryKeyAssigned
-		{
-			get
-			{
-				if (_PrimaryKey < 1)
-					return false;
+	    public int ForeignKey { get; set; }
 
-				return true;
-			}
-		}
+	    [UsedImplicitly]
+	    public bool IsForeignKeyAssigned => ForeignKey >= 1;
 
-		public int ForeignKey
-		{
-			get
-			{
-				return _ForeignKey;
-			}
-			set
-			{
-				_ForeignKey = value;
-			}
-		}
-
-		public bool IsForeignKeyAssigned
-		{
-			get
-			{
-				if (_ForeignKey < 1)
-					return false;
-
-				return true;
-			}
-		}
-
-        public string SessionTicket { get; set; }
-
-        #endregion
+	    public string SessionTicket { get; set; }
 	}
 }

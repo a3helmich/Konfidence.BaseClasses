@@ -5,9 +5,9 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
 {
     public class PageSettingXmlDocument : BaseXmlDocument
     {
-        private PageSettingDictionary _PageSettingDictionary;
-        private string _MenuUrl = string.Empty;
-        private string _LogonUrl = string.Empty;
+        private PageSettingDictionary _pageSettingDictionary;
+        private string _menuUrl = string.Empty;
+        private string _logonUrl = string.Empty;
 
         public string MenuUrl
         {
@@ -15,7 +15,7 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
             {
                 if (PageSettingDictionary.Count > 0)
                 {
-                    return _MenuUrl;
+                    return _menuUrl;
                 }
 
                 return string.Empty;
@@ -28,7 +28,7 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
             {
                 if (PageSettingDictionary.Count > 0)
                 {
-                    return _LogonUrl;
+                    return _logonUrl;
                 }
 
                 return string.Empty;
@@ -39,11 +39,11 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
         {
             get
             {
-                if (!_PageSettingDictionary.IsAssigned())
+                if (!_pageSettingDictionary.IsAssigned())
                 {
-                    _PageSettingDictionary = new PageSettingDictionary();
+                    _pageSettingDictionary = new PageSettingDictionary();
 
-                    XmlNodeList pageSettingNodeList = Root.SelectNodes("Page");
+                    var pageSettingNodeList = Root.SelectNodes("Page");
 
                     if (pageSettingNodeList.IsAssigned())
                     {
@@ -51,24 +51,24 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
                         {
                             var pageSetting = new PageSetting(pageSettingElement);
 
-                            _PageSettingDictionary.Add(pageSetting.PageName.ToLowerInvariant(), pageSetting);
+                            _pageSettingDictionary.Add(pageSetting.PageName.ToLowerInvariant(), pageSetting);
 
-                            string role = pageSetting.Role.ToLowerInvariant();
+                            var role = pageSetting.Role.ToLowerInvariant();
 
                             switch (role)
                             {
                                 case "login":
-                                    _LogonUrl = pageSetting.PageName;
+                                    _logonUrl = pageSetting.PageName;
                                     break;
                                 case "mainmenu":
-                                    _MenuUrl = pageSetting.PageName;
+                                    _menuUrl = pageSetting.PageName;
                                     break;
                             }
                         }
                     }
                 }
 
-                return _PageSettingDictionary;
+                return _pageSettingDictionary;
             }
         }
     }

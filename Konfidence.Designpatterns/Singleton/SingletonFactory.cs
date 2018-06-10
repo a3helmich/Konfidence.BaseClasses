@@ -6,7 +6,7 @@ using Konfidence.Base;
 
 namespace Konfidence.DesignPatterns.Singleton
 {
-    public class SingletonFactory : BaseItem
+    public class SingletonFactory
     {
         private static readonly Hashtable SingletonTable = new Hashtable();
         private static readonly TypeFilter SingletonFilter = SingletonInterfaceFilter;
@@ -31,9 +31,9 @@ namespace Konfidence.DesignPatterns.Singleton
 
             const string warningMessage = ": class must implement ISingleton interface"; 
 
-            string iSingletonName = typeof(ISingleton).FullName;
+            var iSingletonName = typeof(ISingleton).FullName;
 
-            Type[] singletonInterfaces = singletonType.FindInterfaces(SingletonFilter, iSingletonName);
+            var singletonInterfaces = singletonType.FindInterfaces(SingletonFilter, iSingletonName);
 
             if (singletonInterfaces.Length == 0)
             {
@@ -43,7 +43,7 @@ namespace Konfidence.DesignPatterns.Singleton
             var mutex = new Mutex();
             mutex.WaitOne();
 
-            object singleton = SingletonTable[singletonType];
+            var singleton = SingletonTable[singletonType];
 
             if (!singleton.IsAssigned())
             {

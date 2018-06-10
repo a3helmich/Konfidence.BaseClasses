@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Web;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseUserControlHelpers.Login;
@@ -9,29 +10,22 @@ using Konfidence.BaseUserControlHelpers.PageSetting;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class BaseWebPresenter : BaseItem
+    public class BaseWebPresenter 
     {
-        private string _DataDirectory = string.Empty;
-        private string _PageName = string.Empty;
+        private string _dataDirectory = string.Empty;
+        private string _pageName = string.Empty;
 
-        private PageSettingDictionary _PageSettingDictionary;
-        private PageSettingXmlDocument _PageSettingDocument;
+        private PageSettingDictionary _pageSettingDictionary;
+        private PageSettingXmlDocument _pageSettingDocument;
 
-        private readonly LoginContext _LoginContext = new LoginContext();
+        private readonly LoginContext _loginContext = new LoginContext();
 
-        public string PageName
-        {
-            get { return _PageName; }
-        }
+        public string PageName => _pageName;
 
-        public string MenuPageName
-        {
-            get
-            {
-                return PageSettingDocument.MenuUrl;
-            }
-        }
+        [UsedImplicitly]
+        public string MenuPageName => PageSettingDocument.MenuUrl;
 
+        [UsedImplicitly]
         public string MenuUrl
         {
             get
@@ -45,13 +39,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        public string LogonPageName
-        {
-            get
-            {
-                return PageSettingDocument.LogonUrl;
-            }
-        }
+        public string LogonPageName => PageSettingDocument.LogonUrl;
 
         public string LogonUrl
         {
@@ -66,30 +54,31 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [UsedImplicitly]
         protected BaseDataItem CurrentInternalAccount
         {
-            get { return _LoginContext.CurrentInternalAccount; }
-            set { _LoginContext.CurrentInternalAccount = value; }
+            get => _loginContext.CurrentInternalAccount;
+            set => _loginContext.CurrentInternalAccount = value;
         }
 
-        public bool IsLocal
-        {
-            get { return HttpContext.Current.Request.IsLocal; }
-        }
+        [UsedImplicitly]
+        public bool IsLocal => HttpContext.Current.Request.IsLocal;
 
+        [UsedImplicitly]
         protected void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
         {
-            _LoginContext.SessionLogon(fullName, email, password, loginPassword, isAdministrator);
+            _loginContext.SessionLogon(fullName, email, password, loginPassword, isAdministrator);
         }
 
         internal void SetPageName(string pageName)
         {
-            _PageName = pageName;
+            _pageName = pageName;
         }
 
+        [UsedImplicitly]
         public virtual void LogOff()
         {
-            _LoginContext.LogOff();
+            _loginContext.LogOff();
         }
 
         /// <summary>
@@ -99,19 +88,19 @@ namespace Konfidence.BaseUserControlHelpers
         {
             get
             {
-                if (!_DataDirectory.IsAssigned())
+                if (!_dataDirectory.IsAssigned())
                 {
-                    _DataDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                    _dataDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
                     if (AppDomain.CurrentDomain.GetData("DataDirectory").IsAssigned())
                     {
-                        _DataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+                        _dataDirectory = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
                     }
 
-                    _DataDirectory += @"\";
+                    _dataDirectory += @"\";
                 }
 
-                return _DataDirectory;
+                return _dataDirectory;
             }
         }
 
@@ -135,6 +124,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// </summary>
         /// <param name="serverPath">the path like 'c:\...\foldername'</param>
         /// <returns>the url '\foldername'</returns>
+        [UsedImplicitly]
         public static string ResolveClientUrl(string serverPath)
         {
             return serverPath.Replace(ResolveServerPath(ApplicationUrl), @"~");
@@ -145,9 +135,10 @@ namespace Konfidence.BaseUserControlHelpers
         /// </summary>
         /// <param name="pageUrl">url like \folder\page</param>
         /// <returns>http:\\...\folder\page</returns>
+        [UsedImplicitly]
         public string ClientUrl(string pageUrl)
         {
-            string appRoot = @"http://" + HttpContext.Current.Request.Url.Host;
+            var appRoot = @"http://" + HttpContext.Current.Request.Url.Host;
 
             return appRoot + AbsolutePageUrl(pageUrl);
         }
@@ -155,24 +146,20 @@ namespace Konfidence.BaseUserControlHelpers
         /// <summary>
         /// returns the application path like 'c:\...\foldername'
         /// </summary>
-        public static string PhysicalApplicationPath
-        {
-            get { return AppDomain.CurrentDomain.BaseDirectory; }
-        }
+        [UsedImplicitly]
+        public static string PhysicalApplicationPath => AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
         /// return the application Url like '\applicationFoldername'
         /// </summary>
-        public static string ApplicationUrl
-        {
-            get { return VirtualPathUtility.ToAbsolute(@"~").TrimEnd('/'); }
-        }
+        public static string ApplicationUrl => VirtualPathUtility.ToAbsolute(@"~").TrimEnd('/');
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pageUrl">Url like 'http:\\...\foldername'</param>
         /// <returns>Url like '~\foldername'</returns>
+        [UsedImplicitly]
         public string RelativePageUrl(string pageUrl)
         {
             return VirtualPathUtility.ToAppRelative(pageUrl);
@@ -188,56 +175,43 @@ namespace Konfidence.BaseUserControlHelpers
             return VirtualPathUtility.ToAbsolute(pageUrl);
         }
 
-        public string PageUrl
-        {
-            get { return HttpContext.Current.Request.Url.AbsolutePath; }
-        }
+        [UsedImplicitly]
+        public string PageUrl => HttpContext.Current.Request.Url.AbsolutePath;
 
         public string FromUrl
         {
-            get { return HttpContext.Current.Session[InternalSessionAccount.FROM_URL] as string; }
-            set { HttpContext.Current.Session[InternalSessionAccount.FROM_URL] = value; }
+            get => HttpContext.Current.Session[InternalSessionAccount.FROM_URL] as string;
+            set => HttpContext.Current.Session[InternalSessionAccount.FROM_URL] = value;
         }
 
-        public string Email
-        {
-            get { return _LoginContext.Email; }
-        }
+        [UsedImplicitly]
+        public string Email => _loginContext.Email;
 
-        public bool IsLoggedIn
-        {
-            get { return _LoginContext.IsLoggedIn; }
-        }
+        public bool IsLoggedIn => _loginContext.IsLoggedIn;
 
-        public bool IsAuthorized
-        {
-            get { return _LoginContext.IsAuthorized; }
-        }
+        [UsedImplicitly]
+        public bool IsAuthorized => _loginContext.IsAuthorized;
 
-        public string LoginErrorMessage
-        {
-            get { return _LoginContext.LoginErrorMessage; }
-        }
+        [UsedImplicitly]
+        public string LoginErrorMessage => _loginContext.LoginErrorMessage;
 
-        public bool IsAdministrator
-        {
-            get { return _LoginContext.IsAdministrator; }
-        }
+        [UsedImplicitly]
+        public bool IsAdministrator => _loginContext.IsAdministrator;
 
         protected PageSettingXmlDocument PageSettingDocument
         {
             get
             {
-                if (!_PageSettingDocument.IsAssigned())
+                if (!_pageSettingDocument.IsAssigned())
                 {
-                    _PageSettingDocument = new PageSettingXmlDocument();
+                    _pageSettingDocument = new PageSettingXmlDocument();
 
                     CheckPageSettingFile();
 
-                    _PageSettingDocument.Load(PageSettingFileName);
+                    _pageSettingDocument.Load(PageSettingFileName);
                 }
 
-                return _PageSettingDocument;
+                return _pageSettingDocument;
             }
         }
 
@@ -259,24 +233,18 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        private string PageSettingFileName
-        {
-            get
-            {
-                return DataDirectory + "PageSetting.nl.xml";
-            }
-        }
+        private string PageSettingFileName => DataDirectory + "PageSetting.nl.xml";
 
         public PageSettingDictionary PageSettingDictionary
         {
             get
             {
-                if (!_PageSettingDictionary.IsAssigned())
+                if (!_pageSettingDictionary.IsAssigned())
                 {
-                    _PageSettingDictionary = PageSettingDocument.PageSettingDictionary;
+                    _pageSettingDictionary = PageSettingDocument.PageSettingDictionary;
                 }
 
-                return _PageSettingDictionary;
+                return _pageSettingDictionary;
             }
         }
 

@@ -117,151 +117,151 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_EmailTextBox.AccessibleName" xml:space="preserve">
+  <data name="_emailTextBox.AccessibleName" xml:space="preserve">
     <value>Email</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="_EmailTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_emailTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>64, 50</value>
   </data>
-  <data name="_EmailTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_emailTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_EmailTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="_emailTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.Name" xml:space="preserve">
-    <value>_EmailTextBox</value>
+  <data name="&gt;&gt;_emailTextBox.Name" xml:space="preserve">
+    <value>_emailTextBox</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;_emailTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_emailTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_EmailTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_emailTextBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_CancelButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="_cancelButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="_CancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_cancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_CancelButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_cancelButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 82</value>
   </data>
-  <data name="_CancelButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_cancelButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="_CancelButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="_cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="_CancelButton.Text" xml:space="preserve">
+  <data name="_cancelButton.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;_CancelButton.Name" xml:space="preserve">
-    <value>_CancelButton</value>
+  <data name="&gt;&gt;_cancelButton.Name" xml:space="preserve">
+    <value>_cancelButton</value>
   </data>
-  <data name="&gt;&gt;_CancelButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;_cancelButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_CancelButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_CancelButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_cancelButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="_ButtonOk.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="_buttonOk.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="_ButtonOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_buttonOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_ButtonOk.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_buttonOk.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 82</value>
   </data>
-  <data name="_ButtonOk.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_buttonOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="_ButtonOk.TabIndex" type="System.Int32, mscorlib">
+  <data name="_buttonOk.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="_ButtonOk.Text" xml:space="preserve">
+  <data name="_buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Name" xml:space="preserve">
-    <value>_ButtonOk</value>
+  <data name="&gt;&gt;_buttonOk.Name" xml:space="preserve">
+    <value>_buttonOk</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Type" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="_EmailLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_emailLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_EmailLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_emailLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 50</value>
   </data>
-  <data name="_EmailLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_emailLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 18</value>
   </data>
-  <data name="_EmailLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_emailLabel.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="_EmailLabel.Text" xml:space="preserve">
+  <data name="_emailLabel.Text" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="_EmailLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_emailLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.Name" xml:space="preserve">
-    <value>_EmailLabel</value>
+  <data name="&gt;&gt;_emailLabel.Name" xml:space="preserve">
+    <value>_emailLabel</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_emailLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_emailLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_EmailLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_emailLabel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="_LabelDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_labelDescription.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_LabelDescription.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_labelDescription.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 10</value>
   </data>
-  <data name="_LabelDescription.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_labelDescription.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 30</value>
   </data>
-  <data name="_LabelDescription.TabIndex" type="System.Int32, mscorlib">
+  <data name="_labelDescription.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="_LabelDescription.Text" xml:space="preserve">
+  <data name="_labelDescription.Text" xml:space="preserve">
     <value>Enter your email address and you will receive your settings file shortly.</value>
   </data>
-  <data name="_LabelDescription.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_labelDescription.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;_LabelDescription.Name" xml:space="preserve">
-    <value>_LabelDescription</value>
+  <data name="&gt;&gt;_labelDescription.Name" xml:space="preserve">
+    <value>_labelDescription</value>
   </data>
-  <data name="&gt;&gt;_LabelDescription.Type" xml:space="preserve">
+  <data name="&gt;&gt;_labelDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_LabelDescription.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_labelDescription.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_LabelDescription.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_labelDescription.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

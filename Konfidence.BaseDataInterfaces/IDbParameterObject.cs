@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using Konfidence.BaseClassInterfaces;
 
 namespace Konfidence.BaseDataInterfaces
 {

@@ -2,7 +2,7 @@
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class BaseWebServicePresenter : BaseItem
+    public class BaseWebServicePresenter 
     {
     }
 }

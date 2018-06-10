@@ -1,13 +1,16 @@
 using System.Globalization;
 using System.IO;
+using System.Linq;
+using JetBrains.Annotations;
 
 namespace Konfidence.Base
 {
     /// <summary>
     /// Summary description for AllowedFileItem
     /// </summary>
-    public class AllowedFileItem: BaseItem
+    public class AllowedFileItem
     {
+        [UsedImplicitly]
         public virtual string AllowedExtensions => "all";
 
         protected virtual string[] GetAllowedExtensions()
@@ -15,6 +18,7 @@ namespace Konfidence.Base
             return null;
         }
 
+        [UsedImplicitly]
         public bool IsAllowedExtension(string fileName)
         {
             var allowedExtensions = GetAllowedExtensions();
@@ -26,15 +30,7 @@ namespace Konfidence.Base
                 return true;
             }
 
-            foreach (var allowedExtension in allowedExtensions)
-            {
-                if (string.Compare(fileExtension, allowedExtension, true, CultureInfo.InvariantCulture) == 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return allowedExtensions.Any(allowedExtension => string.Compare(fileExtension, allowedExtension, true, CultureInfo.InvariantCulture) == 0);
         }	
     }
 }
