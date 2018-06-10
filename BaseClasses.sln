@@ -155,7 +155,6 @@ Global
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|x86.ActiveCfg = Release|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -165,7 +164,6 @@ Global
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|x86.ActiveCfg = Release|Any CPU
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3D3FD6C6-3583-4047-B960-EF45030FBDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -443,8 +441,8 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
