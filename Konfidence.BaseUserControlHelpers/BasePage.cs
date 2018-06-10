@@ -1,6 +1,7 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
@@ -18,10 +19,8 @@ namespace Konfidence.BaseUserControlHelpers
         protected abstract void PresenterToForm();
         protected abstract void SaveDefaults();
 
-        private bool _isExpired; 
-		private bool _isRefreshed;
+	    private bool _isRefreshed;
 
-		#region properties
         public T Presenter
         {
             get
@@ -37,7 +36,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 		public bool IsRefreshed => _isRefreshed;
 
-	    public bool IsExpired => _isExpired;
+	    public bool IsExpired { get; private set; }
 
 	    protected bool IsRestoreViewState
         {
@@ -67,15 +66,13 @@ namespace Konfidence.BaseUserControlHelpers
             return string.Empty;
         }
 
-		#endregion
-
 	    protected BasePage()
         {
-            _isExpired = false;
+            IsExpired = false;
             _isRefreshed = false;
         }
 
-        #region readonly session properties
+	    [UsedImplicitly]
         protected string CurrentDomainExtension
         {
             get
@@ -89,6 +86,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string CurrentLanguage
         {
             get
@@ -102,6 +100,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string CurrentDnsName
         {
             get
@@ -115,6 +114,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string RefererDnsName
         {
             get
@@ -128,6 +128,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string CurrentPagePath
         {
             get
@@ -153,7 +154,6 @@ namespace Konfidence.BaseUserControlHelpers
                 return string.Empty;
             }
         }
-        #endregion readonly session properties
 
         private void BuildPresenter()
         {
@@ -194,11 +194,13 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected void Page_Init(object sender, EventArgs e)
         {
             BuildPresenter();
         }
 
+	    [UsedImplicitly]
         protected string GetParameter(string name)
         {
             var param = Request.QueryString[name];
@@ -211,6 +213,7 @@ namespace Konfidence.BaseUserControlHelpers
             return param;
         }
 
+	    [UsedImplicitly]
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Presenter.IsLoggedIn && Presenter.IsLogonRequired)
@@ -231,6 +234,7 @@ namespace Konfidence.BaseUserControlHelpers
             FormToPresenter();
         }
 
+	    [UsedImplicitly]
         protected void Page_PreRender(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
@@ -255,6 +259,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected Control FindUserControlByType(ControlCollection controlCollection, Type findType)
         {
             return BasePageHelper.FindUserControlByType(controlCollection, findType);
@@ -351,7 +356,7 @@ namespace Konfidence.BaseUserControlHelpers
 
 			if (!currentSessionId.IsAssigned() && currentSessionId == Session.SessionID && Session.IsNewSession)
 			{
-				_isExpired = true;
+				IsExpired = true;
 			}
 
              //bewaar de currentSessionId, zodat deze voor UpdateSessionState() bij de 

@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseHelper;
 
@@ -16,22 +17,23 @@ namespace Konfidence.BaseWindowForms
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private readonly Container _Components = null;
+        private readonly Container _components = null;
         public Panel BaseFrameLeftContainerPanel;
         public Panel BaseFrameRightContainerPanel;
         public Splitter FrameSplitter;
-        private bool _ShowDesignHelper;
+        private bool _showDesignHelper;
 
+        [UsedImplicitly]
         public bool ShowDesignHelper
         {
             get
             {
                 Refresh();
-                return _ShowDesignHelper;
+                return _showDesignHelper;
             }
             set
             {
-                _ShowDesignHelper = value;
+                _showDesignHelper = value;
                 Refresh();
             }
         }
@@ -47,7 +49,7 @@ namespace Konfidence.BaseWindowForms
         {
             base.OnPaint(e);
 
-            if (DesignMode && _ShowDesignHelper)
+            if (DesignMode && _showDesignHelper)
             {
                 //Design time painting here
                 BaseFrameLeftContainerPanel.BackColor = Color.FromArgb(255, 255, 128);
@@ -63,9 +65,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (_Components.IsAssigned())
+                if (_components.IsAssigned())
                 {
-                    _Components.Dispose();
+                    _components.Dispose();
                 }
             }
             base.Dispose(disposing);

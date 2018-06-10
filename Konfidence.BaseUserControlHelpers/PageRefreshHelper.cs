@@ -11,11 +11,11 @@ namespace Konfidence.BaseUserControlHelpers
 
 		public static bool Check(Page page, HttpContext context, bool asyncPostback)
 		{
-			bool isRefresh = true;
+			var isRefresh = true;
 
-			int sessionTicket = GetSessionTicket(context, page);
+			var sessionTicket = GetSessionTicket(context, page);
 
-			int pageTicket = GetPageTicket(context, sessionTicket);
+			var pageTicket = GetPageTicket(context, sessionTicket);
 
 			if (pageTicket > sessionTicket || (pageTicket == sessionTicket && pageTicket == 0))
 			{

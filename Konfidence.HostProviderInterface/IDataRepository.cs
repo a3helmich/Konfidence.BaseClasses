@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
+using JetBrains.Annotations;
 using Konfidence.BaseDataInterfaces;
 using Konfidence.RepositoryInterface.Objects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
@@ -13,6 +14,7 @@ namespace Konfidence.RepositoryInterface
 
         IDataReader DataReader { get; }
 
+        [UsedImplicitly]
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
 
         int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, IDbParameterObjectList parameterObjectList);
@@ -31,6 +33,7 @@ namespace Konfidence.RepositoryInterface
 
         int ExecuteNonQuery(string textCommand);
 
+        [UsedImplicitly]
         int ExecuteNonQuery(DbCommand commandType);
 
         bool ObjectExists(string objectName, string collection);

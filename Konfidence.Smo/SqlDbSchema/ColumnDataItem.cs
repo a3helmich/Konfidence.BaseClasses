@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using JetBrains.Annotations;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -148,6 +149,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
         }
 
+        [UsedImplicitly]
         public ColumnDataItem(string name) : this()
         {
             Name = name;
@@ -255,7 +257,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             IsLockInfo = isLockInfo;
         }
-        
+
+        [UsedImplicitly]
         public string NewGuidPropertyValue => GetDefaultPropertyValue(SqlDataType, "newguid");
 
         internal bool IsGuidField

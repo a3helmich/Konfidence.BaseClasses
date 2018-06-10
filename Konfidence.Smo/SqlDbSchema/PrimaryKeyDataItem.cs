@@ -1,4 +1,6 @@
-﻿namespace Konfidence.SqlHostProvider.SqlDbSchema
+﻿using JetBrains.Annotations;
+
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class PrimaryKeyDataItem : SchemaBaseDataItem
     {
@@ -6,6 +8,7 @@
 
         private string _constraintName = string.Empty;
 
+        [UsedImplicitly]
         public int PrimaryKeyId => Id;
 
         public string ConstraintName

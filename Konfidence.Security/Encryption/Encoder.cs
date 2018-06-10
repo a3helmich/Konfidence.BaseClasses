@@ -5,27 +5,21 @@ using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
 {
-    public class Encoder : BaseItem, IDisposable
+    public class Encoder : IDisposable
     {
-        private KeyEncryption _Encoder;
-        private bool _Disposed;
+        private KeyEncryption _encoder;
+        private bool _disposed;
 
         public Encoder(string publicKey)
         {
-            _Disposed = false;
+            _disposed = false;
 
-            _Encoder = new KeyEncryption(string.Empty, new Configuration());
+            _encoder = new KeyEncryption(string.Empty, new Configuration());
 
-            _Encoder.ReadKey(publicKey);
+            _encoder.ReadKey(publicKey);
         }
 
-        public int KeySize
-        {
-            get
-            {
-                return _Encoder.RsaProvider.KeySize;
-            }
-        }
+        public int KeySize => _encoder.RsaProvider.KeySize;
 
         public object[] Encrypt(string rawData)
         {
@@ -35,15 +29,15 @@ namespace Konfidence.Security.Encryption
             {
                 byteList = new ArrayList();
 
-                string partialString = rawData;
+                var partialString = rawData;
 
-                while (partialString.Length > _Encoder.PackageSize)
+                while (partialString.Length > _encoder.PackageSize)
                 {
-                    string partialStringBlock = partialString.Substring(0, _Encoder.PackageSize);
+                    var partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
 
                     byteList.Add(GetEnryptedDataBlock(partialStringBlock));
 
-                    partialString = GetNextPartialString(partialString, _Encoder.PackageSize);
+                    partialString = GetNextPartialString(partialString, _encoder.PackageSize);
                 }
 
                 byteList.Add(GetEnryptedDataBlock(partialString));
@@ -61,14 +55,14 @@ namespace Konfidence.Security.Encryption
         {
             var asciiEncoding = new ASCIIEncoding();
 
-            byte[] byteData = asciiEncoding.GetBytes(partialString);
+            var byteData = asciiEncoding.GetBytes(partialString);
 
-            byte[] encryptedData = _Encoder.RsaProvider.Encrypt(byteData, false);
+            var encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
 
             return encryptedData;
         }
 
-        private string GetNextPartialString(string fullString, int packageSize)
+        private static string GetNextPartialString(string fullString, int packageSize)
         {
             return fullString.Substring(packageSize, fullString.Length - packageSize);
         }
@@ -85,16 +79,16 @@ namespace Konfidence.Security.Encryption
         protected virtual void Dispose(bool disposing)
         {
 
-            if (!_Disposed)
+            if (!_disposed)
             {
-                if (_Encoder.IsAssigned())
+                if (_encoder.IsAssigned())
                 {
-                    _Encoder.Dispose(); // resources vrijgeven.
+                    _encoder.Dispose(); // resources vrijgeven.
 
-                    _Encoder = null;
+                    _encoder = null;
                 }
             }
-            _Disposed = true;
+            _disposed = true;
 
         }
 

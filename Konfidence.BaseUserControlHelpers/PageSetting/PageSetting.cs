@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.PageSetting
@@ -10,9 +11,7 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
         {
             get
             {
-                string value;
-
-                GetAttributeValue(Root, "Name", out value);
+                GetAttributeValue(Root, "Name", out var value);
 
                 return value;
             }
@@ -22,34 +21,19 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
         {
             get
             {
-                string role;
-
-                GetValue("Role", out role);
+                GetValue("Role", out string role);
 
                 return role;
             }
         }
 
-        public bool IsLogonRequired
-        {
-            get
-            {
-                if (State.Equals("Authenticated", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
+        public bool IsLogonRequired => State.Equals("Authenticated", StringComparison.InvariantCultureIgnoreCase);
 
         public string State
         {
             get
             {
-                string state;
-
-                GetValue("State", out state);
+                GetValue("State", out string state);
 
                 return state;
             }
@@ -59,21 +43,18 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
         {
             get
             {
-                string signInUrl;
-
-                GetValue("SignInUrl", out signInUrl);
+                GetValue("SignInUrl", out string signInUrl);
 
                 return signInUrl;
             }
         }
 
+        [UsedImplicitly]
         public string HeaderText
         {
             get
             {
-                string headerText;
-
-                GetValue("HeaderText", out headerText);
+                GetValue("HeaderText", out string headerText);
 
                 return headerText;
             }

@@ -1,11 +1,12 @@
 ﻿using Konfidence.Security.Encryption;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.Security
 {
-    public class PrivatePublicKey : BaseItem
+    public class PrivatePublicKey 
     {
         public static int MaxKeySize = -1;
 
@@ -62,6 +63,7 @@ namespace Konfidence.Security
             return true;
         }
 
+        [UsedImplicitly]
         public string Decode(object[] encodedObjectArray)
         {
             var decodedString = string.Empty;
@@ -95,6 +97,7 @@ namespace Konfidence.Security
             return encryptedRegistrationData;
         }
 
+        [UsedImplicitly]
         public static int GetKeySize(string clientPublicKey)
         {
             using (var encoder = new Encoder(clientPublicKey))

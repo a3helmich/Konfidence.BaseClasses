@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -13,12 +14,14 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string Name { get; } = string.Empty;
 
+        [UsedImplicitly]
         public string TableType => SqlConstant.TableType;
 
         public IColumnDataItemList ColumnDataItemList => _columnDataItemList;
 
         public string PrimaryKey => _indexColumnsDataItemList.PrimaryKeyDataItem.ColumnName;
 
+        [UsedImplicitly]
         public string PrimaryKeyDataType => _indexColumnsDataItemList.PrimaryKeyDataItem.DataType;
 
         public bool HasGuidId { get; }

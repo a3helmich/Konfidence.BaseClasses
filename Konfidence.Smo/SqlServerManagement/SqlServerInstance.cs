@@ -9,7 +9,7 @@ using Microsoft.SqlServer.Management.Smo;
 
 namespace Konfidence.SqlHostProvider.SqlServerManagement
 {
-    internal class SqlServerInstance : BaseItem
+    internal class SqlServerInstance 
     {
         private string _databaseServerName = string.Empty;
         private string _userName = string.Empty;

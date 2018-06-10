@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Resources;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseWindowForms
@@ -14,27 +15,21 @@ namespace Konfidence.BaseWindowForms
     public class BaseAboutForm : Form
     {
         protected TextBox CopyrightTextBox;
-        #region CopyrightText
+
+        [UsedImplicitly]
         public string CopyrightText
         {
-            get
-            {
-                return CopyrightTextBox.Text;
-            }
-            set
-            {
-                CopyrightTextBox.Text = value;
-            }
+            get => CopyrightTextBox.Text;
+            set => CopyrightTextBox.Text = value;
         }
-        #endregion
 
-        private LinkLabel _KonfidenceLinkLabel;
-        private Button _ButtonOk;
+        private LinkLabel _konfidenceLinkLabel;
+        private Button _buttonOk;
         protected TextBox TextBoxRegistrationCode;
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private readonly Container _Components = null;
+        private readonly Container _components = null;
 
         public BaseAboutForm()
         {
@@ -55,9 +50,9 @@ namespace Konfidence.BaseWindowForms
         {
             if (disposing)
             {
-                if (_Components.IsAssigned())
+                if (_components.IsAssigned())
                 {
-                    _Components.Dispose();
+                    _components.Dispose();
                 }
             }
             base.Dispose(disposing);
@@ -72,8 +67,8 @@ namespace Konfidence.BaseWindowForms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseAboutForm));
             this.CopyrightTextBox = new System.Windows.Forms.TextBox();
-            this._ButtonOk = new System.Windows.Forms.Button();
-            this._KonfidenceLinkLabel = new System.Windows.Forms.LinkLabel();
+            this._buttonOk = new System.Windows.Forms.Button();
+            this._konfidenceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.TextBoxRegistrationCode = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -87,16 +82,16 @@ namespace Konfidence.BaseWindowForms
             // 
             // buttonOK
             // 
-            resources.ApplyResources(this._ButtonOk, "_ButtonOk");
-            this._ButtonOk.Name = "_ButtonOk";
-            this._ButtonOk.Click += new System.EventHandler(this.buttonOK_Click);
+            resources.ApplyResources(this._buttonOk, "_buttonOk");
+            this._buttonOk.Name = "_buttonOk";
+            this._buttonOk.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // konfidenceLinkLabel
             // 
-            resources.ApplyResources(this._KonfidenceLinkLabel, "_KonfidenceLinkLabel");
-            this._KonfidenceLinkLabel.Name = "_KonfidenceLinkLabel";
-            this._KonfidenceLinkLabel.TabStop = true;
-            this._KonfidenceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.konfidenceLinkLabel_LinkClicked);
+            resources.ApplyResources(this._konfidenceLinkLabel, "_konfidenceLinkLabel");
+            this._konfidenceLinkLabel.Name = "_konfidenceLinkLabel";
+            this._konfidenceLinkLabel.TabStop = true;
+            this._konfidenceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.konfidenceLinkLabel_LinkClicked);
             // 
             // textBoxRegistrationCode
             // 
@@ -108,12 +103,12 @@ namespace Konfidence.BaseWindowForms
             // 
             // BaseAboutForm
             // 
-            this.AcceptButton = this._ButtonOk;
+            this.AcceptButton = this._buttonOk;
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.TextBoxRegistrationCode);
-            this.Controls.Add(this._KonfidenceLinkLabel);
+            this.Controls.Add(this._konfidenceLinkLabel);
             this.Controls.Add(this.CopyrightTextBox);
-            this.Controls.Add(this._ButtonOk);
+            this.Controls.Add(this._buttonOk);
             this.MinimizeBox = false;
             this.Name = "BaseAboutForm";
             this.ShowInTaskbar = false;
@@ -144,7 +139,7 @@ namespace Konfidence.BaseWindowForms
 
         private void konfidenceLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(_KonfidenceLinkLabel.Text);
+            Process.Start(_konfidenceLinkLabel.Text);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -156,6 +151,7 @@ namespace Konfidence.BaseWindowForms
     [Serializable]
     public class BaseAboutFormException : Exception
     {
+        [UsedImplicitly]
         public BaseAboutFormException() : base(new ResourceManager(typeof(BaseAboutForm)).GetString("BaseAboutFormException.DontKnowWarningMessage")) { }
         public BaseAboutFormException(string message) : base(message) { }
         public BaseAboutFormException(string message, Exception exception) : base(message, exception) { }

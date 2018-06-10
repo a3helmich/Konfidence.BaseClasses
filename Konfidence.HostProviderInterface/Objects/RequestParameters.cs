@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Konfidence.Base;
 using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.RepositoryInterface.Objects
 {
-    public class RequestParameters : BaseItem
+    public class RequestParameters 
     {
         private readonly IBaseDataItem _dataItem;
 

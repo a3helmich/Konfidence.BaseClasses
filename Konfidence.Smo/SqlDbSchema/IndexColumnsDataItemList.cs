@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;

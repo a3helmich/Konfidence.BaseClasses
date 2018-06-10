@@ -7,20 +7,18 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 {
     public class DbSiteMapProvider : StaticSiteMapProvider
     {
-        private SiteMapNode _RootNode;
-
-        #region properties
+        private SiteMapNode _rootNode;
 
         // Return the root node of the current site map.
         public override SiteMapNode RootNode // !!! base niet aanroepen, is by design !!!
         {
             get
             {
-                if (!_RootNode.IsAssigned())
+                if (!_rootNode.IsAssigned())
                 {
-                    _RootNode = BuildSiteMap();
+                    _rootNode = BuildSiteMap();
                 }
-                return _RootNode;
+                return _rootNode;
             }
         }
 
@@ -29,8 +27,6 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
         public bool Administrator { get; set; }
 
         public bool IsLocal { get; set; }
-
-        #endregion
 
         public DbSiteMapProvider()
         {
@@ -52,7 +48,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
         {
             lock (this)
             {
-                _RootNode = null;
+                _rootNode = null;
 
                 base.Clear();
             }
@@ -66,16 +62,16 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             // not modified while the site map is built.
             lock (this)
             {
-                SiteMapNode rootNode = _RootNode; // default value is null;
+                var rootNode = _rootNode; // default value is null;
 
-                if (!_RootNode.IsAssigned()) // als eenmaal gebouwd, niet verder naar kijken
+                if (!_rootNode.IsAssigned()) // als eenmaal gebouwd, niet verder naar kijken
                 {
                     // Start with a clean slate
                     Clear();
 
-                    Bl.MenuDataItemList menuItemList = Bl.MenuDataItemList.GetListByMenuId(1);
+                    var menuItemList = Bl.MenuDataItemList.GetListByMenuId(1);
 
-                    Bl.MenuDataItem rootMenu = GetMenuRootNode(menuItemList);
+                    var rootMenu = GetMenuRootNode(menuItemList);
 
                     rootNode = BuildMenuNode(rootMenu);
 
@@ -92,11 +88,11 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
         private void BuildChildNodes(IEnumerable<Bl.MenuDataItem> childNodes, Bl.MenuDataItem rootMenu, SiteMapNode parentNode)
         {
-            foreach (Bl.MenuDataItem childItem in childNodes)
+            foreach (var childItem in childNodes)
             {
                 if (childItem.NodeId != childItem.ParentNodeId && rootMenu.NodeId == childItem.ParentNodeId)
                 {
-                    bool showItem = false;
+                    var showItem = false;
 
                     if (IsLocal)
                     {
@@ -128,7 +124,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
                     if (showItem)
                     {
-                        SiteMapNode childNode = BuildMenuNode(childItem);
+                        var childNode = BuildMenuNode(childItem);
 
                         // add childNode with SiteMapNode.AddNode(..) to the 
                         // ChildNodes collection of the parent
@@ -145,9 +141,9 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        private Bl.MenuDataItem GetMenuRootNode(IEnumerable<Bl.MenuDataItem> menuList)
+        private static Bl.MenuDataItem GetMenuRootNode(IEnumerable<Bl.MenuDataItem> menuList)
         {
-            foreach (Bl.MenuDataItem menuItem in menuList)
+            foreach (var menuItem in menuList)
             {
                 if (menuItem.NodeId == menuItem.ParentNodeId)
                 {
@@ -160,8 +156,8 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
 
         private SiteMapNode BuildMenuNode(Bl.MenuDataItem menuItem)
         {
-            string menuUrl = string.Empty;
-            string menuMenuText = string.Empty;
+            var menuUrl = string.Empty;
+            var menuMenuText = string.Empty;
 
             if (menuItem.IsVisible)
             {

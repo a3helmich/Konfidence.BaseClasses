@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace Konfidence.UtilHelper
 {
@@ -27,6 +28,7 @@ namespace Konfidence.UtilHelper
         /// <param name="dllPointer">Pointer to Dll witch was returned from LoadLibraryEx</param>
         /// <returns>If unloaded library was correct then true, else false</returns>
         [DllImport("kernel32.dll")]
+        [UsedImplicitly]
         public static extern bool FreeLibrary(IntPtr dllPointer);
  
         /// <summary>
@@ -57,27 +59,28 @@ namespace Konfidence.UtilHelper
             if (moduleHandle == IntPtr.Zero)
             {
                 // I'm gettin last dll error
-                int errorCode = Marshal.GetLastWin32Error();
+                var errorCode = Marshal.GetLastWin32Error();
                 throw new ApplicationException(
-                    string.Format("There was an error during dll loading : {0}, error - {1}", dllFilePath, errorCode)
-                    );
+                    $"There was an error during dll loading : {dllFilePath}, error - {errorCode}"
+                );
             }
             return moduleHandle;
         }
     }
- 
-// **************************************************************************************************************************
-// That is all, now how to use this functions
-// **************************************************************************************************************************
+
+    // **************************************************************************************************************************
+    // That is all, now how to use this functions
+    // **************************************************************************************************************************
+    [UsedImplicitly]
     public class TestDll
     {
-        private static IntPtr _MyDll ;
+        private static IntPtr _myDll ;
  
         public  static void InitializeMyDll()
         {
             try
             {
-                _MyDll = Dll.LoadWin32Library("path to my dll with file path name");
+                _myDll = Dll.LoadWin32Library("path to my dll with file path name");
                 // here you can add, dl version check
             }
             catch (ApplicationException exc)
@@ -96,18 +99,19 @@ namespace Konfidence.UtilHelper
         public static int FunctionName(int a, string b)
 //public static RETURN_TYPE functionName(int a, string b)
         {
-            if (_MyDll == IntPtr.Zero)
+            if (_myDll == IntPtr.Zero)
                 InitializeMyDll();
-            IntPtr pProc = Dll.GetProcAddress(_MyDll , "CallingFunctionNameFromCallingDllFile");
+            var pProc = Dll.GetProcAddress(_myDll , "CallingFunctionNameFromCallingDllFile");
             var cpv = (DllFunctionDelegate)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DllFunctionDelegate));
             // Now i'm calling delegate, with is calling function from dll file 
             return cpv(1, "Test");
         }
- 
-// Now if you want to call dll function from program code use this
-// for ex. you want to call c++ function RETURN_TYPE CallingFunctionNameFromCallingDllFile(int nID, LPSTR lpstrName);
 
- 
+        // Now if you want to call dll function from program code use this
+        // for ex. you want to call c++ function RETURN_TYPE CallingFunctionNameFromCallingDllFile(int nID, LPSTR lpstrName);
+
+
+        [UsedImplicitly]
         private void Test()
         {
             FunctionName(2, "name");

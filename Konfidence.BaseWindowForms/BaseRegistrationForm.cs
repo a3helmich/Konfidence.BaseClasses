@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.UtilHelper;
 
@@ -407,7 +408,7 @@ namespace Konfidence.BaseWindowForms
         private bool ValidateTextBox(TextBox textBox, bool isValid)
         {
             const string requiredInformation = "This is required information for registration";
-            string noError = string.Empty;
+            var noError = string.Empty;
 
             if (textBox.Text.Length == 0)
             {
@@ -449,7 +450,7 @@ namespace Konfidence.BaseWindowForms
         {
             _firstErrorTextBox.Text = _emptyString;
 
-            bool valid = ValidateTextBox(_firstNameTextBox, true);
+            var valid = ValidateTextBox(_firstNameTextBox, true);
             valid = ValidateTextBox(_lastNameTextBox, valid);
             valid = ValidateTextBox(_emailTextBox, valid);
 
@@ -499,16 +500,25 @@ namespace Konfidence.BaseWindowForms
             // MessageBox.Show("test");
         }
 
+        [UsedImplicitly]
         public string Address1 => _address1TextBox.Text;
+        [UsedImplicitly]
         public string Address2 => _address2TextBox.Text;
+        [UsedImplicitly]
         public string LastName => _lastNameTextBox.Text;
+        [UsedImplicitly]
         public string FirstName => _firstNameTextBox.Text;
+        [UsedImplicitly]
         public string Company => _companyTextBox.Text;
+        [UsedImplicitly]
         public string Email => _emailTextBox.Text;
+        [UsedImplicitly]
         public string Phone => _phoneTextBox.Text;
         public string Zip => _zipTextBox.Text;
+        [UsedImplicitly]
         public string City => _cityTextBox.Text;
         public string State => _stateTextBox.Text;
+        [UsedImplicitly]
         public string Country => _countryTextBox.Text;
     }
 }

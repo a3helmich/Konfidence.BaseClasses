@@ -1,12 +1,11 @@
 using System;
 using System.Data;
-using Konfidence.Base;
 using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData
 {
     // TODO: internal
-    public class BaseClient: BaseItem, IBaseClient
+    public class BaseClient: IBaseClient
 	{
 	    //private const int ID = 0;
 	    //private Guid _GuidId = Guid.Empty;

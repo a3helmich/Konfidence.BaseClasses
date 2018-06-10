@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+
 namespace Konfidence.Base
 {
 	public class InternalSessionAccount
@@ -10,40 +12,15 @@ namespace Konfidence.Base
         public const string ACCOUNT_OBJECT = "AccountObject";
         public const string CURRENT_ACCOUNT = "CurrentAccountDataItem";
         // menu
+	    [UsedImplicitly]
         public const string URL_MENU_PAGE = "UrlMenuPage";
 
-		private string _FullName = string.Empty;
-		private string _Email = string.Empty;
+	    public string FullName { get; set; } = string.Empty;
 
-	    #region properties
-		public string FullName
-		{
-			get
-			{
-				return _FullName;
-			}
-			set
-			{
-				_FullName = value;
-			}
-		}
-
-		public string Email
-		{
-			get
-			{
-				return _Email;
-			}
-			set
-			{
-				_Email = value;
-			}
-		}
+	    public string Email { get; set; } = string.Empty;
 
 	    public bool IsAdministrator { get; set; }
 
-	    #endregion
-	
         public InternalSessionAccount()
         {
             IsAdministrator = false;

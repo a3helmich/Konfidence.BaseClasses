@@ -2,10 +2,12 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Web.UI;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
+    [UsedImplicitly]
 	public abstract class BaseUserControl<T>: UserControl where T : BaseWebPresenter, new()
 	{
 	    private BasePageHelper _basePageHelper; // TODO : --> zie BasePage
@@ -29,6 +31,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
 		public bool IsRefreshed
 		{
 			get
@@ -62,7 +65,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         protected string GetViewState(string fieldName)
         {
-            object viewState = ViewState[fieldName];
+            var viewState = ViewState[fieldName];
 
             if (viewState.IsAssigned())
             {
@@ -72,7 +75,7 @@ namespace Konfidence.BaseUserControlHelpers
             return string.Empty;
         }
 
-        #region readonly session properties
+	    [UsedImplicitly]
         protected string CurrentDomainExtension
         {
             get
@@ -99,6 +102,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string CurrentDnsName
         {
             get
@@ -112,6 +116,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string RefererDnsName
         {
             get
@@ -125,6 +130,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string CurrentPagePath
         {
             get
@@ -153,7 +159,6 @@ namespace Konfidence.BaseUserControlHelpers
 
 	    public SessionHelper SessionHelper { get; set; }
 
-	    #endregion readonly session properties
 
         private void BuildPresenter()
         {
@@ -161,7 +166,7 @@ namespace Konfidence.BaseUserControlHelpers
             {
                 try
                 {
-                    string urlReferer = string.Empty;
+                    var urlReferer = string.Empty;
 
                     if (Request.UrlReferrer.IsAssigned())
                     {
@@ -187,11 +192,13 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected void Page_Init(object sender, EventArgs e)
         {
             BuildPresenter();
         }
 
+	    [UsedImplicitly]
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsRestoreViewState && IsPostBack)
@@ -204,6 +211,7 @@ namespace Konfidence.BaseUserControlHelpers
             FormToPresenter();
         }
 
+	    [UsedImplicitly]
         protected void Page_PreRender(object sender, EventArgs e)
         {
             PresenterToForm();
@@ -211,6 +219,7 @@ namespace Konfidence.BaseUserControlHelpers
             ViewState["IsRestoreViewState"] = "IsRestoreViewState";
         }
 
+	    [UsedImplicitly]
         protected void Redirect(string url)
         {
             if (url.IsAssigned())
@@ -221,6 +230,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected Control FindUserControlByType(ControlCollection controlCollection, Type findType)
         {
             return BasePageHelper.FindUserControlByType(controlCollection, findType);
@@ -233,6 +243,7 @@ namespace Konfidence.BaseUserControlHelpers
 			base.OnInit(e);
 		}
 
+	    [UsedImplicitly]
         protected void SwitchLanguagePanel(Control languageNl, Control languageDe, Control languageUk)
         {
             if (languageDe.IsAssigned() && languageNl.IsAssigned() && languageUk.IsAssigned())
@@ -259,12 +270,13 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+	    [UsedImplicitly]
         protected string LastUpdateDate()
         {
             // TODO: lastupdate moet afhankelijk zijn van de content!!!
-            string filePath = Page.Request.PhysicalPath;
-            string oldFilePath = Page.Request.FilePath.Replace("/", @"\");
-            string exeFilePath = Page.Request.CurrentExecutionFilePath.Replace("/", @"\");
+            var filePath = Page.Request.PhysicalPath;
+            var oldFilePath = Page.Request.FilePath.Replace("/", @"\");
+            var exeFilePath = Page.Request.CurrentExecutionFilePath.Replace("/", @"\");
 
             filePath = filePath.Replace(oldFilePath, exeFilePath);
 

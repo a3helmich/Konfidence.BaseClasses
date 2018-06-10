@@ -1,8 +1,9 @@
 ﻿using System.Xml;
+using JetBrains.Annotations;
 
 namespace Konfidence.Base
 {
-    public class BaseServiceHelper : BaseItem
+    public class BaseServiceHelper
     {
         protected XmlNode AddNode(XmlDocument xmlDocument, string field, string value)
         {
@@ -23,6 +24,7 @@ namespace Konfidence.Base
             return newNode;
         }
 
+        [UsedImplicitly]
         protected void AddNode(XmlDocument registrationXml, string field, XmlDocument xmlDocument)
         {
             var subDocumentNode = AddNode(registrationXml, field, string.Empty);
@@ -30,6 +32,7 @@ namespace Konfidence.Base
             subDocumentNode.InnerXml = xmlDocument.InnerXml;
         }
 
+        [UsedImplicitly]
         protected void AddNode(XmlDocument registrationXml, XmlDocument xmlDocument)
         {
             XmlNode root = xmlDocument.DocumentElement;

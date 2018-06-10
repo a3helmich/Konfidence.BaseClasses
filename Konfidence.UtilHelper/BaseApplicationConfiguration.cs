@@ -3,22 +3,22 @@ using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.UtilHelper
 {
+    [UsedImplicitly]
     public class BaseApplicationConfiguration: BaseItem
     {
         private XmlDocument _configuration;
         private XmlNode _root;
 
-        private readonly string _configFileName;
-
-        protected string ConfigFileName => _configFileName;
+        protected string ConfigFileName { get; }
 
         public BaseApplicationConfiguration(string configFileName)
         {
-            _configFileName = configFileName;
+            ConfigFileName = configFileName;
 
             OpenConfiguration();
         }
@@ -28,9 +28,9 @@ namespace Konfidence.UtilHelper
             _root = null;
             _configuration = new XmlDocument();
 
-            if (File.Exists(_configFileName))
+            if (File.Exists(ConfigFileName))
             {
-                _configuration.Load(_configFileName);
+                _configuration.Load(ConfigFileName);
 
                 _root = _configuration.DocumentElement;
             }
@@ -43,16 +43,17 @@ namespace Konfidence.UtilHelper
             }
         }
 
+        [UsedImplicitly]
         public void Save()
         {
-            _configuration.Save(_configFileName);
+            _configuration.Save(ConfigFileName);
         }
 
         protected string GetNodeValue(string name)
         {
-            string nodeValue = string.Empty;
+            var nodeValue = string.Empty;
 
-            XmlNode xmlNode = _root.SelectSingleNode(name);
+            var xmlNode = _root.SelectSingleNode(name);
 
             if (xmlNode.IsAssigned())
             {
@@ -62,11 +63,12 @@ namespace Konfidence.UtilHelper
             return nodeValue;
         }
 
+        [UsedImplicitly]
         protected bool GetBoolNodeValue(string name)
         {
-            bool nodeValue = false;
+            var nodeValue = false;
 
-            XmlNode xmlNode = _root.SelectSingleNode(name);
+            var xmlNode = _root.SelectSingleNode(name);
 
             if (xmlNode.IsAssigned())
             {
@@ -76,12 +78,13 @@ namespace Konfidence.UtilHelper
             return nodeValue;
         }
 
+        [UsedImplicitly]
         protected ArrayList GetArrayListNodeValue(string name)
         {
             var arrayArrayList = new ArrayList();
             var arrayByteListNodeValue = new ArrayList();
 
-            string joinedArray = GetNodeValue(name);
+            var joinedArray = GetNodeValue(name);
 
             try
             {
@@ -89,7 +92,7 @@ namespace Konfidence.UtilHelper
                 {
                     var arrayListNodeValue = new ArrayList();
 
-                    string[] splitArray = joinedArray.Split(' ');
+                    var splitArray = joinedArray.Split(' ');
 
                     arrayListNodeValue.AddRange(splitArray);
 
@@ -117,7 +120,7 @@ namespace Konfidence.UtilHelper
 
         protected void SetNodeValue(string name, string value)
         {
-            XmlNode valueNode = _root.SelectSingleNode(name);
+            var valueNode = _root.SelectSingleNode(name);
 
             // Create the node if it doens't exist yet
             if (!valueNode.IsAssigned())
@@ -138,6 +141,7 @@ namespace Konfidence.UtilHelper
             }
         }
 
+        [UsedImplicitly]
         protected void SetNodeValue(string name, bool value)
         {
             SetNodeValue(name, value.ToString());
@@ -149,9 +153,10 @@ namespace Konfidence.UtilHelper
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
+        [UsedImplicitly]
         protected void SetNodeValue(string name, ArrayList value)
         {
-            string joinedArray = string.Empty;
+            var joinedArray = string.Empty;
 
             if (value.IsAssigned())
             {
@@ -159,7 +164,7 @@ namespace Konfidence.UtilHelper
 
                 foreach (byte[] byteArray in value)
                 {
-                    foreach (byte byteChar in byteArray)
+                    foreach (var byteChar in byteArray)
                     {
                         stringArrayList.Add(byteChar.ToString(CultureInfo.InvariantCulture));
                     }

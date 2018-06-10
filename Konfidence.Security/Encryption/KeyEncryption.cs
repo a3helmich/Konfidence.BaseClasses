@@ -2,11 +2,12 @@
 using System.Diagnostics;
 using System.Security.AccessControl;
 using System.Security.Cryptography;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
 {
-    public class KeyEncryption : BaseItem, IDisposable
+    public class KeyEncryption : IDisposable
     {
         private RSACryptoServiceProvider _rsaProvider;
 
@@ -28,6 +29,7 @@ namespace Konfidence.Security.Encryption
 
         public string PrivateKey => _rsaProvider.ToXmlString(true);
 
+        [UsedImplicitly]
         public int KeySize => TempKeyContainer.KeySize;
 
         public int PackageSize => _maxBytesServer / 2;
@@ -49,7 +51,7 @@ namespace Konfidence.Security.Encryption
             _maxBytesClient = keySize / 8;
             _maxBytesServer = keySize / 8;
 
-            bool isTemporary = false;
+            var isTemporary = false;
 
             if (!containerName.IsAssigned())
             {
@@ -76,8 +78,8 @@ namespace Konfidence.Security.Encryption
         {
             get
             {
-                int keySizeClient = _maxBytesClient * 8;
-                int keySizeServer = GetMaxKeySize(); // dit valt te optimaliseren, door er voor te zorgen dat de oude niet direct wordt weggemikt
+                var keySizeClient = _maxBytesClient * 8;
+                var keySizeServer = GetMaxKeySize(); // dit valt te optimaliseren, door er voor te zorgen dat de oude niet direct wordt weggemikt
 
                 if (keySizeServer < keySizeClient)
                 {
@@ -102,7 +104,7 @@ namespace Konfidence.Security.Encryption
             // Rsa.PersistKeyInCsp = false;  // don't want to keep this in storage
             var keyContainer = new RSACryptoServiceProvider();
 
-            KeySizes legalKeySize = keyContainer.LegalKeySizes[0];
+            var legalKeySize = keyContainer.LegalKeySizes[0];
 
             switch (_configuration.OSVersionPlatform)
             {
@@ -126,7 +128,7 @@ namespace Konfidence.Security.Encryption
             return _maxBytesServer * 8;
         }
 
-        private CspParameters GetCspParameters(string containerName)
+        private static CspParameters GetCspParameters(string containerName)
         {
             var cp = new CspParameters();
 
@@ -158,7 +160,7 @@ namespace Konfidence.Security.Encryption
             // - if the Encryption is temporary, make sure it is not persistend
             try
             {
-                CspParameters cp = GetCspParameters(containerName);
+                var cp = GetCspParameters(containerName);
 
                 if (!_rsaProvider.IsAssigned())
                 {

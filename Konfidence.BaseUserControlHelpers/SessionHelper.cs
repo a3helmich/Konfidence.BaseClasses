@@ -4,33 +4,33 @@ using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-	public class SessionHelper : BaseItem
+	public class SessionHelper 
 	{
 		public const string SESSION_ID_VALUE = "KIT_SESSIONID";
 		public const string PAGE_ID_VALUE = "KIT_PAGEID";
 
 		private const string PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE = "ParameterObjectHashtable";
 
-		private readonly HttpContext _Context;
-		private readonly string _ControlName;
+		private readonly HttpContext _context;
+		private readonly string _controlName;
 
 		public SessionHelper(HttpContext context, string controlName)
 		{
-			_Context = context;
-			_ControlName = controlName;
+			_context = context;
+			_controlName = controlName;
 		}
 
 		private Hashtable ParameterObjectHashtable
 		{
 			get
 			{
-			    var parameterObjectHashtable = _Context.Session[PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE] as Hashtable;
+			    var parameterObjectHashtable = _context.Session[PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE] as Hashtable;
 
 				if (!parameterObjectHashtable.IsAssigned())
 				{
 					parameterObjectHashtable = new Hashtable();
 
-					_Context.Session[PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE] = parameterObjectHashtable;
+					_context.Session[PARAMETER_OBJECT_HASHTABLE_CLASS_TYPE] = parameterObjectHashtable;
 				}
 
 				return parameterObjectHashtable;
@@ -41,15 +41,15 @@ namespace Konfidence.BaseUserControlHelpers
 		{
 			get
 			{
-			    var pageId = _Context.Items[PAGE_ID_VALUE] as string;
+			    var pageId = _context.Items[PAGE_ID_VALUE] as string;
 
-				var sessionParameterObject = ParameterObjectHashtable[pageId + "_" + _ControlName] as SessionParameterObject;
+				var sessionParameterObject = ParameterObjectHashtable[pageId + "_" + _controlName] as SessionParameterObject;
 
 				if (!sessionParameterObject.IsAssigned())
 				{
 					sessionParameterObject = new SessionParameterObject();
 
-					ParameterObjectHashtable[pageId + "_" + _ControlName] = sessionParameterObject;
+					ParameterObjectHashtable[pageId + "_" + _controlName] = sessionParameterObject;
 				}
 
 				return sessionParameterObject;

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.UI;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
+    [UsedImplicitly]
     public abstract class BaseMasterPage<T> : MasterPage where T : BaseWebPresenter, new()
     {
         private BasePageHelper _basePageHelper;
@@ -38,7 +40,7 @@ namespace Konfidence.BaseUserControlHelpers
         protected abstract void FormToPresenter();
         protected abstract void PresenterToForm();
 
-        #region readonly session properties
+        [UsedImplicitly]
         protected string CurrentDomainExtension
         {
             get
@@ -52,6 +54,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [UsedImplicitly]
         protected string CurrentLanguage
         {
             get
@@ -65,6 +68,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [UsedImplicitly]
         protected string CurrentDnsName
         {
             get
@@ -78,6 +82,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [UsedImplicitly]
         protected string RefererDnsName
         {
             get
@@ -116,8 +121,7 @@ namespace Konfidence.BaseUserControlHelpers
                 return string.Empty;
             }
         }
-        #endregion readonly session properties
-
+        
         private void BuildPresenter()
         {
             if (!_basePageHelper.IsAssigned())
@@ -219,7 +223,7 @@ namespace Konfidence.BaseUserControlHelpers
             return string.Empty;
         }
 
-
+        [UsedImplicitly]
         protected string GetSessionState(string fieldName)
         {
             var sessionState = Session[fieldName];
@@ -288,6 +292,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [UsedImplicitly]
         protected void Page_Init(object sender, EventArgs e)
         {
             BuildMasterPageDictionaries();
@@ -298,6 +303,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [UsedImplicitly]
         protected void Page_Load(object sender, EventArgs e)
         {
             CheckIsMasterPagePostBack();
@@ -310,6 +316,7 @@ namespace Konfidence.BaseUserControlHelpers
             FormToPresenter();
         }
 
+        [UsedImplicitly]
         protected void Page_PreRender(object sender, EventArgs e)
         {
             if (Presenter.IsLoggedIn)
@@ -330,6 +337,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [UsedImplicitly]
         protected bool IsMasterPagePostBack => _isMasterPagePostBack;
 
         protected void Redirect(string url)

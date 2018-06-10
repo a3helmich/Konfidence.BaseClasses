@@ -6,10 +6,10 @@ namespace Konfidence.BaseUserControlHelpers.Login
 {
     // - in de SessionAccount wordt bijgehouden wie is ingelogd en welke rechten de account heeft.
     // - in CurrentInternalAccount zit het accountobject dat in de applicatie is aangemaakt en gebruikt wordt om in te loggen
-    class LoginContext : BaseItem
+    internal class LoginContext 
     {
-        private InternalSessionAccount _AccountObject;
-        private BaseDataItem _CurrentAccount;
+        private InternalSessionAccount _accountObject;
+        private BaseDataItem _currentAccount;
 
         private InternalSessionAccount SessionAccount
         {
@@ -20,7 +20,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
                     return HttpContext.Current.Session[InternalSessionAccount.ACCOUNT_OBJECT] as InternalSessionAccount;
                 }
 
-                return _AccountObject;
+                return _accountObject;
             }
         }
 
@@ -33,7 +33,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
                     return HttpContext.Current.Session[InternalSessionAccount.CURRENT_ACCOUNT] as BaseDataItem;
                 }
 
-                return _CurrentAccount;
+                return _currentAccount;
             }
             set
             {
@@ -43,7 +43,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
                 }
                 else
                 {
-                    _CurrentAccount = value;
+                    _currentAccount = value;
                 }
             }
         }
@@ -132,8 +132,8 @@ namespace Konfidence.BaseUserControlHelpers.Login
 
         public LoginContext()
         {
-            _CurrentAccount = null;
-            _AccountObject = null;
+            _currentAccount = null;
+            _accountObject = null;
         }
 
         internal void SessionLogon(string fullName, string email, string password, string loginPassword, bool isAdministrator)
@@ -172,8 +172,8 @@ namespace Konfidence.BaseUserControlHelpers.Login
             }
             else
             {
-                _AccountObject = null;
-                _CurrentAccount = null;
+                _accountObject = null;
+                _currentAccount = null;
             }
         }
     }

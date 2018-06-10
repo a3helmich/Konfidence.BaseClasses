@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Resources;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseHelper;
 
@@ -14,7 +15,6 @@ namespace Konfidence.BaseWindowForms
     /// </summary>
     public class BaseMainform : Form
     {
-        private Type _configClass;
         private BaseConfigClass _config;
         private readonly string _errorHeader;
 
@@ -42,15 +42,13 @@ namespace Konfidence.BaseWindowForms
         private MenuItem _statusMenuItem;
         private Panel _mainPanel;
 
-        public Type ConfigClass
-        {
-            get { return _configClass; }
-            set { _configClass = value; }
-        }
+        [UsedImplicitly]
+        public Type ConfigClass { get; set; }
 
+        [UsedImplicitly]
         public Type AboutFormClass
         {
-            get { return _aboutFormClass; }
+            get => _aboutFormClass;
             set
             {
                 if (BaseAboutForm.IsDerivedClass(value))
@@ -76,7 +74,7 @@ namespace Konfidence.BaseWindowForms
             BaseMainframe = BuildMainContainer(null);
         }
 
-        private void BaseInitialize()
+        private static void BaseInitialize()
         {
             // TODO: Supply in derived mainform the application configclass
         }
@@ -383,9 +381,9 @@ namespace Konfidence.BaseWindowForms
 
                 if (!_config.IsAssigned())
                 {
-                    if (_configClass.IsAssigned())
+                    if (ConfigClass.IsAssigned())
                     {
-                        _config = Activator.CreateInstance(_configClass) as BaseConfigClass;
+                        _config = Activator.CreateInstance(ConfigClass) as BaseConfigClass;
                     }
                 }
 
@@ -397,7 +395,7 @@ namespace Konfidence.BaseWindowForms
             }
             catch (Exception e)
             {
-                string errorString = _errorHeader + e;
+                var errorString = _errorHeader + e;
 
                 if (_config.IsAssigned())
                 {

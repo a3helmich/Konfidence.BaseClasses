@@ -1,7 +1,9 @@
 ﻿using System.Text;
+using JetBrains.Annotations;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
+    [UsedImplicitly]
     public class DatabaseStructure : SchemaBaseDataItem
     {
         #region readonly properties
@@ -18,8 +20,10 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             ConnectionName = connectionName;
         }
 
+        [UsedImplicitly]
         public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
+        [UsedImplicitly]
         public void BuildStructure()
         {
             CreateStoredProcedures();

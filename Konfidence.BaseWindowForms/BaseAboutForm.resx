@@ -153,67 +153,67 @@
   <data name="&gt;&gt;CopyrightTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="_ButtonOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="_buttonOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="_ButtonOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_buttonOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_ButtonOk.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_buttonOk.Location" type="System.Drawing.Point, System.Drawing">
     <value>297, 170</value>
   </data>
-  <data name="_ButtonOk.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_buttonOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="_ButtonOk.TabIndex" type="System.Int32, mscorlib">
+  <data name="_buttonOk.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="_ButtonOk.Text" xml:space="preserve">
+  <data name="_buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Name" xml:space="preserve">
-    <value>_ButtonOk</value>
+  <data name="&gt;&gt;_buttonOk.Name" xml:space="preserve">
+    <value>_buttonOk</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Type" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_ButtonOk.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_buttonOk.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="_KonfidenceLinkLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="_konfidenceLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="_KonfidenceLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="_konfidenceLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_KonfidenceLinkLabel.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
+  <data name="_konfidenceLinkLabel.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
     <value>0, 17</value>
   </data>
-  <data name="_KonfidenceLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_konfidenceLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 5</value>
   </data>
-  <data name="_KonfidenceLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_konfidenceLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
   </data>
-  <data name="_KonfidenceLinkLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="_konfidenceLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="_KonfidenceLinkLabel.Text" xml:space="preserve">
+  <data name="_konfidenceLinkLabel.Text" xml:space="preserve">
     <value>www.konfidence.nl</value>
   </data>
-  <data name="&gt;&gt;_KonfidenceLinkLabel.Name" xml:space="preserve">
-    <value>_KonfidenceLinkLabel</value>
+  <data name="&gt;&gt;_konfidenceLinkLabel.Name" xml:space="preserve">
+    <value>_konfidenceLinkLabel</value>
   </data>
-  <data name="&gt;&gt;_KonfidenceLinkLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_konfidenceLinkLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_KonfidenceLinkLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_konfidenceLinkLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_KonfidenceLinkLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_konfidenceLinkLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="TextBoxRegistrationCode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">

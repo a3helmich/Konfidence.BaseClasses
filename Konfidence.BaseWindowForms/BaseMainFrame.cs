@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseWindowForms
@@ -23,6 +24,7 @@ namespace Konfidence.BaseWindowForms
 
         }
 
+        [UsedImplicitly]
         public virtual void AfterCreate()
         {
         }

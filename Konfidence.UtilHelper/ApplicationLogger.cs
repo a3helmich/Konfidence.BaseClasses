@@ -1,4 +1,5 @@
 using System.IO;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DesignPatterns.Singleton;
 
@@ -34,7 +35,7 @@ namespace Konfidence.UtilHelper
 
         public string LogFile
         {
-            get { return _logFile; }
+            get => _logFile;
             set
             {
                 if (_logFile.IsAssigned())
@@ -66,6 +67,7 @@ namespace Konfidence.UtilHelper
             }
         }
 
+        [UsedImplicitly]
         protected virtual void Dispose()
         {
             LogStream.Flush();
@@ -76,8 +78,10 @@ namespace Konfidence.UtilHelper
 
     }
 
+    [UsedImplicitly]
     public sealed class ApplicationLoggerFactory : SingletonFactory
     {
+        [UsedImplicitly]
         public static IApplicationLogger ApplicationLogger(string logFile)
         {
             var applicationLogger = GetInstance(typeof(ApplicationLogger)) as IApplicationLogger;

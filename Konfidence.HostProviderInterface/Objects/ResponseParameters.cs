@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Konfidence.Base;
 using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.RepositoryInterface.Objects
 {
-    public class ResponseParameters : BaseItem
+    public class ResponseParameters
     {
         public int Id { get; private set; }
 
