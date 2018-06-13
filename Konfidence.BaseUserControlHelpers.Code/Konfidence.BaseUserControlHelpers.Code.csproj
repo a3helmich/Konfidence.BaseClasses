@@ -126,10 +126,6 @@
       <Project>{1caf59c3-b155-40e6-a904-3ebc5874e6df}</Project>
       <Name>Konfidence.BaseClasses.Code</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseClassInterfaces\Konfidence.BaseClassInterfaces.csproj">
-      <Project>{fef04c6c-a57e-446e-b0f6-861b5a7a2c90}</Project>
-      <Name>Konfidence.BaseClassInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj">
       <Project>{ac595ed8-f17a-4d6c-a801-480433be4d34}</Project>
       <Name>Konfidence.BaseDatabaseClasses.Code</Name>

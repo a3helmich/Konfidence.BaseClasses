@@ -278,5 +278,26 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         public bool IsLoaded { get; set; }
+        public string ErrorMessage { get; private set; } = string.Empty;
+
+        // TODO : convert to errorlist 
+        public bool SetErrorMessage(string errorMessage)
+        {
+            ErrorMessage = errorMessage;
+
+            return false;
+        }
+
+        [UsedImplicitly]
+        public bool HasErrors()
+        {
+            return ErrorMessage.IsAssigned();
+        }
+
+        [UsedImplicitly]
+        public void ClearErrorMessage()
+        {
+            ErrorMessage = string.Empty;
+        }
     }
 }

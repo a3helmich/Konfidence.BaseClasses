@@ -72,11 +72,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseClassInterfaces\Konfidence.BaseClassInterfaces.csproj">
-      <Project>{FEF04C6C-A57E-446E-B0F6-861B5A7A2C90}</Project>
-      <Name>Konfidence.BaseClassInterfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
