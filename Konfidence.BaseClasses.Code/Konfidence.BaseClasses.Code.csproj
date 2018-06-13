@@ -53,14 +53,8 @@
     <Compile Include="..\Konfidence.BaseClasses\AllowedFileItem.cs">
       <Link>AllowedFileItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.BaseClasses\BaseControlHelper.cs">
-      <Link>BaseControlHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Konfidence.BaseClasses\BaseExtender.cs">
       <Link>BaseExtender.cs</Link>
-    </Compile>
-    <Compile Include="..\Konfidence.BaseClasses\BaseItem.cs">
-      <Link>BaseItem.cs</Link>
     </Compile>
     <Compile Include="..\Konfidence.BaseClasses\BaseParameterObject.cs">
       <Link>BaseParameterObject.cs</Link>
