@@ -105,25 +105,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://localhost/RegistrationWebservice/BaseService.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\WSBaseHost\</RelPath>
-      <UpdateFromURL>http://localhost/RegistrationWebservice/BaseService.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>BaseDataBaseClasses_WSBaseHost_WSBaseHostService</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="Konfidence.BaseDataBaseClasses.nuspec" />
@@ -136,16 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\WSBaseHost\BaseService.disco" />
-    <None Include="Web References\WSBaseHost\BaseService.wsdl" />
-    <None Include="Web References\WSBaseHost\ParameterObject1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\WSBaseHost\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
