@@ -7,6 +7,7 @@ using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseUserControlHelpers.Login;
 using Konfidence.BaseUserControlHelpers.PageSetting;
+using InternalSessionAccount = Konfidence.BaseUserControlHelpers.Login.InternalSessionAccount;
 
 namespace Konfidence.BaseUserControlHelpers
 {

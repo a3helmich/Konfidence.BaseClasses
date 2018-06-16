@@ -50,20 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Konfidence.BaseClasses\AllowedFileItem.cs">
-      <Link>AllowedFileItem.cs</Link>
-    </Compile>
     <Compile Include="..\Konfidence.BaseClasses\BaseExtender.cs">
       <Link>BaseExtender.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.BaseClasses\BaseServiceHelper.cs">
-      <Link>BaseServiceHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Konfidence.BaseClasses\BaseXmlDocument.cs">
       <Link>BaseXmlDocument.cs</Link>
-    </Compile>
-    <Compile Include="..\Konfidence.BaseClasses\SessionAccount.cs">
-      <Link>SessionAccount.cs</Link>
     </Compile>
     <Compile Include="..\Konfidence.BaseClasses\StringExtender.cs">
       <Link>StringExtender.cs</Link>

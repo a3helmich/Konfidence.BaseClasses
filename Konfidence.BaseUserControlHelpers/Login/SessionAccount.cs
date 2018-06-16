@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace Konfidence.Base
+namespace Konfidence.BaseUserControlHelpers.Login
 {
 	public class InternalSessionAccount
 	{

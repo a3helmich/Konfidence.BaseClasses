@@ -101,6 +101,9 @@
     <Compile Include="..\Konfidence.BaseUserControlHelpers\Login\LoginContext.cs">
       <Link>Login\LoginContext.cs</Link>
     </Compile>
+    <Compile Include="..\Konfidence.BaseUserControlHelpers\Login\SessionAccount.cs">
+      <Link>Login\SessionAccount.cs</Link>
+    </Compile>
     <Compile Include="..\Konfidence.BaseUserControlHelpers\PageRefreshHelper.cs">
       <Link>PageRefreshHelper.cs</Link>
     </Compile>
