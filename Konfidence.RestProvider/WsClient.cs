@@ -4,20 +4,69 @@ using System.Configuration;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
-using Konfidence.BaseData.WSBaseHost;
+using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.RestProvider
 {
+
+    internal interface IRestClientMock
+    {
+        string Url { get; set; }
+
+        int Save(IDbParameterObject[] dbParameterObject, int v);
+        void Delete(int id);
+        List<DbParameterObjectList> BuildItemList();
+        int ExecuteTextCommand(string textCommand);
+        bool TableExists(string tableName);
+        bool ViewExists(string viewName);
+    }
+
+    internal class RestClientMock : IRestClientMock
+    {
+        public string Url { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public List<DbParameterObjectList> BuildItemList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ExecuteTextCommand(string textCommand)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Save(IDbParameterObject[] dbParameterObject, int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TableExists(string tableName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ViewExists(string viewName)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     // TODO: internal
     [UsedImplicitly]
     internal class WsClient : BaseClient
     {
-        private readonly WSBaseHostService _wsBaseHostService;
+        private readonly IRestClientMock _wsBaseHostService;
 
         public WsClient(string serviceName, string connectionName) : base(serviceName, connectionName)
         {
-            _wsBaseHostService = new WSBaseHostService();
+            // TODO REstClient
+            _wsBaseHostService = new RestClientMock();
 
             // _WsBaseHostService.UseDefaultCredentials = true;
 
@@ -40,11 +89,11 @@ namespace Konfidence.RestProvider
         {
             var parameterDataItemList = dataItem.SetItemData();
 
-            var parameterObjectList = new List<ParameterObject>();
+            var parameterObjectList = new List<IDbParameterObject>();
 
             foreach (var parameterDataItem in parameterDataItemList)
             {
-                var parameterObject = new ParameterObject { Field = parameterDataItem.Field, Value = parameterDataItem.Value };
+                var parameterObject = new DbParameterObject { Field = parameterDataItem.Field, Value = parameterDataItem.Value };
 
                 parameterObjectList.Add(parameterObject);
             }
