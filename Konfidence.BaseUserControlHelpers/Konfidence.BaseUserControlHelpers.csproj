@@ -181,6 +181,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Login\LoginContext.cs" />
+    <Compile Include="Login\SessionAccount.cs" />
     <Compile Include="PageSetting\PageSetting.cs" />
     <Compile Include="PageSetting\PageSettingDictionary.cs" />
     <Compile Include="PageSetting\PageSettingXmlDocument.cs" />

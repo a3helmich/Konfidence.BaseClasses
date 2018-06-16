@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Xml;
+using JetBrains.Annotations;
 
 namespace Konfidence.Base
 {
@@ -7,26 +8,23 @@ namespace Konfidence.Base
     {
         private XmlElement _root;
 
-        private string _fullFileName = string.Empty;
-        private string _pathName = string.Empty;
         private string _rootNameSpaceUri;
-        private XmlNamespaceManager _xmlNamespaceManager;
 
         public XmlElement Root => _root;
 
-        public string FileName => _fullFileName;
+        public string FileName { get; private set; } = string.Empty;
 
-        public string PathName => _pathName;
+        public string PathName { get; private set; } = string.Empty;
 
         public string RootNameSpaceUri => _rootNameSpaceUri;
 
-        public XmlNamespaceManager XmlNamespaceManager => _xmlNamespaceManager;
+        public XmlNamespaceManager XmlNamespaceManager { get; private set; }
 
         public override void Load(string filename)
         {
-            _fullFileName = filename;
+            FileName = filename;
 
-            _pathName = Path.GetDirectoryName(filename) + @"\";
+            PathName = Path.GetDirectoryName(filename) + @"\";
 
             base.Load(filename);
 
@@ -40,8 +38,8 @@ namespace Konfidence.Base
             _rootNameSpaceUri = Root.NamespaceURI;
 
             // create a shortcut namespace reference
-            _xmlNamespaceManager = new XmlNamespaceManager(NameTable);
-            _xmlNamespaceManager.AddNamespace("p", _rootNameSpaceUri);
+            XmlNamespaceManager = new XmlNamespaceManager(NameTable);
+            XmlNamespaceManager.AddNamespace("p", _rootNameSpaceUri);
         }
 
         public override void Load(Stream inStream)
@@ -72,6 +70,7 @@ namespace Konfidence.Base
             PostLoad();
         }
 
+        [UsedImplicitly]
         public void GetAttributeValue(string nodeName, string attributeName, out string value)
         {
             var valueNode = Root.SelectSingleNode(nodeName);
@@ -116,6 +115,7 @@ namespace Konfidence.Base
             }
         }
 
+        [UsedImplicitly]
         public void GetValue(string nodeName, out bool value)
         {
             GetValue(Root, nodeName, out value);
@@ -152,6 +152,7 @@ namespace Konfidence.Base
             return childElement;
         }
 
+        [UsedImplicitly]
         public XmlNode SetValue(string name, string value)
         {
             return SetValue(Root, name, value);
@@ -172,9 +173,51 @@ namespace Konfidence.Base
             return childElement;
         }
 
+        [UsedImplicitly]
         public XmlNode GetNode(string name)
         {
             return GetNode(Root, name);
+        }
+
+        protected XmlNode AddNode(XmlDocument xmlDocument, string field, string value)
+        {
+            XmlNode root = xmlDocument.DocumentElement;
+
+            XmlNode newNode = xmlDocument.CreateElement(field);
+
+            if (value.IsAssigned())
+            {
+                newNode.InnerText = value;
+            }
+
+            if (root.IsAssigned())
+            {
+                root.AppendChild(newNode);
+            }
+
+            return newNode;
+        }
+
+        [UsedImplicitly]
+        protected void AddNode(XmlDocument registrationXml, string field, XmlDocument xmlDocument)
+        {
+            var subDocumentNode = AddNode(registrationXml, field, string.Empty);
+
+            subDocumentNode.InnerXml = xmlDocument.InnerXml;
+        }
+
+        [UsedImplicitly]
+        protected void AddNode(XmlDocument registrationXml, XmlDocument xmlDocument)
+        {
+            XmlNode root = xmlDocument.DocumentElement;
+
+            if (root.IsAssigned())
+            {
+                var subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
+
+                subDocumentNode.InnerXml = root.InnerXml;
+            }
+
         }
     }
 }

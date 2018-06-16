@@ -71,12 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllowedFileItem.cs" />
     <Compile Include="BaseExtender.cs" />
-    <Compile Include="BaseServiceHelper.cs" />
     <Compile Include="BaseXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionAccount.cs" />
     <Compile Include="StringExtender.cs" />
   </ItemGroup>
   <ItemGroup>
