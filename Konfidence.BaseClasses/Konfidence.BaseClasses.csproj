@@ -73,7 +73,6 @@
   <ItemGroup>
     <Compile Include="AllowedFileItem.cs" />
     <Compile Include="BaseExtender.cs" />
-    <Compile Include="BaseParameterObject.cs" />
     <Compile Include="BaseServiceHelper.cs" />
     <Compile Include="BaseXmlDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

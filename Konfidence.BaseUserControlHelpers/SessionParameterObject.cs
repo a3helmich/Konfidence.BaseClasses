@@ -1,9 +1,8 @@
 using JetBrains.Annotations;
-using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
 {
-    public class SessionParameterObject : BaseParameterObject
+    public class SessionParameterObject 
 	{
 		public int PrimaryKey { get; set; }
 
