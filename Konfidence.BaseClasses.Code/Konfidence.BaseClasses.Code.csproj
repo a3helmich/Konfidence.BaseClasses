@@ -56,9 +56,6 @@
     <Compile Include="..\Konfidence.BaseClasses\BaseExtender.cs">
       <Link>BaseExtender.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.BaseClasses\BaseParameterObject.cs">
-      <Link>BaseParameterObject.cs</Link>
-    </Compile>
     <Compile Include="..\Konfidence.BaseClasses\BaseServiceHelper.cs">
       <Link>BaseServiceHelper.cs</Link>
     </Compile>
