@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.MenuClasses.Code", "Konfidence.MenuClasses.Code\Konfidence.MenuClasses.Code.csproj", "{60D5C141-9292-4B6D-937F-5DEFDD01CAA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Base", "Konfidence.Base\Konfidence.Base.csproj", "{493514CF-A188-401E-8DB2-CA4731F2225A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -417,6 +419,18 @@ Global
 		{60D5C141-9292-4B6D-937F-5DEFDD01CAA3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{60D5C141-9292-4B6D-937F-5DEFDD01CAA3}.Release|x86.ActiveCfg = Release|Any CPU
 		{60D5C141-9292-4B6D-937F-5DEFDD01CAA3}.Release|x86.Build.0 = Release|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Debug|x86.Build.0 = Debug|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Release|x86.ActiveCfg = Release|Any CPU
+		{493514CF-A188-401E-8DB2-CA4731F2225A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -429,8 +443,8 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
