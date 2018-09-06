@@ -6,6 +6,7 @@ namespace Konfidence.Base
     public static class BaseExtender
     {
         [ContractAnnotation("assignedObject:null => false")]
+        [UsedImplicitly]
         public static bool IsAssigned(this object assignedObject)
         {
             if (assignedObject is string assignedString)
@@ -26,6 +27,7 @@ namespace Konfidence.Base
             return true;
         }
 
+        [UsedImplicitly]
         public static bool IsAssigned(this DateTime assignedTime)
         {
             if (assignedTime > DateTime.MinValue)
@@ -65,9 +67,17 @@ namespace Konfidence.Base
         }
 
         [ContractAnnotation("assignedGuid:null => false")]
+        [UsedImplicitly]
         public static bool IsAssigned(this Guid assignedGuid)
         {
             return !Guid.Empty.Equals(assignedGuid);
+        }
+
+        [ContractAnnotation("line:null => false")]
+        [UsedImplicitly]
+        public static bool IsEof(this string line)
+        {
+            return line != null;
         }
     }
 }
