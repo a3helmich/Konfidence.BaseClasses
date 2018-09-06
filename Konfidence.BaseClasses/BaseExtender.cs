@@ -73,7 +73,7 @@ namespace Konfidence.Base
             return !Guid.Empty.Equals(assignedGuid);
         }
 
-        [ContractAnnotation("line:null => false")]
+        [ContractAnnotation("line:null => true")]
         [UsedImplicitly]
         public static bool IsEof(this string line)
         {
