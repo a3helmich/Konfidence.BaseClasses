@@ -77,7 +77,7 @@ namespace Konfidence.Base
         [UsedImplicitly]
         public static bool IsEof(this string line)
         {
-            return line != null;
+            return line == null;
         }
     }
 }
