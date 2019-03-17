@@ -8,6 +8,8 @@
     <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <Version>1.0.3</Version>
+    <PackageId>Konfidence.BaseClasses</PackageId>
+    <Company>Konfidence.BaseClasses</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
