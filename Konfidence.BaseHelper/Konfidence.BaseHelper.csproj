@@ -65,11 +65,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=2018.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.2018.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6741.20176, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6741.20176\lib\net46\Konfidence.BaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseClasses, Version=1.0.6995.41862, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6995.41862\lib\net472\Konfidence.BaseClasses.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -80,6 +80,7 @@
     <Compile Include="BaseConfigClass.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Konfidence.BaseHelper.nuspec" />
     <None Include="Konfidence.nl.snk" />
     <None Include="packages.config" />

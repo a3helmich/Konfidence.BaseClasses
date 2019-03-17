@@ -51,27 +51,23 @@ namespace Konfidence.Base
             return midnight;
         }
 
+        [UsedImplicitly]
+        [ContractAnnotation("line:null => true")]
+        public static bool IsEof(this string line)
+        {
+            return line == null;
+        }
+
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(this string assignedGuid)
         {
-            if (Guid.TryParse(assignedGuid, out var _))
-            {
-                return true;
-            }
-
-            return false;
+            return Guid.TryParse(assignedGuid, out var _);
         }
 
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsAssigned(this Guid assignedGuid)
         {
             return !Guid.Empty.Equals(assignedGuid);
-        }
-
-        [ContractAnnotation("line:null => true")]
-        public static bool IsEof(this string line)
-        {
-            return line == null;
         }
     }
 }
