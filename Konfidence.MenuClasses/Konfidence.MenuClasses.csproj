@@ -50,9 +50,6 @@
     <Reference Include="Konfidence.Base, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6742.24268\lib\net472\Konfidence.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseClasses, Version=1.0.6995.41862, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6995.41862\lib\net472\Konfidence.BaseClasses.dll</HintPath>
-    </Reference>
     <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6742.24268, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6742.24268\lib\net472\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
