@@ -143,10 +143,6 @@
       <Project>{5c710054-52b1-405e-a754-f0f9682f07d6}</Project>
       <Name>Konfidence.BaseDataInterfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.Base\Konfidence.Base.csproj">
-      <Project>{493514cf-a188-401e-8db2-ca4731f2225a}</Project>
-      <Name>Konfidence.Base</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Konfidence.HostProviderInterface\Konfidence.RepositoryInterface.csproj">
       <Project>{cd62101d-fc81-48ef-9476-581f025a87c9}</Project>
       <Name>Konfidence.RepositoryInterface</Name>
