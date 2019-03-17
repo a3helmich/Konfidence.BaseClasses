@@ -71,8 +71,8 @@
     <Reference Include="Konfidence.Base, Version=1.0.3.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseClasses.1.0.3\lib\netstandard2.0\Konfidence.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.Designpatterns, Version=1.0.7015.29039, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.Designpatterns.1.0.7015.29039\lib\net472\Konfidence.Designpatterns.dll</HintPath>
+    <Reference Include="Konfidence.Designpatterns, Version=1.0.7015.29639, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.Designpatterns.1.0.7015.29639\lib\net472\Konfidence.Designpatterns.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
