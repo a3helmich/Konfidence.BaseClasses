@@ -47,20 +47,20 @@
     <Reference Include="JetBrains.Annotations, Version=2018.3.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.2018.3.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.Base, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6742.24268\lib\net472\Konfidence.Base.dll</HintPath>
+    <Reference Include="Konfidence.Base, Version=1.0.3.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseClasses.1.0.3\lib\netstandard2.0\Konfidence.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.6742.24268, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6742.24268\lib\net472\Konfidence.BaseDatabaseClasses.dll</HintPath>
+    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.7015.29232, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7015.29232\lib\net472\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.6742.24265, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6742.24268\lib\net472\Konfidence.BaseDataInterfaces.dll</HintPath>
+    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.7015.29231, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7015.29232\lib\net472\Konfidence.BaseDataInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.6742.24265, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.6742.24268\lib\net472\Konfidence.RepositoryInterface.dll</HintPath>
+    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.7015.29231, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7015.29232\lib\net472\Konfidence.RepositoryInterface.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.6742.24265, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.6742.24265\lib\net472\Konfidence.SqlHostProvider.dll</HintPath>
+    <Reference Include="Konfidence.SqlHostProvider, Version=1.0.7015.29231, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.7015.29231\lib\net472\Konfidence.SqlHostProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
