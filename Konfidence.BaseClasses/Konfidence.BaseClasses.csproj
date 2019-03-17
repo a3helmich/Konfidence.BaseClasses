@@ -7,7 +7,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <PackageId>Konfidence.BaseClasses</PackageId>
     <Company>Konfidence.BaseClasses</Company>
   </PropertyGroup>
