@@ -16,17 +16,15 @@ namespace Konfidence.BaseHelper
     [EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
     public class BaseConfigClass
     {
-        // statics
-        private static string _applicationEventLogName = "FrameWork";
         private static EventLog _eventLog;
 
         private const string EventLogNamePrefix = "Kit_";
         private string _eventLogName;
 
         [UsedImplicitly]
-        public static string ApplicationName => _applicationEventLogName;
+        public static string ApplicationName { get; private set; } = "FrameWork";
 
-
+        [CanBeNull]
         public EventLog EventLog
         {
             get
@@ -35,7 +33,7 @@ namespace Konfidence.BaseHelper
                 {
                     try
                     {
-                        _eventLogName = EventLogNamePrefix + _applicationEventLogName;
+                        _eventLogName = EventLogNamePrefix + ApplicationName;
 
                         // the next thing works when we are not deiling with a webapp or service
                         if (!EventLog.SourceExists(_eventLogName))
@@ -59,13 +57,13 @@ namespace Konfidence.BaseHelper
         {
             if (applicationName.IsAssigned())
             {
-                if (applicationName.Length == 0 && !_applicationEventLogName.Equals("FrameWork"))
+                if (applicationName.Length == 0 && !ApplicationName.Equals("FrameWork"))
                 {
-                    _applicationEventLogName = "FrameWork";
+                    ApplicationName = "FrameWork";
                 }
-                if (applicationName.Length != 0 && !_applicationEventLogName.Equals(applicationName))
+                if (applicationName.Length != 0 && !ApplicationName.Equals(applicationName))
                 {
-                    _applicationEventLogName = applicationName;
+                    ApplicationName = applicationName;
                 }
             }
         }

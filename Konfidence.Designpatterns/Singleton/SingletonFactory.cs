@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Reflection;
 using System.Threading;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.DesignPatterns.Singleton
@@ -11,7 +12,7 @@ namespace Konfidence.DesignPatterns.Singleton
         private static readonly Hashtable SingletonTable = new Hashtable();
         private static readonly TypeFilter SingletonFilter = SingletonInterfaceFilter;
 
-        private static bool SingletonInterfaceFilter(Type typeObject, Object criteriaObject)
+        private static bool SingletonInterfaceFilter([NotNull] Type typeObject, [NotNull] object criteriaObject)
         {
             if (typeObject.ToString() == criteriaObject.ToString())
             {
