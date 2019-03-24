@@ -1,8 +1,6 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using DbMenuClasses;
 using FluentAssertions;
-using Konfidence.BaseDatabaseClasses.Tests.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.BaseDatabaseClasses.Tests
