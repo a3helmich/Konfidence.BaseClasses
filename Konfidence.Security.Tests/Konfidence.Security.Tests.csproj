@@ -92,7 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj">
-      <Project>{1caf59c3-b155-40e6-a904-3ebc5874e6df}</Project>
+      <Project>{0a49d448-bdfe-432c-8390-9a285559ce3e}</Project>
       <Name>Konfidence.BaseClasses.Code</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.Security.Code\Konfidence.Security.Code.csproj">
