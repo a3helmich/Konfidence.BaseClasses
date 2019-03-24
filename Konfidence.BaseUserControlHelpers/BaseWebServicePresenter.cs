@@ -1,6 +1,4 @@
-﻿using Konfidence.Base;
-
-namespace Konfidence.BaseUserControlHelpers
+﻿namespace Konfidence.BaseUserControlHelpers
 {
     public class BaseWebServicePresenter 
     {
