@@ -195,10 +195,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj">
-      <Project>{1caf59c3-b155-40e6-a904-3ebc5874e6df}</Project>
-      <Name>Konfidence.BaseClasses.Code</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj">
       <Project>{ac595ed8-f17a-4d6c-a801-480433be4d34}</Project>
       <Name>Konfidence.BaseDatabaseClasses.Code</Name>
