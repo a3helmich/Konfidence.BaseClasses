@@ -50,19 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Konfidence.HostProviderInterface\IDataRepository.cs">
+    <Compile Include="..\Konfidence.RepositoryInterface\IDataRepository.cs">
       <Link>IDataRepository.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.HostProviderInterface\Objects\RequestParameters.cs">
+    <Compile Include="..\Konfidence.RepositoryInterface\Objects\RequestParameters.cs">
       <Link>Objects\RequestParameters.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.HostProviderInterface\Objects\ResponseParameters.cs">
+    <Compile Include="..\Konfidence.RepositoryInterface\Objects\ResponseParameters.cs">
       <Link>Objects\ResponseParameters.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.HostProviderInterface\Objects\RetrieveListParameters.cs">
+    <Compile Include="..\Konfidence.RepositoryInterface\Objects\RetrieveListParameters.cs">
       <Link>Objects\RetrieveListParameters.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.HostProviderInterface\Objects\RetrieveParameters.cs">
+    <Compile Include="..\Konfidence.RepositoryInterface\Objects\RetrieveParameters.cs">
       <Link>Objects\RetrieveParameters.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
