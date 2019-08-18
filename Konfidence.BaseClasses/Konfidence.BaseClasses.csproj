@@ -9,7 +9,7 @@
     <DelaySign>false</DelaySign>
     <Version>1.0.6</Version>
     <PackageId>Konfidence.BaseClasses</PackageId>
-    <Company>Konfidence.BaseClasses</Company>
+    <Company>Konfidence in it</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
