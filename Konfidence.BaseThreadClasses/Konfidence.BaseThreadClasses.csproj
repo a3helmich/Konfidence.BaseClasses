@@ -70,9 +70,6 @@
     <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.7169.22191, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.22191\lib\net472\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.7169.22188, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.22191\lib\net472\Konfidence.BaseDataInterfaces.dll</HintPath>
-    </Reference>
     <Reference Include="Konfidence.RepositoryInterface, Version=1.0.7169.22191, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.22191\lib\net472\Konfidence.RepositoryInterface.dll</HintPath>
     </Reference>
@@ -152,6 +149,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
+      <Project>{5c710054-52b1-405e-a754-f0f9682f07d6}</Project>
+      <Name>Konfidence.BaseDataInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

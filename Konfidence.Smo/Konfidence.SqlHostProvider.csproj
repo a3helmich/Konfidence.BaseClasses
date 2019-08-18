@@ -47,15 +47,6 @@
     <Reference Include="Konfidence.Base, Version=1.0.6.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseClasses.1.0.6\lib\netstandard2.0\Konfidence.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.7169.22191, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.22191\lib\net472\Konfidence.BaseDatabaseClasses.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.7169.22188, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.22191\lib\net472\Konfidence.BaseDataInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.7169.22191, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.22191\lib\net472\Konfidence.RepositoryInterface.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
       <Private>True</Private>
