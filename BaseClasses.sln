@@ -87,7 +87,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CB6FF5D2-CD43-41EE-A0D1-B1BAE6920C64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses.Code", "Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj", "{0A49D448-BDFE-432C-8390-9A285559CE3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseClasses.Code", "Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj", "{0A49D448-BDFE-432C-8390-9A285559CE3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -447,8 +447,8 @@ Global
 		{A0D7E2E0-144C-409B-B5F2-107780F69B6D} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
