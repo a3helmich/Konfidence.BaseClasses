@@ -1,6 +1,6 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using JetBrains.Annotations;
 
 namespace Konfidence.UtilHelper
@@ -85,7 +85,7 @@ namespace Konfidence.UtilHelper
             }
             catch (ApplicationException exc)
             {
-                MessageBox.Show(exc.Message, "There was an error during dll loading",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Debug.WriteLine(exc.Message, "There was an error during dll loading");
 
                 throw;
             }
