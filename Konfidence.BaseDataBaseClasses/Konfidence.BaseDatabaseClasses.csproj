@@ -24,10 +24,4 @@
     <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="System.Web.Services">
-      <HintPath>..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Web.Services.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
