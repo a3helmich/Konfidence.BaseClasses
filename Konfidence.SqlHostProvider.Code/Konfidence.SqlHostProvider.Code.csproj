@@ -81,61 +81,61 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Konfidence.Smo\Exceptions\SqlClientException.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\Exceptions\SqlClientException.cs">
       <Link>Exceptions\SqlClientException.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlAccess\SqlClient.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlAccess\SqlClient.cs">
       <Link>SqlAccess\SqlClient.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlAccess\SqlClientRepository.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlAccess\SqlClientRepository.cs">
       <Link>SqlAccess\SqlClientRepository.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\ColumnDataItem.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\ColumnDataItem.cs">
       <Link>SqlDbSchema\ColumnDataItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\ColumnDataItemList.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\ColumnDataItemList.cs">
       <Link>SqlDbSchema\ColumnDataItemList.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\DataBaseStructure.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\DataBaseStructure.cs">
       <Link>SqlDbSchema\DataBaseStructure.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\IColumnDataItem.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IColumnDataItem.cs">
       <Link>SqlDbSchema\IColumnDataItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\IColumnDataItemList.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IColumnDataItemList.cs">
       <Link>SqlDbSchema\IColumnDataItemList.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\IndexColumnsDataItem.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IndexColumnsDataItem.cs">
       <Link>SqlDbSchema\IndexColumnsDataItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\IndexColumnsDataItemList.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IndexColumnsDataItemList.cs">
       <Link>SqlDbSchema\IndexColumnsDataItemList.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\ITableDataItem.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\ITableDataItem.cs">
       <Link>SqlDbSchema\ITableDataItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\PrimaryKeyDataItem.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\PrimaryKeyDataItem.cs">
       <Link>SqlDbSchema\PrimaryKeyDataItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\SchemaBaseDataItem.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SchemaBaseDataItem.cs">
       <Link>SqlDbSchema\SchemaBaseDataItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\SpName.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SpName.cs">
       <Link>SqlDbSchema\SpName.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\SqlConstant.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SqlConstant.cs">
       <Link>SqlDbSchema\SqlConstant.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\TableDataItem.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\TableDataItem.cs">
       <Link>SqlDbSchema\TableDataItem.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlDbSchema\TableDataItemList.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\TableDataItemList.cs">
       <Link>SqlDbSchema\TableDataItemList.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlServerManagement\SqlServerCheck.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlServerManagement\SqlServerCheck.cs">
       <Link>SqlServerManagement\SqlServerCheck.cs</Link>
     </Compile>
-    <Compile Include="..\Konfidence.Smo\SqlServerManagement\SqlServerInstance.cs">
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlServerManagement\SqlServerInstance.cs">
       <Link>SqlServerManagement\SqlServerInstance.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

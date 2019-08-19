@@ -6,7 +6,6 @@ using System.Security.Permissions;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseHelper;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -15,7 +14,6 @@ namespace Konfidence.BaseWindowForms
     /// </summary>
     public class BaseMainform : Form
     {
-        private BaseConfigClass _config;
         private readonly string _errorHeader;
 
         private Type _aboutFormClass;
@@ -379,16 +377,6 @@ namespace Konfidence.BaseWindowForms
                 mainframe.Width = _mainPanel.Width;
                 mainframe.Anchor = _mainPanel.Anchor;
 
-                if (!_config.IsAssigned())
-                {
-                    if (ConfigClass.IsAssigned())
-                    {
-                        _config = Activator.CreateInstance(ConfigClass) as BaseConfigClass;
-                    }
-                }
-
-                mainframe.Config = _config;  // this is not the way to make this a singleton!!!  ---> must be an applicationsettings class
-
                 _mainPanel.Controls.Add(mainframe);
 
                 mainframe.AfterCreate();
@@ -396,11 +384,6 @@ namespace Konfidence.BaseWindowForms
             catch (Exception e)
             {
                 var errorString = _errorHeader + e;
-
-                if (_config.IsAssigned())
-                {
-                    _config.EventLog.WriteEntry(errorString, EventLogEntryType.Error);
-                }
 
                 throw;
             }
