@@ -17,10 +17,14 @@
     <PackageReference Include="Konfidence.BaseClasses" Version="1.0.6" />
     <PackageReference Include="EnterpriseLibrary.Common" Version="6.0.1304.0" />
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304.0" />
-    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="1.0.7169.25603" />
+    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="1.0.0" />
     <PackageReference Include="Microsoft.SQLServer.SMO" Version="12.0.2000.8" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj" />
   </ItemGroup>
 
 </Project>
