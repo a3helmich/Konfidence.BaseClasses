@@ -65,32 +65,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=2019.1.3.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.2019.1.3\lib\net20\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.Base, Version=1.0.6.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseClasses.1.0.6\lib\netstandard2.0\Konfidence.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.7169.25603, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.25603\lib\net472\Konfidence.BaseDatabaseClasses.dll</HintPath>
-    </Reference>
-    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.7169.25602, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.25603\lib\net472\Konfidence.BaseDataInterfaces.dll</HintPath>
-    </Reference>
     <Reference Include="Konfidence.MenuClasses, Version=1.0.7169.22188, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.MenuClasses.1.0.7169.22188\lib\net472\Konfidence.MenuClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.RepositoryInterface, Version=1.0.7169.25603, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.7169.25603\lib\net472\Konfidence.RepositoryInterface.dll</HintPath>
-    </Reference>
     <Reference Include="Konfidence.SqlHostProvider, Version=1.0.7169.22189, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.SqlHostProvider.1.0.7169.22189\lib\net472\Konfidence.SqlHostProvider.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SQLServer.SMO.12.0.2000.8\lib\Microsoft.SqlServer.ConnectionInfo.dll</HintPath>
@@ -115,9 +94,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
