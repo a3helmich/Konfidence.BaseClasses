@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
-    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.6" />
+    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.7" />
   </ItemGroup>
 
 </Project>
