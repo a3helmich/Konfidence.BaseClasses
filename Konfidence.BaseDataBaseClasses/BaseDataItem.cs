@@ -53,7 +53,8 @@ namespace Konfidence.BaseData
 	        }
 	    }
 
-	    public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+	    [NotNull]
+        public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
 	    {
 	        var databaseNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
@@ -170,7 +171,8 @@ namespace Konfidence.BaseData
 
 	    protected int Id { get; private set; }
 
-	    public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary
+	    [NotNull]
+        public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary
         {
             get
             {
@@ -184,65 +186,65 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-	    protected internal void GetAutoUpdateField(string fieldName, out byte fieldValue)
+	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out byte fieldValue)
 	    {
 	        fieldValue = GetAutoUpdateFieldInt8(fieldName);
 	    }
 
 	    [UsedImplicitly]
-	    protected internal void GetAutoUpdateField(string fieldName, out short fieldValue)
+	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out short fieldValue)
 	    {
 	        fieldValue = GetAutoUpdateFieldInt16(fieldName);
 	    }
 
 	    [UsedImplicitly]
-        protected internal void GetAutoUpdateField(string fieldName, out int fieldValue)
+        protected internal void GetAutoUpdateField([NotNull] string fieldName, out int fieldValue)
         {
             fieldValue = GetAutoUpdateFieldInt32(fieldName);
         }
 
 	    [UsedImplicitly]
-	    protected internal void GetAutoUpdateField(string fieldName, out long fieldValue)
+	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out long fieldValue)
 	    {
 	        fieldValue = GetAutoUpdateFieldInt64(fieldName);
 	    }
 
 	    [UsedImplicitly]
-        protected internal void GetAutoUpdateField(string fieldName, out Guid fieldValue)
+        protected internal void GetAutoUpdateField([NotNull] string fieldName, out Guid fieldValue)
         {
             fieldValue = GetAutoUpdateFieldGuid(fieldName);
         }
 
 	    [UsedImplicitly]
-        protected internal void GetAutoUpdateField(string fieldName, out string fieldValue)
+        protected internal void GetAutoUpdateField([NotNull] string fieldName, [CanBeNull] out string fieldValue)
         {
             fieldValue = GetAutoUpdateFieldString(fieldName);
         }
 
 	    [UsedImplicitly]
-        protected internal void GetAutoUpdateField(string fieldName, out bool fieldValue)
+        protected internal void GetAutoUpdateField([NotNull] string fieldName, out bool fieldValue)
         {
             fieldValue = GetAutoUpdateFieldBool(fieldName);
         }
 
-        protected internal void GetAutoUpdateField(string fieldName, out DateTime fieldValue)
+        protected internal void GetAutoUpdateField([NotNull] string fieldName, out DateTime fieldValue)
         {
             fieldValue = GetAutoUpdateFieldDateTime(fieldName);
         }
 
 	    [UsedImplicitly]
-        protected internal void GetAutoUpdateField(string fieldName, out TimeSpan fieldValue)
+        protected internal void GetAutoUpdateField([NotNull] string fieldName, out TimeSpan fieldValue)
         {
             fieldValue = GetAutoUpdateFieldTimeSpan(fieldName);
         }
 
 	    [UsedImplicitly]
-        protected internal void GetAutoUpdateField(string fieldName, out decimal fieldValue)
+        protected internal void GetAutoUpdateField([NotNull] string fieldName, out decimal fieldValue)
         {
             fieldValue = GetAutoUpdateFieldDecimal(fieldName);
         }
 
-        private byte GetAutoUpdateFieldInt8(string fieldName)
+        private byte GetAutoUpdateFieldInt8([NotNull] string fieldName)
         {
             byte fieldValue = 0;
 
@@ -257,7 +259,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-	    private short GetAutoUpdateFieldInt16(string fieldName)
+	    private short GetAutoUpdateFieldInt16([NotNull] string fieldName)
 	    {
 	        short fieldValue = 0;
 
@@ -272,7 +274,7 @@ namespace Konfidence.BaseData
 	        return fieldValue;
 	    }
 
-        private int GetAutoUpdateFieldInt32(string fieldName)
+        private int GetAutoUpdateFieldInt32([NotNull] string fieldName)
         {
             var fieldValue = 0;
 
@@ -287,7 +289,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-	    private long GetAutoUpdateFieldInt64(string fieldName)
+	    private long GetAutoUpdateFieldInt64([NotNull] string fieldName)
 	    {
 	        long fieldValue = 0;
 
@@ -302,7 +304,7 @@ namespace Konfidence.BaseData
 	        return fieldValue;
 	    }
 
-        private Guid GetAutoUpdateFieldGuid(string fieldName)
+        private Guid GetAutoUpdateFieldGuid([NotNull] string fieldName)
         {
             var fieldValue = Guid.Empty;
 
@@ -317,7 +319,8 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-        private string GetAutoUpdateFieldString(string fieldName)
+        [CanBeNull]
+        private string GetAutoUpdateFieldString([NotNull] string fieldName)
         {
             var fieldValue = string.Empty;
 
@@ -332,7 +335,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-        private bool GetAutoUpdateFieldBool(string fieldName)
+        private bool GetAutoUpdateFieldBool([NotNull] string fieldName)
         {
             var fieldValue = false;
 
@@ -347,7 +350,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-        private DateTime GetAutoUpdateFieldDateTime(string fieldName)
+        private DateTime GetAutoUpdateFieldDateTime([NotNull] string fieldName)
         {
             var fieldValue = DateTime.MinValue;
 
@@ -362,7 +365,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-        private TimeSpan GetAutoUpdateFieldTimeSpan(string fieldName)
+        private TimeSpan GetAutoUpdateFieldTimeSpan([NotNull] string fieldName)
         {
             var fieldValue = TimeSpan.MinValue;
 
@@ -377,7 +380,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-        private decimal GetAutoUpdateFieldDecimal(string fieldName)
+        private decimal GetAutoUpdateFieldDecimal([NotNull] string fieldName)
         {
             decimal fieldValue = 0;
 
@@ -392,7 +395,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
-        protected internal void AddAutoUpdateField(string fieldName, DbType fieldType)
+        protected internal void AddAutoUpdateField([NotNull] string fieldName, DbType fieldType)
         {
             if (!AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
@@ -443,7 +446,7 @@ namespace Konfidence.BaseData
 	    }
 
 	    [UsedImplicitly]
-        protected void GetField(string fieldName, out Guid field)
+        protected void GetField([NotNull] string fieldName, out Guid field)
         {
             field = GetFieldGuid(fieldName);
         }
@@ -470,7 +473,7 @@ namespace Konfidence.BaseData
         }
 
 	    [UsedImplicitly]
-        protected void GetField(string fieldName, ref XmlDocument field)
+        protected void GetField(string fieldName, [NotNull] ref XmlDocument field)
         {
             field.LoadXml(GetFieldString(fieldName));
         }
@@ -541,7 +544,7 @@ namespace Konfidence.BaseData
 	        throw (new Exception("GetFieldInt64: client/_PropertyDictionary is not assigned"));
 	    }
 
-        private Guid GetFieldGuid(string fieldName)
+        private Guid GetFieldGuid([NotNull] string fieldName)
         {
             if (PropertyDictionary.IsAssigned())
             {
@@ -886,6 +889,7 @@ namespace Konfidence.BaseData
             return Client.StoredProcedureExists(storedProcedureName);
         }
 
+        [NotNull]
         public IDbParameterObjectList SetItemData()
 		{
 			SetData();
@@ -893,6 +897,7 @@ namespace Konfidence.BaseData
             return SetParameterData();
 		}
 
+        [NotNull]
         internal DbParameterObjectList SetParameterData()
         {
             var parameterObjectList = new DbParameterObjectList();

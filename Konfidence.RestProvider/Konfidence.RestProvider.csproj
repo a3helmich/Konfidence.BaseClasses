@@ -65,15 +65,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj">
-      <Project>{2B4CCFAC-0B45-4F69-96BB-A60C4584027F}</Project>
-      <Name>Konfidence.BaseDatabaseClasses</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
-      <Project>{5C710054-52B1-405E-A754-F0F9682F07D6}</Project>
-      <Name>Konfidence.BaseDataInterfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

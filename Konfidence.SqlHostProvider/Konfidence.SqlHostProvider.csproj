@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj" />
     <ProjectReference Include="..\Konfidence.RepositoryInterface\Konfidence.RepositoryInterface.csproj" />
   </ItemGroup>
 
