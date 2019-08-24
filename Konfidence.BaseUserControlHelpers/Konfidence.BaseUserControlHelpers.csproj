@@ -29,7 +29,6 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
     <PackageReference Include="Konfidence.MenuClasses" Version="1.0.7169.22188" />
-    <PackageReference Include="Konfidence.SqlHostProvider" Version="1.0.7169.22189"  />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
