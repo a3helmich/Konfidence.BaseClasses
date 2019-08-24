@@ -22,8 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongName
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers", "Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj", "{D60A1063-3897-44FA-97F5-85A9C25B1F8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseThreadClasses", "Konfidence.BaseThreadClasses\Konfidence.BaseThreadClasses.csproj", "{536AED59-A354-4905-AFC9-6FF981B06413}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWindowForms", "Konfidence.BaseWindowForms\Konfidence.BaseWindowForms.csproj", "{0D53566A-235C-47C3-8DE0-60538050FD9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.UtilHelper", "Konfidence.UtilHelper\Konfidence.UtilHelper.csproj", "{BAD05CC5-FB06-4B17-8089-67CF420159B9}"
@@ -96,15 +94,6 @@ Global
 		{D60A1063-3897-44FA-97F5-85A9C25B1F8C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D60A1063-3897-44FA-97F5-85A9C25B1F8C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D60A1063-3897-44FA-97F5-85A9C25B1F8C}.Release|x86.ActiveCfg = Release|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{536AED59-A354-4905-AFC9-6FF981B06413}.Release|x86.ActiveCfg = Release|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
