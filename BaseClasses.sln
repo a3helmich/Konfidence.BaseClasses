@@ -8,19 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClassGeneratorConfig", "Cla
 		ClassModelGenerator.config.json = ClassModelGenerator.config.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataItemGeneratorConfig", "DataItemGeneratorConfig", "{2CE91D47-F20E-41FB-8824-D422D5E2AB85}"
-	ProjectSection(SolutionItems) = preProject
-		ClassModelGenerator.config.json = ClassModelGenerator.config.json
-		DataItemGenerator.config.xml = DataItemGenerator.config.xml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongNameKey", "{5509EDEF-3EA1-4BBA-905A-34C9C89004C0}"
 	ProjectSection(SolutionItems) = preProject
 		HowToGetPublicKey.txt = HowToGetPublicKey.txt
 		Konfidence.nl.snk = Konfidence.nl.snk
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseWindowForms", "Konfidence.BaseWindowForms\Konfidence.BaseWindowForms.csproj", "{0D53566A-235C-47C3-8DE0-60538050FD9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.UtilHelper", "Konfidence.UtilHelper\Konfidence.UtilHelper.csproj", "{BAD05CC5-FB06-4B17-8089-67CF420159B9}"
 EndProject
@@ -77,15 +69,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{0D53566A-235C-47C3-8DE0-60538050FD9C}.Release|x86.ActiveCfg = Release|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -122,6 +105,7 @@ Global
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{769D1ED1-E250-4F31-9B11-C1D5F8B255FF}.Release|x86.ActiveCfg = Release|Any CPU
@@ -168,6 +152,7 @@ Global
 		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Debug|x86.Build.0 = Debug|Any CPU
 		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1FC56015-7C87-4B9B-8490-009210FC2CEE}.Release|x86.ActiveCfg = Release|Any CPU
