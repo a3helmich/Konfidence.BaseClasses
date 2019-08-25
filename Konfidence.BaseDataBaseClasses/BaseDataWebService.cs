@@ -41,6 +41,7 @@ namespace Konfidence.BaseData
 		}
 
         //[WebMethod]
+        [NotNull]
         public DbParameterObjectList GetItemByParam(DbParameterObjectList parameterList)
         {
             var baseDataItem = GetNewDataItem(parameterList);
@@ -68,6 +69,7 @@ namespace Konfidence.BaseData
 		}
 
 		//[WebMethod]
+        [CanBeNull]
         public List<IDbParameterObjectList> BuildItemList()
 		{
 			//var baseDataItemList = GetNewDataItemList();
@@ -115,12 +117,12 @@ namespace Konfidence.BaseData
 			return baseDataItem.ViewExists(viewName);
 		}
 
-		protected static void SetKey(BaseDataItem baseDataItem, int id)
+		protected static void SetKey([NotNull] BaseDataItem baseDataItem, int id)
 		{
 			baseDataItem.SetId(id);
 		}
 
-        protected static void SetProperties(BaseDataItem baseDataItem, DbParameterObjectList properties)
+        protected static void SetProperties([NotNull] BaseDataItem baseDataItem, [NotNull] DbParameterObjectList properties)
 		{
 			var propertyDictionary = new Dictionary<string, object>();
 
@@ -132,7 +134,8 @@ namespace Konfidence.BaseData
 			baseDataItem.SetProperties(propertyDictionary);
 		}
 
-        internal static DbParameterObjectList GetProperties(BaseDataItem baseDataItem)
+        [NotNull]
+        internal static DbParameterObjectList GetProperties([NotNull] BaseDataItem baseDataItem)
 		{
             var properties = new DbParameterObjectList();
 

@@ -85,7 +85,7 @@ namespace Konfidence.RestProvider
         #endregion
 
         [UsedImplicitly]
-        public void Save(BaseDataItem dataItem)
+        public void Save([NotNull] BaseDataItem dataItem)
         {
             var parameterDataItemList = dataItem.SetItemData();
 
@@ -216,6 +216,7 @@ namespace Konfidence.RestProvider
             return _wsBaseHostService.ViewExists(viewName);
         }
 
+        [NotNull]
         private static string GetWsUrl(string serviceName)
         {
             var wsUrl = ConfigurationManager.AppSettings[serviceName];

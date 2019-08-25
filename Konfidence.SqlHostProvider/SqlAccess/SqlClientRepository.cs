@@ -36,7 +36,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
         }
 
-        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, IDbParameterObjectList parameterObjectList)
+        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, [NotNull] IDbParameterObjectList parameterObjectList)
         {
             var database = GetDatabase();
 
@@ -51,7 +51,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters)
+        public ResponseParameters ExecuteSaveStoredProcedure([NotNull] RequestParameters executeParameters)
         {
             var database = GetDatabase();
 
@@ -69,7 +69,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return resultParameters;
         }
 
-        private static void SetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
+        private static void SetParameterData([NotNull] RequestParameters executeParameters, [NotNull] Database database, DbCommand dbCommand)
         {
             // autoidfield parameter toevoegen
             database.AddParameter(dbCommand, executeParameters.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
@@ -91,7 +91,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static ResponseParameters GetParameterData(RequestParameters executeParameters, Database database, DbCommand dbCommand)
+        [NotNull]
+        private static ResponseParameters GetParameterData([NotNull] RequestParameters executeParameters, [NotNull] Database database, DbCommand dbCommand)
         {
             var responseParameters = new ResponseParameters();
 
@@ -111,7 +112,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return responseParameters;
         }
 
-        public void ExecuteGetStoredProcedure(RetrieveParameters retrieveParameters, Func<bool> callback)
+        public void ExecuteGetStoredProcedure([NotNull] RetrieveParameters retrieveParameters, Func<bool> callback)
         {
             var database = GetDatabase();
 
@@ -136,7 +137,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData(RetrieveParameters executeParameters, Database database, DbCommand dbCommand)
+        private static void SetParameterData([NotNull] RetrieveParameters executeParameters, Database database, DbCommand dbCommand)
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
@@ -146,7 +147,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             executeParameters.ParameterObjectList.Clear();
         }
 
-        public void ExecuteGetListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, Func<bool> callback) where T : IBaseDataItem
+        public void ExecuteGetListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, Func<bool> callback) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -171,7 +172,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public void ExecuteGetRelatedListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, Func<bool> parentCallback, Func<bool> relatedCallback, Func<bool> childCallback) where T : IBaseDataItem
+        public void ExecuteGetRelatedListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, Func<bool> parentCallback, Func<bool> relatedCallback, Func<bool> childCallback) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -216,7 +217,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData<T>(RetrieveListParameters<T> executeParameters, Database database, DbCommand dbCommand) where T : IBaseDataItem
+        private static void SetParameterData<T>([NotNull] RetrieveListParameters<T> executeParameters, Database database, DbCommand dbCommand) where T : IBaseDataItem
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
@@ -239,7 +240,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
         [UsedImplicitly]
-        public int ExecuteNonQuery(string storedProcedure, DbParameterObjectList parameterList)
+        public int ExecuteNonQuery(string storedProcedure, [NotNull] DbParameterObjectList parameterList)
         {
             return ExecuteNonQueryStoredProcedure(storedProcedure, parameterList);
         }

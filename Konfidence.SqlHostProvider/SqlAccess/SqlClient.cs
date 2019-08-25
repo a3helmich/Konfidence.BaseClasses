@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Linq;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
@@ -104,7 +105,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetDecimal(fieldOrdinal);
         }
 
-        private int GetOrdinal(string fieldName)
+        private int GetOrdinal([NotNull] string fieldName)
         {
             if (!DataReader.IsAssigned())
             {
@@ -117,7 +118,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
         #endregion
 
-        public override void Save(IBaseDataItem dataItem)
+        public override void Save([NotNull] IBaseDataItem dataItem)
         {
             if (dataItem.AutoIdField.Equals(string.Empty))
             {
@@ -144,7 +145,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public override void GetItem(IBaseDataItem dataItem, string getStoredProcedure)
+        public override void GetItem(IBaseDataItem dataItem, [NotNull] string getStoredProcedure)
         {
             if (getStoredProcedure.Equals(string.Empty))
             {
@@ -162,7 +163,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 });
         }
 
-        public override void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure)
+        public override void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure)
         {
             if (getListStoredProcedure.Equals(string.Empty))
             {
@@ -177,8 +178,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
 
-        public override void BuildItemList<T>(IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
-            IBaseDataItemList<T> childDataItemList, string getRelatedStoredProcedure)
+        public override void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
+            IBaseDataItemList<T> childDataItemList, [NotNull] string getRelatedStoredProcedure)
         {
             if (getRelatedStoredProcedure.Equals(string.Empty))
             {
@@ -195,7 +196,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 () => GetDataItem(childDataItemList));
         }
 
-        private bool GetDataItem<T>(IBaseDataItemList<T> baseDataItemList) where T : IBaseDataItem
+        private bool GetDataItem<T>([NotNull] IBaseDataItemList<T> baseDataItemList) where T : IBaseDataItem
         {
             var dataItem = baseDataItemList.GetDataItem();
 
@@ -207,7 +208,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return true;
         }
 
-        public override void Delete(string deleteStoredProcedure, string autoIdField, int id)
+        public override void Delete([NotNull] string deleteStoredProcedure, string autoIdField, int id)
         {
             if (deleteStoredProcedure.Equals(string.Empty))
             {
@@ -246,6 +247,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
         // TODO: internal
+        [NotNull]
         public override DataTable GetSchemaObject(string collection)
         {
             DataTable dataTable;

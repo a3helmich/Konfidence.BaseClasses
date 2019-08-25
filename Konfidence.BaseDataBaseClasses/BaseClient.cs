@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using JetBrains.Annotations;
 using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData
@@ -75,6 +76,7 @@ namespace Konfidence.BaseData
         }
         
         // TODO: make internal again 
+        [CanBeNull]
         public virtual DataTable GetSchemaObject(string collection)
         {
             return null;

@@ -155,6 +155,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             Name = name;
         }
 
+        [NotNull]
         private static string GetDataType(string dataType)
         {
             dataType = dataType.ToLower();
@@ -202,6 +203,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return dataType;
         }
 
+        [NotNull]
         private string GetDbDataType()
         {
             var dataType = DataType;
@@ -274,6 +276,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             }
         }
 
+        [NotNull]
         private static string GetDefaultPropertyValue(string dataType, string newValue)
         {
             var defaultPropertyValuelinePart = string.Empty;

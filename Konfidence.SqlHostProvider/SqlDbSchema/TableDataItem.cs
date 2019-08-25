@@ -14,8 +14,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string Name { get; } = string.Empty;
 
-        [UsedImplicitly]
-        public string TableType => SqlConstant.TableType;
+        [UsedImplicitly] [NotNull] public string TableType => SqlConstant.TableType;
 
         public IColumnDataItemList ColumnDataItemList => _columnDataItemList;
 

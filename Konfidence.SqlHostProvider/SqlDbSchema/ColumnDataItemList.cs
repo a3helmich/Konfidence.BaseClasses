@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
@@ -47,11 +48,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             _hasDefaultValueFieldsChecked = false;
         }
 
+        [NotNull]
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();
         }
 
+        [NotNull]
         public static ColumnDataItemList GetList(string tableName, string connectionName)
         {
             var columnDataItemList = new ColumnDataItemList(tableName, connectionName);
@@ -61,7 +64,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return columnDataItemList;
         }
 
-        public override void SetParameters(string storedProcedure)
+        public override void SetParameters([NotNull] string storedProcedure)
         {
 
             if (storedProcedure.Equals(SpName.ColumnsGetlist))
@@ -70,6 +73,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             }
         }
 
+        [CanBeNull]
         public IColumnDataItem Find(string columnName)
         {
             foreach (var columnDataItem in this)
@@ -85,7 +89,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         // construct an identifier for the Columns by appending all Names 
         // ie: Column1 & Column2 -> Column1Column2 for GetByColumn1Column2
-        public string GetFieldNames(List<string> getListByFieldList)
+        [NotNull]
+        public string GetFieldNames([NotNull] List<string> getListByFieldList)
         {
             var fieldNames = string.Empty;
 
@@ -102,7 +107,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return fieldNames;
         }
 
-        public string GetUnderscoreFieldNames(List<string> getListByFieldList)
+        [NotNull]
+        public string GetUnderscoreFieldNames([NotNull] List<string> getListByFieldList)
         {
             var fieldNames = string.Empty;
             var delimiter = string.Empty;
@@ -122,7 +128,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return fieldNames.ToUpper();
         }
 
-        public string GetTypedCommaFieldNames(List<string> getListByFieldList)
+        [NotNull]
+        public string GetTypedCommaFieldNames([NotNull] List<string> getListByFieldList)
         {
             var commaFieldNames = string.Empty;
             var delimiter = string.Empty;
@@ -142,7 +149,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return commaFieldNames;
         }
 
-        public string GetCommaFieldNames(List<string> getListByFieldList)
+        [NotNull]
+        public string GetCommaFieldNames([NotNull] List<string> getListByFieldList)
         {
             var commaFieldNames = string.Empty;
             var delimiter = string.Empty;
@@ -162,7 +170,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return commaFieldNames;
         }
 
-        public string GetFirstField(List<string> getListByFieldList)
+        public string GetFirstField([NotNull] List<string> getListByFieldList)
         {
             if (getListByFieldList.Count > 0)
             {
@@ -172,7 +180,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return string.Empty;
         }
 
-        public string GetLastField(List<string> findByFieldList)
+        public string GetLastField([NotNull] List<string> findByFieldList)
         {
             if (findByFieldList.Count > 0)
             {

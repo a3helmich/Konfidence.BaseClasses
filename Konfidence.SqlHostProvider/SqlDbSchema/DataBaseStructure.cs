@@ -20,8 +20,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             ConnectionName = connectionName;
         }
 
-        [UsedImplicitly]
-        public string SelectedConnectionName => ConnectionName ?? string.Empty;
+        [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
         [UsedImplicitly]
         public void BuildStructure()

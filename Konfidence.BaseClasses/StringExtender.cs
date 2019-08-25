@@ -7,7 +7,8 @@ namespace Konfidence.Base
     [UsedImplicitly]
     public static class StringExtender
     {
-        public static string ReplaceIgnoreCase(this string fromString, string oldValue, string newValue)
+        [NotNull]
+        public static string ReplaceIgnoreCase([NotNull] this string fromString, [NotNull] string oldValue, string newValue)
         {
             var fromStringIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
 

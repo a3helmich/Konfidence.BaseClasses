@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
@@ -18,6 +19,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             BuildItemList(dataTableList);
         }
 
+        [NotNull]
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();
@@ -43,7 +45,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return shemaBaseDataItem.GetTables();
         }
 
-        private void BuildItemList(DataTable dataTableList)
+        private void BuildItemList([NotNull] DataTable dataTableList)
         {
             foreach (DataRow dataRow in dataTableList.Rows)
             {

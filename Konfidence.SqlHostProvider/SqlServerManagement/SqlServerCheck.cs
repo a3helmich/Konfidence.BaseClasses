@@ -12,7 +12,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
     public class SqlServerCheck
     {
         [UsedImplicitly]
-        public static bool VerifyDatabaseServer(Database databaseInstance)
+        public static bool VerifyDatabaseServer([NotNull] Database databaseInstance)
         {
             var serverName = string.Empty;
             var connectionName = string.Empty;

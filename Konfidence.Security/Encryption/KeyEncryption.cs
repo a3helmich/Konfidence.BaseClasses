@@ -25,9 +25,9 @@ namespace Konfidence.Security.Encryption
 
         public RSACryptoServiceProvider RsaProvider => _rsaProvider;
 
-        public string PublicKey => _rsaProvider.ToXmlString(false);
+        [NotNull] public string PublicKey => _rsaProvider.ToXmlString(false);
 
-        public string PrivateKey => _rsaProvider.ToXmlString(true);
+        [NotNull] public string PrivateKey => _rsaProvider.ToXmlString(true);
 
         [UsedImplicitly]
         public int KeySize => TempKeyContainer.KeySize;
@@ -74,6 +74,7 @@ namespace Konfidence.Security.Encryption
             Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
         }
 
+        [NotNull]
         protected RSACryptoServiceProvider TempKeyContainer
         {
             get
@@ -128,6 +129,7 @@ namespace Konfidence.Security.Encryption
             return _maxBytesServer * 8;
         }
 
+        [NotNull]
         private static CspParameters GetCspParameters(string containerName)
         {
             var cp = new CspParameters();
@@ -242,7 +244,7 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-        public void ReadKey(string key)
+        public void ReadKey([NotNull] string key)
         {
             _rsaProvider.FromXmlString(key);
             _maxBytesServer = _rsaProvider.KeySize / 8;

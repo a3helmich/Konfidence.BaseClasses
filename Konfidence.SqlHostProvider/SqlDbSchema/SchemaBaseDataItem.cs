@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.BaseDataInterfaces;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -13,6 +14,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return Client.GetSchemaObject(objectType);
         }
 
+        [NotNull]
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Text;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
@@ -21,6 +22,7 @@ namespace Konfidence.Security.Encryption
 
         public int KeySize => _encoder.RsaProvider.KeySize;
 
+        [CanBeNull]
         public object[] Encrypt(string rawData)
         {
             ArrayList byteList = null;
@@ -51,7 +53,7 @@ namespace Konfidence.Security.Encryption
             return null;
         }
 
-        private byte[] GetEnryptedDataBlock(string partialString)
+        private byte[] GetEnryptedDataBlock([NotNull] string partialString)
         {
             var asciiEncoding = new ASCIIEncoding();
 
@@ -62,7 +64,8 @@ namespace Konfidence.Security.Encryption
             return encryptedData;
         }
 
-        private static string GetNextPartialString(string fullString, int packageSize)
+        [NotNull]
+        private static string GetNextPartialString([NotNull] string fullString, int packageSize)
         {
             return fullString.Substring(packageSize, fullString.Length - packageSize);
         }

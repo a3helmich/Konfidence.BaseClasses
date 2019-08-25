@@ -10,21 +10,17 @@ namespace Konfidence.BaseDatabaseClasses.Tests
     public class BaseDataItemTest
     {
         [TestMethod]
-        public void BaseDataItemWhenInstatiatedShouldSelectClient()
-        {
-            //var x = "my string";
-
-            //var dataItem = new DataItem();
-        }
-
-        [TestMethod]
         public void TestIntDataItemShouldResturnShortAndLong()
         {
+
+            // arrange
             var testIntDataItemList = Bl.TestIntDataItemList.GetList();
 
+            // act
+            testIntDataItemList.Should().HaveCount(1);
 
-            var dataItem = testIntDataItemList[0];
-            dataItem.testInt.Should().BeGreaterThan(1);
+            // assert
+            testIntDataItemList[0].testInt.Should().BeGreaterThan(1);
         }
     }
 }

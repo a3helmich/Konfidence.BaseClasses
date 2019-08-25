@@ -73,6 +73,10 @@
       <Project>{3e43ecac-b03f-4bcb-a975-ca761a696dc6}</Project>
       <Name>Konfidence.BaseDataInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj">
+      <Project>{dcab3a56-9d42-4ce4-9300-d72b9f9e2f64}</Project>
+      <Name>Konfidence.RepositoryInterface.Code</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
