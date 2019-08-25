@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StrongNameKey", "StrongName
 		Konfidence.nl.snk = Konfidence.nl.snk
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.UtilHelper", "Konfidence.UtilHelper\Konfidence.UtilHelper.csproj", "{BAD05CC5-FB06-4B17-8089-67CF420159B9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers.Tests", "Konfidence.Test.BaseWebsiteClasses\Konfidence.BaseUserControlHelpers.Tests.csproj", "{499C842D-9F66-487F-A886-389F32BA4233}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1D94BDD9-A879-4163-BB2C-225088B97A67}"
@@ -65,16 +63,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{BAD05CC5-FB06-4B17-8089-67CF420159B9}.Release|x86.ActiveCfg = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
