@@ -355,6 +355,7 @@ namespace Konfidence.BaseWindowForms
         }
 
         [EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
+        [NotNull]
         private BaseContainerFrame BuildMainContainer(BaseContainerFrame mainframe)
         {
             try

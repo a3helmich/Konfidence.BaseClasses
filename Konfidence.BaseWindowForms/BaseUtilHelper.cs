@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -7,7 +8,7 @@ namespace Konfidence.BaseWindowForms
     /// </summary>
     public abstract class BaseUtilHelper
     {
-        public static bool IsValidEmail(string eMail)
+        public static bool IsValidEmail([NotNull] string eMail)
         {
             var regex = new Regex(".+@.+\\.[a-z]+");
             var match = regex.Match(eMail);
