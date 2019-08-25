@@ -46,9 +46,6 @@
     <Reference Include="Konfidence.BaseDatabaseClasses, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
       <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.0\lib\netstandard2.0\Konfidence.BaseDatabaseClasses.dll</HintPath>
     </Reference>
-    <Reference Include="Konfidence.BaseDataInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4650fb79bf8d22c7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Konfidence.BaseDatabaseClasses.1.0.0\lib\netstandard2.0\Konfidence.BaseDataInterfaces.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -70,6 +67,12 @@
     </None>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
+      <Project>{3e43ecac-b03f-4bcb-a975-ca761a696dc6}</Project>
+      <Name>Konfidence.BaseDataInterfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
