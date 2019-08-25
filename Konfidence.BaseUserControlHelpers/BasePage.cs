@@ -54,7 +54,8 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected string GetViewState(string fieldName)
+        [NotNull]
+        protected string GetViewState([NotNull] string fieldName)
         {
             var viewState = ViewState[fieldName];
 
@@ -201,6 +202,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
+        [NotNull]
         protected string GetParameter(string name)
         {
             var param = Request.QueryString[name];
@@ -260,7 +262,8 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
-        protected Control FindUserControlByType(ControlCollection controlCollection, Type findType)
+        [CanBeNull]
+        protected Control FindUserControlByType([NotNull] ControlCollection controlCollection, Type findType)
         {
             return BasePageHelper.FindUserControlByType(controlCollection, findType);
         }
@@ -308,7 +311,8 @@ namespace Konfidence.BaseUserControlHelpers
 			Context.Items[SessionHelper.PAGE_ID_VALUE] = pageId;
 		}
 
-		private ScriptManager GetScriptManager()
+		[CanBeNull]
+        private ScriptManager GetScriptManager()
 		{
 			ScriptManager scriptManager = null;
 			

@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 
@@ -100,6 +101,7 @@ namespace Konfidence.BaseUserControlHelpers.Login
             }
         }
 
+        [NotNull]
         internal string LoginErrorMessage
         {
             get

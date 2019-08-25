@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.UI;
 using JetBrains.Annotations;
 using Konfidence.Base;
 
@@ -174,6 +175,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [CanBeNull]
         protected Dictionary<string, string> MasterPageDictionaryIn
         {
             get
@@ -192,6 +194,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [CanBeNull]
         protected Dictionary<string, string> MasterPageDictionaryOut
         {
             get
@@ -210,7 +213,8 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected string GetViewState(string fieldName)
+        [NotNull]
+        protected string GetViewState([NotNull] string fieldName)
         {
             var viewState = ViewState[fieldName];
 
@@ -223,6 +227,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         [UsedImplicitly]
+        [NotNull]
         protected string GetSessionState(string fieldName)
         {
             var sessionState = Session[fieldName];

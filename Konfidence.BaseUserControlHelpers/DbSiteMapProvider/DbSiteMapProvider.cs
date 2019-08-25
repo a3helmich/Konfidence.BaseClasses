@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Web;
 using DbMenuClasses;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
@@ -35,6 +36,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             IsLocal = false;
         }
 
+        [CanBeNull]
         protected override SiteMapNode GetRootNodeCore() // !!! base niet aanroepen, is by design !!!
         {
             return RootNode;
@@ -86,7 +88,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        private void BuildChildNodes(IEnumerable<Bl.MenuDataItem> childNodes, Bl.MenuDataItem rootMenu, SiteMapNode parentNode)
+        private void BuildChildNodes([NotNull] IEnumerable<Bl.MenuDataItem> childNodes, Bl.MenuDataItem rootMenu, SiteMapNode parentNode)
         {
             foreach (var childItem in childNodes)
             {
@@ -141,7 +143,8 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             }
         }
 
-        private static Bl.MenuDataItem GetMenuRootNode(IEnumerable<Bl.MenuDataItem> menuList)
+        [CanBeNull]
+        private static Bl.MenuDataItem GetMenuRootNode([NotNull] IEnumerable<Bl.MenuDataItem> menuList)
         {
             foreach (var menuItem in menuList)
             {
@@ -154,7 +157,8 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
             return null;
         }
 
-        private SiteMapNode BuildMenuNode(Bl.MenuDataItem menuItem)
+        [NotNull]
+        private SiteMapNode BuildMenuNode([NotNull] Bl.MenuDataItem menuItem)
         {
             var menuUrl = string.Empty;
             var menuMenuText = string.Empty;

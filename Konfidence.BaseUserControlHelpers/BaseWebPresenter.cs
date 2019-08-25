@@ -27,6 +27,7 @@ namespace Konfidence.BaseUserControlHelpers
         public string MenuPageName => PageSettingDocument.MenuUrl;
 
         [UsedImplicitly]
+        [NotNull]
         public string MenuUrl
         {
             get
@@ -42,6 +43,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         public string LogonPageName => PageSettingDocument.LogonUrl;
 
+        [NotNull]
         public string LogonUrl
         {
             get
@@ -85,6 +87,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// <summary>
         /// returns App_Data path like 'c:\...\app_data' 
         /// </summary>
+        [NotNull]
         public string DataDirectory
         {
             get
@@ -110,6 +113,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// </summary>
         /// <param name="url">the url to resolve</param>
         /// <returns>the path like 'c:\...\foldername\filename' </returns>
+        [NotNull]
         public static string ResolveServerPath(string url)
         {
             if (url.IsAssigned())
@@ -126,7 +130,8 @@ namespace Konfidence.BaseUserControlHelpers
         /// <param name="serverPath">the path like 'c:\...\foldername'</param>
         /// <returns>the url '\foldername'</returns>
         [UsedImplicitly]
-        public static string ResolveClientUrl(string serverPath)
+        [NotNull]
+        public static string ResolveClientUrl([NotNull] string serverPath)
         {
             return serverPath.Replace(ResolveServerPath(ApplicationUrl), @"~");
         }
@@ -137,6 +142,7 @@ namespace Konfidence.BaseUserControlHelpers
         /// <param name="pageUrl">url like \folder\page</param>
         /// <returns>http:\\...\folder\page</returns>
         [UsedImplicitly]
+        [NotNull]
         public string ClientUrl(string pageUrl)
         {
             var appRoot = @"http://" + HttpContext.Current.Request.Url.Host;
@@ -148,11 +154,13 @@ namespace Konfidence.BaseUserControlHelpers
         /// returns the application path like 'c:\...\foldername'
         /// </summary>
         [UsedImplicitly]
+        [NotNull]
         public static string PhysicalApplicationPath => AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
         /// return the application Url like '\applicationFoldername'
         /// </summary>
+        [NotNull]
         public static string ApplicationUrl => VirtualPathUtility.ToAbsolute(@"~").TrimEnd('/');
 
         /// <summary>
@@ -176,9 +184,9 @@ namespace Konfidence.BaseUserControlHelpers
             return VirtualPathUtility.ToAbsolute(pageUrl);
         }
 
-        [UsedImplicitly]
-        public string PageUrl => HttpContext.Current.Request.Url.AbsolutePath;
+        [UsedImplicitly] [NotNull] public string PageUrl => HttpContext.Current.Request.Url.AbsolutePath;
 
+        [CanBeNull]
         public string FromUrl
         {
             get => HttpContext.Current.Session[InternalSessionAccount.FROM_URL] as string;
@@ -193,12 +201,12 @@ namespace Konfidence.BaseUserControlHelpers
         [UsedImplicitly]
         public bool IsAuthorized => _loginContext.IsAuthorized;
 
-        [UsedImplicitly]
-        public string LoginErrorMessage => _loginContext.LoginErrorMessage;
+        [UsedImplicitly] [NotNull] public string LoginErrorMessage => _loginContext.LoginErrorMessage;
 
         [UsedImplicitly]
         public bool IsAdministrator => _loginContext.IsAdministrator;
 
+        [NotNull]
         protected PageSettingXmlDocument PageSettingDocument
         {
             get
@@ -234,8 +242,9 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        private string PageSettingFileName => DataDirectory + "PageSetting.nl.xml";
+        [NotNull] private string PageSettingFileName => DataDirectory + "PageSetting.nl.xml";
 
+        [NotNull]
         public PageSettingDictionary PageSettingDictionary
         {
             get
