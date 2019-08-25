@@ -36,6 +36,7 @@
     <ProjectReference Include="..\Konfidence.BaseUserControlHelpers.Code\Konfidence.BaseUserControlHelpers.Code.csproj" />
     <ProjectReference Include="..\Konfidence.MenuClasses.Code\Konfidence.MenuClasses.Code.csproj" />
     <ProjectReference Include="..\Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj" />
+    <ProjectReference Include="..\Konfidence.Security.Code\Konfidence.Security.Code.csproj" />
     <ProjectReference Include="..\Konfidence.SqlHostProvider.Code\Konfidence.SqlHostProvider.Code.csproj" />
   </ItemGroup>
 
