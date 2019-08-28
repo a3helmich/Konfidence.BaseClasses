@@ -16,10 +16,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
     <PackageReference Include="EnterpriseLibrary.Common" Version="6.0.1304" />
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj" />
+    <PackageReference Include="Konfidence.BaseDatabaseInterfaces" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
