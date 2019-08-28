@@ -17,11 +17,8 @@
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
     <PackageReference Include="Konfidence.BaseClasses" Version="1.0.7" />
+    <PackageReference Include="Konfidence.BaseDatabaseInterfaces" Version="1.0.0" />
     <PackageReference Include="Ninject" Version="3.3.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj" />
   </ItemGroup>
 
 </Project>
