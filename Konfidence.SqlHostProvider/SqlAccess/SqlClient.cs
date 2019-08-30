@@ -35,70 +35,70 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         private IDataReader DataReader => _repository.DataReader;
 
         #region GetField Methods
-        public override byte GetFieldInt8(string fieldName)
+        public override byte GetFieldInt8([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? (byte) 0 : DataReader.GetByte(fieldOrdinal);
         }
 
-        public override short GetFieldInt16(string fieldName)
+        public override short GetFieldInt16([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? (short)0 : DataReader.GetInt16(fieldOrdinal);
         }
 
-        public override int GetFieldInt32(string fieldName)
+        public override int GetFieldInt32([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt32(fieldOrdinal);
         }
 
-        public override long GetFieldInt64(string fieldName)
+        public override long GetFieldInt64([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt64(fieldOrdinal);
         }
 
-        public override Guid GetFieldGuid(string fieldName)
+        public override Guid GetFieldGuid([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : DataReader.GetGuid(fieldOrdinal);
         }
 
-        public override string GetFieldString(string fieldName)
+        public override string GetFieldString([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? string.Empty : DataReader.GetString(fieldOrdinal);
         }
 
-        public override bool GetFieldBool(string fieldName)
+        public override bool GetFieldBool([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return !DataReader.IsDBNull(fieldOrdinal) && DataReader.GetBoolean(fieldOrdinal);
         }
 
-        public override DateTime GetFieldDateTime(string fieldName)
+        public override DateTime GetFieldDateTime([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : DataReader.GetDateTime(fieldOrdinal);
         }
 
-        public override TimeSpan GetFieldTimeSpan(string fieldName)
+        public override TimeSpan GetFieldTimeSpan([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan) DataReader.GetValue(fieldOrdinal);
         }
 
-        public override Decimal GetFieldDecimal(string fieldName)
+        public override Decimal GetFieldDecimal([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 

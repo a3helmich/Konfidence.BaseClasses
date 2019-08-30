@@ -37,9 +37,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string SqlDataType { get; private set; } = string.Empty;
 
-        public string DataType => GetDataType(SqlDataType);
+        [NotNull] public string DataType => GetDataType(SqlDataType);
 
-        public string DbDataType => GetDbDataType();
+        [NotNull] public string DbDataType => GetDbDataType();
 
         //public string ColumnDefault
         //{
@@ -243,7 +243,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return dataType;
         }
 
-        public string DefaultPropertyValue => GetDefaultPropertyValue(SqlDataType, string.Empty);
+        [NotNull] public string DefaultPropertyValue => GetDefaultPropertyValue(SqlDataType, string.Empty);
 
         public void SetPrimaryKey(bool isPrimaryKey)
         {
@@ -260,8 +260,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsLockInfo = isLockInfo;
         }
 
-        [UsedImplicitly]
-        public string NewGuidPropertyValue => GetDefaultPropertyValue(SqlDataType, "newguid");
+        [UsedImplicitly] [NotNull] public string NewGuidPropertyValue => GetDefaultPropertyValue(SqlDataType, "newguid");
 
         internal bool IsGuidField
         {

@@ -51,6 +51,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
+        [NotNull]
         public ResponseParameters ExecuteSaveStoredProcedure([NotNull] RequestParameters executeParameters)
         {
             var database = GetDatabase();
