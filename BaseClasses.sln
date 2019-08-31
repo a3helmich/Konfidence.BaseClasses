@@ -31,17 +31,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.RestProvider", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Tests", "Konfidence.BaseDatabaseClasses.Tests\Konfidence.BaseDatabaseClasses.Tests.csproj", "{A0D7E2E0-144C-409B-B5F2-107780F69B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDatabaseClasses.Code", "Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj", "{AC595ED8-F17A-4D6C-A801-480433BE4D34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Code", "Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj", "{AC595ED8-F17A-4D6C-A801-480433BE4D34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.SqlHostProvider.Code", "Konfidence.SqlHostProvider.Code\Konfidence.SqlHostProvider.Code.csproj", "{45D19995-B114-4A65-87AD-3E4A7FBB0A26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.RepositoryInterface.Code", "Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj", "{DCAB3A56-9D42-4CE4-9300-D72B9F9E2F64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.RepositoryInterface.Code", "Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj", "{DCAB3A56-9D42-4CE4-9300-D72B9F9E2F64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.Security.Code", "Konfidence.Security.Code\Konfidence.Security.Code.csproj", "{43E53231-5C0C-455C-BE26-B4655A38316E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseUserControlHelpers.Code", "Konfidence.BaseUserControlHelpers.Code\Konfidence.BaseUserControlHelpers.Code.csproj", "{7E52DB0C-F25F-441A-9C68-D3B3E7DBFFB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseUserControlHelpers.Code", "Konfidence.BaseUserControlHelpers.Code\Konfidence.BaseUserControlHelpers.Code.csproj", "{7E52DB0C-F25F-441A-9C68-D3B3E7DBFFB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.MenuClasses.Code", "Konfidence.MenuClasses.Code\Konfidence.MenuClasses.Code.csproj", "{60D5C141-9292-4B6D-937F-5DEFDD01CAA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.MenuClasses.Code", "Konfidence.MenuClasses.Code\Konfidence.MenuClasses.Code.csproj", "{60D5C141-9292-4B6D-937F-5DEFDD01CAA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CB6FF5D2-CD43-41EE-A0D1-B1BAE6920C64}"
 EndProject
@@ -67,7 +67,6 @@ Global
 		{499C842D-9F66-487F-A886-389F32BA4233}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Any CPU.Build.0 = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{499C842D-9F66-487F-A886-389F32BA4233}.Release|x86.ActiveCfg = Release|Any CPU
@@ -78,7 +77,6 @@ Global
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Debug|x86.Build.0 = Debug|Any CPU
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D6499F79-C2CD-4EFB-85DA-4D91A5FEFCFB}.Release|x86.ActiveCfg = Release|Any CPU
@@ -90,7 +88,6 @@ Global
 		{6765A31E-69E8-4541-BF5E-F419B32E6069}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{6765A31E-69E8-4541-BF5E-F419B32E6069}.Debug|x86.Build.0 = Debug|Any CPU
 		{6765A31E-69E8-4541-BF5E-F419B32E6069}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6765A31E-69E8-4541-BF5E-F419B32E6069}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6765A31E-69E8-4541-BF5E-F419B32E6069}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6765A31E-69E8-4541-BF5E-F419B32E6069}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6765A31E-69E8-4541-BF5E-F419B32E6069}.Release|x86.ActiveCfg = Release|Any CPU
@@ -210,7 +207,6 @@ Global
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Debug|x86.Build.0 = Debug|Any CPU
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4}.Release|x86.ActiveCfg = Release|Any CPU
@@ -239,8 +235,8 @@ Global
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
