@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <RootNamespace>Konfidence.BaseUserControlHelpers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
