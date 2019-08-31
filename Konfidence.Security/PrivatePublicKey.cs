@@ -8,7 +8,7 @@ namespace Konfidence.Security
 {
     public class PrivatePublicKey 
     {
-        public static int MaxKeySize = -1;
+        public static int MaxKeySize = -1; 
 
         public string ApplicationName { get; }
 
