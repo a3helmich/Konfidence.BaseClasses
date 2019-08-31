@@ -12,18 +12,15 @@
     <PackageReference Include="EnterpriseLibrary.Data" Version="6.0.1304" />
     <PackageReference Include="FluentAssertions" Version="5.9.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
-    <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="16.2.0" />
     <PackageReference Include="Moq" Version="4.12.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj" />
     <ProjectReference Include="..\Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj" />
-    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj" />
     <ProjectReference Include="..\Konfidence.MenuClasses.Code\Konfidence.MenuClasses.Code.csproj" />
     <ProjectReference Include="..\Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj" />
     <ProjectReference Include="..\Konfidence.SqlHostProvider.Code\Konfidence.SqlHostProvider.Code.csproj" />

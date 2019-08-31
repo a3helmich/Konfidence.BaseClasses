@@ -97,9 +97,9 @@
       <Project>{ac595ed8-f17a-4d6c-a801-480433be4d34}</Project>
       <Name>Konfidence.BaseDatabaseClasses.Code</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj">
-      <Project>{3E43ECAC-B03F-4BCB-A975-CA761A696DC6}</Project>
-      <Name>Konfidence.BaseDataInterfaces</Name>
+    <ProjectReference Include="..\Konfidence.BaseDataInterfaces.Code\Konfidence.BaseDataInterfaces.Code.csproj">
+      <Project>{3234486a-84bd-43ec-b974-71d0128750f3}</Project>
+      <Name>Konfidence.BaseDataInterfaces.Code</Name>
     </ProjectReference>
     <ProjectReference Include="..\Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj">
       <Project>{dcab3a56-9d42-4ce4-9300-d72b9f9e2f64}</Project>
