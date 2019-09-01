@@ -19,7 +19,7 @@
     <PackageReference Include="Konfidence.BaseClasses" Version="1.0.7" />
     <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="1.0.0" />
     <PackageReference Include="Konfidence.RepositoryInterface" Version="1.0.0" />
-    <PackageReference Include="Microsoft.SQLServer.SMO" Version="12.0.2000.8" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18147.0" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
   </ItemGroup>
