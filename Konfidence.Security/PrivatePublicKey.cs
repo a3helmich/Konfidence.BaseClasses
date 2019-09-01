@@ -8,7 +8,7 @@ namespace Konfidence.Security
 {
     public class PrivatePublicKey 
     {
-        public static int MaxKeySize = -1;
+        public static int MaxKeySize = -1; 
 
         public string ApplicationName { get; }
 
@@ -64,6 +64,7 @@ namespace Konfidence.Security
         }
 
         [UsedImplicitly]
+        [NotNull]
         public string Decode(object[] encodedObjectArray)
         {
             var decodedString = string.Empty;
@@ -85,6 +86,7 @@ namespace Konfidence.Security
             return decodedString;
         }
 
+        [CanBeNull]
         public object[] Encode(string toEncrypt)
         {
             object[] encryptedRegistrationData;

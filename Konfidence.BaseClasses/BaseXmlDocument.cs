@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using System.Xml;
 using JetBrains.Annotations;
+using Konfidence.Base;
 
-namespace Konfidence.Base
+namespace Konfidence.BaseUserControlHelpers
 {
     public class BaseXmlDocument : XmlDocument
     {
@@ -70,7 +71,7 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
-        public void GetAttributeValue(string nodeName, string attributeName, out string value)
+        public void GetAttributeValue([NotNull] string nodeName, string attributeName, out string value)
         {
             var valueNode = Root.SelectSingleNode(nodeName);
 
@@ -102,7 +103,7 @@ namespace Konfidence.Base
             GetValue(Root, nodeName, out value);
         }
 
-        public void GetValue(XmlNode node,string nodeName, out string value)
+        public void GetValue([NotNull] XmlNode node,[NotNull] string nodeName, [NotNull] out string value)
         {
             value = string.Empty;
 
@@ -120,7 +121,7 @@ namespace Konfidence.Base
             GetValue(Root, nodeName, out value);
         }
 
-        public void GetValue(XmlNode node,string nodeName, out bool value)
+        public void GetValue([NotNull] XmlNode node,[NotNull] string nodeName, out bool value)
         {
             var valueNode = node.SelectSingleNode(nodeName);
 
@@ -135,7 +136,8 @@ namespace Konfidence.Base
             }
         }
 
-        public XmlNode SetValue(XmlNode parentNode, string name, string value)
+        [NotNull]
+        public XmlNode SetValue([NotNull] XmlNode parentNode, [NotNull] string name, [NotNull] string value)
         {
             var childElement = parentNode.SelectSingleNode(name);
 
@@ -152,12 +154,14 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
-        public XmlNode SetValue(string name, string value)
+        [NotNull]
+        public XmlNode SetValue([NotNull] string name, [NotNull] string value)
         {
             return SetValue(Root, name, value);
         }
 
-        public XmlNode GetNode(XmlNode parentNode, string name)
+        [NotNull]
+        public XmlNode GetNode([NotNull] XmlNode parentNode, [NotNull] string name)
         {
             //XmlNode childElement = parentNode.SelectSingleNode(name, _XmlNamespaceManager);
             var childElement = parentNode.SelectSingleNode(name);
@@ -173,12 +177,14 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
-        public XmlNode GetNode(string name)
+        [NotNull]
+        public XmlNode GetNode([NotNull] string name)
         {
             return GetNode(Root, name);
         }
 
-        protected XmlNode AddNode(XmlDocument xmlDocument, string field, string value)
+        [NotNull]
+        protected XmlNode AddNode([NotNull] XmlDocument xmlDocument, [NotNull] string field, string value)
         {
             XmlNode root = xmlDocument.DocumentElement;
 
@@ -198,7 +204,7 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
-        protected void AddNode(XmlDocument registrationXml, string field, XmlDocument xmlDocument)
+        protected void AddNode([NotNull] XmlDocument registrationXml, [NotNull] string field, [NotNull] XmlDocument xmlDocument)
         {
             var subDocumentNode = AddNode(registrationXml, field, string.Empty);
 
@@ -206,7 +212,7 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
-        protected void AddNode(XmlDocument registrationXml, XmlDocument xmlDocument)
+        protected void AddNode(XmlDocument registrationXml, [NotNull] XmlDocument xmlDocument)
         {
             XmlNode root = xmlDocument.DocumentElement;
 

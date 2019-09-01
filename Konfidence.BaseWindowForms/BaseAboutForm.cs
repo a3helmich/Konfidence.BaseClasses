@@ -119,7 +119,7 @@ namespace Konfidence.BaseWindowForms
         }
         #endregion
 
-        public static bool IsDerivedClass(Type classType)
+        public static bool IsDerivedClass([NotNull] Type classType)
         {
             if (!classType.IsAssigned() || !classType.IsSubclassOf(typeof(BaseAboutForm)))
             {
@@ -155,6 +155,6 @@ namespace Konfidence.BaseWindowForms
         public BaseAboutFormException() : base(new ResourceManager(typeof(BaseAboutForm)).GetString("BaseAboutFormException.DontKnowWarningMessage")) { }
         public BaseAboutFormException(string message) : base(message) { }
         public BaseAboutFormException(string message, Exception exception) : base(message, exception) { }
-        protected BaseAboutFormException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext) { }
+        protected BaseAboutFormException([NotNull] SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext) { }
     }
 }

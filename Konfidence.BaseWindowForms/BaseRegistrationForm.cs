@@ -405,7 +405,7 @@ namespace Konfidence.BaseWindowForms
             SetFieldStatus(_serialTextBox.Text.Length > 0);
         }
 
-        private bool ValidateTextBox(TextBox textBox, bool isValid)
+        private bool ValidateTextBox([NotNull] TextBox textBox, bool isValid)
         {
             const string requiredInformation = "This is required information for registration";
             var noError = string.Empty;
@@ -427,7 +427,7 @@ namespace Konfidence.BaseWindowForms
             return isValid;
         }
 
-        private bool ValidateEmail(TextBox textBox, bool isValid)
+        private bool ValidateEmail([NotNull] TextBox textBox, bool isValid)
         {
             const string requiredEmail = "Email address does not have a valid format";
 

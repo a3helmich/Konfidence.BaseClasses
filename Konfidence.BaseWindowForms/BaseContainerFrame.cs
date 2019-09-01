@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseHelper;
 
 namespace Konfidence.BaseWindowForms
 {
@@ -121,8 +120,6 @@ namespace Konfidence.BaseWindowForms
 
         }
         #endregion
-
-        public BaseConfigClass Config { get; set; }
 
         public virtual void AfterCreate()
         {

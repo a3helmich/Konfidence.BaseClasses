@@ -63,7 +63,8 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected string GetViewState(string fieldName)
+        [NotNull]
+        protected string GetViewState([NotNull] string fieldName)
         {
             var viewState = ViewState[fieldName];
 
@@ -76,6 +77,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
+        [NotNull]
         protected string CurrentDomainExtension
         {
             get
@@ -89,6 +91,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         protected string CurrentLanguage
         {
             get
@@ -103,6 +106,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
+        [NotNull]
         protected string CurrentDnsName
         {
             get
@@ -117,6 +121,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
+        [NotNull]
         protected string RefererDnsName
         {
             get
@@ -131,6 +136,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
+        [NotNull]
         protected string CurrentPagePath
         {
             get
@@ -144,6 +150,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         protected string CurrentPageName
         {
             get
@@ -231,7 +238,8 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
-        protected Control FindUserControlByType(ControlCollection controlCollection, Type findType)
+        [CanBeNull]
+        protected Control FindUserControlByType([NotNull] ControlCollection controlCollection, Type findType)
         {
             return BasePageHelper.FindUserControlByType(controlCollection, findType);
         }
@@ -271,6 +279,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
 	    [UsedImplicitly]
+        [NotNull]
         protected string LastUpdateDate()
         {
             // TODO: lastupdate moet afhankelijk zijn van de content!!!

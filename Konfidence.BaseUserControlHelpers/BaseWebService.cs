@@ -10,6 +10,7 @@ namespace Konfidence.BaseUserControlHelpers
         private T _presenter;
 
         [UsedImplicitly]
+        [NotNull]
         public T Presenter
         {
             get

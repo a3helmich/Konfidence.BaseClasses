@@ -1,5 +1,5 @@
-﻿using System.ServiceProcess;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using System.ServiceProcess;
 
 namespace Konfidence.BaseWindowForms
 {

@@ -60,7 +60,7 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
             }
         }
 
-        public PageSetting(XmlElement pageSettingElement)
+        public PageSetting([NotNull] XmlElement pageSettingElement)
         {
             LoadXml(pageSettingElement.OuterXml);
         }

@@ -1,4 +1,5 @@
-﻿using Konfidence.Base;
+﻿using JetBrains.Annotations;
+using Konfidence.Base;
 using Ninject;
 using Ninject.Syntax;
 
@@ -18,6 +19,7 @@ namespace Konfidence.BaseData
             }
         }
 
+        [NotNull]
         public IBindingToSyntax<T> Bind<T>()
         {
             return _kernel.Bind<T>();

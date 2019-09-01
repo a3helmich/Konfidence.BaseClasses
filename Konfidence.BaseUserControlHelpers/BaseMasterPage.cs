@@ -41,6 +41,7 @@ namespace Konfidence.BaseUserControlHelpers
         protected abstract void PresenterToForm();
 
         [UsedImplicitly]
+        [NotNull]
         protected string CurrentDomainExtension
         {
             get
@@ -55,6 +56,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         [UsedImplicitly]
+        [NotNull]
         protected string CurrentLanguage
         {
             get
@@ -69,6 +71,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         [UsedImplicitly]
+        [NotNull]
         protected string CurrentDnsName
         {
             get
@@ -83,6 +86,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         [UsedImplicitly]
+        [NotNull]
         protected string RefererDnsName
         {
             get
@@ -96,6 +100,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         protected string CurrentPagePath
         {
             get
@@ -109,6 +114,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         protected string CurrentPageName
         {
             get
@@ -175,6 +181,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [CanBeNull]
         protected Dictionary<string, string> MasterPageDictionaryIn
         {
             get
@@ -193,6 +200,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [CanBeNull]
         protected Dictionary<string, string> MasterPageDictionaryOut
         {
             get
@@ -211,7 +219,8 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
-        protected string GetViewState(string fieldName)
+        [NotNull]
+        protected string GetViewState([NotNull] string fieldName)
         {
             var viewState = ViewState[fieldName];
 
@@ -224,6 +233,7 @@ namespace Konfidence.BaseUserControlHelpers
         }
 
         [UsedImplicitly]
+        [NotNull]
         protected string GetSessionState(string fieldName)
         {
             var sessionState = Session[fieldName];

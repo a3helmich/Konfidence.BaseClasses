@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers.PageSetting
@@ -35,6 +36,7 @@ namespace Konfidence.BaseUserControlHelpers.PageSetting
             }
         }
 
+        [NotNull]
         public PageSettingDictionary PageSettingDictionary
         {
             get

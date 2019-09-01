@@ -20,6 +20,7 @@ namespace Konfidence.BaseUserControlHelpers
 
         #region readonly properties
 
+        [NotNull]
         public string CurrentDomainExtension
         {
             get
@@ -33,6 +34,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         public string CurrentLanguage
         {
             get
@@ -46,6 +48,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         public string CurrentDnsName
         {
             get
@@ -59,6 +62,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         public string RefererDnsName
         {
             get
@@ -72,6 +76,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         public string CurrentPagePath
         {
             get
@@ -85,6 +90,7 @@ namespace Konfidence.BaseUserControlHelpers
             }
         }
 
+        [NotNull]
         public string CurrentPageName
         {
             get
@@ -157,6 +163,7 @@ namespace Konfidence.BaseUserControlHelpers
             return true;
         }
 
+        [NotNull]
         private string GetCurrentDomainExtension()
         {
             var currentDomainExtension = "nl"; // default
@@ -179,6 +186,7 @@ namespace Konfidence.BaseUserControlHelpers
             return currentDomainExtension;
         }
 
+        [NotNull]
         private string GetCurrentPagePath()
         {
             // strip the first three nodes from the string array
@@ -191,6 +199,7 @@ namespace Konfidence.BaseUserControlHelpers
             return currentPagePath;
         }
 
+        [NotNull]
         private string GetCurrentPageName()
         {
             if (!CurrentPagePath.IsAssigned())
@@ -203,6 +212,7 @@ namespace Konfidence.BaseUserControlHelpers
             return pagePathParts[pagePathParts.Length - 1]; // laatste element is altijd pageName
         }
 
+        [NotNull]
         private string GetRefererDnsName()
         {
             var refererSite = "www.konfidence.nl";
@@ -215,6 +225,7 @@ namespace Konfidence.BaseUserControlHelpers
             return refererSite;
         }
 
+        [NotNull]
         private string GetCurrentDnsName()
         {
             var currentSite = "www.konfidence.nl";
@@ -227,6 +238,7 @@ namespace Konfidence.BaseUserControlHelpers
             return currentSite;
         }
 
+        [NotNull]
         private string GetCurrentLanguage()
         {
             var currentLanguage = "nl"; // default language
@@ -262,7 +274,8 @@ namespace Konfidence.BaseUserControlHelpers
             return currentLanguage;
         }
 
-        internal static Control FindUserControlByType(ControlCollection controlCollection, Type findType)
+        [CanBeNull]
+        internal static Control FindUserControlByType([NotNull] ControlCollection controlCollection, Type findType)
         {
             foreach (Control x in controlCollection)
             {

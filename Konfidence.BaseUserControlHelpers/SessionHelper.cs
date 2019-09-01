@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Web;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
@@ -20,7 +21,8 @@ namespace Konfidence.BaseUserControlHelpers
 			_controlName = controlName;
 		}
 
-		private Hashtable ParameterObjectHashtable
+		[NotNull]
+        private Hashtable ParameterObjectHashtable
 		{
 			get
 			{
@@ -37,7 +39,8 @@ namespace Konfidence.BaseUserControlHelpers
 			}
 		}
 
-		public SessionParameterObject SessionParameterObject
+		[NotNull]
+        public SessionParameterObject SessionParameterObject
 		{
 			get
 			{

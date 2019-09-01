@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Web;
 using System.Web.UI;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.BaseUserControlHelpers
@@ -9,7 +10,7 @@ namespace Konfidence.BaseUserControlHelpers
 	{
 		public const string CURRENT_REFRESH_TICKET_ENTRY = "CURRENTREFRESHTICKETENTRY";
 
-		public static bool Check(Page page, HttpContext context, bool asyncPostback)
+		public static bool Check([NotNull] Page page, [NotNull] HttpContext context, bool asyncPostback)
 		{
 			var isRefresh = true;
 
@@ -30,7 +31,7 @@ namespace Konfidence.BaseUserControlHelpers
 			return isRefresh;
 		}
 
-		private static int GetSessionTicket(HttpContext context, Page page)
+		private static int GetSessionTicket(HttpContext context, [NotNull] Page page)
 		{
 		    var sessionHelper = new SessionHelper(context, page.UniqueID);
 
@@ -50,7 +51,7 @@ namespace Konfidence.BaseUserControlHelpers
 			return 0;
 		}
 
-		private static int GetPageTicket(HttpContext context, int sessionTicket)
+		private static int GetPageTicket([NotNull] HttpContext context, int sessionTicket)
 		{
 			int ticket;
 
@@ -77,7 +78,7 @@ namespace Konfidence.BaseUserControlHelpers
 			return ticket;
 		}
 
-		private static void UpdateTickets(Page page, HttpContext context, int assignedTicket)
+		private static void UpdateTickets([NotNull] Page page, HttpContext context, int assignedTicket)
 		{
 			var ticket = assignedTicket.ToString(CultureInfo.InvariantCulture);
 

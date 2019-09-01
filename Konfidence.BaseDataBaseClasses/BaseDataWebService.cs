@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Web.Services;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
@@ -8,11 +7,11 @@ using Konfidence.BaseDataInterfaces;
 
 namespace Konfidence.BaseData
 {
-    [WebService(Namespace = "http://konfidence.nl/DataItemService")]
-    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-    public class BaseDataWebService : WebService
+    //[WebService(Namespace = "http://konfidence.nl/DataItemService")]
+    //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    public class BaseDataWebService //: WebService
 	{
-		[WebMethod]
+		//[WebMethod]
         public int Save(DbParameterObjectList properties, int id)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -31,7 +30,7 @@ namespace Konfidence.BaseData
 			return 0;
 		}
 
-		[WebMethod]
+		//[WebMethod]
         public DbParameterObjectList GetItem(int id)
 		{
 			var baseDataItem = GetNewDataItem(id);
@@ -41,7 +40,8 @@ namespace Konfidence.BaseData
 			return properties;
 		}
 
-        [WebMethod]
+        //[WebMethod]
+        [NotNull]
         public DbParameterObjectList GetItemByParam(DbParameterObjectList parameterList)
         {
             var baseDataItem = GetNewDataItem(parameterList);
@@ -55,7 +55,7 @@ namespace Konfidence.BaseData
             return properties;
         }
 
-		[WebMethod]
+		//[WebMethod]
 		public void Delete(int id)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -68,7 +68,8 @@ namespace Konfidence.BaseData
 			baseDataItem.Delete();
 		}
 
-		[WebMethod]
+		//[WebMethod]
+        [CanBeNull]
         public List<IDbParameterObjectList> BuildItemList()
 		{
 			//var baseDataItemList = GetNewDataItemList();
@@ -92,7 +93,7 @@ namespace Konfidence.BaseData
         //    return baseDataItem.ExecuteCommand(storedProcedure, parameters);
         //}
 
-		[WebMethod]
+		//[WebMethod]
 		public int ExecuteTextCommand(string textCommand)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -100,7 +101,7 @@ namespace Konfidence.BaseData
 			return baseDataItem.ExecuteTextCommand(textCommand);
 		}
 
-		[WebMethod]
+		//[WebMethod]
 		public bool TableExists(string tableName)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -108,7 +109,7 @@ namespace Konfidence.BaseData
 			return baseDataItem.TableExists(tableName);
 		}
 
-		[WebMethod]
+		//[WebMethod]
 		public bool ViewExists(string viewName)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -116,12 +117,12 @@ namespace Konfidence.BaseData
 			return baseDataItem.ViewExists(viewName);
 		}
 
-		protected static void SetKey(BaseDataItem baseDataItem, int id)
+		protected static void SetKey([NotNull] BaseDataItem baseDataItem, int id)
 		{
 			baseDataItem.SetId(id);
 		}
 
-        protected static void SetProperties(BaseDataItem baseDataItem, DbParameterObjectList properties)
+        protected static void SetProperties([NotNull] BaseDataItem baseDataItem, [NotNull] DbParameterObjectList properties)
 		{
 			var propertyDictionary = new Dictionary<string, object>();
 
@@ -133,7 +134,8 @@ namespace Konfidence.BaseData
 			baseDataItem.SetProperties(propertyDictionary);
 		}
 
-        internal static DbParameterObjectList GetProperties(BaseDataItem baseDataItem)
+        [NotNull]
+        internal static DbParameterObjectList GetProperties([NotNull] BaseDataItem baseDataItem)
 		{
             var properties = new DbParameterObjectList();
 

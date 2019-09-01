@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
 using Konfidence.BaseDataInterfaces;
@@ -35,7 +36,8 @@ namespace Konfidence.BaseData
             }
         }
 
-	    public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
+	    [NotNull]
+        public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
 	    {
 
 	        var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
@@ -100,7 +102,8 @@ namespace Konfidence.BaseData
             BuildItemList(GetListStoredProcedure);
 		}
 
-		public T GetDataItem()
+		[NotNull]
+        public T GetDataItem()
 		{
             //var baseDataItem = new T();
             var baseDataItem = Kernel.Get<T>();
@@ -134,16 +137,19 @@ namespace Konfidence.BaseData
             return default(T);
         }
 
+        [CanBeNull]
         public T FindById(int id)
         {
             return this.FirstOrDefault(x => x.GetId() == id);
         }
 
+        [CanBeNull]
         public T FindById(Guid guidId)
         {
             return this.FirstOrDefault(x => x.GuidIdValue == guidId);
         }
 
+        [CanBeNull]
         private T FindByIsSelected()
         {
             var firstSelected = this.FirstOrDefault(x => x.IsSelected);
@@ -166,11 +172,13 @@ namespace Konfidence.BaseData
             return default(T);
         }
 
+        [CanBeNull]
         protected T FindByIsEditing()
         {
             return this.FirstOrDefault(x => x.IsEditing);
         }
 
+        [CanBeNull]
         public T FindCurrent()
         {
             var dataItem = FindByIsEditing();
@@ -320,7 +328,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        public void Cancel(T dataItem)
+        public void Cancel([NotNull] T dataItem)
         {
             dataItem.LoadDataItem();
 
@@ -352,6 +360,7 @@ namespace Konfidence.BaseData
         }
         #endregion list editing
 
+        [NotNull]
         public List<IDbParameterObjectList> ConvertToListOfParameterObjectList()
 		{
             var baseDataItemListList = new List<IDbParameterObjectList>();
@@ -373,7 +382,8 @@ namespace Konfidence.BaseData
 			return baseDataItemListList;
 		}
 
-        private static IDbParameterObjectList GetProperties(IBaseDataItem baseDataItem)
+        [NotNull]
+        private static IDbParameterObjectList GetProperties([NotNull] IBaseDataItem baseDataItem)
 		{
             var properties = new DbParameterObjectList();
 

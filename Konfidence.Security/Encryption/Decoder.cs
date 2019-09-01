@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Text;
+using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
@@ -19,7 +20,8 @@ namespace Konfidence.Security.Encryption
             _decoder.ReadKey(privateKey);
         }
 
-        public string Decrypt(object[] encryptedData)
+        [NotNull]
+        public string Decrypt([NotNull] object[] encryptedData)
         {
             var asciiEncoding = new ASCIIEncoding();
             var encryptedDataList = new ArrayList();
