@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using System.Xml;
 using JetBrains.Annotations;
-using Konfidence.Base;
 
-namespace Konfidence.BaseUserControlHelpers
+namespace Konfidence.Base
 {
     public class BaseXmlDocument : XmlDocument
     {
