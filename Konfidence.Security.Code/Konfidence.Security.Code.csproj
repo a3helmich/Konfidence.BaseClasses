@@ -1,21 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <!--<TargetFramework>net472</TargetFramework>-->
+    <RootNamespace>Konfidence.Security</RootNamespace>
+    <AssemblyName>Konfidence.Security</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="..\Konfidence.Security\Configuration.cs" Link="Configuration.cs" />
+    <Compile Include="..\Konfidence.Security\SecurityConfiguration.cs" Link="SecurityConfiguration.cs" />
     <Compile Include="..\Konfidence.Security\ContainerSecurity\ContainerPermission.cs" Link="ContainerSecurity\ContainerPermission.cs" />
     <Compile Include="..\Konfidence.Security\Encryption\Decoder.cs" Link="Encryption\Decoder.cs" />
     <Compile Include="..\Konfidence.Security\Encryption\Encoder.cs" Link="Encryption\Encoder.cs" />
     <Compile Include="..\Konfidence.Security\Encryption\KeyEncryption.cs" Link="Encryption\KeyEncryption.cs" />
-    <Compile Include="..\Konfidence.Security\IConfiguration.cs" Link="IConfiguration.cs" />
+    <Compile Include="..\Konfidence.Security\ISecurityConfiguration.cs" Link="ISecurityConfiguration.cs" />
     <Compile Include="..\Konfidence.Security\PrivatePublicKey.cs" Link="PrivatePublicKey.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Security.AccessControl;
 using System.Security.Cryptography;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -34,19 +33,29 @@ namespace Konfidence.Security.Encryption
 
         public int PackageSize => _maxBytesServer / 2;
 
-        private readonly IConfiguration _configuration;
+        private readonly ISecurityConfiguration _securityConfiguration;
 
-        public KeyEncryption(IConfiguration configuration)
+        public KeyEncryption([NotNull] ISecurityConfiguration securityConfiguration)
         {
+            if (securityConfiguration.Framework.IsAssigned())
+            {
+                var frameworkParts = securityConfiguration.Framework.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                var frameworkVersion = frameworkParts[1].Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries)[1].TrimStart('v');
+                if (frameworkParts[0] == ".NETCoreApp" && double.TryParse(frameworkVersion, out var version) && version < 3)
+                {
+                    throw new Exception("Minimaly dotnetcore 3.0 required");
+                }
+            }
+
             _disposed = false;
-            _configuration = configuration;
+            _securityConfiguration = securityConfiguration;
         }
 
-        public KeyEncryption(string containerName, IConfiguration configuration) : this(0, containerName, configuration)
+        public KeyEncryption(string containerName, [NotNull] ISecurityConfiguration securityConfiguration) : this(0, containerName, securityConfiguration)
         {
         }
 
-        public KeyEncryption(int keySize, string containerName, IConfiguration configuration) : this(configuration)
+        public KeyEncryption(int keySize, string containerName, [NotNull] ISecurityConfiguration securityConfiguration) : this(securityConfiguration)
         {
             _maxBytesClient = keySize / 8;
             _maxBytesServer = keySize / 8;
@@ -107,7 +116,7 @@ namespace Konfidence.Security.Encryption
 
             var legalKeySize = keyContainer.LegalKeySizes[0];
 
-            switch (_configuration.OSVersionPlatform)
+            switch (_securityConfiguration.OSVersionPlatform)
             {
                 case PlatformID.Win32Windows:
                     {
@@ -132,23 +141,9 @@ namespace Konfidence.Security.Encryption
         [NotNull]
         private static CspParameters GetCspParameters(string containerName)
         {
-            var cp = new CspParameters();
+            var cp = new CspParameters {KeyContainerName = containerName};
 
-            const string user = "Everyone"; //  @"NT AUTHORITY\NETWORK SERVICE"; //network service
-
-            //Environment.
-
-            var rule = new CryptoKeyAccessRule(user, CryptoKeyRights.Delete | CryptoKeyRights.FullControl | CryptoKeyRights.TakeOwnership | CryptoKeyRights.ChangePermissions, AccessControlType.Allow);
-
-            var cryptoKeySecurity = new CryptoKeySecurity();
-
-            cryptoKeySecurity.SetAccessRule(rule);
-
-            //cryptoKeySecurity.SetOwner(rule);
-
-            cp.KeyContainerName = containerName;
             cp.Flags |= CspProviderFlags.UseMachineKeyStore;
-            cp.CryptoKeySecurity = cryptoKeySecurity;
 
             return cp;
         }

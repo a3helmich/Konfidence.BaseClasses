@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseUserControlH
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.MenuClasses.Tests", "Konfidence.MenuClasses.Tests\Konfidence.MenuClasses.Tests.csproj", "{136189D9-1A3E-4D85-B3DF-E2EBCCE0FC92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExtensionMethods", "TestExtensionMethods\TestExtensionMethods.csproj", "{A980D767-AFD4-4127-8C09-177EB498356B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,18 @@ Global
 		{136189D9-1A3E-4D85-B3DF-E2EBCCE0FC92}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{136189D9-1A3E-4D85-B3DF-E2EBCCE0FC92}.Release|x86.ActiveCfg = Release|Any CPU
 		{136189D9-1A3E-4D85-B3DF-E2EBCCE0FC92}.Release|x86.Build.0 = Release|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Debug|x86.Build.0 = Debug|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Release|x86.ActiveCfg = Release|Any CPU
+		{A980D767-AFD4-4127-8C09-177EB498356B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,10 +253,11 @@ Global
 		{060F714F-AC6B-4834-964B-AB46CE23E5A4} = {35800589-CB56-4489-A217-2108E97ECFAC}
 		{2C66D9D2-6A55-429F-9B68-1FB1EC1D8EF2} = {35800589-CB56-4489-A217-2108E97ECFAC}
 		{136189D9-1A3E-4D85-B3DF-E2EBCCE0FC92} = {35800589-CB56-4489-A217-2108E97ECFAC}
+		{A980D767-AFD4-4127-8C09-177EB498356B} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77

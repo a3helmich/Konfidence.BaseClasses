@@ -5,6 +5,7 @@ using Konfidence.SqlHostProvider.Exceptions;
 using Konfidence.SqlHostProvider.SqlServerManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestExtensionMethods;
 
 namespace Konfidence.Smo.Tests.SqlServerManagement
 {
@@ -12,6 +13,12 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
     [TestClass]
     public class SqlServerCheckTests
     {
+        [TestInitialize]
+        public void initialize()
+        {
+            TestExtensions.CopySqlSettingsToActiveConfiguration();
+        }
+
         [TestMethod, TestCategory("SqlServer")]
         public void VerifyDatabaseServer_WhenInvalidDatabase_ShouldReturnDoesNotExist()
         {
