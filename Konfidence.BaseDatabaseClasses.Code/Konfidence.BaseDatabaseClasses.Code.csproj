@@ -3,10 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
-  </ItemGroup>
   
   <ItemGroup>
     <Compile Include="..\Konfidence.BaseDataBaseClasses\BaseClient.cs" Link="BaseClient.cs" />
@@ -16,6 +12,10 @@
     <Compile Include="..\Konfidence.BaseDataBaseClasses\NinjectDependencyResolver.cs" Link="NinjectDependencyResolver.cs" />
     <Compile Include="..\Konfidence.BaseDataBaseClasses\Objects\DbParameterObject.cs" Link="Objects\DbParameterObject.cs" />
     <Compile Include="..\Konfidence.BaseDataBaseClasses\Objects\DbParameterObjectList.cs" Link="Objects\DbParameterObjectList.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Ninject" Version="3.3.4" />
   </ItemGroup>
   
   <ItemGroup>

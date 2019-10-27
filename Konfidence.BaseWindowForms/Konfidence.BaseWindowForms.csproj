@@ -1,13 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>Konfidence.BaseWindowForms</RootNamespace>
     <AssemblyName>Konfidence.BaseWindowForms</AssemblyName>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <PackageId>Konfidence.BaseWindowForms</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
@@ -27,12 +29,12 @@
     <PackageReference Include="Konfidence.UtilHelper" Version="1.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
+  </ItemGroup>-->
 
 </Project>

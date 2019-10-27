@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="FluentAssertions" Version="5.9.0" />
+    <PackageReference Include="Konfidence.TestTools" Version="1.0.0" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
@@ -18,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.MenuClasses.Code\Konfidence.MenuClasses.Code.csproj" />
-    <ProjectReference Include="..\TestExtensionMethods\TestExtensionMethods.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
+using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestExtensionMethods;
 
-namespace Konfidence.Smo.Tests.SqlDbSchema
+namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 {
     /// <summary>
     ///This is a test class for DatabaseStructureTest and is intended
@@ -17,7 +17,7 @@ namespace Konfidence.Smo.Tests.SqlDbSchema
         [TestInitialize]
         public void initialize()
         {
-            TestExtensions.CopySqlSettingsToActiveConfiguration();
+            SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]

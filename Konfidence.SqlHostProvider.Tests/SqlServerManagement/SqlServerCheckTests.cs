@@ -3,11 +3,11 @@ using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.Exceptions;
 using Konfidence.SqlHostProvider.SqlServerManagement;
+using Konfidence.TestTools;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestExtensionMethods;
 
-namespace Konfidence.Smo.Tests.SqlServerManagement
+namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
@@ -16,7 +16,7 @@ namespace Konfidence.Smo.Tests.SqlServerManagement
         [TestInitialize]
         public void initialize()
         {
-            TestExtensions.CopySqlSettingsToActiveConfiguration();
+            SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
         }
 
         [TestMethod, TestCategory("SqlServer")]

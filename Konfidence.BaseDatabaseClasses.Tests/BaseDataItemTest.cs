@@ -2,7 +2,7 @@
 using DbMenuClasses;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestExtensionMethods;
+using Konfidence.TestTools;
 
 namespace Konfidence.BaseDatabaseClasses.Tests
 {
@@ -14,7 +14,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void TestIntDataItemShouldResturnShortAndLong()
         {
             // arrange
-            TestExtensions.CopySqlSettingsToActiveConfiguration();
+            SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
             var testIntDataItemList = Bl.TestIntDataItemList.GetList();
 

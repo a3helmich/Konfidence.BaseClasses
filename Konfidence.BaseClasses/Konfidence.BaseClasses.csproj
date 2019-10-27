@@ -4,10 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Konfidence.Base</RootNamespace>
     <AssemblyName>Konfidence.Base</AssemblyName>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <PackageId>Konfidence.BaseClasses</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
@@ -21,11 +21,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
+    <Compile Remove=".vs\**" />
+    <EmbeddedResource Remove=".vs\**" />
+    <None Remove=".vs\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include=".vs\Konfidence.BaseClasses\DesignTimeBuild\" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
   </ItemGroup>
 
 </Project>
