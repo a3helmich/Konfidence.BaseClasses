@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.7" />
-    <PackageReference Include="Konfidence.BaseDatabaseInterfaces" Version="1.0.0" />
+    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.8" />
+    <PackageReference Include="Konfidence.BaseDatabaseInterfaces" Version="1.0.1" />
     <PackageReference Include="Ninject" Version="3.3.4" />
   </ItemGroup>
 

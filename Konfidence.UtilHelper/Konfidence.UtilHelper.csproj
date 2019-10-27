@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.Designpatterns" Version="1.0.0" />
+    <PackageReference Include="Konfidence.Designpatterns" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.7" />
+    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.8" />
   </ItemGroup>
 
 </Project>
