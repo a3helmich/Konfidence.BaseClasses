@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using JetBrains.Annotations;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 using Konfidence.RepositoryInterface.Objects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 

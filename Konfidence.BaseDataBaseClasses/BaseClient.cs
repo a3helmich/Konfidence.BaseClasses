@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 using JetBrains.Annotations;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 
 namespace Konfidence.BaseData
 {

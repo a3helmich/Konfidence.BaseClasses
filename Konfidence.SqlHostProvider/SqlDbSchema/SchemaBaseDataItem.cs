@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema

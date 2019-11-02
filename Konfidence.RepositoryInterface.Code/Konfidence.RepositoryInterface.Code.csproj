@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseDataInterfaces.Code\Konfidence.BaseDataInterfaces.Code.csproj" />
+    <ProjectReference Include="..\Konfidence.DataBaseInterface.Code\Konfidence.DataBaseInterface.Code.csproj" />
   </ItemGroup>
 
 </Project>

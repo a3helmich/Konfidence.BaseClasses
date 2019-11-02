@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace Konfidence.BaseDataInterfaces
+namespace Konfidence.DataBaseInterface
 {
     public interface IBaseClient
     {

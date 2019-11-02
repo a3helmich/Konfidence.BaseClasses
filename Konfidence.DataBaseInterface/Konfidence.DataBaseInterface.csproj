@@ -5,7 +5,7 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <Version>1.0.1</Version>
-    <PackageId>Konfidence.BaseDataInterfaces</PackageId>
+    <PackageId>Konfidence.DataBaseInterface</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

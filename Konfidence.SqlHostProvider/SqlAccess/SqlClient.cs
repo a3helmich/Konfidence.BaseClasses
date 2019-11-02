@@ -4,7 +4,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 using Konfidence.RepositoryInterface;
 using Konfidence.RepositoryInterface.Objects;
 using Ninject;

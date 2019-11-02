@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Konfidence.BaseDataInterfaces
+namespace Konfidence.DataBaseInterface
 {
     public interface IBaseDataItem
     {

@@ -6,7 +6,7 @@ using System.Xml;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Objects;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 using Ninject;
 using Ninject.Parameters;
 

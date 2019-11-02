@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDataInterfaces", "Konfidence.BaseDataInterfaces\Konfidence.BaseDataInterfaces.csproj", "{EBF7E589-A8E4-401D-8B67-CAFF1966FDD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.DataBaseInterface", "Konfidence.DataBaseInterface\Konfidence.DataBaseInterface.csproj", "{7E5704EC-ADE9-41E4-8A1E-24E55FF3F0C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EBF7E589-A8E4-401D-8B67-CAFF1966FDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBF7E589-A8E4-401D-8B67-CAFF1966FDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBF7E589-A8E4-401D-8B67-CAFF1966FDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBF7E589-A8E4-401D-8B67-CAFF1966FDD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E5704EC-ADE9-41E4-8A1E-24E55FF3F0C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E5704EC-ADE9-41E4-8A1E-24E55FF3F0C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E5704EC-ADE9-41E4-8A1E-24E55FF3F0C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E5704EC-ADE9-41E4-8A1E-24E55FF3F0C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

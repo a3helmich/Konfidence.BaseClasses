@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 
 namespace Konfidence.RepositoryInterface.Objects
 {

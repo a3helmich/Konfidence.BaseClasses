@@ -1,11 +1,9 @@
 using System.Data;
 using System;
-using System.Data.Common;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.SqlHostProvider.SqlAccess;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 
 namespace DbMenuClasses
 {

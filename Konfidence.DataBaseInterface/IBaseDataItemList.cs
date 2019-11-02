@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Konfidence.BaseDataInterfaces
+namespace Konfidence.DataBaseInterface
 {
     public interface IBaseDataItemList<T> : IList<T> where T : IBaseDataItem
     {

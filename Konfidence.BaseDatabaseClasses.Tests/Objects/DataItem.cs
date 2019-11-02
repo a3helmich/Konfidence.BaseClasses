@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Konfidence.BaseData;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 using Moq;
 
 namespace Konfidence.BaseDatabaseClasses.Tests.Objects
