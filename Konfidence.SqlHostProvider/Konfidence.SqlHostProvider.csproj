@@ -7,14 +7,14 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>../Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>Konfidence.SqlHostProvider</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="1.0.1" />
-    <PackageReference Include="Konfidence.RepositoryInterface" Version="1.0.1" />
+    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="1.0.2" />
+    <PackageReference Include="Konfidence.RepositoryInterface" Version="1.0.2" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18147.0" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />

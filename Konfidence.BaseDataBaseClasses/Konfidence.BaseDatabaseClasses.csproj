@@ -7,14 +7,14 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>Konfidence.BaseDatabaseClasses</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Konfidence.BaseClasses" Version="1.0.8" />
-    <PackageReference Include="Konfidence.DataBaseInterface" Version="1.0.1" />
+    <PackageReference Include="Konfidence.DataBaseInterface" Version="1.0.2" />
     <PackageReference Include="Ninject" Version="3.3.4" />
   </ItemGroup>
 

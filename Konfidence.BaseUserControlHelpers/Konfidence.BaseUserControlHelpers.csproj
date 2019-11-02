@@ -7,7 +7,7 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>Konfidence.BaseUserControlHelpers</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.MenuClasses" Version="1.0.1" />
+    <PackageReference Include="Konfidence.MenuClasses" Version="1.0.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />

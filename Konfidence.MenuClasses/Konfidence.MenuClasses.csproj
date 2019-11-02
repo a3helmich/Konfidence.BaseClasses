@@ -7,7 +7,7 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageId>Konfidence.MenuClasses</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.SqlHostProvider" Version="1.0.0" />
+    <PackageReference Include="Konfidence.SqlHostProvider" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
