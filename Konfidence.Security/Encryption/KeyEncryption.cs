@@ -43,7 +43,7 @@ namespace Konfidence.Security.Encryption
                 var frameworkVersion = frameworkParts[1].Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries)[1].TrimStart('v');
                 if (frameworkParts[0] == ".NETCoreApp" && double.TryParse(frameworkVersion, out var version) && version < 3)
                 {
-                    throw new Exception("Minimaly dotnetcore 3.0 required");
+                    throw new Exception($"Minimaly dotnetcore 3.0 required, FrameWork: {securityConfiguration.Framework}");
                 }
             }
 
