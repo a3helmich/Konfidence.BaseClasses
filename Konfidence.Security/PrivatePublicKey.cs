@@ -1,4 +1,5 @@
-﻿using Konfidence.Security.Encryption;
+﻿using System;
+using Konfidence.Security.Encryption;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using JetBrains.Annotations;
@@ -16,27 +17,28 @@ namespace Konfidence.Security
 
         public string PrivateKey { get; }
 
-        private readonly IConfiguration _configuration;
+        private readonly ISecurityConfiguration _securityConfiguration;
 
         public string ServerPublicKey { get; set; } = string.Empty;
 
-        public PrivatePublicKey(string applicationName, IConfiguration configuration) : this(0, applicationName, configuration)
+        public PrivatePublicKey(string applicationName, ISecurityConfiguration securityConfiguration) : this(0, applicationName, securityConfiguration)
         {
         }
 
-        public PrivatePublicKey(int maxKeySize, string applicationName, IConfiguration configuration)
+        public PrivatePublicKey(int maxKeySize, string applicationName, ISecurityConfiguration securityConfiguration)
         {
-            _configuration = configuration;
+            _securityConfiguration = securityConfiguration;
             ApplicationName = applicationName;
 
-            using (var test = new KeyEncryption(maxKeySize, ApplicationName, configuration))
+            using (var test = new KeyEncryption(maxKeySize, ApplicationName, securityConfiguration))
             {
                 PublicKey = test.PublicKey;
                 PrivateKey = test.PrivateKey;
 
                 if (test.IsAssigned())
                 {
-                    using (var clientKeyEncryption = new KeyEncryption(maxKeySize, ApplicationName, configuration))
+                    using (var clientKeyEncryption =
+                        new KeyEncryption(maxKeySize, ApplicationName, securityConfiguration))
                     {
                         PublicKey = clientKeyEncryption.PublicKey;
                         PrivateKey = clientKeyEncryption.PrivateKey;
@@ -50,7 +52,7 @@ namespace Konfidence.Security
         {
             try
             {
-                using (var clientKeyEncryption = new KeyEncryption(ApplicationName, _configuration))
+                using (var clientKeyEncryption = new KeyEncryption(ApplicationName, _securityConfiguration))
                 {
                     clientKeyEncryption.Delete();
                 }

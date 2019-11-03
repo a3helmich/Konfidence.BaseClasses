@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.BaseData.Objects;
-using Konfidence.BaseDataInterfaces;
+using Konfidence.DataBaseInterface;
 
 namespace Konfidence.RestProvider
 {

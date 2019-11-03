@@ -3,8 +3,8 @@ using System.ServiceProcess;
 
 namespace Konfidence.BaseWindowForms
 {
-    [UsedImplicitly]
-    public class BaseServiceBase : ServiceBase
-    {
-    }
+    //[UsedImplicitly]
+    //public class BaseServiceBase : ServiceBase
+    //{
+    //}
 }

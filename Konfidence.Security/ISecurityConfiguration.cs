@@ -2,8 +2,10 @@
 
 namespace Konfidence.Security
 {
-    public interface IConfiguration
+    public interface ISecurityConfiguration
     {
         PlatformID OSVersionPlatform { get; }
+
+        string Framework { get; }
     }
 }

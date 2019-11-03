@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Konfidence.DataBaseInterface\IBaseClient.cs" Link="IBaseClient.cs" />
+    <Compile Include="..\Konfidence.DataBaseInterface\IBaseDataItem.cs" Link="IBaseDataItem.cs" />
+    <Compile Include="..\Konfidence.DataBaseInterface\IBaseDataItemList.cs" Link="IBaseDataItemList.cs" />
+    <Compile Include="..\Konfidence.DataBaseInterface\IDbParameterObject.cs" Link="IDbParameterObject.cs" />
+    <Compile Include="..\Konfidence.DataBaseInterface\IDbParameterObjectList.cs" Link="IDbParameterObjectList.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
+  </ItemGroup>
+
+</Project>

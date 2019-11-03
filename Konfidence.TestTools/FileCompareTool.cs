@@ -2,42 +2,43 @@
 using JetBrains.Annotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.BaseUnitTestClasses
+namespace Konfidence.TestTools
 {
     [UsedImplicitly]
-    public class BaseFileTest
+    public static class FileCompareTool
     {
         [UsedImplicitly]
-        public static bool BitmapsEqual(string file1, string file2)
+        public static bool BitmapEqual(string file1, string file2)
         {
-            if (File.Exists(file1) && File.Exists(file2))
+            if (!File.Exists(file1) || !File.Exists(file2))
             {
-                var file1Info = new FileInfo(file1);
-                var file2Info = new FileInfo(file2);
+                return false;
+            }
 
-                if (file1Info.Length == file2Info.Length)
+            var file1Info = new FileInfo(file1);
+            var file2Info = new FileInfo(file2);
+
+            if (file1Info.Length != file2Info.Length)
+            {
+                return false;
+            }
+
+            var file1ByteList = File.ReadAllBytes(file1);
+            var file2ByteList = File.ReadAllBytes(file2);
+
+            var byteIndex = 0;
+
+            while (byteIndex < file1Info.Length)
+            {
+                if (file1ByteList[byteIndex] != file2ByteList[byteIndex])
                 {
-                    Assert.IsTrue(file1Info.Length < 100000, "Files zijn te groot");
-
-                    var file1ByteList = File.ReadAllBytes(file1);
-                    var file2ByteList = File.ReadAllBytes(file2);
-
-                    var byteIndex = 0;
-                    while (byteIndex < file1Info.Length)
-                    {
-                        if (file1ByteList[byteIndex] != file2ByteList[byteIndex])
-                        {
-                            return false;
-                        }
-
-                        byteIndex++;
-                    }
-
-                    return true;
+                    return false;
                 }
 
+                byteIndex++;
             }
-            return false;
+
+            return true;
         }
 
         [UsedImplicitly]
@@ -50,7 +51,7 @@ namespace Konfidence.BaseUnitTestClasses
 
                 if (file1Info.Length == file2Info.Length)
                 {
-                    Assert.IsTrue(file1Info.Length < 100000, "Files zijn te groot");
+                    Assert.IsTrue(file1Info.Length < 100000, "Files are too big");
 
                     var file1ByteList = File.ReadAllBytes(file1);
                     var file2ByteList = File.ReadAllBytes(file2);

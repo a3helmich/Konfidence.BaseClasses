@@ -1,4 +1,4 @@
-﻿using Konfidence.BaseDataInterfaces;
+﻿using Konfidence.DataBaseInterface;
 
 namespace Konfidence.RepositoryInterface.Objects
 {

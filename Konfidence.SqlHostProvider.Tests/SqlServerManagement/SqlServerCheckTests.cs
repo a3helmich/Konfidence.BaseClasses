@@ -3,15 +3,22 @@ using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.Exceptions;
 using Konfidence.SqlHostProvider.SqlServerManagement;
+using Konfidence.TestTools;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.Smo.Tests.SqlServerManagement
+namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
     public class SqlServerCheckTests
     {
+        [TestInitialize]
+        public void initialize()
+        {
+            SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+        }
+
         [TestMethod, TestCategory("SqlServer")]
         public void VerifyDatabaseServer_WhenInvalidDatabase_ShouldReturnDoesNotExist()
         {
