@@ -24,9 +24,9 @@ namespace Konfidence.Security.Encryption
 
         public RSACryptoServiceProvider RsaProvider => _rsaProvider;
 
-        [NotNull] public string PublicKey => _rsaProvider.ToXmlString(false);
+        [NotNull] public string PublicKey => RsaProviderToXmlString(false);
 
-        [NotNull] public string PrivateKey => _rsaProvider.ToXmlString(true);
+        [NotNull] public string PrivateKey => RsaProviderToXmlString(true);
 
         [UsedImplicitly]
         public int KeySize => TempKeyContainer.KeySize;
@@ -35,18 +35,21 @@ namespace Konfidence.Security.Encryption
 
         private readonly ISecurityConfiguration _securityConfiguration;
 
+        [NotNull]
+        private string RsaProviderToXmlString(bool includePrivateParameters)
+        {
+            try
+            {
+                return _rsaProvider.ToXmlString(includePrivateParameters);
+            }
+            catch (PlatformNotSupportedException ex)
+            {
+                throw new Exception("Security is only supported by dotnetCore 3.0 or higher and the dotnet Framework x.x", ex);
+            }
+        }
+
         public KeyEncryption([NotNull] ISecurityConfiguration securityConfiguration)
         {
-            if (securityConfiguration.Framework.IsAssigned())
-            {
-                var frameworkParts = securityConfiguration.Framework.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-                var frameworkVersion = frameworkParts[1].Split(new[] { "=" }, StringSplitOptions.RemoveEmptyEntries)[1].TrimStart('v');
-                if (frameworkParts[0] == ".NETCoreApp" && double.TryParse(frameworkVersion, out var version) && version < 3)
-                {
-                    throw new Exception($"Minimaly dotnetcore 3.0 required, FrameWork: {securityConfiguration.Framework}");
-                }
-            }
-
             _disposed = false;
             _securityConfiguration = securityConfiguration;
         }

@@ -1,4 +1,5 @@
-﻿using Konfidence.Security.Encryption;
+﻿using System;
+using Konfidence.Security.Encryption;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using JetBrains.Annotations;
@@ -36,7 +37,8 @@ namespace Konfidence.Security
 
                 if (test.IsAssigned())
                 {
-                    using (var clientKeyEncryption = new KeyEncryption(maxKeySize, ApplicationName, securityConfiguration))
+                    using (var clientKeyEncryption =
+                        new KeyEncryption(maxKeySize, ApplicationName, securityConfiguration))
                     {
                         PublicKey = clientKeyEncryption.PublicKey;
                         PrivateKey = clientKeyEncryption.PrivateKey;
