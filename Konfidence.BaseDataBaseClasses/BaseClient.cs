@@ -5,7 +5,8 @@ using Konfidence.DataBaseInterface;
 
 namespace Konfidence.BaseData
 {
-    // TODO: internal
+	// TODO: internal
+	[UsedImplicitly]
     public class BaseClient: IBaseClient
 	{
 	    //private const int ID = 0;
