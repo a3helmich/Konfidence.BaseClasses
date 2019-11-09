@@ -4,18 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Konfidence.SqlHostProvider</RootNamespace>
     <AssemblyName>Konfidence.SqlHostProvider</AssemblyName>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>../Konfidence.nl.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
-    <Version>1.0.2</Version>
+    <Version>2019.0.1</Version>
     <PackageId>Konfidence.SqlHostProvider</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="1.0.2" />
-    <PackageReference Include="Konfidence.RepositoryInterface" Version="1.0.2" />
-    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18178.0" />
+    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="2019.0.1" />
+    <PackageReference Include="Konfidence.RepositoryInterface" Version="2019.0.1" />
+    <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18208.0" />
   </ItemGroup>
 
 </Project>
