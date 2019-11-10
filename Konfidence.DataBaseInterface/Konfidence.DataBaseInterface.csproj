@@ -2,9 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Konfidence.nl.snk</AssemblyOriginatorKeyFile>
-    <Version>1.0.2</Version>
+    <Version>2019.0.1</Version>
     <PackageId>Konfidence.DataBaseInterface</PackageId>
   </PropertyGroup>
 

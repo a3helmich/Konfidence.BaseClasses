@@ -11,7 +11,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    internal class SqlClientRepository : IDataRepository
+    public class SqlClientRepository : IDataRepository
     {
         private readonly string _connectionName;
 

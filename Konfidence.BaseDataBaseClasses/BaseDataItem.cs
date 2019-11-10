@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 using JetBrains.Annotations;
@@ -54,6 +55,7 @@ namespace Konfidence.BaseData
 	    }
 
 	    [NotNull]
+        [UsedImplicitly]
         public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
 	    {
 	        var databaseNameParam = new ConstructorArgument("connectionName", ConnectionName);
@@ -75,6 +77,8 @@ namespace Konfidence.BaseData
 	        {
 	            if (!_client.IsAssigned())
 	            {
+                    Debug.WriteLine("get _client");
+
 	                _client = ClientBind();
 	            }
 
@@ -227,6 +231,7 @@ namespace Konfidence.BaseData
             fieldValue = GetAutoUpdateFieldBool(fieldName);
         }
 
+        [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, out DateTime fieldValue)
         {
             fieldValue = GetAutoUpdateFieldDateTime(fieldName);
@@ -395,6 +400,7 @@ namespace Konfidence.BaseData
             return fieldValue;
         }
 
+        [UsedImplicitly]
         protected internal void AddAutoUpdateField([NotNull] string fieldName, DbType fieldType)
         {
             if (!AutoUpdateFieldDictionary.ContainsKey(fieldName))
@@ -409,6 +415,7 @@ namespace Konfidence.BaseData
 
 	    public string SaveStoredProcedure { get; set; } = string.Empty;
 
+        [UsedImplicitly]
 	    public bool IsNew
 		{
 			get
@@ -425,21 +432,25 @@ namespace Konfidence.BaseData
 
         #region GetField Methods
 
+        [UsedImplicitly]
 	    protected void GetField(string fieldName, out byte field)
 	    {
 	        field = GetFieldInt8(fieldName);
 	    }
 
+        [UsedImplicitly]
         protected void GetField(string fieldName, out short field)
         {
             field = GetFieldInt16(fieldName);
         }
 
+        [UsedImplicitly]
         protected void GetField(string fieldName, out int field)
         {
             field = GetFieldInt32(fieldName);
         }
 
+        [UsedImplicitly]
 	    protected void GetField(string fieldName, out long field)
 	    {
 	        field = GetFieldInt64(fieldName);
@@ -451,16 +462,19 @@ namespace Konfidence.BaseData
             field = GetFieldGuid(fieldName);
         }
 
+        [UsedImplicitly]
         protected void GetField(string fieldName, out string field)
         {
             field = GetFieldString(fieldName);
         }
 
+        [UsedImplicitly]
         protected void GetField(string fieldName, out bool field)
         {
             field = GetFieldBool(fieldName);
         }
 
+        [UsedImplicitly]
         protected void GetField(string fieldName, out DateTime field)
         {
             field = GetFieldDateTime(fieldName);
@@ -704,6 +718,7 @@ namespace Konfidence.BaseData
 	        SetField(fieldName, value);
 	    }
 
+        [UsedImplicitly]
 	    protected void SetParameter(string fieldName, int value)
 		{
 			SetField(fieldName, value);
@@ -733,6 +748,7 @@ namespace Konfidence.BaseData
             SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, string value)
 		{
 			SetField(fieldName, value);
@@ -884,6 +900,7 @@ namespace Konfidence.BaseData
             return Client.ViewExists(viewName);
 		}
 
+        [UsedImplicitly]
         protected internal bool StoredProcedureExists(string storedProcedureName)
         {
             return Client.StoredProcedureExists(storedProcedureName);

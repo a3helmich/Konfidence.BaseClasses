@@ -10,6 +10,7 @@ using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
+    [UsedImplicitly]
     public abstract class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem
     {
         private readonly DbParameterObjectList _dbParameterObjectList;
@@ -37,6 +38,7 @@ namespace Konfidence.BaseData
         }
 
 	    [NotNull]
+        [UsedImplicitly]
         public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
 	    {
 
@@ -77,6 +79,7 @@ namespace Konfidence.BaseData
 
         protected string GetListStoredProcedure { get; private set; } = string.Empty;
 
+        [UsedImplicitly]
         protected string ServiceName { get; set; } = string.Empty;
 
         #endregion
@@ -95,6 +98,7 @@ namespace Konfidence.BaseData
             AfterDataLoad();
         }
 
+        [UsedImplicitly]
 		protected void RebuildItemList()
 		{
 			Clear();
@@ -115,6 +119,8 @@ namespace Konfidence.BaseData
 			return baseDataItem;
 		}
 
+        [UsedImplicitly]
+        [CanBeNull]
         public T FindById(string textId)
         {
             if (Guid.TryParse(textId, out var guidId))
@@ -191,6 +197,7 @@ namespace Konfidence.BaseData
             return FindByIsSelected(); 
         }
 
+        [UsedImplicitly]
         public bool HasCurrent
         {
             get
@@ -201,6 +208,7 @@ namespace Konfidence.BaseData
 
         #region list selecting state control
 
+        [UsedImplicitly]
         public void SetSelected(string idText, string isEditingText)
         {
             bool.TryParse(isEditingText, out var isEditing);
@@ -226,6 +234,7 @@ namespace Konfidence.BaseData
             }
         }
 
+        [UsedImplicitly]
         public void SetSelected(string idText)
         {
             if (Guid.TryParse(idText, out var guidId))
@@ -248,6 +257,7 @@ namespace Konfidence.BaseData
             }
         }
 
+        [UsedImplicitly]
         public void SetSelected(BaseDataItem dataItem)
         {
             if (dataItem.IsAssigned())
@@ -297,6 +307,7 @@ namespace Konfidence.BaseData
 
         #region list editing state control
 
+        [UsedImplicitly]
         public void New()
         {
             var dataItem = FindCurrent();
@@ -308,6 +319,7 @@ namespace Konfidence.BaseData
             }
         }
 
+        [UsedImplicitly]
         public void Edit(T dataItem)
         {
             if (dataItem.IsAssigned())
@@ -316,6 +328,7 @@ namespace Konfidence.BaseData
             }
         }
 
+        [UsedImplicitly]
         public void Save(T dataItem)
         {
             if (dataItem.IsAssigned())
@@ -328,6 +341,7 @@ namespace Konfidence.BaseData
             }
         }
 
+        [UsedImplicitly]
         public void Cancel([NotNull] T dataItem)
         {
             dataItem.LoadDataItem();
@@ -335,6 +349,7 @@ namespace Konfidence.BaseData
             dataItem.IsEditing = false;
         }
 
+        [UsedImplicitly]
         public void Delete(T dataItem)
         {
             if (dataItem.IsAssigned())
@@ -397,52 +412,59 @@ namespace Konfidence.BaseData
             return _dbParameterObjectList;
         }
 
-        #region SetParameter Methods
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, int value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, byte value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, short value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, long value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, Guid value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, string value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, bool value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, DateTime value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
 
+        [UsedImplicitly]
         protected void SetParameter(string fieldName, TimeSpan value)
         {
             _dbParameterObjectList.SetField(fieldName, value);
         }
-        #endregion
 
 		/// <summary>
 		/// Add parameters for filtering
@@ -453,21 +475,25 @@ namespace Konfidence.BaseData
 			// NOP
 		}
 
+        [UsedImplicitly]
 		protected int ExecuteTextCommand(string textCommand)
 		{
 			return Client.ExecuteTextCommand(textCommand);
 		}
 
+        [UsedImplicitly]
 		protected bool TableExists(string tableName)
 		{
 			return Client.TableExists(tableName);
 		}
 
+        [UsedImplicitly]
 		protected bool ViewExists(string viewName)
 		{
 			return Client.ViewExists(viewName);
 		}
 
+        [UsedImplicitly]
         protected bool StoredProcedureExists(string storedProcedureName)
         {
             return Client.StoredProcedureExists(storedProcedureName);

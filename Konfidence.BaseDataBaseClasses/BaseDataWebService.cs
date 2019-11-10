@@ -12,6 +12,7 @@ namespace Konfidence.BaseData
     public class BaseDataWebService //: WebService
 	{
 		//[WebMethod]
+        [UsedImplicitly]
         public int Save(DbParameterObjectList properties, int id)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -31,6 +32,8 @@ namespace Konfidence.BaseData
 		}
 
 		//[WebMethod]
+        [UsedImplicitly]
+        [NotNull]
         public DbParameterObjectList GetItem(int id)
 		{
 			var baseDataItem = GetNewDataItem(id);
@@ -42,6 +45,7 @@ namespace Konfidence.BaseData
 
         //[WebMethod]
         [NotNull]
+        [UsedImplicitly]
         public DbParameterObjectList GetItemByParam(DbParameterObjectList parameterList)
         {
             var baseDataItem = GetNewDataItem(parameterList);
@@ -56,6 +60,7 @@ namespace Konfidence.BaseData
         }
 
 		//[WebMethod]
+        [UsedImplicitly]
 		public void Delete(int id)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -70,6 +75,7 @@ namespace Konfidence.BaseData
 
 		//[WebMethod]
         [CanBeNull]
+        [UsedImplicitly]
         public List<IDbParameterObjectList> BuildItemList()
 		{
 			//var baseDataItemList = GetNewDataItemList();
@@ -85,15 +91,16 @@ namespace Konfidence.BaseData
 	        throw new NotImplementedException();
 	    }
 
-	    //[WebMethod]
-        //public int ExecuteCommand(string storedProcedure, params object[] parameters)
-        //{
-        //    BaseDataItem baseDataItem = GetNewDataItem();
+		//[WebMethod]
+		//public int ExecuteCommand(string storedProcedure, params object[] parameters)
+		//{
+		//    BaseDataItem baseDataItem = GetNewDataItem();
 
-        //    return baseDataItem.ExecuteCommand(storedProcedure, parameters);
-        //}
+		//    return baseDataItem.ExecuteCommand(storedProcedure, parameters);
+		//}
 
 		//[WebMethod]
+		[UsedImplicitly]
 		public int ExecuteTextCommand(string textCommand)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -102,6 +109,7 @@ namespace Konfidence.BaseData
 		}
 
 		//[WebMethod]
+        [UsedImplicitly]
 		public bool TableExists(string tableName)
 		{
 			var baseDataItem = GetNewDataItem();
@@ -110,6 +118,7 @@ namespace Konfidence.BaseData
 		}
 
 		//[WebMethod]
+        [UsedImplicitly]
 		public bool ViewExists(string viewName)
 		{
 			var baseDataItem = GetNewDataItem();
