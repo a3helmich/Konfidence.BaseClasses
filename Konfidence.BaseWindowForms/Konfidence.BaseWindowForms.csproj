@@ -23,8 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.8" />
-    <PackageReference Include="Konfidence.UtilHelper" Version="1.0.1" />
+    <PackageReference Include="Konfidence.UtilHelper" Version="2019.0.1" />
   </ItemGroup>
 
 </Project>
