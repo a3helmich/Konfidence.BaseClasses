@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Konfidence.DesignPatterns</RootNamespace>
     <AssemblyName>Konfidence.DesignPatterns</AssemblyName>
-    <Version>1.0.1</Version>
+    <Version>2019.0.1</Version>
     <PackageId>Konfidence.DesignPatterns</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
