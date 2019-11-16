@@ -28,7 +28,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             var database = databaseProviderFactory.Create("TestDatabase");
 
             // Act 
-            Action action = () => SqlServerCheck.VerifyDatabaseServer(database); 
+            Action action = () => SqlServerCheck.VerifyDatabaseServer(database, 10000); 
 
             // Assert
             action.Should().Throw<SqlClientException>().WithMessage("Database TestDatabase does not exist");
@@ -43,7 +43,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             var database = databaseProviderFactory.Create("TestClassGenerator");
 
             // Act 
-            var result = SqlServerCheck.VerifyDatabaseServer(database);
+            var result = SqlServerCheck.VerifyDatabaseServer(database, 10000);
 
             // Assert
             Assert.IsTrue(result);

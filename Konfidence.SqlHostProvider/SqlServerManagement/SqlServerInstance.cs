@@ -22,14 +22,14 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
             _pingSucceeded = false;
         }
 
-        internal static bool VerifyDatabaseServer(string databaseServerName, string userName, string password)
+        internal static bool VerifyDatabaseServer(string databaseServerName, string userName, string password, int timeOut)
         {
             var executer = new SqlServerInstance();
 
-            return executer.PingSqlServerVersion(databaseServerName, userName, password);
+            return executer.PingSqlServerVersion(databaseServerName, userName, password, timeOut);
         }
 
-        private bool PingSqlServerVersion(string databaseServerName, string userName, string password)
+        private bool PingSqlServerVersion(string databaseServerName, string userName, string password, int timeOut)
         {
             if (databaseServerName.IsAssigned())
             {
@@ -46,7 +46,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
                 }
                 else
                 {
-                    executerThread.Join(3000); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
+                    executerThread.Join(timeOut); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
                                                // NB. the thread is not going to stop immediately -> the application will not stop right away. 
                                                // but the response is really fast.
                 }
