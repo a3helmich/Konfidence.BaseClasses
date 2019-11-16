@@ -12,7 +12,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
     public class SqlServerCheck
     {
         [UsedImplicitly]
-        public static bool VerifyDatabaseServer([NotNull] Database databaseInstance)
+        public static bool VerifyDatabaseServer([NotNull] Database databaseInstance, int timeOut = 3000)
         {
             var serverName = string.Empty;
             var connectionName = string.Empty;
@@ -57,7 +57,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
                 }
             }
 
-            if (!SqlServerInstance.VerifyDatabaseServer(serverName, userName, password))
+            if (!SqlServerInstance.VerifyDatabaseServer(serverName, userName, password, timeOut))
             {
                 throw new SqlClientException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
             }
