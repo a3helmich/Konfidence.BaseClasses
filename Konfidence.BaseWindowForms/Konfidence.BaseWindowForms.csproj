@@ -6,10 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>Konfidence.BaseWindowForms</RootNamespace>
     <AssemblyName>Konfidence.BaseWindowForms</AssemblyName>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
-    <Version>1.0.1</Version>
+    <Version>2019.0.1</Version>
     <PackageId>Konfidence.BaseWindowForms</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
