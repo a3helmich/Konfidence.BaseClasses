@@ -4,16 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Konfidence.Mail</RootNamespace>
     <AssemblyName>Konfidence.Mail</AssemblyName>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
-    <Version>1.0.1</Version>
+    <Version>2019.0.1</Version>
     <PackageId>Konfidence.Mail</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseClasses" Version="1.0.8" />
+    <PackageReference Include="Konfidence.BaseClasses" Version="2019.0.1" />
   </ItemGroup>
 
 </Project>
