@@ -4,10 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Konfidence.MenuClasses</RootNamespace>
     <AssemblyName>Konfidence.MenuClasses</AssemblyName>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Konfidence.nl.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
-    <Version>1.0.2</Version>
+    <Version>2019.0.1</Version>
     <PackageId>Konfidence.MenuClasses</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
@@ -21,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.SqlHostProvider" Version="1.0.2" />
+    <PackageReference Include="Konfidence.SqlHostProvider" Version="2019.0.1" />
   </ItemGroup>
 
 </Project>
