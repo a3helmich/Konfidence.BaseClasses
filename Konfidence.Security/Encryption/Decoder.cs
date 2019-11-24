@@ -11,7 +11,7 @@ namespace Konfidence.Security.Encryption
         private KeyEncryption _decoder;
         private bool _disposed;
 
-        public Decoder(string privateKey)
+        public Decoder([NotNull] string privateKey)
         {
             _disposed = false;
 

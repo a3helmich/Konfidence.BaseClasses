@@ -8,8 +8,6 @@ namespace Konfidence.Security.Encryption
 {
     public class KeyEncryption : IDisposable
     {
-        private RSACryptoServiceProvider _rsaProvider;
-
         private bool _disposed;
 
         private RSACryptoServiceProvider _tempRsaProvider;
@@ -19,10 +17,9 @@ namespace Konfidence.Security.Encryption
         // uitgezocht, maar de maximum datasize = keysize lijkt niet waar te zijn heb voorlopig gekozen voor halverwege 
         // de keysize, dit lijkt te voldoen, moet verder uitgezocht.
         //NB nov 2012: zal wel iets te maken hebben met de encoding van de string (onebyte/twobyte).
-        private int _maxBytesServer; // default voor de serverside
-        private int _maxBytesClient; // default voor de serverside
+        private int _maxBytesServer; 
 
-        public RSACryptoServiceProvider RsaProvider => _rsaProvider;
+        public RSACryptoServiceProvider RsaProvider { get; private set; }
 
         [NotNull] public string PublicKey => RsaProviderToXmlString(false);
 
@@ -40,7 +37,7 @@ namespace Konfidence.Security.Encryption
         {
             try
             {
-                return _rsaProvider.ToXmlString(includePrivateParameters);
+                return RsaProvider.ToXmlString(includePrivateParameters);
             }
             catch (PlatformNotSupportedException ex)
             {
@@ -48,20 +45,12 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-        public KeyEncryption([NotNull] ISecurityConfiguration securityConfiguration)
+        public KeyEncryption(string containerName, [NotNull] ISecurityConfiguration securityConfiguration)
         {
             _disposed = false;
             _securityConfiguration = securityConfiguration;
-        }
 
-        public KeyEncryption(string containerName, [NotNull] ISecurityConfiguration securityConfiguration) : this(0, containerName, securityConfiguration)
-        {
-        }
-
-        public KeyEncryption(int keySize, string containerName, [NotNull] ISecurityConfiguration securityConfiguration) : this(securityConfiguration)
-        {
-            _maxBytesClient = keySize / 8;
-            _maxBytesServer = keySize / 8;
+            _maxBytesServer = GetMaxKeySize() / 8;
 
             var isTemporary = false;
 
@@ -76,7 +65,7 @@ namespace Konfidence.Security.Encryption
 
             if (isTemporary)
             {
-                _rsaProvider = TempKeyContainer;
+                RsaProvider = TempKeyContainer;
             }
             else
             {
@@ -87,21 +76,15 @@ namespace Konfidence.Security.Encryption
         }
 
         [NotNull]
-        protected RSACryptoServiceProvider TempKeyContainer
+        private RSACryptoServiceProvider TempKeyContainer
         {
             get
             {
-                var keySizeClient = _maxBytesClient * 8;
-                var keySizeServer = GetMaxKeySize(); // dit valt te optimaliseren, door er voor te zorgen dat de oude niet direct wordt weggemikt
+                var keySizeServer = GetMaxKeySize();
 
-                if (keySizeServer < keySizeClient)
+                if (!_tempRsaProvider.IsAssigned())
                 {
-                    keySizeClient = keySizeServer;
-                }
-
-                if (!_tempRsaProvider.IsAssigned() || _tempKeySize != keySizeClient)
-                {
-                    _tempRsaProvider = keySizeClient == 0 ? new RSACryptoServiceProvider() : new RSACryptoServiceProvider(keySizeClient);
+                    _tempRsaProvider = keySizeServer == 0 ? new RSACryptoServiceProvider() : new RSACryptoServiceProvider(keySizeServer);
 
                     _tempKeySize = _tempRsaProvider.KeySize;
                 }
@@ -110,7 +93,7 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-        public int GetMaxKeySize()
+        private int GetMaxKeySize()
         {
             // at first I wanted to remove redundant keys etc. but keeping them in 
             // store is faster for non-key generating actions. like here, but also for encoding and decoding
@@ -133,11 +116,6 @@ namespace Konfidence.Security.Encryption
                     }
             }
 
-            if (_maxBytesClient == 0)
-            {
-                _maxBytesClient = _maxBytesServer;
-            }
-
             return _maxBytesServer * 8;
         }
 
@@ -155,28 +133,31 @@ namespace Konfidence.Security.Encryption
         {
             // - if this is a clientsize Encryption determine maximum keysize
             // - get the serviceprovider
-            // - if the serviceprovider allready exisists, with the wrong keysize, delete the serviceprovider
+            // - if the serviceprovider allready exists, with the wrong keysize, delete the serviceprovider
             // - get a new serviceprovider if deleted
             // - if the Encryption is temporary, make sure it is not persistend
             try
             {
                 var cp = GetCspParameters(containerName);
 
-                if (!_rsaProvider.IsAssigned())
+                if (!RsaProvider.IsAssigned())
                 {
                     try
                     {
-                        _rsaProvider = new RSACryptoServiceProvider(_maxBytesServer * 8, cp);
+                        RsaProvider = new RSACryptoServiceProvider(_maxBytesServer * 8, cp);
                     }
                     catch (CryptographicException e)
                     {
+                        if (RsaProvider.IsAssigned())
                         {
-                            throw new Exception("create: " + e.Message, e);
+                            Delete();
                         }
+
+                        throw new Exception("create: " + e.Message, e);
                     }
                 }
 
-                if (_maxBytesServer > 0 && _rsaProvider.KeySize != _maxBytesServer * 8)
+                if (_maxBytesServer > 0 && RsaProvider.KeySize != _maxBytesServer * 8)
                 {
                     try
                     {
@@ -192,9 +173,9 @@ namespace Konfidence.Security.Encryption
                         }
 
 
-                        if (!_rsaProvider.IsAssigned())
+                        if (!RsaProvider.IsAssigned())
                         {
-                            _rsaProvider = new RSACryptoServiceProvider(_maxBytesServer * 8, cp);
+                            RsaProvider = new RSACryptoServiceProvider(_maxBytesServer * 8, cp);
                         }
                     }
                     catch (CryptographicException e)
@@ -219,15 +200,15 @@ namespace Konfidence.Security.Encryption
             {
                 // if a rsaprovider exists, make non persistent, clear it and nullify --> the key is deleted
 
-                if (_rsaProvider.IsAssigned())
+                if (RsaProvider.IsAssigned())
                 {
                     // Delete the key entry in the container.
-                    _rsaProvider.PersistKeyInCsp = false;
+                    RsaProvider.PersistKeyInCsp = false;
 
                     // Call Clear to release resources and delete the key from the container.
-                    _rsaProvider.Clear();
+                    RsaProvider.Clear();
 
-                    _rsaProvider = null;
+                    RsaProvider = null;
 
                     return true;
                 }
@@ -244,8 +225,8 @@ namespace Konfidence.Security.Encryption
 
         public void ReadKey([NotNull] string key)
         {
-            _rsaProvider.FromXmlString(key);
-            _maxBytesServer = _rsaProvider.KeySize / 8;
+            RsaProvider.FromXmlString(key);
+            _maxBytesServer = RsaProvider.KeySize / 8;
         }
 
         #region IDisposable Members
@@ -262,11 +243,11 @@ namespace Konfidence.Security.Encryption
 
             if (!_disposed)
             {
-                if (_rsaProvider.IsAssigned())
+                if (RsaProvider.IsAssigned())
                 {
-                    _rsaProvider.Clear(); // resources vrijgeven.
+                    RsaProvider.Clear(); // resources vrijgeven.
 
-                    _rsaProvider = null;
+                    RsaProvider = null;
                 }
             }
             _disposed = true;

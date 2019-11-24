@@ -9,8 +9,6 @@ namespace Konfidence.Security
 {
     public class PrivatePublicKey 
     {
-        public static int MaxKeySize = -1; 
-
         public string ApplicationName { get; }
 
         public string PublicKey { get; }
@@ -19,32 +17,15 @@ namespace Konfidence.Security
 
         private readonly ISecurityConfiguration _securityConfiguration;
 
-        public string ServerPublicKey { get; set; } = string.Empty;
-
-        public PrivatePublicKey(string applicationName, ISecurityConfiguration securityConfiguration) : this(0, applicationName, securityConfiguration)
-        {
-        }
-
-        public PrivatePublicKey(int maxKeySize, string applicationName, ISecurityConfiguration securityConfiguration)
+        public PrivatePublicKey(string applicationName, [NotNull] ISecurityConfiguration securityConfiguration)
         {
             _securityConfiguration = securityConfiguration;
             ApplicationName = applicationName;
 
-            using (var test = new KeyEncryption(maxKeySize, ApplicationName, securityConfiguration))
+            using (var encryption = new KeyEncryption(ApplicationName, securityConfiguration))
             {
-                PublicKey = test.PublicKey;
-                PrivateKey = test.PrivateKey;
-
-                if (test.IsAssigned())
-                {
-                    using (var clientKeyEncryption =
-                        new KeyEncryption(maxKeySize, ApplicationName, securityConfiguration))
-                    {
-                        PublicKey = clientKeyEncryption.PublicKey;
-                        PrivateKey = clientKeyEncryption.PrivateKey;
-                        MaxKeySize = clientKeyEncryption.GetMaxKeySize();
-                    }
-                }
+                PublicKey = encryption.PublicKey;
+                PrivateKey = encryption.PrivateKey;
             }
         }
 
@@ -63,51 +44,6 @@ namespace Konfidence.Security
             }
 
             return true;
-        }
-
-        [UsedImplicitly]
-        [NotNull]
-        public string Decode(object[] encodedObjectArray)
-        {
-            var decodedString = string.Empty;
-
-            using (var decoder = new Decoder(PrivateKey))
-            {
-                try
-                {
-                    decodedString = decoder.Decrypt(encodedObjectArray);
-
-                    Debug.WriteLine("Decryption: finished");
-                }
-                catch (CryptographicException cex)
-                {
-                    Debug.WriteLine("Decryption: failed - " + cex.Message);
-                }
-            }
-
-            return decodedString;
-        }
-
-        [CanBeNull]
-        public object[] Encode(string toEncrypt)
-        {
-            object[] encryptedRegistrationData;
-
-            using (var encoder = new Encoder(ServerPublicKey))
-            {
-                encryptedRegistrationData = encoder.Encrypt(toEncrypt);
-            }
-
-            return encryptedRegistrationData;
-        }
-
-        [UsedImplicitly]
-        public static int GetKeySize(string clientPublicKey)
-        {
-            using (var encoder = new Encoder(clientPublicKey))
-            {
-                return encoder.KeySize;
-            }
         }
     }
 }
