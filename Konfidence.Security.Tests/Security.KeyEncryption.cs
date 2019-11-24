@@ -18,10 +18,10 @@ namespace Konfidence.Security.Tests
 
             configurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32NT);
 
-            using var keyEncryption = new KeyEncryption(configurationMock.Object);
+            using var keyEncryption = new KeyEncryption(string.Empty, configurationMock.Object);
 
             // act
-            var maxKeySize = keyEncryption.GetMaxKeySize();
+            var maxKeySize = keyEncryption.KeySize;
 
             // assert
             Assert.AreEqual(1024, maxKeySize);
@@ -35,10 +35,10 @@ namespace Konfidence.Security.Tests
 
             configurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32Windows);
 
-            using var keyEncryption = new KeyEncryption(configurationMock.Object);
+            using var keyEncryption = new KeyEncryption(string.Empty, configurationMock.Object);
 
             // act
-            var maxKeySize = keyEncryption.GetMaxKeySize();
+            var maxKeySize = keyEncryption.KeySize;
 
             // assert
             Assert.AreEqual(384, maxKeySize);

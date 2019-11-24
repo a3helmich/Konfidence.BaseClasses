@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using FluentAssertions;
+using Konfidence.Base;
 using Konfidence.Security.Encryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -33,7 +35,7 @@ namespace Konfidence.Security.Tests
         public void EncodeDecodeTest()
         {
             // this is only testing the encode decode functionality : NOT the encryption/decryption class!
-            string resultString;
+            var resultString = string.Empty;
             var testString = string.Empty;
 
             testString += "-1teststring om te decoden encoden 1234567890";
@@ -52,13 +54,17 @@ namespace Konfidence.Security.Tests
                 arrayList = encoder.Encrypt(testString);
             }
 
-            using (var decoder = new Decoder(ppk.PrivateKey))
+            if (arrayList.IsAssigned())
             {
+                using var decoder = new Decoder(ppk.PrivateKey);
+
                 resultString = decoder.Decrypt(arrayList);
             }
 
             ppk.DeleteEncryptionStore();
 
+            arrayList.Should().NotBeNull();
+            resultString.Should().NotBeNullOrWhiteSpace();
             Assert.AreEqual(resultString, testString, false, "encoding/decoding failed");
         }
     }

@@ -11,7 +11,7 @@ namespace Konfidence.Security.Encryption
         private KeyEncryption _encoder;
         private bool _disposed;
 
-        public Encoder(string publicKey)
+        public Encoder([NotNull] string publicKey)
         {
             _disposed = false;
 
@@ -37,12 +37,12 @@ namespace Konfidence.Security.Encryption
                 {
                     var partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
 
-                    byteList.Add(GetEnryptedDataBlock(partialStringBlock));
+                    byteList.Add(GetEncryptedDataBlock(partialStringBlock));
 
                     partialString = GetNextPartialString(partialString, _encoder.PackageSize);
                 }
 
-                byteList.Add(GetEnryptedDataBlock(partialString));
+                byteList.Add(GetEncryptedDataBlock(partialString));
             }
 
             if (byteList.IsAssigned())
@@ -53,7 +53,7 @@ namespace Konfidence.Security.Encryption
             return null;
         }
 
-        private byte[] GetEnryptedDataBlock([NotNull] string partialString)
+        private byte[] GetEncryptedDataBlock([NotNull] string partialString)
         {
             var asciiEncoding = new ASCIIEncoding();
 
@@ -86,7 +86,7 @@ namespace Konfidence.Security.Encryption
             {
                 if (_encoder.IsAssigned())
                 {
-                    _encoder.Dispose(); // resources vrijgeven.
+                    _encoder.Dispose(); 
 
                     _encoder = null;
                 }
