@@ -13,7 +13,7 @@ namespace Konfidence.BaseData
     [UsedImplicitly]
     public abstract class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem
     {
-        private readonly DbParameterObjectList _dbParameterObjectList;
+        private readonly List<IDbParameterObject> _dbParameterObjectList;
 
 	    private IBaseClient _client;
 
@@ -86,7 +86,7 @@ namespace Konfidence.BaseData
 
 	    public BaseDataItemList()
 	    {
-	        _dbParameterObjectList = new DbParameterObjectList();
+	        _dbParameterObjectList = new List<IDbParameterObject>();
         }
 
         protected void BuildItemList(string getListStoredProcedure)
@@ -376,9 +376,9 @@ namespace Konfidence.BaseData
         #endregion list editing
 
         [NotNull]
-        public List<IDbParameterObjectList> ConvertToListOfParameterObjectList()
+        public List<List<IDbParameterObject>> ConvertToListOfParameterObjectList()
 		{
-            var baseDataItemListList = new List<IDbParameterObjectList>();
+            var baseDataItemListList = new List<List<IDbParameterObject>>();
 
 			foreach (var baseDataItem in this)
 			{
@@ -398,16 +398,16 @@ namespace Konfidence.BaseData
 		}
 
         [NotNull]
-        private static IDbParameterObjectList GetProperties([NotNull] IBaseDataItem baseDataItem)
+        private static List<IDbParameterObject> GetProperties([NotNull] IBaseDataItem baseDataItem)
 		{
-            var properties = new DbParameterObjectList();
+            var properties = new List<IDbParameterObject>();
 
 			baseDataItem.GetProperties(properties);
 
 			return properties;
 		}
 
-        public IDbParameterObjectList GetParameterObjectList()
+        public List<IDbParameterObject> GetParameterObjectList()
         {
             return _dbParameterObjectList;
         }

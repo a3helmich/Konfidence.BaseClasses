@@ -9,8 +9,8 @@ namespace Konfidence.DataBaseInterface
         //void AddItem(BaseClient client);
         T GetDataItem();
 
-        List<IDbParameterObjectList> ConvertToListOfParameterObjectList();
+        List<List<IDbParameterObject>> ConvertToListOfParameterObjectList();
 
-        IDbParameterObjectList GetParameterObjectList();
+        List<IDbParameterObject> GetParameterObjectList();
     }
 }

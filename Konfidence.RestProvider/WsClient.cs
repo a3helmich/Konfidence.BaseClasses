@@ -16,7 +16,7 @@ namespace Konfidence.RestProvider
 
         int Save(IDbParameterObject[] dbParameterObject, int v);
         void Delete(int id);
-        List<DbParameterObjectList> BuildItemList();
+        List<List<IDbParameterObject>> BuildItemList();
         int ExecuteTextCommand(string textCommand);
         bool TableExists(string tableName);
         bool ViewExists(string viewName);
@@ -26,7 +26,7 @@ namespace Konfidence.RestProvider
     {
         public string Url { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public List<DbParameterObjectList> BuildItemList()
+        public List<List<IDbParameterObject>> BuildItemList()
         {
             throw new NotImplementedException();
         }

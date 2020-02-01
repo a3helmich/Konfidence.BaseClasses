@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using JetBrains.Annotations;
@@ -17,7 +18,7 @@ namespace Konfidence.RepositoryInterface
         [UsedImplicitly]
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
 
-        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, IDbParameterObjectList parameterObjectList);
+        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, List<IDbParameterObject> parameterObjectList);
 
         ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters);
 

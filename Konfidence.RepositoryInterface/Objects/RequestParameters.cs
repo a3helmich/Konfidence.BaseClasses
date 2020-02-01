@@ -15,7 +15,7 @@ namespace Konfidence.RepositoryInterface.Objects
 
         public Dictionary<string, IDbParameterObject> AutoUpdateFieldList => _dataItem.AutoUpdateFieldDictionary;
 
-        public IDbParameterObjectList ParameterObjectList
+        public List<IDbParameterObject> ParameterObjectList
         {
             get
             {

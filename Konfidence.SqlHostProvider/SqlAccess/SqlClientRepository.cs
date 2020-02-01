@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using JetBrains.Annotations;
@@ -36,7 +37,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
         }
 
-        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, [NotNull] IDbParameterObjectList parameterObjectList)
+        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, [NotNull] List<IDbParameterObject> parameterObjectList)
         {
             var database = GetDatabase();
 
@@ -241,7 +242,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
         [UsedImplicitly]
-        public int ExecuteNonQuery(string storedProcedure, [NotNull] DbParameterObjectList parameterList)
+        public int ExecuteNonQuery(string storedProcedure, [NotNull] List<IDbParameterObject> parameterList)
         {
             return ExecuteNonQueryStoredProcedure(storedProcedure, parameterList);
         }

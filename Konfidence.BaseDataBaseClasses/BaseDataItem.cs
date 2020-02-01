@@ -31,14 +31,16 @@ namespace Konfidence.BaseData
 
 	    private NinjectDependencyResolver _ninject;
 
-	    protected BaseDataItem()
+        protected List<IDbParameterObject> DbParameterObjectList { get; private set; }
+
+        protected BaseDataItem()
 	    {
 	        WithLanguage = false;
 	        _isSelected = false;
 	        _isEditing = false;
 	        _isInitialized = false;
 
-	        DbParameterObjectList = new DbParameterObjectList();
+	        DbParameterObjectList = new List<IDbParameterObject>();
 	    }
 
         private IKernel Kernel
@@ -98,8 +100,6 @@ namespace Konfidence.BaseData
             }
         }
 
-        protected IDbParameterObjectList DbParameterObjectList { get; private set; }
-
 	    protected virtual void IsSelectedChanged()
         {
             // nop
@@ -134,7 +134,7 @@ namespace Konfidence.BaseData
 			PropertyDictionary = null;
 		}
 
-        public void GetProperties(IDbParameterObjectList properties)
+        public void GetProperties(List<IDbParameterObject> properties)
 		{
 			DbParameterObjectList = properties;
 
@@ -143,7 +143,7 @@ namespace Konfidence.BaseData
 			DbParameterObjectList = null;
 		}
 
-        public IDbParameterObjectList GetParameterObjectList()
+        public List<IDbParameterObject> GetParameterObjectList()
         {
             return DbParameterObjectList;
         }
@@ -880,7 +880,7 @@ namespace Konfidence.BaseData
         }
 
 	    [UsedImplicitly]
-        protected internal int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList)
+        protected internal int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
         {
             return Client.ExecuteCommand(storedProcedure, parameterObjectList);
         }
@@ -907,7 +907,7 @@ namespace Konfidence.BaseData
         }
 
         [NotNull]
-        public IDbParameterObjectList SetItemData()
+        public List<IDbParameterObject> SetItemData()
 		{
 			SetData();
 
@@ -915,9 +915,9 @@ namespace Konfidence.BaseData
 		}
 
         [NotNull]
-        internal DbParameterObjectList SetParameterData()
+        internal List<IDbParameterObject> SetParameterData()
         {
-            var parameterObjectList = new DbParameterObjectList();
+            var parameterObjectList = new List<IDbParameterObject>();
 
             foreach (var parameterObject in DbParameterObjectList)
             {
