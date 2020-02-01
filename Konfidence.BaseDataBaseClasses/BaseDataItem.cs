@@ -658,8 +658,8 @@ namespace Konfidence.BaseData
 
         #endregion
 
-		#region SetField Methods
-		protected void SetField(string fieldName, int value)
+        #region SetField Methods
+        protected void SetField(string fieldName, int value)
 		{
 		    DbParameterObjectList.SetField(fieldName, value);
 		}
