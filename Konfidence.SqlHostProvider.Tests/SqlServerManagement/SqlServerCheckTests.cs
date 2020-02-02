@@ -9,7 +9,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 {
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class SqlServerCheckTests
     {

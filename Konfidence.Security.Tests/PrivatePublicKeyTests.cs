@@ -9,7 +9,6 @@ namespace Konfidence.Security.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class PrivatePublicKeyTest
     {

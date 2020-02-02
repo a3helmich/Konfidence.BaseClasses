@@ -37,20 +37,20 @@ namespace Konfidence.BaseData
             }
         }
 
-	    [NotNull]
+        [NotNull]
         [UsedImplicitly]
-        public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
-	    {
+        public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+        {
 
-	        var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
+            var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
-	        {
-	            Kernel.Bind<IBaseClient>().To<TC>();
-	        }
+            {
+                Kernel.Bind<IBaseClient>().To<TC>();
+            }
 
-	       return Kernel.Get<TC>(connectionNameParam);
-	    }
+            return Kernel.Get<TC>(connectionNameParam);
+        }
 
         protected abstract IBaseClient ClientBind();
 
@@ -374,28 +374,6 @@ namespace Konfidence.BaseData
             }
         }
         #endregion list editing
-
-        [NotNull]
-        public List<List<IDbParameterObject>> ConvertToListOfParameterObjectList()
-		{
-            var baseDataItemListList = new List<List<IDbParameterObject>>();
-
-			foreach (var baseDataItem in this)
-			{
-				var properties = GetProperties(baseDataItem);
-
-				if (baseDataItem.AutoIdField.Length > 0)
-				{
-					var property = new DbParameterObject {Field = "BaseDataItem_KeyValue", Value = baseDataItem.GetId()};
-
-				    properties.Add(property);
-				}
-
-				baseDataItemListList.Add(properties);
-			}
-
-			return baseDataItemListList;
-		}
 
         [NotNull]
         private static List<IDbParameterObject> GetProperties([NotNull] IBaseDataItem baseDataItem)

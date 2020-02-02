@@ -78,10 +78,6 @@ namespace Konfidence.BaseData
         [UsedImplicitly]
         public List<List<IDbParameterObject>> BuildItemList()
 		{
-			//var baseDataItemList = GetNewDataItemList();
-
-			//return baseDataItemList.ConvertToListOfParameterObjectList();
-
 		    return null;
 		}
 
@@ -167,10 +163,5 @@ namespace Konfidence.BaseData
         {
             throw new NotImplementedException(); // NOP
         }
-
-        //protected void LoadParameterList(BaseDataItem dataItem, List<BaseDataItem.ParameterObject> ParameterList)
-        //{
-        //    dataItem.GetItem(ParameterList);
-        //}
 	}
 }

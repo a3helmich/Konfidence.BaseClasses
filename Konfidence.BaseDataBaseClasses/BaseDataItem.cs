@@ -31,7 +31,7 @@ namespace Konfidence.BaseData
 
 	    private NinjectDependencyResolver _ninject;
 
-        protected List<IDbParameterObject> DbParameterObjectList { get; private set; }
+        protected List<IDbParameterObject> DbParameterObjects { get; private set; }
 
         protected BaseDataItem()
 	    {
@@ -40,7 +40,7 @@ namespace Konfidence.BaseData
 	        _isEditing = false;
 	        _isInitialized = false;
 
-	        DbParameterObjectList = new List<IDbParameterObject>();
+	        DbParameterObjects = new List<IDbParameterObject>();
 	    }
 
         private IKernel Kernel
@@ -136,16 +136,16 @@ namespace Konfidence.BaseData
 
         public void GetProperties(List<IDbParameterObject> properties)
 		{
-			DbParameterObjectList = properties;
+			DbParameterObjects = properties;
 
 			SetData();
 
-			DbParameterObjectList = null;
+			DbParameterObjects = null;
 		}
 
         public List<IDbParameterObject> GetParameterObjectList()
         {
-            return DbParameterObjectList;
+            return DbParameterObjects;
         }
 
         public void GetKey()
@@ -661,53 +661,53 @@ namespace Konfidence.BaseData
         #region SetField Methods
         protected void SetField(string fieldName, int value)
 		{
-		    DbParameterObjectList.SetField(fieldName, value);
+		    DbParameterObjects.SetField(fieldName, value);
 		}
 
 	    protected void SetField(string fieldName, byte value)
 	    {
-	        DbParameterObjectList.SetField(fieldName, value);
+	        DbParameterObjects.SetField(fieldName, value);
 	    }
 
         protected void SetField(string fieldName, short value)
 	    {
-	        DbParameterObjectList.SetField(fieldName, value);
+	        DbParameterObjects.SetField(fieldName, value);
 	    }
 
 	    protected void SetField(string fieldName, long value)
 	    {
-	        DbParameterObjectList.SetField(fieldName, value);
+	        DbParameterObjects.SetField(fieldName, value);
 	    }
 
 
         protected void SetField(string fieldName, Guid value)
         {
-            DbParameterObjectList.SetField(fieldName, value);
+            DbParameterObjects.SetField(fieldName, value);
         }
 
         protected void SetField(string fieldName, string value)
 		{
-            DbParameterObjectList.SetField(fieldName, value);
+            DbParameterObjects.SetField(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, bool value)
 		{
-            DbParameterObjectList.SetField(fieldName, value);
+            DbParameterObjects.SetField(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, DateTime value)
 		{
-            DbParameterObjectList.SetField(fieldName, value);
+            DbParameterObjects.SetField(fieldName, value);
 		}
 
         protected void SetField(string fieldName, TimeSpan value)
         {
-            DbParameterObjectList.SetField(fieldName, value);
+            DbParameterObjects.SetField(fieldName, value);
         }
 
         protected void SetField(string fieldName, decimal value)
         {
-            DbParameterObjectList.SetField(fieldName, value);
+            DbParameterObjects.SetField(fieldName, value);
         }
         #endregion
 
@@ -919,12 +919,12 @@ namespace Konfidence.BaseData
         {
             var parameterObjectList = new List<IDbParameterObject>();
 
-            foreach (var parameterObject in DbParameterObjectList)
+            foreach (var parameterObject in DbParameterObjects)
             {
                 parameterObjectList.Add(parameterObject);
             }
 
-            DbParameterObjectList.Clear();
+            DbParameterObjects.Clear();
 
             return parameterObjectList;
         }

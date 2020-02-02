@@ -6,7 +6,6 @@ using Moq;
 
 namespace Konfidence.Security.Tests
 {
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class KeyEncryptionTests
     {

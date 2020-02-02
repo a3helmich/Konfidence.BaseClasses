@@ -5,7 +5,6 @@ using Moq;
 
 namespace Konfidence.BaseDatabaseClasses.Tests.Objects
 {
-    [ExcludeFromCodeCoverage]
     public class DataItem : BaseDataItem
     {
         protected override IBaseClient ClientBind()
