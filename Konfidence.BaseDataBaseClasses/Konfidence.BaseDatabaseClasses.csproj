@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Konfidence.BaseClasses" Version="2019.0.1" />
-    <PackageReference Include="Konfidence.DataBaseInterface" Version="2019.0.1" />
+    <PackageReference Include="Konfidence.DataBaseInterface" Version="2019.0.2" />
     <PackageReference Include="Ninject" Version="3.3.4" />
   </ItemGroup>
 
