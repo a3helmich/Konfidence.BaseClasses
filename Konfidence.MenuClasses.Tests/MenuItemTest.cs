@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DbMenuClasses;
+using FluentAssertions;
 using Konfidence.MenuClasses.Tests.objects;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +10,6 @@ namespace Konfidence.MenuClasses.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class MenuItemTest
     {
@@ -52,7 +52,7 @@ namespace Konfidence.MenuClasses.Tests
         {
             var test = new Bl.MenuDataItem(1);
 
-            Assert.IsNotNull(test);
+            test.Should().NotBeNull();
         }
 
         [TestMethod, TestCategory("Ninject")]

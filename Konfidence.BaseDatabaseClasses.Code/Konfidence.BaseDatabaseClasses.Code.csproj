@@ -11,7 +11,7 @@
     <Compile Include="..\Konfidence.BaseDataBaseClasses\BaseDataWebService.cs" Link="BaseDataWebService.cs" />
     <Compile Include="..\Konfidence.BaseDataBaseClasses\NinjectDependencyResolver.cs" Link="NinjectDependencyResolver.cs" />
     <Compile Include="..\Konfidence.BaseDataBaseClasses\Objects\DbParameterObject.cs" Link="Objects\DbParameterObject.cs" />
-    <Compile Include="..\Konfidence.BaseDataBaseClasses\Objects\DbParameterObjectList.cs" Link="Objects\DbParameterObjectList.cs" />
+    <Compile Include="..\Konfidence.BaseDataBaseClasses\Objects\DbParameterObjectExtensions.cs" Link="Objects\DbParameterObjectExtensions.cs" />
   </ItemGroup>
   
   <ItemGroup>
@@ -21,5 +21,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses.Code\Konfidence.BaseClasses.Code.csproj" />
     <ProjectReference Include="..\Konfidence.DataBaseInterface.Code\Konfidence.DataBaseInterface.Code.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Konfidence.BaseDatabaseClasses.Tests</_Parameter1>
+    </AssemblyAttribute>  
   </ItemGroup>
 </Project>

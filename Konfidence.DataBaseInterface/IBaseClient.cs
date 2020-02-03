@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Konfidence.DataBaseInterface
@@ -11,7 +12,7 @@ namespace Konfidence.DataBaseInterface
 
         void Delete(string deleteStoredProcedure, string autoIdField, int id);
 
-        int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList);
+        int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList);
 
         int ExecuteTextCommand(string textCommand);
 

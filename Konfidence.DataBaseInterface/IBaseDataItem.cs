@@ -25,7 +25,7 @@ namespace Konfidence.DataBaseInterface
 
         void InitializeDataItem();
 
-        IDbParameterObjectList SetItemData();
+        List<IDbParameterObject> SetItemData();
 
         void Save();
 
@@ -43,8 +43,8 @@ namespace Konfidence.DataBaseInterface
 
         void SetProperties(Dictionary<string, object> propertyDictionary);
 
-        void GetProperties(IDbParameterObjectList properties);
+        void GetProperties(List<IDbParameterObject> properties);
 
-        IDbParameterObjectList GetParameterObjectList();
+        List<IDbParameterObject> GetParameterObjectList();
     }
 }

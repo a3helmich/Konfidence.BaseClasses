@@ -7,7 +7,6 @@ using Ninject.Parameters;
 
 namespace Konfidence.MenuClasses.Tests.objects
 {
-    [ExcludeFromCodeCoverage]
     public class TestItemClassList : List<TestItemClass>, ITestItemClassList
     {
         public void AddItem()

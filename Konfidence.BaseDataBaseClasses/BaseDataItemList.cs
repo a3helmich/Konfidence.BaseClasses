@@ -13,7 +13,7 @@ namespace Konfidence.BaseData
     [UsedImplicitly]
     public abstract class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem
     {
-        private readonly DbParameterObjectList _dbParameterObjectList;
+        private readonly List<IDbParameterObject> _dbParameterObjects;
 
 	    private IBaseClient _client;
 
@@ -37,20 +37,20 @@ namespace Konfidence.BaseData
             }
         }
 
-	    [NotNull]
+        [NotNull]
         [UsedImplicitly]
-        public virtual IBaseClient ClientBind<TC>() where TC: IBaseClient
-	    {
+        public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
+        {
 
-	        var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
+            var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
-	        {
-	            Kernel.Bind<IBaseClient>().To<TC>();
-	        }
+            {
+                Kernel.Bind<IBaseClient>().To<TC>();
+            }
 
-	       return Kernel.Get<TC>(connectionNameParam);
-	    }
+            return Kernel.Get<TC>(connectionNameParam);
+        }
 
         protected abstract IBaseClient ClientBind();
 
@@ -86,7 +86,7 @@ namespace Konfidence.BaseData
 
 	    public BaseDataItemList()
 	    {
-	        _dbParameterObjectList = new DbParameterObjectList();
+	        _dbParameterObjects = new List<IDbParameterObject>();
         }
 
         protected void BuildItemList(string getListStoredProcedure)
@@ -376,94 +376,72 @@ namespace Konfidence.BaseData
         #endregion list editing
 
         [NotNull]
-        public List<IDbParameterObjectList> ConvertToListOfParameterObjectList()
+        private static List<IDbParameterObject> GetProperties([NotNull] IBaseDataItem baseDataItem)
 		{
-            var baseDataItemListList = new List<IDbParameterObjectList>();
-
-			foreach (var baseDataItem in this)
-			{
-				var properties = GetProperties(baseDataItem);
-
-				if (baseDataItem.AutoIdField.Length > 0)
-				{
-					var property = new DbParameterObject {Field = "BaseDataItem_KeyValue", Value = baseDataItem.GetId()};
-
-				    properties.Add(property);
-				}
-
-				baseDataItemListList.Add(properties);
-			}
-
-			return baseDataItemListList;
-		}
-
-        [NotNull]
-        private static IDbParameterObjectList GetProperties([NotNull] IBaseDataItem baseDataItem)
-		{
-            var properties = new DbParameterObjectList();
+            var properties = new List<IDbParameterObject>();
 
 			baseDataItem.GetProperties(properties);
 
 			return properties;
 		}
 
-        public IDbParameterObjectList GetParameterObjectList()
+        public List<IDbParameterObject> GetParameterObjectList()
         {
-            return _dbParameterObjectList;
+            return _dbParameterObjects;
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, int value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, byte value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, short value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, long value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, Guid value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, string value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, bool value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, DateTime value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
         [UsedImplicitly]
         protected void SetParameter(string fieldName, TimeSpan value)
         {
-            _dbParameterObjectList.SetField(fieldName, value);
+            _dbParameterObjects.SetField(fieldName, value);
         }
 
 		/// <summary>

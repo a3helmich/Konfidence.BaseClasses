@@ -3,7 +3,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Konfidence.MenuClasses.Tests.objects
 {
-    [ExcludeFromCodeCoverage]
     public class CallTestItemListClass
     {
         protected ITestItemClassList TestItemList { get; } = new TestItemClassList();// as List<ITestItemClass>; }

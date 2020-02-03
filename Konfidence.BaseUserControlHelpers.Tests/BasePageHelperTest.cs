@@ -7,7 +7,6 @@ namespace Konfidence.BaseUserControlHelpers.Tests
     ///This is a test class for BasePageHelperTest and is intended
     ///to contain all BasePageHelperTest Unit Tests
     ///</summary>
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class BasePageHelperTest
     {

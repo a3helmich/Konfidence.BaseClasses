@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using JetBrains.Annotations;
@@ -221,7 +222,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public override int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList)
+        public override int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
         {
             return _repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
         }

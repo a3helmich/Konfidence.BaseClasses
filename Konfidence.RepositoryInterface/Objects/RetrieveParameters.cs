@@ -1,4 +1,5 @@
-﻿using Konfidence.DataBaseInterface;
+﻿using System.Collections.Generic;
+using Konfidence.DataBaseInterface;
 
 namespace Konfidence.RepositoryInterface.Objects
 {
@@ -8,7 +9,7 @@ namespace Konfidence.RepositoryInterface.Objects
 
         public string StoredProcedure { get; }
 
-        public IDbParameterObjectList ParameterObjectList
+        public List<IDbParameterObject> ParameterObjectList
         {
             get
             {

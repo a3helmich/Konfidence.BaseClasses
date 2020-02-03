@@ -10,7 +10,6 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
     ///This is a test class for DatabaseStructureTest and is intended
     ///to contain all DatabaseStructureTest Unit Tests
     ///</summary>
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class DatabaseStructureTest
     {

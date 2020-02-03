@@ -9,7 +9,6 @@
     <Compile Include="..\Konfidence.DataBaseInterface\IBaseDataItem.cs" Link="IBaseDataItem.cs" />
     <Compile Include="..\Konfidence.DataBaseInterface\IBaseDataItemList.cs" Link="IBaseDataItemList.cs" />
     <Compile Include="..\Konfidence.DataBaseInterface\IDbParameterObject.cs" Link="IDbParameterObject.cs" />
-    <Compile Include="..\Konfidence.DataBaseInterface\IDbParameterObjectList.cs" Link="IDbParameterObjectList.cs" />
   </ItemGroup>
 
   <ItemGroup>

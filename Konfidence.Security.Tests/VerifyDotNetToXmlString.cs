@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 
 namespace Konfidence.Security.Tests
 {
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class VerifyDotNetToXmlString
     {

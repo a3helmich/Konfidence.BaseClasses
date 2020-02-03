@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using JetBrains.Annotations;
 using Konfidence.DataBaseInterface;
 
 namespace Konfidence.BaseData.Objects
 {
-    public class DbParameterObjectList : List<IDbParameterObject>, IDbParameterObjectList
+    internal static class DbParameterObjectExtensions
     {
-        private readonly Dictionary<Type, DbType> _typeMap = new Dictionary<Type, DbType>();
+        [NotNull] private static readonly Dictionary<Type, DbType> _typeMap = new Dictionary<Type, DbType>();
 
-        public DbParameterObjectList()
+        static DbParameterObjectExtensions()
         {
             _typeMap[typeof(byte)] = DbType.Byte;
             _typeMap[typeof(sbyte)] = DbType.SByte;
@@ -28,6 +29,7 @@ namespace Konfidence.BaseData.Objects
             _typeMap[typeof(Guid)] = DbType.Guid;
             _typeMap[typeof(DateTime)] = DbType.DateTime;
             _typeMap[typeof(DateTimeOffset)] = DbType.DateTimeOffset;
+            _typeMap[typeof(TimeSpan)] = DbType.Time;
             _typeMap[typeof(byte[])] = DbType.Binary;
             _typeMap[typeof(byte?)] = DbType.Byte;
             _typeMap[typeof(sbyte?)] = DbType.SByte;
@@ -45,92 +47,58 @@ namespace Konfidence.BaseData.Objects
             _typeMap[typeof(Guid?)] = DbType.Guid;
             _typeMap[typeof(DateTime?)] = DbType.DateTime;
             _typeMap[typeof(DateTimeOffset?)] = DbType.DateTimeOffset;
+            _typeMap[typeof(TimeSpan?)] = DbType.Time;
             //typeMap[typeof(System.Data.Linq.Binary)] = DbType.Binary;
         }
 
-        public void SetField<T>(string fieldName, T value) where T : Type
+        public static void SetField<T>([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, T value) 
         {
-            AddInParameter(fieldName, _typeMap[typeof(T)], value);
+            dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(T)], value);
         }
 
-        public void SetField(string fieldName, int value)
-        {
-            AddInParameter(fieldName, DbType.Int32, value);
-        }
-
-        public void SetField(string fieldName, byte value)
-        {
-            AddInParameter(fieldName, DbType.Byte, value);
-        }
-
-        public void SetField(string fieldName, short value)
-        {
-            AddInParameter(fieldName, DbType.Int16, value);
-        }
-
-        public void SetField(string fieldName, long value)
-        {
-            AddInParameter(fieldName, DbType.Int64, value);
-        }
-
-        public void SetField(string fieldName, Guid value)
+        public static void SetField([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, Guid value)
         {
             if (Guid.Empty.Equals(value))
             {
-                AddInParameter(fieldName, DbType.Guid, null);
+                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(Guid)], null);
             }
             else
             {
-                AddInParameter(fieldName, DbType.Guid, value);
+                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(Guid)], value);
             }
         }
 
-        public void SetField(string fieldName, string value)
-        {
-            AddInParameter(fieldName, DbType.String, value);
-        }
-
-        public void SetField(string fieldName, bool value)
-        {
-            AddInParameter(fieldName, DbType.Boolean, value);
-        }
-
-        public void SetField(string fieldName, DateTime value)
+        public static void SetField([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, DateTime value)
         {
             if (value > DateTime.MinValue)
             {
-                AddInParameter(fieldName, DbType.DateTime, value);
+                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(DateTime)], value);
             }
             else
             {
-                AddInParameter(fieldName, DbType.DateTime, null);
+                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(DateTime)], null);
             }
         }
 
-        public void SetField(string fieldName, TimeSpan value)
+        public static void SetField([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, TimeSpan value)
         {
             if (value > TimeSpan.MinValue)
             {
-                var inbetween = DateTime.Now;
+                var timeSpan = DateTime.Today;
 
-                inbetween = new DateTime(inbetween.Year, inbetween.Month, inbetween.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
+                timeSpan = new DateTime(timeSpan.Year, timeSpan.Month, timeSpan.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
 
-                AddInParameter(fieldName, DbType.Time, inbetween);
+                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(TimeSpan)], timeSpan);
             }
             else
             {
-                AddInParameter(fieldName, DbType.Time, null);
+                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(TimeSpan)], null);
             }
         }
 
-        public void SetField(string fieldName, decimal value)
+        private static void AddInParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string field, DbType dbType, object value)
         {
-            AddInParameter(fieldName, DbType.Decimal, value);
-        }
-
-        private void AddInParameter(string field, DbType dbType, object value)
-        {
-            Add(new DbParameterObject(field, dbType, value));
+            dbParameterObjects.Add(new DbParameterObject(field, dbType, value));
         }
     }
 }

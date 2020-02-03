@@ -13,7 +13,7 @@ namespace Konfidence.BaseData
 	{
 		//[WebMethod]
         [UsedImplicitly]
-        public int Save(DbParameterObjectList properties, int id)
+        public int Save(List<IDbParameterObject> properties, int id)
 		{
 			var baseDataItem = GetNewDataItem();
 
@@ -34,7 +34,7 @@ namespace Konfidence.BaseData
 		//[WebMethod]
         [UsedImplicitly]
         [NotNull]
-        public DbParameterObjectList GetItem(int id)
+        public List<IDbParameterObject> GetItem(int id)
 		{
 			var baseDataItem = GetNewDataItem(id);
 
@@ -46,7 +46,7 @@ namespace Konfidence.BaseData
         //[WebMethod]
         [NotNull]
         [UsedImplicitly]
-        public DbParameterObjectList GetItemByParam(DbParameterObjectList parameterList)
+        public List<IDbParameterObject> GetItemByParam(List<IDbParameterObject> parameterList)
         {
             var baseDataItem = GetNewDataItem(parameterList);
 
@@ -76,17 +76,13 @@ namespace Konfidence.BaseData
 		//[WebMethod]
         [CanBeNull]
         [UsedImplicitly]
-        public List<IDbParameterObjectList> BuildItemList()
+        public List<List<IDbParameterObject>> BuildItemList()
 		{
-			//var baseDataItemList = GetNewDataItemList();
-
-			//return baseDataItemList.ConvertToListOfParameterObjectList();
-
 		    return null;
 		}
 
         [UsedImplicitly]
-	    private static IDbParameterObjectList GetNewDataItemList()
+	    private static List<IDbParameterObject> GetNewDataItemList()
 	    {
 	        throw new NotImplementedException();
 	    }
@@ -131,7 +127,7 @@ namespace Konfidence.BaseData
 			baseDataItem.SetId(id);
 		}
 
-        protected static void SetProperties([NotNull] BaseDataItem baseDataItem, [NotNull] DbParameterObjectList properties)
+        protected static void SetProperties([NotNull] BaseDataItem baseDataItem, [NotNull] List<IDbParameterObject> properties)
 		{
 			var propertyDictionary = new Dictionary<string, object>();
 
@@ -144,9 +140,9 @@ namespace Konfidence.BaseData
 		}
 
         [NotNull]
-        internal static DbParameterObjectList GetProperties([NotNull] BaseDataItem baseDataItem)
+        internal static List<IDbParameterObject> GetProperties([NotNull] BaseDataItem baseDataItem)
 		{
-            var properties = new DbParameterObjectList();
+            var properties = new List<IDbParameterObject>();
 
 			baseDataItem.GetProperties(properties);
 
@@ -163,14 +159,9 @@ namespace Konfidence.BaseData
 			throw new NotImplementedException(); // NOP
 		}
 
-        protected virtual BaseDataItem GetNewDataItem(DbParameterObjectList parameterList)
+        protected virtual BaseDataItem GetNewDataItem(List<IDbParameterObject> parameterList)
         {
             throw new NotImplementedException(); // NOP
         }
-
-        //protected void LoadParameterList(BaseDataItem dataItem, List<BaseDataItem.ParameterObject> ParameterList)
-        //{
-        //    dataItem.GetItem(ParameterList);
-        //}
 	}
 }

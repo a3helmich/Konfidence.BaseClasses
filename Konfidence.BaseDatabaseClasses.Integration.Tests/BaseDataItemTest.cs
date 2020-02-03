@@ -6,7 +6,6 @@ using Konfidence.TestTools;
 
 namespace Konfidence.BaseDatabaseClasses.Tests
 {
-    [ExcludeFromCodeCoverage]
     [TestClass]
     public class BaseDataItemTest
     {

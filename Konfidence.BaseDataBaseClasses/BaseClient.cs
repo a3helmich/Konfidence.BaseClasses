@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using JetBrains.Annotations;
 using Konfidence.DataBaseInterface;
@@ -51,7 +52,7 @@ namespace Konfidence.BaseData
         {
 		}
 
-        public virtual int ExecuteCommand(string storedProcedure, IDbParameterObjectList parameterObjectList)
+        public virtual int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
         {
             return 0;
         }
