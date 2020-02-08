@@ -19,7 +19,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         private readonly IDataRepository _repository;
 
-        protected IKernel Kernel => _ninject.Kernel;
+        //protected IKernel Kernel => _ninject.Kernel;
 
         public SqlClient(string connectionName) : base(string.Empty, connectionName)
         {
@@ -30,7 +30,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 _ninject.Bind<IDataRepository>().To<SqlClientRepository>();
             }
 
-            _repository = Kernel.Get<IDataRepository>(connectionNameParam);
+            _repository = _ninject.Kernel.Get<IDataRepository>(connectionNameParam);
         }
 
         private IDataReader DataReader => _repository.DataReader;

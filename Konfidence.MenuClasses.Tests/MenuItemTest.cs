@@ -24,7 +24,7 @@ namespace Konfidence.MenuClasses.Tests
         {
             var dataItem = new Bl.MenuDataItem(2);
 
-            Assert.IsNotNull(dataItem);
+            dataItem.Should().NotBeNull();
         }
 
         [TestMethod, TestCategory("MenuItem")]
@@ -33,8 +33,8 @@ namespace Konfidence.MenuClasses.Tests
             var dataItem1 = new Bl.MenuDataItem(1);
             var dataItem2 = new Bl.MenuDataItem(2);
 
-            Assert.IsNotNull(dataItem1);
-            Assert.IsNotNull(dataItem2);
+            dataItem1.Should().NotBeNull();
+            dataItem2.Should().NotBeNull();
         }
 
         [TestMethod, TestCategory("MenuItem")]
@@ -42,9 +42,9 @@ namespace Konfidence.MenuClasses.Tests
         {
             var list = Bl.MenuDataItemList.GetListByMenuId(1);
 
-            Assert.AreEqual(9, list.Count, "was expecting to get 9 menu items back");
+            list.Should().HaveCount(9, "list should contain 9 menu items");
 
-            Assert.AreEqual("Wijzigen van mijn persoonsgegevens", list[3].MenuText.MenuText, "menu text klopt niet");
+            list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
         }
 
         [TestMethod, TestCategory("MenuItem")]

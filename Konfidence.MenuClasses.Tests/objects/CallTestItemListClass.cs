@@ -1,11 +1,12 @@
-﻿using Konfidence.MenuClasses.Tests.interfaces;
+﻿using System.Collections.Generic;
+using Konfidence.MenuClasses.Tests.interfaces;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Konfidence.MenuClasses.Tests.objects
 {
     public class CallTestItemListClass
     {
-        protected ITestItemClassList TestItemList { get; } = new TestItemClassList();// as List<ITestItemClass>; }
+        protected List<ITestItemClass> TestItemList { get; } = new List<ITestItemClass>();
 
         public void MethodOne()
         {
@@ -17,7 +18,7 @@ namespace Konfidence.MenuClasses.Tests.objects
 
         public void MethodTwo()
         {
-            var testList = new TestItemClassList();
+            var testList = new List<ITestItemClass>();
 
             testList.AddItem();
         }
