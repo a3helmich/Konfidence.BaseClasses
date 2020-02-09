@@ -63,16 +63,13 @@ namespace Konfidence.BaseData
 	    {
             lock (BaseDataItemList<IBaseDataItem>.KernelLocker)
             {
-                Log.Information($"Ninject Binding: ClientBind start");
                 var databaseNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
                 if (!Kernel.GetBindings(typeof(TC)).Any())
                 {
-                    Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
+                    Log.Debug($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
                     Kernel.Bind<IBaseClient>().To<TC>();
                 }
-
-                Log.Information($"Ninject Binding: ClientBind end");
 
                 return Kernel.Get<TC>(databaseNameParam);
             }
