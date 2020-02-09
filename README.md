@@ -1,0 +1,2 @@
+# Konfidence-BaseClasses
+my baseclasses
