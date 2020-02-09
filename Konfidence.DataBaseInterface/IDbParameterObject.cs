@@ -4,7 +4,7 @@ namespace Konfidence.DataBaseInterface
 {
     public interface IDbParameterObject 
     {
-        string Field { get; set; }
+        string ParameterName { get; set; }
 
         DbType DbType { get; set; }
 

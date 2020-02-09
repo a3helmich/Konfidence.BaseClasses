@@ -1,20 +1,20 @@
 ﻿using System.Data;
 using Konfidence.DataBaseInterface;
 
-namespace Konfidence.BaseData.Objects
+namespace Konfidence.BaseDatabaseClasses.Objects
 {
-    public class DbParameterObject : IDbParameterObject
+    internal class DbParameterObject : IDbParameterObject
     {
         public DbParameterObject() { }
 
-        public DbParameterObject(string field, DbType dbType, object value)
+        public DbParameterObject(string parameterName, DbType dbType, object value)
         {
-            Field = field;
+            ParameterName = parameterName;
             DbType = dbType;
             Value = value;
         }
 
-        public string Field { get; set; }
+        public string ParameterName { get; set; }
 
         public DbType DbType { get; set; }
 

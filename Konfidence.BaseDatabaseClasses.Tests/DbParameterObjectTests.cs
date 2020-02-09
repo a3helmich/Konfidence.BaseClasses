@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using FluentAssertions;
-using Konfidence.BaseData.Objects;
+using Konfidence.BaseDatabaseClasses.Objects;
 using Konfidence.DataBaseInterface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,7 +20,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             var testValue = Guid.NewGuid();
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -40,7 +40,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             var testValue = Guid.Empty;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -60,7 +60,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             const int testValue = 1234;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -80,7 +80,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             const long testValue = 1234;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -100,7 +100,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             const short testValue = 1234;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -120,7 +120,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             var testValue = DateTime.Now;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -140,7 +140,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             var testValue = DateTime.MinValue;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -161,7 +161,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             var timeValue = DateTime.Today.AddHours(2).AddSeconds(22);
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -181,7 +181,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             var testValue = TimeSpan.MinValue;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 
@@ -202,7 +202,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
             const bool testValue = true;
 
             // act
-            dbParameterObjects.SetField("TestField", testValue);
+            dbParameterObjects.SetParameter("TestField", testValue);
 
             var field = dbParameterObjects.First();
 

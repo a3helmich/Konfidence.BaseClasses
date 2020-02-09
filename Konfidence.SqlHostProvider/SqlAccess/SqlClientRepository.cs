@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Common;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseData.Objects;
+using Konfidence.BaseDatabaseClasses.Objects;
 using Konfidence.DataBaseInterface;
 using Konfidence.RepositoryInterface;
 using Konfidence.RepositoryInterface.Objects;
@@ -45,7 +45,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             {
                 foreach (var parameterObject in parameterObjectList)
                 {
-                    database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+                    database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
                 }
 
                 return ExecuteNonQuery(dbCommand);
@@ -82,14 +82,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             {
                 var parameterObject = kvp.Value;
 
-                database.AddParameter(dbCommand, parameterObject.Field, parameterObject.DbType, ParameterDirection.InputOutput,
-                                                            parameterObject.Field, DataRowVersion.Proposed, parameterObject.Value);
+                database.AddParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, ParameterDirection.InputOutput,
+                                                            parameterObject.ParameterName, DataRowVersion.Proposed, parameterObject.Value);
             }
 
             // alle overige parameters toevoegen
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
-                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
         }
 
@@ -103,7 +103,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             foreach (var kvp in responseParameters.AutoUpdateFieldList)
             {
-                kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.Field);
+                kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
 
                 if (DBNull.Value.Equals(kvp.Value.Value))
                 {
@@ -143,7 +143,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
-                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
 
             executeParameters.ParameterObjectList.Clear();
@@ -223,7 +223,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             foreach (var parameterObject in executeParameters.ParameterObjectList)
             {
-                database.AddInParameter(dbCommand, parameterObject.Field, parameterObject.DbType, parameterObject.Value);
+                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
 
             executeParameters.ParameterObjectList.Clear();
