@@ -2,6 +2,7 @@
 using Konfidence.Base;
 using Ninject;
 using Ninject.Syntax;
+using Serilog;
 
 namespace Konfidence.BaseData
 {
@@ -22,6 +23,8 @@ namespace Konfidence.BaseData
         [NotNull]
         public IBindingToSyntax<T> Bind<T>()
         {
+            Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName}");
+
             return _kernel.Bind<T>();
         }
     }

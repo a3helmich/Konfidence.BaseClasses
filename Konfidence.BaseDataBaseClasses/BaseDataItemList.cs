@@ -7,6 +7,7 @@ using Konfidence.BaseDatabaseClasses.Objects;
 using Konfidence.DataBaseInterface;
 using Ninject;
 using Ninject.Parameters;
+using Serilog;
 
 namespace Konfidence.BaseData
 {
@@ -29,6 +30,8 @@ namespace Konfidence.BaseData
 
                     if (!_ninject.Kernel.GetBindings(typeof(T)).Any())
                     {
+                        Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName}");
+
                         _ninject.Kernel.Bind<T>().To<T>();
                     }
                 }
@@ -46,6 +49,8 @@ namespace Konfidence.BaseData
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
             {
+                Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName}");
+
                 Kernel.Bind<IBaseClient>().To<TC>();
             }
 
