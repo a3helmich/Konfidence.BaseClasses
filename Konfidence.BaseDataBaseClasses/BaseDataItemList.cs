@@ -28,9 +28,11 @@ namespace Konfidence.BaseData
                 {
                     _ninject = new NinjectDependencyResolver();
 
+                    Log.Information($"Ninject Binding: ClientBind start");
+
                     if (!_ninject.Kernel.GetBindings(typeof(T)).Any())
                     {
-                        Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName}");
+                        Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName} - 33 - C:\\Projects\\Konfidence\\BaseClasses\\Konfidence.BaseDataBaseClasses\\BaseDataItemList.cs");
 
                         _ninject.Kernel.Bind<T>().To<T>();
                     }
@@ -47,9 +49,11 @@ namespace Konfidence.BaseData
 
             var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
+            Log.Information($"Ninject Binding: ClientBind start");
+
             if (!Kernel.GetBindings(typeof(TC)).Any())
             {
-                Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName}");
+                Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName} - 45 - C:\\Projects\\Konfidence\\BaseClasses\\Konfidence.BaseDataBaseClasses\\BaseDataItemList.cs");
 
                 Kernel.Bind<IBaseClient>().To<TC>();
             }
