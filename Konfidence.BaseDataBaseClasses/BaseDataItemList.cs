@@ -20,25 +20,31 @@ namespace Konfidence.BaseData
 
         private NinjectDependencyResolver _ninject;
 
+        public static object KernelLocker = new object();
+
         private IKernel Kernel
         {
             get
             {
-                if (!_ninject.IsAssigned())
+                lock (KernelLocker)
                 {
-                    _ninject = new NinjectDependencyResolver();
-
-                    Log.Information($"Ninject Binding: ClientBind start");
-
-                    if (!_ninject.Kernel.GetBindings(typeof(T)).Any())
+                    if (!_ninject.IsAssigned())
                     {
-                        Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName} - 33 - C:\\Projects\\Konfidence\\BaseClasses\\Konfidence.BaseDataBaseClasses\\BaseDataItemList.cs");
+                        _ninject = new NinjectDependencyResolver();
 
-                        _ninject.Kernel.Bind<T>().To<T>();
+                        Log.Information($"Ninject Binding: ClientBind start");
+
+                        if (!_ninject.Kernel.GetBindings(typeof(T)).Any())
+                        {
+                            Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName} - 33 - C:\\Projects\\Konfidence\\BaseClasses\\Konfidence.BaseDataBaseClasses\\BaseDataItemList.cs");
+
+                            _ninject.Kernel.Bind<T>().To<T>();
+                        }
+
                     }
-                }
 
-                return _ninject.Kernel;
+                    return _ninject.Kernel;
+                }
             }
         }
 
@@ -46,19 +52,22 @@ namespace Konfidence.BaseData
         [UsedImplicitly]
         public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
         {
-
-            var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
-
-            Log.Information($"Ninject Binding: ClientBind start");
-
-            if (!Kernel.GetBindings(typeof(TC)).Any())
+            lock (BaseDataItemList<IBaseDataItem>.KernelLocker)
             {
-                Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName} - 45 - C:\\Projects\\Konfidence\\BaseClasses\\Konfidence.BaseDataBaseClasses\\BaseDataItemList.cs");
+                var connectionNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
-                Kernel.Bind<IBaseClient>().To<TC>();
+                Log.Information($"Ninject Binding: ClientBind start");
+
+                if (!Kernel.GetBindings(typeof(TC)).Any())
+                {
+                    Log.Information(
+                        $"Ninject Binding: ClientBind {typeof(TC).FullName} - 45 - C:\\Projects\\Konfidence\\BaseClasses\\Konfidence.BaseDataBaseClasses\\BaseDataItemList.cs");
+
+                    Kernel.Bind<IBaseClient>().To<TC>();
+                }
+
+                return Kernel.Get<TC>(connectionNameParam);
             }
-
-            return Kernel.Get<TC>(connectionNameParam);
         }
 
         protected abstract IBaseClient ClientBind();
