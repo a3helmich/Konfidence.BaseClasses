@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="2019.0.4" />
+    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="2019.0.5" />
     <PackageReference Include="Konfidence.RepositoryInterface" Version="2019.0.2" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18208.0" />
   </ItemGroup>
