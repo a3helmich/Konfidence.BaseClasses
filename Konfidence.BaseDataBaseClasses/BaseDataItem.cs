@@ -61,21 +61,24 @@ namespace Konfidence.BaseData
         [UsedImplicitly]
         public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
 	    {
-            Log.Information($"Ninject Binding: ClientBind start");
-	        var databaseNameParam = new ConstructorArgument("connectionName", ConnectionName);
+            lock (BaseDataItemList<IBaseDataItem>.KernelLocker)
+            {
+                Log.Information($"Ninject Binding: ClientBind start");
+                var databaseNameParam = new ConstructorArgument("connectionName", ConnectionName);
 
-            if (!Kernel.GetBindings(typeof(TC)).Any())
-	        {
-                Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
-	            Kernel.Bind<IBaseClient>().To<TC>();
-	        }
+                if (!Kernel.GetBindings(typeof(TC)).Any())
+                {
+                    Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
+                    Kernel.Bind<IBaseClient>().To<TC>();
+                }
 
-            Log.Information($"Ninject Binding: ClientBind end");
+                Log.Information($"Ninject Binding: ClientBind end");
 
-            return Kernel.Get<TC>(databaseNameParam);
-	    }
+                return Kernel.Get<TC>(databaseNameParam);
+            }
+        }
 
-	    protected abstract IBaseClient ClientBind();
+        protected abstract IBaseClient ClientBind();
 
 	    // TODO: internal
 	    public IBaseClient Client
