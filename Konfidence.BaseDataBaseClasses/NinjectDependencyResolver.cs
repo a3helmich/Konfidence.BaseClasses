@@ -23,7 +23,7 @@ namespace Konfidence.BaseData
         [NotNull]
         public IBindingToSyntax<T> Bind<T>()
         {
-            Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName}");
+            Log.Information($"Ninject Binding: ClientBind {typeof(T).FullName} - 26 - C:\\Projects\\Konfidence\\BaseClasses\\Konfidence.BaseDataBaseClasses\\NinjectDependencyResolver.cs");
 
             return _kernel.Bind<T>();
         }

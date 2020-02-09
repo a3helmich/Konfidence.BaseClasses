@@ -66,7 +66,7 @@ namespace Konfidence.BaseData
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
-                Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName}");
+                Log.Information($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
 	            Kernel.Bind<IBaseClient>().To<TC>();
 	        }
 
