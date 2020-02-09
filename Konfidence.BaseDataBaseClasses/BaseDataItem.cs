@@ -6,10 +6,11 @@ using System.Linq;
 using System.Xml;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseData.Objects;
+using Konfidence.BaseDatabaseClasses.Objects;
 using Konfidence.DataBaseInterface;
 using Ninject;
 using Ninject.Parameters;
+using Serilog;
 
 namespace Konfidence.BaseData
 {
@@ -64,6 +65,7 @@ namespace Konfidence.BaseData
 
             if (!Kernel.GetBindings(typeof(TC)).Any())
 	        {
+                Log.Debug($"Ninject Binding: ClientBind {typeof(TC).FullName}");
 	            Kernel.Bind<IBaseClient>().To<TC>();
 	        }
 
@@ -661,53 +663,53 @@ namespace Konfidence.BaseData
         #region SetField Methods
         protected void SetField(string fieldName, int value)
 		{
-		    DbParameterObjects.SetField(fieldName, value);
+		    DbParameterObjects.SetParameter(fieldName, value);
 		}
 
 	    protected void SetField(string fieldName, byte value)
 	    {
-	        DbParameterObjects.SetField(fieldName, value);
+	        DbParameterObjects.SetParameter(fieldName, value);
 	    }
 
         protected void SetField(string fieldName, short value)
 	    {
-	        DbParameterObjects.SetField(fieldName, value);
+	        DbParameterObjects.SetParameter(fieldName, value);
 	    }
 
 	    protected void SetField(string fieldName, long value)
 	    {
-	        DbParameterObjects.SetField(fieldName, value);
+	        DbParameterObjects.SetParameter(fieldName, value);
 	    }
 
 
         protected void SetField(string fieldName, Guid value)
         {
-            DbParameterObjects.SetField(fieldName, value);
+            DbParameterObjects.SetParameter(fieldName, value);
         }
 
         protected void SetField(string fieldName, string value)
 		{
-            DbParameterObjects.SetField(fieldName, value);
+            DbParameterObjects.SetParameter(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, bool value)
 		{
-            DbParameterObjects.SetField(fieldName, value);
+            DbParameterObjects.SetParameter(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, DateTime value)
 		{
-            DbParameterObjects.SetField(fieldName, value);
+            DbParameterObjects.SetParameter(fieldName, value);
 		}
 
         protected void SetField(string fieldName, TimeSpan value)
         {
-            DbParameterObjects.SetField(fieldName, value);
+            DbParameterObjects.SetParameter(fieldName, value);
         }
 
         protected void SetField(string fieldName, decimal value)
         {
-            DbParameterObjects.SetField(fieldName, value);
+            DbParameterObjects.SetParameter(fieldName, value);
         }
         #endregion
 

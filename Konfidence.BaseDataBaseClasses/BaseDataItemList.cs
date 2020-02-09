@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseData.Objects;
+using Konfidence.BaseDatabaseClasses.Objects;
 using Konfidence.DataBaseInterface;
 using Ninject;
 using Ninject.Parameters;
@@ -73,16 +73,12 @@ namespace Konfidence.BaseData
             //
         }
 
-		#region properties
-
 		protected string ConnectionName { get; set; } = string.Empty;
 
         protected string GetListStoredProcedure { get; private set; } = string.Empty;
 
         [UsedImplicitly]
         protected string ServiceName { get; set; } = string.Empty;
-
-        #endregion
 
 	    public BaseDataItemList()
 	    {
@@ -390,58 +386,9 @@ namespace Konfidence.BaseData
             return _dbParameterObjects;
         }
 
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, int value)
+        protected void SetParameter<TP>(string fieldName, TP value)
         {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, byte value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, short value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, long value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, Guid value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, string value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, bool value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, DateTime value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
-        }
-
-        [UsedImplicitly]
-        protected void SetParameter(string fieldName, TimeSpan value)
-        {
-            _dbParameterObjects.SetField(fieldName, value);
+            _dbParameterObjects.SetParameter(fieldName, value);
         }
 
 		/// <summary>

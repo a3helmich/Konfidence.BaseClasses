@@ -4,7 +4,7 @@ using System.Data;
 using JetBrains.Annotations;
 using Konfidence.DataBaseInterface;
 
-namespace Konfidence.BaseData.Objects
+namespace Konfidence.BaseDatabaseClasses.Objects
 {
     internal static class DbParameterObjectExtensions
     {
@@ -51,36 +51,36 @@ namespace Konfidence.BaseData.Objects
             //typeMap[typeof(System.Data.Linq.Binary)] = DbType.Binary;
         }
 
-        public static void SetField<T>([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, T value) 
+        public static void SetParameter<T>([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, T value) 
         {
-            dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(T)], value);
+            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(T)], value);
         }
 
-        public static void SetField([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, Guid value)
+        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, Guid value)
         {
             if (Guid.Empty.Equals(value))
             {
-                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(Guid)], null);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], null);
             }
             else
             {
-                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(Guid)], value);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], value);
             }
         }
 
-        public static void SetField([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, DateTime value)
+        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, DateTime value)
         {
             if (value > DateTime.MinValue)
             {
-                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(DateTime)], value);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], value);
             }
             else
             {
-                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(DateTime)], null);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], null);
             }
         }
 
-        public static void SetField([NotNull] this List<IDbParameterObject> dbParameterObjects, string fieldName, TimeSpan value)
+        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, TimeSpan value)
         {
             if (value > TimeSpan.MinValue)
             {
@@ -88,11 +88,11 @@ namespace Konfidence.BaseData.Objects
 
                 timeSpan = new DateTime(timeSpan.Year, timeSpan.Month, timeSpan.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
 
-                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(TimeSpan)], timeSpan);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], timeSpan);
             }
             else
             {
-                dbParameterObjects.AddInParameter(fieldName, _typeMap[typeof(TimeSpan)], null);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], null);
             }
         }
 
