@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.Security.Encryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
