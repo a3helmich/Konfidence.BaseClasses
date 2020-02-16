@@ -20,7 +20,7 @@ namespace Konfidence.BaseData
 
         private NinjectDependencyResolver _ninject;
 
-        public static object KernelLocker = new object();
+        [NotNull] internal static object KernelLocker = new object();
 
         private IKernel Kernel
         {
@@ -384,15 +384,15 @@ namespace Konfidence.BaseData
         }
         #endregion list editing
 
-        [NotNull]
-        private static List<IDbParameterObject> GetProperties([NotNull] IBaseDataItem baseDataItem)
-		{
-            var properties = new List<IDbParameterObject>();
+        //[NotNull]
+        //private static List<IDbParameterObject> GetProperties([NotNull] IBaseDataItem baseDataItem)
+        //{
+        //    var properties = new List<IDbParameterObject>();
 
-			baseDataItem.GetProperties(properties);
+        //    baseDataItem.GetProperties(properties);
 
-			return properties;
-		}
+        //    return properties;
+        //}
 
         public List<IDbParameterObject> GetParameterObjectList()
         {

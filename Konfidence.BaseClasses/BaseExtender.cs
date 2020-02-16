@@ -27,6 +27,7 @@ namespace Konfidence.Base
             return true;
         }
 
+        [UsedImplicitly]
         public static bool IsAssigned(this DateTime assignedTime)
         {
             if (assignedTime > DateTime.MinValue)
@@ -37,6 +38,7 @@ namespace Konfidence.Base
             return false;
         }
 
+        [UsedImplicitly]
         public static DateTime StartOfDayTime(this DateTime dateTime)
         {
             var afterMidnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
@@ -44,6 +46,7 @@ namespace Konfidence.Base
             return afterMidnight;
         }
 
+        [UsedImplicitly]
         public static DateTime EndOfDayTime(this DateTime dateTime)
         {
             var midnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Utc);
@@ -58,6 +61,7 @@ namespace Konfidence.Base
             return line == null;
         }
 
+        [UsedImplicitly]
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(this string assignedGuid)
         {
