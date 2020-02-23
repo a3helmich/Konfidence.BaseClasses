@@ -82,14 +82,16 @@ namespace Konfidence.BaseData
 	    {
 	        get
 	        {
-	            if (!_client.IsAssigned())
-	            {
-                    Debug.WriteLine("get _client");
+                if (_client.IsAssigned())
+                {
+                    return _client;
+                }
 
-	                _client = ClientBind();
-	            }
+                Debug.WriteLine($"get _client{GetType().FullName}");
 
-	            return _client;
+                _client = ClientBind();
+
+                return _client;
 	        }
 	        set => _client = value;
 	    }

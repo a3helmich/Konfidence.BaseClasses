@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using JetBrains.Annotations;
+using Serilog;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -84,6 +86,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private void DeleteSp(string storedProcedure)
         {
+            Debug.WriteLine($"deleteSp entry");
+
             var sb = new StringBuilder();
 
             sb.AppendLine("DROP PROCEDURE [dbo].[" + storedProcedure + "]");
@@ -92,6 +96,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             {
                 ExecuteTextCommand(sb.ToString());
             }
+
+            Debug.WriteLine($"deleteSp exit");
         }
     }
 }
