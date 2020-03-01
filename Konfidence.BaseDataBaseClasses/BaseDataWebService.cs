@@ -1,167 +1,169 @@
-//using System;
-//using System.Collections.Generic;
-//using JetBrains.Annotations;
-//using Konfidence.Base;
-//using Konfidence.BaseData.Objects;
-//using Konfidence.DataBaseInterface;
+using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+using Konfidence.Base;
+using Konfidence.BaseDatabaseClasses.Objects;
+using Konfidence.DataBaseInterface;
 
-//namespace Konfidence.BaseData
-//{
-//    //[WebService(Namespace = "http://konfidence.nl/DataItemService")]
-//    //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-//    public class BaseDataWebService //: WebService
-//	{
-//		//[WebMethod]
-//        [UsedImplicitly]
-//        public int Save(List<IDbParameterObject> properties, int id)
-//		{
-//			var baseDataItem = GetNewDataItem();
+namespace Konfidence.BaseData
+{
+	//[WebService(Namespace = "http://konfidence.nl/DataItemService")]
+	//[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+	public class BaseDataWebService //: WebService
+	{
+		//[WebMethod]
+		[UsedImplicitly]
+		public int Save(List<IDbParameterObject> properties, int id)
+		{
+			var baseDataItem = GetNewDataItem();
 
-//			if (baseDataItem.IsAssigned())
-//			{
-//				SetKey(baseDataItem, id);
+			if (baseDataItem.IsAssigned())
+			{
+				SetKey(baseDataItem, id);
 
-//				SetProperties(baseDataItem, properties);
+				SetProperties(baseDataItem, properties);
 
-//				baseDataItem.Save();
+				baseDataItem.Save();
 
-//				return baseDataItem.GetId();
-//			}
+				return baseDataItem.GetId();
+			}
 
-//			return 0;
-//		}
+			return 0;
+		}
 
-//		//[WebMethod]
-//        [UsedImplicitly]
-//        [NotNull]
-//        public List<IDbParameterObject> GetItem(int id)
-//		{
-//			var baseDataItem = GetNewDataItem(id);
+		//[WebMethod]
+		[UsedImplicitly]
+		[NotNull]
+		public List<IDbParameterObject> GetItem(int id)
+		{
+			var baseDataItem = GetNewDataItem(id);
 
-//            var properties = GetProperties(baseDataItem);
+			var properties = GetProperties(baseDataItem);
 
-//			return properties;
-//		}
+			return properties;
+		}
 
-//        //[WebMethod]
-//        [NotNull]
-//        [UsedImplicitly]
-//        public List<IDbParameterObject> GetItemByParam(List<IDbParameterObject> parameterList)
-//        {
-//            var baseDataItem = GetNewDataItem(parameterList);
+		//[WebMethod]
+		[NotNull]
+		[UsedImplicitly]
+		public List<IDbParameterObject> GetItemByParam(List<IDbParameterObject> parameterList)
+		{
+			var baseDataItem = GetNewDataItem(parameterList);
 
-//            var properties = GetProperties(baseDataItem);
+			var properties = GetProperties(baseDataItem);
 
-//            var idProperty = new DbParameterObject {ParameterName = "AutoIdField", Value = baseDataItem.GetId()};
+			//var idProperty = new DbParameterObject { ParameterName = "AutoIdField", Value = baseDataItem.GetId() };
 
-//            properties.Insert(0, idProperty);
+			//properties.Insert(0, idProperty);
 
-//            return properties;
-//        }
+			properties.SetParameter("AutoIdField", baseDataItem.GetId());
 
-//		//[WebMethod]
-//        [UsedImplicitly]
-//		public void Delete(int id)
-//		{
-//			var baseDataItem = GetNewDataItem();
+			return properties;
+		}
 
-//            if (baseDataItem.IsAssigned())
-//			{
-//				SetKey(baseDataItem, id);
-//			}
+		//[WebMethod]
+		[UsedImplicitly]
+		public void Delete(int id)
+		{
+			var baseDataItem = GetNewDataItem();
 
-//			baseDataItem.Delete();
-//		}
+			if (baseDataItem.IsAssigned())
+			{
+				SetKey(baseDataItem, id);
+			}
 
-//		//[WebMethod]
-//        [CanBeNull]
-//        [UsedImplicitly]
-//        public List<List<IDbParameterObject>> BuildItemList()
-//		{
-//		    return null;
-//		}
+			baseDataItem.Delete();
+		}
 
-//        [UsedImplicitly]
-//	    private static List<IDbParameterObject> GetNewDataItemList()
-//	    {
-//	        throw new NotImplementedException();
-//	    }
+		//[WebMethod]
+		[CanBeNull]
+		[UsedImplicitly]
+		public List<List<IDbParameterObject>> BuildItemList()
+		{
+			return null;
+		}
 
-//		//[WebMethod]
-//		//public int ExecuteCommand(string storedProcedure, params object[] parameters)
-//		//{
-//		//    BaseDataItem baseDataItem = GetNewDataItem();
+		[UsedImplicitly]
+		private static List<IDbParameterObject> GetNewDataItemList()
+		{
+			throw new NotImplementedException();
+		}
 
-//		//    return baseDataItem.ExecuteCommand(storedProcedure, parameters);
-//		//}
+		//[WebMethod]
+		//public int ExecuteCommand(string storedProcedure, params object[] parameters)
+		//{
+		//    BaseDataItem baseDataItem = GetNewDataItem();
 
-//		//[WebMethod]
-//		[UsedImplicitly]
-//		public int ExecuteTextCommand(string textCommand)
-//		{
-//			var baseDataItem = GetNewDataItem();
+		//    return baseDataItem.ExecuteCommand(storedProcedure, parameters);
+		//}
 
-//			return baseDataItem.ExecuteTextCommand(textCommand);
-//		}
+		//[WebMethod]
+		[UsedImplicitly]
+		public int ExecuteTextCommand(string textCommand)
+		{
+			var baseDataItem = GetNewDataItem();
 
-//		//[WebMethod]
-//        [UsedImplicitly]
-//		public bool TableExists(string tableName)
-//		{
-//			var baseDataItem = GetNewDataItem();
+			return baseDataItem.ExecuteTextCommand(textCommand);
+		}
 
-//			return baseDataItem.TableExists(tableName);
-//		}
+		//[WebMethod]
+		[UsedImplicitly]
+		public bool TableExists(string tableName)
+		{
+			var baseDataItem = GetNewDataItem();
 
-//		//[WebMethod]
-//        [UsedImplicitly]
-//		public bool ViewExists(string viewName)
-//		{
-//			var baseDataItem = GetNewDataItem();
+			return baseDataItem.TableExists(tableName);
+		}
 
-//			return baseDataItem.ViewExists(viewName);
-//		}
+		//[WebMethod]
+		[UsedImplicitly]
+		public bool ViewExists(string viewName)
+		{
+			var baseDataItem = GetNewDataItem();
 
-//		protected static void SetKey([NotNull] BaseDataItem baseDataItem, int id)
-//		{
-//			baseDataItem.SetId(id);
-//		}
+			return baseDataItem.ViewExists(viewName);
+		}
 
-//        protected static void SetProperties([NotNull] BaseDataItem baseDataItem, [NotNull] List<IDbParameterObject> properties)
-//		{
-//			var propertyDictionary = new Dictionary<string, object>();
+		protected static void SetKey([NotNull] BaseDataItem baseDataItem, int id)
+		{
+			baseDataItem.SetId(id);
+		}
 
-//			foreach (var parameterObject in properties)
-//			{
-//				propertyDictionary.Add(parameterObject.ParameterName, parameterObject.Value);
-//			}
+		protected static void SetProperties([NotNull] BaseDataItem baseDataItem, [NotNull] List<IDbParameterObject> properties)
+		{
+			var propertyDictionary = new Dictionary<string, object>();
 
-//			baseDataItem.SetProperties(propertyDictionary);
-//		}
+			foreach (var parameterObject in properties)
+			{
+				propertyDictionary.Add(parameterObject.ParameterName, parameterObject.Value);
+			}
 
-//        [NotNull]
-//        internal static List<IDbParameterObject> GetProperties([NotNull] BaseDataItem baseDataItem)
-//		{
-//            var properties = new List<IDbParameterObject>();
+			baseDataItem.SetProperties(propertyDictionary);
+		}
 
-//			baseDataItem.GetProperties(properties);
+		[NotNull]
+		internal static List<IDbParameterObject> GetProperties([NotNull] BaseDataItem baseDataItem)
+		{
+			var properties = new List<IDbParameterObject>();
 
-//			return properties;
-//		}
+			baseDataItem.GetProperties(properties);
 
-//		protected virtual BaseDataItem GetNewDataItem()
-//		{
-//			throw new NotImplementedException(); // NOP
-//		}
+			return properties;
+		}
 
-//		protected virtual BaseDataItem GetNewDataItem(int id)
-//		{
-//			throw new NotImplementedException(); // NOP
-//		}
+		protected virtual BaseDataItem GetNewDataItem()
+		{
+			throw new NotImplementedException(); // NOP
+		}
 
-//        protected virtual BaseDataItem GetNewDataItem(List<IDbParameterObject> parameterList)
-//        {
-//            throw new NotImplementedException(); // NOP
-//        }
-//	}
-//}
+		protected virtual BaseDataItem GetNewDataItem(int id)
+		{
+			throw new NotImplementedException(); // NOP
+		}
+
+		protected virtual BaseDataItem GetNewDataItem(List<IDbParameterObject> parameterList)
+		{
+			throw new NotImplementedException(); // NOP
+		}
+	}
+}
