@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18208.0" />
     <PackageReference Include="Serilog" Version="2.9.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,11 +20,9 @@
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\DataBaseStructure.cs" Link="SqlDbSchema\DataBaseStructure.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IColumnDataItem.cs" Link="SqlDbSchema\IColumnDataItem.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IColumnDataItemList.cs" Link="SqlDbSchema\IColumnDataItemList.cs" />
-    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IndexColumnsDataItem.cs" Link="SqlDbSchema\IndexColumnsDataItem.cs" />
-    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IndexColumnsDataItemList.cs" Link="SqlDbSchema\IndexColumnsDataItemList.cs" />
+    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\IndexColumnsDataItemProperties.cs" Link="SqlDbSchema\IndexColumnsDataItemProperties.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\ITableDataItem.cs" Link="SqlDbSchema\ITableDataItem.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\PrimaryKeyDataItem.cs" Link="SqlDbSchema\PrimaryKeyDataItem.cs" />
-    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SchemaBaseDataItem.cs" Link="SqlDbSchema\SchemaBaseDataItem.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SpName.cs" Link="SqlDbSchema\SpName.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SqlConstant.cs" Link="SqlDbSchema\SqlConstant.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\TableDataItem.cs" Link="SqlDbSchema\TableDataItem.cs" />

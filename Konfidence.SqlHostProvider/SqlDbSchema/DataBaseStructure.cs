@@ -1,13 +1,23 @@
-﻿using System.Diagnostics;
+﻿using System.Data;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
+using Konfidence.Base;
+using Konfidence.BaseData;
+using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
+using Ninject;
+using Ninject.Parameters;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     [UsedImplicitly]
-    public class DatabaseStructure : SchemaBaseDataItem
+    public class DatabaseStructure : BaseDataItem
     {
         public TableDataItemList TableList { get; private set; }
+
+        [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
         public DatabaseStructure(string connectionName)
         {
@@ -15,7 +25,10 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             ConnectionName = connectionName;
         }
 
-        [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
+        protected override IBaseClient ClientBind()
+        {
+            return base.ClientBind<SqlClient>();
+        }
 
         [UsedImplicitly]
         public void BuildStructure()
@@ -93,7 +106,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             sb.AppendLine("DROP PROCEDURE [dbo].[" + storedProcedure + "]");
 
-            if (StoredProcedureExists(storedProcedure))
+            if (Client.StoredProcedureExists(storedProcedure))
             {
                 ExecuteTextCommand(sb.ToString());
             }

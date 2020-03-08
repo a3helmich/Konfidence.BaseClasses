@@ -1,8 +1,11 @@
 ﻿using JetBrains.Annotations;
+using Konfidence.BaseData;
+using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public class PrimaryKeyDataItem : SchemaBaseDataItem
+    public class PrimaryKeyDataItem : BaseDataItem
     {
         // field definitions
 
@@ -34,6 +37,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             SetParameter(SqlConstant.TableName, tableName);
 
             GetItem(SpName.PrimarykeyGet);
+        }
+
+        protected override IBaseClient ClientBind()
+        {
+            return base.ClientBind<SqlClient>();
         }
 
         // TODO: internal
