@@ -6,7 +6,6 @@ namespace Konfidence.DataBaseInterface
     {
         void SetParameters(string storedProcedure);
 
-        //void AddItem(BaseClient client);
         T GetDataItem();
 
         List<IDbParameterObject> GetParameterObjectList();

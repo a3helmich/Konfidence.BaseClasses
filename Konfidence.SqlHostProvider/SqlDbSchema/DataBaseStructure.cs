@@ -1,24 +1,17 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using JetBrains.Annotations;
-using Serilog;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     [UsedImplicitly]
     public class DatabaseStructure : SchemaBaseDataItem
     {
-        #region readonly properties
         public TableDataItemList TableList { get; private set; }
-
-        #endregion readonly properties
-
-        //public DatabaseStructure()
-        //{
-        //}
 
         public DatabaseStructure(string connectionName)
         {
+            Debug.WriteLine($@"DatabaseStructure constructor{connectionName}");
             ConnectionName = connectionName;
         }
 
@@ -27,17 +20,25 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         [UsedImplicitly]
         public void BuildStructure()
         {
+            Debug.WriteLine("DatabaseStructure enter BuildStructure()");
+
+            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
+
+            Debug.WriteLine("DatabaseStructure between DeleteStoredProcedures() - CreateStoredProcedures()");
+
             CreateStoredProcedures();
+
+            Debug.WriteLine("DatabaseStructure between CreateStoredProcedures() -  DeleteStoredProcedures()");
 
             TableList = new TableDataItemList(ConnectionName);
 
             DeleteStoredProcedures();
+
+            Debug.WriteLine("DatabaseStructure exit BuildStructure()");
         }
 
         private void CreateStoredProcedures()
         {
-            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
-
             CreateSPPrimaryKey_Get(SpName.PrimarykeyGet);
             CreateSPColumns_GetList(SpName.ColumnsGetlist);
         }
