@@ -98,31 +98,31 @@ namespace Konfidence.BaseData
 		//}
 
 		//[WebMethod]
-		[UsedImplicitly]
-		public int ExecuteTextCommand(string textCommand)
-		{
-			var baseDataItem = GetNewDataItem();
+		//[UsedImplicitly]
+		//public int ExecuteTextCommand(string textCommand)
+		//{
+		//	var baseDataItem = GetNewDataItem();
 
-			return baseDataItem.ExecuteTextCommand(textCommand);
-		}
-
-		//[WebMethod]
-		[UsedImplicitly]
-		public bool TableExists(string tableName)
-		{
-			var baseDataItem = GetNewDataItem();
-
-			return baseDataItem.TableExists(tableName);
-		}
+		//	return baseDataItem.ExecuteTextCommand(textCommand);
+		//}
 
 		//[WebMethod]
-		[UsedImplicitly]
-		public bool ViewExists(string viewName)
-		{
-			var baseDataItem = GetNewDataItem();
+		//[UsedImplicitly]
+		//public bool TableExists(string tableName)
+		//{
+		//	var baseDataItem = GetNewDataItem();
 
-			return baseDataItem.ViewExists(viewName);
-		}
+		//	return baseDataItem.TableExists(tableName);
+		//}
+
+		//[WebMethod]
+		//[UsedImplicitly]
+		//public bool ViewExists(string viewName)
+		//{
+		//	var baseDataItem = GetNewDataItem();
+
+		//	return baseDataItem.ViewExists(viewName);
+		//}
 
 		protected static void SetKey([NotNull] BaseDataItem baseDataItem, int id)
 		{

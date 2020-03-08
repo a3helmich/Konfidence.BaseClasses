@@ -76,7 +76,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             sb.AppendLine("    AND table_name = @tableName");
             sb.AppendLine("END");
 
-            ExecuteTextCommand(sb.ToString());
+            Client.ExecuteTextCommand(sb.ToString());
         }
 
         private void CreateSPColumns_GetList(string storedProcedure)
@@ -95,7 +95,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             sb.AppendLine("    AND st.status = 0");
             sb.AppendLine("END");
 
-            ExecuteTextCommand(sb.ToString());
+            Client.ExecuteTextCommand(sb.ToString());
         }
 
         private void DeleteSp(string storedProcedure)
@@ -108,7 +108,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             if (Client.StoredProcedureExists(storedProcedure))
             {
-                ExecuteTextCommand(sb.ToString());
+                Client.ExecuteTextCommand(sb.ToString());
             }
 
             Debug.WriteLine($"deleteSp exit");

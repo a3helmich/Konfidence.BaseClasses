@@ -886,26 +886,26 @@ namespace Konfidence.BaseData
             AfterDelete();
         }
 
-	    [UsedImplicitly]
-        protected internal int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
-        {
-            return Client.ExecuteCommand(storedProcedure, parameterObjectList);
-        }
+	 //   [UsedImplicitly]
+  //      protected internal int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
+  //      {
+  //          return Client.ExecuteCommand(storedProcedure, parameterObjectList);
+  //      }
 
-		protected internal int ExecuteTextCommand(string textCommand)
-		{
-            return Client.ExecuteTextCommand(textCommand);
-		} 
+		//protected internal int ExecuteTextCommand(string textCommand)
+		//{
+  //          return Client.ExecuteTextCommand(textCommand);
+		//} 
 
-		protected internal bool TableExists(string tableName)
-		{
-            return Client.TableExists(tableName);
-		}
+		//protected internal bool TableExists(string tableName)
+		//{
+  //          return Client.TableExists(tableName);
+		//}
 
-		protected internal bool ViewExists(string viewName)
-		{
-            return Client.ViewExists(viewName);
-		}
+		//protected internal bool ViewExists(string viewName)
+		//{
+  //          return Client.ViewExists(viewName);
+		//}
 
         //[UsedImplicitly]
         //protected internal bool StoredProcedureExists(string storedProcedureName)
