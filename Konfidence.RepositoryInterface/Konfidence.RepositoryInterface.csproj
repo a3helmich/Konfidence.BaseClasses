@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Konfidence.RepositoryInterface</RootNamespace>
     <AssemblyName>Konfidence.RepositoryInterface</AssemblyName>
-    <Version>2020.0.1</Version>
+    <Version>2020.0.2</Version>
     <PackageId>Konfidence.RepositoryInterface</PackageId>
     <Company>Konfidence in it</Company>
   </PropertyGroup>
