@@ -13,8 +13,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string Catalog { get; } = string.Empty;
 
-        //public string Schema { get; } = string.Empty;
-
         public string Name { get; } = string.Empty;
 
         [UsedImplicitly] [NotNull] public string TableType => SqlConstant.TableType;
@@ -27,10 +25,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         public string PrimaryKeyDataType => _indexColumnsDataItemProperties.PrimaryKeyDataItem.DataType;
 
         public bool HasGuidId { get; }
-
-        //public TableDataItem()
-        //{
-        //}
         
         protected override IBaseClient ClientBind()
         {

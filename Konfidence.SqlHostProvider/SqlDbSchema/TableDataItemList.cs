@@ -14,7 +14,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             ConnectionName = connectionName;
 
-            var dataTableList = GetTables();
+            var dataTableList = Client.GetTables();
 
             BuildItemList(dataTableList);
         }
@@ -23,31 +23,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();
-        }
-
-        private class InternalTableDataItem : BaseDataItem
-        {
-            public InternalTableDataItem(string connectionName)
-            {
-                ConnectionName = connectionName;
-            }
-            
-            protected override IBaseClient ClientBind()
-            {
-                return base.ClientBind<SqlClient>();
-            }
-
-            internal DataTable GetTables()
-            {
-                return Client.GetSchemaObject("Tables");
-            }
-        }
-
-        private DataTable GetTables()
-        {
-            var shemaBaseDataItem = new InternalTableDataItem(ConnectionName);
-
-            return shemaBaseDataItem.GetTables();
         }
 
         private void BuildItemList([NotNull] DataTable dataTableList)
