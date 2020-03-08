@@ -2,7 +2,6 @@
 using Konfidence.Base;
 using Ninject;
 using Ninject.Syntax;
-using Serilog;
 
 namespace Konfidence.BaseData
 {

@@ -13,16 +13,15 @@ using Ninject.Parameters;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    public class SqlClient : BaseClient
+    public class SqlClient : IBaseClient
     {
         private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
 
         private readonly IDataRepository _repository;
 
-        //protected IKernel Kernel => _ninject.Kernel;
-
-        public SqlClient(string connectionName) : base(string.Empty, connectionName)
+        public SqlClient(string connectionName) 
         {
+            
             var connectionNameParam = new ConstructorArgument("connectionName", connectionName);
 
             if (!_ninject.Kernel.GetBindings(typeof(IDataRepository)).Any())
@@ -36,70 +35,70 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         private IDataReader DataReader => _repository.DataReader;
 
         #region GetField Methods
-        public override byte GetFieldInt8([NotNull] string fieldName)
+        public byte GetFieldInt8([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? (byte) 0 : DataReader.GetByte(fieldOrdinal);
         }
 
-        public override short GetFieldInt16([NotNull] string fieldName)
+        public short GetFieldInt16([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? (short)0 : DataReader.GetInt16(fieldOrdinal);
         }
 
-        public override int GetFieldInt32([NotNull] string fieldName)
+        public int GetFieldInt32([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt32(fieldOrdinal);
         }
 
-        public override long GetFieldInt64([NotNull] string fieldName)
+        public long GetFieldInt64([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt64(fieldOrdinal);
         }
 
-        public override Guid GetFieldGuid([NotNull] string fieldName)
+        public Guid GetFieldGuid([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : DataReader.GetGuid(fieldOrdinal);
         }
 
-        public override string GetFieldString([NotNull] string fieldName)
+        public string GetFieldString([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? string.Empty : DataReader.GetString(fieldOrdinal);
         }
 
-        public override bool GetFieldBool([NotNull] string fieldName)
+        public bool GetFieldBool([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return !DataReader.IsDBNull(fieldOrdinal) && DataReader.GetBoolean(fieldOrdinal);
         }
 
-        public override DateTime GetFieldDateTime([NotNull] string fieldName)
+        public DateTime GetFieldDateTime([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : DataReader.GetDateTime(fieldOrdinal);
         }
 
-        public override TimeSpan GetFieldTimeSpan([NotNull] string fieldName)
+        public TimeSpan GetFieldTimeSpan([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
             return DataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan) DataReader.GetValue(fieldOrdinal);
         }
 
-        public override Decimal GetFieldDecimal([NotNull] string fieldName)
+        public Decimal GetFieldDecimal([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -119,7 +118,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
         #endregion
 
-        public override void Save([NotNull] IBaseDataItem dataItem)
+        public void Save([NotNull] IBaseDataItem dataItem)
         {
             if (dataItem.AutoIdField.Equals(string.Empty))
             {
@@ -146,7 +145,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public override void GetItem(IBaseDataItem dataItem, [NotNull] string getStoredProcedure)
+        public void GetItem(IBaseDataItem dataItem, [NotNull] string getStoredProcedure)
         {
             if (getStoredProcedure.Equals(string.Empty))
             {
@@ -164,7 +163,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 });
         }
 
-        public override void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure)
+        public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
         {
             if (getListStoredProcedure.Equals(string.Empty))
             {
@@ -179,8 +178,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
 
-        public override void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
-            IBaseDataItemList<T> childDataItemList, [NotNull] string getRelatedStoredProcedure)
+        public void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
+            IBaseDataItemList<T> childDataItemList, [NotNull] string getRelatedStoredProcedure) where T : IBaseDataItem
         {
             if (getRelatedStoredProcedure.Equals(string.Empty))
             {
@@ -209,7 +208,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return true;
         }
 
-        public override void Delete([NotNull] string deleteStoredProcedure, string autoIdField, int id)
+        public void Delete([NotNull] string deleteStoredProcedure, string autoIdField, int id)
         {
             if (deleteStoredProcedure.Equals(string.Empty))
             {
@@ -222,34 +221,34 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public override int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
+        public int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
         {
             return _repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
         }
 
-        public override int ExecuteTextCommand(string textCommand)
+        public int ExecuteTextCommand(string textCommand)
         {
             return _repository.ExecuteNonQuery(textCommand);
         }
 
-        public override bool TableExists(string tableName)
+        public bool TableExists(string tableName)
         {
             return _repository.ObjectExists(tableName, "Tables");
         }
 
-        public override bool ViewExists(string viewName)
+        public bool ViewExists(string viewName)
         {
             return _repository.ObjectExists(viewName, "Views");
         }
 
-        public override bool StoredProcedureExists(string storedProcedureName)
+        public bool StoredProcedureExists(string storedProcedureName)
         {
             return _repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
         // TODO: internal
         [NotNull]
-        public override DataTable GetSchemaObject(string collection)
+        public DataTable GetSchemaObject(string collection)
         {
             DataTable dataTable;
 
@@ -266,6 +265,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
 
             return dataTable;
+        }
+
+        [NotNull]
+        public DataTable GetIndexedColumns()
+        {
+            return GetSchemaObject("IndexColumns");
         }
     }
 }

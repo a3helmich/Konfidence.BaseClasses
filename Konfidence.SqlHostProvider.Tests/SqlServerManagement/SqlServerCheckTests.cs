@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.Exceptions;
 using Konfidence.SqlHostProvider.SqlServerManagement;

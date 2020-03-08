@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Common;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseDatabaseClasses.Objects;
 using Konfidence.DataBaseInterface;
 using Konfidence.RepositoryInterface;
 using Konfidence.RepositoryInterface.Objects;

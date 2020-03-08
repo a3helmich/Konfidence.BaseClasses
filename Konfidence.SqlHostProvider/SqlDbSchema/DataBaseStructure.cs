@@ -1,41 +1,57 @@
-﻿using System.Text;
+﻿using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using JetBrains.Annotations;
+using Konfidence.Base;
+using Konfidence.BaseData;
+using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
+using Ninject;
+using Ninject.Parameters;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     [UsedImplicitly]
-    public class DatabaseStructure : SchemaBaseDataItem
+    public class DatabaseStructure : BaseDataItem
     {
-        #region readonly properties
         public TableDataItemList TableList { get; private set; }
 
-        #endregion readonly properties
-
-        //public DatabaseStructure()
-        //{
-        //}
+        [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
         public DatabaseStructure(string connectionName)
         {
+            Debug.WriteLine($@"DatabaseStructure constructor{connectionName}");
             ConnectionName = connectionName;
         }
 
-        [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
+        protected override IBaseClient ClientBind()
+        {
+            return base.ClientBind<SqlClient>();
+        }
 
         [UsedImplicitly]
         public void BuildStructure()
         {
+            Debug.WriteLine("DatabaseStructure enter BuildStructure()");
+
+            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
+
+            Debug.WriteLine("DatabaseStructure between DeleteStoredProcedures() - CreateStoredProcedures()");
+
             CreateStoredProcedures();
+
+            Debug.WriteLine("DatabaseStructure between CreateStoredProcedures() -  DeleteStoredProcedures()");
 
             TableList = new TableDataItemList(ConnectionName);
 
             DeleteStoredProcedures();
+
+            Debug.WriteLine("DatabaseStructure exit BuildStructure()");
         }
 
         private void CreateStoredProcedures()
         {
-            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
-
             CreateSPPrimaryKey_Get(SpName.PrimarykeyGet);
             CreateSPColumns_GetList(SpName.ColumnsGetlist);
         }
@@ -84,14 +100,18 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private void DeleteSp(string storedProcedure)
         {
+            Debug.WriteLine($"deleteSp entry");
+
             var sb = new StringBuilder();
 
             sb.AppendLine("DROP PROCEDURE [dbo].[" + storedProcedure + "]");
 
-            if (StoredProcedureExists(storedProcedure))
+            if (Client.StoredProcedureExists(storedProcedure))
             {
                 ExecuteTextCommand(sb.ToString());
             }
+
+            Debug.WriteLine($"deleteSp exit");
         }
     }
 }

@@ -7,7 +7,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <Compile Include="..\Konfidence.BaseDataBaseClasses\BaseClient.cs" Link="BaseClient.cs" />
     <Compile Include="..\Konfidence.BaseDataBaseClasses\BaseDataItem.cs" Link="BaseDataItem.cs" />
     <Compile Include="..\Konfidence.BaseDataBaseClasses\BaseDataItemList.cs" Link="BaseDataItemList.cs" />
     <Compile Include="..\Konfidence.BaseDataBaseClasses\BaseDataWebService.cs" Link="BaseDataWebService.cs" />

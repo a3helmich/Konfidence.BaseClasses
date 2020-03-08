@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

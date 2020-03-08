@@ -67,7 +67,7 @@ namespace Konfidence.BaseData
 
                 if (!Kernel.GetBindings(typeof(TC)).Any())
                 {
-                    Log.Debug($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
+                    //Log.Debug($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
                     Kernel.Bind<IBaseClient>().To<TC>();
                 }
 
@@ -82,14 +82,16 @@ namespace Konfidence.BaseData
 	    {
 	        get
 	        {
-	            if (!_client.IsAssigned())
-	            {
-                    Debug.WriteLine("get _client");
+                if (_client.IsAssigned())
+                {
+                    return _client;
+                }
 
-	                _client = ClientBind();
-	            }
+                Debug.WriteLine($"get _client{GetType().FullName}");
 
-	            return _client;
+                _client = ClientBind();
+
+                return _client;
 	        }
 	        set => _client = value;
 	    }
@@ -905,11 +907,11 @@ namespace Konfidence.BaseData
             return Client.ViewExists(viewName);
 		}
 
-        [UsedImplicitly]
-        protected internal bool StoredProcedureExists(string storedProcedureName)
-        {
-            return Client.StoredProcedureExists(storedProcedureName);
-        }
+        //[UsedImplicitly]
+        //protected internal bool StoredProcedureExists(string storedProcedureName)
+        //{
+        //    return Client.StoredProcedureExists(storedProcedureName);
+        //}
 
         [NotNull]
         public List<IDbParameterObject> SetItemData()

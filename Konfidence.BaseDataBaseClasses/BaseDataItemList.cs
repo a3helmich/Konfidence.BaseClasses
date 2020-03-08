@@ -20,7 +20,7 @@ namespace Konfidence.BaseData
 
         private NinjectDependencyResolver _ninject;
 
-        [NotNull] internal static object KernelLocker = new object();
+        [NotNull] public static object KernelLocker = new object();
 
         private IKernel Kernel
         {

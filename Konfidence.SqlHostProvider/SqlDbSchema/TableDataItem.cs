@@ -1,12 +1,15 @@
 ﻿using System;
 using JetBrains.Annotations;
+using Konfidence.BaseData;
+using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public class TableDataItem : SchemaBaseDataItem, ITableDataItem
+    public class TableDataItem : BaseDataItem, ITableDataItem
     {
         private readonly ColumnDataItemList _columnDataItemList;
-        private readonly IndexColumnsDataItemList _indexColumnsDataItemList;
+        private readonly IndexColumnsDataItemProperties _indexColumnsDataItemProperties;
 
         public string Catalog { get; } = string.Empty;
 
@@ -18,16 +21,21 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public IColumnDataItemList ColumnDataItemList => _columnDataItemList;
 
-        public string PrimaryKey => _indexColumnsDataItemList.PrimaryKeyDataItem.ColumnName;
+        public string PrimaryKey => _indexColumnsDataItemProperties.PrimaryKeyDataItem.ColumnName;
 
         [UsedImplicitly]
-        public string PrimaryKeyDataType => _indexColumnsDataItemList.PrimaryKeyDataItem.DataType;
+        public string PrimaryKeyDataType => _indexColumnsDataItemProperties.PrimaryKeyDataItem.DataType;
 
         public bool HasGuidId { get; }
 
         //public TableDataItem()
         //{
         //}
+        
+        protected override IBaseClient ClientBind()
+        {
+            return base.ClientBind<SqlClient>();
+        }
 
         public TableDataItem(string connectionName, string catalog, string name)
         {
@@ -36,14 +44,14 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             Name = name;
 
             _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name, ConnectionName);
-            _indexColumnsDataItemList = new IndexColumnsDataItemList(ConnectionName, name);
+            _indexColumnsDataItemProperties = new IndexColumnsDataItemProperties(ConnectionName, name);
 
             // find out which column is the primaryKey
             foreach (var columnDataItem in _columnDataItemList)
             {
                 if (columnDataItem.Name.Equals(PrimaryKey, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    _indexColumnsDataItemList.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
+                    _indexColumnsDataItemProperties.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
 
                     columnDataItem.SetPrimaryKey(true);
 

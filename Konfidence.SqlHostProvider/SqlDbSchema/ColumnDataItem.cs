@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Globalization;
 using JetBrains.Annotations;
+using Konfidence.BaseData;
+using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public class ColumnDataItem : SchemaBaseDataItem, IColumnDataItem
+    public class ColumnDataItem : BaseDataItem, IColumnDataItem
     {
         //private string _ColumnDefault = string.Empty;
 
@@ -117,6 +120,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsDefaulted = false;
             IsComputed = false;
             IsLockInfo = false;
+        }
+        
+        protected override IBaseClient ClientBind()
+        {
+            return base.ClientBind<SqlClient>();
         }
 
         // TODO : internal
