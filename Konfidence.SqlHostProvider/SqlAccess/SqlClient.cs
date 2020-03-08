@@ -272,5 +272,11 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             return GetSchemaObject("IndexColumns");
         }
+
+        [NotNull]
+        public DataTable GetTables()
+        {
+            return GetSchemaObject("Tables");
+        }
     }
 }

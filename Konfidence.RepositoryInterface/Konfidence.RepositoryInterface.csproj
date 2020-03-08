@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="EnterpriseLibrary.Common.NetCore" Version="6.0.1312" />
     <PackageReference Include="EnterpriseLibrary.Data.NetCore" Version="6.0.1313" />
-    <PackageReference Include="Konfidence.DataBaseInterface" Version="2020.0.1" />
+    <PackageReference Include="Konfidence.DataBaseInterface" Version="2020.0.2" />
   </ItemGroup>
 
 </Project>
