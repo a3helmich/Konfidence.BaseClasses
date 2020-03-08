@@ -26,6 +26,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public bool HasGuidId { get; }
         
+        [NotNull]
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();
@@ -124,10 +125,5 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             throw new NotImplementedException();
         }
-
-        //internal System.Data.DataTable GetTables()
-        //{
-        //    return GetSchemaObject("Tables");
-        //}
     }
 }

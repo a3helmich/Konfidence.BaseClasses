@@ -26,7 +26,6 @@
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SpName.cs" Link="SqlDbSchema\SpName.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\SqlConstant.cs" Link="SqlDbSchema\SqlConstant.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\TableDataItem.cs" Link="SqlDbSchema\TableDataItem.cs" />
-    <Compile Include="..\Konfidence.SqlHostProvider\SqlDbSchema\TableDataItemList.cs" Link="SqlDbSchema\TableDataItemList.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlServerManagement\SqlServerCheck.cs" Link="SqlServerManagement\SqlServerCheck.cs" />
     <Compile Include="..\Konfidence.SqlHostProvider\SqlServerManagement\SqlServerInstance.cs" Link="SqlServerManagement\SqlServerInstance.cs" />
   </ItemGroup>
