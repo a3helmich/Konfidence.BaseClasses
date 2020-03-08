@@ -25,7 +25,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return base.ClientBind<SqlClient>();
         }
 
-        internal class InternalTableDataItem : SchemaBaseDataItem
+        private class InternalTableDataItem : SchemaBaseDataItem
         {
             public InternalTableDataItem(string connectionName)
             {
