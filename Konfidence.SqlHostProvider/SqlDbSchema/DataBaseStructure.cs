@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -7,15 +9,13 @@ using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
-using Ninject;
-using Ninject.Parameters;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     [UsedImplicitly]
     public class DatabaseStructure : BaseDataItem
     {
-        public TableDataItemList TableList { get; private set; }
+        public List<TableDataItem> TableList { get; private set; }
 
         [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
@@ -25,6 +25,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             ConnectionName = connectionName;
         }
 
+        [NotNull]
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();
@@ -43,7 +44,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             Debug.WriteLine("DatabaseStructure between CreateStoredProcedures() -  DeleteStoredProcedures()");
 
-            TableList = new TableDataItemList(ConnectionName);
+            TableList = BuildTableItemList(Client.GetTables());
 
             DeleteStoredProcedures();
 
@@ -112,6 +113,37 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             }
 
             Debug.WriteLine($"deleteSp exit");
+        }
+
+        [NotNull]
+        private List<TableDataItem> BuildTableItemList([NotNull] DataTable dataTable)
+        {
+            var allTypes = dataTable.AsEnumerable().ToList();
+            var tables = allTypes.Where(dataRow => dataRow["TABLE_TYPE"].Equals("BASE TABLE")).ToList();
+            var views = allTypes.Where(dataRow => dataRow["TABLE_TYPE"].Equals("VIEW")).ToList();
+
+            if (allTypes.Count != tables.Count + views.Count)
+            {
+                throw new Exception("there are unknown tables types");
+            }
+
+            var tableList = new List<TableDataItem>();
+
+            foreach (var dataRow in tables)
+            {
+                var catalog = dataRow["TABLE_CATALOG"] as string;
+
+                var name = dataRow["TABLE_NAME"] as string;
+
+                if (name.IsAssigned() && (!name.Equals("dtproperties", StringComparison.OrdinalIgnoreCase) && !name.StartsWith("sys", StringComparison.OrdinalIgnoreCase)))
+                {
+                    var tableDataItem = new TableDataItem(ConnectionName, catalog, name);
+
+                    tableList.Add(tableDataItem);
+                }
+            }
+
+            return tableList;
         }
     }
 }
