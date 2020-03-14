@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Konfidence.BaseDatabaseClasses</RootNamespace>
-    <AssemblyName>Konfidence.BaseDatabaseClasses</AssemblyName>
   </PropertyGroup>
   
   <ItemGroup>
