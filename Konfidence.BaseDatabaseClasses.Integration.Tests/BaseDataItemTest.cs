@@ -10,7 +10,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
     public class BaseDataItemTest
     {
         [TestMethod]
-        public void TestIntDataItemShouldResturnShortAndLong()
+        public void TestIntDataItemShouldReturnShortAndLong()
         {
             // arrange
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
