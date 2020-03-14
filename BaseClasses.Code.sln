@@ -254,8 +254,8 @@ Global
 		{FEB1CF10-250C-43CB-B000-66CC3CF55B16} = {35800589-CB56-4489-A217-2108E97ECFAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+		SolutionGuid = {8E4220DF-EC8D-48F6-9BFD-A7279785472C}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = b618b640-2142-4e92-919b-4083a9829d77
