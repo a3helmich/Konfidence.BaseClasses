@@ -203,7 +203,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         //            columnDataItem = new ColumnDataItem(columnName);
 
-        //            int ordinalPosition = (int)dataRow["ORDINAL_POSITION"];
         //            string columnDefault = dataRow["COLUMN_DEFAULT"] as string;
         //            string dataType = dataRow["DATA_TYPE"] as string;
         //            string characterMaximumLength = string.Empty;
@@ -213,7 +212,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         //                characterMaximumLength = charLength.ToString();
         //            }
 
-        //            columnDataItem.OrdinalPosition = ordinalPosition;
         //            columnDataItem.ColumnDefault = columnDefault;
         //            columnDataItem.DataType = dataType;
         //            columnDataItem.CharacterMaximumLength = characterMaximumLength;
