@@ -10,3 +10,6 @@ packages/*
 **/App.debug.config
 **/*.sln.dotsettings
 **/*.lock.json
+**/Report
+**/coverage.json
+**/coverage.cobertura.xml
