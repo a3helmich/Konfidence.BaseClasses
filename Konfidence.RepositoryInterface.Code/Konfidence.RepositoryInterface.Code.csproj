@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Konfidence.RepositoryInterface</RootNamespace>
-    <AssemblyName>Konfidence.RepositoryInterface</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
