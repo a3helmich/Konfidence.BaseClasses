@@ -13,3 +13,4 @@ packages/*
 **/Report
 **/coverage.json
 **/coverage.cobertura.xml
+**/*.coverage
