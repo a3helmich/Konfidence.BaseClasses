@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Konfidence.Security</RootNamespace>
-    <AssemblyName>Konfidence.Security</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
