@@ -6,6 +6,7 @@
     <PackageId>Indy.Sockets</PackageId>
     <Company>Konfidence in it</Company>
     <AssemblyName>Indy.Sockets.Pack</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,5 +18,15 @@
       <HintPath>refBin\Indy.Sockets.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+
+  <Target Name="GetMyPackageFiles">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutputPath)indy.sockets.dll"></BuildOutputInPackage>
+    </ItemGroup>
+  </Target>
 
 </Project>
