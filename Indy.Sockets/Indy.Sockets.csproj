@@ -2,12 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Indy.Sockets</RootNamespace>
-    <AssemblyName>Indy.Sockets</AssemblyName>
     <Version>2020.0.1</Version>
     <PackageId>Indy.Sockets</PackageId>
     <Company>Konfidence in it</Company>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <AssemblyName>Indy.Sockets.Pack</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
