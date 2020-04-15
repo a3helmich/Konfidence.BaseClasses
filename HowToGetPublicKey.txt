@@ -3,3 +3,5 @@ get access to .net sdk and run from console
 sn -p konfidence.nl.snk konfidence.out sha256
 
 sn -tp konfidence.out
+
+git push github 
