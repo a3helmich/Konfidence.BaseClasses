@@ -2,11 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Konfidence.BaseThreadClasses</RootNamespace>
-    <AssemblyName>Konfidence.BaseThreadClasses</AssemblyName>
-    <Version>2019.0.1</Version>
-    <PackageId>Konfidence.BaseThreadClasses</PackageId>
-    <Company>Konfidence in it</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -18,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseClasses" Version="2019.0.1" />
+    <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
   </ItemGroup>
 
 </Project>

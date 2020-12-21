@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseUserControlHelpers.Code\Konfidence.BaseUserControlHelpers.Code.csproj" />
+    <ProjectReference Include="..\Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

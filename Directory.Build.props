@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Version>2020.1.0</Version>
+    <Authors>Konfidence in it</Authors>
+    <Copyright>Konfidence in it 2020.</Copyright>
+    <Company>Konfidence in it</Company>
+    <AssemblyCompany>Konfidence in it</AssemblyCompany>
+    <ComVisible>False</ComVisible>
+    <CLSCompliant>False</CLSCompliant>
+    <AssemblyCulture>en</AssemblyCulture>
+    <Product>Konfidence Base Classes</Product>
+  </PropertyGroup>
+</Project>

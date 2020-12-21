@@ -2,18 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Konfidence.SqlHostProvider</RootNamespace>
-    <AssemblyName>Konfidence.SqlHostProvider</AssemblyName>
-    <Version>2020.0.8</Version>
-    <PackageId>Konfidence.SqlHostProvider</PackageId>
-    <Company>Konfidence in it</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.BaseDatabaseClasses" Version="2020.0.6" />
-    <PackageReference Include="Konfidence.RepositoryInterface" Version="2020.0.2" />
     <PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="150.18208.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj" />
+    <ProjectReference Include="..\Konfidence.RepositoryInterface\Konfidence.RepositoryInterface.csproj" />
   </ItemGroup>
 
 </Project>

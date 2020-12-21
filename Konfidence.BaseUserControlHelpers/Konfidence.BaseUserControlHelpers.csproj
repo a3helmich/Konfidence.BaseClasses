@@ -2,11 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <RootNamespace>Konfidence.BaseUserControlHelpers</RootNamespace>
-    <AssemblyName>Konfidence.BaseUserControlHelpers</AssemblyName>
-    <Version>2019.0.1</Version>
-    <PackageId>Konfidence.BaseUserControlHelpers</PackageId>
-    <Company>Konfidence in it</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -18,12 +14,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.MenuClasses" Version="2019.0.1" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi.WebHost" Version="5.2.7" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj" />
   </ItemGroup>
 
   <ItemGroup>
