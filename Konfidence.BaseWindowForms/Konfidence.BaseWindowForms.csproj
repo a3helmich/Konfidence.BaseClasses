@@ -1,14 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <RootNamespace>Konfidence.BaseWindowForms</RootNamespace>
-    <AssemblyName>Konfidence.BaseWindowForms</AssemblyName>
-    <Version>2019.0.1</Version>
-    <PackageId>Konfidence.BaseWindowForms</PackageId>
-    <Company>Konfidence in it</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -20,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Konfidence.UtilHelper" Version="2019.0.1" />
+    <ProjectReference Include="..\Konfidence.UtilHelper\Konfidence.UtilHelper.csproj" />
   </ItemGroup>
 
 </Project>

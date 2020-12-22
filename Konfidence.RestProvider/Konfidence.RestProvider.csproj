@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj" />
-    <ProjectReference Include="..\Konfidence.RepositoryInterface.Code\Konfidence.RepositoryInterface.Code.csproj" />
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj" />
+    <ProjectReference Include="..\Konfidence.RepositoryInterface\Konfidence.RepositoryInterface.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.BaseDatabaseClasses.Code\Konfidence.BaseDatabaseClasses.Code.csproj" />
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj" />
   </ItemGroup>
 
   <ItemGroup>
