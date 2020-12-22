@@ -2,11 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Konfidence.MenuClasses</RootNamespace>
-    <AssemblyName>Konfidence.MenuClasses</AssemblyName>
-    <Version>2019.0.1</Version>
-    <PackageId>Konfidence.MenuClasses</PackageId>
-    <Company>Konfidence in it</Company>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
