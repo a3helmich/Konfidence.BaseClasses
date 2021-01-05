@@ -72,91 +72,93 @@ namespace Konfidence.BaseWindowForms
             this._dbPasswordLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // ButtonCancel
             // 
-            this.ButtonCancel.Location = new System.Drawing.Point(204, 144);
+            this.ButtonCancel.Location = new System.Drawing.Point(186, 137);
+            this.ButtonCancel.Size = new System.Drawing.Size(90, 29);
             // 
-            // buttonOK
+            // ButtonOk
             // 
-            this.ButtonOk.Location = new System.Drawing.Point(124, 144);
+            this.ButtonOk.Location = new System.Drawing.Point(90, 137);
+            this.ButtonOk.Size = new System.Drawing.Size(90, 29);
             this.ButtonOk.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // DBServerTextBox
+            // _dbServerTextBox
             // 
             this._dbServerTextBox.AccessibleName = "First Name";
-            this._dbServerTextBox.Location = new System.Drawing.Point(151, 16);
+            this._dbServerTextBox.Location = new System.Drawing.Point(181, 20);
             this._dbServerTextBox.Name = "_dbServerTextBox";
-            this._dbServerTextBox.Size = new System.Drawing.Size(128, 20);
+            this._dbServerTextBox.Size = new System.Drawing.Size(154, 23);
             this._dbServerTextBox.TabIndex = 0;
             // 
-            // DBServerLabel
+            // _dbServerLabel
             // 
             this._dbServerLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._dbServerLabel.Location = new System.Drawing.Point(17, 17);
+            this._dbServerLabel.Location = new System.Drawing.Point(20, 21);
             this._dbServerLabel.Name = "_dbServerLabel";
-            this._dbServerLabel.Size = new System.Drawing.Size(96, 18);
+            this._dbServerLabel.Size = new System.Drawing.Size(116, 22);
             this._dbServerLabel.TabIndex = 18;
             this._dbServerLabel.Text = "Database server";
             this._dbServerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // DBUserTextBox
+            // _dbUserTextBox
             // 
             this._dbUserTextBox.AccessibleName = "First Name";
-            this._dbUserTextBox.Location = new System.Drawing.Point(151, 72);
+            this._dbUserTextBox.Location = new System.Drawing.Point(181, 89);
             this._dbUserTextBox.Name = "_dbUserTextBox";
-            this._dbUserTextBox.Size = new System.Drawing.Size(128, 20);
+            this._dbUserTextBox.Size = new System.Drawing.Size(154, 23);
             this._dbUserTextBox.TabIndex = 2;
             this._dbUserTextBox.TextChanged += new System.EventHandler(this.DBUserTextBox_TextChanged);
             // 
-            // DBUserLabel
+            // _dbUserLabel
             // 
             this._dbUserLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._dbUserLabel.Location = new System.Drawing.Point(17, 72);
+            this._dbUserLabel.Location = new System.Drawing.Point(20, 89);
             this._dbUserLabel.Name = "_dbUserLabel";
-            this._dbUserLabel.Size = new System.Drawing.Size(96, 18);
+            this._dbUserLabel.Size = new System.Drawing.Size(116, 22);
             this._dbUserLabel.TabIndex = 20;
             this._dbUserLabel.Text = "Username";
             this._dbUserLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // DatabaseTextBox
+            // _databaseTextBox
             // 
             this._databaseTextBox.AccessibleName = "First Name";
-            this._databaseTextBox.Location = new System.Drawing.Point(151, 44);
+            this._databaseTextBox.Location = new System.Drawing.Point(181, 54);
             this._databaseTextBox.Name = "_databaseTextBox";
-            this._databaseTextBox.Size = new System.Drawing.Size(128, 20);
+            this._databaseTextBox.Size = new System.Drawing.Size(154, 23);
             this._databaseTextBox.TabIndex = 1;
             // 
-            // DatabaseLabel
+            // _databaseLabel
             // 
             this._databaseLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._databaseLabel.Location = new System.Drawing.Point(17, 44);
+            this._databaseLabel.Location = new System.Drawing.Point(20, 54);
             this._databaseLabel.Name = "_databaseLabel";
-            this._databaseLabel.Size = new System.Drawing.Size(96, 18);
+            this._databaseLabel.Size = new System.Drawing.Size(116, 22);
             this._databaseLabel.TabIndex = 22;
             this._databaseLabel.Text = "Database";
             this._databaseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // DBPasswordTextBox
+            // _dbPasswordTextBox
             // 
             this._dbPasswordTextBox.AccessibleName = "First Name";
-            this._dbPasswordTextBox.Location = new System.Drawing.Point(151, 100);
+            this._dbPasswordTextBox.Location = new System.Drawing.Point(181, 123);
             this._dbPasswordTextBox.Name = "_dbPasswordTextBox";
-            this._dbPasswordTextBox.Size = new System.Drawing.Size(128, 20);
+            this._dbPasswordTextBox.Size = new System.Drawing.Size(154, 23);
             this._dbPasswordTextBox.TabIndex = 3;
             // 
-            // DBPasswordLabel
+            // _dbPasswordLabel
             // 
             this._dbPasswordLabel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this._dbPasswordLabel.Location = new System.Drawing.Point(17, 100);
+            this._dbPasswordLabel.Location = new System.Drawing.Point(20, 123);
             this._dbPasswordLabel.Name = "_dbPasswordLabel";
-            this._dbPasswordLabel.Size = new System.Drawing.Size(96, 18);
+            this._dbPasswordLabel.Size = new System.Drawing.Size(116, 22);
             this._dbPasswordLabel.TabIndex = 24;
             this._dbPasswordLabel.Text = "Password";
             this._dbPasswordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // BaseDatabaseConfigForm
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 16);
             this.ClientSize = new System.Drawing.Size(296, 174);
             this.Controls.Add(this._dbPasswordTextBox);
             this.Controls.Add(this._dbPasswordLabel);
