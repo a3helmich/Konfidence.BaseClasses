@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.Security.Encryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -45,7 +46,7 @@ namespace Konfidence.Security.Tests
 
             var ppk = new PrivatePublicKey(APPLICATION_NAME, configuration);
 
-            object[] arrayList;
+            List<List<byte>> arrayList;
 
             using (var encoder = new Encoder(ppk.PublicKey))
             {

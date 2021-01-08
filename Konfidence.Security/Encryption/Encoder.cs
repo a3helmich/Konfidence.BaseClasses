@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -23,13 +25,13 @@ namespace Konfidence.Security.Encryption
         public int KeySize => _encoder.RsaProvider.KeySize;
 
         [CanBeNull]
-        public object[] Encrypt(string rawData)
+        public List<List<byte>> Encrypt(string rawData)
         {
-            ArrayList byteList = null;
+            List<List<byte>> byteList = null;
 
             if (rawData.IsAssigned())
             {
-                byteList = new ArrayList();
+                byteList = new List<List<byte>>();
 
                 var partialString = rawData;
 
@@ -47,13 +49,14 @@ namespace Konfidence.Security.Encryption
 
             if (byteList.IsAssigned())
             {
-                return byteList.ToArray();
+                return byteList.ToList();
             }
 
             return null;
         }
 
-        private byte[] GetEncryptedDataBlock([NotNull] string partialString)
+        [NotNull]
+        private List<byte> GetEncryptedDataBlock([NotNull] string partialString)
         {
             var asciiEncoding = new ASCIIEncoding();
 
@@ -61,7 +64,7 @@ namespace Konfidence.Security.Encryption
 
             var encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
 
-            return encryptedData;
+            return encryptedData.ToList();
         }
 
         [NotNull]
