@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -21,7 +22,7 @@ namespace Konfidence.Security.Encryption
         }
 
         [NotNull]
-        public string Decrypt([NotNull] object[] encryptedData)
+        public string Decrypt([NotNull] List<List<byte>> encryptedData)
         {
             var asciiEncoding = new ASCIIEncoding();
             var encryptedDataList = new ArrayList();
@@ -32,9 +33,9 @@ namespace Konfidence.Security.Encryption
                 encryptedDataList.Add(objectItem);
             }
 
-            foreach (byte[] byteData in encryptedDataList)
+            foreach (List<byte> byteData in encryptedDataList)
             {
-                var decryptedByteData = _decoder.RsaProvider.Decrypt(byteData, false);
+                var decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
 
                 rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
             }
