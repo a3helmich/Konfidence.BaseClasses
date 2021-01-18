@@ -17,13 +17,11 @@ namespace Konfidence.Security.Tests
         [TestMethod]
         public void RetrieveCreatedKeyTest()
         {
-            var configuration = new SecurityConfiguration();
-
-            var ppk1 = new PrivatePublicKey(APPLICATION_NAME, configuration);
+            var ppk1 = new PrivatePublicKey(APPLICATION_NAME);
 
             var publicKey1 = ppk1.PublicKey;
 
-            var ppk2 = new PrivatePublicKey(APPLICATION_NAME, configuration);
+            var ppk2 = new PrivatePublicKey(APPLICATION_NAME);
 
             var publicKey2 = ppk2.PublicKey;
 
@@ -42,9 +40,7 @@ namespace Konfidence.Security.Tests
             testString += "-3teststring om te decoden encoden 1234567890";
             testString += "-4teststring om te decoden encoden 1234567890";
 
-            var configuration = new SecurityConfiguration();
-
-            var ppk = new PrivatePublicKey(APPLICATION_NAME, configuration);
+            var ppk = new PrivatePublicKey(APPLICATION_NAME);
 
             List<List<byte>> arrayList;
 
