@@ -6,13 +6,19 @@ using Konfidence.Base;
 
 namespace Konfidence.Security
 {
-    public class SecurityConfiguration : ISecurityConfiguration
+    internal class SecurityConfiguration : ISecurityConfiguration
     {
         private string _framework;
 
-        public PlatformID OSVersionPlatform => Environment.OSVersion.Platform;
+        public PlatformID OSVersionPlatform { get; set; }
 
-        [CanBeNull] public string Framework => GetFramework();
+        [CanBeNull] public string Framework { get; set; }
+
+        internal SecurityConfiguration()
+        {
+            OSVersionPlatform = Environment.OSVersion.Platform;
+            Framework = GetFramework();
+        }
 
         [CanBeNull]
         private string GetFramework()

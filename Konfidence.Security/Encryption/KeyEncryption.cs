@@ -45,10 +45,11 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-        public KeyEncryption(string containerName, [NotNull] ISecurityConfiguration securityConfiguration)
+        public KeyEncryption(string containerName) : this(containerName, null) { }
+
+        internal KeyEncryption(string containerName, [CanBeNull] ISecurityConfiguration securityConfiguration)
         {
-            _disposed = false;
-            _securityConfiguration = securityConfiguration;
+            _securityConfiguration = securityConfiguration ?? new SecurityConfiguration();
 
             _maxBytesServer = GetMaxKeySize() / 8;
 

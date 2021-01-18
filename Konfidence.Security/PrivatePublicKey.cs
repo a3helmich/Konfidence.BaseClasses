@@ -11,14 +11,11 @@ namespace Konfidence.Security
 
         public string PrivateKey { get; }
 
-        private readonly ISecurityConfiguration _securityConfiguration;
-
-        public PrivatePublicKey(string applicationName, [NotNull] ISecurityConfiguration securityConfiguration)
+        public PrivatePublicKey(string applicationName)
         {
-            _securityConfiguration = securityConfiguration;
             ApplicationName = applicationName;
 
-            using (var encryption = new KeyEncryption(ApplicationName, securityConfiguration))
+            using (var encryption = new KeyEncryption(ApplicationName))
             {
                 PublicKey = encryption.PublicKey;
                 PrivateKey = encryption.PrivateKey;
@@ -29,7 +26,7 @@ namespace Konfidence.Security
         {
             try
             {
-                using (var clientKeyEncryption = new KeyEncryption(ApplicationName, _securityConfiguration))
+                using (var clientKeyEncryption = new KeyEncryption(ApplicationName))
                 {
                     clientKeyEncryption.Delete();
                 }
