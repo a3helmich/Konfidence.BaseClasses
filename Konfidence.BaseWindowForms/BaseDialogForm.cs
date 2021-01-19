@@ -65,31 +65,31 @@ namespace Konfidence.BaseWindowForms
             this.ButtonOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // buttonCancel
+            // ButtonCancel
             // 
             this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.ButtonCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ButtonCancel.Location = new System.Drawing.Point(153, 118);
+            this.ButtonCancel.Location = new System.Drawing.Point(125, 85);
             this.ButtonCancel.Name = "ButtonCancel";
-            this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
+            this.ButtonCancel.Size = new System.Drawing.Size(90, 29);
             this.ButtonCancel.TabIndex = 16;
             this.ButtonCancel.Text = "Cancel";
             // 
-            // buttonOK
+            // ButtonOk
             // 
             this.ButtonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonOk.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ButtonOk.Location = new System.Drawing.Point(73, 118);
+            this.ButtonOk.Location = new System.Drawing.Point(29, 85);
             this.ButtonOk.Name = "ButtonOk";
-            this.ButtonOk.Size = new System.Drawing.Size(75, 23);
+            this.ButtonOk.Size = new System.Drawing.Size(90, 29);
             this.ButtonOk.TabIndex = 15;
             this.ButtonOk.Text = "OK";
             // 
             // BaseDialogForm
             // 
             this.AcceptButton = this.ButtonOk;
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 16);
             this.ClientSize = new System.Drawing.Size(296, 262);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonOk);

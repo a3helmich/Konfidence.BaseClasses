@@ -80,20 +80,20 @@ namespace Konfidence.BaseWindowForms
             this.CopyrightTextBox.Name = "CopyrightTextBox";
             this.CopyrightTextBox.ReadOnly = true;
             // 
-            // buttonOK
+            // _buttonOk
             // 
             resources.ApplyResources(this._buttonOk, "_buttonOk");
             this._buttonOk.Name = "_buttonOk";
             this._buttonOk.Click += new System.EventHandler(this.buttonOK_Click);
             // 
-            // konfidenceLinkLabel
+            // _konfidenceLinkLabel
             // 
             resources.ApplyResources(this._konfidenceLinkLabel, "_konfidenceLinkLabel");
             this._konfidenceLinkLabel.Name = "_konfidenceLinkLabel";
             this._konfidenceLinkLabel.TabStop = true;
             this._konfidenceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.konfidenceLinkLabel_LinkClicked);
             // 
-            // textBoxRegistrationCode
+            // TextBoxRegistrationCode
             // 
             this.TextBoxRegistrationCode.AcceptsReturn = true;
             resources.ApplyResources(this.TextBoxRegistrationCode, "TextBoxRegistrationCode");

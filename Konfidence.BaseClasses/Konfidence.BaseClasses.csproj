@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+
     <RootNamespace>Konfidence.Base</RootNamespace>
     <AssemblyName>Konfidence.BaseClasses</AssemblyName>
+
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
