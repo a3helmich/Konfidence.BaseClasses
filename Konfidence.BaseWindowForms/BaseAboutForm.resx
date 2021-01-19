@@ -1,4 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -52,27 +112,27 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CopyrightTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing.Primitives" name="System.Drawing.Primitives, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="CopyrightTextBox.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>10, 32</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="CopyrightTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 26</value>
   </data>
-  <assembly alias="System.Private.CoreLib" name="System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e" />
-  <data name="CopyrightTextBox.Multiline" type="System.Boolean, System.Private.CoreLib">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CopyrightTextBox.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CopyrightTextBox.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>359, 167</value>
+  <data name="CopyrightTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>622, 136</value>
   </data>
-  <data name="CopyrightTextBox.TabIndex" type="System.Int32, System.Private.CoreLib">
+  <data name="CopyrightTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="CopyrightTextBox.Text" xml:space="preserve">
@@ -99,13 +159,13 @@
   <data name="_buttonOk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="_buttonOk.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>279, 164</value>
+  <data name="_buttonOk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>555, 447</value>
   </data>
-  <data name="_buttonOk.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>90, 29</value>
+  <data name="_buttonOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="_buttonOk.TabIndex" type="System.Int32, System.Private.CoreLib">
+  <data name="_buttonOk.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="_buttonOk.Text" xml:space="preserve">
@@ -123,7 +183,7 @@
   <data name="&gt;&gt;_buttonOk.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="_konfidenceLinkLabel.AutoSize" type="System.Boolean, System.Private.CoreLib">
+  <data name="_konfidenceLinkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="_konfidenceLinkLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -132,13 +192,13 @@
   <data name="_konfidenceLinkLabel.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
     <value>0, 17</value>
   </data>
-  <data name="_konfidenceLinkLabel.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>17, 6</value>
+  <data name="_konfidenceLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 5</value>
   </data>
-  <data name="_konfidenceLinkLabel.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>109, 15</value>
+  <data name="_konfidenceLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
   </data>
-  <data name="_konfidenceLinkLabel.TabIndex" type="System.Int32, System.Private.CoreLib">
+  <data name="_konfidenceLinkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="_konfidenceLinkLabel.Text" xml:space="preserve">
@@ -159,13 +219,13 @@
   <data name="TextBoxRegistrationCode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="TextBoxRegistrationCode.Location" type="System.Drawing.Point, System.Drawing.Primitives">
-    <value>10, 215</value>
+  <data name="TextBoxRegistrationCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 175</value>
   </data>
-  <data name="TextBoxRegistrationCode.Size" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>239, 16</value>
+  <data name="TextBoxRegistrationCode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>522, 13</value>
   </data>
-  <data name="TextBoxRegistrationCode.TabIndex" type="System.Int32, System.Private.CoreLib">
+  <data name="TextBoxRegistrationCode.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="TextBoxRegistrationCode.Text" xml:space="preserve">
@@ -183,17 +243,17 @@
   <data name="&gt;&gt;TextBoxRegistrationCode.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>6, 16</value>
+  <data name="$this.AutoScaleBaseSize" type="System.Drawing.Size, System.Drawing">
+    <value>5, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>384, 197</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>701, 482</value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing.Primitives">
-    <value>470, 246</value>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>392, 200</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
