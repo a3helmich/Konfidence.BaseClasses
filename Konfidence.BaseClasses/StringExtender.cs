@@ -8,6 +8,7 @@ namespace Konfidence.Base
     public static class StringExtender
     {
         [NotNull]
+        [UsedImplicitly]
         public static string ReplaceIgnoreCase([NotNull] this string fromString, [NotNull] string oldValue, string newValue)
         {
             var fromStringIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
@@ -25,7 +26,8 @@ namespace Konfidence.Base
             return fromString;
         }
 
-        public static decimal ToDecimal(this string decimalString, decimal defaultValue)
+        [UsedImplicitly]
+        public static decimal ToDecimal(this string decimalString, decimal defaultValue = 0)
         {
             if (decimalString.IndexOf('.') < 0 && decimalString.IndexOf(',') >= 0)
             {
@@ -46,7 +48,7 @@ namespace Konfidence.Base
                 return returnValue2;
             }
 
-            return 0; // return default
+            return defaultValue;
         }
     }
 }
