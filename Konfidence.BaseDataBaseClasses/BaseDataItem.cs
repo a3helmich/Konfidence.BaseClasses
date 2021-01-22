@@ -10,7 +10,6 @@ using Konfidence.BaseDatabaseClasses.Objects;
 using Konfidence.DataBaseInterface;
 using Ninject;
 using Ninject.Parameters;
-using Serilog;
 
 namespace Konfidence.BaseData
 {

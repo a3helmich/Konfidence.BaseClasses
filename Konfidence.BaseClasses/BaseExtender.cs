@@ -30,7 +30,7 @@ namespace Konfidence.Base
         [UsedImplicitly]
         public static bool IsAssigned(this DateTime assignedTime)
         {
-            if (assignedTime > DateTime.MinValue)
+            if (assignedTime > DateTime.MinValue && assignedTime < DateTime.MaxValue)
             {
                 return true;
             }
