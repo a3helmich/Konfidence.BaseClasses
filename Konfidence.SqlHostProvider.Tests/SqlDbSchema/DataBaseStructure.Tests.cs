@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -28,7 +29,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.TableList.Should().HaveCount(5); // TestClassGenerator heeft nu 5 tabellen
+            target.TableList.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -41,7 +42,22 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.TableList.Should().HaveCount(5); // TestClassGenerator heeft nu 5 tabellen
+            target.TableList.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
+
+            target.TableList.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
+        }
+
+        [TestMethod, TestCategory("DatabaseStructure")]
+        public void BuildStructureWithBlockedHackersConnectionName()
+        {
+            // arrange
+            var target = new DatabaseStructure("BlockedHackers"); // TODO: Initialize to an appropriate value
+
+            // act
+            target.BuildStructure();
+
+            // assert
+            target.TableList.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
         }
     }
 }
