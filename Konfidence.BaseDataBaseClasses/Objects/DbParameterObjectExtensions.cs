@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using JetBrains.Annotations;
+using Konfidence.Base;
 using Konfidence.DataBaseInterface;
 
-namespace Konfidence.BaseDatabaseClasses.Objects
+namespace Konfidence.BaseData.Objects
 {
-    public static class DbParameterObjectExtensions
+    internal static class DbParameterObjectExtensions
     {
         [NotNull] private static readonly Dictionary<Type, DbType> _typeMap = new Dictionary<Type, DbType>();
 
@@ -56,44 +57,44 @@ namespace Konfidence.BaseDatabaseClasses.Objects
             dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(T)], value);
         }
 
-        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, Guid value)
+        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, Guid guidValue)
         {
-            if (Guid.Empty.Equals(value))
+            if (guidValue.IsAssigned())
             {
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], null);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], guidValue);
+
+                return;
             }
-            else
-            {
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], value);
-            }
+
+            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], null);
         }
 
-        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, DateTime value)
+        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, DateTime dateTimeValue)
         {
-            if (value > DateTime.MinValue)
+            if (dateTimeValue.IsAssigned())
             {
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], value);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], dateTimeValue);
+
+                return;
             }
-            else
-            {
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], null);
-            }
+
+            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], null);
         }
 
-        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, TimeSpan value)
+        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, TimeSpan timeSpanValue)
         {
-            if (value > TimeSpan.MinValue)
+            if (timeSpanValue.IsAssigned())
             {
                 var timeSpan = DateTime.Today;
 
-                timeSpan = new DateTime(timeSpan.Year, timeSpan.Month, timeSpan.Day, value.Hours, value.Minutes, value.Seconds, value.Milliseconds);
+                timeSpan = new DateTime(timeSpan.Year, timeSpan.Month, timeSpan.Day, timeSpanValue.Hours, timeSpanValue.Minutes, timeSpanValue.Seconds, timeSpanValue.Milliseconds);
 
                 dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], timeSpan);
+
+                return;
             }
-            else
-            {
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], null);
-            }
+
+            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], null);
         }
 
         private static void AddInParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string field, DbType dbType, object value)

@@ -13,7 +13,7 @@ namespace Konfidence.RepositoryInterface.Objects
         {
             get
             {
-                var parameterObjectList = _dataItem.GetParameterObjectList();
+                var parameterObjectList = _dataItem.GetParameterObjects();
 
                 return parameterObjectList;
             }

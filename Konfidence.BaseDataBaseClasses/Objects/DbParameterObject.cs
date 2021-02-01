@@ -1,9 +1,9 @@
 ﻿using System.Data;
 using Konfidence.DataBaseInterface;
 
-namespace Konfidence.BaseDatabaseClasses.Objects
+namespace Konfidence.BaseData.Objects
 {
-    public class DbParameterObject : IDbParameterObject
+    internal class DbParameterObject : IDbParameterObject
     {
         public DbParameterObject(string parameterName, DbType dbType, object value)
         {

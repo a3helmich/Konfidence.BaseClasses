@@ -98,7 +98,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return DataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan) DataReader.GetValue(fieldOrdinal);
         }
 
-        public Decimal GetFieldDecimal([NotNull] string fieldName)
+        public decimal GetFieldDecimal([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
 
@@ -176,7 +176,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             _repository.ExecuteGetListStoredProcedure(retrieveListParameters, () => GetDataItem(baseDataItemList));
         }
-
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
             IBaseDataItemList<T> childDataItemList, [NotNull] string getRelatedStoredProcedure) where T : IBaseDataItem
