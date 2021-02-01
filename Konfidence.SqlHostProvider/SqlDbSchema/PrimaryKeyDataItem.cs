@@ -39,6 +39,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             GetItem(SpName.PrimarykeyGet);
         }
 
+        [NotNull]
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();
