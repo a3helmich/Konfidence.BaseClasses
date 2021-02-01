@@ -39,6 +39,17 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
+        public static bool IsAssigned(this TimeSpan assignedTime)
+        {
+            if (assignedTime > TimeSpan.MinValue && assignedTime < TimeSpan.MaxValue)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        [UsedImplicitly]
         public static DateTime StartOfDayTime(this DateTime dateTime)
         {
             var afterMidnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Xml;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseDatabaseClasses.Objects;
+using Konfidence.BaseData.Objects;
 using Konfidence.DataBaseInterface;
 using Ninject;
 using Ninject.Parameters;
@@ -25,7 +25,7 @@ namespace Konfidence.BaseData
         private bool _isInitialized;
 
         private IBaseClient _client; 
-		internal Dictionary<string, object> PropertyDictionary;
+		private Dictionary<string, object> PropertyDictionary;
 
 	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
 
@@ -149,7 +149,7 @@ namespace Konfidence.BaseData
 			DbParameterObjects = null;
 		}
 
-        public List<IDbParameterObject> GetParameterObjectList()
+        public List<IDbParameterObject> GetParameterObjects()
         {
             return DbParameterObjects;
         }

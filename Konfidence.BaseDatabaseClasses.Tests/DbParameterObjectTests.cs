@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using FluentAssertions;
-using Konfidence.BaseDatabaseClasses.Objects;
+using Konfidence.BaseData.Objects;
 using Konfidence.DataBaseInterface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

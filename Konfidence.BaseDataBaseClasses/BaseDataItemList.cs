@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseDatabaseClasses.Objects;
+using Konfidence.BaseData.Objects;
 using Konfidence.DataBaseInterface;
 using Ninject;
 using Ninject.Parameters;

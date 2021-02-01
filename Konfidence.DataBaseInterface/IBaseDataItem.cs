@@ -45,6 +45,6 @@ namespace Konfidence.DataBaseInterface
 
         void GetProperties(List<IDbParameterObject> properties);
 
-        List<IDbParameterObject> GetParameterObjectList();
+        List<IDbParameterObject> GetParameterObjects();
     }
 }
