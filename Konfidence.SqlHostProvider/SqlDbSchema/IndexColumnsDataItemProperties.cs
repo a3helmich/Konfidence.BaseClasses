@@ -35,13 +35,14 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private void GetProperties([NotNull] DataTable dataTable)
         {
-            var tableRow = dataTable.AsEnumerable().First(dataRow => dataRow["TABLE_NAME"].Equals(_tableName));
+            var tableRows = dataTable.AsEnumerable().Where(dataRow => dataRow["TABLE_NAME"].Equals(_tableName));
 
-            var columnName = tableRow["COLUMN_NAME"] as string;
-            var constraintName = tableRow["CONSTRAINT_NAME"] as string;
+            var tableRow = tableRows.FirstOrDefault(constraintRow => constraintRow["CONSTRAINT_NAME"].Equals(PrimaryKeyDataItem.ConstraintName));
 
-            if (constraintName.IsAssigned() && constraintName.Equals(PrimaryKeyDataItem.ConstraintName))
+            if (tableRow.IsAssigned())
             {
+                var columnName = tableRow["COLUMN_NAME"] as string;
+
                 PrimaryKeyDataItem.ColumnName = columnName;
             }
         }
