@@ -1,8 +1,9 @@
 using System.Data;
 using System;
+using Konfidence.Base;
 using Konfidence.BaseData;
-using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace DbMenuClasses
 {
@@ -30,7 +31,7 @@ namespace DbMenuClasses
             private int _testInt = 0;
             private DateTime _SysInsertTime = DateTime.MinValue;
             private DateTime _SysUpdateTime = DateTime.MinValue;
-            private string _testNtext;
+            private string _testNtext = string.Empty;
             private long _testBigInt = 0;
             private string _SysLock = string.Empty;
 
