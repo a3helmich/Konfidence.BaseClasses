@@ -7,9 +7,9 @@ using Konfidence.DataBaseInterface;
 
 namespace Konfidence.BaseData.Objects
 {
-    internal static class DbParameterObjectExtensions
+    public static class DbParameterObjectExtensions
     {
-        [NotNull] private static readonly Dictionary<Type, DbType> _typeMap = new Dictionary<Type, DbType>();
+        [NotNull] private static readonly Dictionary<Type, DbType> _typeMap = new();
 
         static DbParameterObjectExtensions()
         {

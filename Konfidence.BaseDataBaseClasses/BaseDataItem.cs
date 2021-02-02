@@ -150,7 +150,6 @@ namespace Konfidence.BaseData
             return Id;
         }
 
-        #region properties
         protected string ConnectionName { get; set; } = string.Empty;
 
         [UsedImplicitly]
@@ -417,10 +416,6 @@ namespace Konfidence.BaseData
 			}
 		}
 
-        #endregion
-
-        #region GetField Methods
-
         [UsedImplicitly]
 	    protected void GetField(string fieldName, IDataReader dataReader, out byte field)
 	    {
@@ -616,9 +611,6 @@ namespace Konfidence.BaseData
             throw (new Exception("GetFieldDecimal: client is not assigned"));
         }
 
-        #endregion
-
-        #region SetField Methods
         protected void SetField(string fieldName, int value)
 		{
 		    DbParameterObjects.SetParameter(fieldName, value);
@@ -669,10 +661,8 @@ namespace Konfidence.BaseData
         {
             DbParameterObjects.SetParameter(fieldName, value);
         }
-        #endregion
 
-        #region SetParameter Methods
-	    [UsedImplicitly]
+        [UsedImplicitly]
 	    protected void SetParameter(string fieldName, byte value)
 	    {
 	        SetField(fieldName, value);
@@ -731,7 +721,6 @@ namespace Konfidence.BaseData
         {
             SetField(fieldName, value);
         }
-		#endregion
 
         public void LoadDataItem()
         {
@@ -838,33 +827,6 @@ namespace Konfidence.BaseData
 
             AfterDelete();
         }
-
-	 //   [UsedImplicitly]
-  //      protected internal int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
-  //      {
-  //          return Client.ExecuteCommand(storedProcedure, parameterObjectList);
-  //      }
-
-		//protected internal int ExecuteTextCommand(string textCommand)
-		//{
-  //          return Client.ExecuteTextCommand(textCommand);
-		//} 
-
-		//protected internal bool TableExists(string tableName)
-		//{
-  //          return Client.TableExists(tableName);
-		//}
-
-		//protected internal bool ViewExists(string viewName)
-		//{
-  //          return Client.ViewExists(viewName);
-		//}
-
-        //[UsedImplicitly]
-        //protected internal bool StoredProcedureExists(string storedProcedureName)
-        //{
-        //    return Client.StoredProcedureExists(storedProcedureName);
-        //}
 
         [NotNull]
         public List<IDbParameterObject> SetItemData()
