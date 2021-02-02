@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Konfidence.BaseDatabaseClasses.Tests")]
+[assembly: InternalsVisibleTo("Konfidence.MenuClasses.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 

@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using DbMenuClasses;
+﻿using DbMenuClasses;
 using FluentAssertions;
 using Konfidence.MenuClasses.Tests.objects;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Konfidence.BaseData;
 
 namespace Konfidence.MenuClasses.Tests
 {
@@ -45,6 +45,58 @@ namespace Konfidence.MenuClasses.Tests
             list.Should().HaveCount(9, "list should contain 9 menu items");
 
             list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
+        }
+
+        [TestMethod, TestCategory("MenuItem")]
+        public void GetSingleMenuItemByFindId()
+        {
+            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+
+            var itemById = list.FindById("2");
+
+            itemById?.NodeId.Should().Be(2);
+        }
+
+        [TestMethod, TestCategory("MenuItem")]
+        public void GetSingleMenuItemByFindIsSelected()
+        {
+            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+
+            var itemById = list.FindByIsSelected();
+
+            itemById?.MenuId.Should().Be(1);
+        }
+
+        [TestMethod, TestCategory("MenuItem")]
+        public void GetSingleMenuItemByFindIsEditing()
+        {
+            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+
+            var itemById = list.FindByIsEditing();
+
+            itemById?.MenuId.Should().Be(1);
+        }
+
+        [TestMethod, TestCategory("MenuItem")]
+        public void GetSingleMenuItemByFindCurrent()
+        {
+            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+
+            var itemById = list.FindCurrent();
+
+            itemById?.MenuId.Should().Be(1);
+        }
+
+        [TestMethod, TestCategory("MenuItem")]
+        public void GetSingleMenuItemHasCurrent()
+        {
+            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+
+            var _ = list.FindCurrent();
+
+            var itemHasCurrent = list.HasCurrent();
+
+            itemHasCurrent.Should().BeTrue();
         }
 
         [TestMethod, TestCategory("MenuItem")]
