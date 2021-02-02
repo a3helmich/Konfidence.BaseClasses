@@ -25,7 +25,6 @@ namespace Konfidence.BaseData
         private bool _isInitialized;
 
         private IBaseClient _client; 
-		private Dictionary<string, object> PropertyDictionary;
 
 	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
 
@@ -131,34 +130,16 @@ namespace Konfidence.BaseData
 			Id = id;
 		}
 
-		//private void SetProperties(Dictionary<string, object> propertyDictionary)
-		//{
-		//	PropertyDictionary = propertyDictionary;
-
-		//	GetData();
-
-		//	PropertyDictionary = null;
-		//}
-
-  //      private void GetProperties(List<IDbParameterObject> properties)
-		//{
-		//	DbParameterObjects = properties;
-
-		//	SetData();
-
-		//	DbParameterObjects = null;
-		//}
-
         public List<IDbParameterObject> GetParameterObjects()
         {
             return DbParameterObjects;
         }
 
-        public void GetKey()
+        public void GetKey(IDataReader dataReader)
         {
             if (AutoIdField.Length > 0)
             {
-                GetFieldInternal(AutoIdField, out int id);
+                GetFieldInternal(AutoIdField, dataReader, out int id);
 
                 Id = id;
             }
@@ -441,164 +422,126 @@ namespace Konfidence.BaseData
         #region GetField Methods
 
         [UsedImplicitly]
-	    protected void GetField(string fieldName, out byte field)
+	    protected void GetField(string fieldName, IDataReader dataReader, out byte field)
 	    {
-	        GetFieldInternal(fieldName, out field);
+	        GetFieldInternal(fieldName, dataReader, out field);
 	    }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, out short field)
+        protected void GetField(string fieldName, IDataReader dataReader, out short field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, out int field)
+        protected void GetField(string fieldName, IDataReader dataReader, out int field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
         [UsedImplicitly]
-	    protected void GetField(string fieldName, out long field)
+	    protected void GetField(string fieldName, IDataReader dataReader, out long field)
 	    {
-	        GetFieldInternal(fieldName, out field);
+	        GetFieldInternal(fieldName, dataReader, out field);
 	    }
 
 	    [UsedImplicitly]
-        protected void GetField([NotNull] string fieldName, out Guid field)
+        protected void GetField([NotNull] string fieldName, IDataReader dataReader, out Guid field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, out string field)
+        protected void GetField(string fieldName, IDataReader dataReader, out string field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, out bool field)
+        protected void GetField(string fieldName, IDataReader dataReader, out bool field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, out DateTime field)
+        protected void GetField(string fieldName, IDataReader dataReader, out DateTime field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
 	    [UsedImplicitly]
-        protected void GetField(string fieldName, out TimeSpan field)
+        protected void GetField(string fieldName, IDataReader dataReader, out TimeSpan field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
 	    [UsedImplicitly]
-        protected void GetField(string fieldName, [NotNull] ref XmlDocument field)
+        protected void GetField(string fieldName, IDataReader dataReader, [NotNull] ref XmlDocument field)
         {
-            GetFieldInternal(fieldName, out string xmlString);
+            GetFieldInternal(fieldName, dataReader, out string xmlString);
 
             field.LoadXml(xmlString);
         }
 
 	    [UsedImplicitly]
-        protected void GetField(string fieldName, out decimal field)
+        protected void GetField(string fieldName, IDataReader dataReader, out decimal field)
         {
-            GetFieldInternal(fieldName, out field);
+            GetFieldInternal(fieldName, dataReader, out field);
         }
 
-        private void GetFieldInternal(string fieldName, out byte field)
+        private void GetFieldInternal(string fieldName, IDataReader dataReader, out byte field)
         {
-            if (PropertyDictionary.IsAssigned())
-            {
-                if (PropertyDictionary.TryGetValue(fieldName, out var propertyValue))
-                {
-                    field = (byte)propertyValue;
-
-                    return;
-                }
-            }
-
             if (Client.IsAssigned())
             {
-                field = Client.GetFieldInt8(fieldName);
+                field = Client.GetFieldInt8(fieldName, dataReader);
 
                 return;
             }
 
-            throw (new Exception("GetFieldInt8: client/_PropertyDictionary is not assigned"));
+            throw (new Exception("GetFieldInt8: client is not assigned"));
         }
 
-	    private void GetFieldInternal(string fieldName, out short field)
+	    private void GetFieldInternal(string fieldName, IDataReader dataReader, out short field)
 	    {
-	        if (PropertyDictionary.IsAssigned())
-	        {
-	            field = (short)PropertyDictionary[fieldName];
-
-                return;
-            }
-
 	        if (Client.IsAssigned())
 	        {
-	            field = Client.GetFieldInt16(fieldName);
+	            field = Client.GetFieldInt16(fieldName, dataReader);
 
                 return;
             }
 
-	        throw (new Exception("GetFieldInt16: client/_PropertyDictionary is not assigned"));
+	        throw (new Exception("GetFieldInt16: client is not assigned"));
 	    }
 
-        private void GetFieldInternal(string fieldName, out int field)
+        private void GetFieldInternal(string fieldName, IDataReader dataReader, out int field)
 		{
-			if (PropertyDictionary.IsAssigned())
-			{
-				field = (int)PropertyDictionary[fieldName];
-
-                return;
-            }
-
 		    if (Client.IsAssigned())
 		    {
-		        field = Client.GetFieldInt32(fieldName);
+		        field = Client.GetFieldInt32(fieldName, dataReader);
 
                 return;
             }
 
-		    throw (new Exception("GetFieldInt32: client/_PropertyDictionary is not assigned"));
+		    throw (new Exception("GetFieldInt32: client is not assigned"));
 		}
 
-	    private void GetFieldInternal(string fieldName, out long field)
+	    private void GetFieldInternal(string fieldName, IDataReader dataReader, out long field)
 	    {
-	        if (PropertyDictionary.IsAssigned())
-	        {
-	            field = (long)PropertyDictionary[fieldName];
-
-                return;
-            }
-
 	        if (Client.IsAssigned())
 	        {
-	            field =  Client.GetFieldInt64(fieldName);
+	            field =  Client.GetFieldInt64(fieldName, dataReader);
 
                 return;
             }
 
-	        throw (new Exception("GetFieldInt64: client/_PropertyDictionary is not assigned"));
+	        throw (new Exception("GetFieldInt64: client is not assigned"));
 	    }
 
-        private void GetFieldInternal([NotNull] string fieldName, out Guid field)
+        private void GetFieldInternal([NotNull] string fieldName, IDataReader dataReader, out Guid field)
         {
-            if (PropertyDictionary.IsAssigned())
-            {
-                field = (Guid)PropertyDictionary[fieldName];
-
-                return;
-            }
-
             if (Client.IsAssigned())
             {
-                var fieldValue = Client.GetFieldGuid(fieldName);
+                var fieldValue = Client.GetFieldGuid(fieldName, dataReader);
 
                 if (fieldName.Equals(GuidIdField, StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -610,104 +553,68 @@ namespace Konfidence.BaseData
                 return;
             }
 
-            throw (new Exception("GetFieldGuid: client/_PropertyDictionary is not assigned"));
+            throw (new Exception("GetFieldGuid: client is not assigned"));
         }
 
-		private void GetFieldInternal(string fieldName, out string field)
+		private void GetFieldInternal(string fieldName, IDataReader dataReader, out string field)
 		{
-			if (PropertyDictionary.IsAssigned())
-			{
-				field = PropertyDictionary[fieldName] as string;
-
-                return;
-            }
-		    
             if (Client.IsAssigned())
 		    {
-		        field = Client.GetFieldString(fieldName);
+		        field = Client.GetFieldString(fieldName, dataReader);
 
                 return;
             }
 
-		    throw (new Exception("GetFieldString: client/_PropertyDictionary  is not assigned"));
+		    throw (new Exception("GetFieldString: client is not assigned"));
 		}
 
-        private void GetFieldInternal(string fieldName, out bool field)
+        private void GetFieldInternal(string fieldName, IDataReader dataReader, out bool field)
         {
-            if (PropertyDictionary.IsAssigned())
-            {
-                field = (bool)PropertyDictionary[fieldName];
-
-                return;
-            }
-            
             if (Client.IsAssigned())
             {
-                field = Client.GetFieldBool(fieldName);
+                field = Client.GetFieldBool(fieldName, dataReader);
 
                 return;
             }
 
-            throw (new Exception("GetFieldBool: client/_PropertyDictionary  is not assigned"));
+            throw (new Exception("GetFieldBool: client is not assigned"));
         }
 
-		private void GetFieldInternal(string fieldName, out DateTime field)
+		private void GetFieldInternal(string fieldName, IDataReader dataReader, out DateTime field)
 		{
-			if (PropertyDictionary.IsAssigned())
-			{
-				field = (DateTime)PropertyDictionary[fieldName];
-
-                return;
-            }
-		    
             if (Client.IsAssigned())
 		    {
-		        field = Client.GetFieldDateTime(fieldName);
+		        field = Client.GetFieldDateTime(fieldName, dataReader);
 
                 return;
             }
 
-		    throw (new Exception("GetFieldDateTime: client/_PropertyDictionary  is not assigned"));
+		    throw (new Exception("GetFieldDateTime: client is not assigned"));
 		}
 
-        private void GetFieldInternal(string fieldName, out TimeSpan field)
+        private void GetFieldInternal(string fieldName, IDataReader dataReader, out TimeSpan field)
         {
-            if (PropertyDictionary.IsAssigned())
-            {
-                field = (TimeSpan)PropertyDictionary[fieldName];
-
-                return;
-            }
-            
             if (Client.IsAssigned())
             {
-                field = Client.GetFieldTimeSpan(fieldName);
+                field = Client.GetFieldTimeSpan(fieldName, dataReader);
 
                 return;
             }
 
-            throw (new Exception("GetFieldTimeSpan: client/_PropertyDictionary  is not assigned"));
+            throw (new Exception("GetFieldTimeSpan: client is not assigned"));
         }
 
-        private void GetFieldInternal(string fieldName, out decimal field)
+        private void GetFieldInternal(string fieldName, IDataReader dataReader, out decimal field)
         {
-            if (PropertyDictionary.IsAssigned())
-            {
-                field = (decimal)PropertyDictionary[fieldName];
-
-                return;
-            }
-            
             if (Client.IsAssigned())
             {
-                field = Client.GetFieldDecimal(fieldName);
+                field = Client.GetFieldDecimal(fieldName, dataReader);
 
                 return;
             }
 
-            throw (new Exception("GetFieldDecimal: client/_PropertyDictionary  is not assigned"));
+            throw (new Exception("GetFieldDecimal: client is not assigned"));
         }
-
 
         #endregion
 
@@ -986,7 +893,7 @@ namespace Konfidence.BaseData
         {
         }
 
-        public virtual void GetData()
+        public virtual void GetData(IDataReader dataReader)
 		{
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Globalization;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
@@ -128,21 +129,21 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO : internal
-        public override void GetData()
+        public override void GetData(IDataReader dataReader)
         {
-            GetField("Name", out string name);
+            GetField("Name", dataReader, out string name);
 
-            GetField("Default_object_id", out int defaultObjectId);
+            GetField("Default_object_id", dataReader, out int defaultObjectId);
 
             var isDefaulted = defaultObjectId > 0;
 
-            GetField("Is_Computed", out bool isComputed);
+            GetField("Is_Computed", dataReader, out bool isComputed);
 
-            GetField("column_id", out int ordinalPosition);
+            GetField("column_id", dataReader, out int ordinalPosition);
 
-            GetField("datatype", out string dataType);
+            GetField("datatype", dataReader, out string dataType);
 
-            GetField("max_length", out short characterMaximumLengthInt);
+            GetField("max_length", dataReader, out short characterMaximumLengthInt);
 
             SetColumnData(name, isDefaulted, isComputed, ordinalPosition, dataType, characterMaximumLengthInt);
         }

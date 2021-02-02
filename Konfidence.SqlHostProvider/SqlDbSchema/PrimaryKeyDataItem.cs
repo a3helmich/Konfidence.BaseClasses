@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Data;
+using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -52,9 +53,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO: internal
-        public override void GetData()
+        public override void GetData(IDataReader dataReader)
         {
-            GetField(SqlConstant.ConstraintNameField, out _constraintName);
+            GetField(SqlConstant.ConstraintNameField, dataReader, out _constraintName);
         }
     }
 }

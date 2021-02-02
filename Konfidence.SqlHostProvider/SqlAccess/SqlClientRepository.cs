@@ -15,8 +15,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
     {
         private readonly string _connectionName;
 
-        public IDataReader DataReader { get; private set; }
-
         public SqlClientRepository(string connectionName)
         {
             _connectionName = connectionName;
@@ -125,12 +123,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 {
                     if (dataReader.Read())
                     {
-                        DataReader = dataReader;
-
-                        baseDataItem.GetKey();
-                        baseDataItem.GetData();
-
-                        DataReader = null;
+                        baseDataItem.GetKey(dataReader);
+                        baseDataItem.GetData(dataReader);
                     }
                 }
             }
@@ -156,19 +150,15 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
-                    DataReader = dataReader;
-
                     while (dataReader.Read())
                     {
                         var dataItem = baseDataItemList.GetDataItem();
 
                         dataItem.Client = baseClient;
 
-                        dataItem.GetKey();
-                        dataItem.GetData();
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
                     }
-
-                    DataReader = null;
                 }
             }
         }
@@ -184,16 +174,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
-                    DataReader = dataReader;
-
                     while (dataReader.Read())
                     {
                         var dataItem = parentDataItemList.GetDataItem();
 
                         dataItem.Client = baseClient;
 
-                        dataItem.GetKey();
-                        dataItem.GetData();
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
                     }
 
                     dataReader.NextResult();
@@ -204,8 +192,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                         dataItem.Client = baseClient;
 
-                        dataItem.GetKey();
-                        dataItem.GetData();
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
                     }
 
                     dataReader.NextResult();
@@ -216,11 +204,9 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                         dataItem.Client = baseClient;
 
-                        dataItem.GetKey();
-                        dataItem.GetData();
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
                     }
-
-                    DataReader = null;
                 }
             }
         }

@@ -13,8 +13,6 @@ namespace Konfidence.RepositoryInterface
     {
         Database GetDatabase();
 
-        IDataReader DataReader { get; }
-
         [UsedImplicitly]
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
 

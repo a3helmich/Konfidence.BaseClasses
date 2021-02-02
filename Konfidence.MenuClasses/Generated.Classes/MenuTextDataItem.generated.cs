@@ -119,15 +119,15 @@ namespace DbMenuClasses
                 GetAutoUpdateField(LANGUAGE, out _Language);
             }
 
-            public override void GetData()
+            public override void GetData(IDataReader dataReader)
             {
-                GetField(MENUID, out _MenuId);
-                GetField(SYSINSERTTIME, out _SysInsertTime);
-                GetField(SYSUPDATETIME, out _SysUpdateTime);
-                GetField(LANGUAGE, out _Language);
-                GetField(DESCRIPTION, out _Description);
-                GetField(SYSLOCK, out _SysLock);
-                GetField(MENUTEXT, out _MenuText);
+                GetField(MENUID, dataReader, out _MenuId);
+                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
+                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
+                GetField(LANGUAGE, dataReader, out _Language);
+                GetField(DESCRIPTION, dataReader, out _Description);
+                GetField(SYSLOCK, dataReader, out _SysLock);
+                GetField(MENUTEXT, dataReader, out _MenuText);
             }
 
             protected override void SetData()

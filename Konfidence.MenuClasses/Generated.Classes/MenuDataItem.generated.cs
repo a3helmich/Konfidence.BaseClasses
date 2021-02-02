@@ -181,21 +181,21 @@ namespace DbMenuClasses
                 GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
             }
 
-            public override void GetData()
+            public override void GetData(IDataReader dataReader)
             {
-                GetField(PARENTNODEID, out _ParentNodeId);
-                GetField(MENUID, out _MenuId);
-                GetField(SYSINSERTTIME, out _SysInsertTime);
-                GetField(SYSUPDATETIME, out _SysUpdateTime);
-                GetField(ISROOT, out _IsRoot);
-                GetField(ISVISIBLE, out _IsVisible);
-                GetField(ISLOGONVISIBLE, out _IsLogonVisible);
-                GetField(ISADMINISTRATOR, out _IsAdministrator);
-                GetField(ISNOTLOGONVISIBLE, out _IsNotLogonVisible);
-                GetField(ISLOCALVISIBLE, out _IsLocalVisible);
-                GetField(URL, out _Url);
-                GetField(APPLICATIONID, out _ApplicationId);
-                GetField(SYSLOCK, out _SysLock);
+                GetField(PARENTNODEID, dataReader, out _ParentNodeId);
+                GetField(MENUID, dataReader, out _MenuId);
+                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
+                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
+                GetField(ISROOT, dataReader, out _IsRoot);
+                GetField(ISVISIBLE, dataReader, out _IsVisible);
+                GetField(ISLOGONVISIBLE, dataReader, out _IsLogonVisible);
+                GetField(ISADMINISTRATOR, dataReader, out _IsAdministrator);
+                GetField(ISNOTLOGONVISIBLE, dataReader, out _IsNotLogonVisible);
+                GetField(ISLOCALVISIBLE, dataReader, out _IsLocalVisible);
+                GetField(URL, dataReader, out _Url);
+                GetField(APPLICATIONID, dataReader, out _ApplicationId);
+                GetField(SYSLOCK, dataReader, out _SysLock);
             }
 
             protected override void SetData()
