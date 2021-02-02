@@ -81,15 +81,15 @@ namespace Konfidence.BaseData.Objects
             dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], null);
         }
 
-        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, TimeSpan timeSpanValue)
+        public static void SetParameter([NotNull] this List<IDbParameterObject> dbParameterObjects, string parameterName, TimeSpan timeSpan)
         {
-            if (timeSpanValue.IsAssigned())
+            if (timeSpan.IsAssigned())
             {
-                var timeSpan = DateTime.Today;
+                var dateTime = DateTime.Today;
 
-                timeSpan = new DateTime(timeSpan.Year, timeSpan.Month, timeSpan.Day, timeSpanValue.Hours, timeSpanValue.Minutes, timeSpanValue.Seconds, timeSpanValue.Milliseconds);
+                dateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
 
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], timeSpan);
+                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], dateTime);
 
                 return;
             }

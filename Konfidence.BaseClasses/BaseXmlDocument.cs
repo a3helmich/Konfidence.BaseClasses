@@ -97,7 +97,7 @@ namespace Konfidence.Base
             }
         }
 
-        public void GetValue(string nodeName, out string value)
+        public void GetValue([NotNull] string nodeName, [NotNull] out string value)
         {
             GetValue(Root, nodeName, out value);
         }
@@ -115,7 +115,7 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
-        public void GetValue(string nodeName, out bool value)
+        public void GetValue([NotNull] string nodeName, out bool value)
         {
             GetValue(Root, nodeName, out value);
         }

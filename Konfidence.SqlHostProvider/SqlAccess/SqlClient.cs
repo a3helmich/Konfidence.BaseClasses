@@ -15,7 +15,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 {
     public class SqlClient : IBaseClient
     {
-        private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
+        private readonly NinjectDependencyResolver _ninject = new();
 
         private readonly IDataRepository _repository;
 
@@ -32,89 +32,95 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository = _ninject.Kernel.Get<IDataRepository>(connectionNameParam);
         }
 
-        private IDataReader DataReader => _repository.DataReader;
-
         #region GetField Methods
-        public byte GetFieldInt8([NotNull] string fieldName)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? (byte) 0 : DataReader.GetByte(fieldOrdinal);
+        public void GetField([NotNull] string fieldName, out byte field, [NotNull] IDataReader dataReader)
+        {
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
+
+            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetByte(fieldOrdinal);
         }
 
-        public short GetFieldInt16([NotNull] string fieldName)
+        public byte GetFieldInt8([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? (short)0 : DataReader.GetInt16(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? (byte) 0 : dataReader.GetByte(fieldOrdinal);
         }
 
-        public int GetFieldInt32([NotNull] string fieldName)
+        public short GetFieldInt16([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt32(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? (short)0 : dataReader.GetInt16(fieldOrdinal);
         }
 
-        public long GetFieldInt64([NotNull] string fieldName)
+        public int GetFieldInt32([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetInt64(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
         }
 
-        public Guid GetFieldGuid([NotNull] string fieldName)
+        public long GetFieldInt64([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : DataReader.GetGuid(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
         }
 
-        public string GetFieldString([NotNull] string fieldName)
+        public Guid GetFieldGuid([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? string.Empty : DataReader.GetString(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : dataReader.GetGuid(fieldOrdinal);
         }
 
-        public bool GetFieldBool([NotNull] string fieldName)
+        public string GetFieldString([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return !DataReader.IsDBNull(fieldOrdinal) && DataReader.GetBoolean(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? string.Empty : dataReader.GetString(fieldOrdinal);
         }
 
-        public DateTime GetFieldDateTime([NotNull] string fieldName)
+        public bool GetFieldBool([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : DataReader.GetDateTime(fieldOrdinal);
+            return !dataReader.IsDBNull(fieldOrdinal) && dataReader.GetBoolean(fieldOrdinal);
         }
 
-        public TimeSpan GetFieldTimeSpan([NotNull] string fieldName)
+        public DateTime GetFieldDateTime([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan) DataReader.GetValue(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : dataReader.GetDateTime(fieldOrdinal);
         }
 
-        public decimal GetFieldDecimal([NotNull] string fieldName)
+        public TimeSpan GetFieldTimeSpan([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            var fieldOrdinal = GetOrdinal(fieldName);
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetDecimal(fieldOrdinal);
+            return dataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan)dataReader.GetValue(fieldOrdinal);
         }
 
-        private int GetOrdinal([NotNull] string fieldName)
+        public decimal GetFieldDecimal([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
-            if (!DataReader.IsAssigned())
+            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
+
+            return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetDecimal(fieldOrdinal);
+        }
+
+        private int GetOrdinal([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        {
+            if (!dataReader.IsAssigned())
             {
                 const string message = @"_DataReader: in SQLClient.GetOrdinal(string fieldName);";
 
                 throw new ArgumentNullException(message);
             }
 
-            return DataReader.GetOrdinal(fieldName);
+            return dataReader.GetOrdinal(fieldName);
         }
         #endregion
 
@@ -154,13 +160,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             var retrieveParameters = new RetrieveParameters(dataItem, getStoredProcedure);
 
-            _repository.ExecuteGetStoredProcedure(retrieveParameters, () =>
-                {
-                    dataItem.GetKey();
-                    dataItem.GetData();
-
-                    return true;
-                });
+            _repository.ExecuteGetStoredProcedure(retrieveParameters, dataItem);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
@@ -174,7 +174,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             var retrieveListParameters = new RetrieveListParameters<T>(baseDataItemList, getListStoredProcedure);
 
-            _repository.ExecuteGetListStoredProcedure(retrieveListParameters, () => GetDataItem(baseDataItemList));
+            _repository.ExecuteGetListStoredProcedure(retrieveListParameters, baseDataItemList, this);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
@@ -189,20 +189,17 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             var retrieveListParameters = new RetrieveListParameters<T>(parentDataItemList, getRelatedStoredProcedure);
 
-            _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters,
-                () => GetDataItem(parentDataItemList),
-                () => GetDataItem(relatedDataItemList),
-                () => GetDataItem(childDataItemList));
+            _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters, parentDataItemList, relatedDataItemList, childDataItemList, this);
         }
 
-        private bool GetDataItem<T>([NotNull] IBaseDataItemList<T> baseDataItemList) where T : IBaseDataItem
+        private bool GetDataItem<T>([NotNull] IBaseDataItemList<T> baseDataItemList, IDataReader dataReader) where T : IBaseDataItem
         {
             var dataItem = baseDataItemList.GetDataItem();
 
             dataItem.Client = this;
 
-            dataItem.GetKey();
-            dataItem.GetData();
+            dataItem.GetKey(dataReader);
+            dataItem.GetData(dataReader);
 
             return true;
         }

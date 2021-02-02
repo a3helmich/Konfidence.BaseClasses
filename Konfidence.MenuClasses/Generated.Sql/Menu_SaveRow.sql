@@ -25,40 +25,59 @@ CREATE PROCEDURE [dbo].[gen_Menu_SaveRow]
 	@SysLock varchar(75)
 )
 AS
-	if (@NodeId > 0)
-	begin
-		UPDATE [Menu] WITH (ROWLOCK)
-		SET
-		[ParentNodeId] = @ParentNodeId,
-		[MenuId] = @MenuId,
-		[IsRoot] = @IsRoot,
-		[IsVisible] = @IsVisible,
-		[IsLogonVisible] = @IsLogonVisible,
-		[IsAdministrator] = @IsAdministrator,
-		[IsNotLogonVisible] = @IsNotLogonVisible,
-		[IsLocalVisible] = @IsLocalVisible,
-		[Url] = @Url,
-		[ApplicationId] = @ApplicationId,
-		[SysLock] = @SysLock
-		WHERE
-		[NodeId] = @NodeId
-		
-		SELECT @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [NodeId] = @NodeId
-	end
-	else
-	begin
-		INSERT INTO [Menu] WITH (ROWLOCK)
-		(
-			[ParentNodeId], [MenuId], [IsRoot], [IsVisible], [IsLogonVisible], [IsAdministrator], [IsNotLogonVisible], [IsLocalVisible], [Url], [ApplicationId], [SysLock]
-		)
-		VALUES
-		(
-			@ParentNodeId, @MenuId, @IsRoot, @IsVisible, @IsLogonVisible, @IsAdministrator, @IsNotLogonVisible, @IsLocalVisible, @Url, @ApplicationId, @SysLock
-		)
-		
-		SET @NodeId = @@IDENTITY
-		
-		SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [NodeId] = @NodeId
-	end
 	
+	BEGIN TRANSACTION
+		
+		BEGIN TRY
+			
+			if (@NodeId > 0)
+			begin
+				UPDATE [Menu] WITH (ROWLOCK)
+				SET
+				[ParentNodeId] = @ParentNodeId,
+				[MenuId] = @MenuId,
+				[IsRoot] = @IsRoot,
+				[IsVisible] = @IsVisible,
+				[IsLogonVisible] = @IsLogonVisible,
+				[IsAdministrator] = @IsAdministrator,
+				[IsNotLogonVisible] = @IsNotLogonVisible,
+				[IsLocalVisible] = @IsLocalVisible,
+				[Url] = @Url,
+				[ApplicationId] = @ApplicationId,
+				[SysLock] = @SysLock
+				WHERE
+				[NodeId] = @NodeId
+				
+				SELECT @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [NodeId] = @NodeId
+			end
+			else
+			begin
+				INSERT INTO [Menu] WITH (ROWLOCK)
+				(
+					[ParentNodeId], [MenuId], [IsRoot], [IsVisible], [IsLogonVisible], [IsAdministrator], [IsNotLogonVisible], [IsLocalVisible], [Url], [ApplicationId], [SysLock]
+				)
+				VALUES
+				(
+					@ParentNodeId, @MenuId, @IsRoot, @IsVisible, @IsLogonVisible, @IsAdministrator, @IsNotLogonVisible, @IsLocalVisible, @Url, @ApplicationId, @SysLock
+				)
+				
+				SET @NodeId = @@IDENTITY
+				
+				SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [Menu] WHERE [NodeId] = @NodeId
+			end
+			
+			COMMIT TRANSACTION
+			
+		END TRY
+		BEGIN CATCH
+			
+			DECLARE @ErrorMessage nvarchar(max), @ErrorSeverity int, @ErrorState int
+			SELECT @ErrorMessage = ERROR_MESSAGE() + ' Line ' + cast(ERROR_LINE() as nvarchar(5)), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE()
+			
+			ROLLBACK TRANSACTION
+			
+			RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState)
+			
+		END CATCH
+		
 RETURN

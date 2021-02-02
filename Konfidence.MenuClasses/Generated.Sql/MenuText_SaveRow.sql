@@ -19,33 +19,52 @@ CREATE PROCEDURE [dbo].[gen_MenuText_SaveRow]
 	@MenuText nvarchar(100)
 )
 AS
-	if (@NodeId > 0)
-	begin
-		UPDATE [MenuText] WITH (ROWLOCK)
-		SET
-		[MenuId] = @MenuId,
-		[Description] = @Description,
-		[SysLock] = @SysLock,
-		[MenuText] = @MenuText
-		WHERE
-		[NodeId] = @NodeId
-		
-		SELECT @SysUpdateTime = [SysUpdateTime] FROM [MenuText] WHERE [NodeId] = @NodeId
-	end
-	else
-	begin
-		INSERT INTO [MenuText] WITH (ROWLOCK)
-		(
-			[MenuId], [Description], [SysLock], [MenuText]
-		)
-		VALUES
-		(
-			@MenuId, @Description, @SysLock, @MenuText
-		)
-		
-		SET @NodeId = @@IDENTITY
-		
-		SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime], @Language = [Language] FROM [MenuText] WHERE [NodeId] = @NodeId
-	end
 	
+	BEGIN TRANSACTION
+		
+		BEGIN TRY
+			
+			if (@NodeId > 0)
+			begin
+				UPDATE [MenuText] WITH (ROWLOCK)
+				SET
+				[MenuId] = @MenuId,
+				[Description] = @Description,
+				[SysLock] = @SysLock,
+				[MenuText] = @MenuText
+				WHERE
+				[NodeId] = @NodeId
+				
+				SELECT @SysUpdateTime = [SysUpdateTime] FROM [MenuText] WHERE [NodeId] = @NodeId
+			end
+			else
+			begin
+				INSERT INTO [MenuText] WITH (ROWLOCK)
+				(
+					[MenuId], [Description], [SysLock], [MenuText]
+				)
+				VALUES
+				(
+					@MenuId, @Description, @SysLock, @MenuText
+				)
+				
+				SET @NodeId = @@IDENTITY
+				
+				SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime], @Language = [Language] FROM [MenuText] WHERE [NodeId] = @NodeId
+			end
+			
+			COMMIT TRANSACTION
+			
+		END TRY
+		BEGIN CATCH
+			
+			DECLARE @ErrorMessage nvarchar(max), @ErrorSeverity int, @ErrorState int
+			SELECT @ErrorMessage = ERROR_MESSAGE() + ' Line ' + cast(ERROR_LINE() as nvarchar(5)), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE()
+			
+			ROLLBACK TRANSACTION
+			
+			RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState)
+			
+		END CATCH
+		
 RETURN

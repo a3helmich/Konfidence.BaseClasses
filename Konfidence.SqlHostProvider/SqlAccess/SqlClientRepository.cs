@@ -15,8 +15,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
     {
         private readonly string _connectionName;
 
-        public IDataReader DataReader { get; private set; }
-
         public SqlClientRepository(string connectionName)
         {
             _connectionName = connectionName;
@@ -113,7 +111,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return responseParameters;
         }
 
-        public void ExecuteGetStoredProcedure([NotNull] RetrieveParameters retrieveParameters, Func<bool> callback)
+        public void ExecuteGetStoredProcedure([NotNull] RetrieveParameters retrieveParameters, IBaseDataItem baseDataItem)
         {
             var database = GetDatabase();
 
@@ -125,14 +123,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 {
                     if (dataReader.Read())
                     {
-                        DataReader = dataReader;
-
-                        if (callback.IsAssigned())
-                        {
-                            callback();
-                        }
-
-                        DataReader = null;
+                        baseDataItem.GetKey(dataReader);
+                        baseDataItem.GetData(dataReader);
                     }
                 }
             }
@@ -148,7 +140,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             executeParameters.ParameterObjectList.Clear();
         }
 
-        public void ExecuteGetListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, Func<bool> callback) where T : IBaseDataItem
+        public void ExecuteGetListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, IBaseDataItemList<T> baseDataItemList, IBaseClient baseClient) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -158,22 +150,21 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
-                    DataReader = dataReader;
-
                     while (dataReader.Read())
                     {
-                        if (callback.IsAssigned())
-                        {
-                            callback();
-                        }
-                    }
+                        var dataItem = baseDataItemList.GetDataItem();
 
-                    DataReader = null;
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
+                    }
                 }
             }
         }
 
-        public void ExecuteGetRelatedListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, Func<bool> parentCallback, Func<bool> relatedCallback, Func<bool> childCallback) where T : IBaseDataItem
+        public void ExecuteGetRelatedListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters,
+            IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList, IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -183,37 +174,39 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
-                    DataReader = dataReader;
-
                     while (dataReader.Read())
                     {
-                        if (parentCallback.IsAssigned())
-                        {
-                            parentCallback();
-                        }
+                        var dataItem = parentDataItemList.GetDataItem();
+
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
                     }
 
                     dataReader.NextResult();
 
                     while (dataReader.Read())
                     {
-                        if (relatedCallback.IsAssigned())
-                        {
-                            relatedCallback();
-                        }
+                        var dataItem = relatedDataItemList.GetDataItem();
+
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
                     }
 
                     dataReader.NextResult();
 
                     while (dataReader.Read())
                     {
-                        if (childCallback.IsAssigned())
-                        {
-                            childCallback();
-                        }
-                    }
+                        var dataItem = childDataItemList.GetDataItem();
 
-                    DataReader = null;
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
+                    }
                 }
             }
         }

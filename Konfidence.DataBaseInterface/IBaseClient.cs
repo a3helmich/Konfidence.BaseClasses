@@ -22,25 +22,25 @@ namespace Konfidence.DataBaseInterface
 
         bool StoredProcedureExists(string storedPprocedureName);
 
-        byte GetFieldInt8(string fieldName);
+        byte GetFieldInt8(string fieldName, IDataReader dataReader);
 
-        short GetFieldInt16(string fieldName);
+        short GetFieldInt16(string fieldName, IDataReader dataReader);
 
-        int GetFieldInt32(string fieldName);
+        int GetFieldInt32(string fieldName, IDataReader dataReader);
 
-        long GetFieldInt64(string fieldName);
+        long GetFieldInt64(string fieldName, IDataReader dataReader);
 
-        Guid GetFieldGuid(string fieldName);
+        Guid GetFieldGuid(string fieldName, IDataReader dataReader);
 
-        string GetFieldString(string fieldName);
+        string GetFieldString(string fieldName, IDataReader dataReader);
 
-        bool GetFieldBool(string fieldName);
+        bool GetFieldBool(string fieldName, IDataReader dataReader);
 
-        DateTime GetFieldDateTime(string fieldName);
+        DateTime GetFieldDateTime(string fieldName, IDataReader dataReader);
 
-        TimeSpan GetFieldTimeSpan(string fieldName);
+        TimeSpan GetFieldTimeSpan(string fieldName, IDataReader dataReader);
 
-        decimal GetFieldDecimal(string fieldName);
+        decimal GetFieldDecimal(string fieldName, IDataReader dataReader);
 
         DataTable GetSchemaObject(string objectType);
 

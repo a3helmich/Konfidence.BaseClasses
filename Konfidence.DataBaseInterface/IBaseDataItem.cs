@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Konfidence.DataBaseInterface
 {
@@ -37,13 +38,13 @@ namespace Konfidence.DataBaseInterface
 
         void SetId(int id);
 
-        void GetKey();
+        void GetKey(IDataReader dataReader);
 
-        void GetData();
+        void GetData(IDataReader dataReader);
 
-        void SetProperties(Dictionary<string, object> propertyDictionary);
+        //void SetProperties(Dictionary<string, object> propertyDictionary);
 
-        void GetProperties(List<IDbParameterObject> properties);
+        //void GetProperties(List<IDbParameterObject> properties);
 
         List<IDbParameterObject> GetParameterObjects();
     }

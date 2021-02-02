@@ -19,34 +19,53 @@ CREATE PROCEDURE [dbo].[gen_TestInt_SaveRow]
 	@SysLock varchar(75)
 )
 AS
-	if (@TestId > 0)
-	begin
-		UPDATE [TestInt] WITH (ROWLOCK)
-		SET
-		[testTinyInt] = @testTinyInt,
-		[testInt] = @testInt,
-		[testNtext] = @testNtext,
-		[testBigInt] = @testBigInt,
-		[SysLock] = @SysLock
-		WHERE
-		[TestId] = @TestId
-		
-		SELECT @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [TestId] = @TestId
-	end
-	else
-	begin
-		INSERT INTO [TestInt] WITH (ROWLOCK)
-		(
-			[testTinyInt], [testInt], [testNtext], [testBigInt], [SysLock]
-		)
-		VALUES
-		(
-			@testTinyInt, @testInt, @testNtext, @testBigInt, @SysLock
-		)
-		
-		SET @TestId = @@IDENTITY
-		
-		SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [TestId] = @TestId
-	end
 	
+	BEGIN TRANSACTION
+		
+		BEGIN TRY
+			
+			if (@TestId > 0)
+			begin
+				UPDATE [TestInt] WITH (ROWLOCK)
+				SET
+				[testTinyInt] = @testTinyInt,
+				[testInt] = @testInt,
+				[testNtext] = @testNtext,
+				[testBigInt] = @testBigInt,
+				[SysLock] = @SysLock
+				WHERE
+				[TestId] = @TestId
+				
+				SELECT @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [TestId] = @TestId
+			end
+			else
+			begin
+				INSERT INTO [TestInt] WITH (ROWLOCK)
+				(
+					[testTinyInt], [testInt], [testNtext], [testBigInt], [SysLock]
+				)
+				VALUES
+				(
+					@testTinyInt, @testInt, @testNtext, @testBigInt, @SysLock
+				)
+				
+				SET @TestId = @@IDENTITY
+				
+				SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [TestId] = @TestId
+			end
+			
+			COMMIT TRANSACTION
+			
+		END TRY
+		BEGIN CATCH
+			
+			DECLARE @ErrorMessage nvarchar(max), @ErrorSeverity int, @ErrorState int
+			SELECT @ErrorMessage = ERROR_MESSAGE() + ' Line ' + cast(ERROR_LINE() as nvarchar(5)), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE()
+			
+			ROLLBACK TRANSACTION
+			
+			RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState)
+			
+		END CATCH
+		
 RETURN

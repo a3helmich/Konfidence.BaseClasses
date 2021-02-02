@@ -1,8 +1,9 @@
 using System.Data;
 using System;
+using Konfidence.Base;
 using Konfidence.BaseData;
-using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace DbMenuClasses
 {
@@ -30,7 +31,7 @@ namespace DbMenuClasses
             private int _testInt = 0;
             private DateTime _SysInsertTime = DateTime.MinValue;
             private DateTime _SysUpdateTime = DateTime.MinValue;
-            private string _testNtext;
+            private string _testNtext = string.Empty;
             private long _testBigInt = 0;
             private string _SysLock = string.Empty;
 
@@ -117,15 +118,15 @@ namespace DbMenuClasses
                 GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
             }
 
-            public override void GetData()
+            public override void GetData(IDataReader dataReader)
             {
-                GetField(TESTTINYINT, out _testTinyInt);
-                GetField(TESTINT, out _testInt);
-                GetField(SYSINSERTTIME, out _SysInsertTime);
-                GetField(SYSUPDATETIME, out _SysUpdateTime);
-                GetField(TESTNTEXT, out _testNtext);
-                GetField(TESTBIGINT, out _testBigInt);
-                GetField(SYSLOCK, out _SysLock);
+                GetField(TESTTINYINT, dataReader, out _testTinyInt);
+                GetField(TESTINT, dataReader, out _testInt);
+                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
+                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
+                GetField(TESTNTEXT, dataReader, out _testNtext);
+                GetField(TESTBIGINT, dataReader, out _testBigInt);
+                GetField(SYSLOCK, dataReader, out _SysLock);
             }
 
             protected override void SetData()
