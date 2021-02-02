@@ -35,6 +35,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         private IDataReader DataReader => _repository.DataReader;
 
         #region GetField Methods
+
+        public void GetField([NotNull] string fieldName, out byte field)
+        {
+            var fieldOrdinal = GetOrdinal(fieldName);
+
+            field = DataReader.IsDBNull(fieldOrdinal) ? 0 : DataReader.GetByte(fieldOrdinal);
+        }
+
         public byte GetFieldInt8([NotNull] string fieldName)
         {
             var fieldOrdinal = GetOrdinal(fieldName);
