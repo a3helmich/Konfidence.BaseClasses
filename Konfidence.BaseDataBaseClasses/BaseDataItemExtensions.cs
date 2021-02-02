@@ -84,7 +84,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        internal static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, string idText, string isEditingText) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, string idText, string isEditingText) where T : class, IBaseDataItem
         {
             bool.TryParse(isEditingText, out var isEditing);
 
@@ -102,7 +102,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        internal static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, string idText) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, string idText) where T : class, IBaseDataItem
         {
             if (Guid.TryParse(idText, out var guidId))
             {
@@ -118,7 +118,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        internal static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, BaseDataItem dataItem) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, BaseDataItem dataItem) where T : class, IBaseDataItem
         {
             if (dataItem.IsAssigned())
             {
@@ -126,17 +126,17 @@ namespace Konfidence.BaseData
             }
         }
 
-        internal static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, int id, bool isEditing = false) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, int id, bool isEditing = false) where T : class, IBaseDataItem
         {
             baseDataItems.SetSelected(id, Guid.Empty, isEditing);
         }
 
-        internal static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, Guid guidId, bool isEditing) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, Guid guidId, bool isEditing) where T : class, IBaseDataItem
         {
             baseDataItems.SetSelected(0, guidId, isEditing);
         }
 
-        internal static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, int id, Guid guidId, bool isEditing) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, int id, Guid guidId, bool isEditing) where T : class, IBaseDataItem
         {
             if (baseDataItems.Any())
             {
