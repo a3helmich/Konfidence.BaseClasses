@@ -22,13 +22,13 @@ namespace Konfidence.RepositoryInterface
 
         ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters);
 
-        void ExecuteGetStoredProcedure(RetrieveParameters retrieveParameters, Func<bool> callback);
+        void ExecuteGetStoredProcedure(RetrieveParameters retrieveParameters, IBaseDataItem baseDataItem);
 
-        void ExecuteGetListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, Func<bool> callback) where T : IBaseDataItem;
+        void ExecuteGetListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, IBaseDataItemList<T> baseDataItemList, IBaseClient baseClient) where T : IBaseDataItem;
 
         void ExecuteGetRelatedListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters,
-                                                  Func<bool> parentCallback, Func<bool> relatedCallback,
-                                                  Func<bool> childCallback) where T : IBaseDataItem;
+            IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
+            IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem;
 
         void ExecuteDeleteStoredProcedure(string deleteStoredProcedure, string autoIdField, int id);
 

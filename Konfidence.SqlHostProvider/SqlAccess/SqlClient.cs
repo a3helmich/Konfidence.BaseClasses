@@ -15,7 +15,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 {
     public class SqlClient : IBaseClient
     {
-        private readonly NinjectDependencyResolver _ninject = new NinjectDependencyResolver();
+        private readonly NinjectDependencyResolver _ninject = new();
 
         private readonly IDataRepository _repository;
 
@@ -154,13 +154,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             var retrieveParameters = new RetrieveParameters(dataItem, getStoredProcedure);
 
-            _repository.ExecuteGetStoredProcedure(retrieveParameters, () =>
-                {
-                    dataItem.GetKey();
-                    dataItem.GetData();
-
-                    return true;
-                });
+            _repository.ExecuteGetStoredProcedure(retrieveParameters, dataItem);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
@@ -174,7 +168,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             var retrieveListParameters = new RetrieveListParameters<T>(baseDataItemList, getListStoredProcedure);
 
-            _repository.ExecuteGetListStoredProcedure(retrieveListParameters, () => GetDataItem(baseDataItemList));
+            _repository.ExecuteGetListStoredProcedure(retrieveListParameters, baseDataItemList, this);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
@@ -189,10 +183,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             var retrieveListParameters = new RetrieveListParameters<T>(parentDataItemList, getRelatedStoredProcedure);
 
-            _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters,
-                () => GetDataItem(parentDataItemList),
-                () => GetDataItem(relatedDataItemList),
-                () => GetDataItem(childDataItemList));
+            _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters, parentDataItemList, relatedDataItemList, childDataItemList, this);
         }
 
         private bool GetDataItem<T>([NotNull] IBaseDataItemList<T> baseDataItemList) where T : IBaseDataItem

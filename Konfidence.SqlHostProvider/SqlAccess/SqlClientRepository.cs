@@ -113,7 +113,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return responseParameters;
         }
 
-        public void ExecuteGetStoredProcedure([NotNull] RetrieveParameters retrieveParameters, Func<bool> callback)
+        public void ExecuteGetStoredProcedure([NotNull] RetrieveParameters retrieveParameters, IBaseDataItem baseDataItem)
         {
             var database = GetDatabase();
 
@@ -127,10 +127,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                     {
                         DataReader = dataReader;
 
-                        if (callback.IsAssigned())
-                        {
-                            callback();
-                        }
+                        baseDataItem.GetKey();
+                        baseDataItem.GetData();
 
                         DataReader = null;
                     }
@@ -148,7 +146,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             executeParameters.ParameterObjectList.Clear();
         }
 
-        public void ExecuteGetListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, Func<bool> callback) where T : IBaseDataItem
+        public void ExecuteGetListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, IBaseDataItemList<T> baseDataItemList, IBaseClient baseClient) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -162,10 +160,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                     while (dataReader.Read())
                     {
-                        if (callback.IsAssigned())
-                        {
-                            callback();
-                        }
+                        var dataItem = baseDataItemList.GetDataItem();
+
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey();
+                        dataItem.GetData();
                     }
 
                     DataReader = null;
@@ -173,7 +173,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public void ExecuteGetRelatedListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, Func<bool> parentCallback, Func<bool> relatedCallback, Func<bool> childCallback) where T : IBaseDataItem
+        public void ExecuteGetRelatedListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters,
+            IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList, IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
@@ -187,30 +188,36 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                     while (dataReader.Read())
                     {
-                        if (parentCallback.IsAssigned())
-                        {
-                            parentCallback();
-                        }
+                        var dataItem = parentDataItemList.GetDataItem();
+
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey();
+                        dataItem.GetData();
                     }
 
                     dataReader.NextResult();
 
                     while (dataReader.Read())
                     {
-                        if (relatedCallback.IsAssigned())
-                        {
-                            relatedCallback();
-                        }
+                        var dataItem = relatedDataItemList.GetDataItem();
+
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey();
+                        dataItem.GetData();
                     }
 
                     dataReader.NextResult();
 
                     while (dataReader.Read())
                     {
-                        if (childCallback.IsAssigned())
-                        {
-                            childCallback();
-                        }
+                        var dataItem = childDataItemList.GetDataItem();
+
+                        dataItem.Client = baseClient;
+
+                        dataItem.GetKey();
+                        dataItem.GetData();
                     }
 
                     DataReader = null;

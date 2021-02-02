@@ -3,7 +3,6 @@
   "DevelopmentServer": "konfidence2",
   "DeploymentServer": "",
   "TargetProjectDirectory": "Konfidence.MenuClasses",
-  "WebServiceDirectory": "MenuClassesWebService",
   "SolutionDirectory": "C:\\Projects\\Konfidence\\BaseClasses",
   "OneToOneItems": [
     {
