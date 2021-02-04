@@ -115,9 +115,9 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(retrieveParameters.StoredProcedure))
+            using (var dbCommand = GetStoredProcCommand(baseDataItem.LoadStoredProcedure))
             {
-                SetParameterData(retrieveParameters, database, dbCommand);
+                SetParameterData(baseDataItem.GetParameterObjects(), database, dbCommand);
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
@@ -130,14 +130,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData([NotNull] RetrieveParameters executeParameters, Database database, DbCommand dbCommand)
+        private static void SetParameterData([NotNull] List<IDbParameterObject> parameterObjectList, Database database, DbCommand dbCommand)
         {
-            foreach (var parameterObject in executeParameters.ParameterObjectList)
+            foreach (var parameterObject in parameterObjectList)
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
-
-            executeParameters.ParameterObjectList.Clear();
         }
 
         public void ExecuteGetListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, IBaseDataItemList<T> baseDataItemList, IBaseClient baseClient) where T : IBaseDataItem

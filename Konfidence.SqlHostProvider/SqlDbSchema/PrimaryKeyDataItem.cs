@@ -25,9 +25,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string DataType { get; set; } = string.Empty;
 
-
         public PrimaryKeyDataItem()
         {
+            LoadStoredProcedure = SpName.PrimarykeyGet;
         }
 
         public PrimaryKeyDataItem(string connectionName, string tableName)

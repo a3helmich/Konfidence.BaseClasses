@@ -153,7 +153,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void GetItem(IBaseDataItem dataItem, [NotNull] string getStoredProcedure)
         {
-            if (getStoredProcedure.Equals(string.Empty))
+            if (!getStoredProcedure.IsAssigned())
             {
                 throw (new Exception("GetStoredProcedure not provided"));
             }
@@ -165,7 +165,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
         {
-            if (getListStoredProcedure.Equals(string.Empty))
+            if (!getListStoredProcedure.IsAssigned())
             {
                 throw (new Exception("GetListStoredProcedure not provided"));
             }
