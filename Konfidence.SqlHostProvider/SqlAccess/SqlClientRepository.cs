@@ -79,7 +79,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
 
             // alle overige parameters toevoegen
-            foreach (var parameterObject in dataItem.GetParameterObjects())
+            foreach (var parameterObject in dataItem.SetItemData())
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
