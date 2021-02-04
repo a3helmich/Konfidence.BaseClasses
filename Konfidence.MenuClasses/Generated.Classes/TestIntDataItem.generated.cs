@@ -89,7 +89,7 @@ namespace DbMenuClasses
 
             public TestIntDataItem(int testid) : this()
             {
-                GetItem(TESTINT_GETROW, testid);
+                GetItem(testid);
             }
 
             protected override IBaseClient ClientBind()

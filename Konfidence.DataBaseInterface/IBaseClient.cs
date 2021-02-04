@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using JetBrains.Annotations;
 
 namespace Konfidence.DataBaseInterface
 {
@@ -9,6 +10,8 @@ namespace Konfidence.DataBaseInterface
         void Save(IBaseDataItem dataItem);
 
         void GetItem(IBaseDataItem dataItem);
+
+        void GetItemBy(IBaseDataItem dataItem, [NotNull] string storedProcedure);
 
         void Delete(IBaseDataItem dataItem);
 

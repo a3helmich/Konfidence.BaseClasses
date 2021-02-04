@@ -1,5 +1,7 @@
 using System.Data;
 using System;
+using System.Data.Common;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
@@ -152,7 +154,7 @@ namespace DbMenuClasses
 
             public MenuDataItem(int nodeid) : this()
             {
-                GetItem(MENU_GETROW, nodeid);
+                GetItem(nodeid);
             }
 
             protected override IBaseClient ClientBind()
@@ -172,6 +174,7 @@ namespace DbMenuClasses
                 SaveStoredProcedure = MENU_SAVEROW;
 
                 base.InitializeDataItem();
+
             }
 
             protected override void GetAutoUpdateData()

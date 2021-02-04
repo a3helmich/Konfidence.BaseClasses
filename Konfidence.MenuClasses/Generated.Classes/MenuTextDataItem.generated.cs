@@ -89,7 +89,7 @@ namespace DbMenuClasses
 
             public MenuTextDataItem(int nodeid) : this()
             {
-                GetItem(MENUTEXT_GETROW, nodeid);
+                GetItem(nodeid);
             }
 
             protected override IBaseClient ClientBind()
@@ -147,7 +147,7 @@ namespace DbMenuClasses
 
                 menutextDataItem.SetParameter(NODEID, nodeid);
 
-                menutextDataItem.GetItem(MENUTEXT_GETROWBY_NODEID);
+                menutextDataItem.GetItemBy(MENUTEXT_GETROWBY_NODEID);
 
                 if (!menutextDataItem.IsNew)
                 {

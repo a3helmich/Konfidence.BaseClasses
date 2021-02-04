@@ -30,7 +30,7 @@ namespace Konfidence.BaseData
 
 	    private NinjectDependencyResolver _ninject;
 
-        protected List<IDbParameterObject> DbParameterObjects { get; private set; }
+        private List<IDbParameterObject> DbParameterObjects { get;  }
 
         protected BaseDataItem()
 	    {
@@ -631,7 +631,6 @@ namespace Konfidence.BaseData
 	        DbParameterObjects.SetParameter(fieldName, value);
 	    }
 
-
         protected void SetField(string fieldName, Guid value)
         {
             DbParameterObjects.SetParameter(fieldName, value);
@@ -726,7 +725,7 @@ namespace Konfidence.BaseData
         {
             if (GetStoredProcedure.IsAssigned())
             {
-                GetItem(GetStoredProcedure, Id);
+                GetItem(Id);
             }
         }
 
@@ -749,7 +748,7 @@ namespace Konfidence.BaseData
 		{
         }
 
-        protected void GetItem(string storedProcedure)
+        protected void GetItem()
 		{
             InternalInitializeDataItem();
 
@@ -758,23 +757,32 @@ namespace Konfidence.BaseData
             AfterGetDataItem();
         }
 
-		protected void GetItem(string storedProcedure, int autoKeyId)
+        protected void GetItemBy([NotNull] string storedProcedure)
+        {
+            InternalInitializeDataItem();
+
+            Client.GetItemBy(this, storedProcedure);
+
+            AfterGetDataItem();
+        }
+
+        protected void GetItem(int autoKeyId)
 		{
             InternalInitializeDataItem();
 
             SetField(AutoIdField, autoKeyId);
 
-            GetItem(storedProcedure);
+            GetItem();
 		}
 
 	    [UsedImplicitly]
-        protected void GetItem(string storedProcedure, Guid guidId)
+        protected void GetItem([NotNull] string guidStoredProcedure, Guid guidId)
         {
             InternalInitializeDataItem();
 
             SetField(GuidIdField, guidId);
 
-            GetItem(storedProcedure);
+            GetItemBy(guidStoredProcedure);
         }
 
         protected virtual void BeforeSave()

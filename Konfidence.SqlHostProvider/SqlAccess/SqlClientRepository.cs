@@ -124,6 +124,25 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
+        public void ExecuteGetByStoredProcedure([NotNull] IBaseDataItem dataItem, string storedProcedure)
+        {
+            var database = GetDatabase();
+
+            using (var dbCommand = GetStoredProcCommand(storedProcedure))
+            {
+                SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
+
+                using (var dataReader = database.ExecuteReader(dbCommand))
+                {
+                    if (dataReader.Read())
+                    {
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
+                    }
+                }
+            }
+        }
+
         private static void SetParameterData([NotNull] List<IDbParameterObject> parameterObjectList, Database database, DbCommand dbCommand)
         {
             foreach (var parameterObject in parameterObjectList)

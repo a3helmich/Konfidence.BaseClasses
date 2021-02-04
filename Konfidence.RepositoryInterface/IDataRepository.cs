@@ -21,6 +21,8 @@ namespace Konfidence.RepositoryInterface
 
         void ExecuteGetStoredProcedure(IBaseDataItem dataItem);
 
+        void ExecuteGetByStoredProcedure(IBaseDataItem dataItem, string storedProcedure);
+
         void ExecuteGetListStoredProcedure<T>(IBaseDataItemList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem;
 
         void ExecuteGetRelatedListStoredProcedure<T>(string storedProcedure,

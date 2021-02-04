@@ -37,7 +37,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             SetParameter(SqlConstant.TableName, tableName);
 
-            GetItem(SpName.PrimarykeyGet);
+            GetItem();
         }
 
         [NotNull]

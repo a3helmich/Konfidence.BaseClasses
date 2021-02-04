@@ -133,16 +133,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
 
             _repository.ExecuteSaveStoredProcedure(dataItem);
-
-            //foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
-            //{
-            //    kvp.Value.Value = resultParameters.AutoUpdateFieldDictionary[kvp.Key].Value;
-
-            //    if (DBNull.Value.Equals(kvp.Value.Value))
-            //    {
-            //        kvp.Value.Value = null;
-            //    }
-            //}
         }
 
         public void GetItem([NotNull] IBaseDataItem dataItem)
@@ -153,6 +143,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
 
             _repository.ExecuteGetStoredProcedure(dataItem);
+        }
+
+        public void GetItemBy([NotNull] IBaseDataItem dataItem, string storedProcedure)
+        {
+            if (!storedProcedure.IsAssigned())
+            {
+                throw (new Exception("GetStoredProcedure not provided"));
+            }
+
+            _repository.ExecuteGetByStoredProcedure(dataItem, storedProcedure);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
