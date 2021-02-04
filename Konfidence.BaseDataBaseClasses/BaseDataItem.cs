@@ -753,7 +753,7 @@ namespace Konfidence.BaseData
 		{
             InternalInitializeDataItem();
 
-            Client.GetItem(this, storedProcedure);
+            Client.GetItem(this);
 
             AfterGetDataItem();
         }

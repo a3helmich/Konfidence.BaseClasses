@@ -111,7 +111,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return responseParameters;
         }
 
-        public void ExecuteGetStoredProcedure([NotNull] RetrieveParameters retrieveParameters, IBaseDataItem baseDataItem)
+        public void ExecuteGetStoredProcedure([NotNull] IBaseDataItem baseDataItem)
         {
             var database = GetDatabase();
 

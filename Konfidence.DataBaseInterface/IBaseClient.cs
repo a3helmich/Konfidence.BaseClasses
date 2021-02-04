@@ -8,7 +8,7 @@ namespace Konfidence.DataBaseInterface
     {
         void Save(IBaseDataItem dataItem);
 
-        void GetItem(IBaseDataItem dataItem, string getStoredProcedure);
+        void GetItem(IBaseDataItem dataItem);
 
         void Delete(string deleteStoredProcedure, string autoIdField, int id);
 

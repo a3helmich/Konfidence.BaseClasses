@@ -20,7 +20,7 @@ namespace Konfidence.RepositoryInterface
 
         ResponseParameters ExecuteSaveStoredProcedure(RequestParameters executeParameters);
 
-        void ExecuteGetStoredProcedure(RetrieveParameters retrieveParameters, IBaseDataItem baseDataItem);
+        void ExecuteGetStoredProcedure(IBaseDataItem baseDataItem);
 
         void ExecuteGetListStoredProcedure<T>(RetrieveListParameters<T> retrieveListParameters, IBaseDataItemList<T> baseDataItemList, IBaseClient baseClient) where T : IBaseDataItem;
 

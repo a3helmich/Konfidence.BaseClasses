@@ -151,16 +151,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public void GetItem(IBaseDataItem dataItem, [NotNull] string getStoredProcedure)
+        public void GetItem([NotNull] IBaseDataItem dataItem)
         {
-            if (!getStoredProcedure.IsAssigned())
+            if (!dataItem.LoadStoredProcedure.IsAssigned())
             {
                 throw (new Exception("GetStoredProcedure not provided"));
             }
 
-            var retrieveParameters = new RetrieveParameters(dataItem, getStoredProcedure);
-
-            _repository.ExecuteGetStoredProcedure(retrieveParameters, dataItem);
+            _repository.ExecuteGetStoredProcedure(dataItem);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
