@@ -10,7 +10,7 @@ namespace Konfidence.DataBaseInterface
 
         void GetItem(IBaseDataItem dataItem);
 
-        void Delete(string deleteStoredProcedure, string autoIdField, int id);
+        void Delete(IBaseDataItem dataItem);
 
         int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList);
 

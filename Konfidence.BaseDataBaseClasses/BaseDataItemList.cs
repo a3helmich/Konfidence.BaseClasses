@@ -113,14 +113,14 @@ namespace Konfidence.BaseData
 		[NotNull]
         public T GetDataItem()
 		{
-            //var baseDataItem = new T();
-            var baseDataItem = Kernel.Get<T>();
+            //var dataItem = new T();
+            var dataItem = Kernel.Get<T>();
 
-            baseDataItem.InitializeDataItem();
+            dataItem.InitializeDataItem();
 
-			Add(baseDataItem);
+			Add(dataItem);
 
-			return baseDataItem;
+			return dataItem;
 		}
 
         public List<IDbParameterObject> GetParameterObjectList()

@@ -397,7 +397,7 @@ namespace Konfidence.BaseData
             }
         }
 
-	    public string LoadStoredProcedure { get; set; } = string.Empty;
+	    public string GetStoredProcedure { get; set; } = string.Empty;
 
 	    public string DeleteStoredProcedure { get; set; } = string.Empty;
 
@@ -724,9 +724,9 @@ namespace Konfidence.BaseData
 
         public void LoadDataItem()
         {
-            if (LoadStoredProcedure.IsAssigned())
+            if (GetStoredProcedure.IsAssigned())
             {
-                GetItem(LoadStoredProcedure, Id);
+                GetItem(GetStoredProcedure, Id);
             }
         }
 
@@ -821,7 +821,7 @@ namespace Konfidence.BaseData
 
             BeforeDelete();
 
-			Client.Delete(DeleteStoredProcedure, AutoIdField, Id);
+			Client.Delete(this);
 
 			Id = 0;
 

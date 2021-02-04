@@ -105,7 +105,7 @@ namespace DbMenuClasses
                 AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
                 AddAutoUpdateField(LANGUAGE, DbType.String);
 
-                LoadStoredProcedure = MENUTEXT_GETROW;
+                GetStoredProcedure = MENUTEXT_GETROW;
                 DeleteStoredProcedure = MENUTEXT_DELETEROW;
                 SaveStoredProcedure = MENUTEXT_SAVEROW;
 

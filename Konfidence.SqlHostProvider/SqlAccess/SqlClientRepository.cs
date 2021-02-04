@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DataBaseInterface;
 using Konfidence.RepositoryInterface;
-using Konfidence.RepositoryInterface.Objects;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
@@ -50,32 +49,28 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
         [NotNull]
-        public ResponseParameters ExecuteSaveStoredProcedure([NotNull] RequestParameters executeParameters)
+        public void ExecuteSaveStoredProcedure([NotNull] IBaseDataItem dataItem)
         {
             var database = GetDatabase();
 
-            ResponseParameters resultParameters;
-
-            using (var dbCommand = GetStoredProcCommand(executeParameters.StoredProcedure))
+            using (var dbCommand = GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
-                SetParameterData(executeParameters, database, dbCommand);
+                SetParameterData(dataItem, database, dbCommand);
 
                 ExecuteNonQuery(dbCommand);
 
-                resultParameters = GetParameterData(executeParameters, database, dbCommand);
+                GetParameterData(dataItem, database, dbCommand);
             }
-
-            return resultParameters;
         }
 
-        private static void SetParameterData([NotNull] RequestParameters executeParameters, [NotNull] Database database, DbCommand dbCommand)
+        private static void SetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
         {
             // autoidfield parameter toevoegen
-            database.AddParameter(dbCommand, executeParameters.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
-                                                        executeParameters.AutoIdField, DataRowVersion.Proposed, executeParameters.Id);
+            database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
+                dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.GetId());
 
             // alle velden die aan de kant van de database gewijzigd worden als parameter toevoegen
-            foreach (var kvp in executeParameters.AutoUpdateFieldList)
+            foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
             {
                 var parameterObject = kvp.Value;
 
@@ -84,47 +79,46 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
 
             // alle overige parameters toevoegen
-            foreach (var parameterObject in executeParameters.ParameterObjectList)
+            foreach (var parameterObject in dataItem.GetParameterObjects())
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
         }
 
         [NotNull]
-        private static ResponseParameters GetParameterData([NotNull] RequestParameters executeParameters, [NotNull] Database database, DbCommand dbCommand)
+        private static void GetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
         {
-            var responseParameters = new ResponseParameters();
+            dataItem.SetId((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));
 
-            responseParameters.SetId((int)database.GetParameterValue(dbCommand, executeParameters.AutoIdField));
-            responseParameters.SetAutoUpdateFieldList(executeParameters.AutoUpdateFieldList);
-
-            foreach (var kvp in responseParameters.AutoUpdateFieldList)
+            foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
             {
-                kvp.Value.Value = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
+                var fieldValue = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
 
-                if (DBNull.Value.Equals(kvp.Value.Value))
+                if (DBNull.Value.Equals(fieldValue))
                 {
                     kvp.Value.Value = null;
-                }
-            }
 
-            return responseParameters;
+                    continue;
+                }
+
+                kvp.Value.Value = fieldValue;
+            }
         }
 
-        public void ExecuteGetStoredProcedure([NotNull] IBaseDataItem baseDataItem)
+        public void ExecuteGetStoredProcedure([NotNull] IBaseDataItem dataItem)
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(baseDataItem.LoadStoredProcedure))
+            using (var dbCommand = GetStoredProcCommand(dataItem.GetStoredProcedure))
             {
-                SetParameterData(baseDataItem.GetParameterObjects(), database, dbCommand);
+                SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
                     if (dataReader.Read())
                     {
-                        baseDataItem.GetKey(dataReader);
-                        baseDataItem.GetData(dataReader);
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
                     }
                 }
             }
@@ -138,13 +132,13 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public void ExecuteGetListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters, IBaseDataItemList<T> baseDataItemList, IBaseClient baseClient) where T : IBaseDataItem
+        public void ExecuteGetListStoredProcedure<T>([NotNull] IBaseDataItemList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(retrieveListParameters.StoredProcedure))
+            using (var dbCommand = GetStoredProcCommand(storedProcedure))
             {
-                SetParameterData(retrieveListParameters, database, dbCommand);
+                SetParameterData(baseDataItemList.GetParameterObjectList(), database, dbCommand);
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
@@ -161,14 +155,13 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public void ExecuteGetRelatedListStoredProcedure<T>([NotNull] RetrieveListParameters<T> retrieveListParameters,
-            IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList, IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem
+        public void ExecuteGetRelatedListStoredProcedure<T>(string storedProcedure, [NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList, IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(retrieveListParameters.StoredProcedure))
+            using (var dbCommand = GetStoredProcCommand(storedProcedure))
             {
-                SetParameterData(retrieveListParameters, database, dbCommand);
+                SetParameterData(parentDataItemList.GetParameterObjectList(), database, dbCommand);
 
                 using (var dataReader = database.ExecuteReader(dbCommand))
                 {
@@ -209,23 +202,20 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData<T>([NotNull] RetrieveListParameters<T> executeParameters, Database database, DbCommand dbCommand) where T : IBaseDataItem
+        public void ExecuteDeleteStoredProcedure([NotNull] IBaseDataItem dataItem)
         {
-            foreach (var parameterObject in executeParameters.ParameterObjectList)
+            var id = dataItem.GetId();
+
+            if (id == 0)
             {
-                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
+                return;
             }
 
-            executeParameters.ParameterObjectList.Clear();
-        }
-
-        public void ExecuteDeleteStoredProcedure(string deleteStoredProcedure, string autoIdField, int id)
-        {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(deleteStoredProcedure))
+            using (var dbCommand = GetStoredProcCommand(dataItem.DeleteStoredProcedure))
             {
-                database.AddInParameter(dbCommand, autoIdField, DbType.Int32, id);
+                database.AddInParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, dataItem.GetId());
 
                 ExecuteNonQuery(dbCommand);
             }

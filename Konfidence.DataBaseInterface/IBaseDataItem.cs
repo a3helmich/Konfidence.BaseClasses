@@ -18,7 +18,7 @@ namespace Konfidence.DataBaseInterface
 
         IBaseClient Client { get; set; }
 
-        string LoadStoredProcedure { get; set; }
+        string GetStoredProcedure { get; set; }
 
         string DeleteStoredProcedure { get; set; }
 

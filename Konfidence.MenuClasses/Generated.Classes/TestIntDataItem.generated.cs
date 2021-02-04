@@ -104,7 +104,7 @@ namespace DbMenuClasses
                 AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
                 AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
 
-                LoadStoredProcedure = TESTINT_GETROW;
+                GetStoredProcedure = TESTINT_GETROW;
                 DeleteStoredProcedure = TESTINT_DELETEROW;
                 SaveStoredProcedure = TESTINT_SAVEROW;
 
