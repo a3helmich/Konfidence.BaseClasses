@@ -2,7 +2,7 @@
 
 namespace Konfidence.DataBaseInterface
 {
-    public interface IDbParameterObject 
+    public interface IDbParameterData 
     {
         string ParameterName { get; set; }
 

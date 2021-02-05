@@ -28,9 +28,9 @@ namespace Konfidence.BaseData
 
         private NinjectDependencyResolver _ninject;
 
-        private List<IDbParameterObject> DbParameterObjects { get;  }
+        private List<IDbParameterData> DbParameterObjects { get;  }
 
-        public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary { get; }
+        public Dictionary<string, IDbParameterData> AutoUpdateFieldDictionary { get; }
 
         protected BaseDataItem()
 	    {
@@ -39,8 +39,8 @@ namespace Konfidence.BaseData
 	        _isEditing = false;
 	        _isInitialized = false;
 
-	        DbParameterObjects = new List<IDbParameterObject>();
-            AutoUpdateFieldDictionary = new Dictionary<string, IDbParameterObject>();
+	        DbParameterObjects = new List<IDbParameterData>();
+            AutoUpdateFieldDictionary = new Dictionary<string, IDbParameterData>();
         }
 
         private IKernel Kernel
@@ -131,7 +131,7 @@ namespace Konfidence.BaseData
 			Id = id;
 		}
 
-        public List<IDbParameterObject> GetParameterObjects()
+        public List<IDbParameterData> GetParameterObjects()
         {
             return DbParameterObjects;
         }
@@ -380,7 +380,7 @@ namespace Konfidence.BaseData
         {
             if (!AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                AutoUpdateFieldDictionary.Add(fieldName, new DbParameterObject(fieldName, fieldType, null));
+                AutoUpdateFieldDictionary.Add(fieldName, new DbParameterData(fieldName, fieldType, null));
             }
         }
 
@@ -824,7 +824,7 @@ namespace Konfidence.BaseData
         }
 
         [NotNull]
-        public List<IDbParameterObject> SetItemData()
+        public List<IDbParameterData> SetItemData()
 		{
 			SetData();
 
@@ -832,9 +832,9 @@ namespace Konfidence.BaseData
 		}
 
         [NotNull]
-        internal List<IDbParameterObject> SetParameterData()
+        internal List<IDbParameterData> SetParameterData()
         {
-            var parameterObjectList = new List<IDbParameterObject>();
+            var parameterObjectList = new List<IDbParameterData>();
 
             foreach (var parameterObject in DbParameterObjects)
             {

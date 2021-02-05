@@ -15,7 +15,7 @@ namespace Konfidence.RepositoryInterface
         [UsedImplicitly]
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
 
-        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, List<IDbParameterObject> parameterObjectList);
+        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, List<IDbParameterData> parameterObjectList);
 
         void ExecuteSaveStoredProcedure(IBaseDataItem dataItem);
 
@@ -32,9 +32,6 @@ namespace Konfidence.RepositoryInterface
         void ExecuteDeleteStoredProcedure(IBaseDataItem dataItem);
 
         int ExecuteNonQuery(string textCommand);
-
-        [UsedImplicitly]
-        int ExecuteNonQuery(DbCommand commandType);
 
         bool ObjectExists(string objectName, string collection);
     }

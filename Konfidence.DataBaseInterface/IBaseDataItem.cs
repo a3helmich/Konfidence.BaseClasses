@@ -8,7 +8,7 @@ namespace Konfidence.DataBaseInterface
     {
         string AutoIdField { get; set; }
 
-        Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary { get; }
+        Dictionary<string, IDbParameterData> AutoUpdateFieldDictionary { get; }
 
         Guid GuidIdValue { get; }
 
@@ -26,7 +26,7 @@ namespace Konfidence.DataBaseInterface
 
         void InitializeDataItem();
 
-        List<IDbParameterObject> SetItemData();
+        List<IDbParameterData> SetItemData();
 
         void Save();
 
@@ -46,6 +46,6 @@ namespace Konfidence.DataBaseInterface
 
         //void GetProperties(List<IDbParameterObject> properties);
 
-        List<IDbParameterObject> GetParameterObjects();
+        List<IDbParameterData> GetParameterObjects();
     }
 }

@@ -190,7 +190,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteDeleteStoredProcedure(dataItem);
         }
 
-        public int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)
+        public int ExecuteCommand(string storedProcedure, List<IDbParameterData> parameterObjectList)
         {
             return _repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
         }

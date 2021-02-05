@@ -15,7 +15,7 @@ namespace Konfidence.DataBaseInterface
 
         void Delete(IBaseDataItem dataItem);
 
-        int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList);
+        int ExecuteCommand(string storedProcedure, List<IDbParameterData> parameterObjectList);
 
         int ExecuteTextCommand(string textCommand);
 

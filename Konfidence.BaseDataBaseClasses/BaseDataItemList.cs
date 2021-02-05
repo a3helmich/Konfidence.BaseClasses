@@ -13,7 +13,7 @@ namespace Konfidence.BaseData
     [UsedImplicitly]
     public abstract class BaseDataItemList<T> : List<T>, IBaseDataItemList<T> where T : class, IBaseDataItem
     {
-        private readonly List<IDbParameterObject> _dbParameterObjects;
+        private readonly List<IDbParameterData> _dbParameterObjects;
 
 	    private IBaseClient _client;
 
@@ -92,7 +92,7 @@ namespace Konfidence.BaseData
 
 	    public BaseDataItemList()
 	    {
-	        _dbParameterObjects = new List<IDbParameterObject>();
+	        _dbParameterObjects = new List<IDbParameterData>();
         }
 
         protected void BuildItemList(string getListStoredProcedure)
@@ -123,7 +123,7 @@ namespace Konfidence.BaseData
 			return dataItem;
 		}
 
-        public List<IDbParameterObject> GetParameterObjectList()
+        public List<IDbParameterData> GetParameterObjectList()
         {
             return _dbParameterObjects;
         }
