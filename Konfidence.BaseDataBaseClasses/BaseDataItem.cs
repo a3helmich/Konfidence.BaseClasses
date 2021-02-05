@@ -24,13 +24,13 @@ namespace Konfidence.BaseData
         private bool _isEditing;
         private bool _isInitialized;
 
-        private IBaseClient _client; 
+        private IBaseClient _client;
 
-	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
-
-	    private NinjectDependencyResolver _ninject;
+        private NinjectDependencyResolver _ninject;
 
         private List<IDbParameterObject> DbParameterObjects { get;  }
+
+        public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary { get; }
 
         protected BaseDataItem()
 	    {
@@ -40,7 +40,8 @@ namespace Konfidence.BaseData
 	        _isInitialized = false;
 
 	        DbParameterObjects = new List<IDbParameterObject>();
-	    }
+            AutoUpdateFieldDictionary = new Dictionary<string, IDbParameterObject>();
+        }
 
         private IKernel Kernel
 	    {
@@ -162,20 +163,6 @@ namespace Konfidence.BaseData
 	    public Guid GuidIdValue { get; private set; } = Guid.Empty;
 
 	    protected int Id { get; private set; }
-
-	    [NotNull]
-        public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary
-        {
-            get
-            {
-                if (!_autoUpdateFieldDictionary.IsAssigned())
-                {
-                    _autoUpdateFieldDictionary = new Dictionary<string, IDbParameterObject>();
-                }
-
-                return _autoUpdateFieldDictionary;
-            }
-        }
 
         [UsedImplicitly]
 	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out byte fieldValue)
