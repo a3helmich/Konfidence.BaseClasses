@@ -99,14 +99,6 @@ namespace Konfidence.BaseData
             AfterDataLoad();
         }
 
-        [UsedImplicitly]
-		protected void RebuildItemList(string getListStoredProcedure)
-		{
-			Clear();
-
-            BuildItemList(getListStoredProcedure);
-		}
-
 		[NotNull]
         public T GetDataItem()
 		{
