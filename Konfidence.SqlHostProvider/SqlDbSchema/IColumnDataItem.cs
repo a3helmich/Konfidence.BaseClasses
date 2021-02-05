@@ -1,12 +1,15 @@
-﻿namespace Konfidence.SqlHostProvider.SqlDbSchema
+﻿using Konfidence.DataBaseInterface;
+
+namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public interface IColumnDataItem 
+    public interface IColumnDataItem : IBaseDataItem
     {
         string Name { get; }
         bool IsPrimaryKey { get; }
         bool IsDefaulted { get; }
         bool IsComputed { get; }
         bool IsAutoUpdated { get; }
+        bool IsGuidField { get; }
         bool IsLockInfo { get; }
         string DefaultPropertyValue { get; }
         string CharacterMaximumLength { get; }

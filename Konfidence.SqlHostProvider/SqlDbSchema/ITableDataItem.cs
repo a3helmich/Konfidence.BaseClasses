@@ -7,7 +7,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         [UsedImplicitly]
         string Catalog { get; }
         [UsedImplicitly]
-        IColumnDataItemList ColumnDataItemList { get; }
+        ColumnDataItemList ColumnDataItemList { get; }
         string Name { get; }
         [UsedImplicitly]
         string PrimaryKey { get; }

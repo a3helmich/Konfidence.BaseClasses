@@ -87,9 +87,6 @@ namespace Konfidence.BaseData
 
 		protected string ConnectionName { get; set; } = string.Empty;
 
-        [UsedImplicitly]
-        protected string ServiceName { get; set; } = string.Empty;
-
 	    public BaseDataItemList()
 	    {
 	        _dbParameterObjects = new List<IDbParameterData>();

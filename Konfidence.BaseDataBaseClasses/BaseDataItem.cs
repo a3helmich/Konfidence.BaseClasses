@@ -153,9 +153,6 @@ namespace Konfidence.BaseData
 
         protected string ConnectionName { get; set; } = string.Empty;
 
-        [UsedImplicitly]
-	    protected string ServiceName { get; set; } = string.Empty;
-
 	    public string AutoIdField { get; set; } = string.Empty;
 
 	    protected internal string GuidIdField { get; set; } = string.Empty;

@@ -8,7 +8,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class TableDataItem : BaseDataItem, ITableDataItem
     {
-        private readonly ColumnDataItemList _columnDataItemList;
         private readonly IndexColumnsDataItemProperties _indexColumnsDataItemProperties;
 
         public string Catalog { get; } = string.Empty;
@@ -17,7 +16,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         [UsedImplicitly] [NotNull] public string TableType => SqlConstant.TableType;
 
-        public IColumnDataItemList ColumnDataItemList => _columnDataItemList;
+        public ColumnDataItemList ColumnDataItemList { get; }
 
         public string PrimaryKey => _indexColumnsDataItemProperties.PrimaryKeyDataItem.ColumnName;
 
@@ -38,11 +37,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             Catalog = catalog;
             Name = name;
 
-            _columnDataItemList = SqlDbSchema.ColumnDataItemList.GetList(name, ConnectionName);
+            ColumnDataItemList = ColumnDataItemList.GetList(name, ConnectionName);
             _indexColumnsDataItemProperties = new IndexColumnsDataItemProperties(ConnectionName, name);
 
             // find out which column is the primaryKey
-            foreach (var columnDataItem in _columnDataItemList)
+            foreach (var columnDataItem in ColumnDataItemList)
             {
                 if (columnDataItem.Name.Equals(PrimaryKey, StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -57,7 +56,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             HasGuidId = false;
 
             // find out if te guidId exists for this table
-            foreach (var columnDataItem in _columnDataItemList)
+            foreach (var columnDataItem in ColumnDataItemList)
             {
                 if (columnDataItem.IsGuidField)
                 {
@@ -97,7 +96,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             //COALESCE(OBJECT_NAME(object_id), 'x'),
             //COALESCE(COL_NAME(object_id, column_id), 'a') 
 
-            foreach (var columnDataItem in _columnDataItemList)
+            foreach (var columnDataItem in ColumnDataItemList)
             {
                 switch (columnDataItem.Name.ToLower())
                 {
@@ -110,7 +109,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             }
 
             // DataItem specific lockinfo
-            foreach (var columnDataItem in _columnDataItemList)
+            foreach (var columnDataItem in ColumnDataItemList)
             {
                 switch (columnDataItem.Name.ToLower())
                 {
