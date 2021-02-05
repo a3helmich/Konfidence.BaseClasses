@@ -154,7 +154,7 @@ namespace DbMenuClasses
 
             public MenuDataItem(int nodeid) : this()
             {
-                GetItem(MENU_GETROW, nodeid);
+                GetItem(nodeid);
             }
 
             protected override IBaseClient ClientBind()
@@ -169,7 +169,7 @@ namespace DbMenuClasses
                 AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
                 AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
 
-                LoadStoredProcedure = MENU_GETROW;
+                GetStoredProcedure = MENU_GETROW;
                 DeleteStoredProcedure = MENU_DELETEROW;
                 SaveStoredProcedure = MENU_SAVEROW;
 

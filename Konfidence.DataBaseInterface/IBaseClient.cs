@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using JetBrains.Annotations;
 
 namespace Konfidence.DataBaseInterface
 {
@@ -8,9 +9,11 @@ namespace Konfidence.DataBaseInterface
     {
         void Save(IBaseDataItem dataItem);
 
-        void GetItem(IBaseDataItem dataItem, string getStoredProcedure);
+        void GetItem(IBaseDataItem dataItem);
 
-        void Delete(string deleteStoredProcedure, string autoIdField, int id);
+        void GetItemBy(IBaseDataItem dataItem, [NotNull] string storedProcedure);
+
+        void Delete(IBaseDataItem dataItem);
 
         int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList);
 

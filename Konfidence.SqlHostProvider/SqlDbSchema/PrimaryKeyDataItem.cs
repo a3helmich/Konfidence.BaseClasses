@@ -25,9 +25,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string DataType { get; set; } = string.Empty;
 
-
         public PrimaryKeyDataItem()
         {
+            GetStoredProcedure = SpName.PrimarykeyGet;
         }
 
         public PrimaryKeyDataItem(string connectionName, string tableName)
@@ -37,7 +37,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             SetParameter(SqlConstant.TableName, tableName);
 
-            GetItem(SpName.PrimarykeyGet);
+            GetItem();
         }
 
         [NotNull]

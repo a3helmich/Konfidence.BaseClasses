@@ -7,7 +7,6 @@ using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.RepositoryInterface;
-using Konfidence.RepositoryInterface.Objects;
 using Ninject;
 using Ninject.Parameters;
 
@@ -31,8 +30,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             _repository = _ninject.Kernel.Get<IDataRepository>(connectionNameParam);
         }
-
-        #region GetField Methods
 
         public void GetField([NotNull] string fieldName, out byte field, [NotNull] IDataReader dataReader)
         {
@@ -111,7 +108,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetDecimal(fieldOrdinal);
         }
 
-        private int GetOrdinal([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        private static int GetOrdinal([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
             if (!dataReader.IsAssigned())
             {
@@ -122,7 +119,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             return dataReader.GetOrdinal(fieldName);
         }
-        #endregion
 
         public void Save([NotNull] IBaseDataItem dataItem)
         {
@@ -136,45 +132,39 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 throw (new Exception("StoredProcedure not provided"));
             }
 
-            var resultParameters = _repository.ExecuteSaveStoredProcedure(new RequestParameters(dataItem, dataItem.SaveStoredProcedure));
-
-            dataItem.SetId(resultParameters.Id);
-
-            foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
-            {
-                kvp.Value.Value = resultParameters.AutoUpdateFieldList[kvp.Key].Value;
-
-                if (DBNull.Value.Equals(kvp.Value.Value))
-                {
-                    kvp.Value.Value = null;
-                }
-            }
+            _repository.ExecuteSaveStoredProcedure(dataItem);
         }
 
-        public void GetItem(IBaseDataItem dataItem, [NotNull] string getStoredProcedure)
+        public void GetItem([NotNull] IBaseDataItem dataItem)
         {
-            if (getStoredProcedure.Equals(string.Empty))
+            if (!dataItem.GetStoredProcedure.IsAssigned())
             {
                 throw (new Exception("GetStoredProcedure not provided"));
             }
 
-            var retrieveParameters = new RetrieveParameters(dataItem, getStoredProcedure);
+            _repository.ExecuteGetStoredProcedure(dataItem);
+        }
 
-            _repository.ExecuteGetStoredProcedure(retrieveParameters, dataItem);
+        public void GetItemBy([NotNull] IBaseDataItem dataItem, string storedProcedure)
+        {
+            if (!storedProcedure.IsAssigned())
+            {
+                throw (new Exception("GetStoredProcedure not provided"));
+            }
+
+            _repository.ExecuteGetByStoredProcedure(dataItem, storedProcedure);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
         {
-            if (getListStoredProcedure.Equals(string.Empty))
+            if (!getListStoredProcedure.IsAssigned())
             {
                 throw (new Exception("GetListStoredProcedure not provided"));
             }
 
             baseDataItemList.SetParameters(getListStoredProcedure);
 
-            var retrieveListParameters = new RetrieveListParameters<T>(baseDataItemList, getListStoredProcedure);
-
-            _repository.ExecuteGetListStoredProcedure(retrieveListParameters, baseDataItemList, this);
+            _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, this);
         }
 
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
@@ -187,34 +177,17 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             parentDataItemList.SetParameters(getRelatedStoredProcedure);
 
-            var retrieveListParameters = new RetrieveListParameters<T>(parentDataItemList, getRelatedStoredProcedure);
-
-            _repository.ExecuteGetRelatedListStoredProcedure(retrieveListParameters, parentDataItemList, relatedDataItemList, childDataItemList, this);
+            _repository.ExecuteGetRelatedListStoredProcedure(getRelatedStoredProcedure, parentDataItemList, relatedDataItemList, childDataItemList, this);
         }
 
-        private bool GetDataItem<T>([NotNull] IBaseDataItemList<T> baseDataItemList, IDataReader dataReader) where T : IBaseDataItem
+        public void Delete([NotNull] IBaseDataItem dataItem)
         {
-            var dataItem = baseDataItemList.GetDataItem();
-
-            dataItem.Client = this;
-
-            dataItem.GetKey(dataReader);
-            dataItem.GetData(dataReader);
-
-            return true;
-        }
-
-        public void Delete([NotNull] string deleteStoredProcedure, string autoIdField, int id)
-        {
-            if (deleteStoredProcedure.Equals(string.Empty))
+            if (!dataItem.DeleteStoredProcedure.IsAssigned())
             {
                 throw new Exception("DeleteStoredProcedure not provided");
             }
 
-            if (id > 0)
-            {
-                _repository.ExecuteDeleteStoredProcedure(deleteStoredProcedure, autoIdField, id);
-            }
+            _repository.ExecuteDeleteStoredProcedure(dataItem);
         }
 
         public int ExecuteCommand(string storedProcedure, List<IDbParameterObject> parameterObjectList)

@@ -24,13 +24,13 @@ namespace Konfidence.BaseData
         private bool _isEditing;
         private bool _isInitialized;
 
-        private IBaseClient _client; 
+        private IBaseClient _client;
 
-	    private Dictionary<string, IDbParameterObject> _autoUpdateFieldDictionary;
+        private NinjectDependencyResolver _ninject;
 
-	    private NinjectDependencyResolver _ninject;
+        private List<IDbParameterObject> DbParameterObjects { get;  }
 
-        protected List<IDbParameterObject> DbParameterObjects { get; private set; }
+        public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary { get; }
 
         protected BaseDataItem()
 	    {
@@ -40,7 +40,8 @@ namespace Konfidence.BaseData
 	        _isInitialized = false;
 
 	        DbParameterObjects = new List<IDbParameterObject>();
-	    }
+            AutoUpdateFieldDictionary = new Dictionary<string, IDbParameterObject>();
+        }
 
         private IKernel Kernel
 	    {
@@ -162,20 +163,6 @@ namespace Konfidence.BaseData
 	    public Guid GuidIdValue { get; private set; } = Guid.Empty;
 
 	    protected int Id { get; private set; }
-
-	    [NotNull]
-        public Dictionary<string, IDbParameterObject> AutoUpdateFieldDictionary
-        {
-            get
-            {
-                if (!_autoUpdateFieldDictionary.IsAssigned())
-                {
-                    _autoUpdateFieldDictionary = new Dictionary<string, IDbParameterObject>();
-                }
-
-                return _autoUpdateFieldDictionary;
-            }
-        }
 
         [UsedImplicitly]
 	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out byte fieldValue)
@@ -397,7 +384,7 @@ namespace Konfidence.BaseData
             }
         }
 
-	    public string LoadStoredProcedure { get; set; } = string.Empty;
+	    public string GetStoredProcedure { get; set; } = string.Empty;
 
 	    public string DeleteStoredProcedure { get; set; } = string.Empty;
 
@@ -631,7 +618,6 @@ namespace Konfidence.BaseData
 	        DbParameterObjects.SetParameter(fieldName, value);
 	    }
 
-
         protected void SetField(string fieldName, Guid value)
         {
             DbParameterObjects.SetParameter(fieldName, value);
@@ -724,9 +710,9 @@ namespace Konfidence.BaseData
 
         public void LoadDataItem()
         {
-            if (LoadStoredProcedure.IsAssigned())
+            if (GetStoredProcedure.IsAssigned())
             {
-                GetItem(LoadStoredProcedure, Id);
+                GetItem(Id);
             }
         }
 
@@ -749,32 +735,41 @@ namespace Konfidence.BaseData
 		{
         }
 
-        protected void GetItem(string storedProcedure)
+        protected void GetItem()
 		{
             InternalInitializeDataItem();
 
-            Client.GetItem(this, storedProcedure);
+            Client.GetItem(this);
 
             AfterGetDataItem();
         }
 
-		protected void GetItem(string storedProcedure, int autoKeyId)
+        protected void GetItemBy([NotNull] string storedProcedure)
+        {
+            InternalInitializeDataItem();
+
+            Client.GetItemBy(this, storedProcedure);
+
+            AfterGetDataItem();
+        }
+
+        protected void GetItem(int autoKeyId)
 		{
             InternalInitializeDataItem();
 
             SetField(AutoIdField, autoKeyId);
 
-            GetItem(storedProcedure);
+            GetItem();
 		}
 
 	    [UsedImplicitly]
-        protected void GetItem(string storedProcedure, Guid guidId)
+        protected void GetItem([NotNull] string guidStoredProcedure, Guid guidId)
         {
             InternalInitializeDataItem();
 
             SetField(GuidIdField, guidId);
 
-            GetItem(storedProcedure);
+            GetItemBy(guidStoredProcedure);
         }
 
         protected virtual void BeforeSave()
@@ -821,7 +816,7 @@ namespace Konfidence.BaseData
 
             BeforeDelete();
 
-			Client.Delete(DeleteStoredProcedure, AutoIdField, Id);
+			Client.Delete(this);
 
 			Id = 0;
 
