@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
@@ -58,6 +59,104 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.TableList.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
+        }
+
+        [TestMethod]
+        public void When_GetFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        {
+            // arrange
+            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            var table = target.TableList.First(x => x.Name == "Test5");
+            var columnNameList = new List<string> { "naam", "Omschrijving" };
+
+            // act
+            var columnString = table.ColumnDataItemList.GetFieldNames(columnNameList);
+
+            // assert
+            columnString.Should().Be("NaamOmschrijving");
+        }
+
+        [TestMethod]
+        public void When_GetUnderscoreFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        {
+            // arrange
+            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            var table = target.TableList.First(x => x.Name == "Test5");
+            var columnNameList = new List<string> { "naam", "Omschrijving" };
+
+            // act
+            var columnString = table.ColumnDataItemList.GetUnderscoreFieldNames(columnNameList);
+
+            // assert
+            columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
+        }
+
+        [TestMethod]
+        public void When_GetCommaFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        {
+            // arrange
+            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            var table = target.TableList.First(x => x.Name == "Test5");
+            var columnNameList = new List<string> { "naam", "Omschrijving" };
+
+            // act
+            var columnString = table.ColumnDataItemList.GetCommaFieldNames(columnNameList);
+
+            // assert
+            columnString.Should().Be("Naam, Omschrijving");
+        }
+
+        [TestMethod]
+        public void When_GetTypedCommaFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        {
+            // arrange
+            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            var table = target.TableList.First(x => x.Name == "Test5");
+            var columnNameList = new List<string> { "naam", "Omschrijving" };
+
+            // act
+            var columnString = table.ColumnDataItemList.GetTypedCommaFieldNames(columnNameList);
+
+            // assert
+            columnString.Should().Be("string naam, string omschrijving");
+        }
+
+        [TestMethod]
+        public void When_GetFirstField_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        {
+            // arrange
+            var columnNameList = new List<string> { "naam", "Omschrijving" };
+
+            // act
+            var columnString = columnNameList.GetFirstField();
+
+            // assert
+            columnString.Should().Be("naam");
+        }
+
+        [TestMethod]
+        public void When_GetLastField_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        {
+            // arrange
+            var columnNameList = new List<string> { "naam", "Omschrijving" };
+
+            // act
+            var columnString = columnNameList.GetLastField();
+
+            // assert
+            columnString.Should().Be("Omschrijving");
         }
     }
 }

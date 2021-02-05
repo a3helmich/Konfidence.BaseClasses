@@ -1,51 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using Konfidence.Base;
+﻿using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public class ColumnDataItemList : BaseDataItemList<ColumnDataItem>, IColumnDataItemList
+    public class ColumnDataItemList : BaseDataItemList<ColumnDataItem>
     {
         private readonly string _tableName;
-
-        private bool _hasDefaultValueFields;
-        private bool _hasDefaultValueFieldsChecked;
-
-        public bool HasDefaultValueFields
-        {
-            get
-            {
-                if (!_hasDefaultValueFieldsChecked)
-                {
-                    foreach (var columnItem in this)
-                    {
-                        if (columnItem.IsAutoUpdated || columnItem.IsComputed || columnItem.IsDefaulted)
-                        {
-                            _hasDefaultValueFields = true;
-
-                            break;
-                        }
-                    }
-
-                    _hasDefaultValueFieldsChecked = true;
-                }
-
-                return _hasDefaultValueFields;
-            }
-        }
         
         public ColumnDataItemList(string tableName, string connectionName)
         {
             ConnectionName = connectionName;
 
             _tableName = tableName;
-
-            _hasDefaultValueFields = false;
-            _hasDefaultValueFieldsChecked = false;
         }
 
         [NotNull]
@@ -66,128 +34,10 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public override void SetParameters([NotNull] string storedProcedure)
         {
-
             if (storedProcedure.Equals(SpName.ColumnsGetlist))
             {
                 SetParameter("TableName", _tableName);
             }
-        }
-
-        [CanBeNull]
-        public IColumnDataItem Find(string columnName)
-        {
-            foreach (var columnDataItem in this)
-            {
-                if (columnDataItem.Name.Equals(columnName, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return columnDataItem;
-                }
-            }
-
-            return null;
-        }
-
-        // construct an identifier for the Columns by appending all Names 
-        // ie: Column1 & Column2 -> Column1Column2 for GetByColumn1Column2
-        [NotNull]
-        public string GetFieldNames([NotNull] List<string> getListByFieldList)
-        {
-            var fieldNames = string.Empty;
-
-            foreach (var getListByField in getListByFieldList)
-            {
-                var columnDataItem = Find(getListByField);
-
-                if (columnDataItem.IsAssigned())
-                {
-                    fieldNames += columnDataItem.Name;
-                }
-            }
-
-            return fieldNames;
-        }
-
-        [NotNull]
-        public string GetUnderscoreFieldNames([NotNull] List<string> getListByFieldList)
-        {
-            var fieldNames = string.Empty;
-            var delimiter = string.Empty;
-
-            foreach (var getListByField in getListByFieldList)
-            {
-                var columnDataItem = Find(getListByField);
-
-                if (columnDataItem.IsAssigned())
-                {
-                    fieldNames += delimiter + columnDataItem.Name;
-
-                    delimiter = "_";
-                }
-            }
-
-            return fieldNames.ToUpper();
-        }
-
-        [NotNull]
-        public string GetTypedCommaFieldNames([NotNull] List<string> getListByFieldList)
-        {
-            var commaFieldNames = string.Empty;
-            var delimiter = string.Empty;
-
-            foreach (var getListByField in getListByFieldList)
-            {
-                var columnDataItem = Find(getListByField);
-
-                if (columnDataItem.IsAssigned())
-                {
-                    commaFieldNames += delimiter + columnDataItem.DataType + " " + columnDataItem.Name.ToLower();
-
-                    delimiter = ", ";
-                }
-            }
-
-            return commaFieldNames;
-        }
-
-        [NotNull]
-        public string GetCommaFieldNames([NotNull] List<string> getListByFieldList)
-        {
-            var commaFieldNames = string.Empty;
-            var delimiter = string.Empty;
-
-            foreach (var getListByField in getListByFieldList)
-            {
-                var columnDataItem = Find(getListByField);
-
-                if (columnDataItem.IsAssigned())
-                {
-                    commaFieldNames += delimiter + columnDataItem.Name;
-
-                    delimiter = ", ";
-                }
-            }
-
-            return commaFieldNames;
-        }
-
-        public string GetFirstField([NotNull] List<string> getListByFieldList)
-        {
-            if (getListByFieldList.Count > 0)
-            {
-                return getListByFieldList[0];
-            }
-
-            return string.Empty;
-        }
-
-        public string GetLastField([NotNull] List<string> findByFieldList)
-        {
-            if (findByFieldList.Count > 0)
-            {
-                return findByFieldList[findByFieldList.Count - 1];
-            }
-
-            return string.Empty;
         }
 
         //private void BuildItemList(DataTable dataTable)

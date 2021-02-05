@@ -123,6 +123,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsLockInfo = false;
         }
         
+        [NotNull]
         protected override IBaseClient ClientBind()
         {
             return base.ClientBind<SqlClient>();
@@ -271,7 +272,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         [UsedImplicitly] [NotNull] public string NewGuidPropertyValue => GetDefaultPropertyValue(SqlDataType, "newguid");
 
-        internal bool IsGuidField
+        public bool IsGuidField
         {
             get
             {

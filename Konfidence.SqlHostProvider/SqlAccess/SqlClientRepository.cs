@@ -33,7 +33,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
         }
 
-        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, [NotNull] List<IDbParameterObject> parameterObjectList)
+        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, [NotNull] List<IDbParameterData> parameterObjectList)
         {
             var database = GetDatabase();
 
@@ -143,7 +143,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData([NotNull] List<IDbParameterObject> parameterObjectList, Database database, DbCommand dbCommand)
+        private static void SetParameterData([NotNull] List<IDbParameterData> parameterObjectList, Database database, DbCommand dbCommand)
         {
             foreach (var parameterObject in parameterObjectList)
             {
@@ -243,12 +243,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
         [UsedImplicitly]
-        public int ExecuteNonQuery(string storedProcedure, [NotNull] List<IDbParameterObject> parameterList)
+        public int ExecuteNonQuery(string storedProcedure, [NotNull] List<IDbParameterData> parameterList)
         {
             return ExecuteNonQueryStoredProcedure(storedProcedure, parameterList);
         }
 
-        public int ExecuteNonQuery(DbCommand dbCommand)
+        private int ExecuteNonQuery(DbCommand dbCommand)
         {
             return GetDatabase().ExecuteNonQuery(dbCommand);
         }
