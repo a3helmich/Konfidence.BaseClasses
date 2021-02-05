@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using JetBrains.Annotations;
-using Konfidence.DataBaseInterface;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Konfidence.RepositoryInterface
+namespace Konfidence.DataBaseInterface
 {
     public interface IDataRepository
     {
-        Database GetDatabase();
+        DataTable GetSchemaObject(string collection);
 
-        [UsedImplicitly]
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
 
         int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, List<IDbParameterData> parameterObjectList);

@@ -5,7 +5,6 @@ using System.Data.Common;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DataBaseInterface;
-using Konfidence.RepositoryInterface;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
@@ -28,6 +27,26 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return databaseInstance;
         }
 
+        [NotNull]
+        public DataTable GetSchemaObject(string collection)
+        {
+            DataTable dataTable;
+
+            var database = GetDatabase();
+
+            using (var dbConnection = database.CreateConnection())
+            {
+                dbConnection.Open();
+
+                using (var schemaTable = dbConnection.GetSchema(collection))
+                {
+                    dataTable = schemaTable.Copy();
+                }
+            }
+
+            return dataTable;
+        }
+
         public DbCommand GetStoredProcCommand(string saveStoredProcedure)
         {
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
@@ -48,7 +67,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        [NotNull]
         public void ExecuteSaveStoredProcedure([NotNull] IBaseDataItem dataItem)
         {
             var database = GetDatabase();
@@ -85,7 +103,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        [NotNull]
         private static void GetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
         {
             dataItem.SetId((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));

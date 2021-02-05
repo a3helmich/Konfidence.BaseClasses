@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
-using Konfidence.RepositoryInterface;
 using Ninject;
 using Ninject.Parameters;
 
@@ -215,25 +214,10 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return _repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
-        // TODO: internal
         [NotNull]
         public DataTable GetSchemaObject(string collection)
         {
-            DataTable dataTable;
-
-            var database = _repository.GetDatabase();
-
-            using (var dbConnection = database.CreateConnection())
-            {
-                dbConnection.Open();
-
-                using (var schemaTable = dbConnection.GetSchema(collection))
-                {
-                    dataTable = schemaTable.Copy();
-                }
-            }
-
-            return dataTable;
+            return _repository.GetSchemaObject(collection);
         }
 
         [NotNull]
