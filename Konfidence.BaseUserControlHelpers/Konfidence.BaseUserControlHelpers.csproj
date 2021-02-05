@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj" />
     <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj" />
   </ItemGroup>
 

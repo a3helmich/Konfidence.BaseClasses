@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj" />
-    <ProjectReference Include="..\Konfidence.RepositoryInterface\Konfidence.RepositoryInterface.csproj" />
   </ItemGroup>
 
 </Project>
