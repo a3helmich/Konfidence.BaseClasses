@@ -149,6 +149,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
+
+            parameterObjectList.Clear();
         }
 
         public void ExecuteGetListStoredProcedure<T>([NotNull] IBaseDataItemList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem
