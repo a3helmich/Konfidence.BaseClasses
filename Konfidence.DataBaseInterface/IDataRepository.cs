@@ -10,7 +10,7 @@ namespace Konfidence.DataBaseInterface
 
         DbCommand GetStoredProcCommand(string saveStoredProcedure);
 
-        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, List<IDbParameterData> parameterObjectList);
+        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, List<ISpParameterData> parameterObjectList);
 
         void ExecuteSaveStoredProcedure(IBaseDataItem dataItem);
 

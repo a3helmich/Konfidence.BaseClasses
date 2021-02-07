@@ -28,9 +28,9 @@ namespace Konfidence.BaseData
 
         private NinjectDependencyResolver _ninject;
 
-        private List<IDbParameterData> DbParameterObjects { get;  }
+        private List<ISpParameterData> SpParameterData { get;  }
 
-        public Dictionary<string, IDbParameterData> AutoUpdateFieldDictionary { get; }
+        public Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
 
         protected BaseDataItem()
 	    {
@@ -39,8 +39,8 @@ namespace Konfidence.BaseData
 	        _isEditing = false;
 	        _isInitialized = false;
 
-	        DbParameterObjects = new List<IDbParameterData>();
-            AutoUpdateFieldDictionary = new Dictionary<string, IDbParameterData>();
+	        SpParameterData = new List<ISpParameterData>();
+            AutoUpdateFieldDictionary = new Dictionary<string, ISpParameterData>();
         }
 
         private IKernel Kernel
@@ -131,9 +131,9 @@ namespace Konfidence.BaseData
 			Id = id;
 		}
 
-        public List<IDbParameterData> GetParameterObjects()
+        public List<ISpParameterData> GetParameterObjects()
         {
-            return DbParameterObjects;
+            return SpParameterData;
         }
 
         public void GetKey(IDataReader dataReader)
@@ -377,7 +377,7 @@ namespace Konfidence.BaseData
         {
             if (!AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
-                AutoUpdateFieldDictionary.Add(fieldName, new DbParameterData(fieldName, fieldType, null));
+                AutoUpdateFieldDictionary.Add(fieldName, new SpParameter(fieldName, fieldType, null));
             }
         }
 
@@ -597,52 +597,52 @@ namespace Konfidence.BaseData
 
         protected void SetField(string fieldName, int value)
 		{
-		    DbParameterObjects.SetParameter(fieldName, value);
+		    SpParameterData.SetParameter(fieldName, value);
 		}
 
 	    protected void SetField(string fieldName, byte value)
 	    {
-	        DbParameterObjects.SetParameter(fieldName, value);
+	        SpParameterData.SetParameter(fieldName, value);
 	    }
 
         protected void SetField(string fieldName, short value)
 	    {
-	        DbParameterObjects.SetParameter(fieldName, value);
+	        SpParameterData.SetParameter(fieldName, value);
 	    }
 
 	    protected void SetField(string fieldName, long value)
 	    {
-	        DbParameterObjects.SetParameter(fieldName, value);
+	        SpParameterData.SetParameter(fieldName, value);
 	    }
 
         protected void SetField(string fieldName, Guid value)
         {
-            DbParameterObjects.SetParameter(fieldName, value);
+            SpParameterData.SetParameter(fieldName, value);
         }
 
         protected void SetField(string fieldName, string value)
 		{
-            DbParameterObjects.SetParameter(fieldName, value);
+            SpParameterData.SetParameter(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, bool value)
 		{
-            DbParameterObjects.SetParameter(fieldName, value);
+            SpParameterData.SetParameter(fieldName, value);
 		}
 
 		protected void SetField(string fieldName, DateTime value)
 		{
-            DbParameterObjects.SetParameter(fieldName, value);
+            SpParameterData.SetParameter(fieldName, value);
 		}
 
         protected void SetField(string fieldName, TimeSpan value)
         {
-            DbParameterObjects.SetParameter(fieldName, value);
+            SpParameterData.SetParameter(fieldName, value);
         }
 
         protected void SetField(string fieldName, decimal value)
         {
-            DbParameterObjects.SetParameter(fieldName, value);
+            SpParameterData.SetParameter(fieldName, value);
         }
 
         [UsedImplicitly]
@@ -821,7 +821,7 @@ namespace Konfidence.BaseData
         }
 
         [NotNull]
-        public List<IDbParameterData> SetItemData()
+        public List<ISpParameterData> SetItemData()
 		{
 			SetData();
 
@@ -829,16 +829,16 @@ namespace Konfidence.BaseData
 		}
 
         [NotNull]
-        internal List<IDbParameterData> SetParameterData()
+        internal List<ISpParameterData> SetParameterData()
         {
-            var parameterObjectList = new List<IDbParameterData>();
+            var parameterObjectList = new List<ISpParameterData>();
 
-            foreach (var parameterObject in DbParameterObjects)
+            foreach (var parameterObject in SpParameterData)
             {
                 parameterObjectList.Add(parameterObject);
             }
 
-            DbParameterObjects.Clear();
+            SpParameterData.Clear();
 
             return parameterObjectList;
         }

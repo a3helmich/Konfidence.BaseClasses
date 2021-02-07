@@ -8,6 +8,6 @@ namespace Konfidence.DataBaseInterface
 
         T GetDataItem();
 
-        List<IDbParameterData> GetParameterObjectList();
+        List<ISpParameterData> GetParameterObjectList();
     }
 }

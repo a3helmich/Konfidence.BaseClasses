@@ -104,15 +104,5 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return columnDataItems.Any(columnDataItem => 
                 columnDataItem.IsAutoUpdated || columnDataItem.IsComputed || columnDataItem.IsDefaulted);
         }
-
-        public static string GetFirstField([NotNull] this List<string> fieldNameList)
-        {
-            return fieldNameList.Any() ? fieldNameList.First() : string.Empty;
-        }
-
-        public static string GetLastField([NotNull] this List<string> findByFieldList)
-        {
-            return findByFieldList.Any() ? findByFieldList.Last() : string.Empty;
-        }
     }
 }

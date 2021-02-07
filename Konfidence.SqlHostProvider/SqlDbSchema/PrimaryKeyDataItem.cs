@@ -6,24 +6,17 @@ using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public class PrimaryKeyDataItem : BaseDataItem
+    internal class PrimaryKeyDataItem : BaseDataItem
     {
         // field definitions
 
         private string _constraintName = string.Empty;
-
-        [UsedImplicitly]
-        public int PrimaryKeyId => Id;
 
         public string ConstraintName
         {
             get => _constraintName;
             set => _constraintName = value;
         }
-
-        public string ColumnName { get; set; } = string.Empty;
-
-        public string DataType { get; set; } = string.Empty;
 
         public PrimaryKeyDataItem()
         {

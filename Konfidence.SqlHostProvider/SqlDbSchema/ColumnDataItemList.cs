@@ -27,14 +27,14 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             var columnDataItemList = new ColumnDataItemList(tableName, connectionName);
 
-            columnDataItemList.BuildItemList(SpName.ColumnsGetlist);
+            columnDataItemList.BuildItemList(SpName.GetColumnList);
 
             return columnDataItemList;
         }
 
         public override void SetParameters([NotNull] string storedProcedure)
         {
-            if (storedProcedure.Equals(SpName.ColumnsGetlist))
+            if (storedProcedure.Equals(SpName.GetColumnList))
             {
                 SetParameter("TableName", _tableName);
             }

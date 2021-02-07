@@ -3,7 +3,7 @@ using Konfidence.DataBaseInterface;
 
 namespace Konfidence.BaseData.Objects
 {
-    internal class DbParameterData : IDbParameterData
+    internal class SpParameter : ISpParameterData
     {
         public string ParameterName { get; set; }
 
@@ -11,7 +11,7 @@ namespace Konfidence.BaseData.Objects
 
         public object Value { get; set; }
 
-        public DbParameterData(string parameterName, DbType dbType, object value)
+        public SpParameter(string parameterName, DbType dbType, object value)
         {
             ParameterName = parameterName;
             DbType = dbType;

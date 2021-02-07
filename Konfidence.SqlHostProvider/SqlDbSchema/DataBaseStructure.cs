@@ -54,13 +54,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         private void CreateStoredProcedures()
         {
             CreateSPPrimaryKey_Get(SpName.PrimarykeyGet);
-            CreateSPColumns_GetList(SpName.ColumnsGetlist);
+            CreateSPColumns_GetList(SpName.GetColumnList);
         }
 
         private void DeleteStoredProcedures()
         {
             DeleteSp(SpName.PrimarykeyGet);
-            DeleteSp(SpName.ColumnsGetlist);
+            DeleteSp(SpName.GetColumnList);
         }
 
         private void CreateSPPrimaryKey_Get(string storedProcedure)

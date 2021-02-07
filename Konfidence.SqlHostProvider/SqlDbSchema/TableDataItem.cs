@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
@@ -18,10 +19,10 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public ColumnDataItemList ColumnDataItemList { get; }
 
-        public string PrimaryKey => _indexColumnsDataItemProperties.PrimaryKeyDataItem.ColumnName;
+        public string PrimaryKey => _indexColumnsDataItemProperties.PrimaryKeyColumnName;
 
         [UsedImplicitly]
-        public string PrimaryKeyDataType => _indexColumnsDataItemProperties.PrimaryKeyDataItem.DataType;
+        public string PrimaryKeyDataType => _indexColumnsDataItemProperties.PrimaryKeyDataType;
 
         public bool HasGuidId { get; }
         
@@ -38,6 +39,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             Name = name;
 
             ColumnDataItemList = ColumnDataItemList.GetList(name, ConnectionName);
+
             _indexColumnsDataItemProperties = new IndexColumnsDataItemProperties(ConnectionName, name);
 
             // find out which column is the primaryKey
@@ -45,7 +47,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             {
                 if (columnDataItem.Name.Equals(PrimaryKey, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    _indexColumnsDataItemProperties.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
+                    _indexColumnsDataItemProperties.PrimaryKeyDataType = columnDataItem.DataType;
 
                     columnDataItem.SetPrimaryKey(true);
 
@@ -53,21 +55,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 }
             }
 
-            HasGuidId = false;
-
-            // find out if te guidId exists for this table
-            foreach (var columnDataItem in ColumnDataItemList)
-            {
-                if (columnDataItem.IsGuidField)
-                {
-                    if (columnDataItem.Name.Equals(Name + "Id", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        HasGuidId = true;
-
-                        break;
-                    }
-                }
-            }
+            var idName = $"{Name}Id";
+            HasGuidId = ColumnDataItemList.Any(columnDataItem => columnDataItem.IsGuidField &&
+                                                                 columnDataItem.Name.Equals(idName, StringComparison.InvariantCultureIgnoreCase));
 
             // TODO : figure out which columns have an update trigger
             // find out which column is autoUpdated

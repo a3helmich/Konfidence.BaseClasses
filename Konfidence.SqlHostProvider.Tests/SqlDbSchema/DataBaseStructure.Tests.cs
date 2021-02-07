@@ -140,7 +140,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = columnNameList.GetFirstField();
+            var columnString = columnNameList.Any() ? columnNameList.First() : string.Empty;
 
             // assert
             columnString.Should().Be("naam");
@@ -153,7 +153,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = columnNameList.GetLastField();
+            var columnString = columnNameList.Any() ? columnNameList.Last() : string.Empty;
 
             // assert
             columnString.Should().Be("Omschrijving");
