@@ -160,7 +160,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData([NotNull] List<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
+        private static void SetParameterData([NotNull] IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
         {
             foreach (var parameterObject in parameterObjectList)
             {
@@ -168,6 +168,34 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
 
             parameterObjectList.Clear();
+        }
+
+        public void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, [NotNull] IList<ISpParameterData> spParameters, IBaseClient baseClient) where T : IBaseDataItem, new()
+        {
+            var database = GetDatabase();
+
+            using (var dbCommand = GetStoredProcCommand(storedProcedure))
+            {
+                SetParameterData(spParameters, database, dbCommand);
+
+                using (var dataReader = database.ExecuteReader(dbCommand))
+                {
+                    while (dataReader.Read())
+                    {
+                        var dataItem = new T
+                        {
+                            Client = baseClient
+                        };
+
+                        dataItem.InitializeDataItem();
+
+                        dataItem.GetKey(dataReader);
+                        dataItem.GetData(dataReader);
+
+                        baseDataItemList.Add(dataItem);
+                    }
+                }
+            }
         }
 
         public void ExecuteGetListStoredProcedure<T>([NotNull] IBaseDataItemList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem

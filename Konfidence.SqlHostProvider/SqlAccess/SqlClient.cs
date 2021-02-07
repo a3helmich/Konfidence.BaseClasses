@@ -154,6 +154,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteGetByStoredProcedure(dataItem, storedProcedure);
         }
 
+        public void BuildItemList<T>([NotNull] IList<T> baseDataItemList, [NotNull] string getListStoredProcedure, IList<ISpParameterData> spParameters) where T : IBaseDataItem, new()
+        {
+            if (!getListStoredProcedure.IsAssigned())
+            {
+                throw (new Exception("GetListStoredProcedure not provided"));
+            }
+
+            _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, spParameters, this);
+        }
+
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
         {
             if (!getListStoredProcedure.IsAssigned())

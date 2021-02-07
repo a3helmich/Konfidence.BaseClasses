@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using JetBrains.Annotations;
@@ -23,8 +24,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         //private string _CharacterSetName = string.Empty;
         //private string _CollationCatalog = string.Empty;
 
-        #region properties
-
         public bool IsPrimaryKey { get; private set; }
 
         public bool IsAutoUpdated { get; private set; }
@@ -36,6 +35,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         public bool IsLockInfo { get; private set; }
 
         public string Name { get; private set; } = string.Empty;
+
+        public string TableName { get; private set; } = string.Empty;
 
         protected int OrdinalPosition { get; private set; }
 
@@ -112,7 +113,64 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         //    get { return _CollationCatalog; }
         //    set { _CollationCatalog = value; }
         //}
-        #endregion properties
+
+        //============================================  >>>>>>
+
+        //private void BuildItemList(DataTable dataTable)
+        //{
+        //    foreach (DataRow dataRow in dataTable.Rows)
+        //    {
+        //        string tableName = dataRow["TABLE_NAME"] as string;
+        //        ColumnDataItem columnDataItem = null;
+
+        //        if (tableName.Equals(_TableName))
+        //        {
+        //            string columnName = dataRow["COLUMN_NAME"] as string;
+
+        //            columnDataItem = new ColumnDataItem(columnName);
+
+        //            string columnDefault = dataRow["COLUMN_DEFAULT"] as string;
+        //            string dataType = dataRow["DATA_TYPE"] as string;
+        //            string characterMaximumLength = string.Empty;
+        //            if (dataType.Equals("varchar") || dataType.Equals("char"))
+        //            {
+        //                int charLength = (int)dataRow["CHARACTER_MAXIMUM_LENGTH"];
+        //                characterMaximumLength = charLength.ToString();
+        //            }
+
+        //            columnDataItem.ColumnDefault = columnDefault;
+        //            columnDataItem.DataType = dataType;
+        //            columnDataItem.CharacterMaximumLength = characterMaximumLength;
+
+        //            /*
+        //            bool isNullable = (bool)dataRow["IS_NULLABLE"];
+        //            int characterMaximumLength = (int)dataRow["CHARACTER_MAXIMUM_LENGTH"];
+        //            int characterOctetLength = (int)dataRow["CHARACTER_OCTET_LENGTH"];
+        //            int numericPrecision = (int)dataRow["NUMERIC_PRECISION"];
+        //            int numericPrecisionRadix = (int)dataRow["NUMERIC_PRECISION_RADIX"];
+        //            int numericScale = (int)dataRow["NUMERIC_SCALE"];
+        //            int dateTimePrecision = (int)dataRow["DATETIME_PRECISION"];
+        //            string characterSetCatalog = dataRow["CHARACTER_SET_CATALOG"] as string;
+        //            string characterSetSchema = dataRow["CHARACTER_SET_SCHEMA"] as string;
+        //            string characterSetName = dataRow["CHARACTER_SET_NAME"] as string;
+        //            string collationCatalog = dataRow["COLLATION_CATALOG"] as string;
+
+        //            columnDataItem.IsNullable = isNullable;
+        //            columnDataItem.CharacterOctetLength = characterOctetLength;
+        //            columnDataItem.NumericPrecision = numericPrecision;
+        //            columnDataItem.NumericPrecisionRadix = numericPrecisionRadix;
+        //            columnDataItem.DateTimePrecision = dateTimePrecision;
+        //            columnDataItem.CharacterSetCatalog = characterSetCatalog;
+        //            columnDataItem.CharacterSetSchema = characterSetSchema;
+        //            columnDataItem.CharacterSetName = characterSetName;
+        //            columnDataItem.CollationCatalog = collationCatalog;
+        //            */
+
+        //            this.Add(columnDataItem);
+        //        }
+        //    }
+        //}
+        //============================================   <<<<<<
 
         public ColumnDataItem()
         {
@@ -122,7 +180,19 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsComputed = false;
             IsLockInfo = false;
         }
-        
+
+        [NotNull]
+        public static List<ColumnDataItem> GetList([NotNull] IBaseClient client)
+        {
+            var columnDataItems = new List<ColumnDataItem>();
+
+            var spParameterData = new List<ISpParameterData>();
+
+            client.BuildItemList(columnDataItems, SpName.GetColumnList, spParameterData);
+
+            return columnDataItems;
+        }
+
         [NotNull]
         protected override IBaseClient ClientBind()
         {
@@ -133,6 +203,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         public override void GetData(IDataReader dataReader)
         {
             GetField("Name", dataReader, out string name);
+
+            GetField("tableName", dataReader, out string tableName);
 
             GetField("Default_object_id", dataReader, out int defaultObjectId);
 
@@ -145,13 +217,15 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             GetField("datatype", dataReader, out string dataType);
 
             GetField("max_length", dataReader, out short characterMaximumLengthInt);
+            
 
-            SetColumnData(name, isDefaulted, isComputed, ordinalPosition, dataType, characterMaximumLengthInt);
+            SetColumnData(name, tableName, isDefaulted, isComputed, ordinalPosition, dataType, characterMaximumLengthInt);
         }
 
-        public void SetColumnData(string name, bool isDefaulted, bool isComputed, int ordinalPosition, string dataType, short characterMaximumLengthInt)
+        public void SetColumnData(string name, string tableName, bool isDefaulted, bool isComputed, int ordinalPosition, string dataType, short characterMaximumLengthInt)
         {
             Name = name;
+            TableName = tableName;
             IsDefaulted = isDefaulted;
             IsComputed = isComputed;
             OrdinalPosition = ordinalPosition;

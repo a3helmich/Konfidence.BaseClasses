@@ -19,9 +19,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
+        private readonly List<IColumnDataItem> _columnDataItems;
+
         public DatabaseStructure(string connectionName)
         {
-            Debug.WriteLine($@"DatabaseStructure constructor{connectionName}");
+            _columnDataItems = new List<IColumnDataItem>();
+
+            Debug.WriteLine($"DatabaseStructure constructor{connectionName}");
             ConnectionName = connectionName;
         }
 
@@ -36,7 +40,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             Debug.WriteLine("DatabaseStructure enter BuildStructure()");
 
-            DeleteStoredProcedures(); // cleanup voor als storeprocedures aangepast zijn maar nog niet verwijderd
+            DeleteStoredProcedures();
 
             Debug.WriteLine("DatabaseStructure between DeleteStoredProcedures() - CreateStoredProcedures()");
 
@@ -44,7 +48,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             Debug.WriteLine("DatabaseStructure between CreateStoredProcedures() -  DeleteStoredProcedures()");
 
-            TableList = BuildTableItemList(Client.GetTables());
+            _columnDataItems.AddRange(ColumnDataItem.GetList(Client));
+
+            TableList = BuildTableItemList(Client.GetTables(), _columnDataItems);
 
             DeleteStoredProcedures();
 
@@ -67,7 +73,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("CREATE PROCEDURE [dbo].[" + storedProcedure + "]");
+            sb.AppendLine($"CREATE PROCEDURE [dbo].[{storedProcedure}]");
             sb.AppendLine("  @tableName varchar(50)");
             sb.AppendLine("AS BEGIN");
             sb.AppendLine("  SET NOCOUNT ON;");
@@ -84,14 +90,12 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("CREATE PROCEDURE [dbo].[" + storedProcedure + "]");
-            sb.AppendLine("@tableName varchar(50)");
+            sb.AppendLine($"CREATE PROCEDURE [dbo].[{storedProcedure}]");
             sb.AppendLine("AS BEGIN");
             sb.AppendLine("  SET NOCOUNT ON;");
             sb.AppendLine("  SELECT t.name AS tableName, st.name AS datatype, cc.*");
             sb.AppendLine("  FROM sys.columns cc, sys.tables t, sys.systypes st");
             sb.AppendLine("  WHERE cc.object_id = t.object_id");
-            sb.AppendLine("    AND t.name = @tableName");
             sb.AppendLine("    AND st.xtype = cc.system_type_id");
             sb.AppendLine("    AND st.status = 0");
             sb.AppendLine("END");
@@ -101,22 +105,22 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private void DeleteSp(string storedProcedure)
         {
-            Debug.WriteLine($"deleteSp entry");
+            Debug.WriteLine("deleteSp entry");
 
             var sb = new StringBuilder();
 
-            sb.AppendLine("DROP PROCEDURE [dbo].[" + storedProcedure + "]");
+            sb.AppendLine($"DROP PROCEDURE [dbo].[{storedProcedure}]");
 
             if (Client.StoredProcedureExists(storedProcedure))
             {
                 Client.ExecuteTextCommand(sb.ToString());
             }
 
-            Debug.WriteLine($"deleteSp exit");
+            Debug.WriteLine("deleteSp exit");
         }
 
         [NotNull]
-        private List<TableDataItem> BuildTableItemList([NotNull] DataTable dataTable)
+        private List<TableDataItem> BuildTableItemList([NotNull] DataTable dataTable, List<IColumnDataItem> columnDataItems)
         {
             var allTypes = dataTable.AsEnumerable().ToList();
             var tables = allTypes.Where(dataRow => dataRow["TABLE_TYPE"].Equals("BASE TABLE")).ToList();
@@ -137,7 +141,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
                 if (name.IsAssigned() && (!name.Equals("dtproperties", StringComparison.OrdinalIgnoreCase) && !name.StartsWith("sys", StringComparison.OrdinalIgnoreCase)))
                 {
-                    var tableDataItem = new TableDataItem(ConnectionName, catalog, name);
+                    var tableDataItem = new TableDataItem(ConnectionName, catalog, name, columnDataItems);
 
                     tableList.Add(tableDataItem);
                 }
