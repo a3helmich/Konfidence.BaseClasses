@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
@@ -16,12 +18,12 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         [UsedImplicitly] [NotNull] public string TableType => SqlConstant.TableType;
 
-        public ColumnDataItemList ColumnDataItemList { get; }
+        public List<IColumnDataItem> ColumnDataItems { get; }
 
-        public string PrimaryKey => _indexColumnsDataItemProperties.PrimaryKeyDataItem.ColumnName;
+        public string PrimaryKey => _indexColumnsDataItemProperties.PrimaryKeyColumnName;
 
         [UsedImplicitly]
-        public string PrimaryKeyDataType => _indexColumnsDataItemProperties.PrimaryKeyDataItem.DataType;
+        public string PrimaryKeyDataType => _indexColumnsDataItemProperties.PrimaryKeyDataType;
 
         public bool HasGuidId { get; }
         
@@ -31,21 +33,22 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return base.ClientBind<SqlClient>();
         }
 
-        public TableDataItem(string connectionName, string catalog, string name)
+        public TableDataItem(string connectionName, string catalog, string name, [NotNull] List<IColumnDataItem> columnDataItems)
         {
             ConnectionName = connectionName;
             Catalog = catalog;
             Name = name;
 
-            ColumnDataItemList = ColumnDataItemList.GetList(name, ConnectionName);
+            ColumnDataItems = columnDataItems.Where(columnDataItem => columnDataItem.TableName == name).ToList();
+
             _indexColumnsDataItemProperties = new IndexColumnsDataItemProperties(ConnectionName, name);
 
             // find out which column is the primaryKey
-            foreach (var columnDataItem in ColumnDataItemList)
+            foreach (var columnDataItem in ColumnDataItems)
             {
                 if (columnDataItem.Name.Equals(PrimaryKey, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    _indexColumnsDataItemProperties.PrimaryKeyDataItem.DataType = columnDataItem.DataType;
+                    _indexColumnsDataItemProperties.PrimaryKeyDataType = columnDataItem.DataType;
 
                     columnDataItem.SetPrimaryKey(true);
 
@@ -53,21 +56,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 }
             }
 
-            HasGuidId = false;
-
-            // find out if te guidId exists for this table
-            foreach (var columnDataItem in ColumnDataItemList)
-            {
-                if (columnDataItem.IsGuidField)
-                {
-                    if (columnDataItem.Name.Equals(Name + "Id", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        HasGuidId = true;
-
-                        break;
-                    }
-                }
-            }
+            var idName = $"{Name}Id";
+            HasGuidId = ColumnDataItems.Any(columnDataItem => columnDataItem.IsGuidField &&
+                                                                 columnDataItem.Name.Equals(idName, StringComparison.InvariantCultureIgnoreCase));
 
             // TODO : figure out which columns have an update trigger
             // find out which column is autoUpdated
@@ -96,7 +87,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             //COALESCE(OBJECT_NAME(object_id), 'x'),
             //COALESCE(COL_NAME(object_id, column_id), 'a') 
 
-            foreach (var columnDataItem in ColumnDataItemList)
+            foreach (var columnDataItem in ColumnDataItems)
             {
                 switch (columnDataItem.Name.ToLower())
                 {
@@ -109,7 +100,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             }
 
             // DataItem specific lockinfo
-            foreach (var columnDataItem in ColumnDataItemList)
+            foreach (var columnDataItem in ColumnDataItems)
             {
                 switch (columnDataItem.Name.ToLower())
                 {

@@ -7,11 +7,11 @@ using Konfidence.DataBaseInterface;
 
 namespace Konfidence.BaseData.Objects
 {
-    public static class DbParameterDataExtensions
+    public static class SpParameterExtensions
     {
         [NotNull] private static readonly Dictionary<Type, DbType> _typeMap = new();
 
-        static DbParameterDataExtensions()
+        static SpParameterExtensions()
         {
             _typeMap[typeof(byte)] = DbType.Byte;
             _typeMap[typeof(sbyte)] = DbType.SByte;
@@ -52,36 +52,36 @@ namespace Konfidence.BaseData.Objects
             //typeMap[typeof(System.Data.Linq.Binary)] = DbType.Binary;
         }
 
-        public static void SetParameter<T>([NotNull] this List<IDbParameterData> dbParameterObjects, string parameterName, T value) 
+        public static void SetParameter<T>([NotNull] this List<ISpParameterData> spParameterData, string parameterName, T value) 
         {
-            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(T)], value);
+            spParameterData.AddInParameter(parameterName, _typeMap[typeof(T)], value);
         }
 
-        public static void SetParameter([NotNull] this List<IDbParameterData> dbParameterObjects, string parameterName, Guid guidValue)
+        public static void SetParameter([NotNull] this List<ISpParameterData> spParameterData, string parameterName, Guid guidValue)
         {
             if (guidValue.IsAssigned())
             {
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], guidValue);
+                spParameterData.AddInParameter(parameterName, _typeMap[typeof(Guid)], guidValue);
 
                 return;
             }
 
-            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(Guid)], null);
+            spParameterData.AddInParameter(parameterName, _typeMap[typeof(Guid)], null);
         }
 
-        public static void SetParameter([NotNull] this List<IDbParameterData> dbParameterObjects, string parameterName, DateTime dateTimeValue)
+        public static void SetParameter([NotNull] this List<ISpParameterData> spParameterData, string parameterName, DateTime dateTimeValue)
         {
             if (dateTimeValue.IsAssigned())
             {
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], dateTimeValue);
+                spParameterData.AddInParameter(parameterName, _typeMap[typeof(DateTime)], dateTimeValue);
 
                 return;
             }
 
-            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(DateTime)], null);
+            spParameterData.AddInParameter(parameterName, _typeMap[typeof(DateTime)], null);
         }
 
-        public static void SetParameter([NotNull] this List<IDbParameterData> dbParameterObjects, string parameterName, TimeSpan timeSpan)
+        public static void SetParameter([NotNull] this List<ISpParameterData> spParameterData, string parameterName, TimeSpan timeSpan)
         {
             if (timeSpan.IsAssigned())
             {
@@ -89,17 +89,17 @@ namespace Konfidence.BaseData.Objects
 
                 dateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
 
-                dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], dateTime);
+                spParameterData.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], dateTime);
 
                 return;
             }
 
-            dbParameterObjects.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], null);
+            spParameterData.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], null);
         }
 
-        private static void AddInParameter([NotNull] this List<IDbParameterData> dbParameterObjects, string field, DbType dbType, object value)
+        private static void AddInParameter([NotNull] this List<ISpParameterData> spParameterData, string field, DbType dbType, object value)
         {
-            dbParameterObjects.Add(new DbParameterData(field, dbType, value));
+            spParameterData.Add(new SpParameter(field, dbType, value));
         }
     }
 }

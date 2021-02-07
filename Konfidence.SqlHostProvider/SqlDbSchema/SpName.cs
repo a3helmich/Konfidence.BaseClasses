@@ -4,6 +4,6 @@
     {
         public const string PrimarykeyGet = "CG_PrimaryKey_Get";
 
-        public const string ColumnsGetlist = "CG_Columns_GetList";
+        public const string GetColumnList = "CG_Columns_GetList";
     }
 }

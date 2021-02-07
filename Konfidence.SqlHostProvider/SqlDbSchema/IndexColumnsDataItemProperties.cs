@@ -8,11 +8,15 @@ using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public class IndexColumnsDataItemProperties : BaseDataItem
+    internal class IndexColumnsDataItemProperties : BaseDataItem
     {
         private readonly string _tableName;
 
         public PrimaryKeyDataItem PrimaryKeyDataItem { get; }
+
+        public string PrimaryKeyColumnName { get; private set; }
+
+        public string PrimaryKeyDataType { get; set; }
 
         public IndexColumnsDataItemProperties(string connectionName, string tableName)
         {
@@ -43,7 +47,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             {
                 var columnName = tableRow["COLUMN_NAME"] as string;
 
-                PrimaryKeyDataItem.ColumnName = columnName;
+                PrimaryKeyColumnName = columnName;
             }
         }
     }

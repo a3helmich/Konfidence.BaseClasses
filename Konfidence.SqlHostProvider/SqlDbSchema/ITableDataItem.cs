@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -7,7 +8,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         [UsedImplicitly]
         string Catalog { get; }
         [UsedImplicitly]
-        ColumnDataItemList ColumnDataItemList { get; }
+        List<IColumnDataItem> ColumnDataItems { get; }
         string Name { get; }
         [UsedImplicitly]
         string PrimaryKey { get; }

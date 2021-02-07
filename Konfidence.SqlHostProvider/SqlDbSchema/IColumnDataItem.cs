@@ -5,6 +5,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     public interface IColumnDataItem : IBaseDataItem
     {
         string Name { get; }
+        string TableName { get; }
         bool IsPrimaryKey { get; }
         bool IsDefaulted { get; }
         bool IsComputed { get; }

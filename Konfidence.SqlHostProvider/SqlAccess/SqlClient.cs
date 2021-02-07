@@ -154,6 +154,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteGetByStoredProcedure(dataItem, storedProcedure);
         }
 
+        public void BuildItemList<T>([NotNull] IList<T> baseDataItemList, [NotNull] string getListStoredProcedure, IList<ISpParameterData> spParameters) where T : IBaseDataItem, new()
+        {
+            if (!getListStoredProcedure.IsAssigned())
+            {
+                throw (new Exception("GetListStoredProcedure not provided"));
+            }
+
+            _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, spParameters, this);
+        }
+
         public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
         {
             if (!getListStoredProcedure.IsAssigned())
@@ -189,7 +199,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteDeleteStoredProcedure(dataItem);
         }
 
-        public int ExecuteCommand(string storedProcedure, List<IDbParameterData> parameterObjectList)
+        public int ExecuteCommand(string storedProcedure, List<ISpParameterData> parameterObjectList)
         {
             return _repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
         }

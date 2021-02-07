@@ -11,7 +11,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         // construct an identifier for the Columns by appending all Names 
         // ie: Column1 & Column2 -> Column1Column2 for GetByColumn1Column2
         [NotNull]
-        public static string GetFieldNames(this List<ColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetFieldNames(this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var concatenatedFieldNames = string.Empty;
 
@@ -29,7 +29,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        public static string GetUnderscoreFieldNames(this List<ColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetUnderscoreFieldNames(this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var fieldNames = string.Empty;
             var delimiter = string.Empty;
@@ -50,7 +50,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        public static string GetCommaFieldNames(this List<ColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetCommaFieldNames(this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var commaFieldNames = string.Empty;
             var delimiter = string.Empty;
@@ -71,7 +71,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        public static string GetTypedCommaFieldNames(this List<ColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetTypedCommaFieldNames(this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var commaFieldNames = string.Empty;
             var delimiter = string.Empty;
@@ -92,27 +92,17 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [CanBeNull]
-        public static IColumnDataItem Find([NotNull] this List<ColumnDataItem> columnDataItems, string columnName)
+        public static IColumnDataItem Find([NotNull] this List<IColumnDataItem> columnDataItems, string columnName)
         {
             return columnDataItems.FirstOrDefault(columnDataItem =>
                 columnDataItem.Name.Equals(columnName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         [UsedImplicitly]
-        public static bool HasDefaultValueFields([NotNull] this List<ColumnDataItem> columnDataItems)
+        public static bool HasDefaultValueFields([NotNull] this List<IColumnDataItem> columnDataItems)
         {
             return columnDataItems.Any(columnDataItem => 
                 columnDataItem.IsAutoUpdated || columnDataItem.IsComputed || columnDataItem.IsDefaulted);
-        }
-
-        public static string GetFirstField([NotNull] this List<string> fieldNameList)
-        {
-            return fieldNameList.Any() ? fieldNameList.First() : string.Empty;
-        }
-
-        public static string GetLastField([NotNull] this List<string> findByFieldList)
-        {
-            return findByFieldList.Any() ? findByFieldList.Last() : string.Empty;
         }
     }
 }

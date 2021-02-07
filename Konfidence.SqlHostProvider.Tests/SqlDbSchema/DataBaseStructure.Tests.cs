@@ -73,7 +73,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItemList.GetFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("NaamOmschrijving");
@@ -91,7 +91,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItemList.GetUnderscoreFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetUnderscoreFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
@@ -109,7 +109,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItemList.GetCommaFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetCommaFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("Naam, Omschrijving");
@@ -127,7 +127,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItemList.GetTypedCommaFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetTypedCommaFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("string naam, string omschrijving");
@@ -140,7 +140,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = columnNameList.GetFirstField();
+            var columnString = columnNameList.Any() ? columnNameList.First() : string.Empty;
 
             // assert
             columnString.Should().Be("naam");
@@ -153,7 +153,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = columnNameList.GetLastField();
+            var columnString = columnNameList.Any() ? columnNameList.Last() : string.Empty;
 
             // assert
             columnString.Should().Be("Omschrijving");
