@@ -13,6 +13,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         bool IsGuidField { get; }
         bool IsLockInfo { get; }
         string DefaultPropertyValue { get; }
+        string NewGuidPropertyValue { get; }
+        
         string CharacterMaximumLength { get; }
         string DataType { get; }
         string DbDataType { get; }
