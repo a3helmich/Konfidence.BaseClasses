@@ -9,7 +9,7 @@ using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    internal class TableDataItem : BaseDataItem, ITableDataItem
+    public class TableDataItem : BaseDataItem, ITableDataItem
     {
         public string Catalog { get; }
 
