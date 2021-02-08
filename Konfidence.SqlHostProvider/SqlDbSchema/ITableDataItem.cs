@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    internal interface ITableDataItem
+    public interface ITableDataItem
     {
         [UsedImplicitly]
         string Catalog { get; }
