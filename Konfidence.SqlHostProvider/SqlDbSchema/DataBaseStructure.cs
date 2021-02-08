@@ -11,7 +11,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     [UsedImplicitly]
     public class DatabaseStructure : BaseDataItem
     {
-        internal List<TableDataItem> TableList { get; }
+        public List<TableDataItem> TableList { get; }
 
         [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
