@@ -47,10 +47,6 @@ namespace Konfidence.DataBaseInterface
 
         DataTable GetSchemaObject(string objectType);
 
-        DataTable GetIndexedColumns();
-
-        DataTable GetTables();
-
         void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem;
 
         void BuildItemList<T>(IList<T> baseDataItemList, string getListStoredProcedure, IList<ISpParameterData> spParameters) where T : IBaseDataItem, new();

@@ -62,7 +62,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void When_GetFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
             var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
@@ -80,7 +80,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetUnderscoreFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void When_GetUnderscoreFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
             var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
@@ -98,7 +98,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetCommaFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void When_GetCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
             var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
@@ -116,7 +116,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetTypedCommaFields_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void When_GetTypedCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
             var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
@@ -134,7 +134,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetFirstField_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void When_GetFirstField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
             var columnNameList = new List<string> { "naam", "Omschrijving" };
@@ -147,7 +147,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetLastField_executed_on_tabel_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void When_GetLastField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
             var columnNameList = new List<string> { "naam", "Omschrijving" };

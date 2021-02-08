@@ -1,4 +1,7 @@
-﻿//using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Konfidence.SqlHostProvider.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 //[assembly: InternalsVisibleTo("Konfidence.Smo.Tests, PublicKey = 002400000c80000094000000060200000024000052534131000400000100010001e4cbf3ebe277" +
 //                              "6ba5fa278fb19d2c9bfea6a111c37d29fcbdc5fbb96194e0dde397cff409fb04afcbf7efe3182d" +

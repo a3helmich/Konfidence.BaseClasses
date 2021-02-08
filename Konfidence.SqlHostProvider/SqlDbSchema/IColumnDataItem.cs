@@ -17,8 +17,5 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         string DataType { get; }
         string DbDataType { get; }
         string SqlDataType { get; }
-        void SetPrimaryKey(bool isPrimaryKey);
-        void SetAutoUpdated(bool isAutoUpdated);
-        void SetLockInfo(bool isLockInfo);
     }
 }

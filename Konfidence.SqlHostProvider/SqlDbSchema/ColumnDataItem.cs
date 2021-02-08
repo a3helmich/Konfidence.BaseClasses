@@ -2,28 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
+using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public class ColumnDataItem : BaseDataItem, IColumnDataItem
     {
-        //private string _ColumnDefault = string.Empty;
-
-        //private bool _IsNullable = false;
-        //private int _CharacterOctetLength = 0;
-        //private int _NumericPrecision = 0;
-        //private int _NumericPrecisionRadix = 0;
-        //private int _NumericScale = 0;
-        //private int _DateTimePrecision = 0;
-        //private string _CharacterSetCatalog = string.Empty;
-        //private string _CharacterSetSchema = string.Empty;
-        //private string _CharacterSetName = string.Empty;
-        //private string _CollationCatalog = string.Empty;
-
         public bool IsPrimaryKey { get; private set; }
 
         public bool IsAutoUpdated { get; private set; }
@@ -34,94 +23,25 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public bool IsLockInfo { get; private set; }
 
+        public bool IsGuidField { get; private set; }
+
         public string Name { get; private set; } = string.Empty;
 
         public string TableName { get; private set; } = string.Empty;
 
-        protected int OrdinalPosition { get; private set; }
+        //private int _ordinalPosition;
 
         public string SqlDataType { get; private set; } = string.Empty;
 
-        [NotNull] public string DataType => GetDataType(SqlDataType);
+        public string DataType { get; private set; } = string.Empty;
 
-        [NotNull] public string DbDataType => GetDbDataType();
+        public string DbDataType { get; private set; } = string.Empty;
 
-        //public string ColumnDefault
-        //{
-        //    get { return _ColumnDefault; }
-        //    set { _ColumnDefault = value; }
-        //}
+        public string DefaultPropertyValue { get; private set; } = string.Empty;
 
-        //public bool IsNullable
-        //{
-        //    get { return _IsNullable; }
-        //    set { _IsNullable = value; }
-        //}
+        public string NewGuidPropertyValue { get; private set; } = string.Empty;
 
         public string CharacterMaximumLength { get; private set; } = string.Empty;
-
-        //public int CharacterOctetLength
-        //{
-        //    get { return _CharacterOctetLength; }
-        //    set { _CharacterOctetLength = value; }
-        //}
-
-        //public int NumericPrecision
-        //{
-        //    get { return _NumericPrecision; }
-        //    set { _NumericPrecision = value; }
-        //}
-
-        //public int NumericPrecisionRadix
-        //{
-        //    get { return _NumericPrecisionRadix; }
-        //    set { _NumericPrecisionRadix = value; }
-        //}
-
-        //public int NumericScale
-        //{
-        //    get { return _NumericScale; }
-        //    set { _NumericScale = value; }
-        //}
-
-        //public int DateTimePrecision
-        //{
-        //    get { return _DateTimePrecision; }
-        //    set { _DateTimePrecision = value; }
-        //}
-
-        //public string CharacterSetCatalog
-        //{
-        //    get { return _CharacterSetCatalog; }
-        //    set { _CharacterSetCatalog = value; }
-        //}
-
-        //public string CharacterSetSchema
-        //{
-        //    get { return _CharacterSetSchema; }
-        //    set { _CharacterSetSchema = value; }
-        //}
-
-        //public string CharacterSetName
-        //{
-        //    get { return _CharacterSetName; }
-        //    set { _CharacterSetName = value; }
-        //}
-
-        //public string CollationCatalog
-        //{
-        //    get { return _CollationCatalog; }
-        //    set { _CollationCatalog = value; }
-        //}
-
-        //============================================  >>>>>>
-
-        //private void BuildItemList(DataTable dataTable)
-        //{
-        //    foreach (DataRow dataRow in dataTable.Rows)
-        //    {
-        //        string tableName = dataRow["TABLE_NAME"] as string;
-        //        ColumnDataItem columnDataItem = null;
 
         //        if (tableName.Equals(_TableName))
         //        {
@@ -155,21 +75,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         //            string characterSetName = dataRow["CHARACTER_SET_NAME"] as string;
         //            string collationCatalog = dataRow["COLLATION_CATALOG"] as string;
 
-        //            columnDataItem.IsNullable = isNullable;
-        //            columnDataItem.CharacterOctetLength = characterOctetLength;
-        //            columnDataItem.NumericPrecision = numericPrecision;
-        //            columnDataItem.NumericPrecisionRadix = numericPrecisionRadix;
-        //            columnDataItem.DateTimePrecision = dateTimePrecision;
-        //            columnDataItem.CharacterSetCatalog = characterSetCatalog;
-        //            columnDataItem.CharacterSetSchema = characterSetSchema;
-        //            columnDataItem.CharacterSetName = characterSetName;
-        //            columnDataItem.CollationCatalog = collationCatalog;
-        //            */
-
         //            this.Add(columnDataItem);
         //        }
-        //    }
-        //}
         //============================================   <<<<<<
 
         public ColumnDataItem()
@@ -179,16 +86,30 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsDefaulted = false;
             IsComputed = false;
             IsLockInfo = false;
+            IsGuidField = false;
         }
 
         [NotNull]
-        public static List<ColumnDataItem> GetList([NotNull] IBaseClient client)
+        internal static List<ColumnDataItem> GetList([NotNull] IBaseClient client, [NotNull] List<IIndexDataItem> allIndexDataItems)
         {
             var columnDataItems = new List<ColumnDataItem>();
 
             var spParameterData = new List<ISpParameterData>();
 
             client.BuildItemList(columnDataItems, SpName.GetColumnList, spParameterData);
+
+            columnDataItems
+                .Where(x => x.Name.Equals("syslock", StringComparison.OrdinalIgnoreCase))
+                .ForEach(x => x.IsLockInfo = true);
+
+            columnDataItems
+                .Where(x => x.Name.Equals("sysupdatetime", StringComparison.OrdinalIgnoreCase))
+                .ForEach(x => x.IsAutoUpdated = true);
+
+            allIndexDataItems
+                .Where(indexDataItem => indexDataItem.IsPrimaryKey)
+                .SelectMany(indexDataItem => columnDataItems.Where(columnDataItem => columnDataItem.Name == indexDataItem.IndexName))
+                .ForEach(x => x.IsPrimaryKey = true);
 
             return columnDataItems;
         }
@@ -203,40 +124,30 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         public override void GetData(IDataReader dataReader)
         {
             GetField("Name", dataReader, out string name);
-
             GetField("tableName", dataReader, out string tableName);
-
             GetField("Default_object_id", dataReader, out int defaultObjectId);
-
-            var isDefaulted = defaultObjectId > 0;
-
             GetField("Is_Computed", dataReader, out bool isComputed);
-
-            GetField("column_id", dataReader, out int ordinalPosition);
-
+            //GetField("column_id", dataReader, out int ordinalPosition);
             GetField("datatype", dataReader, out string dataType);
-
             GetField("max_length", dataReader, out short characterMaximumLengthInt);
-            
 
-            SetColumnData(name, tableName, isDefaulted, isComputed, ordinalPosition, dataType, characterMaximumLengthInt);
-        }
-
-        public void SetColumnData(string name, string tableName, bool isDefaulted, bool isComputed, int ordinalPosition, string dataType, short characterMaximumLengthInt)
-        {
             Name = name;
             TableName = tableName;
-            IsDefaulted = isDefaulted;
+            IsDefaulted = defaultObjectId > 0;
             IsComputed = isComputed;
-            OrdinalPosition = ordinalPosition;
+            //_ordinalPosition = ordinalPosition;
             SqlDataType = dataType;
             CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
-        }
 
-        [UsedImplicitly]
-        public ColumnDataItem(string name) : this()
-        {
-            Name = name;
+            DataType = GetDataType(SqlDataType);
+
+            DbDataType = GetDbDataType(DataType);
+
+            DefaultPropertyValue = GetDefaultPropertyValue(SqlDataType, string.Empty);
+
+            NewGuidPropertyValue = GetDefaultPropertyValue(SqlDataType, "newguid");
+
+            IsGuidField = SqlDataType.Equals("uniqueidentifier", StringComparison.InvariantCultureIgnoreCase);
         }
 
         [NotNull]
@@ -288,10 +199,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        private string GetDbDataType()
+        private string GetDbDataType(string dataType)
         {
-            var dataType = DataType;
-
             if (dataType.Equals("int", StringComparison.InvariantCultureIgnoreCase))
             {
                 dataType += "32";
@@ -325,38 +234,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             dataType = dataType.Substring(0, 1).ToUpper() + dataType.Substring(1, dataType.Length - 1);
 
             return dataType;
-        }
-
-        [NotNull] public string DefaultPropertyValue => GetDefaultPropertyValue(SqlDataType, string.Empty);
-
-        public void SetPrimaryKey(bool isPrimaryKey)
-        {
-            IsPrimaryKey = isPrimaryKey;
-        }
-
-        public void SetAutoUpdated(bool isAutoUpdated)
-        {
-            IsAutoUpdated = isAutoUpdated;
-        }
-
-        public void SetLockInfo(bool isLockInfo)
-        {
-            IsLockInfo = isLockInfo;
-        }
-
-        [UsedImplicitly] [NotNull] public string NewGuidPropertyValue => GetDefaultPropertyValue(SqlDataType, "newguid");
-
-        public bool IsGuidField
-        {
-            get
-            {
-                if (SqlDataType.Equals("uniqueidentifier", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    return true;
-                }
-
-                return false;
-            }
         }
 
         [NotNull]
