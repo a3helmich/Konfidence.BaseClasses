@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
@@ -6,31 +7,24 @@ using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    internal class PrimaryKeyDataItem : BaseDataItem
+    internal class PrimaryKeyDataItem : BaseDataItem, IPrimaryKeyDataItem
     {
-        // field definitions
+        public string ConstraintName { get; set; } = string.Empty;
 
-        private string _constraintName = string.Empty;
+        public string ConstraintType { get; set; } = string.Empty;
 
-        public string ConstraintName
+        public string TableName { get; set; } = string.Empty;
+
+        [NotNull]
+        internal static List<PrimaryKeyDataItem> GetList([NotNull] IBaseClient client)
         {
-            get => _constraintName;
-            set => _constraintName = value;
-        }
+            var primaryKeyDataItems = new List<PrimaryKeyDataItem>();
 
-        public PrimaryKeyDataItem()
-        {
-            GetStoredProcedure = SpName.PrimarykeyGet;
-        }
+            var spParameterData = new List<ISpParameterData>();
 
-        public PrimaryKeyDataItem(string connectionName, string tableName)
-            : this()
-        {
-            ConnectionName = connectionName;
+            client.BuildItemList(primaryKeyDataItems, SpName.GetTablePrimaryKeyList, spParameterData);
 
-            SetParameter(SqlConstant.TableName, tableName);
-
-            GetItem();
+            return primaryKeyDataItems;
         }
 
         [NotNull]
@@ -40,15 +34,15 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO: internal
-        public override void InitializeDataItem()
-        {
-            AutoIdField = SqlConstant.PrimaryKeyId;
-        }
-
-        // TODO: internal
         public override void GetData(IDataReader dataReader)
         {
-            GetField(SqlConstant.ConstraintNameField, dataReader, out _constraintName);
+            GetField(SqlConstant.ConstraintNameField, dataReader, out string constraintName);
+            GetField(SqlConstant.ConstraintTypeField, dataReader, out string constraintType);
+            GetField(SqlConstant.ConstraintTableNameField, dataReader, out string tableName);
+
+            ConstraintName = constraintName;
+            ConstraintType = constraintType;
+            TableName = tableName;
         }
     }
 }

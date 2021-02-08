@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
-using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -15,15 +11,23 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     [UsedImplicitly]
     public class DatabaseStructure : BaseDataItem
     {
-        public List<TableDataItem> TableList { get; private set; }
+        internal List<TableDataItem> TableList { get; }
 
         [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
-        private readonly List<IColumnDataItem> _columnDataItems;
+        private readonly List<IColumnDataItem> _allColumnDataItems;
+
+        private readonly List<IPrimaryKeyDataItem> _allPrimaryKeyDataItems;
+
+        private readonly List<IIndexDataItem> _allIndexDataItems;
 
         public DatabaseStructure(string connectionName)
         {
-            _columnDataItems = new List<IColumnDataItem>();
+            TableList = new List<TableDataItem>();
+
+            _allColumnDataItems = new List<IColumnDataItem>();
+            _allPrimaryKeyDataItems = new List<IPrimaryKeyDataItem>();
+            _allIndexDataItems = new List<IIndexDataItem>();
 
             Debug.WriteLine($"DatabaseStructure constructor{connectionName}");
             ConnectionName = connectionName;
@@ -48,9 +52,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             Debug.WriteLine("DatabaseStructure between CreateStoredProcedures() -  DeleteStoredProcedures()");
 
-            _columnDataItems.AddRange(ColumnDataItem.GetList(Client));
+            _allPrimaryKeyDataItems.AddRange(PrimaryKeyDataItem.GetList(Client));
 
-            TableList = BuildTableItemList(Client.GetTables(), _columnDataItems);
+            _allIndexDataItems.AddRange(IndexDataItem.GetList(Client, _allPrimaryKeyDataItems));
+            
+            _allColumnDataItems.AddRange(ColumnDataItem.GetList(Client, _allIndexDataItems));
+
+            TableList.AddRange(TableDataItem.GetList(Client, _allColumnDataItems));
 
             DeleteStoredProcedures();
 
@@ -59,28 +67,26 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private void CreateStoredProcedures()
         {
-            CreateSPPrimaryKey_Get(SpName.PrimarykeyGet);
+            CreateSPTablePrimaryKey_GetList(SpName.GetTablePrimaryKeyList);
             CreateSPColumns_GetList(SpName.GetColumnList);
         }
 
         private void DeleteStoredProcedures()
         {
-            DeleteSp(SpName.PrimarykeyGet);
+            DeleteSp(SpName.GetTablePrimaryKeyList);
             DeleteSp(SpName.GetColumnList);
         }
 
-        private void CreateSPPrimaryKey_Get(string storedProcedure)
+        private void CreateSPTablePrimaryKey_GetList(string storedProcedure)
         {
             var sb = new StringBuilder();
 
             sb.AppendLine($"CREATE PROCEDURE [dbo].[{storedProcedure}]");
-            sb.AppendLine("  @tableName varchar(50)");
             sb.AppendLine("AS BEGIN");
             sb.AppendLine("  SET NOCOUNT ON;");
             sb.AppendLine("  SELECT 1 as PrimaryKeyId, *");
             sb.AppendLine("  FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS");
             sb.AppendLine("  WHERE constraint_type = 'PRIMARY KEY'");
-            sb.AppendLine("    AND table_name = @tableName");
             sb.AppendLine("END");
 
             Client.ExecuteTextCommand(sb.ToString());
@@ -117,37 +123,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             }
 
             Debug.WriteLine("deleteSp exit");
-        }
-
-        [NotNull]
-        private List<TableDataItem> BuildTableItemList([NotNull] DataTable dataTable, List<IColumnDataItem> columnDataItems)
-        {
-            var allTypes = dataTable.AsEnumerable().ToList();
-            var tables = allTypes.Where(dataRow => dataRow["TABLE_TYPE"].Equals("BASE TABLE")).ToList();
-            var views = allTypes.Where(dataRow => dataRow["TABLE_TYPE"].Equals("VIEW")).ToList();
-
-            if (allTypes.Count != tables.Count + views.Count)
-            {
-                throw new Exception("there are unknown tables types");
-            }
-
-            var tableList = new List<TableDataItem>();
-
-            foreach (var dataRow in tables)
-            {
-                var catalog = dataRow["TABLE_CATALOG"] as string;
-
-                var name = dataRow["TABLE_NAME"] as string;
-
-                if (name.IsAssigned() && (!name.Equals("dtproperties", StringComparison.OrdinalIgnoreCase) && !name.StartsWith("sys", StringComparison.OrdinalIgnoreCase)))
-                {
-                    var tableDataItem = new TableDataItem(ConnectionName, catalog, name, columnDataItems);
-
-                    tableList.Add(tableDataItem);
-                }
-            }
-
-            return tableList;
         }
     }
 }

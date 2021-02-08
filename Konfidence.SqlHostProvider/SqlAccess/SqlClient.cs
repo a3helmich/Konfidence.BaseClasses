@@ -229,17 +229,5 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             return _repository.GetSchemaObject(collection);
         }
-
-        [NotNull]
-        public DataTable GetIndexedColumns()
-        {
-            return GetSchemaObject("IndexColumns");
-        }
-
-        [NotNull]
-        public DataTable GetTables()
-        {
-            return GetSchemaObject("Tables");
-        }
     }
 }
