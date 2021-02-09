@@ -16,17 +16,17 @@ namespace DbMenuClasses
             // field definitions
             internal const string NODEID = "NodeId";
             internal const string PARENTNODEID = "ParentNodeId";
-            internal const string MENUID = "MenuId";
-            internal const string SYSINSERTTIME = "SysInsertTime";
-            internal const string SYSUPDATETIME = "SysUpdateTime";
+            internal const string URL = "Url";
+            internal const string APPLICATIONID = "ApplicationId";
             internal const string ISROOT = "IsRoot";
             internal const string ISVISIBLE = "IsVisible";
+            internal const string MENUID = "MenuId";
             internal const string ISLOGONVISIBLE = "IsLogonVisible";
             internal const string ISADMINISTRATOR = "IsAdministrator";
             internal const string ISNOTLOGONVISIBLE = "IsNotLogonVisible";
             internal const string ISLOCALVISIBLE = "IsLocalVisible";
-            internal const string URL = "Url";
-            internal const string APPLICATIONID = "ApplicationId";
+            internal const string SYSINSERTTIME = "SysInsertTime";
+            internal const string SYSUPDATETIME = "SysUpdateTime";
             internal const string SYSLOCK = "SysLock";
 
             // stored procedures
@@ -36,17 +36,17 @@ namespace DbMenuClasses
 
             // property storage
             private int _ParentNodeId = 0;
-            private int _MenuId = 0;
-            private DateTime _SysInsertTime = DateTime.MinValue;
-            private DateTime _SysUpdateTime = DateTime.MinValue;
+            private string _Url = string.Empty;
+            private string _ApplicationId = string.Empty;
             private bool _IsRoot = false;
             private bool _IsVisible = false;
+            private int _MenuId = 0;
             private bool _IsLogonVisible = false;
             private bool _IsAdministrator = false;
             private bool _IsNotLogonVisible = false;
             private bool _IsLocalVisible = false;
-            private string _Url = string.Empty;
-            private string _ApplicationId = string.Empty;
+            private DateTime _SysInsertTime = DateTime.MinValue;
+            private DateTime _SysUpdateTime = DateTime.MinValue;
             private string _SysLock = string.Empty;
 
             private MenuTextDataItem _MenuText = null;
@@ -64,20 +64,16 @@ namespace DbMenuClasses
                 set { _ParentNodeId = value; }
             }
 
-            public int MenuId
+            public string Url
             {
-                get { return _MenuId; }
-                set { _MenuId = value; }
+                get { return _Url; }
+                set { _Url = value; }
             }
 
-            public DateTime SysInsertTime
+            public string ApplicationId
             {
-                get { return _SysInsertTime; }
-            }
-
-            public DateTime SysUpdateTime
-            {
-                get { return _SysUpdateTime; }
+                get { return _ApplicationId; }
+                set { _ApplicationId = value; }
             }
 
             public bool IsRoot
@@ -90,6 +86,12 @@ namespace DbMenuClasses
             {
                 get { return _IsVisible; }
                 set { _IsVisible = value; }
+            }
+
+            public int MenuId
+            {
+                get { return _MenuId; }
+                set { _MenuId = value; }
             }
 
             public bool IsLogonVisible
@@ -116,16 +118,14 @@ namespace DbMenuClasses
                 set { _IsLocalVisible = value; }
             }
 
-            public string Url
+            public DateTime SysInsertTime
             {
-                get { return _Url; }
-                set { _Url = value; }
+                get { return _SysInsertTime; }
             }
 
-            public string ApplicationId
+            public DateTime SysUpdateTime
             {
-                get { return _ApplicationId; }
-                set { _ApplicationId = value; }
+                get { return _SysUpdateTime; }
             }
 
             public string SysLock
@@ -186,17 +186,17 @@ namespace DbMenuClasses
             public override void GetData(IDataReader dataReader)
             {
                 GetField(PARENTNODEID, dataReader, out _ParentNodeId);
-                GetField(MENUID, dataReader, out _MenuId);
-                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
-                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
+                GetField(URL, dataReader, out _Url);
+                GetField(APPLICATIONID, dataReader, out _ApplicationId);
                 GetField(ISROOT, dataReader, out _IsRoot);
                 GetField(ISVISIBLE, dataReader, out _IsVisible);
+                GetField(MENUID, dataReader, out _MenuId);
                 GetField(ISLOGONVISIBLE, dataReader, out _IsLogonVisible);
                 GetField(ISADMINISTRATOR, dataReader, out _IsAdministrator);
                 GetField(ISNOTLOGONVISIBLE, dataReader, out _IsNotLogonVisible);
                 GetField(ISLOCALVISIBLE, dataReader, out _IsLocalVisible);
-                GetField(URL, dataReader, out _Url);
-                GetField(APPLICATIONID, dataReader, out _ApplicationId);
+                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
+                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
                 GetField(SYSLOCK, dataReader, out _SysLock);
             }
 
@@ -205,15 +205,15 @@ namespace DbMenuClasses
                 base.SetData();
 
                 SetField(PARENTNODEID, _ParentNodeId);
-                SetField(MENUID, _MenuId);
+                SetField(URL, _Url);
+                SetField(APPLICATIONID, _ApplicationId);
                 SetField(ISROOT, _IsRoot);
                 SetField(ISVISIBLE, _IsVisible);
+                SetField(MENUID, _MenuId);
                 SetField(ISLOGONVISIBLE, _IsLogonVisible);
                 SetField(ISADMINISTRATOR, _IsAdministrator);
                 SetField(ISNOTLOGONVISIBLE, _IsNotLogonVisible);
                 SetField(ISLOCALVISIBLE, _IsLocalVisible);
-                SetField(URL, _Url);
-                SetField(APPLICATIONID, _ApplicationId);
                 SetField(SYSLOCK, _SysLock);
             }
         }

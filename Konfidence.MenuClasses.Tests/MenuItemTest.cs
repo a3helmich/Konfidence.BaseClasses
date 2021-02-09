@@ -1,4 +1,5 @@
-﻿using DbMenuClasses;
+﻿using System.Linq;
+using DbMenuClasses;
 using FluentAssertions;
 using Konfidence.MenuClasses.Tests.objects;
 using Konfidence.TestTools;
@@ -114,6 +115,23 @@ namespace Konfidence.MenuClasses.Tests
 
             callClassMethod.MethodOne();
             callClassMethod.MethodTwo();
+        }
+
+        [TestMethod]
+        public void When_Table_Test1_is_retrieved_and_table_does_contain_data_Should_return_GuidIdField()
+        {
+            // arrange
+            var testIntDataItemList = Bl.TestIntDataItemList.GetList();
+
+            // act
+            var testIntDataItem = testIntDataItemList.First();
+
+            // assert
+            //testIntDataItem.Should().BeFalse();
+
+            testIntDataItem.TestId.Should().NotBeEmpty();
+            testIntDataItem.AutoIdField.Should().NotBeEmpty();
+            testIntDataItem.GuidIdField.Should().NotBeEmpty();
         }
     }
 }

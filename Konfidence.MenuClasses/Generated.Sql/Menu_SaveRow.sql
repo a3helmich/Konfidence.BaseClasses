@@ -11,17 +11,17 @@ CREATE PROCEDURE [dbo].[gen_Menu_SaveRow]
 (
 	@NodeId int OUTPUT,
 	@ParentNodeId int,
-	@MenuId int,
-	@SysInsertTime datetime = NULL OUTPUT,
-	@SysUpdateTime datetime = NULL OUTPUT,
+	@Url varchar(100),
+	@ApplicationId varchar(100),
 	@IsRoot bit,
 	@IsVisible bit,
+	@MenuId int,
 	@IsLogonVisible bit,
 	@IsAdministrator bit,
 	@IsNotLogonVisible bit,
 	@IsLocalVisible bit,
-	@Url varchar(100),
-	@ApplicationId varchar(100),
+	@SysInsertTime datetime = NULL OUTPUT,
+	@SysUpdateTime datetime = NULL OUTPUT,
 	@SysLock varchar(75)
 )
 AS
@@ -35,15 +35,15 @@ AS
 				UPDATE [Menu] WITH (ROWLOCK)
 				SET
 				[ParentNodeId] = @ParentNodeId,
-				[MenuId] = @MenuId,
+				[Url] = @Url,
+				[ApplicationId] = @ApplicationId,
 				[IsRoot] = @IsRoot,
 				[IsVisible] = @IsVisible,
+				[MenuId] = @MenuId,
 				[IsLogonVisible] = @IsLogonVisible,
 				[IsAdministrator] = @IsAdministrator,
 				[IsNotLogonVisible] = @IsNotLogonVisible,
 				[IsLocalVisible] = @IsLocalVisible,
-				[Url] = @Url,
-				[ApplicationId] = @ApplicationId,
 				[SysLock] = @SysLock
 				WHERE
 				[NodeId] = @NodeId
@@ -54,11 +54,11 @@ AS
 			begin
 				INSERT INTO [Menu] WITH (ROWLOCK)
 				(
-					[ParentNodeId], [MenuId], [IsRoot], [IsVisible], [IsLogonVisible], [IsAdministrator], [IsNotLogonVisible], [IsLocalVisible], [Url], [ApplicationId], [SysLock]
+					[ParentNodeId], [Url], [ApplicationId], [IsRoot], [IsVisible], [MenuId], [IsLogonVisible], [IsAdministrator], [IsNotLogonVisible], [IsLocalVisible], [SysLock]
 				)
 				VALUES
 				(
-					@ParentNodeId, @MenuId, @IsRoot, @IsVisible, @IsLogonVisible, @IsAdministrator, @IsNotLogonVisible, @IsLocalVisible, @Url, @ApplicationId, @SysLock
+					@ParentNodeId, @Url, @ApplicationId, @IsRoot, @IsVisible, @MenuId, @IsLogonVisible, @IsAdministrator, @IsNotLogonVisible, @IsLocalVisible, @SysLock
 				)
 				
 				SET @NodeId = @@IDENTITY

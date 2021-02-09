@@ -9,10 +9,10 @@ GO
 
 CREATE PROCEDURE [dbo].[gen_TestInt_DeleteRow]
 (
-	@TestId int
+	@Id int
 )
 AS
 	DELETE FROM [TestInt] WITH(ROWLOCK)
-	WHERE [TestId] = @TestId
+	WHERE [Id] = @Id
 	
 RETURN

@@ -118,7 +118,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, BaseDataItem dataItem) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, IBaseDataItem dataItem) where T : class, IBaseDataItem
         {
             if (dataItem.IsAssigned())
             {

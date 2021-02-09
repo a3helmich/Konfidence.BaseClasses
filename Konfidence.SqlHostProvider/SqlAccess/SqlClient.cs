@@ -37,33 +37,54 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetByte(fieldOrdinal);
         }
 
-        public byte GetFieldInt8([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        public void GetField([NotNull] string fieldName, out short field, [NotNull] IDataReader dataReader)
         {
             var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return dataReader.IsDBNull(fieldOrdinal) ? (byte) 0 : dataReader.GetByte(fieldOrdinal);
+            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt16(fieldOrdinal);
         }
 
-        public short GetFieldInt16([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        public void GetField([NotNull] string fieldName, out int field, [NotNull] IDataReader dataReader)
         {
             var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return dataReader.IsDBNull(fieldOrdinal) ? (short)0 : dataReader.GetInt16(fieldOrdinal);
+            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
         }
 
-        public int GetFieldInt32([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        public void GetField([NotNull] string fieldName, out long field, [NotNull] IDataReader dataReader)
         {
             var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
+            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
         }
 
-        public long GetFieldInt64([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
+        //public byte GetFieldInt8([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        //{
+        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
 
-            return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
-        }
+        //    return dataReader.IsDBNull(fieldOrdinal) ? (byte) 0 : dataReader.GetByte(fieldOrdinal);
+        //}
+
+        //public short GetFieldInt16([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        //{
+        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
+
+        //    return dataReader.IsDBNull(fieldOrdinal) ? (short)0 : dataReader.GetInt16(fieldOrdinal);
+        //}
+
+        //public int GetFieldInt32([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        //{
+        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
+
+        //    return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
+        //}
+
+        //public long GetFieldInt64([NotNull] string fieldName, [NotNull] IDataReader dataReader)
+        //{
+        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
+
+        //    return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
+        //}
 
         public Guid GetFieldGuid([NotNull] string fieldName, [NotNull] IDataReader dataReader)
         {
@@ -201,12 +222,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public int ExecuteCommand(string storedProcedure, List<ISpParameterData> parameterObjectList)
         {
-            return _repository.ExecuteNonQueryStoredProcedure(storedProcedure, parameterObjectList);
+            return _repository.ExecuteCommandStoredProcedure(storedProcedure, parameterObjectList);
         }
 
         public int ExecuteTextCommand(string textCommand)
         {
-            return _repository.ExecuteNonQuery(textCommand);
+            return _repository.ExecuteTextCommandQuery(textCommand);
         }
 
         public bool TableExists(string tableName)

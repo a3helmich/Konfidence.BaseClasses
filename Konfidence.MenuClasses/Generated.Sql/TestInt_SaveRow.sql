@@ -9,13 +9,14 @@ GO
 
 CREATE PROCEDURE [dbo].[gen_TestInt_SaveRow]
 (
-	@TestId int OUTPUT,
+	@Id int OUTPUT,
+	@TestId uniqueidentifier = NULL OUTPUT,
 	@testTinyInt tinyint,
+	@testBigInt bigint,
 	@testInt int,
+	@testNtext ntext,
 	@SysInsertTime datetime = NULL OUTPUT,
 	@SysUpdateTime datetime = NULL OUTPUT,
-	@testNtext ntext,
-	@testBigInt bigint,
 	@SysLock varchar(75)
 )
 AS
@@ -24,34 +25,34 @@ AS
 		
 		BEGIN TRY
 			
-			if (@TestId > 0)
+			if (@Id > 0)
 			begin
 				UPDATE [TestInt] WITH (ROWLOCK)
 				SET
 				[testTinyInt] = @testTinyInt,
+				[testBigInt] = @testBigInt,
 				[testInt] = @testInt,
 				[testNtext] = @testNtext,
-				[testBigInt] = @testBigInt,
 				[SysLock] = @SysLock
 				WHERE
-				[TestId] = @TestId
+				[Id] = @Id
 				
-				SELECT @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [TestId] = @TestId
+				SELECT @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [Id] = @Id
 			end
 			else
 			begin
 				INSERT INTO [TestInt] WITH (ROWLOCK)
 				(
-					[testTinyInt], [testInt], [testNtext], [testBigInt], [SysLock]
+					[testTinyInt], [testBigInt], [testInt], [testNtext], [SysLock]
 				)
 				VALUES
 				(
-					@testTinyInt, @testInt, @testNtext, @testBigInt, @SysLock
+					@testTinyInt, @testBigInt, @testInt, @testNtext, @SysLock
 				)
 				
-				SET @TestId = @@IDENTITY
+				SET @Id = @@IDENTITY
 				
-				SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [TestId] = @TestId
+				SELECT @TestId = [TestId], @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [Id] = @Id
 			end
 			
 			COMMIT TRANSACTION

@@ -32,6 +32,16 @@ namespace Konfidence.BaseData
 
         public Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
 
+        protected string ConnectionName { get; set; } = string.Empty;
+
+        public string AutoIdField { get; set; } = string.Empty;
+
+        public string GuidIdField { get; set; } = string.Empty;
+
+        public Guid GuidIdValue { get; private set; } = Guid.Empty;
+
+        public int Id { get; private set; }
+
         protected BaseDataItem()
 	    {
 	        WithLanguage = false;
@@ -151,225 +161,75 @@ namespace Konfidence.BaseData
             return Id;
         }
 
-        protected string ConnectionName { get; set; } = string.Empty;
-
-	    public string AutoIdField { get; set; } = string.Empty;
-
-	    protected internal string GuidIdField { get; set; } = string.Empty;
-
-	    public Guid GuidIdValue { get; private set; } = Guid.Empty;
-
-	    protected int Id { get; private set; }
-
         [UsedImplicitly]
 	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out byte fieldValue)
-	    {
-	        fieldValue = GetAutoUpdateFieldInt8(fieldName);
-	    }
+        {
+            fieldValue = (byte) (GetAutoUpdateField(fieldName) ?? 0);
+        }
 
 	    [UsedImplicitly]
 	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out short fieldValue)
-	    {
-	        fieldValue = GetAutoUpdateFieldInt16(fieldName);
-	    }
+        {
+            fieldValue = (short) (GetAutoUpdateField(fieldName) ?? 0);
+        }
 
 	    [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, out int fieldValue)
         {
-            fieldValue = GetAutoUpdateFieldInt32(fieldName);
+            fieldValue = (int) (GetAutoUpdateField(fieldName) ?? 0);
         }
 
 	    [UsedImplicitly]
 	    protected internal void GetAutoUpdateField([NotNull] string fieldName, out long fieldValue)
-	    {
-	        fieldValue = GetAutoUpdateFieldInt64(fieldName);
-	    }
+        {
+            fieldValue = (long) (GetAutoUpdateField(fieldName) ?? 0);
+        }
 
 	    [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, out Guid fieldValue)
         {
-            fieldValue = GetAutoUpdateFieldGuid(fieldName);
+            fieldValue = (Guid) (GetAutoUpdateField(fieldName) ?? Guid.Empty);
         }
 
 	    [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, [CanBeNull] out string fieldValue)
         {
-            fieldValue = GetAutoUpdateFieldString(fieldName);
+            fieldValue = (GetAutoUpdateField(fieldName) ?? string.Empty) as string;
         }
 
 	    [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, out bool fieldValue)
         {
-            fieldValue = GetAutoUpdateFieldBool(fieldName);
+            fieldValue = (bool) (GetAutoUpdateField(fieldName) ?? false);
         }
 
         [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, out DateTime fieldValue)
         {
-            fieldValue = GetAutoUpdateFieldDateTime(fieldName);
+            fieldValue = (DateTime) (GetAutoUpdateField(fieldName) ?? DateTime.MinValue);
         }
 
-	    [UsedImplicitly]
+        [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, out TimeSpan fieldValue)
         {
-            fieldValue = GetAutoUpdateFieldTimeSpan(fieldName);
+            fieldValue = (TimeSpan) (GetAutoUpdateField(fieldName) ?? TimeSpan.MinValue);
         }
 
 	    [UsedImplicitly]
         protected internal void GetAutoUpdateField([NotNull] string fieldName, out decimal fieldValue)
         {
-            fieldValue = GetAutoUpdateFieldDecimal(fieldName);
-        }
-
-        private byte GetAutoUpdateFieldInt8([NotNull] string fieldName)
-        {
-            byte fieldValue = 0;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-            {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = (byte)AutoUpdateFieldDictionary[fieldName].Value;
-                }
-            }
-            
-            return fieldValue;
-        }
-
-	    private short GetAutoUpdateFieldInt16([NotNull] string fieldName)
-	    {
-	        short fieldValue = 0;
-
-	        if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-	        {
-	            if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-	            {
-	                fieldValue = (short)AutoUpdateFieldDictionary[fieldName].Value;
-	            }
-	        }
-
-	        return fieldValue;
-	    }
-
-        private int GetAutoUpdateFieldInt32([NotNull] string fieldName)
-        {
-            var fieldValue = 0;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-            {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = (int)AutoUpdateFieldDictionary[fieldName].Value;
-                }
-            }
-            
-            return fieldValue;
-        }
-
-	    private long GetAutoUpdateFieldInt64([NotNull] string fieldName)
-	    {
-	        long fieldValue = 0;
-
-	        if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-	        {
-	            if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-	            {
-	                fieldValue = (long)AutoUpdateFieldDictionary[fieldName].Value;
-	            }
-	        }
-
-	        return fieldValue;
-	    }
-
-        private Guid GetAutoUpdateFieldGuid([NotNull] string fieldName)
-        {
-            var fieldValue = Guid.Empty;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-            {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = (Guid)AutoUpdateFieldDictionary[fieldName].Value;
-                }
-            }
-
-            return fieldValue;
+            fieldValue = (decimal) (GetAutoUpdateField(fieldName) ?? 0);
         }
 
         [CanBeNull]
-        private string GetAutoUpdateFieldString([NotNull] string fieldName)
+        private object GetAutoUpdateField([NotNull] string fieldName)
         {
-            var fieldValue = string.Empty;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
+            if (AutoUpdateFieldDictionary.TryGetValue(fieldName, out var parameterData) && parameterData.IsAssigned())
             {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = AutoUpdateFieldDictionary[fieldName].Value as string;
-                }
+                return parameterData.Value;
             }
 
-            return fieldValue;
-        }
-
-        private bool GetAutoUpdateFieldBool([NotNull] string fieldName)
-        {
-            var fieldValue = false;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-            {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = (bool)AutoUpdateFieldDictionary[fieldName].Value;
-                }
-            }
-
-            return fieldValue;
-        }
-
-        private DateTime GetAutoUpdateFieldDateTime([NotNull] string fieldName)
-        {
-            var fieldValue = DateTime.MinValue;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-            {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = (DateTime)AutoUpdateFieldDictionary[fieldName].Value;
-                }
-            }
-
-            return fieldValue;
-        }
-
-        private TimeSpan GetAutoUpdateFieldTimeSpan([NotNull] string fieldName)
-        {
-            var fieldValue = TimeSpan.MinValue;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-            {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = (TimeSpan)AutoUpdateFieldDictionary[fieldName].Value;
-                }
-            }
-
-            return fieldValue;
-        }
-
-        private decimal GetAutoUpdateFieldDecimal([NotNull] string fieldName)
-        {
-            decimal fieldValue = 0;
-
-            if (AutoUpdateFieldDictionary.ContainsKey(fieldName))
-            {
-                if (AutoUpdateFieldDictionary[fieldName].Value.IsAssigned())
-                {
-                    fieldValue = (decimal)AutoUpdateFieldDictionary[fieldName].Value;
-                }
-            }
-
-            return fieldValue;
+            return null;
         }
 
         [UsedImplicitly]
@@ -388,17 +248,7 @@ namespace Konfidence.BaseData
 	    public string SaveStoredProcedure { get; set; } = string.Empty;
 
         [UsedImplicitly]
-	    public bool IsNew
-		{
-			get
-			{
-				if (Id == 0)
-				{
-					return true;
-				}
-				return false;
-			}
-		}
+	    public bool IsNew => Id == 0;
 
         [UsedImplicitly]
 	    protected void GetField(string fieldName, IDataReader dataReader, out byte field)
@@ -472,7 +322,7 @@ namespace Konfidence.BaseData
         {
             if (Client.IsAssigned())
             {
-                field = Client.GetFieldInt8(fieldName, dataReader);
+                Client.GetField(fieldName, out field, dataReader);
 
                 return;
             }
@@ -484,7 +334,7 @@ namespace Konfidence.BaseData
 	    {
 	        if (Client.IsAssigned())
 	        {
-	            field = Client.GetFieldInt16(fieldName, dataReader);
+	            Client.GetField(fieldName, out field, dataReader);
 
                 return;
             }
@@ -496,7 +346,7 @@ namespace Konfidence.BaseData
 		{
 		    if (Client.IsAssigned())
 		    {
-		        field = Client.GetFieldInt32(fieldName, dataReader);
+		        Client.GetField(fieldName, out field, dataReader);
 
                 return;
             }
@@ -508,7 +358,7 @@ namespace Konfidence.BaseData
 	    {
 	        if (Client.IsAssigned())
 	        {
-	            field =  Client.GetFieldInt64(fieldName, dataReader);
+	            Client.GetField(fieldName, out field, dataReader);
 
                 return;
             }
