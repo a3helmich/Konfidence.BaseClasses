@@ -8,9 +8,9 @@ namespace Konfidence.DataBaseInterface
     {
         DataTable GetSchemaObject(string collection);
 
-        DbCommand GetStoredProcCommand(string saveStoredProcedure);
+        //DbCommand GetStoredProcCommand(string saveStoredProcedure);
 
-        int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, List<ISpParameterData> parameterObjectList);
+        int ExecuteCommandStoredProcedure(string saveStoredProcedure, List<ISpParameterData> parameterObjectList);
 
         void ExecuteSaveStoredProcedure(IBaseDataItem dataItem);
 
@@ -28,7 +28,7 @@ namespace Konfidence.DataBaseInterface
 
         void ExecuteDeleteStoredProcedure(IBaseDataItem dataItem);
 
-        int ExecuteNonQuery(string textCommand);
+        int ExecuteTextCommandQuery(string textCommand);
 
         bool ObjectExists(string objectName, string collection);
     }

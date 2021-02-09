@@ -14,7 +14,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            var testIntDataItemList = Bl.TestIntDataItemList.GetList().Where(x => x.TestId > 1).ToList();
+            var testIntDataItemList = Bl.TestIntDataItemList.GetList().Where(x => x.GetId() > 1).ToList();
 
             if (testIntDataItemList.Any())
             {
@@ -55,7 +55,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
 
             testIntDataItem.Save();
 
-            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.TestId);
+            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.GetId());
 
             // assert
             copyTestIntDataItem.TestId.Should().Be(testIntDataItem.TestId);
@@ -78,7 +78,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
 
             testIntDataItem.Save();
 
-            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.TestId);
+            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id);
 
             copyTestIntDataItem.testTinyInt = 222;
             copyTestIntDataItem.testInt = 2222;
@@ -86,7 +86,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
 
             copyTestIntDataItem.Save();
 
-            var updateTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.TestId);
+            var updateTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id);
 
             // assert
             updateTestIntDataItem.TestId.Should().Be(testIntDataItem.TestId);

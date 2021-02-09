@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using JetBrains.Annotations;
+using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -25,7 +26,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public bool HasGuidId { get; }
 
-        public TableDataItem(string catalog, string name, [NotNull] List<IColumnDataItem> columnDataItems, string primaryKey, string primaryKeyDataType, bool hasGuidId)
+        public TableDataItem(string catalog, string name, [NotNull] List<IColumnDataItem> columnDataItems, string primaryKey, string primaryKeyDataType, string guidIdField, bool hasGuidId)
         {
             Catalog = catalog;
             Name = name;
@@ -35,6 +36,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             PrimaryKeyDataType = primaryKeyDataType;
 
             HasGuidId = hasGuidId;
+
+            GuidIdField = guidIdField;
 
             ColumnDataItems = columnDataItems;
         }
@@ -79,11 +82,16 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             var primaryKeyDataType = indexedColumnDataItem.DataType;
 
-            var hasGuidId = columnDataItems.Any(columnDataItem => columnDataItem.IsGuidField &&
-                                                              columnDataItem.Name.Equals($"{name}Id", StringComparison.InvariantCultureIgnoreCase));
+            var guidColumn = columnDataItems
+                .Find(columnDataItem => columnDataItem.IsGuidField &&
+                                        columnDataItem.Name.Equals($"{name}Id",
+                                            StringComparison.InvariantCultureIgnoreCase));
 
+            var hasGuidId = guidColumn.IsAssigned();
 
-            return new TableDataItem(catalog, name, columnDataItems, primaryKey, primaryKeyDataType, hasGuidId); 
+            var guidIdField = hasGuidId ? guidColumn.Name : string.Empty;
+
+            return new TableDataItem(catalog, name, columnDataItems, primaryKey, primaryKeyDataType, guidIdField, hasGuidId); 
         }
 
         [NotNull]

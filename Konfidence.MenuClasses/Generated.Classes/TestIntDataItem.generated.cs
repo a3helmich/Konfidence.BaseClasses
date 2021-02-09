@@ -12,13 +12,14 @@ namespace DbMenuClasses
         public partial class TestIntDataItem : BaseDataItem
         {
             // field definitions
-            internal const string TESTTINYINT = "testTinyInt";
+            internal const string ID = "Id";
             internal const string TESTID = "TestId";
+            internal const string TESTTINYINT = "testTinyInt";
+            internal const string TESTBIGINT = "testBigInt";
             internal const string TESTINT = "testInt";
+            internal const string TESTNTEXT = "testNtext";
             internal const string SYSINSERTTIME = "SysInsertTime";
             internal const string SYSUPDATETIME = "SysUpdateTime";
-            internal const string TESTNTEXT = "testNtext";
-            internal const string TESTBIGINT = "testBigInt";
             internal const string SYSLOCK = "SysLock";
 
             // stored procedures
@@ -27,19 +28,20 @@ namespace DbMenuClasses
             private const string TESTINT_DELETEROW = "gen_TestInt_DeleteRow";
 
             // property storage
+            private Guid _TestId = Guid.Empty;
             private byte _testTinyInt = 0;
+            private long _testBigInt = 0;
             private int _testInt = 0;
+            private string _testNtext = string.Empty;
             private DateTime _SysInsertTime = DateTime.MinValue;
             private DateTime _SysUpdateTime = DateTime.MinValue;
-            private string _testNtext = string.Empty;
-            private long _testBigInt = 0;
             private string _SysLock = string.Empty;
 
             #region generated properties
-            // id storage
-            public int TestId
+
+            public Guid TestId
             {
-                get { return Id; }
+                get { return _TestId; }
             }
 
             public byte testTinyInt
@@ -48,10 +50,22 @@ namespace DbMenuClasses
                 set { _testTinyInt = value; }
             }
 
+            public long testBigInt
+            {
+                get { return _testBigInt; }
+                set { _testBigInt = value; }
+            }
+
             public int testInt
             {
                 get { return _testInt; }
                 set { _testInt = value; }
+            }
+
+            public string testNtext
+            {
+                get { return _testNtext; }
+                set { _testNtext = value; }
             }
 
             public DateTime SysInsertTime
@@ -62,18 +76,6 @@ namespace DbMenuClasses
             public DateTime SysUpdateTime
             {
                 get { return _SysUpdateTime; }
-            }
-
-            public string testNtext
-            {
-                get { return _testNtext; }
-                set { _testNtext = value; }
-            }
-
-            public long testBigInt
-            {
-                get { return _testBigInt; }
-                set { _testBigInt = value; }
             }
 
             public string SysLock
@@ -87,9 +89,9 @@ namespace DbMenuClasses
             {
             }
 
-            public TestIntDataItem(int testid) : this()
+            public TestIntDataItem(int id) : this()
             {
-                GetItem(testid);
+                GetItem(id);
             }
 
             protected override IBaseClient ClientBind()
@@ -99,8 +101,11 @@ namespace DbMenuClasses
 
             public override void InitializeDataItem()
             {
-                AutoIdField = TESTID;
+                AutoIdField = ID;
 
+                GuidIdField = TESTID;
+
+                AddAutoUpdateField(TESTID, DbType.Guid);
                 AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
                 AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
 
@@ -114,18 +119,20 @@ namespace DbMenuClasses
 
             protected override void GetAutoUpdateData()
             {
+                GetAutoUpdateField(TESTID, out _TestId);
                 GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
                 GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
             }
 
             public override void GetData(IDataReader dataReader)
             {
+                GetField(TESTID, dataReader, out _TestId);
                 GetField(TESTTINYINT, dataReader, out _testTinyInt);
+                GetField(TESTBIGINT, dataReader, out _testBigInt);
                 GetField(TESTINT, dataReader, out _testInt);
+                GetField(TESTNTEXT, dataReader, out _testNtext);
                 GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
                 GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
-                GetField(TESTNTEXT, dataReader, out _testNtext);
-                GetField(TESTBIGINT, dataReader, out _testBigInt);
                 GetField(SYSLOCK, dataReader, out _SysLock);
             }
 
@@ -134,9 +141,9 @@ namespace DbMenuClasses
                 base.SetData();
 
                 SetField(TESTTINYINT, _testTinyInt);
+                SetField(TESTBIGINT, _testBigInt);
                 SetField(TESTINT, _testInt);
                 SetField(TESTNTEXT, _testNtext);
-                SetField(TESTBIGINT, _testBigInt);
                 SetField(SYSLOCK, _SysLock);
             }
         }

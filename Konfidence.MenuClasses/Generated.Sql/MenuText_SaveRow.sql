@@ -10,13 +10,13 @@ GO
 CREATE PROCEDURE [dbo].[gen_MenuText_SaveRow]
 (
 	@NodeId int OUTPUT,
-	@MenuId int,
+	@Language varchar(3) = NULL OUTPUT,
+	@MenuText nvarchar(100),
+	@Description varchar(300),
 	@SysInsertTime datetime = NULL OUTPUT,
 	@SysUpdateTime datetime = NULL OUTPUT,
-	@Language varchar(3) = NULL OUTPUT,
-	@Description varchar(300),
 	@SysLock varchar(75),
-	@MenuText nvarchar(100)
+	@MenuId int
 )
 AS
 	
@@ -28,10 +28,10 @@ AS
 			begin
 				UPDATE [MenuText] WITH (ROWLOCK)
 				SET
-				[MenuId] = @MenuId,
+				[MenuText] = @MenuText,
 				[Description] = @Description,
 				[SysLock] = @SysLock,
-				[MenuText] = @MenuText
+				[MenuId] = @MenuId
 				WHERE
 				[NodeId] = @NodeId
 				
@@ -41,16 +41,16 @@ AS
 			begin
 				INSERT INTO [MenuText] WITH (ROWLOCK)
 				(
-					[MenuId], [Description], [SysLock], [MenuText]
+					[MenuText], [Description], [SysLock], [MenuId]
 				)
 				VALUES
 				(
-					@MenuId, @Description, @SysLock, @MenuText
+					@MenuText, @Description, @SysLock, @MenuId
 				)
 				
 				SET @NodeId = @@IDENTITY
 				
-				SELECT @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime], @Language = [Language] FROM [MenuText] WHERE [NodeId] = @NodeId
+				SELECT @Language = [Language], @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [MenuText] WHERE [NodeId] = @NodeId
 			end
 			
 			COMMIT TRANSACTION

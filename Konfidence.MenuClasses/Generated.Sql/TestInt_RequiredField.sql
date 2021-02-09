@@ -36,5 +36,5 @@ AS
 		UPDATE [TestInt]
 		SET [SysUpdateTime] = getdate()
 		FROM inserted i
-		WHERE i.[TestId] = [TestInt].[TestId]
+		WHERE i.[Id] = [TestInt].[Id]
 	end

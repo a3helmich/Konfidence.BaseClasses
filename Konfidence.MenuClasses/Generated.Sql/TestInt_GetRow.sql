@@ -9,11 +9,11 @@ GO
 
 CREATE PROCEDURE [dbo].[gen_TestInt_GetRow]
 (
-	@TestId int
+	@Id int
 )
 AS
 	SELECT *
 	FROM [TestInt]
-	WHERE [TestId] = @TestId
+	WHERE [Id] = @Id
 	
 RETURN

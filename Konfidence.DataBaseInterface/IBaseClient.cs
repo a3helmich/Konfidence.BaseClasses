@@ -25,13 +25,21 @@ namespace Konfidence.DataBaseInterface
 
         bool StoredProcedureExists(string storedPprocedureName);
 
-        byte GetFieldInt8(string fieldName, IDataReader dataReader);
+        void GetField(string fieldName, out byte field, IDataReader dataReader);
 
-        short GetFieldInt16(string fieldName, IDataReader dataReader);
+        void GetField(string fieldName, out short field, IDataReader dataReader);
 
-        int GetFieldInt32(string fieldName, IDataReader dataReader);
+        void GetField(string fieldName, out int field, IDataReader dataReader);
+        
+        void GetField(string fieldName, out long field, IDataReader dataReader);
 
-        long GetFieldInt64(string fieldName, IDataReader dataReader);
+        //byte GetFieldInt8(string fieldName, IDataReader dataReader);
+
+        //short GetFieldInt16(string fieldName, IDataReader dataReader);
+
+        //int GetFieldInt32(string fieldName, IDataReader dataReader);
+
+        //long GetFieldInt64(string fieldName, IDataReader dataReader);
 
         Guid GetFieldGuid(string fieldName, IDataReader dataReader);
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DbMenuClasses;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
@@ -157,6 +158,36 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("Omschrijving");
+        }
+
+        [TestMethod]
+        public void When_TableExists_is_executed_and_table_exists_Should_return_true()
+        {
+            // arrange
+            var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            // act
+            var tableExists = target.Client.TableExists("Test1");
+
+            // assert
+            tableExists.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void When_TableExists_is_executed_and_table_does_notexists_Should_return_false()
+        {
+            // arrange
+            var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
+
+            target.BuildStructure();
+
+            // act
+            var tableExists = target.Client.TableExists("Test666");
+
+            // assert
+            tableExists.Should().BeFalse();
         }
     }
 }

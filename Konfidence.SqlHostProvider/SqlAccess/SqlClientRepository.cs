@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DataBaseInterface;
@@ -9,7 +10,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    public class SqlClientRepository : IDataRepository
+    internal class SqlClientRepository : IDataRepository
     {
         private readonly string _connectionName;
 
@@ -18,7 +19,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _connectionName = connectionName;
         }
 
-        public Database GetDatabase()
+        private Database GetDatabase()
         {
             var databaseProviderFactory = new DatabaseProviderFactory();
 
@@ -47,12 +48,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return dataTable;
         }
 
-        public DbCommand GetStoredProcCommand(string saveStoredProcedure)
-        {
-            return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
-        }
-
-        public int ExecuteNonQueryStoredProcedure(string saveStoredProcedure, [NotNull] List<ISpParameterData> parameterObjectList)
+        public int ExecuteCommandStoredProcedure(string saveStoredProcedure, [NotNull] List<ISpParameterData> parameterObjectList)
         {
             var database = GetDatabase();
 
@@ -88,10 +84,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.GetId());
 
             // alle velden die aan de kant van de database gewijzigd worden als parameter toevoegen
-            foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
+            foreach (var parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
             {
-                var parameterObject = kvp.Value;
-
                 database.AddParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, ParameterDirection.InputOutput,
                                                             parameterObject.ParameterName, DataRowVersion.Proposed, parameterObject.Value);
             }
@@ -290,7 +284,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         [UsedImplicitly]
         public int ExecuteNonQuery(string storedProcedure, [NotNull] List<ISpParameterData> parameterList)
         {
-            return ExecuteNonQueryStoredProcedure(storedProcedure, parameterList);
+            return ExecuteCommandStoredProcedure(storedProcedure, parameterList);
+        }
+
+        public int ExecuteTextCommandQuery(string textCommand)
+        {
+            return GetDatabase().ExecuteNonQuery(CommandType.Text, textCommand);
         }
 
         private int ExecuteNonQuery(DbCommand dbCommand)
@@ -298,39 +297,25 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return GetDatabase().ExecuteNonQuery(dbCommand);
         }
 
-        public int ExecuteNonQuery(string textCommand)
+        private DbCommand GetStoredProcCommand(string saveStoredProcedure)
         {
-            return GetDatabase().ExecuteNonQuery(CommandType.Text, textCommand);
+            return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
         }
 
         public bool ObjectExists(string objectName, string collection)
         {
-            // TODO: schema information
-            //DbConnection dbConnection = database.CreateConnection();
-            //DataTable schemaTable = dbConnection.GetSchema("Tables"); 
-            // MetaDataCollections, DataSourceInformation, DataTypes, Restrictions, ReservedWords, 
-            // Users, Databases, Tables, Columns, Views, ViewColumns, ProcedureParameters, 
-            // Procedures, ForeignKeys, IndexColumns, Indexes, UserDefinedTypes
-
             using (var dbConnection = GetDatabase().CreateConnection())
             {
                 dbConnection.Open();
 
                 using (var schemaTable = dbConnection.GetSchema(collection))
                 {
-                    foreach (DataRow dataRow in schemaTable.Rows)
-                    {
-                        var foundName = dataRow[2].ToString();
-
-                        if (objectName.Equals(foundName, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            return true;
-                        }
-                    }
+                    return schemaTable
+                        .Rows
+                        .Cast<DataRow>()
+                        .Any(x => x[2].ToString().Equals(objectName, StringComparison.OrdinalIgnoreCase));
                 }
             }
-
-            return false;
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Konfidence.DataBaseInterface
 
         Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
 
+        string GuidIdField { get; }
+
         Guid GuidIdValue { get; }
 
         bool IsSelected { get; set; }

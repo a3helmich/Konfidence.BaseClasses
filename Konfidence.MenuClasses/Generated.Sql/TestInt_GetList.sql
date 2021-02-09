@@ -11,6 +11,6 @@ CREATE PROCEDURE [dbo].[gen_TestInt_GetList]
 AS
 	SELECT *
 	FROM [TestInt]
-	ORDER BY [TestId]
+	ORDER BY [Id]
 	
 RETURN
