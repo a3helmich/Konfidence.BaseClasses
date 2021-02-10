@@ -51,6 +51,8 @@ namespace Konfidence.BaseData
 
 	        SpParameterData = new List<ISpParameterData>();
             AutoUpdateFieldDictionary = new Dictionary<string, ISpParameterData>();
+
+            InternalInitializeDataItem();
         }
 
         private IKernel Kernel
@@ -584,8 +586,6 @@ namespace Konfidence.BaseData
 
         protected void GetItem()
 		{
-            InternalInitializeDataItem();
-
             Client.GetItem(this);
 
             AfterGetDataItem();
@@ -593,8 +593,6 @@ namespace Konfidence.BaseData
 
         protected void GetItemBy([NotNull] string storedProcedure)
         {
-            InternalInitializeDataItem();
-
             Client.GetItemBy(this, storedProcedure);
 
             AfterGetDataItem();
@@ -602,8 +600,6 @@ namespace Konfidence.BaseData
 
         protected void GetItem(int autoKeyId)
 		{
-            InternalInitializeDataItem();
-
             SetField(AutoIdField, autoKeyId);
 
             GetItem();
@@ -612,8 +608,6 @@ namespace Konfidence.BaseData
 	    [UsedImplicitly]
         protected void GetItem([NotNull] string guidStoredProcedure, Guid guidId)
         {
-            InternalInitializeDataItem();
-
             SetField(GuidIdField, guidId);
 
             GetItemBy(guidStoredProcedure);
@@ -631,8 +625,6 @@ namespace Konfidence.BaseData
 
 		public void Save()
 		{
-            InternalInitializeDataItem();
-
             BeforeSave();
 
 			if (!IsValidDataItem())
@@ -659,8 +651,6 @@ namespace Konfidence.BaseData
 
 		public void Delete()
 		{
-            InternalInitializeDataItem();
-
             BeforeDelete();
 
 			Client.Delete(this);

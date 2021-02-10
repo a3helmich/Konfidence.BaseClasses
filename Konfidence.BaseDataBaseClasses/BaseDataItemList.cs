@@ -105,8 +105,6 @@ namespace Konfidence.BaseData
             //var dataItem = new T();
             var dataItem = Kernel.Get<T>();
 
-            dataItem.InitializeDataItem();
-
 			Add(dataItem);
 
 			return dataItem;

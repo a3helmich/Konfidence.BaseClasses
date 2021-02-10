@@ -13,7 +13,7 @@ namespace DbMenuClasses
         {
             // field definitions
             internal const string ID = "Id";
-            internal const string TESTID = "TestId";
+            internal const string TESTINTID = "TestIntId";
             internal const string TESTTINYINT = "testTinyInt";
             internal const string TESTBIGINT = "testBigInt";
             internal const string TESTINT = "testInt";
@@ -24,11 +24,12 @@ namespace DbMenuClasses
 
             // stored procedures
             private const string TESTINT_GETROW = "gen_TestInt_GetRow";
+            private const string TESTINT_GETROWBYGUID = "gen_TestInt_GetRowByGuid";
             private const string TESTINT_SAVEROW = "gen_TestInt_SaveRow";
             private const string TESTINT_DELETEROW = "gen_TestInt_DeleteRow";
 
             // property storage
-            private Guid _TestId = Guid.Empty;
+            private Guid _TestIntId = Guid.NewGuid();
             private byte _testTinyInt = 0;
             private long _testBigInt = 0;
             private int _testInt = 0;
@@ -39,9 +40,9 @@ namespace DbMenuClasses
 
             #region generated properties
 
-            public Guid TestId
+            public Guid TestIntId
             {
-                get { return _TestId; }
+                get { return _TestIntId; }
             }
 
             public byte testTinyInt
@@ -94,6 +95,11 @@ namespace DbMenuClasses
                 GetItem(id);
             }
 
+            public TestIntDataItem(Guid testintId) : this()
+            {
+                GetItem(TESTINT_GETROWBYGUID, testintId);
+            }
+
             protected override IBaseClient ClientBind()
             {
                 return base.ClientBind<SqlClient>();
@@ -102,10 +108,9 @@ namespace DbMenuClasses
             public override void InitializeDataItem()
             {
                 AutoIdField = ID;
+                GuidIdField = TESTINTID;
 
-                GuidIdField = TESTID;
-
-                AddAutoUpdateField(TESTID, DbType.Guid);
+                AddAutoUpdateField(TESTINTID, DbType.Guid);
                 AddAutoUpdateField(SYSINSERTTIME, DbType.DateTime);
                 AddAutoUpdateField(SYSUPDATETIME, DbType.DateTime);
 
@@ -119,14 +124,14 @@ namespace DbMenuClasses
 
             protected override void GetAutoUpdateData()
             {
-                GetAutoUpdateField(TESTID, out _TestId);
+                GetAutoUpdateField(TESTINTID, out _TestIntId);
                 GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
                 GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
             }
 
             public override void GetData(IDataReader dataReader)
             {
-                GetField(TESTID, dataReader, out _TestId);
+                GetField(TESTINTID, dataReader, out _TestIntId);
                 GetField(TESTTINYINT, dataReader, out _testTinyInt);
                 GetField(TESTBIGINT, dataReader, out _testBigInt);
                 GetField(TESTINT, dataReader, out _testInt);

@@ -10,7 +10,7 @@ GO
 CREATE PROCEDURE [dbo].[gen_TestInt_SaveRow]
 (
 	@Id int OUTPUT,
-	@TestId uniqueidentifier = NULL OUTPUT,
+	@TestIntId uniqueidentifier = NULL OUTPUT,
 	@testTinyInt tinyint,
 	@testBigInt bigint,
 	@testInt int,
@@ -52,7 +52,7 @@ AS
 				
 				SET @Id = @@IDENTITY
 				
-				SELECT @TestId = [TestId], @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [Id] = @Id
+				SELECT @TestIntId = [TestIntId], @SysInsertTime = [SysInsertTime], @SysUpdateTime = [SysUpdateTime] FROM [TestInt] WHERE [Id] = @Id
 			end
 			
 			COMMIT TRANSACTION
