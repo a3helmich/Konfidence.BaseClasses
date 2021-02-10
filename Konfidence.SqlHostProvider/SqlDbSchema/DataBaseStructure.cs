@@ -11,7 +11,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     [UsedImplicitly]
     public class DatabaseStructure : BaseDataItem
     {
-        public List<TableDataItem> TableList { get; }
+        public List<TableDataItem> Tables { get; }
 
         [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
 
@@ -23,7 +23,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public DatabaseStructure(string connectionName)
         {
-            TableList = new List<TableDataItem>();
+            Tables = new List<TableDataItem>();
 
             _allColumnDataItems = new List<IColumnDataItem>();
             _allPrimaryKeyDataItems = new List<IPrimaryKeyDataItem>();
@@ -58,7 +58,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             
             _allColumnDataItems.AddRange(ColumnDataItem.GetList(Client, _allIndexDataItems));
 
-            TableList.AddRange(TableDataItem.GetList(Client, _allColumnDataItems));
+            Tables.AddRange(TableDataItem.GetList(Client, _allColumnDataItems));
 
             DeleteStoredProcedures();
 

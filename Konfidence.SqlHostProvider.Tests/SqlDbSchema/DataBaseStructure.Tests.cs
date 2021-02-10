@@ -31,7 +31,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.TableList.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
+            target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -44,9 +44,9 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.TableList.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
+            target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
 
-            target.TableList.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
+            target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -59,7 +59,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.TableList.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
+            target.Tables.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
         }
 
 
@@ -73,7 +73,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.TableList.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
+            target.Tables.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
         }
 
 
@@ -85,7 +85,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             target.BuildStructure();
 
-            var table = target.TableList.First(x => x.Name == "Test5");
+            var table = target.Tables.First(x => x.Name == "Test5");
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
@@ -103,7 +103,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             target.BuildStructure();
 
-            var table = target.TableList.First(x => x.Name == "Test5");
+            var table = target.Tables.First(x => x.Name == "Test5");
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
@@ -121,7 +121,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             target.BuildStructure();
 
-            var table = target.TableList.First(x => x.Name == "Test5");
+            var table = target.Tables.First(x => x.Name == "Test5");
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
@@ -139,7 +139,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             target.BuildStructure();
 
-            var table = target.TableList.First(x => x.Name == "Test5");
+            var table = target.Tables.First(x => x.Name == "Test5");
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act

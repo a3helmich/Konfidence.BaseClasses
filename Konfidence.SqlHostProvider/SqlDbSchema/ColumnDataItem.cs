@@ -121,7 +121,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO : internal
-        public override void GetData(IDataReader dataReader)
+        public override void GetData([NotNull] IDataReader dataReader)
         {
             GetField("Name", dataReader, out string name);
             GetField("tableName", dataReader, out string tableName);
