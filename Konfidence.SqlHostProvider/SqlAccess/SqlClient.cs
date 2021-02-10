@@ -19,7 +19,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public SqlClient(string connectionName) 
         {
-            
             var connectionNameParam = new ConstructorArgument("connectionName", connectionName);
 
             if (!_ninject.Kernel.GetBindings(typeof(IDataRepository)).Any())
@@ -30,126 +29,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository = _ninject.Kernel.Get<IDataRepository>(connectionNameParam);
         }
 
-        public void GetField([NotNull] string fieldName, out byte field, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetByte(fieldOrdinal);
-        }
-
-        public void GetField([NotNull] string fieldName, out short field, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt16(fieldOrdinal);
-        }
-
-        public void GetField([NotNull] string fieldName, out int field, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
-        }
-
-        public void GetField([NotNull] string fieldName, out long field, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
-        }
-
-        //public byte GetFieldInt8([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        //{
-        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-        //    return dataReader.IsDBNull(fieldOrdinal) ? (byte) 0 : dataReader.GetByte(fieldOrdinal);
-        //}
-
-        //public short GetFieldInt16([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        //{
-        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-        //    return dataReader.IsDBNull(fieldOrdinal) ? (short)0 : dataReader.GetInt16(fieldOrdinal);
-        //}
-
-        //public int GetFieldInt32([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        //{
-        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-        //    return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
-        //}
-
-        //public long GetFieldInt64([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        //{
-        //    var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-        //    return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
-        //}
-
-        public Guid GetFieldGuid([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            return dataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : dataReader.GetGuid(fieldOrdinal);
-        }
-
-        public string GetFieldString([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            return dataReader.IsDBNull(fieldOrdinal) ? string.Empty : dataReader.GetString(fieldOrdinal);
-        }
-
-        public bool GetFieldBool([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            return !dataReader.IsDBNull(fieldOrdinal) && dataReader.GetBoolean(fieldOrdinal);
-        }
-
-        public DateTime GetFieldDateTime([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            return dataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : dataReader.GetDateTime(fieldOrdinal);
-        }
-
-        public TimeSpan GetFieldTimeSpan([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            return dataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan)dataReader.GetValue(fieldOrdinal);
-        }
-
-        public decimal GetFieldDecimal([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            var fieldOrdinal = GetOrdinal(fieldName, dataReader);
-
-            return dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetDecimal(fieldOrdinal);
-        }
-
-        private static int GetOrdinal([NotNull] string fieldName, [NotNull] IDataReader dataReader)
-        {
-            if (!dataReader.IsAssigned())
-            {
-                const string message = @"_DataReader: in SQLClient.GetOrdinal(string fieldName);";
-
-                throw new ArgumentNullException(message);
-            }
-
-            return dataReader.GetOrdinal(fieldName);
-        }
-
         public void Save([NotNull] IBaseDataItem dataItem)
         {
             if (dataItem.AutoIdField.Equals(string.Empty))
             {
-                throw (new Exception("AutoIdField not provided"));
+                throw new Exception("AutoIdField not provided");
             }
 
             if (dataItem.SaveStoredProcedure.Equals(string.Empty))
             {
-                throw (new Exception("StoredProcedure not provided"));
+                throw new Exception("StoredProcedure not provided");
             }
 
             _repository.ExecuteSaveStoredProcedure(dataItem);
@@ -159,7 +48,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!dataItem.GetStoredProcedure.IsAssigned())
             {
-                throw (new Exception("GetStoredProcedure not provided"));
+                throw new Exception("GetStoredProcedure not provided");
             }
 
             _repository.ExecuteGetStoredProcedure(dataItem);
@@ -169,7 +58,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!storedProcedure.IsAssigned())
             {
-                throw (new Exception("GetStoredProcedure not provided"));
+                throw new Exception("GetStoredProcedure not provided");
             }
 
             _repository.ExecuteGetByStoredProcedure(dataItem, storedProcedure);
@@ -179,7 +68,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!getListStoredProcedure.IsAssigned())
             {
-                throw (new Exception("GetListStoredProcedure not provided"));
+                throw new Exception("GetListStoredProcedure not provided");
             }
 
             _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, spParameters, this);
@@ -189,7 +78,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!getListStoredProcedure.IsAssigned())
             {
-                throw (new Exception("GetListStoredProcedure not provided"));
+                throw new Exception("GetListStoredProcedure not provided");
             }
 
             baseDataItemList.SetParameters(getListStoredProcedure);
@@ -202,7 +91,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (getRelatedStoredProcedure.Equals(string.Empty))
             {
-                throw (new Exception("GetListStoredProcedure not provided"));
+                throw new Exception("GetListStoredProcedure not provided");
             }
 
             parentDataItemList.SetParameters(getRelatedStoredProcedure);

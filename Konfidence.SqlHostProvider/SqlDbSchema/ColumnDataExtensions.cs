@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
-    public static class SqlSchemaExtensions
+    public static class ColumnDataExtensions
     {
         [NotNull]
         public static string GetFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
