@@ -58,7 +58,8 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
             var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.GetId());
 
             // assert
-            copyTestIntDataItem.TestId.Should().Be(testIntDataItem.TestId);
+            copyTestIntDataItem.Id.Should().Be(testIntDataItem.Id);
+            copyTestIntDataItem.TestIntId.Should().Be(testIntDataItem.TestIntId);
 
             copyTestIntDataItem.testTinyInt.Should().Be(111);
             copyTestIntDataItem.testInt.Should().Be(1111);
@@ -89,7 +90,8 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
             var updateTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id);
 
             // assert
-            updateTestIntDataItem.TestId.Should().Be(testIntDataItem.TestId);
+            updateTestIntDataItem.TestIntId.Should().Be(testIntDataItem.TestIntId);
+            updateTestIntDataItem.Id.Should().Be(testIntDataItem.Id);
 
             updateTestIntDataItem.testTinyInt.Should().Be(222);
             updateTestIntDataItem.testInt.Should().Be(2222);

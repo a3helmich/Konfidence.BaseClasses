@@ -6,6 +6,6 @@ namespace DbMenuClasses
 	{
 		public partial class MenuDataItem : BaseDataItem
 		{
-		}
+        }
 	}
 }

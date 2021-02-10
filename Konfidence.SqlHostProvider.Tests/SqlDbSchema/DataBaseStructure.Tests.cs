@@ -62,6 +62,21 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.TableList.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
         }
 
+
+        [TestMethod, TestCategory("DatabaseStructure")]
+        public void BuildStructureWithDBMenuConnectionName()
+        {
+            // arrange
+            var target = new DatabaseStructure("DBMenu"); // TODO: Initialize to an appropriate value
+
+            // act
+            target.BuildStructure();
+
+            // assert
+            target.TableList.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
+        }
+
+
         [TestMethod]
         public void When_GetFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {

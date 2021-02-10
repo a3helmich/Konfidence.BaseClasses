@@ -129,7 +129,7 @@ namespace Konfidence.MenuClasses.Tests
             // assert
             //testIntDataItem.Should().BeFalse();
 
-            testIntDataItem.TestId.Should().NotBeEmpty();
+            testIntDataItem.TestIntId.Should().NotBeEmpty();
             testIntDataItem.AutoIdField.Should().NotBeEmpty();
             testIntDataItem.GuidIdField.Should().NotBeEmpty();
         }
