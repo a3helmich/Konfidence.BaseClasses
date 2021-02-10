@@ -25,34 +25,6 @@ namespace Konfidence.DataBaseInterface
 
         bool StoredProcedureExists(string storedPprocedureName);
 
-        void GetField(string fieldName, out byte field, IDataReader dataReader);
-
-        void GetField(string fieldName, out short field, IDataReader dataReader);
-
-        void GetField(string fieldName, out int field, IDataReader dataReader);
-        
-        void GetField(string fieldName, out long field, IDataReader dataReader);
-
-        //byte GetFieldInt8(string fieldName, IDataReader dataReader);
-
-        //short GetFieldInt16(string fieldName, IDataReader dataReader);
-
-        //int GetFieldInt32(string fieldName, IDataReader dataReader);
-
-        //long GetFieldInt64(string fieldName, IDataReader dataReader);
-
-        Guid GetFieldGuid(string fieldName, IDataReader dataReader);
-
-        string GetFieldString(string fieldName, IDataReader dataReader);
-
-        bool GetFieldBool(string fieldName, IDataReader dataReader);
-
-        DateTime GetFieldDateTime(string fieldName, IDataReader dataReader);
-
-        TimeSpan GetFieldTimeSpan(string fieldName, IDataReader dataReader);
-
-        decimal GetFieldDecimal(string fieldName, IDataReader dataReader);
-
         DataTable GetSchemaObject(string objectType);
 
         void BuildItemList<T>(IBaseDataItemList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem;

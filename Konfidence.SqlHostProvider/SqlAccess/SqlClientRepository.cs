@@ -154,16 +154,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData([NotNull] IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
-        {
-            foreach (var parameterObject in parameterObjectList)
-            {
-                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
-            }
-
-            parameterObjectList.Clear();
-        }
-
         public void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, [NotNull] IList<ISpParameterData> spParameters, IBaseClient baseClient) where T : IBaseDataItem, new()
         {
             var database = GetDatabase();
@@ -300,6 +290,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         private DbCommand GetStoredProcCommand(string saveStoredProcedure)
         {
             return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
+        }
+
+        private static void SetParameterData([NotNull] IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
+        {
+            foreach (var parameterObject in parameterObjectList)
+            {
+                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
+            }
+
+            parameterObjectList.Clear();
         }
 
         public bool ObjectExists(string objectName, string collection)

@@ -152,7 +152,7 @@ namespace Konfidence.BaseData
         {
             if (AutoIdField.Length > 0)
             {
-                GetFieldInternal(AutoIdField, dataReader, out int id);
+                dataReader.GetField(AutoIdField,  out int id);
 
                 Id = id;
             }
@@ -253,198 +253,76 @@ namespace Konfidence.BaseData
 	    public bool IsNew => Id == 0;
 
         [UsedImplicitly]
-	    protected void GetField(string fieldName, IDataReader dataReader, out byte field)
+	    protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out byte field)
 	    {
-	        GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
 	    }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, out short field)
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out short field)
         {
-            GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, out int field)
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out int field)
         {
-            GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
         }
 
         [UsedImplicitly]
-	    protected void GetField(string fieldName, IDataReader dataReader, out long field)
+	    protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out long field)
 	    {
-	        GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
 	    }
 
-	    [UsedImplicitly]
-        protected void GetField([NotNull] string fieldName, IDataReader dataReader, out Guid field)
+        [UsedImplicitly]
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out decimal field)
         {
-            GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, out string field)
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out bool field)
         {
-            GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, out bool field)
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out Guid field)
         {
-            GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
+
+            if (fieldName.Equals(GuidIdField, StringComparison.InvariantCultureIgnoreCase))
+            {
+                GuidIdValue = field;
+            }
         }
 
         [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, out DateTime field)
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out string field)
         {
-            GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
+        }
+
+        [UsedImplicitly]
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out DateTime field)
+        {
+            dataReader.GetField(fieldName, out field);
         }
 
 	    [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, out TimeSpan field)
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, out TimeSpan field)
         {
-            GetFieldInternal(fieldName, dataReader, out field);
+            dataReader.GetField(fieldName, out field);
         }
 
 	    [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, [NotNull] ref XmlDocument field)
+        protected void GetField([NotNull] string fieldName, [NotNull] IDataReader dataReader, [NotNull] ref XmlDocument field)
         {
-            GetFieldInternal(fieldName, dataReader, out string xmlString);
+            dataReader.GetField(fieldName, out string xmlString);
 
             field.LoadXml(xmlString);
-        }
-
-	    [UsedImplicitly]
-        protected void GetField(string fieldName, IDataReader dataReader, out decimal field)
-        {
-            GetFieldInternal(fieldName, dataReader, out field);
-        }
-
-        private void GetFieldInternal(string fieldName, IDataReader dataReader, out byte field)
-        {
-            if (Client.IsAssigned())
-            {
-                Client.GetField(fieldName, out field, dataReader);
-
-                return;
-            }
-
-            throw (new Exception("GetFieldInt8: client is not assigned"));
-        }
-
-	    private void GetFieldInternal(string fieldName, IDataReader dataReader, out short field)
-	    {
-	        if (Client.IsAssigned())
-	        {
-	            Client.GetField(fieldName, out field, dataReader);
-
-                return;
-            }
-
-	        throw (new Exception("GetFieldInt16: client is not assigned"));
-	    }
-
-        private void GetFieldInternal(string fieldName, IDataReader dataReader, out int field)
-		{
-		    if (Client.IsAssigned())
-		    {
-		        Client.GetField(fieldName, out field, dataReader);
-
-                return;
-            }
-
-		    throw (new Exception("GetFieldInt32: client is not assigned"));
-		}
-
-	    private void GetFieldInternal(string fieldName, IDataReader dataReader, out long field)
-	    {
-	        if (Client.IsAssigned())
-	        {
-	            Client.GetField(fieldName, out field, dataReader);
-
-                return;
-            }
-
-	        throw (new Exception("GetFieldInt64: client is not assigned"));
-	    }
-
-        private void GetFieldInternal([NotNull] string fieldName, IDataReader dataReader, out Guid field)
-        {
-            if (Client.IsAssigned())
-            {
-                var fieldValue = Client.GetFieldGuid(fieldName, dataReader);
-
-                if (fieldName.Equals(GuidIdField, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    GuidIdValue = fieldValue;
-                }
-
-                field = fieldValue;
-
-                return;
-            }
-
-            throw (new Exception("GetFieldGuid: client is not assigned"));
-        }
-
-		private void GetFieldInternal(string fieldName, IDataReader dataReader, out string field)
-		{
-            if (Client.IsAssigned())
-		    {
-		        field = Client.GetFieldString(fieldName, dataReader);
-
-                return;
-            }
-
-		    throw (new Exception("GetFieldString: client is not assigned"));
-		}
-
-        private void GetFieldInternal(string fieldName, IDataReader dataReader, out bool field)
-        {
-            if (Client.IsAssigned())
-            {
-                field = Client.GetFieldBool(fieldName, dataReader);
-
-                return;
-            }
-
-            throw (new Exception("GetFieldBool: client is not assigned"));
-        }
-
-		private void GetFieldInternal(string fieldName, IDataReader dataReader, out DateTime field)
-		{
-            if (Client.IsAssigned())
-		    {
-		        field = Client.GetFieldDateTime(fieldName, dataReader);
-
-                return;
-            }
-
-		    throw (new Exception("GetFieldDateTime: client is not assigned"));
-		}
-
-        private void GetFieldInternal(string fieldName, IDataReader dataReader, out TimeSpan field)
-        {
-            if (Client.IsAssigned())
-            {
-                field = Client.GetFieldTimeSpan(fieldName, dataReader);
-
-                return;
-            }
-
-            throw (new Exception("GetFieldTimeSpan: client is not assigned"));
-        }
-
-        private void GetFieldInternal(string fieldName, IDataReader dataReader, out decimal field)
-        {
-            if (Client.IsAssigned())
-            {
-                field = Client.GetFieldDecimal(fieldName, dataReader);
-
-                return;
-            }
-
-            throw (new Exception("GetFieldDecimal: client is not assigned"));
         }
 
         protected void SetField(string fieldName, int value)

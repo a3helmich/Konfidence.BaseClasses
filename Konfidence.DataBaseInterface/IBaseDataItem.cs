@@ -44,10 +44,6 @@ namespace Konfidence.DataBaseInterface
 
         void GetData(IDataReader dataReader);
 
-        //void SetProperties(Dictionary<string, object> propertyDictionary);
-
-        //void GetProperties(List<IDbParameterObject> properties);
-
         List<ISpParameterData> GetParameterObjects();
     }
 }
