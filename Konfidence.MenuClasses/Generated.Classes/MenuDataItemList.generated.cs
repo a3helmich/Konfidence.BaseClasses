@@ -26,15 +26,6 @@ namespace DbMenuClasses
                 return base.ClientBind<SqlClient>();
             }
 
-            public static MenuDataItemList GetList()
-            {
-                MenuDataItemList menuList = new MenuDataItemList();
-
-                menuList.BuildItemList(MENU_GETLIST);
-
-                return menuList;
-            }
-
             public static MenuDataItemList GetListByMenuId(int menuid)
             {
                 MenuDataItemList menuList = new MenuDataItemList();

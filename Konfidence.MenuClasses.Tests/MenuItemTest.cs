@@ -121,7 +121,7 @@ namespace Konfidence.MenuClasses.Tests
         public void When_Table_Test1_is_retrieved_and_table_does_contain_data_Should_return_GuidIdField()
         {
             // arrange
-            var testIntDataItemList = Bl.TestIntDataItemList.GetList();
+            var testIntDataItemList = Bl.TestIntDataItem.GetList();
 
             // act
             var testIntDataItem = testIntDataItemList.First();

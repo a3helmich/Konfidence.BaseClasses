@@ -33,8 +33,8 @@ namespace DbMenuClasses
             private const string MENU_GETROW = "gen_Menu_GetRow";
             private const string MENU_SAVEROW = "gen_Menu_SaveRow";
             private const string MENU_DELETEROW = "gen_Menu_DeleteRow";
-            private const string MENU_GETLIST = "gen_Menu_GetList";
-            private const string MENU_GETLISTBY_MENUID = "gen_Menu_GetListByMenuId";
+            internal const string MENU_GETLIST = "gen_Menu_GetList";
+            internal const string MENU_GETLISTBY_MENUID = "gen_Menu_GetListByMenuId";
 
             // property storage
             private int _ParentNodeId = 0;
@@ -52,6 +52,8 @@ namespace DbMenuClasses
             private string _SysLock = string.Empty;
 
             private MenuTextDataItem _MenuText = null;
+
+            private static IBaseClient _client;
 
             #region generated properties
             // id storage
@@ -150,8 +152,14 @@ namespace DbMenuClasses
                 }
             }
 
+            static MenuDataItem()
+            {
+                _client = new SqlClient(string.Empty);
+            }
+
             public MenuDataItem()
             {
+                Client = _client;
             }
 
             public MenuDataItem(int nodeid) : this()
@@ -217,6 +225,15 @@ namespace DbMenuClasses
                 SetField(ISNOTLOGONVISIBLE, _IsNotLogonVisible);
                 SetField(ISLOCALVISIBLE, _IsLocalVisible);
                 SetField(SYSLOCK, _SysLock);
+            }
+
+            public static MenuDataItemList GetList()
+            {
+                MenuDataItemList menuList = new MenuDataItemList();
+
+                _client.BuildItemList(menuList, MenuDataItem.MENU_GETLIST);
+
+                return menuList;
             }
         }
     }
