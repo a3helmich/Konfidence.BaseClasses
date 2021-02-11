@@ -24,21 +24,5 @@
       ]
     }
   ],
-  "FindBy": [
-    {
-      "Name": "Menu",
-      "Fields": [
-        "ParentNodeId"
-      ]
-    }
-  ],
-  "FindListBy": [
-    {
-      "Name": "Menu",
-      "Fields": [
-        "ParentNodeId"
-      ]
-    }
-  ],
   "DataBaseExplicit": false
 }
