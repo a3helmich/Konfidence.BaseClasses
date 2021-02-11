@@ -43,9 +43,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        internal static List<TableDataItem> GetList([NotNull] IBaseClient client, List<IColumnDataItem> allColumnDataItems)
+        internal static List<ITableDataItem> GetList([NotNull] IBaseClient client, List<IColumnDataItem> allColumnDataItems)
         {
-            var tableDataItems = new List<TableDataItem>();
+            var tableDataItems = new List<ITableDataItem>();
 
             var schemaTables = client
                 .GetSchemaObject("Tables")

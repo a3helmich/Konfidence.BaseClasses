@@ -16,7 +16,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         public string TableName { get; set; } = string.Empty;
 
         [NotNull]
-        internal static List<PrimaryKeyDataItem> GetList([NotNull] IBaseClient client)
+        internal static List<IPrimaryKeyDataItem> GetList([NotNull] IBaseClient client)
         {
             var primaryKeyDataItems = new List<PrimaryKeyDataItem>();
 
@@ -24,7 +24,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             client.BuildItemList(primaryKeyDataItems, SpName.GetTablePrimaryKeyList, spParameterData);
 
-            return primaryKeyDataItems;
+            return new List<IPrimaryKeyDataItem>(primaryKeyDataItems);
         }
 
         [NotNull]
