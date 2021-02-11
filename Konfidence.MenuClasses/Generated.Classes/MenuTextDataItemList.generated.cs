@@ -42,18 +42,6 @@ namespace DbMenuClasses
 
                 return menutextList;
             }
-
-            public MenuTextDataItemList FindAll()
-            {
-                MenuTextDataItemList menutextList = new MenuTextDataItemList();
-
-                foreach (MenuTextDataItem menutext in this)
-                {
-                    menutextList.Add(menutext);
-                }
-
-                return menutextList;
-            }
         }
     }
 }

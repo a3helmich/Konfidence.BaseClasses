@@ -72,18 +72,6 @@ namespace DbMenuClasses
                 return null;
             }
 
-            public MenuDataItemList FindAll()
-            {
-                MenuDataItemList menuList = new MenuDataItemList();
-
-                foreach (MenuDataItem menu in this)
-                {
-                    menuList.Add(menu);
-                }
-
-                return menuList;
-            }
-
             public MenuDataItemList FindListByParentNodeId(int parentnodeid)
             {
                 MenuDataItemList menuList = new MenuDataItemList();

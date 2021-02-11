@@ -42,18 +42,6 @@ namespace DbMenuClasses
 
                 return testintList;
             }
-
-            public TestIntDataItemList FindAll()
-            {
-                TestIntDataItemList testintList = new TestIntDataItemList();
-
-                foreach (TestIntDataItem testint in this)
-                {
-                    testintList.Add(testint);
-                }
-
-                return testintList;
-            }
         }
     }
 }
