@@ -12,10 +12,6 @@ namespace DbMenuClasses
     {
         public partial class MenuDataItemList : BaseDataItemList<MenuDataItem>
         {
-            // partial methods
-            partial void BeforeInitializeDataItemList();
-            partial void AfterInitializeDataItemList();
-
             private const string MENU_GETLIST = "gen_Menu_GetList";
             private const string MENU_GETLISTBY_MENUID = "gen_Menu_GetListByMenuId";
 
@@ -33,8 +29,6 @@ namespace DbMenuClasses
             static public MenuDataItemList GetList()
             {
                 MenuDataItemList menuList = new MenuDataItemList();
-
-                menuList.BeforeInitializeDataItemList();
 
                 menuList.BuildItemList(MENU_GETLIST);
 
