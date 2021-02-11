@@ -1,4 +1,7 @@
+using System;
 using System.Data;
+using System.Collections.Generic;
+using Konfidence.BaseData.Sp;
 using System;
 using System.Data.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
@@ -139,18 +142,7 @@ namespace DbMenuClasses
             }
             #endregion generated properties
 
-            public MenuTextDataItem MenuText
-            {
-                get
-                {
-                    if (!_MenuText.IsAssigned())
-                    {
-                        _MenuText = MenuTextDataItem.GetByNodeId(NodeId);
-                    }
-
-                    return _MenuText;
-                }
-            }
+            public MenuTextDataItem MenuText => _MenuText ?? (_MenuText = MenuTextDataItem.GetByNodeId(NodeId));
 
             static MenuDataItem()
             {
@@ -232,6 +224,19 @@ namespace DbMenuClasses
                 MenuDataItemList menuList = new MenuDataItemList();
 
                 _client.BuildItemList(menuList, MenuDataItem.MENU_GETLIST);
+
+                return menuList;
+            }
+
+            public static MenuDataItemList GetListByMenuId(int menuid)
+            {
+                var menuList = new MenuDataItemList();
+
+                var spParameterList = new List<ISpParameterData>();
+
+                spParameterList.SetParameter(MenuDataItem.MENUID, menuid);
+
+                _client.BuildItemList(menuList, MENU_GETLISTBY_MENUID, spParameterList);
 
                 return menuList;
             }

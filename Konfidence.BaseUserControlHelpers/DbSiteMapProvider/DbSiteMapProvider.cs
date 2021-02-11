@@ -71,7 +71,7 @@ namespace Konfidence.BaseUserControlHelpers.DbSiteMapProvider
                     // Start with a clean slate
                     Clear();
 
-                    var menuItemList = Bl.MenuDataItemList.GetListByMenuId(1);
+                    var menuItemList = Bl.MenuDataItem.GetListByMenuId(1);
 
                     var rootMenu = GetMenuRootNode(menuItemList);
 

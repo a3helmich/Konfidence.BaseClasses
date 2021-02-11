@@ -25,25 +25,6 @@ namespace DbMenuClasses
             {
                 return base.ClientBind<SqlClient>();
             }
-
-            public static MenuDataItemList GetListByMenuId(int menuid)
-            {
-                MenuDataItemList menuList = new MenuDataItemList();
-
-                menuList._MenuId = menuid;
-
-                menuList.BuildItemList(MENU_GETLISTBY_MENUID);
-
-                return menuList;
-            }
-
-            public override void SetParameters(string storedProcedure)
-            {
-                if (storedProcedure.Equals(MENU_GETLISTBY_MENUID))
-                {
-                    SetParameter(MenuDataItem.MENUID, _MenuId);
-                }
-            }
         }
     }
 }
