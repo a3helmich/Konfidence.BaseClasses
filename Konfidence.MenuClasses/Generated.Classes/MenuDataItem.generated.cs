@@ -33,6 +33,8 @@ namespace DbMenuClasses
             private const string MENU_GETROW = "gen_Menu_GetRow";
             private const string MENU_SAVEROW = "gen_Menu_SaveRow";
             private const string MENU_DELETEROW = "gen_Menu_DeleteRow";
+            private const string MENU_GETLIST = "gen_Menu_GetList";
+            private const string MENU_GETLISTBY_MENUID = "gen_Menu_GetListByMenuId";
 
             // property storage
             private int _ParentNodeId = 0;
