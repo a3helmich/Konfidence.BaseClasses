@@ -16,7 +16,7 @@ namespace DbMenuClasses
 
             private const string TESTINT_GETLIST = "gen_TestInt_GetList";
 
-            protected TestIntDataItemList() : base()
+            public TestIntDataItemList() : base()
             {
             }
 

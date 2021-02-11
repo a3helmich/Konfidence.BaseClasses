@@ -16,7 +16,7 @@ namespace DbMenuClasses
 
             private const string MENUTEXT_GETLIST = "gen_MenuText_GetList";
 
-            protected MenuTextDataItemList() : base()
+            public MenuTextDataItemList() : base()
             {
             }
 

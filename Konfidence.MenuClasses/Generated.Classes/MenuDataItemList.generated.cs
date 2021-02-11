@@ -21,7 +21,7 @@ namespace DbMenuClasses
 
             private int _MenuId = 0;
 
-            protected MenuDataItemList() : base()
+            public MenuDataItemList() : base()
             {
             }
 
