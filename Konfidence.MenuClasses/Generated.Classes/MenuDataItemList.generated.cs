@@ -21,20 +21,13 @@ namespace DbMenuClasses
 
             private int _MenuId = 0;
 
-            protected MenuDataItemList() : base()
+            public MenuDataItemList() : base()
             {
             }
 
             protected override IBaseClient ClientBind()
             {
                 return base.ClientBind<SqlClient>();
-            }
-
-            static public MenuDataItemList GetEmptyList()
-            {
-                MenuDataItemList menuList = new MenuDataItemList();
-
-                return menuList;
             }
 
             static public MenuDataItemList GetList()
@@ -70,18 +63,6 @@ namespace DbMenuClasses
                 }
 
                 return null;
-            }
-
-            public MenuDataItemList FindAll()
-            {
-                MenuDataItemList menuList = new MenuDataItemList();
-
-                foreach (MenuDataItem menu in this)
-                {
-                    menuList.Add(menu);
-                }
-
-                return menuList;
             }
 
             public MenuDataItemList FindListByParentNodeId(int parentnodeid)

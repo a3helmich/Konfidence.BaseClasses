@@ -16,20 +16,13 @@ namespace DbMenuClasses
 
             private const string MENUTEXT_GETLIST = "gen_MenuText_GetList";
 
-            protected MenuTextDataItemList() : base()
+            public MenuTextDataItemList() : base()
             {
             }
 
             protected override IBaseClient ClientBind()
             {
                 return base.ClientBind<SqlClient>();
-            }
-
-            static public MenuTextDataItemList GetEmptyList()
-            {
-                MenuTextDataItemList menutextList = new MenuTextDataItemList();
-
-                return menutextList;
             }
 
             static public MenuTextDataItemList GetList()
@@ -39,18 +32,6 @@ namespace DbMenuClasses
                 menutextList.BeforeInitializeDataItemList();
 
                 menutextList.BuildItemList(MENUTEXT_GETLIST);
-
-                return menutextList;
-            }
-
-            public MenuTextDataItemList FindAll()
-            {
-                MenuTextDataItemList menutextList = new MenuTextDataItemList();
-
-                foreach (MenuTextDataItem menutext in this)
-                {
-                    menutextList.Add(menutext);
-                }
 
                 return menutextList;
             }

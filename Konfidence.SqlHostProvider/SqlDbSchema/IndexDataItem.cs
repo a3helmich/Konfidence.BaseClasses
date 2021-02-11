@@ -34,9 +34,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        internal static List<IndexDataItem> GetList([NotNull] IBaseClient client, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
+        internal static List<IIndexDataItem> GetList([NotNull] IBaseClient client, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
         {
-            var indexDataItems = new List<IndexDataItem>();
+            var indexDataItems = new List<IIndexDataItem>();
 
             var schemaIndexes = client
                 .GetSchemaObject("IndexColumns")
@@ -49,13 +49,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        private static List<IndexDataItem> MapSchemaIndexesToIndexDataItems([NotNull] List<DataRow> schemaIndexes, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
+        private static List<IIndexDataItem> MapSchemaIndexesToIndexDataItems([NotNull] List<DataRow> schemaIndexes, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
         {
             return schemaIndexes.Select(indexDataRow => BuildIndexDataItem(indexDataRow, allPrimaryKeyDataItems)).ToList();
         }
 
         [NotNull]
-        private static IndexDataItem BuildIndexDataItem([NotNull] DataRow indexDataRow, [NotNull] List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
+        private static IIndexDataItem BuildIndexDataItem([NotNull] DataRow indexDataRow, [NotNull] List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
         {
             var catalog = indexDataRow["TABLE_CATALOG"].ToString();
 

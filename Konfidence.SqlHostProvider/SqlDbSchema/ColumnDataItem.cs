@@ -90,7 +90,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        internal static List<ColumnDataItem> GetList([NotNull] IBaseClient client, [NotNull] List<IIndexDataItem> allIndexDataItems)
+        internal static List<IColumnDataItem> GetList([NotNull] IBaseClient client, [NotNull] List<IIndexDataItem> allIndexDataItems)
         {
             var columnDataItems = new List<ColumnDataItem>();
 
@@ -111,7 +111,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 .SelectMany(indexDataItem => columnDataItems.Where(columnDataItem => columnDataItem.Name == indexDataItem.IndexName))
                 .ForEach(x => x.IsPrimaryKey = true);
 
-            return columnDataItems;
+            return new List<IColumnDataItem>(columnDataItems);
         }
 
         [NotNull]
@@ -121,7 +121,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO : internal
-        public override void GetData(IDataReader dataReader)
+        public override void GetData([NotNull] IDataReader dataReader)
         {
             GetField("Name", dataReader, out string name);
             GetField("tableName", dataReader, out string tableName);
