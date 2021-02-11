@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Konfidence.DataBaseInterface;
 
-namespace Konfidence.BaseData.Objects
+namespace Konfidence.BaseData.Sp
 {
     internal class SpParameter : ISpParameterData
     {

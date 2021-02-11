@@ -1,4 +1,7 @@
+using System;
 using System.Data;
+using System.Collections.Generic;
+using Konfidence.BaseData.Sp;
 using System;
 using Konfidence.Base;
 using Konfidence.BaseData;
@@ -25,6 +28,7 @@ namespace DbMenuClasses
             private const string MENUTEXT_GETROW = "gen_MenuText_GetRow";
             private const string MENUTEXT_SAVEROW = "gen_MenuText_SaveRow";
             private const string MENUTEXT_DELETEROW = "gen_MenuText_DeleteRow";
+            internal const string MENUTEXT_GETLIST = "gen_MenuText_GetList";
             private const string MENUTEXT_GETROWBY_NODEID = "gen_MenuText_GetRowByNodeId";
 
             // property storage
@@ -35,6 +39,8 @@ namespace DbMenuClasses
             private DateTime _SysUpdateTime = DateTime.MinValue;
             private string _SysLock = string.Empty;
             private int _MenuId = 0;
+
+            private static IBaseClient _client;
 
             #region generated properties
             // id storage
@@ -83,8 +89,14 @@ namespace DbMenuClasses
             }
             #endregion generated properties
 
+            static MenuTextDataItem()
+            {
+                _client = new SqlClient(string.Empty);
+            }
+
             public MenuTextDataItem()
             {
+                Client = _client;
             }
 
             public MenuTextDataItem(int nodeid) : this()
@@ -139,6 +151,15 @@ namespace DbMenuClasses
                 SetField(DESCRIPTION, _Description);
                 SetField(SYSLOCK, _SysLock);
                 SetField(MENUID, _MenuId);
+            }
+
+            public static MenuTextDataItemList GetList()
+            {
+                MenuTextDataItemList menutextList = new MenuTextDataItemList();
+
+                _client.BuildItemList(menutextList, MenuTextDataItem.MENUTEXT_GETLIST);
+
+                return menutextList;
             }
 
             public static MenuTextDataItem GetByNodeId(int nodeid)

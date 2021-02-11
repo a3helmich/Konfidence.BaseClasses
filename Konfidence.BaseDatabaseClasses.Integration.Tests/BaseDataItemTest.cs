@@ -14,7 +14,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            var testIntDataItemList = Bl.TestIntDataItemList.GetList().Where(x => x.GetId() > 1).ToList();
+            var testIntDataItemList = Bl.TestIntDataItem.GetList().Where(x => x.GetId() > 1).ToList();
 
             if (testIntDataItemList.Any())
             {
@@ -29,7 +29,8 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         public void TestIntDataItemShouldReturnShortAndLong()
         {
             // arrange
-            var testIntDataItemList = Bl.TestIntDataItemList.GetList();
+            //var testIntDataItemList = Bl.TestIntDataItemList.GetList();
+            var testIntDataItemList = Bl.TestIntDataItem.GetList();
 
             // act
 

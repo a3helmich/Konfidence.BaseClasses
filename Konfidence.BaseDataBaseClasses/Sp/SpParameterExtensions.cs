@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DataBaseInterface;
 
-namespace Konfidence.BaseData.Objects
+namespace Konfidence.BaseData.Sp
 {
     public static class SpParameterExtensions
     {

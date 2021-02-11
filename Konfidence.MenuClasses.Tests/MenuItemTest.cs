@@ -41,7 +41,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemList()
         {
-            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+            var list = Bl.MenuDataItem.GetListByMenuId(1);
 
             list.Should().HaveCount(9, "list should contain 9 menu items");
 
@@ -51,7 +51,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemByFindId()
         {
-            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+            var list = Bl.MenuDataItem.GetListByMenuId(1);
 
             var itemById = list.FindById("2");
 
@@ -61,7 +61,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemByFindIsSelected()
         {
-            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+            var list = Bl.MenuDataItem.GetListByMenuId(1);
 
             var itemById = list.FindByIsSelected();
 
@@ -71,7 +71,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemByFindIsEditing()
         {
-            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+            var list = Bl.MenuDataItem.GetListByMenuId(1);
 
             var itemById = list.FindByIsEditing();
 
@@ -81,7 +81,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemByFindCurrent()
         {
-            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+            var list = Bl.MenuDataItem.GetListByMenuId(1);
 
             var itemById = list.FindCurrent();
 
@@ -91,13 +91,25 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod, TestCategory("MenuItem")]
         public void GetSingleMenuItemHasCurrent()
         {
-            var list = Bl.MenuDataItemList.GetListByMenuId(1);
+            var list = Bl.MenuDataItem.GetListByMenuId(1);
 
             var _ = list.FindCurrent();
 
             var itemHasCurrent = list.HasCurrent();
 
             itemHasCurrent.Should().BeTrue();
+        }
+
+        [TestMethod, TestCategory("MenuItem")]
+        public void GetSingleMenuItemHasCurrentMenuId2()
+        {
+            var list = Bl.MenuDataItem.GetListByMenuId(2);
+
+            var _ = list.FindCurrent();
+
+            var itemHasCurrent = list.HasCurrent();
+
+            itemHasCurrent.Should().BeFalse();
         }
 
         [TestMethod, TestCategory("MenuItem")]
@@ -121,7 +133,7 @@ namespace Konfidence.MenuClasses.Tests
         public void When_Table_Test1_is_retrieved_and_table_does_contain_data_Should_return_GuidIdField()
         {
             // arrange
-            var testIntDataItemList = Bl.TestIntDataItemList.GetList();
+            var testIntDataItemList = Bl.TestIntDataItem.GetList();
 
             // act
             var testIntDataItem = testIntDataItemList.First();

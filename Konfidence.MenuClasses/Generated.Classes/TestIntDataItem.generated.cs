@@ -1,4 +1,7 @@
+using System;
 using System.Data;
+using System.Collections.Generic;
+using Konfidence.BaseData.Sp;
 using System;
 using Konfidence.Base;
 using Konfidence.BaseData;
@@ -27,6 +30,7 @@ namespace DbMenuClasses
             private const string TESTINT_GETROWBYGUID = "gen_TestInt_GetRowByGuid";
             private const string TESTINT_SAVEROW = "gen_TestInt_SaveRow";
             private const string TESTINT_DELETEROW = "gen_TestInt_DeleteRow";
+            internal const string TESTINT_GETLIST = "gen_TestInt_GetList";
 
             // property storage
             private Guid _TestIntId = Guid.NewGuid();
@@ -37,6 +41,8 @@ namespace DbMenuClasses
             private DateTime _SysInsertTime = DateTime.MinValue;
             private DateTime _SysUpdateTime = DateTime.MinValue;
             private string _SysLock = string.Empty;
+
+            private static IBaseClient _client;
 
             #region generated properties
 
@@ -86,8 +92,14 @@ namespace DbMenuClasses
             }
             #endregion generated properties
 
+            static TestIntDataItem()
+            {
+                _client = new SqlClient(string.Empty);
+            }
+
             public TestIntDataItem()
             {
+                Client = _client;
             }
 
             public TestIntDataItem(int id) : this()
@@ -150,6 +162,15 @@ namespace DbMenuClasses
                 SetField(TESTINT, _testInt);
                 SetField(TESTNTEXT, _testNtext);
                 SetField(SYSLOCK, _SysLock);
+            }
+
+            public static TestIntDataItemList GetList()
+            {
+                TestIntDataItemList testintList = new TestIntDataItemList();
+
+                _client.BuildItemList(testintList, TestIntDataItem.TESTINT_GETLIST);
+
+                return testintList;
             }
         }
     }

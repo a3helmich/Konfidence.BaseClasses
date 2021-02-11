@@ -10,10 +10,6 @@ namespace DbMenuClasses
     {
         public partial class TestIntDataItemList : BaseDataItemList<TestIntDataItem>
         {
-            // partial methods
-            partial void BeforeInitializeDataItemList();
-            partial void AfterInitializeDataItemList();
-
             private const string TESTINT_GETLIST = "gen_TestInt_GetList";
 
             public TestIntDataItemList() : base()
@@ -23,17 +19,6 @@ namespace DbMenuClasses
             protected override IBaseClient ClientBind()
             {
                 return base.ClientBind<SqlClient>();
-            }
-
-            static public TestIntDataItemList GetList()
-            {
-                TestIntDataItemList testintList = new TestIntDataItemList();
-
-                testintList.BeforeInitializeDataItemList();
-
-                testintList.BuildItemList(TESTINT_GETLIST);
-
-                return testintList;
             }
         }
     }
