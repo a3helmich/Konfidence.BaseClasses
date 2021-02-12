@@ -219,18 +219,18 @@ namespace DbMenuClasses
                 SetField(SYSLOCK, _SysLock);
             }
 
-            public static MenuDataItemList GetList()
+            public static List<MenuDataItem> GetList()
             {
-                MenuDataItemList menuList = new MenuDataItemList();
+                var menuList = new List<MenuDataItem>();
 
                 _client.BuildItemList(menuList, MenuDataItem.MENU_GETLIST);
 
                 return menuList;
             }
 
-            public static MenuDataItemList GetListByMenuId(int menuid)
+            public static List<MenuDataItem> GetListByMenuId(int menuid)
             {
-                var menuList = new MenuDataItemList();
+                var menuList = new List<MenuDataItem>();
 
                 var spParameterList = new List<ISpParameterData>();
 
