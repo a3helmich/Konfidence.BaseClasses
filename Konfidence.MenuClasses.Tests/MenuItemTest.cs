@@ -139,8 +139,6 @@ namespace Konfidence.MenuClasses.Tests
             var testIntDataItem = testIntDataItemList.First();
 
             // assert
-            //testIntDataItem.Should().BeFalse();
-
             testIntDataItem.TestIntId.Should().NotBeEmpty();
             testIntDataItem.AutoIdField.Should().NotBeEmpty();
             testIntDataItem.GuidIdField.Should().NotBeEmpty();

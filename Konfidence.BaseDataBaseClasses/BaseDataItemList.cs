@@ -15,7 +15,7 @@ namespace Konfidence.BaseData
     {
         private readonly List<ISpParameterData> _spParameterData;
 
-	    private IBaseClient _client;
+        private IBaseClient _client;
 
         private NinjectDependencyResolver _ninject;
 
@@ -67,48 +67,48 @@ namespace Konfidence.BaseData
         protected abstract IBaseClient ClientBind();
 
         public IBaseClient Client
-	    {
-	        get
-	        {
-	            if (!_client.IsAssigned())
-	            {
-	                _client = ClientBind();
-	            }
+        {
+            get
+            {
+                if (!_client.IsAssigned())
+                {
+                    _client = ClientBind();
+                }
 
-	            return _client;
-	        }
-	        set => _client = value;
-	    }
+                return _client;
+            }
+            set => _client = value;
+        }
 
         protected virtual void AfterDataLoad()
         {
             //
         }
 
-		protected string ConnectionName { get; set; } = string.Empty;
+        protected string ConnectionName { get; set; } = string.Empty;
 
-	    public BaseDataItemList()
-	    {
-	        _spParameterData = new List<ISpParameterData>();
+        public BaseDataItemList()
+        {
+            _spParameterData = new List<ISpParameterData>();
         }
 
         protected void BuildItemList(string getListStoredProcedure)
-		{
-		    Client.BuildItemList(this, getListStoredProcedure);
+        {
+            Client.BuildItemList(this, getListStoredProcedure);
 
             AfterDataLoad();
         }
 
-		[NotNull]
+        [NotNull]
         public T GetDataItem()
-		{
+        {
             //var dataItem = new T();
             var dataItem = Kernel.Get<T>();
 
-			Add(dataItem);
+            Add(dataItem);
 
-			return dataItem;
-		}
+            return dataItem;
+        }
 
         public List<ISpParameterData> GetParameterObjectList()
         {
@@ -120,32 +120,32 @@ namespace Konfidence.BaseData
             _spParameterData.SetParameter(fieldName, value);
         }
 
-		/// <summary>
-		/// Add parameters for filtering
-		/// </summary>
-		/// <returns></returns>
-		public virtual void SetParameters(string storedProcedure)
-		{
-			// NOP
-		}
+        /// <summary>
+        /// Add parameters for filtering
+        /// </summary>
+        /// <returns></returns>
+        public virtual void SetParameters(string storedProcedure)
+        {
+            // NOP
+        }
 
         [UsedImplicitly]
-		protected int ExecuteTextCommand(string textCommand)
-		{
-			return Client.ExecuteTextCommand(textCommand);
-		}
+        protected int ExecuteTextCommand(string textCommand)
+        {
+            return Client.ExecuteTextCommand(textCommand);
+        }
 
         [UsedImplicitly]
-		protected bool TableExists(string tableName)
-		{
-			return Client.TableExists(tableName);
-		}
+        protected bool TableExists(string tableName)
+        {
+            return Client.TableExists(tableName);
+        }
 
         [UsedImplicitly]
-		protected bool ViewExists(string viewName)
-		{
-			return Client.ViewExists(viewName);
-		}
+        protected bool ViewExists(string viewName)
+        {
+            return Client.ViewExists(viewName);
+        }
 
         [UsedImplicitly]
         protected bool StoredProcedureExists(string storedProcedureName)

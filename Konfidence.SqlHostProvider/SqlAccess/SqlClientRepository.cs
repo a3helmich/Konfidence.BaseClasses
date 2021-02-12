@@ -154,6 +154,11 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
+        public void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem, new()
+        {
+            ExecuteGetListStoredProcedure(baseDataItemList, storedProcedure, new List<ISpParameterData>(), baseClient);
+        }
+
         public void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, [NotNull] IList<ISpParameterData> spParameters, IBaseClient baseClient) where T : IBaseDataItem, new()
         {
             var database = GetDatabase();

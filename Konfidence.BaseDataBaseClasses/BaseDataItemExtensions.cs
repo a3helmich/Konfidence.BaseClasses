@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -9,7 +10,7 @@ namespace Konfidence.BaseData
     public static class BaseDataItemExtensions
     {
         [CanBeNull]
-        public static T FindById<T>([NotNull] this BaseDataItemList<T> baseDataItems, string textId) where T : class, IBaseDataItem
+        public static T FindById<T>([NotNull] this IList<T> baseDataItems, string textId) where T : class, IBaseDataItem
         {
             if (Guid.TryParse(textId, out var guidId))
             {
@@ -25,19 +26,19 @@ namespace Konfidence.BaseData
         }
 
         [CanBeNull]
-        public static T FindById<T>([NotNull] this BaseDataItemList<T> baseDataItems, int id) where T : class, IBaseDataItem
+        public static T FindById<T>([NotNull] this IList<T> baseDataItems, int id) where T : class, IBaseDataItem
         {
             return baseDataItems.FirstOrDefault(x => x.GetId() == id);
         }
 
         [CanBeNull]
-        public static T FindById<T>([NotNull] this BaseDataItemList<T> baseDataItems, Guid guidId) where T : class, IBaseDataItem
+        public static T FindById<T>([NotNull] this IList<T> baseDataItems, Guid guidId) where T : class, IBaseDataItem
         {
             return baseDataItems.FirstOrDefault(x => x.GuidIdValue == guidId);
         }
 
         [CanBeNull]
-        internal static T FindByIsSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems) where T : class, IBaseDataItem
+        internal static T FindByIsSelected<T>([NotNull] this IList<T> baseDataItems) where T : class, IBaseDataItem
         {
             var firstSelected = baseDataItems.FirstOrDefault(x => x.IsSelected);
 
@@ -60,13 +61,13 @@ namespace Konfidence.BaseData
         }
 
         [CanBeNull]
-        internal static T FindByIsEditing<T>([NotNull] this BaseDataItemList<T> baseDataItems) where T : class, IBaseDataItem
+        internal static T FindByIsEditing<T>([NotNull] this IList<T> baseDataItems) where T : class, IBaseDataItem
         {
             return baseDataItems.FirstOrDefault(x => x.IsEditing);
         }
 
         [CanBeNull]
-        public static T FindCurrent<T>([NotNull] this BaseDataItemList<T> baseDataItems) where T : class, IBaseDataItem
+        public static T FindCurrent<T>([NotNull] this IList<T> baseDataItems) where T : class, IBaseDataItem
         {
             var dataItem = baseDataItems.FindByIsEditing();
 
@@ -78,13 +79,13 @@ namespace Konfidence.BaseData
             return baseDataItems.FindByIsSelected();
         }
 
-        public static bool HasCurrent<T>([NotNull] this BaseDataItemList<T> baseDataItems) where T : class, IBaseDataItem
+        public static bool HasCurrent<T>([NotNull] this IList<T> baseDataItems) where T : class, IBaseDataItem
         {
                 return baseDataItems.Any(x => x.IsEditing || x.IsSelected);
         }
 
         [UsedImplicitly]
-        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, string idText, string isEditingText) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, string idText, string isEditingText) where T : class, IBaseDataItem
         {
             bool.TryParse(isEditingText, out var isEditing);
 
@@ -102,7 +103,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, string idText) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, string idText) where T : class, IBaseDataItem
         {
             if (Guid.TryParse(idText, out var guidId))
             {
@@ -118,7 +119,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, IBaseDataItem dataItem) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, IBaseDataItem dataItem) where T : class, IBaseDataItem
         {
             if (dataItem.IsAssigned())
             {
@@ -126,17 +127,17 @@ namespace Konfidence.BaseData
             }
         }
 
-        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, int id, bool isEditing = false) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, int id, bool isEditing = false) where T : class, IBaseDataItem
         {
             baseDataItems.SetSelected(id, Guid.Empty, isEditing);
         }
 
-        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, Guid guidId, bool isEditing) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, Guid guidId, bool isEditing) where T : class, IBaseDataItem
         {
             baseDataItems.SetSelected(0, guidId, isEditing);
         }
 
-        public static void SetSelected<T>([NotNull] this BaseDataItemList<T> baseDataItems, int id, Guid guidId, bool isEditing) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, int id, Guid guidId, bool isEditing) where T : class, IBaseDataItem
         {
             if (baseDataItems.Any())
             {
@@ -164,7 +165,7 @@ namespace Konfidence.BaseData
             }
         }
 
-        public static void New<T>([NotNull] this BaseDataItemList<T> baseDataItems) where T : class, IBaseDataItem
+        public static void New<T>([NotNull] this IList<T> baseDataItems) where T : class, IBaseDataItem
         {
             var dataItem = baseDataItems.FindCurrent();
 
@@ -187,7 +188,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        public static void Save<T>([NotNull] this BaseDataItemList<T> baseDataItems, T dataItem) where T : class, IBaseDataItem
+        public static void Save<T>([NotNull] this IList<T> baseDataItems, T dataItem) where T : class, IBaseDataItem
         {
             if (!dataItem.IsAssigned())
             {
@@ -215,7 +216,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        public static void Delete<T>([NotNull] this BaseDataItemList<T> baseDataItems, T dataItem) where T : class, IBaseDataItem
+        public static void Delete<T>([NotNull] this IList<T> baseDataItems, T dataItem) where T : class, IBaseDataItem
         {
             if (!dataItem.IsAssigned())
             {

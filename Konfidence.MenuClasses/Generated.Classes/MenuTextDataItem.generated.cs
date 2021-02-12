@@ -153,9 +153,9 @@ namespace DbMenuClasses
                 SetField(MENUID, _MenuId);
             }
 
-            public static MenuTextDataItemList GetList()
+            public static List<MenuTextDataItem> GetList()
             {
-                MenuTextDataItemList menutextList = new MenuTextDataItemList();
+                var menutextList = new List<MenuTextDataItem>();
 
                 _client.BuildItemList(menutextList, MenuTextDataItem.MENUTEXT_GETLIST);
 

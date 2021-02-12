@@ -164,9 +164,9 @@ namespace DbMenuClasses
                 SetField(SYSLOCK, _SysLock);
             }
 
-            public static TestIntDataItemList GetList()
+            public static List<TestIntDataItem> GetList()
             {
-                TestIntDataItemList testintList = new TestIntDataItemList();
+                var testintList = new List<TestIntDataItem>();
 
                 _client.BuildItemList(testintList, TestIntDataItem.TESTINT_GETLIST);
 
