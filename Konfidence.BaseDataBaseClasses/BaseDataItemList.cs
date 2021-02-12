@@ -87,17 +87,17 @@ namespace Konfidence.BaseData
 
         protected string ConnectionName { get; set; } = string.Empty;
 
-        public BaseDataItemList()
-        {
-            _spParameterData = new List<ISpParameterData>();
-        }
+        //public BaseDataItemList()
+        //{
+        //    _spParameterData = new List<ISpParameterData>();
+        //}
 
-        protected void BuildItemList(string getListStoredProcedure)
-        {
-            Client.BuildItemList(this, getListStoredProcedure);
+        //protected void BuildItemList(string getListStoredProcedure)
+        //{
+        //    Client.BuildItemList(this, getListStoredProcedure);
 
-            AfterDataLoad();
-        }
+        //    AfterDataLoad();
+        //}
 
         [NotNull]
         public T GetDataItem()

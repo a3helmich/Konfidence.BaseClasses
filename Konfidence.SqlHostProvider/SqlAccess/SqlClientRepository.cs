@@ -187,75 +187,75 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        public void ExecuteGetListStoredProcedure<T>([NotNull] IBaseDataItemList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem
-        {
-            var database = GetDatabase();
+        //public void ExecuteGetListStoredProcedure<T>([NotNull] IBaseDataItemList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem
+        //{
+        //    var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(storedProcedure))
-            {
-                SetParameterData(baseDataItemList.GetParameterObjectList(), database, dbCommand);
+        //    using (var dbCommand = GetStoredProcCommand(storedProcedure))
+        //    {
+        //        SetParameterData(baseDataItemList.GetParameterObjectList(), database, dbCommand);
 
-                using (var dataReader = database.ExecuteReader(dbCommand))
-                {
-                    while (dataReader.Read())
-                    {
-                        var dataItem = baseDataItemList.GetDataItem();
+        //        using (var dataReader = database.ExecuteReader(dbCommand))
+        //        {
+        //            while (dataReader.Read())
+        //            {
+        //                var dataItem = baseDataItemList.GetDataItem();
 
-                        dataItem.Client = baseClient;
+        //                dataItem.Client = baseClient;
 
-                        dataItem.GetKey(dataReader);
-                        dataItem.GetData(dataReader);
-                    }
-                }
-            }
-        }
+        //                dataItem.GetKey(dataReader);
+        //                dataItem.GetData(dataReader);
+        //            }
+        //        }
+        //    }
+        //}
 
-        public void ExecuteGetRelatedListStoredProcedure<T>(string storedProcedure, [NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList, IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem
-        {
-            var database = GetDatabase();
+        //public void ExecuteGetRelatedListStoredProcedure<T>(string storedProcedure, [NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList, IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem
+        //{
+        //    var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(storedProcedure))
-            {
-                SetParameterData(parentDataItemList.GetParameterObjectList(), database, dbCommand);
+        //    using (var dbCommand = GetStoredProcCommand(storedProcedure))
+        //    {
+        //        SetParameterData(parentDataItemList.GetParameterObjectList(), database, dbCommand);
 
-                using (var dataReader = database.ExecuteReader(dbCommand))
-                {
-                    while (dataReader.Read())
-                    {
-                        var dataItem = parentDataItemList.GetDataItem();
+        //        using (var dataReader = database.ExecuteReader(dbCommand))
+        //        {
+        //            while (dataReader.Read())
+        //            {
+        //                var dataItem = parentDataItemList.GetDataItem();
 
-                        dataItem.Client = baseClient;
+        //                dataItem.Client = baseClient;
 
-                        dataItem.GetKey(dataReader);
-                        dataItem.GetData(dataReader);
-                    }
+        //                dataItem.GetKey(dataReader);
+        //                dataItem.GetData(dataReader);
+        //            }
 
-                    dataReader.NextResult();
+        //            dataReader.NextResult();
 
-                    while (dataReader.Read())
-                    {
-                        var dataItem = relatedDataItemList.GetDataItem();
+        //            while (dataReader.Read())
+        //            {
+        //                var dataItem = relatedDataItemList.GetDataItem();
 
-                        dataItem.Client = baseClient;
+        //                dataItem.Client = baseClient;
 
-                        dataItem.GetKey(dataReader);
-                        dataItem.GetData(dataReader);
-                    }
+        //                dataItem.GetKey(dataReader);
+        //                dataItem.GetData(dataReader);
+        //            }
 
-                    dataReader.NextResult();
+        //            dataReader.NextResult();
 
-                    while (dataReader.Read())
-                    {
-                        var dataItem = childDataItemList.GetDataItem();
+        //            while (dataReader.Read())
+        //            {
+        //                var dataItem = childDataItemList.GetDataItem();
 
-                        dataItem.Client = baseClient;
+        //                dataItem.Client = baseClient;
 
-                        dataItem.GetKey(dataReader);
-                        dataItem.GetData(dataReader);
-                    }
-                }
-            }
-        }
+        //                dataItem.GetKey(dataReader);
+        //                dataItem.GetData(dataReader);
+        //            }
+        //        }
+        //    }
+        //}
 
         public void ExecuteDeleteStoredProcedure([NotNull] IBaseDataItem dataItem)
         {

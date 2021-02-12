@@ -84,30 +84,30 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, spParameters, this);
         }
 
-        public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
-        {
-            if (!getListStoredProcedure.IsAssigned())
-            {
-                throw new Exception("GetListStoredProcedure not provided");
-            }
+        //public void BuildItemList<T>([NotNull] IBaseDataItemList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem
+        //{
+        //    if (!getListStoredProcedure.IsAssigned())
+        //    {
+        //        throw new Exception("GetListStoredProcedure not provided");
+        //    }
 
-            baseDataItemList.SetParameters(getListStoredProcedure);
+        //    baseDataItemList.SetParameters(getListStoredProcedure);
 
-            _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, this);
-        }
+        //    _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, this);
+        //}
 
-        public void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
-            IBaseDataItemList<T> childDataItemList, [NotNull] string getRelatedStoredProcedure) where T : IBaseDataItem
-        {
-            if (getRelatedStoredProcedure.Equals(string.Empty))
-            {
-                throw new Exception("GetListStoredProcedure not provided");
-            }
+        //public void BuildItemList<T>([NotNull] IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
+        //    IBaseDataItemList<T> childDataItemList, [NotNull] string getRelatedStoredProcedure) where T : IBaseDataItem
+        //{
+        //    if (getRelatedStoredProcedure.Equals(string.Empty))
+        //    {
+        //        throw new Exception("GetListStoredProcedure not provided");
+        //    }
 
-            parentDataItemList.SetParameters(getRelatedStoredProcedure);
+        //    parentDataItemList.SetParameters(getRelatedStoredProcedure);
 
-            _repository.ExecuteGetRelatedListStoredProcedure(getRelatedStoredProcedure, parentDataItemList, relatedDataItemList, childDataItemList, this);
-        }
+        //    _repository.ExecuteGetRelatedListStoredProcedure(getRelatedStoredProcedure, parentDataItemList, relatedDataItemList, childDataItemList, this);
+        //}
 
         public void Delete([NotNull] IBaseDataItem dataItem)
         {
