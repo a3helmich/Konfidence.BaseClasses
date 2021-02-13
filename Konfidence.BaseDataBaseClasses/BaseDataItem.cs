@@ -42,6 +42,12 @@ namespace Konfidence.BaseData
 
         public int Id { get; private set; }
 
+        public void SetId(int id) => Id = id;
+
+        public int GetId() => Id;
+
+        public List<ISpParameterData> GetParameterObjects() => SpParameterData;
+
         protected BaseDataItem()
 	    {
 	        WithLanguage = false;
@@ -55,55 +61,16 @@ namespace Konfidence.BaseData
             InternalInitializeDataItem();
         }
 
-        private IKernel Kernel
-	    {
-	        get
-	        {
-	            if (!_ninject.IsAssigned())
-	            {
-	                _ninject = new NinjectDependencyResolver();
-	            }
-
-	            return _ninject.Kernel;
-	        }
-	    }
-
-	    [NotNull]
-        [UsedImplicitly]
-        public virtual IBaseClient ClientBind<TC>() where TC : IBaseClient
-	    {
-            lock (BaseDataItemList<IBaseDataItem>.KernelLocker)
-            {
-                var databaseNameParam = new ConstructorArgument("connectionName", ConnectionName);
-
-                if (!Kernel.GetBindings(typeof(TC)).Any())
-                {
-                    //Log.Debug($"Ninject Binding: ClientBind {typeof(TC).FullName} - 69 - TOCH NOOIT");
-                    Kernel.Bind<IBaseClient>().To<TC>();
-                }
-
-                return Kernel.Get<TC>(databaseNameParam);
-            }
-        }
-
-        protected abstract IBaseClient ClientBind();
-
 	    // TODO: internal
 	    public IBaseClient Client
 	    {
 	        get
 	        {
-                if (_client.IsAssigned())
-                {
-                    return _client;
-                }
-
                 Debug.WriteLine($"get _client{GetType().FullName}");
-
-                _client = ClientBind();
 
                 return _client;
 	        }
+
 	        set => _client = value;
 	    }
 
@@ -138,16 +105,6 @@ namespace Konfidence.BaseData
             }
         }
 
-		public  void SetId(int id)
-		{
-			Id = id;
-		}
-
-        public List<ISpParameterData> GetParameterObjects()
-        {
-            return SpParameterData;
-        }
-
         public void GetKey(IDataReader dataReader)
         {
             if (AutoIdField.Length > 0)
@@ -156,11 +113,6 @@ namespace Konfidence.BaseData
 
                 Id = id;
             }
-        }
-
-        public int GetId()
-        {
-            return Id;
         }
 
         [UsedImplicitly]

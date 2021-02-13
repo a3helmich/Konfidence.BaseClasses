@@ -23,6 +23,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public DatabaseStructure(string connectionName)
         {
+            Client = new SqlClient(connectionName);
+
             Tables = new List<ITableDataItem>();
 
             _allColumnDataItems = new List<IColumnDataItem>();
@@ -31,12 +33,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             Debug.WriteLine($"DatabaseStructure constructor{connectionName}");
             ConnectionName = connectionName;
-        }
-
-        [NotNull]
-        protected override IBaseClient ClientBind()
-        {
-            return base.ClientBind<SqlClient>();
         }
 
         [UsedImplicitly]
