@@ -112,11 +112,6 @@ namespace DbMenuClasses
                 GetItem(TESTINT_GETROWBYGUID, testintId);
             }
 
-            protected override IBaseClient ClientBind()
-            {
-                return base.ClientBind<SqlClient>();
-            }
-
             public override void InitializeDataItem()
             {
                 AutoIdField = ID;

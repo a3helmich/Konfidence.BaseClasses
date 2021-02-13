@@ -94,12 +94,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return new TableDataItem(catalog, name, columnDataItems, primaryKey, primaryKeyDataType, guidIdField, hasGuidId); 
         }
 
-        [NotNull]
-        protected override IBaseClient ClientBind()
-        {
-            return base.ClientBind<SqlClient>();
-        }
-
         // TODO : figure out which columns have an update trigger
         // find out which column is autoUpdated
 

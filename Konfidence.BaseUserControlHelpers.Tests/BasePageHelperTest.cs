@@ -10,12 +10,6 @@ namespace Konfidence.BaseUserControlHelpers.Tests
     [TestClass]
     public class BasePageHelperTest
     {
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext { get; set; }
-
         #region UrlRequestTest
 
         [TestMethod, TestCategory("UrlRequest")]

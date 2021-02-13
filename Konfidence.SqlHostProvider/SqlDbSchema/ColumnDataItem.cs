@@ -114,12 +114,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return new List<IColumnDataItem>(columnDataItems);
         }
 
-        [NotNull]
-        protected override IBaseClient ClientBind()
-        {
-            return base.ClientBind<SqlClient>();
-        }
-
         // TODO : internal
         public override void GetData([NotNull] IDataReader dataReader)
         {

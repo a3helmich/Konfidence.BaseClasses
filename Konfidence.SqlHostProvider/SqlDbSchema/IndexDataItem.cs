@@ -69,11 +69,5 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             return new IndexDataItem(catalog, tableName, indexName, contraintName, isPrimaryKey);
         }
-
-        [NotNull]
-        protected override IBaseClient ClientBind()
-        {
-            return base.ClientBind<SqlClient>();
-        }
     }
 }

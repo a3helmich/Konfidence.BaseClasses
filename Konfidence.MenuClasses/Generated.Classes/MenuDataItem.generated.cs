@@ -159,11 +159,6 @@ namespace DbMenuClasses
                 GetItem(nodeid);
             }
 
-            protected override IBaseClient ClientBind()
-            {
-                return base.ClientBind<SqlClient>();
-            }
-
             public override void InitializeDataItem()
             {
                 AutoIdField = NODEID;
