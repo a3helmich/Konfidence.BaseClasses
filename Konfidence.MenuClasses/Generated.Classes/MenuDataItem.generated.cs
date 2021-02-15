@@ -14,7 +14,22 @@ namespace DbMenuClasses
 {
     public partial class Bl
     {
-        public partial class MenuDataItem : BaseDataItem
+        public partial interface IMenuDataItem : IBaseDataItem
+        {
+
+        }
+
+        public IMenuDataItem GetMenuDataItem()
+        {
+            return new MenuDataItem();
+        }
+
+        public List<MenuDataItem> GetMenuDataList()
+        {
+            return MenuDataItem.GetList();
+        }
+
+        public partial class MenuDataItem : BaseDataItem, IMenuDataItem
         {
             // field definitions
             internal const string NODEID = "NodeId";

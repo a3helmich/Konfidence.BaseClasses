@@ -8,8 +8,6 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Sp;
 using Konfidence.DataBaseInterface;
-using Ninject;
-using Ninject.Parameters;
 
 namespace Konfidence.BaseData
 {
@@ -26,13 +24,9 @@ namespace Konfidence.BaseData
 
         private IBaseClient _client;
 
-        private NinjectDependencyResolver _ninject;
-
         private List<ISpParameterData> SpParameterData { get;  }
 
         public Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
-
-        protected string ConnectionName { get; set; } = string.Empty;
 
         public string AutoIdField { get; set; } = string.Empty;
 
@@ -61,18 +55,18 @@ namespace Konfidence.BaseData
             InternalInitializeDataItem();
         }
 
-	    // TODO: internal
-	    public IBaseClient Client
-	    {
-	        get
-	        {
+        // TODO: internal
+        public IBaseClient Client
+        {
+            get
+            {
                 Debug.WriteLine($"get _client{GetType().FullName}");
 
                 return _client;
-	        }
+            }
 
-	        set => _client = value;
-	    }
+            set => _client = value;
+        }
 
         public bool IsSelected
         {

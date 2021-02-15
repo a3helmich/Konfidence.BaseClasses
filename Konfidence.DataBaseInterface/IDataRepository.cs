@@ -22,12 +22,6 @@ namespace Konfidence.DataBaseInterface
 
         void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, IList<ISpParameterData> spParameters, IBaseClient baseClient) where T : IBaseDataItem, new();
 
-        //void ExecuteGetListStoredProcedure<T>(IBaseDataItemList<T> baseDataItemList, string storedProcedure, IBaseClient baseClient) where T : IBaseDataItem;
-
-        //void ExecuteGetRelatedListStoredProcedure<T>(string storedProcedure,
-        //    IBaseDataItemList<T> parentDataItemList, IBaseDataItemList<T> relatedDataItemList,
-        //    IBaseDataItemList<T> childDataItemList, IBaseClient baseClient) where T : IBaseDataItem;
-
         void ExecuteDeleteStoredProcedure(IBaseDataItem dataItem);
 
         int ExecuteTextCommandQuery(string textCommand);

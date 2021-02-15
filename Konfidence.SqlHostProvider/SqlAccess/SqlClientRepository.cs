@@ -31,8 +31,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         [NotNull]
         public DataTable GetSchemaObject(string collection)
         {
-            DataTable dataTable;
-
             var database = GetDatabase();
 
             using (var dbConnection = database.CreateConnection())
@@ -41,11 +39,11 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
                 using (var schemaTable = dbConnection.GetSchema(collection))
                 {
-                    dataTable = schemaTable.Copy();
+                    var dataTable = schemaTable.Copy();
+
+                    return dataTable;
                 }
             }
-
-            return dataTable;
         }
 
         public int ExecuteCommandStoredProcedure(string saveStoredProcedure, [NotNull] List<ISpParameterData> parameterObjectList)
@@ -171,10 +169,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 {
                     while (dataReader.Read())
                     {
-                        var dataItem = new T
-                        {
-                            Client = baseClient
-                        };
+                        var dataItem = new T(); // dependency resolver
 
                         dataItem.InitializeDataItem();
 

@@ -18,8 +18,6 @@ namespace Konfidence.DataBaseInterface
 
         bool IsEditing { get; set; }
 
-        IBaseClient Client { get; set; }
-
         string GetStoredProcedure { get; set; }
 
         string DeleteStoredProcedure { get; set; }
