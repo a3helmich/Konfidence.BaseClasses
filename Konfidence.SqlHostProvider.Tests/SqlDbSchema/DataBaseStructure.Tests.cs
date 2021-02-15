@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DbMenuClasses;
 using FluentAssertions;
+using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -67,7 +67,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureWithDBMenuConnectionName()
         {
             // arrange
-            var target = new DatabaseStructure("DBMenu"); // TODO: Initialize to an appropriate value
+            IDatabaseStructure target = new DatabaseStructure("DBMenu"); // TODO: Initialize to an appropriate value
 
             // act
             target.BuildStructure();
@@ -81,7 +81,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
@@ -99,7 +99,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetUnderscoreFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
@@ -117,7 +117,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
@@ -135,7 +135,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetTypedCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
@@ -179,12 +179,16 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_TableExists_is_executed_and_table_exists_Should_return_true()
         {
             // arrange
-            var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
+            const string connectionName = "TestClassGenerator";
+
+            var client = new SqlClient(connectionName);
+
+            IDatabaseStructure target = new DatabaseStructure(connectionName); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
             // act
-            var tableExists = target.Client.TableExists("Test1");
+            var tableExists = client.TableExists("Test1");
 
             // assert
             tableExists.Should().BeTrue();
@@ -194,12 +198,16 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_TableExists_is_executed_and_table_does_notexists_Should_return_false()
         {
             // arrange
-            var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
+            const string connectionName = "TestClassGenerator";
+
+            var client = new SqlClient(connectionName);
+
+            IDatabaseStructure target = new DatabaseStructure(connectionName); // TODO: Initialize to an appropriate value
 
             target.BuildStructure();
 
             // act
-            var tableExists = target.Client.TableExists("Test666");
+            var tableExists = client.TableExists("Test666");
 
             // assert
             tableExists.Should().BeFalse();

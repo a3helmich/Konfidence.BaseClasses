@@ -2,18 +2,21 @@
 using System.Diagnostics;
 using System.Text;
 using JetBrains.Annotations;
-using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     [UsedImplicitly]
-    public class DatabaseStructure : BaseDataItem
+    internal class DatabaseStructure : IDatabaseStructure
     {
         public List<ITableDataItem> Tables { get; }
 
-        [UsedImplicitly] [NotNull] public string SelectedConnectionName => ConnectionName ?? string.Empty;
+        private readonly string _connectionName;
+
+        private readonly IBaseClient _client;
+
+        [UsedImplicitly] [NotNull] public string SelectedConnectionName => _connectionName ?? string.Empty;
 
         private readonly List<IColumnDataItem> _allColumnDataItems;
 
@@ -23,7 +26,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public DatabaseStructure(string connectionName)
         {
-            Client = new SqlClient(connectionName);
+            _client = new SqlClient(connectionName);
 
             Tables = new List<ITableDataItem>();
 
@@ -32,7 +35,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             _allIndexDataItems = new List<IIndexDataItem>();
 
             Debug.WriteLine($"DatabaseStructure constructor{connectionName}");
-            ConnectionName = connectionName;
+            _connectionName = connectionName;
         }
 
         [UsedImplicitly]
@@ -48,13 +51,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             Debug.WriteLine("DatabaseStructure between CreateStoredProcedures() -  DeleteStoredProcedures()");
 
-            _allPrimaryKeyDataItems.AddRange(PrimaryKeyDataItem.GetList(Client));
+            _allPrimaryKeyDataItems.AddRange(PrimaryKeyDataItem.GetList(_client));
 
-            _allIndexDataItems.AddRange(IndexDataItem.GetList(Client, _allPrimaryKeyDataItems));
+            _allIndexDataItems.AddRange(IndexDataItem.GetList(_client, _allPrimaryKeyDataItems));
             
-            _allColumnDataItems.AddRange(ColumnDataItem.GetList(Client, _allIndexDataItems));
+            _allColumnDataItems.AddRange(ColumnDataItem.GetList(_client, _allIndexDataItems));
 
-            Tables.AddRange(TableDataItem.GetList(Client, _allColumnDataItems));
+            Tables.AddRange(TableDataItem.GetList(_client, _allColumnDataItems));
 
             DeleteStoredProcedures();
 
@@ -85,7 +88,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             sb.AppendLine("  WHERE constraint_type = 'PRIMARY KEY'");
             sb.AppendLine("END");
 
-            Client.ExecuteTextCommand(sb.ToString());
+            _client.ExecuteTextCommand(sb.ToString());
         }
 
         private void CreateSPColumns_GetList(string storedProcedure)
@@ -102,7 +105,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             sb.AppendLine("    AND st.status = 0");
             sb.AppendLine("END");
 
-            Client.ExecuteTextCommand(sb.ToString());
+            _client.ExecuteTextCommand(sb.ToString());
         }
 
         private void DeleteSp(string storedProcedure)
@@ -113,9 +116,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             sb.AppendLine($"DROP PROCEDURE [dbo].[{storedProcedure}]");
 
-            if (Client.StoredProcedureExists(storedProcedure))
+            if (_client.StoredProcedureExists(storedProcedure))
             {
-                Client.ExecuteTextCommand(sb.ToString());
+                _client.ExecuteTextCommand(sb.ToString());
             }
 
             Debug.WriteLine("deleteSp exit");
