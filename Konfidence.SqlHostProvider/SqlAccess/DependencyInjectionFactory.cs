@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using JetBrains.Annotations;
+using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,18 +14,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             return new ConfigurationBuilder()
                 .SetBasePath(GetApplicationPath())
-                .AddJsonFile(@"HostSettings.json", true)
+                .AddJsonFile(@"ClientSettings.json", true)
                 .Build();
         }
 
         [NotNull]
         private static string GetApplicationPath()
         {
-            var assembly = Assembly.GetEntryAssembly();
+            var assembly = Assembly.GetCallingAssembly();
 
-            return assembly == null
-                ? string.Empty
-                : Path.GetDirectoryName(assembly.Location)??string.Empty;
+            return Path.GetDirectoryName(assembly.Location) ?? string.Empty;
         }
 
         [NotNull]
@@ -32,24 +31,17 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var services = new ServiceCollection();
 
-            //var mapping = ApplicationMapping.GetMapping();
             var configuration = GetConfigurationRoot();
 
             // special classes 
             services
-                //.AddSingleton(mapping)
                 .AddSingleton<IConfiguration>(configuration);
 
             // client classes
-            //services
-            //    .AddSingleton<ClientExecuter>()
-            //    .AddSingleton<IRestClient, RestClient>()
+            services
+                .AddSingleton<IDatabaseStructure, DatabaseStructure>()
             //    .AddSingleton<IApplicationConfigurationFactory, ApplicationConfigurationFactory>()
-            //    .AddSingleton<IClientConfig, ClientConfig>()
-            //    .AddSingleton<IBaseRestClient, BaseRestClient>()
-            //    .AddSingleton<ILicenseClient, LicenseClient>()
-            //    .AddSingleton<IEncryptionPresenter, EncryptionPresenter>()
-            //    .AddSingleton<IClientPresenter, ClientPresenter>();
+                .AddSingleton<IClientConfig, ClientConfig>();
 
             // dto factories
             //services

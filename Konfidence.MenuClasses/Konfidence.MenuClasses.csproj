@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />
     <PackageReference Include="Serilog" Version="2.*" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="ClientSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

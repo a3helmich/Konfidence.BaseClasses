@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
@@ -15,10 +17,22 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
     [TestClass]
     public class DatabaseStructureTest
     {
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext testContext)
+        {
+            File.Copy(@"ClientSettings.json", "CopyClientSettings.json", overwrite: true);
+        }
+
         [TestInitialize]
         public void initialize()
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            File.Copy(@"CopyClientSettings.json", "ClientSettings.json", overwrite: true);
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -211,6 +225,38 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             tableExists.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void When_DependecyInjection_is_used_should_return_DatabaseStructure_Of_defaultDb()
+        {
+            // arrange
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+
+            // act
+            var target = dependencyProvider.GetService<IDatabaseStructure>();
+
+            // assert
+            target.Should().NotBeNull();
+            target.Should().BeOfType<DatabaseStructure>();
+            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
+        }
+
+        [TestMethod]
+        public void When_DependecyInjection_is_used_With_DbMenu_Should_return_DatabaseStructure_of_DbMenu()
+        {
+            // arrange
+            File.Copy(@"TestConfigurations\DbMenuClientSettings.json", "ClientSettings.json", overwrite: true);
+
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+
+            // act
+            var target = dependencyProvider.GetService<IDatabaseStructure>();
+
+            // assert
+            target.Should().NotBeNull();
+            target.Should().BeOfType<DatabaseStructure>();
+            target?.SelectedConnectionName.Should().Be("DbMenu");
         }
     }
 }

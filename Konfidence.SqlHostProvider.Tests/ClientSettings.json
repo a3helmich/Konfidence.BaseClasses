@@ -1,0 +1,8 @@
+{
+  "LogLevel": "Information",
+  //"LogLevel": "Verbose",
+  "DataConfiguration": {
+    "DefaultDatabase": "TestClassGenerator",
+    "LogLevel": "Verbose"
+  }
+}
