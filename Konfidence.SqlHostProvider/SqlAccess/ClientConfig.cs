@@ -7,6 +7,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
     {
         public string DefaultDatabase { get; set; } = string.Empty;
 
+        public string ConfigFileFolder { get; set; } = string.Empty;
+
         public ClientConfig([NotNull] IConfiguration configuration)
         {
             var section = configuration.GetSection(@"DataConfiguration");

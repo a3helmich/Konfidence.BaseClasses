@@ -1,32 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
-using Ninject;
-using Ninject.Parameters;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
     public class SqlClient : IBaseClient
     {
-        private readonly NinjectDependencyResolver _ninject = new();
-
         private readonly IDataRepository _repository;
 
-        public SqlClient(string connectionName) 
+        public SqlClient(IDataRepository sqlClientRepository) 
         {
-            var connectionNameParam = new ConstructorArgument("connectionName", connectionName);
-
-            if (!_ninject.Kernel.GetBindings(typeof(IDataRepository)).Any())
-            {
-                _ninject.Bind<IDataRepository>().To<SqlClientRepository>();
-            }
-
-            _repository = _ninject.Kernel.Get<IDataRepository>(connectionNameParam);
+            _repository = sqlClientRepository;
         }
 
         public void Save([NotNull] IBaseDataItem dataItem)

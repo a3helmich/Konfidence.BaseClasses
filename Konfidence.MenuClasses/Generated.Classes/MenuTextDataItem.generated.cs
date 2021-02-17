@@ -6,7 +6,9 @@ using System;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider;
 using Konfidence.SqlHostProvider.SqlAccess;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DbMenuClasses
 {
@@ -91,7 +93,9 @@ namespace DbMenuClasses
 
             static MenuTextDataItem()
             {
-                _client = new SqlClient(string.Empty);
+                var provider = DependencyInjectionFactory.ConfigureDependencyInjection(new string[] { });
+
+                _client = provider.GetService<IBaseClient>();
             }
 
             public MenuTextDataItem()

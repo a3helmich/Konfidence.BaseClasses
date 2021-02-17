@@ -12,18 +12,20 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 {
     internal class SqlClientRepository : IDataRepository
     {
-        private readonly string _connectionName;
+        [NotNull] private readonly IClientConfig _clientConfig;
 
-        public SqlClientRepository(string connectionName)
+        public SqlClientRepository([NotNull] IClientConfig clientConfig)
         {
-            _connectionName = connectionName;
+            _clientConfig = clientConfig;
         }
 
         private Database GetDatabase()
         {
             var databaseProviderFactory = new DatabaseProviderFactory();
 
-            var databaseInstance = _connectionName.IsAssigned() ? databaseProviderFactory.Create(_connectionName) : databaseProviderFactory.CreateDefault();
+            var databaseInstance = _clientConfig.DefaultDatabase.IsAssigned()
+                ? databaseProviderFactory.Create(_clientConfig.DefaultDatabase)
+                : databaseProviderFactory.CreateDefault();
 
             return databaseInstance;
         }
@@ -77,18 +79,18 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         private static void SetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
         {
-            // autoidfield parameter toevoegen
+            // autoidfield
             database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
                 dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.GetId());
 
-            // alle velden die aan de kant van de database gewijzigd worden als parameter toevoegen
+            // fields changing at the database side
             foreach (var parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
             {
                 database.AddParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, ParameterDirection.InputOutput,
                                                             parameterObject.ParameterName, DataRowVersion.Proposed, parameterObject.Value);
             }
 
-            // alle overige parameters toevoegen
+            // all the other fields
             foreach (var parameterObject in dataItem.SetItemData())
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
