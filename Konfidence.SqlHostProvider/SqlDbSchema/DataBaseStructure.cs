@@ -12,11 +12,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         public List<ITableDataItem> Tables { get; }
 
-        private readonly string _connectionName;
-
         private readonly IBaseClient _client;
 
-        [UsedImplicitly] [NotNull] public string SelectedConnectionName => _connectionName ?? string.Empty;
+        public string SelectedConnectionName { get; }
 
         private readonly List<IColumnDataItem> _allColumnDataItems;
 
@@ -24,23 +22,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private readonly List<IIndexDataItem> _allIndexDataItems;
 
-        public DatabaseStructure(string connectionName)
+        public DatabaseStructure([NotNull] IClientConfig clientConfig, IBaseClient client)
         {
-            _client = new SqlClient(connectionName);
-
-            Tables = new List<ITableDataItem>();
-
-            _allColumnDataItems = new List<IColumnDataItem>();
-            _allPrimaryKeyDataItems = new List<IPrimaryKeyDataItem>();
-            _allIndexDataItems = new List<IIndexDataItem>();
-
-            Debug.WriteLine($"DatabaseStructure constructor{connectionName}");
-            _connectionName = connectionName;
-        }
-
-        public DatabaseStructure([NotNull] IClientConfig clientConfig)
-        {
-            _client = new SqlClient(clientConfig.DefaultDatabase);
+            _client = client;
 
             Tables = new List<ITableDataItem>();
 
@@ -49,7 +33,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             _allIndexDataItems = new List<IIndexDataItem>();
 
             Debug.WriteLine($"DatabaseStructure constructor, default database: '{clientConfig.DefaultDatabase}'");
-            _connectionName = clientConfig.DefaultDatabase;
+            SelectedConnectionName = clientConfig.DefaultDatabase;
         }
 
         [UsedImplicitly]

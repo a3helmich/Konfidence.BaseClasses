@@ -1,20 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
+using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Konfidence.SqlHostProvider.SqlAccess
+namespace Konfidence.SqlHostProvider
 {
     public class DependencyInjectionFactory
     {
-        private static IConfigurationRoot GetConfigurationRoot()
+        private static IConfigurationRoot GetConfigurationRoot(string[] args)
         {
             return new ConfigurationBuilder()
                 .SetBasePath(GetApplicationPath())
                 .AddJsonFile(@"ClientSettings.json", true)
+                .AddCommandLine(args)
                 .Build();
         }
 
@@ -27,11 +32,20 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         }
 
         [NotNull]
-        public static IServiceProvider ConfigureDependencyInjection()
+        public static IServiceProvider ConfigureDependencyInjection([NotNull] string[] args)
         {
             var services = new ServiceCollection();
 
-            var configuration = GetConfigurationRoot();
+            services.AddSingleton(services);
+
+            var commandLineArguments = new List<string>();
+
+            if (args.Any())
+            {
+                commandLineArguments.Add($"DataConfiguration:ConfigFileFolder={args[0]}");
+            }
+
+            var configuration = GetConfigurationRoot(commandLineArguments.ToArray());
 
             // special classes 
             services
@@ -40,8 +54,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             // client classes
             services
                 .AddSingleton<IDatabaseStructure, DatabaseStructure>()
+                .AddSingleton<IBaseClient, SqlClient>()
+                .AddSingleton<IDataRepository, SqlClientRepository>()
             //    .AddSingleton<IApplicationConfigurationFactory, ApplicationConfigurationFactory>()
                 .AddSingleton<IClientConfig, ClientConfig>();
+
+            //IDataRepository
 
             // dto factories
             //services
@@ -52,11 +70,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             //        return applicationConfigurationFactory?.GetApplicationConfiguration();
             //    });
 
-            var serviceProvider = services.BuildServiceProvider();
-
-            services.AddSingleton(serviceProvider);
-
-            return serviceProvider;
+            return services.BuildServiceProvider();
         }
     }
 }

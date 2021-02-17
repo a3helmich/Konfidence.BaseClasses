@@ -2,11 +2,13 @@
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 {
@@ -39,7 +41,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureTest()
         {
             // arrange
-            var target = new DatabaseStructure("TestClassGenerator"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             // act
             target.BuildStructure();
@@ -52,7 +60,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureWithDifferentConnectionNameTest()
         {
             // arrange
-            var target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             // act
             target.BuildStructure();
@@ -67,7 +81,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureWithBlockedHackersConnectionName()
         {
             // arrange
-            var target = new DatabaseStructure("BlockedHackers"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("BlockedHackers");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             // act
             target.BuildStructure();
@@ -81,7 +101,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureWithDBMenuConnectionName()
         {
             // arrange
-            IDatabaseStructure target = new DatabaseStructure("DBMenu"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("DBMenu");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             // act
             target.BuildStructure();
@@ -95,7 +121,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             target.BuildStructure();
 
@@ -113,7 +145,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetUnderscoreFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             target.BuildStructure();
 
@@ -131,7 +169,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             target.BuildStructure();
 
@@ -149,7 +193,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetTypedCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            IDatabaseStructure target = new DatabaseStructure("SchemaDatabaseDevelopment"); // TODO: Initialize to an appropriate value
+            var clientConfigMock = new Mock<IClientConfig>();
+
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             target.BuildStructure();
 
@@ -193,11 +243,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_TableExists_is_executed_and_table_exists_Should_return_true()
         {
             // arrange
-            const string connectionName = "TestClassGenerator";
+            var clientConfigMock = new Mock<IClientConfig>();
 
-            var client = new SqlClient(connectionName);
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
 
-            IDatabaseStructure target = new DatabaseStructure(connectionName); // TODO: Initialize to an appropriate value
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             target.BuildStructure();
 
@@ -212,11 +264,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_TableExists_is_executed_and_table_does_notexists_Should_return_false()
         {
             // arrange
-            const string connectionName = "TestClassGenerator";
+            var clientConfigMock = new Mock<IClientConfig>();
 
-            var client = new SqlClient(connectionName);
+            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
 
-            IDatabaseStructure target = new DatabaseStructure(connectionName); // TODO: Initialize to an appropriate value
+            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+
+            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
 
             target.BuildStructure();
 
@@ -231,7 +285,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_should_return_DatabaseStructure_Of_defaultDb()
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(new string[] { });
 
             // act
             var target = dependencyProvider.GetService<IDatabaseStructure>();
@@ -248,7 +302,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             // arrange
             File.Copy(@"TestConfigurations\DbMenuClientSettings.json", "ClientSettings.json", overwrite: true);
 
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(new string[] { });
 
             // act
             var target = dependencyProvider.GetService<IDatabaseStructure>();
@@ -257,6 +311,21 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Should().NotBeNull();
             target.Should().BeOfType<DatabaseStructure>();
             target?.SelectedConnectionName.Should().Be("DbMenu");
+        }
+
+        [TestMethod]
+        public void When_DependecyInjection_is_used_should_return_commandlinearguments()
+        {
+            // arrange
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(new[] {@"some\location\"});
+
+            // act
+            var target = dependencyProvider.GetService<IClientConfig>();
+
+            // assert
+            target.Should().NotBeNull();
+            target.Should().BeOfType<ClientConfig>();
+            target?.ConfigFileFolder.Should().Be(@"some\location\");
         }
     }
 }
