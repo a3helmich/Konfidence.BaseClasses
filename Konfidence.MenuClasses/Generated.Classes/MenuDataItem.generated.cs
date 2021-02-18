@@ -2,15 +2,9 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using Konfidence.BaseData.Sp;
-using System;
-using System.Data.Common;
-using Microsoft.Practices.EnterpriseLibrary.Data;
-using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider;
-using Konfidence.SqlHostProvider.SqlAccess;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DbMenuClasses

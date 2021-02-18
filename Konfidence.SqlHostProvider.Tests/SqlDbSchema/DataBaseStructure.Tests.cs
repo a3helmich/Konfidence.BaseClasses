@@ -285,7 +285,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_should_return_DatabaseStructure_Of_defaultDb()
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(new string[] { });
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
             // act
             var target = dependencyProvider.GetService<IDatabaseStructure>();
@@ -302,7 +302,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             // arrange
             File.Copy(@"TestConfigurations\DbMenuClientSettings.json", "ClientSettings.json", overwrite: true);
 
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(new string[] { });
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
             // act
             var target = dependencyProvider.GetService<IDatabaseStructure>();
@@ -317,7 +317,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_should_return_commandlinearguments()
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(new[] {@"some\location\"});
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(@"--ConfigFileFolder=some\location\");
 
             // act
             var target = dependencyProvider.GetService<IClientConfig>();
