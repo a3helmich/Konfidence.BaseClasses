@@ -32,6 +32,12 @@ namespace Konfidence.SqlHostProvider
         }
 
         [NotNull]
+        public static IServiceProvider ConfigureDependencyInjection()
+        {
+            return ConfigureDependencyInjection(new string[] { });
+        }
+
+        [NotNull]
         public static IServiceProvider ConfigureDependencyInjection([NotNull] string[] args)
         {
             var services = new ServiceCollection();

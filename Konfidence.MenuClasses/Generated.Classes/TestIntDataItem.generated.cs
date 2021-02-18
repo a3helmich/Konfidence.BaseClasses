@@ -96,7 +96,7 @@ namespace DbMenuClasses
 
             static TestIntDataItem()
             {
-                var provider = DependencyInjectionFactory.ConfigureDependencyInjection(new string[] { });
+                var provider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
                 _client = provider.GetService<IBaseClient>();
             }
