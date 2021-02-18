@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
+using Konfidence.Base;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 namespace Konfidence.SqlHostProvider
 {
@@ -32,13 +34,7 @@ namespace Konfidence.SqlHostProvider
         }
 
         [NotNull]
-        public static IServiceProvider ConfigureDependencyInjection()
-        {
-            return ConfigureDependencyInjection(new string[] { });
-        }
-
-        [NotNull]
-        public static IServiceProvider ConfigureDependencyInjection([NotNull] string[] args)
+        public static IServiceProvider ConfigureDependencyInjection([NotNull] params string[] args)
         {
             var services = new ServiceCollection();
 
@@ -48,7 +44,17 @@ namespace Konfidence.SqlHostProvider
 
             if (args.Any())
             {
-                commandLineArguments.Add($"DataConfiguration:ConfigFileFolder={args[0]}");
+                var arguments = args.ToList();
+
+                if (TryProcessArgument(Argument.ConfigFileFolder, arguments, out var commandLineArgument))
+                {
+                    commandLineArguments.Add($"DataConfiguration:ConfigFileFolder={commandLineArgument}");
+                }
+
+                if (TryProcessArgument(Argument.DefaulDatabase, arguments, out commandLineArgument))
+                {
+                    commandLineArguments.Add($"DataConfiguration:DefaulDatabase={commandLineArgument}");
+                }
             }
 
             var configuration = GetConfigurationRoot(commandLineArguments.ToArray());
@@ -78,5 +84,30 @@ namespace Konfidence.SqlHostProvider
 
             return services.BuildServiceProvider();
         }
+
+        private static bool TryProcessArgument(Argument argument, [NotNull] List<string> args, [NotNull] out string commandLineArgument)
+        {
+            commandLineArgument = string.Empty;
+
+            var arg = @"--" + argument.ToString().ToLowerInvariant();
+
+            var executeArg = args.FirstOrDefault(x => x.ToLowerInvariant().StartsWith(arg))?.Substring(arg.Length).TrimStart('=');
+
+            if (!executeArg.IsAssigned())
+            {
+                return false;
+            }
+
+            switch (argument)
+            {
+                case Argument.ConfigFileFolder:
+                case Argument.DefaulDatabase:
+                    commandLineArgument = executeArg;
+                    return true;
+            }
+
+            return false;
+        }
+
     }
 }
