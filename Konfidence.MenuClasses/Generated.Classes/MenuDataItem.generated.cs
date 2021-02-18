@@ -164,7 +164,7 @@ namespace DbMenuClasses
 
             static MenuDataItem()
             {
-                var provider = DependencyInjectionFactory.ConfigureDependencyInjection(new string[] { });
+                var provider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
                 _client = provider.GetService<IBaseClient>();
             }
