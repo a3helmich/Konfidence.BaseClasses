@@ -120,15 +120,6 @@ namespace Konfidence.MenuClasses.Tests
             test.Should().NotBeNull();
         }
 
-        [TestMethod, TestCategory("Ninject")]
-        public void TestNinject()
-        {
-            var callClassMethod = new CallTestItemListClass();
-
-            callClassMethod.MethodOne();
-            callClassMethod.MethodTwo();
-        }
-
         [TestMethod]
         public void When_Table_Test1_is_retrieved_and_table_does_contain_data_Should_return_GuidIdField()
         {

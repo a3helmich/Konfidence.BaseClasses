@@ -4,7 +4,7 @@ using System.Data.Common;
 
 namespace Konfidence.DataBaseInterface
 {
-    public interface IDataRepository
+    internal interface IDataRepository
     {
         DataTable GetSchemaObject(string collection);
 
