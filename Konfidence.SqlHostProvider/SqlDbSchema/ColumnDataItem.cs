@@ -108,7 +108,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             allIndexDataItems
                 .Where(indexDataItem => indexDataItem.IsPrimaryKey)
-                .SelectMany(indexDataItem => columnDataItems.Where(columnDataItem => columnDataItem.Name == indexDataItem.IndexName))
+                .SelectMany(indexDataItem => columnDataItems
+                    .Where(columnDataItem => columnDataItem.Name == indexDataItem.IndexName && columnDataItem.TableName == indexDataItem.TableName))
                 .ForEach(x => x.IsPrimaryKey = true);
 
             return new List<IColumnDataItem>(columnDataItems);
