@@ -1,11 +1,11 @@
 using System;
-using System.Data;
 using System.Collections.Generic;
-using Konfidence.BaseData.Sp;
+using System.Data;
+using Microsoft.Extensions.DependencyInjection;
 using Konfidence.BaseData;
+using Konfidence.BaseData.Sp;
 using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace DbMenuClasses
 {
@@ -158,9 +158,7 @@ namespace DbMenuClasses
 
             static MenuDataItem()
             {
-                var provider = DependencyInjectionFactory.ConfigureDependencyInjection();
-
-                _client = provider.GetService<IBaseClient>();
+                _client = _serviceProvider.GetService<IBaseClient>();
             }
 
             public MenuDataItem()
