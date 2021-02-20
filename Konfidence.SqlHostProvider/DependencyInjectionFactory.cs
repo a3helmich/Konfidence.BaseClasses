@@ -10,7 +10,6 @@ using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 
 namespace Konfidence.SqlHostProvider
 {
@@ -48,44 +47,28 @@ namespace Konfidence.SqlHostProvider
 
                 if (TryProcessArgument(Argument.ConfigFileFolder, arguments, out var commandLineArgument))
                 {
-                    commandLineArguments.Add($"DataConfiguration:ConfigFileFolder={commandLineArgument}");
+                    commandLineArguments.Add($"DataConfiguration:{Argument.ConfigFileFolder}={commandLineArgument}");
                 }
 
-                if (TryProcessArgument(Argument.DefaulDatabase, arguments, out commandLineArgument))
+                if (TryProcessArgument(Argument.DefaultDatabase, arguments, out commandLineArgument))
                 {
-                    commandLineArguments.Add($"DataConfiguration:DefaulDatabase={commandLineArgument}");
+                    commandLineArguments.Add($"DataConfiguration:{Argument.DefaultDatabase}={commandLineArgument}");
                 }
             }
 
             var configuration = GetConfigurationRoot(commandLineArguments.ToArray());
-
-            // special classes 
-            services
-                .AddSingleton<IConfiguration>(configuration);
 
             // client classes
             services
                 .AddSingleton<IDatabaseStructure, DatabaseStructure>()
                 .AddSingleton<IBaseClient, SqlClient>()
                 .AddSingleton<IDataRepository, SqlClientRepository>()
-            //    .AddSingleton<IApplicationConfigurationFactory, ApplicationConfigurationFactory>()
-                .AddSingleton<IClientConfig, ClientConfig>();
-
-            //IDataRepository
-
-            // dto factories
-            //services
-            //    .AddSingleton(x =>
-            //    {
-            //        var applicationConfigurationFactory = x.GetService<IApplicationConfigurationFactory>();
-
-            //        return applicationConfigurationFactory?.GetApplicationConfiguration();
-            //    });
+                .AddSingleton<IClientConfig>(new ClientConfig(configuration));
 
             return services.BuildServiceProvider();
         }
 
-        private static bool TryProcessArgument(Argument argument, [NotNull] List<string> args, [NotNull] out string commandLineArgument)
+        private static bool TryProcessArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
         {
             commandLineArgument = string.Empty;
 
@@ -101,7 +84,7 @@ namespace Konfidence.SqlHostProvider
             switch (argument)
             {
                 case Argument.ConfigFileFolder:
-                case Argument.DefaulDatabase:
+                case Argument.DefaultDatabase:
                     commandLineArgument = executeArg;
                     return true;
             }

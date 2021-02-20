@@ -54,6 +54,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
+            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -75,6 +76,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
 
             target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
+            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -94,6 +96,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Tables.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
+            target?.SelectedConnectionName.Should().Be("BlockedHackers");
         }
 
 
@@ -114,6 +117,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Tables.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
+            target?.SelectedConnectionName.Should().Be("DBMenu");
         }
 
 
@@ -139,6 +143,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("NaamOmschrijving");
+            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -163,6 +168,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
+            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -187,6 +193,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("Naam, Omschrijving");
+            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -211,6 +218,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("string naam, string omschrijving");
+            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -258,6 +266,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             tableExists.Should().BeTrue();
+            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod]
@@ -279,6 +288,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             tableExists.Should().BeFalse();
+            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod]
@@ -300,9 +310,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_With_DbMenu_Should_return_DatabaseStructure_of_DbMenu()
         {
             // arrange
-            File.Copy(@"TestConfigurations\DbMenuClientSettings.json", "ClientSettings.json", overwrite: true);
-
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection("--DefaultDatabase=DbMenu");
 
             // act
             var target = dependencyProvider.GetService<IDatabaseStructure>();

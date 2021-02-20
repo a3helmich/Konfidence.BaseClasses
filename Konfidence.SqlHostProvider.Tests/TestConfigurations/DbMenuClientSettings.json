@@ -1,8 +1,0 @@
-{
-  "LogLevel": "Information",
-  //"LogLevel": "Verbose",
-  "DataConfiguration": {
-    "DefaultDatabase": "DbMenu",
-    "LogLevel": "Verbose"
-  }
-}

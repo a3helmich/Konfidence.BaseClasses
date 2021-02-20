@@ -7,11 +7,11 @@ using Konfidence.DataBaseInterface;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    public class SqlClient : IBaseClient
+    internal class SqlClient : IBaseClient
     {
         private readonly IDataRepository _repository;
 
-        public SqlClient(IDataRepository sqlClientRepository) 
+        public SqlClient([NotNull] IDataRepository sqlClientRepository) 
         {
             _repository = sqlClientRepository;
         }

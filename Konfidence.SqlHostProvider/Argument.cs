@@ -2,7 +2,7 @@
 {
     public enum Argument
     {
-        DefaulDatabase = 0,
+        DefaultDatabase = 0,
         ConfigFileFolder = 1,
     }
 }
