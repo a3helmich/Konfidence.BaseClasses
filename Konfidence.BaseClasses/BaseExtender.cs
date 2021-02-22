@@ -11,58 +11,28 @@ namespace Konfidence.Base
         {
             if (assignedObject is string assignedString)
             {
-                if (string.IsNullOrWhiteSpace(assignedString))
-                {
-                    return false;
-                }
-
-                return true;
+                return !string.IsNullOrWhiteSpace(assignedString);
             }
 
-            if (assignedObject == null)
-            {
-                return false;
-            }
-
-            return true;
+            return assignedObject != null;
         }
 
         [UsedImplicitly]
         public static bool IsAssigned(this DateTime assignedTime)
         {
-            if (assignedTime > DateTime.MinValue && assignedTime < DateTime.MaxValue)
-            {
-                return true;
-            }
-
-            return false;
+            return assignedTime > DateTime.MinValue && assignedTime < DateTime.MaxValue;
         }
 
         [UsedImplicitly]
         public static bool IsAssigned(this TimeSpan assignedTime)
         {
-            if (assignedTime > TimeSpan.MinValue && assignedTime < TimeSpan.MaxValue)
-            {
-                return true;
-            }
-
-            return false;
+            return assignedTime > TimeSpan.MinValue && assignedTime < TimeSpan.MaxValue;
         }
 
-        [UsedImplicitly]
-        public static DateTime StartOfDayTime(this DateTime dateTime)
+        [ContractAnnotation("assignedGuid:null => false")]
+        public static bool IsAssigned(this Guid assignedGuid)
         {
-            var afterMidnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
-
-            return afterMidnight;
-        }
-
-        [UsedImplicitly]
-        public static DateTime EndOfDayTime(this DateTime dateTime)
-        {
-            var midnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Utc);
-
-            return midnight;
+            return !Guid.Empty.Equals(assignedGuid);
         }
 
         [UsedImplicitly]
@@ -77,12 +47,6 @@ namespace Konfidence.Base
         public static bool IsGuid(this string assignedGuid)
         {
             return Guid.TryParse(assignedGuid, out _);
-        }
-
-        [ContractAnnotation("assignedGuid:null => false")]
-        public static bool IsAssigned(this Guid assignedGuid)
-        {
-            return !Guid.Empty.Equals(assignedGuid);
         }
 
         [UsedImplicitly]
@@ -103,12 +67,23 @@ namespace Konfidence.Base
                 return true;
             }
 
-            if (decimal.TryParse(numericString, out _))
-            {
-                return true;
-            }
+            return decimal.TryParse(numericString, out _);
+        }
 
-            return false;
+        [UsedImplicitly]
+        public static DateTime StartOfDayTime(this DateTime dateTime)
+        {
+            var afterMidnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
+
+            return afterMidnight;
+        }
+
+        [UsedImplicitly]
+        public static DateTime EndOfDayTime(this DateTime dateTime)
+        {
+            var midnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Utc);
+
+            return midnight;
         }
     }
 }

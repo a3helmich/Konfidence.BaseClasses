@@ -12,7 +12,7 @@ namespace Konfidence.Base
 
         public string PathName { get; private set; } = string.Empty;
 
-        public string RootNameSpaceUri { get; private set; }
+        public string NeedRootNameSpaceUri { get; private set; }
 
         public XmlNamespaceManager XmlNamespaceManager { get; private set; }
 
@@ -25,20 +25,6 @@ namespace Konfidence.Base
             base.Load(filename);
 
             PostLoad();
-        }
-
-        private void PostLoad()
-        {
-            Root = DocumentElement;
-
-            if (Root.IsAssigned())
-            {
-                RootNameSpaceUri = Root.NamespaceURI;
-
-                // create a shortcut namespace reference
-                XmlNamespaceManager = new XmlNamespaceManager(NameTable);
-                XmlNamespaceManager.AddNamespace("p", RootNameSpaceUri);
-            }
         }
 
         public override void Load(Stream inStream)
@@ -69,6 +55,21 @@ namespace Konfidence.Base
             PostLoad();
         }
 
+        private void PostLoad()
+        {
+            Root = DocumentElement;
+
+            if (!Root.IsAssigned())
+            {
+                return;
+            }
+
+            NeedRootNameSpaceUri = Root.NamespaceURI;
+
+            XmlNamespaceManager = new XmlNamespaceManager(NameTable);
+            XmlNamespaceManager.AddNamespace("p", NeedRootNameSpaceUri);
+        }
+
         [UsedImplicitly]
         public void GetAttributeValue([NotNull] string nodeName, string attributeName, out string value)
         {
@@ -81,19 +82,23 @@ namespace Konfidence.Base
         {
             value = string.Empty;
 
-            if (valueNode.IsAssigned())
+            if (!valueNode.IsAssigned())
             {
-                var attributes = valueNode.Attributes;
+                return;
+            }
 
-                if (attributes.IsAssigned())
-                {
-                    var attribute = attributes[attributeName];
+            var attributes = valueNode.Attributes;
 
-                    if (attribute.IsAssigned())
-                    {
-                        value = attribute.Value;
-                    }
-                }
+            if (!attributes.IsAssigned())
+            {
+                return;
+            }
+
+            var attribute = attributes[attributeName];
+
+            if (attribute.IsAssigned())
+            {
+                value = attribute.Value;
             }
         }
 
@@ -126,12 +131,14 @@ namespace Konfidence.Base
 
             value = false;
 
-            if (valueNode.IsAssigned())
+            if (!valueNode.IsAssigned()) 
             {
-                if (bool.TryParse(valueNode.InnerText, out var outvalue))
-                {
-                    value = outvalue;
-                }
+                return;
+            }
+
+            if (bool.TryParse(valueNode.InnerText, out var outvalue))
+            {
+                value = outvalue;
             }
         }
 
@@ -142,7 +149,7 @@ namespace Konfidence.Base
 
             if (!childElement.IsAssigned())
             {
-                childElement = CreateElement(name, RootNameSpaceUri);
+                childElement = CreateElement(name, NeedRootNameSpaceUri);
 
                 parentNode.AppendChild(childElement);
             }
@@ -162,15 +169,16 @@ namespace Konfidence.Base
         [NotNull]
         public XmlNode GetNode([NotNull] XmlNode parentNode, [NotNull] string name)
         {
-            //XmlNode childElement = parentNode.SelectSingleNode(name, _XmlNamespaceManager);
             var childElement = parentNode.SelectSingleNode(name);
 
-            if (!childElement.IsAssigned())
+            if (childElement.IsAssigned())
             {
-                childElement = CreateElement(name, RootNameSpaceUri);
-
-                parentNode.AppendChild(childElement);
+                return childElement;
             }
+
+            childElement = CreateElement(name, NeedRootNameSpaceUri);
+
+            parentNode.AppendChild(childElement);
 
             return childElement;
         }
@@ -215,13 +223,14 @@ namespace Konfidence.Base
         {
             XmlNode root = xmlDocument.DocumentElement;
 
-            if (root.IsAssigned())
+            if (!root.IsAssigned()) 
             {
-                var subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
-
-                subDocumentNode.InnerXml = root.InnerXml;
+                return;
             }
 
+            var subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
+
+            subDocumentNode.InnerXml = root.InnerXml;
         }
     }
 }

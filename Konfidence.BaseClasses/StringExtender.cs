@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using JetBrains.Annotations;
 
 namespace Konfidence.Base
@@ -73,6 +75,13 @@ namespace Konfidence.Base
             }
 
             return line;
+        }
+
+        [NotNull]
+        [UsedImplicitly]
+        public static List<string> TrimList([NotNull] this IEnumerable<string> lines)
+        {
+            return lines.Select(x => x.Trim()).ToList();
         }
 
         [NotNull]
