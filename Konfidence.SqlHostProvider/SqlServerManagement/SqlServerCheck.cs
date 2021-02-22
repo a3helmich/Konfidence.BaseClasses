@@ -57,12 +57,12 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
                 }
             }
 
-            if (!SqlServerInstance.VerifyDatabaseServer(serverName, userName, password, timeOut))
+            if (!SqlServerInstance.VerifyDatabaseServer(serverName, userName, password).Result)
             {
                 throw new SqlClientException("Connection timeout (> 1500ms), Database Server " + serverName + " not found");
             }
 
-            if (!SqlServerInstance.FindDatabase(serverName, connectionName, userName, password))
+            if (!SqlServerInstance.TryFindDatabase(serverName, connectionName, userName, password))
             {
                 throw new SqlClientException("Database " + connectionName + " does not exist");
             }

@@ -1,127 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using Konfidence.Base;
+using Konfidence.SqlHostProvider.Exceptions;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
 namespace Konfidence.SqlHostProvider.SqlServerManagement
 {
-    public class SqlServerInstance 
+    internal static class SqlServerInstance 
     {
-        private string _databaseServerName = string.Empty;
-        private string _userName = string.Empty;
-        private string _password = string.Empty;
-
-        private bool _pingSucceeded;
-
-        public SqlServerInstance()
+        internal static async Task<bool> VerifyDatabaseServer(string databaseServerName, string userName, string password)
         {
-            _pingSucceeded = false;
+            return await PingSqlServerVersionAsync(databaseServerName, userName, password);
         }
 
-        internal static bool VerifyDatabaseServer(string databaseServerName, string userName, string password, int timeOut)
+        private static async Task<bool> PingSqlServerVersionAsync(string databaseServerName, string userName, string password)
         {
-            var executer = new SqlServerInstance();
+            var task = new Task<bool>(() => PingSqlServerVersion(databaseServerName, userName, password));
 
-            return executer.PingSqlServerVersion(databaseServerName, userName, password, timeOut);
+            task.Start();
+
+            return await task;
         }
 
-        private bool PingSqlServerVersion(string databaseServerName, string userName, string password, int timeOut)
+        private static bool PingSqlServerVersion(string databaseServerName, string userName, string password)
         {
-            if (databaseServerName.IsAssigned())
-            {
-                _databaseServerName = databaseServerName;
-                _userName = userName;
-                _password = password;
-
-                var executerThread = new Thread(PingSqlServerVersionExecuter);
-
-                executerThread.Start();
-                if (Debugger.IsAttached)
-                {
-                    executerThread.Join();
-                }
-                else
-                {
-                    executerThread.Join(timeOut); // 1,5 seconde genoeg, of moet dit aanpasbaar zijn?
-                                               // NB. the thread is not going to stop immediately -> the application will not stop right away. 
-                                               // but the response is really fast.
-                }
-
-                return _pingSucceeded;
-            }
-
-            return true;
-        }
-
-        private void PingSqlServerVersionExecuter()
-        {
-            _pingSucceeded = false;
-
             try
             {
-                if (_userName.IsAssigned() && _password.IsAssigned())
+                ServerConnection serverConnection;
+
+                if (userName.IsAssigned() && password.IsAssigned())
                 {
-                    var serverConnection = new ServerConnection(_databaseServerName, _userName, _password)
+                    serverConnection = new ServerConnection(databaseServerName, userName, password)
                     {
                         LoginSecure = false
                     };
 
-                    var server = new Server(serverConnection);
-
-                    server.PingSqlServerVersion(_databaseServerName, _userName, _password);
-                }
-                else
-                {
-                    var server = new Server();
-
-                    server.PingSqlServerVersion(_databaseServerName);
+                    return serverConnection.ServerVersion.IsAssigned();
                 }
 
-                _pingSucceeded = true;
+                serverConnection = new ServerConnection(databaseServerName);
+
+                return serverConnection.ServerVersion.IsAssigned();
             }
             catch (FailedOperationException cfEx)
             {
-                if (cfEx.InnerException != null) throw cfEx.InnerException;
+                if (cfEx.InnerException != null)
+                {
+                    throw cfEx.InnerException;
+                }
+            }
+            catch (ConnectionFailureException)
+            {
+                throw;
             }
             catch (Exception)
             {
                 // if this fails, a timeout has already occured
             }
 
+            return false;
         }
 
-        internal static bool FindDatabase(string databaseServerName, string databaseName, string userName, string password)
+        internal static bool TryFindDatabase(string databaseServerName, string databaseName, string userName, string password)
         {
-            Server server;
-
-            if (userName.IsAssigned() && password.IsAssigned())
+            if (!userName.IsAssigned() || !password.IsAssigned())
             {
-                var serverConnection = new ServerConnection(databaseServerName, userName, password)
-                {
-                    LoginSecure = false
-                };
-
-                server = new Server(serverConnection);
-            }
-            else
-            {
-                server = new Server();
+                throw new SqlClientException("no password or username provided");
             }
 
-            var databaseList = new List<string>();
-
-            foreach (Database database in server.Databases)
+            var serverConnection = new ServerConnection(databaseServerName, userName, password)
             {
-                databaseList.Add(database.Name.ToLower());
-            }
+                LoginSecure = false
+            };
 
-            var foundDatabase = databaseList.Any(name => name.Equals(databaseName, StringComparison.OrdinalIgnoreCase));
-
-            return foundDatabase;
+            return new Server(serverConnection)
+                .Databases
+                .Cast<Database>()
+                .Select(database => database.Name)
+                .Any(name => name.Equals(databaseName, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
