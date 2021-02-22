@@ -6,7 +6,6 @@ using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
-using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
@@ -226,7 +225,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 dataType = "Boolean";
             }
 
-            dataType = dataType.Substring(0, 1).ToUpper() + dataType.Substring(1, dataType.Length - 1);
+            dataType = char.ToUpper(dataType[0]) + dataType.TrimStart(dataType[0]);
 
             return dataType;
         }

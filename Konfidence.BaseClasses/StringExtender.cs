@@ -9,6 +9,74 @@ namespace Konfidence.Base
     {
         [NotNull]
         [UsedImplicitly]
+        public static string TrimStart(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        {
+            if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.StartsWith(trimPart))
+            {
+                line = line.Substring(trimPart.Length);
+
+                if (!leaveWhiteSpace)
+                {
+                    line = line.TrimStart();
+                }
+            }
+
+            return line;
+        }
+
+        [NotNull]
+        [UsedImplicitly]
+        public static string TrimStartIgnoreCase(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        {
+            if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.StartsWith(trimPart, StringComparison.CurrentCultureIgnoreCase))
+            {
+                line = line.Substring(trimPart.Length);
+
+                if (!leaveWhiteSpace)
+                {
+                    line = line.TrimStart();
+                }
+            }
+
+            return line;
+        }
+
+        [NotNull]
+        [UsedImplicitly]
+        public static string TrimEnd(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        {
+            if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.EndsWith(trimPart))
+            {
+                line = line.Substring(0, line.Length - trimPart.Length);
+
+                if (!leaveWhiteSpace)
+                {
+                    line = line.TrimEnd();
+                }
+            }
+
+            return line;
+        }
+
+        [NotNull]
+        [UsedImplicitly]
+        public static string TrimEndIgnoreCase(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        {
+            if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.EndsWith(trimPart, StringComparison.InvariantCultureIgnoreCase))
+            {
+                line = line.Substring(0, line.Length - trimPart.Length);
+
+                if (!leaveWhiteSpace)
+                {
+                    line = line.TrimEnd();
+                }
+            }
+
+            return line;
+        }
+
+        [NotNull]
+        [UsedImplicitly]
         public static string ReplaceIgnoreCase([NotNull] this string fromString, [NotNull] string oldValue, string newValue)
         {
             var fromStringIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);

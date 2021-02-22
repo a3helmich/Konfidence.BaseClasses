@@ -76,13 +76,39 @@ namespace Konfidence.Base
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsGuid(this string assignedGuid)
         {
-            return Guid.TryParse(assignedGuid, out var _);
+            return Guid.TryParse(assignedGuid, out _);
         }
 
         [ContractAnnotation("assignedGuid:null => false")]
         public static bool IsAssigned(this Guid assignedGuid)
         {
             return !Guid.Empty.Equals(assignedGuid);
+        }
+
+        [UsedImplicitly]
+        public static bool IsNumeric(this string numericString)
+        {
+            if (!numericString.IsAssigned())
+            {
+                return false;
+            }
+
+            if (long.TryParse(numericString, out _))
+            {
+                return true;
+            }
+
+            if (double.TryParse(numericString, out _))
+            {
+                return true;
+            }
+
+            if (decimal.TryParse(numericString, out _))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

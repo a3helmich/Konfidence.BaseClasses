@@ -307,10 +307,19 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_DependecyInjection_is_used_With_DbMenu_Should_return_DatabaseStructure_of_DbMenu()
+        [DataRow("--defaultdatabase", "=", "DbMenu")]
+        [DataRow("--DefaultDatabase", "=", "DbMenu")]
+        [DataRow("--DefaultDatabase", " = ", "DbMenu")]
+        [DataRow("--DefaultDatabase", " =", "DbMenu")]
+        [DataRow("--DefaultDatabase", "= ", "DbMenu")]
+        [DataRow("--DefaultDatabase", ":", "DbMenu")]
+        [DataRow("--DefaultDatabase", " : ", "DbMenu")]
+        [DataRow("--DefaultDatabase", " ", "DbMenu")]
+        [DataRow("--DefaultDatabase", "   ", "DbMenu")]
+        public void When_DependecyInjection_is_used_With_DbMenu_Should_return_DatabaseStructure_of_DbMenu(string param, string delim, string value)
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection("--DefaultDatabase=DbMenu");
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection($"{param}{delim}{value}");
 
             // act
             var target = dependencyProvider.GetService<IDatabaseStructure>();

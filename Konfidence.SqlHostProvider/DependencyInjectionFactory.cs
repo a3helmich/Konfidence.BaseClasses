@@ -43,14 +43,12 @@ namespace Konfidence.SqlHostProvider
 
             if (args.Any())
             {
-                var arguments = args.ToList();
-
-                if (TryProcessArgument(Argument.ConfigFileFolder, arguments, out var commandLineArgument))
+                if (TryProcessArgument(Argument.ConfigFileFolder, args, out var commandLineArgument))
                 {
                     commandLineArguments.Add($"DataConfiguration:{Argument.ConfigFileFolder}={commandLineArgument}");
                 }
 
-                if (TryProcessArgument(Argument.DefaultDatabase, arguments, out commandLineArgument))
+                if (TryProcessArgument(Argument.DefaultDatabase, args, out commandLineArgument))
                 {
                     commandLineArguments.Add($"DataConfiguration:{Argument.DefaultDatabase}={commandLineArgument}");
                 }
@@ -72,11 +70,16 @@ namespace Konfidence.SqlHostProvider
         {
             commandLineArgument = string.Empty;
 
-            var arg = @"--" + argument.ToString().ToLowerInvariant();
+            var arg = @"--" + argument;
 
-            var executeArg = args.FirstOrDefault(x => x.ToLowerInvariant().StartsWith(arg))?.Substring(arg.Length).TrimStart('=');
+            var executeArg = args
+                .Where(x => x.StartsWith(arg, StringComparison.OrdinalIgnoreCase))
+                .Select(x => x.TrimStartIgnoreCase(arg, true))
+                .Where(x => x.StartsWith(" ") || x.TrimStart().StartsWith("=") || x.TrimStart().StartsWith(":"))
+                .Select(x => x.TrimStart().TrimStart("=").TrimStart(":"))
+                .ToList();
 
-            if (!executeArg.IsAssigned())
+            if (!executeArg.Any())
             {
                 return false;
             }
@@ -85,7 +88,7 @@ namespace Konfidence.SqlHostProvider
             {
                 case Argument.ConfigFileFolder:
                 case Argument.DefaultDatabase:
-                    commandLineArgument = executeArg;
+                    commandLineArgument = executeArg.First();
                     return true;
             }
 
