@@ -79,6 +79,13 @@ namespace Konfidence.Base
 
         [NotNull]
         [UsedImplicitly]
+        public static List<string> TrimList([NotNull] this IEnumerable<string> lines)
+        {
+            return lines.Select(x => x.Trim()).ToList();
+        }
+
+        [NotNull]
+        [UsedImplicitly]
         public static string ReplaceIgnoreCase([NotNull] this string fromString, [NotNull] string oldValue, string newValue)
         {
             var fromStringIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
@@ -119,13 +126,6 @@ namespace Konfidence.Base
             }
 
             return defaultValue;
-        }
-
-        [NotNull]
-        [UsedImplicitly]
-        public static List<string> TrimList([NotNull] this IEnumerable<string> lines)
-        {
-            return lines.Select(x => x.Trim()).ToList();
         }
     }
 }
