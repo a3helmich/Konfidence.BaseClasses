@@ -29,10 +29,9 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         public void TestIntDataItemShouldReturnShortAndLong()
         {
             // arrange
-            //var testIntDataItemList = Bl.TestIntDataItemList.GetList();
-            var testIntDataItemList = Bl.TestIntDataItem.GetList();
 
             // act
+            var testIntDataItemList = Bl.TestIntDataItem.GetList();
 
             // assert
             testIntDataItemList.Should().HaveCount(1);
@@ -47,15 +46,16 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         public void When_TestIntDataItem_is_Created_when_queried_should_be_returned()
         {
             // arrange
-            var testIntDataItem = new Bl.TestIntDataItem();
-
-            // act
-            testIntDataItem.testTinyInt = 111;
-            testIntDataItem.testInt = 1111;
-            testIntDataItem.testBigInt = 11111;
+            var testIntDataItem = new Bl.TestIntDataItem
+            {
+                testTinyInt = 111, 
+                testInt = 1111, 
+                testBigInt = 11111
+            };
 
             testIntDataItem.Save();
 
+            // act
             var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.GetId());
 
             // assert
@@ -68,26 +68,28 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         }
 
         [TestMethod]
-        public void When_TestIntDataItem_is_Created_and_updated_when_queried_should_be_returned_update()
+        public void When_TestIntDataItem_is_Created_and_updated_when_queried_should_be_returned_and_updated()
         {
             // arrange
-            var testIntDataItem = new Bl.TestIntDataItem();
-
-            // act
-            testIntDataItem.testTinyInt = 11;
-            testIntDataItem.testInt = 1111;
-            testIntDataItem.testBigInt = 11111;
+            var testIntDataItem = new Bl.TestIntDataItem
+            {
+                testTinyInt = 11, 
+                testInt = 1111, 
+                testBigInt = 11111
+            };
 
             testIntDataItem.Save();
 
-            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id);
-
-            copyTestIntDataItem.testTinyInt = 222;
-            copyTestIntDataItem.testInt = 2222;
-            copyTestIntDataItem.testBigInt = 22222;
+            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id)
+            {
+                testTinyInt = 222, 
+                testInt = 2222, 
+                testBigInt = 22222
+            };
 
             copyTestIntDataItem.Save();
 
+            // act
             var updateTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id);
 
             // assert

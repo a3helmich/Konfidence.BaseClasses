@@ -28,7 +28,7 @@ namespace DbMenuClasses
             private const string TESTINT_GETROWBYGUID = "gen_TestInt_GetRowByGuid";
             private const string TESTINT_SAVEROW = "gen_TestInt_SaveRow";
             private const string TESTINT_DELETEROW = "gen_TestInt_DeleteRow";
-            internal const string TESTINT_GETLIST = "gen_TestInt_GetList";
+            private const string TESTINT_GETLIST = "gen_TestInt_GetList";
 
             // property storage
             private Guid _TestIntId = Guid.NewGuid();
@@ -51,8 +51,8 @@ namespace DbMenuClasses
 
             public byte testTinyInt
             {
-                get { return _testTinyInt; }
-                set { _testTinyInt = value; }
+                get => _testTinyInt;
+                set => _testTinyInt = value;
             }
 
             public long testBigInt

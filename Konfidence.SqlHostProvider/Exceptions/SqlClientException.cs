@@ -4,8 +4,7 @@ namespace Konfidence.SqlHostProvider.Exceptions
 {
     public class SqlClientException : Exception
     {
-        public SqlClientException(string description)
-            : base(description)
+        public SqlClientException(string description) : base(description)
         {
         }
     }
