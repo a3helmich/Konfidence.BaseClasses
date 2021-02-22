@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Konfidence.Base;
+using Konfidence.SqlHostProvider.Exceptions;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
@@ -64,24 +65,17 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
 
         internal static bool TryFindDatabase(string databaseServerName, string databaseName, string userName, string password)
         {
-            Server server = null;
-
-            if (userName.IsAssigned() && password.IsAssigned())
+            if (!userName.IsAssigned() || !password.IsAssigned())
             {
-                var serverConnection = new ServerConnection(databaseServerName, userName, password)
-                {
-                    LoginSecure = false
-                };
-
-                server = new Server(serverConnection);
+                throw new SqlClientException("no password or username provided");
             }
 
-            if (!server.IsAssigned())
+            var serverConnection = new ServerConnection(databaseServerName, userName, password)
             {
-                server = new Server(databaseServerName);
-            }
+                LoginSecure = false
+            };
 
-            return server
+            return new Server(serverConnection)
                 .Databases
                 .Cast<Database>()
                 .Select(database => database.Name)

@@ -59,10 +59,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             var password = string.Empty;
 
             // Act 
-            var foundDatabase = SqlServerInstance.TryFindDatabase(serverName, database, userName, password);
+            Action action = () => SqlServerInstance.TryFindDatabase(serverName, database, userName, password);
 
             // Assert
-            foundDatabase.Should().BeTrue();
+            action.Should().Throw<SqlClientException>().WithMessage("no password or username provided");
         }
 
         [TestMethod, TestCategory("SqlServer")]

@@ -4,7 +4,6 @@ using System.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
-using Konfidence.SqlHostProvider;
 
 namespace DbMenuClasses
 {
@@ -51,8 +50,8 @@ namespace DbMenuClasses
 
             public byte testTinyInt
             {
-                get => _testTinyInt;
-                set => _testTinyInt = value;
+                get { return _testTinyInt; }
+                set { _testTinyInt = value; }
             }
 
             public long testBigInt

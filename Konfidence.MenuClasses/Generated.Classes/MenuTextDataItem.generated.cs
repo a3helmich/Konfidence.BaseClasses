@@ -4,7 +4,6 @@ using System.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Konfidence.BaseData;
 using Konfidence.DataBaseInterface;
-using Konfidence.SqlHostProvider;
 
 namespace DbMenuClasses
 {
@@ -26,7 +25,7 @@ namespace DbMenuClasses
             private const string MENUTEXT_GETROW = "gen_MenuText_GetRow";
             private const string MENUTEXT_SAVEROW = "gen_MenuText_SaveRow";
             private const string MENUTEXT_DELETEROW = "gen_MenuText_DeleteRow";
-            internal const string MENUTEXT_GETLIST = "gen_MenuText_GetList";
+            private const string MENUTEXT_GETLIST = "gen_MenuText_GetList";
             private const string MENUTEXT_GETROWBY_NODEID = "gen_MenuText_GetRowByNodeId";
 
             // property storage
