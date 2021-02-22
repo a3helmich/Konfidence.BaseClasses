@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Konfidence.SqlHostProvider.SqlDbSchema
+﻿namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     internal interface IIndexDataItem
     {
