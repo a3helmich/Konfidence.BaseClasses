@@ -2,6 +2,7 @@
 using System.Xml;
 using JetBrains.Annotations;
 using Konfidence.Base;
+using Konfidence.UtilHelper;
 
 namespace Konfidence.BaseUserControlHelpers.PageSetting
 {

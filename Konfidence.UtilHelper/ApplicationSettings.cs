@@ -23,16 +23,25 @@ namespace Konfidence.UtilHelper
         private static string _rootPath = string.Empty;
 
         [UsedImplicitly]
+        [CanBeNull]
         public static IApplicationSettings ApplicationSettings(string application, string rootPath)
         {
             _rootPath = rootPath;
+
             if (!_rootPath.EndsWith(@"\"))
+            {
                 _rootPath += @"\";
+            }
+
             if (!_rootPath.EndsWith(@"settings\"))
+            {
                 _rootPath += @"settings\";
+            }
+
             return ApplicationSettings(application);
         }
 
+        [CanBeNull]
         public static IApplicationSettings ApplicationSettings(string application)
         {
             var applicationSettings = GetInstance(typeof(ApplicationSettings)) as ApplicationSettings;
@@ -62,6 +71,7 @@ namespace Konfidence.UtilHelper
         internal string Application;
         internal string RootPath = string.Empty;
 
+        [NotNull]
         private XmlNodeList ElementList
         {
             get
@@ -70,7 +80,9 @@ namespace Konfidence.UtilHelper
                 {
                     _fileName = RootPath + Application + ".settings";
                     if (File.Exists(_fileName))
+                    {
                         _xmlDocument.Load(_fileName);
+                    }
                     else
                     {
                         _xmlDocument.LoadXml("<configuration />");
@@ -83,6 +95,7 @@ namespace Konfidence.UtilHelper
             }
         }
 
+        [NotNull]
         public string GetStringValue(string keyName)
         {
             foreach (XmlNode xmlNode in ElementList)
@@ -107,7 +120,7 @@ namespace Konfidence.UtilHelper
             _xmlDocument.Save(_fileName);
         }
 
-        public void SetStringValue(string keyName, string keyValue)
+        public void SetStringValue([NotNull] string keyName, [NotNull] string keyValue)
         {
             XmlNode keyNode = null;
 

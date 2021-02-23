@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using System.Xml;
 using JetBrains.Annotations;
+using Konfidence.Base;
 
-namespace Konfidence.Base
+namespace Konfidence.UtilHelper
 {
     public class BaseXmlDocument : XmlDocument
     {
@@ -102,6 +103,7 @@ namespace Konfidence.Base
             }
         }
 
+        [UsedImplicitly]
         public void GetValue([NotNull] string nodeName, [NotNull] out string value)
         {
             GetValue(Root, nodeName, out value);

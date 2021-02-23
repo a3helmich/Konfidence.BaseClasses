@@ -49,7 +49,8 @@ namespace Konfidence.UtilHelper
             _configuration.Save(ConfigFileName);
         }
 
-        protected string GetNodeValue(string name)
+        [NotNull]
+        protected string GetNodeValue([NotNull] string name)
         {
             var nodeValue = string.Empty;
 
@@ -64,7 +65,7 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        protected bool GetBoolNodeValue(string name)
+        protected bool GetBoolNodeValue([NotNull] string name)
         {
             var nodeValue = false;
 
@@ -79,7 +80,8 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        protected ArrayList GetArrayListNodeValue(string name)
+        [NotNull]
+        protected ArrayList GetArrayListNodeValue([NotNull] string name)
         {
             var arrayArrayList = new ArrayList();
             var arrayByteListNodeValue = new ArrayList();
@@ -118,7 +120,7 @@ namespace Konfidence.UtilHelper
             return arrayArrayList;
         }
 
-        protected void SetNodeValue(string name, string value)
+        protected void SetNodeValue([NotNull] string name, string value)
         {
             var valueNode = _root.SelectSingleNode(name);
 
@@ -142,7 +144,7 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        protected void SetNodeValue(string name, bool value)
+        protected void SetNodeValue([NotNull] string name, bool value)
         {
             SetNodeValue(name, value.ToString());
         }
@@ -154,7 +156,7 @@ namespace Konfidence.UtilHelper
         /// <param name="name"></param>
         /// <param name="value"></param>
         [UsedImplicitly]
-        protected void SetNodeValue(string name, ArrayList value)
+        protected void SetNodeValue([NotNull] string name, ArrayList value)
         {
             var joinedArray = string.Empty;
 
