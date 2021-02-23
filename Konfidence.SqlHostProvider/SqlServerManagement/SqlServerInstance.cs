@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.Exceptions;
 using Microsoft.SqlServer.Management.Common;
@@ -57,13 +58,13 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
             }
             catch (Exception)
             {
-                // if this fails, a timeout has already occured
+                // if this fails, a timeout should have already occured
             }
 
             return false;
         }
 
-        internal static bool TryFindDatabase(string databaseServerName, string databaseName, string userName, string password)
+        internal static bool TryFindDatabase(string databaseServerName, string databaseName, [NotNull] string userName, [NotNull] string password)
         {
             if (!userName.IsAssigned() || !password.IsAssigned())
             {

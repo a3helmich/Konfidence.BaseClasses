@@ -23,11 +23,11 @@ namespace Konfidence.TestTools
 
             activeConfig.Sections.Add("dataConfiguration", databaseSettingsCopy);
 
-            foreach (ConnectionStringSettings configConnectionString in config.ConnectionStrings.ConnectionStrings)
-            {
-                activeConfig.ConnectionStrings.ConnectionStrings.Remove(configConnectionString);
+            activeConfig.ConnectionStrings.ConnectionStrings.Clear();
 
-                activeConfig.ConnectionStrings.ConnectionStrings.Add(configConnectionString);
+            foreach (ConnectionStringSettings configConnectionStringSettings in config.ConnectionStrings.ConnectionStrings)
+            {
+                activeConfig.ConnectionStrings.ConnectionStrings.Add(configConnectionStringSettings);
             }
 
             activeConfig.Save(ConfigurationSaveMode.Modified);
