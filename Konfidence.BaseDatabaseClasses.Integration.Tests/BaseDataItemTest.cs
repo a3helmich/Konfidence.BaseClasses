@@ -14,7 +14,10 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            var testIntDataItemList = Bl.TestIntDataItem.GetList().Where(x => x.GetId() > 1).ToList();
+            var testIntDataItemList = Bl.TestIntDataItem
+                .GetList()
+                .Where(x => x.GetId() > 1)
+                .ToList();
 
             if (testIntDataItemList.Any())
             {

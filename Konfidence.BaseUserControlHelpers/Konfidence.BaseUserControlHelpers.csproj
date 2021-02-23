@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj" />
     <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj" />
+    <ProjectReference Include="..\Konfidence.UtilHelper\Konfidence.UtilHelper.csproj" />
   </ItemGroup>
 
   <ItemGroup>
