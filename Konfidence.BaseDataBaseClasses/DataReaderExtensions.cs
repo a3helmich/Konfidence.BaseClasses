@@ -4,21 +4,23 @@ using JetBrains.Annotations;
 
 namespace Konfidence.BaseData
 {
+    [UsedImplicitly]
     internal static class DataReaderExtensions
     {
+        private static byte _byteZero = 0;
 
         public static void GetField([NotNull] this IDataReader dataReader, [NotNull] string fieldName, out byte field)
         {
             var fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetByte(fieldOrdinal);
+            field = dataReader.IsDBNull(fieldOrdinal) ? _byteZero : dataReader.GetByte(fieldOrdinal);
         }
 
         public static void GetField([NotNull] this IDataReader dataReader, [NotNull] string fieldName, out short field)
         {
             var fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt16(fieldOrdinal);
+            field = dataReader.IsDBNull(fieldOrdinal) ? _byteZero : dataReader.GetInt16(fieldOrdinal);
         }
 
         public static void GetField([NotNull] this IDataReader dataReader, [NotNull] string fieldName, out int field)

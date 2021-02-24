@@ -117,7 +117,7 @@ namespace Konfidence.BaseWindowForms
             this._dbUserLabel.Name = "_dbUserLabel";
             this._dbUserLabel.Size = new System.Drawing.Size(116, 22);
             this._dbUserLabel.TabIndex = 20;
-            this._dbUserLabel.Text = "Username";
+            this._dbUserLabel.Text = "User Name";
             this._dbUserLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // _databaseTextBox

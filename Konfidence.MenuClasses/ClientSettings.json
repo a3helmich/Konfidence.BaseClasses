@@ -3,6 +3,22 @@
   //"LogLevel": "Verbose",
   "DataConfiguration": {
     "DefaultDatabase": "DbMenu",
-    "LogLevel": "Verbose"
+    "LogLevel": "Verbose",
+    "Connections": [
+      {
+        "ConnectionName": "",
+        "Server": "",
+        "Database": "",
+        "UserName": "",
+        "Password": ""
+      },
+      {
+        "ConnectionName": "",
+        "Server": "",
+        "Database": "",
+        "UserName": "",
+        "Password": ""
+      }
+    ]
   }
 }

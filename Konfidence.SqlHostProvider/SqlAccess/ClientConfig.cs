@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
@@ -8,6 +9,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         public string DefaultDatabase { get; set; } = string.Empty;
 
         public string ConfigFileFolder { get; set; } = string.Empty;
+
+        public List<ConfigConnectionString> Connections { get; set; } = new();
 
         public ClientConfig([NotNull] IConfiguration configuration)
         {

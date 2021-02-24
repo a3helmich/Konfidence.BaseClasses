@@ -6,6 +6,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
@@ -21,13 +22,31 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         private Database GetDatabase()
         {
-            var databaseProviderFactory = new DatabaseProviderFactory();
+            if (!_clientConfig.DefaultDatabase.IsAssigned())
+            {
+                return new DatabaseProviderFactory().CreateDefault();
+            }
 
-            var databaseInstance = _clientConfig.DefaultDatabase.IsAssigned()
-                ? databaseProviderFactory.Create(_clientConfig.DefaultDatabase)
-                : databaseProviderFactory.CreateDefault();
+            var connection = GetConfigConnection(_clientConfig);
 
-            return databaseInstance;
+            var config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, _clientConfig.DefaultDatabase);
+
+            var databaseProviderFactory = new DatabaseProviderFactory(config.GetSection);
+
+            return databaseProviderFactory.Create(_clientConfig.DefaultDatabase);
+        }
+
+        [NotNull]
+        private static ConfigConnectionString GetConfigConnection([NotNull] IClientConfig clientConfig)
+        {
+            var connection = clientConfig.Connections.FirstOrDefault(x => x.ConnectionName == clientConfig.DefaultDatabase);
+
+            if (connection.IsAssigned())
+            {
+                return connection;
+            }
+
+            return new ConfigConnectionString();
         }
 
         [NotNull]

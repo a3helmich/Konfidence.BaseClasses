@@ -13,10 +13,13 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
     [TestClass]
     public class SqlServerCheckTests
     {
-        [TestInitialize]
-        public void initialize()
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext _)
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestClassGenerator");
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestDatabase");
         }
 
         [TestMethod, TestCategory("SqlServer")]

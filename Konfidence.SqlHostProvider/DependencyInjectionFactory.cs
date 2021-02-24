@@ -56,12 +56,16 @@ namespace Konfidence.SqlHostProvider
 
             var configuration = GetConfigurationRoot(commandLineArguments.ToArray());
 
+            var clientConfig = new ClientConfig(configuration);
+
+            clientConfig.SetSqlApplicationSettings();
+
             // client classes
             services
                 .AddSingleton<IDatabaseStructure, DatabaseStructure>()
                 .AddSingleton<IBaseClient, SqlClient>()
                 .AddSingleton<IDataRepository, SqlClientRepository>()
-                .AddSingleton<IClientConfig>(new ClientConfig(configuration));
+                .AddSingleton<IClientConfig>(clientConfig);
 
             return services.BuildServiceProvider();
         }

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using FluentAssertions;
-using Konfidence.DataBaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
@@ -22,19 +21,12 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            File.Copy(@"ClientSettings.json", "CopyClientSettings.json", overwrite: true);
-        }
-
-        [TestInitialize]
-        public void initialize()
-        {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
-        }
 
-        [TestCleanup]
-        public void Cleanup()
-        {
-            File.Copy(@"CopyClientSettings.json", "ClientSettings.json", overwrite: true);
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestClassGenerator");
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("SchemaDatabaseDevelopment");
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("BlockedHackers");
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("DbMenu");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -44,6 +36,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -54,7 +47,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
-            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
+            target.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -64,6 +57,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -76,7 +70,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
 
             target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
-            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
+            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -86,6 +80,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("BlockedHackers");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -96,7 +91,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Tables.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
-            target?.SelectedConnectionName.Should().Be("BlockedHackers");
+            target.SelectedConnectionName.Should().Be("BlockedHackers");
         }
 
 
@@ -107,6 +102,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("DBMenu");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -117,7 +113,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Tables.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
-            target?.SelectedConnectionName.Should().Be("DBMenu");
+            target.SelectedConnectionName.Should().Be("DBMenu");
         }
 
 
@@ -128,6 +124,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -143,7 +140,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("NaamOmschrijving");
-            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
+            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -153,6 +150,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -168,7 +166,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
-            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
+            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -178,6 +176,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -193,7 +192,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("Naam, Omschrijving");
-            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
+            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -203,6 +202,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -218,7 +218,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("string naam, string omschrijving");
-            target?.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
+            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -254,6 +254,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -266,7 +267,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             tableExists.Should().BeTrue();
-            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
+            target.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod]
@@ -276,6 +277,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var clientConfigMock = new Mock<IClientConfig>();
 
             clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
+            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
 
             var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
 
@@ -288,7 +290,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             tableExists.Should().BeFalse();
-            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
+            target.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod]

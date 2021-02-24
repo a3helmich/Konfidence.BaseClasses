@@ -3,6 +3,15 @@
   //"LogLevel": "Verbose",
   "DataConfiguration": {
     "DefaultDatabase": "TestClassGenerator",
-    "LogLevel": "Verbose"
+    "LogLevel": "Verbose",
+    "Connections": [
+      {
+        "ConnectionName": "TestClassGenerator",
+        "Server": "konfidence2",
+        "Database": "TestClassGenerator",
+        "UserName": "",
+        "Password": ""
+      }
+    ]
   }
 }
