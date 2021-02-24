@@ -70,7 +70,7 @@ namespace Konfidence.SqlHostProvider
             return services.BuildServiceProvider();
         }
 
-        private static bool TryProcessArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
+        public static bool TryProcessArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
         {
             commandLineArgument = string.Empty;
 
@@ -88,15 +88,9 @@ namespace Konfidence.SqlHostProvider
                 return false;
             }
 
-            switch (argument)
-            {
-                case Argument.ConfigFileFolder:
-                case Argument.DefaultDatabase:
-                    commandLineArgument = executeArg.First();
-                    return true;
-            }
+            commandLineArgument = executeArg.First();
 
-            return false;
+            return true;
         }
 
     }

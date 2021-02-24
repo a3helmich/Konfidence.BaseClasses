@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ClientSettingsUpdater": {
+      "commandName": "Project",
+      "commandLineArgs": "--ConfigFileFolder=$(ProjectDir) --UserName=Test --Password=pissword"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "DataConfiguration": {
+    "DefaultDatabase": "DbMenu",
+    "Connections": [
+      {
+        "ConnectionName": "DbMenu",
+        "UserName": "",
+        "Password": "",
+        "Server": "konfidence2",
+        "Database": "DbMenu"
+      },
+      {
+        "ConnectionName": "TestClasses",
+        "UserName": "",
+        "Password": "",
+        "Server": "konfidence2",
+        "Database": "TestDb"
+      }
+    ]
+  }
+}

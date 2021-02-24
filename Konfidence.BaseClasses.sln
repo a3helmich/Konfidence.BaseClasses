@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Mail", "Konfiden
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseWindowForms", "Konfidence.BaseWindowForms\Konfidence.BaseWindowForms.csproj", "{74C04717-4CDC-4FBE-944E-D83CB58DCD69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSettingsUpdater", "ClientSettingsUpdater\ClientSettingsUpdater.csproj", "{687CFA15-FB09-46FC-8769-2B5C4494080D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{74C04717-4CDC-4FBE-944E-D83CB58DCD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74C04717-4CDC-4FBE-944E-D83CB58DCD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74C04717-4CDC-4FBE-944E-D83CB58DCD69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
