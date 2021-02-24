@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
@@ -54,8 +55,17 @@ namespace ClientSettingsUpdater
                 Environment.Exit(6);
             }
 
+            var fullFolderName = Path.GetFullPath(_configFolder);
+
+            Debug.WriteLine($"Location: {fullFolderName}");
+            Console.WriteLine($"Location: {fullFolderName}");
+
+
             foreach (var clientSettingsFileName in clientSettingsFileNames)
             {
+                Debug.WriteLine($"File: {clientSettingsFileName}");
+                Console.WriteLine($"File: {clientSettingsFileName}");
+
                 UpdateFile(clientSettingsFileName);
             }
         }
@@ -64,14 +74,17 @@ namespace ClientSettingsUpdater
         {
             var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
-            var connections = clientSettings.DataConfiguration.Connections.Where(x => !x.UserName.IsAssigned());
+            var connections = clientSettings.DataConfiguration.Connections;
 
             clientSettings.DataConfiguration.Connections =
                 connections
                     .Select(setting =>
                     {
-                        setting.UserName = _userName;
-                        setting.Password = _password;
+                        if (!setting.UserName.IsAssigned())
+                        {
+                            setting.UserName = _userName;
+                            setting.Password = _password;
+                        }
 
                         return setting;
                     })
