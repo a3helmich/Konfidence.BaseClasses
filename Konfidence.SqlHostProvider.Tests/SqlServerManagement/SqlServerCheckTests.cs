@@ -38,7 +38,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
                 throw new Exception("clientconfig not returned by dependency injection");
             }
 
-            clientConfig.DefaultDatabase = "TestClassGenerator";
+            clientConfig.DefaultDatabase = "TestDatabase";
 
             var connection = clientConfig.GetConfigConnection();
 
