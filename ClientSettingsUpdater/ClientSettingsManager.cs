@@ -60,7 +60,6 @@ namespace ClientSettingsUpdater
             Debug.WriteLine($"Location: {fullFolderName}");
             Console.WriteLine($"Location: {fullFolderName}");
 
-
             foreach (var clientSettingsFileName in clientSettingsFileNames)
             {
                 Debug.WriteLine($"File: {clientSettingsFileName}");
@@ -80,11 +79,13 @@ namespace ClientSettingsUpdater
                 connections
                     .Select(setting =>
                     {
-                        if (!setting.UserName.IsAssigned())
+                        if (setting.UserName.IsAssigned())
                         {
-                            setting.UserName = _userName;
-                            setting.Password = _password;
+                            return setting;
                         }
+
+                        setting.UserName = _userName;
+                        setting.Password = _password;
 
                         return setting;
                     })
