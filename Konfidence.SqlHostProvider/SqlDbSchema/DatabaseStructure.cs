@@ -14,15 +14,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private readonly IBaseClient _client;
 
-        public string SelectedConnectionName { get; }
-
         private readonly List<IColumnDataItem> _allColumnDataItems;
 
         private readonly List<IPrimaryKeyDataItem> _allPrimaryKeyDataItems;
 
         private readonly List<IIndexDataItem> _allIndexDataItems;
 
-        public DatabaseStructure([NotNull] IClientConfig clientConfig, IBaseClient client)
+        public DatabaseStructure(IBaseClient client)
         {
             _client = client;
 
@@ -31,9 +29,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             _allColumnDataItems = new List<IColumnDataItem>();
             _allPrimaryKeyDataItems = new List<IPrimaryKeyDataItem>();
             _allIndexDataItems = new List<IIndexDataItem>();
-
-            Debug.WriteLine($"DatabaseStructure constructor, default database: '{clientConfig.DefaultDatabase}'");
-            SelectedConnectionName = clientConfig.DefaultDatabase;
         }
 
         [UsedImplicitly]

@@ -23,5 +23,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             ConnectionManagement.SetActiveConnection(clientConfig.DefaultDatabase);
         }
+
+        [CanBeNull]
+        public static ConfigConnectionString GetConfigConnection([NotNull] this IClientConfig clientConfig)
+        {
+            var connection = clientConfig
+                .Connections
+                .FirstOrDefault(x =>
+                    clientConfig.DefaultDatabase.IsAssigned() && x.ConnectionName == clientConfig.DefaultDatabase);
+
+            return connection;
+        }
     }
 }

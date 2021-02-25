@@ -7,8 +7,6 @@ namespace Konfidence.DataBaseInterface
     {
         DataTable GetSchemaObject(string collection);
 
-        //DbCommand GetStoredProcCommand(string saveStoredProcedure);
-
         int ExecuteCommandStoredProcedure(string saveStoredProcedure, List<ISpParameterData> parameterObjectList);
 
         void ExecuteSaveStoredProcedure(IBaseDataItem dataItem);

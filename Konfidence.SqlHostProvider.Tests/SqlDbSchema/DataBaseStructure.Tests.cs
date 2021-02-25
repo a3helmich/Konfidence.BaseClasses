@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
@@ -33,35 +34,44 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureTest()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
 
             // assert
             target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
-            target.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
         public void BuildStructureWithDifferentConnectionNameTest()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
@@ -70,65 +80,75 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
 
             target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
-            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
         public void BuildStructureWithBlockedHackersConnectionName()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("BlockedHackers");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "BlockedHackers";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
 
             // assert
             target.Tables.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
-            target.SelectedConnectionName.Should().Be("BlockedHackers");
         }
-
 
         [TestMethod, TestCategory("DatabaseStructure")]
         public void BuildStructureWithDBMenuConnectionName()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("DBMenu");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "DbMenu";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
 
             // assert
             target.Tables.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
-            target.SelectedConnectionName.Should().Be("DBMenu");
         }
-
 
         [TestMethod]
         public void When_GetFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -140,21 +160,25 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("NaamOmschrijving");
-            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
         public void When_GetUnderscoreFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -166,21 +190,25 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
-            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
         public void When_GetCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -192,21 +220,25 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("Naam, Omschrijving");
-            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
         public void When_GetTypedCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("SchemaDatabaseDevelopment");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -218,7 +250,6 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             columnString.Should().Be("string naam, string omschrijving");
-            target.SelectedConnectionName.Should().Be("SchemaDatabaseDevelopment");
         }
 
         [TestMethod]
@@ -251,14 +282,19 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_TableExists_is_executed_and_table_exists_Should_return_true()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -267,21 +303,25 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             tableExists.Should().BeTrue();
-            target.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod]
         public void When_TableExists_is_executed_and_table_does_notexists_Should_return_false()
         {
             // arrange
-            var clientConfigMock = new Mock<IClientConfig>();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
 
-            clientConfigMock.Setup(x => x.DefaultDatabase).Returns("TestClassGenerator");
-            clientConfigMock.Setup(x => x.Connections).Returns(new List<ConfigConnectionString>());
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
 
-            var client = new SqlClient(new SqlClientRepository(clientConfigMock.Object));
+            clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            IDatabaseStructure target = new DatabaseStructure(clientConfigMock.Object, client);
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -290,7 +330,6 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             tableExists.Should().BeFalse();
-            target.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod]
@@ -305,7 +344,6 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             // assert
             target.Should().NotBeNull();
             target.Should().BeOfType<DatabaseStructure>();
-            target?.SelectedConnectionName.Should().Be("TestClassGenerator");
         }
 
         [TestMethod]
@@ -329,7 +367,6 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             // assert
             target.Should().NotBeNull();
             target.Should().BeOfType<DatabaseStructure>();
-            target?.SelectedConnectionName.Should().Be("DbMenu");
         }
 
         [TestMethod]
