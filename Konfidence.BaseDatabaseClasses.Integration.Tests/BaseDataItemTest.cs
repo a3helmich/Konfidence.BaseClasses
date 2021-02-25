@@ -9,11 +9,17 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
     [TestClass]
     public class BaseDataItemTest
     {
-        [TestInitialize]
-        public void TestInitialize()
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext _)
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("DbMenu");
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
             var testIntDataItemList = Bl.TestIntDataItem
                 .GetList()
                 .Where(x => x.GetId() > 1)

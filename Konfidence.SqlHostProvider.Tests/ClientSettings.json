@@ -3,6 +3,43 @@
   //"LogLevel": "Verbose",
   "DataConfiguration": {
     "DefaultDatabase": "TestClassGenerator",
-    "LogLevel": "Verbose"
+    "LogLevel": "Verbose",
+    "Connections": [
+      {
+        "ConnectionName": "TestClassGenerator",
+        "Server": "konfidence2",
+        "Database": "TestClassGenerator",
+        "UserName": "",
+        "Password": ""
+      },
+      {
+        "ConnectionName": "SchemaDatabaseDevelopment",
+        "Server": "konfidence2",
+        "Database": "TestClassGenerator",
+        "UserName": "",
+        "Password": ""
+      },
+      {
+        "ConnectionName": "BlockedHackers",
+        "Server": "konfidence2",
+        "Database": "BlockedHackers",
+        "UserName": "",
+        "Password": ""
+      },
+      {
+        "ConnectionName": "DbMenu",
+        "Server": "konfidence2",
+        "Database": "DbMenu",
+        "UserName": "",
+        "Password": ""
+      },
+      {
+        "ConnectionName": "TestDatabase",
+        "Server": "konfidence2",
+        "Database": "TestDatabase",
+        "UserName": "",
+        "Password": ""
+      }
+    ]
   }
 }

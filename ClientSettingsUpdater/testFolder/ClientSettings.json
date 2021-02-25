@@ -1,23 +1,20 @@
 {
-  "LogLevel": "Information",
-  //"LogLevel": "Verbose",
   "DataConfiguration": {
     "DefaultDatabase": "DbMenu",
-    "LogLevel": "Verbose",
     "Connections": [
       {
         "ConnectionName": "DbMenu",
-        "Server": "konfidence2",
-        "Database": "DbMenu",
         "UserName": "",
-        "Password": ""
+        "Password": "",
+        "Server": "konfidence2",
+        "Database": "DbMenu"
       },
       {
         "ConnectionName": "TestClasses",
-        "Server": "konfidence2",
-        "Database": "TestDb",
         "UserName": "",
-        "Password": ""
+        "Password": "",
+        "Server": "konfidence2",
+        "Database": "TestDb"
       }
     ]
   }

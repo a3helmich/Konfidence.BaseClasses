@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DataBaseInterface;
+using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
@@ -21,13 +23,18 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         private Database GetDatabase()
         {
-            var databaseProviderFactory = new DatabaseProviderFactory();
+            var connection = _clientConfig.GetConfigConnection();
 
-            var databaseInstance = _clientConfig.DefaultDatabase.IsAssigned()
-                ? databaseProviderFactory.Create(_clientConfig.DefaultDatabase)
-                : databaseProviderFactory.CreateDefault();
+            Debug.WriteLine($"SqlClientRepository GetDatabase, default database: '{_clientConfig.DefaultDatabase}'");
 
-            return databaseInstance;
+            if (!connection.IsAssigned())
+            {
+                return new DatabaseProviderFactory().CreateDefault();
+            }
+
+            var config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+
+            return new DatabaseProviderFactory(config.GetSection).Create(connection.ConnectionName);
         }
 
         [NotNull]
@@ -52,14 +59,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(saveStoredProcedure))
+            using (var dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
             {
                 foreach (var parameterObject in parameterObjectList)
                 {
                     database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
                 }
 
-                return ExecuteNonQuery(dbCommand);
+                return database.ExecuteNonQuery(dbCommand);
             }
         }
 
@@ -67,52 +74,13 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(dataItem.SaveStoredProcedure))
+            using (var dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
                 SetParameterData(dataItem, database, dbCommand);
 
-                ExecuteNonQuery(dbCommand);
+                database.ExecuteNonQuery(dbCommand);
 
                 GetParameterData(dataItem, database, dbCommand);
-            }
-        }
-
-        private static void SetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
-        {
-            // autoidfield
-            database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
-                dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.GetId());
-
-            // fields changing at the database side
-            foreach (var parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
-            {
-                database.AddParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, ParameterDirection.InputOutput,
-                                                            parameterObject.ParameterName, DataRowVersion.Proposed, parameterObject.Value);
-            }
-
-            // all the other fields
-            foreach (var parameterObject in dataItem.SetItemData())
-            {
-                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
-            }
-        }
-
-        private static void GetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
-        {
-            dataItem.SetId((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));
-
-            foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
-            {
-                var fieldValue = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
-
-                if (DBNull.Value.Equals(fieldValue))
-                {
-                    kvp.Value.Value = null;
-
-                    continue;
-                }
-
-                kvp.Value.Value = fieldValue;
             }
         }
 
@@ -120,7 +88,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(dataItem.GetStoredProcedure))
+            using (var dbCommand = database.GetStoredProcCommand(dataItem.GetStoredProcedure))
             {
                 SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
 
@@ -139,7 +107,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(storedProcedure))
+            using (var dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
                 SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
 
@@ -163,7 +131,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(storedProcedure))
+            using (var dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
                 SetParameterData(spParameters, database, dbCommand);
 
@@ -195,48 +163,26 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             var database = GetDatabase();
 
-            using (var dbCommand = GetStoredProcCommand(dataItem.DeleteStoredProcedure))
+            using (var dbCommand = database.GetStoredProcCommand(dataItem.DeleteStoredProcedure))
             {
                 database.AddInParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, dataItem.GetId());
 
-                ExecuteNonQuery(dbCommand);
+                database.ExecuteNonQuery(dbCommand);
             }
-        }
-
-        [UsedImplicitly]
-        public int ExecuteNonQuery(string storedProcedure, [NotNull] List<ISpParameterData> parameterList)
-        {
-            return ExecuteCommandStoredProcedure(storedProcedure, parameterList);
         }
 
         public int ExecuteTextCommandQuery(string textCommand)
         {
-            return GetDatabase().ExecuteNonQuery(CommandType.Text, textCommand);
-        }
+            var database = GetDatabase();
 
-        private int ExecuteNonQuery(DbCommand dbCommand)
-        {
-            return GetDatabase().ExecuteNonQuery(dbCommand);
-        }
-
-        private DbCommand GetStoredProcCommand(string saveStoredProcedure)
-        {
-            return GetDatabase().GetStoredProcCommand(saveStoredProcedure);
-        }
-
-        private static void SetParameterData([NotNull] IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
-        {
-            foreach (var parameterObject in parameterObjectList)
-            {
-                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
-            }
-
-            parameterObjectList.Clear();
+            return database.ExecuteNonQuery(CommandType.Text, textCommand);
         }
 
         public bool ObjectExists(string objectName, string collection)
         {
-            using (var dbConnection = GetDatabase().CreateConnection())
+            var database = GetDatabase();
+
+            using (var dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
@@ -248,6 +194,55 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                         .Any(x => x[2].ToString().Equals(objectName, StringComparison.OrdinalIgnoreCase));
                 }
             }
+        }
+
+        private static void SetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
+        {
+            // autoidfield
+            database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
+                dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.GetId());
+
+            // fields changing at the database side
+            foreach (var parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
+            {
+                database.AddParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, ParameterDirection.InputOutput,
+                    parameterObject.ParameterName, DataRowVersion.Proposed, parameterObject.Value);
+            }
+
+            // all the other fields
+            foreach (var parameterObject in dataItem.SetItemData())
+            {
+                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
+            }
+        }
+
+        private static void GetParameterData([NotNull] IBaseDataItem dataItem, [NotNull] Database database, DbCommand dbCommand)
+        {
+            dataItem.SetId((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));
+
+            foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
+            {
+                var fieldValue = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
+
+                if (DBNull.Value.Equals(fieldValue))
+                {
+                    kvp.Value.Value = null;
+
+                    continue;
+                }
+
+                kvp.Value.Value = fieldValue;
+            }
+        }
+
+        private static void SetParameterData([NotNull] IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
+        {
+            foreach (var parameterObject in parameterObjectList)
+            {
+                database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
+            }
+
+            parameterObjectList.Clear();
         }
     }
 }

@@ -14,10 +14,12 @@ namespace Konfidence.MenuClasses.Tests
     [TestClass]
     public class MenuItemTest
     {
-        [TestInitialize]
-        public void initialize()
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext _)
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("DbMenu");
         }
 
         [TestMethod, TestCategory("MenuItem")]

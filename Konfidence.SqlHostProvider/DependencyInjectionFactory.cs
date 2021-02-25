@@ -56,17 +56,21 @@ namespace Konfidence.SqlHostProvider
 
             var configuration = GetConfigurationRoot(commandLineArguments.ToArray());
 
+            var clientConfig = new ClientConfig(configuration);
+
+            clientConfig.SetSqlApplicationSettings();
+
             // client classes
             services
                 .AddSingleton<IDatabaseStructure, DatabaseStructure>()
                 .AddSingleton<IBaseClient, SqlClient>()
                 .AddSingleton<IDataRepository, SqlClientRepository>()
-                .AddSingleton<IClientConfig>(new ClientConfig(configuration));
+                .AddSingleton<IClientConfig>(clientConfig);
 
             return services.BuildServiceProvider();
         }
 
-        private static bool TryProcessArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
+        public static bool TryProcessArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
         {
             commandLineArgument = string.Empty;
 
@@ -84,15 +88,9 @@ namespace Konfidence.SqlHostProvider
                 return false;
             }
 
-            switch (argument)
-            {
-                case Argument.ConfigFileFolder:
-                case Argument.DefaultDatabase:
-                    commandLineArgument = executeArg.First();
-                    return true;
-            }
+            commandLineArgument = executeArg.First();
 
-            return false;
+            return true;
         }
 
     }

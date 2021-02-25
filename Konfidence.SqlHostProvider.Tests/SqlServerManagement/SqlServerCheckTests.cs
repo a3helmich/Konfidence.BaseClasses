@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Konfidence.Base;
 using Konfidence.SqlHostProvider.Exceptions;
+using Konfidence.SqlHostProvider.SqlAccess;
+using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Konfidence.SqlHostProvider.SqlServerManagement;
 using Konfidence.TestTools;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,17 +17,39 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
     [TestClass]
     public class SqlServerCheckTests
     {
-        [TestInitialize]
-        public void initialize()
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext _)
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestClassGenerator");
+            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestDatabase");
         }
 
         [TestMethod, TestCategory("SqlServer")]
         public void When_VerifyDatabaseServer_With_invalid_database_Should_return_DoesNotExist()
         {
             // Arrange
-            var databaseProviderFactory = new DatabaseProviderFactory();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
+
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
+
+            clientConfig.DefaultDatabase = "TestDatabase";
+
+            var connection = clientConfig.GetConfigConnection();
+
+            if (!connection.IsAssigned())
+            {
+                throw new Exception("connection not returned by configuration");
+            }
+
+            var config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+
+            var databaseProviderFactory = new DatabaseProviderFactory(config.GetSection);
 
             var database = databaseProviderFactory.Create("TestDatabase");
 
@@ -38,7 +64,26 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_valid_database_Should_return_Ok()
         {
             // Arrange
-            var databaseProviderFactory = new DatabaseProviderFactory();
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
+
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
+
+            clientConfig.DefaultDatabase = "TestClassGenerator";
+
+            var connection = clientConfig.GetConfigConnection();
+
+            if (!connection.IsAssigned())
+            {
+                throw new Exception("connection not returned by configuration");
+            }
+
+            var config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+
+            var databaseProviderFactory = new DatabaseProviderFactory(config.GetSection);
 
             var database = databaseProviderFactory.Create("TestClassGenerator");
 
