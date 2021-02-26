@@ -10,6 +10,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public string ConfigFileFolder { get; set; } = string.Empty;
 
+        public bool UseEnvironmentSetting { get; set; } = false;
+
         public List<ConfigConnectionString> Connections { get; set; } = new();
 
         public ClientConfig([NotNull] IConfiguration configuration)

@@ -88,19 +88,11 @@ namespace Konfidence.Base
         [UsedImplicitly]
         public static string ReplaceIgnoreCase([NotNull] this string fromString, [NotNull] string oldValue, string newValue)
         {
-            var fromStringIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
+            var replaceFromIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
 
-            if (fromStringIndex > -1)
-            {
-                var toString = fromString.Substring(0, fromStringIndex);
-
-                toString += newValue;
-                toString += fromString.Substring(fromStringIndex + oldValue.Length);
-
-                return toString;
-            }
-
-            return fromString;
+            return replaceFromIndex > -1
+                ? $"{fromString.Substring(0, replaceFromIndex)}{newValue}{fromString.Substring(replaceFromIndex + oldValue.Length)}"
+                : fromString;
         }
 
         [UsedImplicitly]
@@ -111,21 +103,18 @@ namespace Konfidence.Base
                 decimalString = decimalString.Replace(',', '.');
             }
 
-            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out var returnValue1))
+            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out var returnValue))
             {
-                return returnValue1;
+                return returnValue;
             }
 
             decimalString = decimalString.Replace(',', 'k');
             decimalString = decimalString.Replace('.', ',');
             decimalString = decimalString.Replace('k', '.');
 
-            if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out var returnValue2))
-            {
-                return returnValue2;
-            }
-
-            return defaultValue;
+            return decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out returnValue)
+                ? returnValue
+                : defaultValue;
         }
     }
 }

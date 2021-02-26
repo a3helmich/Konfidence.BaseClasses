@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
+using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
+using Newtonsoft.Json;
 
 namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 {
@@ -80,21 +83,42 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             connectionStringParts.Remove(connectionPart);
         }
 
+        internal static void CopySqlSecurityToMemory(string connectionName)
+        {
+            if (!"ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) || !File.Exists(fileName))
+            {
+                return;
+            }
+
+            var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
+
+            var connections = clientSettings
+                .DataConfiguration
+                .Connections
+                .Where(x => x.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (!connections.Any())
+            {
+                return;
+            }
+
+            var connection = connections.First();
+
+            SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+        }
+
+        [NotNull]
         internal static Configuration SetDatabaseSecurityInMemory(string userName, string password, string connectionName)
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            if (!userName.IsAssigned() || !password.IsAssigned())
-            {
-                return config;
-            }
 
             var connectionStringSettings = config.ConnectionStrings
                 .ConnectionStrings
                 .Cast<ConnectionStringSettings>()
                 .FirstOrDefault(x => x.Name == connectionName);
 
-            if (!connectionStringSettings.IsAssigned())
+            if (!userName.IsAssigned() || !password.IsAssigned() || !connectionStringSettings.IsAssigned())
             {
                 return config;
             }

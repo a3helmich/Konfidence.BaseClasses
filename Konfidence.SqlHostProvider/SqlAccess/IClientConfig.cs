@@ -8,6 +8,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         string ConfigFileFolder { get; set; }
 
+        bool UseEnvironmentSetting { get; set; }
+
         List<ConfigConnectionString> Connections { get; set; }
     }
 }

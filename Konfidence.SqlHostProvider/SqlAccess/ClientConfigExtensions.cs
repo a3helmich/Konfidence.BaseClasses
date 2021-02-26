@@ -18,10 +18,15 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             if (connection.IsAssigned())
             {
-                ConnectionManagement.SetApplicationDatabase(clientConfig.DefaultDatabase, connection.Server, connection.ConnectionName);
+                ConnectionManagement.SetApplicationDatabase(connection.Database, connection.Server, connection.ConnectionName);
             }
 
             ConnectionManagement.SetActiveConnection(clientConfig.DefaultDatabase);
+
+            if (clientConfig.UseEnvironmentSetting && connection.IsAssigned() && !connection.UserName.IsAssigned())
+            {
+                ConnectionManagement.CopySqlSecurityToMemory(clientConfig.DefaultDatabase);
+            }
         }
 
         [CanBeNull]

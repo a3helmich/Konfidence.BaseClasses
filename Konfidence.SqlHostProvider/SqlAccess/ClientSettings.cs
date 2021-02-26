@@ -8,6 +8,8 @@ namespace Konfidence.SqlHostProvider.SqlAccess
     {
         [UsedImplicitly] public LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
 
+        [UsedImplicitly] public bool UseEnvironmentSetting { get; set; }
+
         [UsedImplicitly] public string DefaultDatabase { get; set; } = string.Empty;
 
         public List<ConfigConnectionString> Connections { get; set; } = new();
