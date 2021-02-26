@@ -3,6 +3,7 @@
   //"LogLevel": "Verbose",
   "DataConfiguration": {
     "DefaultDatabase": "TestClassGenerator",
+    "UseEnvironmentSetting" : true, 
     "LogLevel": "Verbose",
     "Connections": [
       {

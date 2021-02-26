@@ -42,9 +42,9 @@ namespace Konfidence.TestTools
             ConfigurationManager.RefreshSection("connectionStrings");
         }
 
-        public static void CopySqlSecurityToClientConfig(string toConnectionName)
+        public static void CopySqlSecurityToClientConfig(string connectionName)
         {
-            if (TryGetEnvironmentVariable("ClientConfigLocation", out var fileName) && File.Exists(fileName))
+            if ("ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) && File.Exists(fileName))
             {
                 var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
@@ -55,69 +55,15 @@ namespace Konfidence.TestTools
                     return;
                 }
 
-                var connection = connections.First();
+                var connection = connections.FirstOrDefault(c => c.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase));
 
-                SetDatabaseSecurity(connection.UserName, connection.Password, toConnectionName);
+                if (!connection.IsAssigned())
+                {
+                    connection = connections.First();
+                }
+
+                SetDatabaseSecurity(connection.UserName, connection.Password, connectionName);
             }
-        }
-
-        //public static void CopySqlSecurityToClientConfig(string fromConnectionName, string toConnectionName)
-        //{
-        //    if (TryGetEnvironmentVariable("ClientConfigLocation", out var fileName) && File.Exists(fileName))
-        //    {
-        //        var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
-
-        //        var connections = clientSettings
-        //            .DataConfiguration
-        //            .Connections
-        //            .Where(x => x.ConnectionName.Equals(fromConnectionName, StringComparison.OrdinalIgnoreCase))
-        //            .ToList();
-
-        //        if (!connections.Any())
-        //        {
-        //            return;
-        //        }
-
-        //        var connection = connections.First();
-
-        //        SetDatabaseSecurity(connection.UserName, connection.Password, toConnectionName);
-        //    }
-        //}
-
-        private static bool TryGetEnvironmentVariable(string variable, out string value)
-        {
-            string key;
-
-            var ev = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.User);
-
-            if ((key = ev.Keys.Cast<string>().ToList().FirstOrDefault(x => x.Equals(variable, StringComparison.OrdinalIgnoreCase))) != null)
-            {
-                value = (string) ev[key];
-
-                return true;
-            }
-
-            ev = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Machine);
-
-            if ((key = ev.Keys.Cast<string>().ToList().FirstOrDefault(x => x.Equals(variable, StringComparison.OrdinalIgnoreCase))) != null)
-            {
-                value = (string)ev[key];
-
-                return true;
-            }
-
-            ev = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Process);
-
-            if ((key = ev.Keys.Cast<string>().ToList().FirstOrDefault(x => x.Equals(variable, StringComparison.OrdinalIgnoreCase))) != null)
-            {
-                value = (string)ev[key];
-
-                return true;
-            }
-
-            value = string.Empty;
-
-            return false;
         }
 
         public static void SetDatabaseSecurity(string userName, string password, string connectionName)

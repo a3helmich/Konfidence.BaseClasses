@@ -17,13 +17,11 @@ namespace Konfidence.Base
             return assignedObject != null;
         }
 
-        [UsedImplicitly]
         public static bool IsAssigned(this DateTime assignedTime)
         {
             return assignedTime > DateTime.MinValue && assignedTime < DateTime.MaxValue;
         }
 
-        [UsedImplicitly]
         public static bool IsAssigned(this TimeSpan assignedTime)
         {
             return assignedTime > TimeSpan.MinValue && assignedTime < TimeSpan.MaxValue;

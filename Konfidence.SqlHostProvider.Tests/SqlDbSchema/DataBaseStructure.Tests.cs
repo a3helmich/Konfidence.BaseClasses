@@ -383,5 +383,20 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Should().BeOfType<ClientConfig>();
             target?.ConfigFileFolder.Should().Be(@"some\location\");
         }
+
+        [TestMethod]
+        public void When_DependecyInjection_is_used_should_have_UseEnvironmentSetting_set_to_true()
+        {
+            // arrange
+            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+
+            // act
+            var target = dependencyProvider.GetService<IClientConfig>();
+
+            // assert
+            target.Should().NotBeNull();
+            target.Should().BeOfType<ClientConfig>();
+            target?.UseEnvironmentSetting.Should().BeTrue();
+        }
     }
 }
