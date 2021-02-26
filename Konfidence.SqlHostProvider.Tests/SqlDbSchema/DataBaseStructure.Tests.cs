@@ -24,10 +24,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestClassGenerator");
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("SchemaDatabaseDevelopment");
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("BlockedHackers");
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("DbMenu");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestClassGenerator");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("SchemaDatabaseDevelopment");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("BlockedHackers");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]

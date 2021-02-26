@@ -14,7 +14,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("DbMenu");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
         }
 
         [TestInitialize]

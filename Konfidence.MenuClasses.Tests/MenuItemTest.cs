@@ -19,7 +19,7 @@ namespace Konfidence.MenuClasses.Tests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("DbMenu");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
         }
 
         [TestMethod, TestCategory("MenuItem")]

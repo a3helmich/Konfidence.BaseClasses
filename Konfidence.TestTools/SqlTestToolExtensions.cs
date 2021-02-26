@@ -42,7 +42,7 @@ namespace Konfidence.TestTools
             ConfigurationManager.RefreshSection("connectionStrings");
         }
 
-        public static void CopySqlSecurityToClientConfig(string connectionName)
+        public static void CopySqlSecurityToActiveConfiguration(string connectionName)
         {
             if ("ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) && File.Exists(fileName))
             {
@@ -62,11 +62,11 @@ namespace Konfidence.TestTools
                     connection = connections.First();
                 }
 
-                SetDatabaseSecurity(connection.UserName, connection.Password, connectionName);
+                SetDatabaseSecurityToActiveConfiguration(connection.UserName, connection.Password, connectionName);
             }
         }
 
-        public static void SetDatabaseSecurity(string userName, string password, string connectionName)
+        private static void SetDatabaseSecurityToActiveConfiguration(string userName, string password, string connectionName)
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 

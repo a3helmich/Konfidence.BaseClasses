@@ -83,7 +83,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             connectionStringParts.Remove(connectionPart);
         }
 
-        internal static void CopySqlSecurityToMemory(string connectionName)
+        internal static void CopySqlSecurityToClientConfig(string connectionName, ClientConfig clientConfig)
         {
             if (!"ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) || !File.Exists(fileName))
             {
@@ -92,20 +92,35 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
             var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
-            var connections = clientSettings
-                .DataConfiguration
-                .Connections
-                .Where(x => x.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
-            if (!connections.Any())
+            if (!clientSettings.DataConfiguration.Connections.Any())
             {
                 return;
             }
 
-            var connection = connections.First();
+            var connection = clientSettings
+                .DataConfiguration
+                .Connections
+                .FirstOrDefault(x => x.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase));
 
-            SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            if (!connection.IsAssigned())
+            {
+                connection = clientSettings.DataConfiguration.Connections.First();
+            }
+
+            if (clientConfig.Connections.Any(x => x.ConnectionName == connectionName))
+            {
+                var clientConnection = clientConfig.Connections.First(x => x.ConnectionName == connectionName);
+
+                clientConnection.UserName = connection.UserName;
+                clientConnection.Password = connection.Password;
+
+                return;
+            }
+
+            connection = new ConfigConnectionString
+                { ConnectionName = connectionName, UserName = connection.UserName, Password = connection.Password };
+
+            clientConfig.Connections.Add(connection);
         }
 
         [NotNull]
