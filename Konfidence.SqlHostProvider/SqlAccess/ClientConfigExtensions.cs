@@ -23,9 +23,9 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             ConnectionManagement.SetActiveConnection(clientConfig.DefaultDatabase);
 
-            if (clientConfig.UseEnvironmentSetting && connection.IsAssigned() && !connection.UserName.IsAssigned())
+            if (clientConfig.UseEnvironmentSetting && (!connection.IsAssigned() || !connection.UserName.IsAssigned()))
             {
-                ConnectionManagement.CopySqlSecurityToMemory(clientConfig.DefaultDatabase);
+                ConnectionManagement.CopySqlSecurityToClientConfig(clientConfig.DefaultDatabase, clientConfig);
             }
         }
 

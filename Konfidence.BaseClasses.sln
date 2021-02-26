@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseWindowForms"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSettingsUpdater", "ClientSettingsUpdater\ClientSettingsUpdater.csproj", "{687CFA15-FB09-46FC-8769-2B5C4494080D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestByHandApp", "TestByHandApp\TestByHandApp.csproj", "{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{8255D86B-6377-406C-832A-1CDDC6BD61FE} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{9055CC5D-FD7D-4748-8968-98EFF6B98803} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{FAF276FC-1E51-43E6-A4F3-D83D667E5160} = {AE05D666-5600-4C5A-A903-038C94787EB4}
+		{2CFB0201-0A93-4384-BD3C-546EF66CB0B9} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B102BFD-CA61-4D89-A274-368CA1DF0437}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
@@ -23,9 +24,9 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         private Database GetDatabase()
         {
-            var connection = _clientConfig.GetConfigConnection();
-
             Debug.WriteLine($"SqlClientRepository GetDatabase, default database: '{_clientConfig.DefaultDatabase}'");
+
+            var connection = _clientConfig.GetConfigConnection();
 
             if (!connection.IsAssigned())
             {

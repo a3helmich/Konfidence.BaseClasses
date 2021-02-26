@@ -22,8 +22,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestClassGenerator");
-            SqlTestToolExtensions.CopySqlSecurityToClientConfig("TestDatabase");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestClassGenerator");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestDatabase");
         }
 
         [TestMethod, TestCategory("SqlServer")]
