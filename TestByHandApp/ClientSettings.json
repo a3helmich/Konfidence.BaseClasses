@@ -7,9 +7,9 @@
     "UseEnvironmentSetting": true,
     "Connections": [
       {
-        "ConnectionName": "",
-        "Server": "",
-        "Database": "",
+        "ConnectionName": "DbMenu",
+        "Server": "konfidence2",
+        "Database": "DbMenu",
         "UserName": "",
         "Password": ""
       }

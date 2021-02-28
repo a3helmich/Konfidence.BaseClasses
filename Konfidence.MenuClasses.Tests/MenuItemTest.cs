@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using DbMenuClasses;
 using FluentAssertions;
-using Konfidence.MenuClasses.Tests.objects;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Konfidence.BaseData;

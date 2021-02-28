@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Konfidence.MenuClasses.Tests.interfaces;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Konfidence.MenuClasses.Tests.objects
 {
