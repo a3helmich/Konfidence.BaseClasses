@@ -78,27 +78,35 @@ namespace ClientSettingsUpdater
         {
             var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
-            var connections = clientSettings
-                .DataConfiguration
-                .Connections
-                .Where(x => x.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            var connections = clientSettings.DataConfiguration.Connections;
 
-            clientSettings.DataConfiguration.Connections =
-                connections
-                    .Select(setting =>
+            clientSettings.DataConfiguration.Connections = connections
+                .Select(setting =>
+                {
+                    if (setting.UserName.IsAssigned())
                     {
-                        if (setting.UserName.IsAssigned())
-                        {
-                            return setting;
-                        }
+                        return setting;
+                    }
 
+                    if (setting.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
+                    {
                         setting.UserName = _userName;
                         setting.Password = _password;
 
                         return setting;
-                    })
-                    .ToList();
+                    }
+
+                    if (_server.IsAssigned())
+                    {
+                        return setting;
+                    }
+
+                    setting.UserName = _userName;
+                    setting.Password = _password;
+
+                    return setting;
+                })
+                .ToList();
 
             File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
