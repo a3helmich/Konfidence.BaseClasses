@@ -23,6 +23,32 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("SchemaDatabaseDevelopment");
             SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("BlockedHackers");
             SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("hMailServer");
+        }
+
+        [TestMethod, TestCategory("DatabaseStructure")]
+        public void When_BuildStructure_of_hMailServer_Should_generate_structure()
+        {
+            // arrange
+            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            var clientConfig = di.GetService<IClientConfig>();
+
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
+
+            clientConfig.DefaultDatabase = "hMailServer";
+
+            var client = new SqlClient(new SqlClientRepository(clientConfig));
+
+            IDatabaseStructure target = new DatabaseStructure(client);
+
+            // act
+            target.BuildStructure();
+
+            // assert
+            target.Tables.Should().HaveCount(34); // hmailserver contains 34 tables
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
