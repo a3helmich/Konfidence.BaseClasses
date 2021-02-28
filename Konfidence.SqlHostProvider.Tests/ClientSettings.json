@@ -40,6 +40,13 @@
         "Database": "TestDatabase",
         "UserName": "",
         "Password": ""
+      },
+      {
+        "ConnectionName": "hMailServer",
+        "Server": "konfidence3",
+        "Database": "hMailServer",
+        "UserName": "",
+        "Password": ""
       }
     ]
   }

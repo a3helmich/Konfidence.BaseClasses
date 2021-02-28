@@ -83,7 +83,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             connectionStringParts.Remove(connectionPart);
         }
 
-        internal static void CopySqlSecurityToClientConfig(string connectionName, ClientConfig clientConfig)
+        internal static void CopySqlSecurityToClientConfig(IClientConfig clientConfig)
         {
             if (!"ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) || !File.Exists(fileName))
             {
@@ -97,30 +97,16 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return;
             }
 
-            var connection = clientSettings
-                .DataConfiguration
-                .Connections
-                .FirstOrDefault(x => x.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase));
-
-            if (!connection.IsAssigned())
+            foreach (var clientSetting in clientSettings.DataConfiguration.Connections)
             {
-                connection = clientSettings.DataConfiguration.Connections.First();
+                var clientConfigConnections = clientConfig.Connections.Where(x => x.Server == clientSetting.Server);
+
+                foreach (var clientConfigConnection in clientConfigConnections)
+                {
+                    clientConfigConnection.UserName = clientSetting.UserName;
+                    clientConfigConnection.Password = clientSetting.Password;
+                }
             }
-
-            if (clientConfig.Connections.Any(x => x.ConnectionName == connectionName))
-            {
-                var clientConnection = clientConfig.Connections.First(x => x.ConnectionName == connectionName);
-
-                clientConnection.UserName = connection.UserName;
-                clientConnection.Password = connection.Password;
-
-                return;
-            }
-
-            connection = new ConfigConnectionString
-                { ConnectionName = connectionName, UserName = connection.UserName, Password = connection.Password };
-
-            clientConfig.Connections.Add(connection);
         }
 
         [NotNull]

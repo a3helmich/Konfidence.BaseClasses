@@ -8,19 +8,14 @@ using Konfidence.SqlHostProvider.SqlDbSchema;
 using Konfidence.TestTools;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 {
-    /// <summary>
-    ///This is a test class for DatabaseStructureTest and is intended
-    ///to contain all DatabaseStructureTest Unit Tests
-    ///</summary>
     [TestClass]
     public class DatabaseStructureTest
     {
         [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
+        public static void ClassInitialize(TestContext _)
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
