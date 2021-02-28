@@ -6,16 +6,9 @@
     "LogLevel": "Verbose",
     "Connections": [
       {
-        "ConnectionName": "",
-        "Server": "",
-        "Database": "",
-        "UserName": "",
-        "Password": ""
-      },
-      {
-        "ConnectionName": "",
-        "Server": "",
-        "Database": "",
+        "ConnectionName": "DbMenu",
+        "Server": "konfidence2",
+        "Database": "DbMenu",
         "UserName": "",
         "Password": ""
       }

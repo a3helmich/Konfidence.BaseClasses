@@ -15,6 +15,7 @@ namespace ClientSettingsUpdater
         private string _configFolder;
         private string _userName;
         private string _password;
+        private string _server = string.Empty;
 
         public ClientSettingsManager([NotNull] string[] args)
         {
@@ -39,20 +40,24 @@ namespace ClientSettingsUpdater
                 Environment.Exit(3);
             }
 
+            if (!DependencyInjectionFactory.TryProcessArgument(Argument.Server, args, out _server))
+            {
+               // not required
+            }
         }
 
         public void Execute()
         {
             if (!Directory.Exists(_configFolder))
             {
-                Environment.Exit(5);
+                Environment.Exit(6);
             }
 
             var clientSettingsFileNames = Directory.GetFiles(_configFolder, "clientsettings.json", SearchOption.AllDirectories);
 
             if (!clientSettingsFileNames.Any())
             {
-                Environment.Exit(6);
+                Environment.Exit(7);
             }
 
             var fullFolderName = Path.GetFullPath(_configFolder);
@@ -73,23 +78,22 @@ namespace ClientSettingsUpdater
         {
             var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
-            var connections = clientSettings.DataConfiguration.Connections;
-
-            clientSettings.DataConfiguration.Connections =
-                connections
-                    .Select(setting =>
+            clientSettings.DataConfiguration.Connections
+                .ForEach(setting =>
+                {
+                    if (setting.UserName.IsAssigned())
                     {
-                        if (setting.UserName.IsAssigned())
-                        {
-                            return setting;
-                        }
+                        return;
+                    }
 
-                        setting.UserName = _userName;
-                        setting.Password = _password;
+                    if (_server.IsAssigned() && !setting.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return;
+                    }
 
-                        return setting;
-                    })
-                    .ToList();
+                    setting.UserName = _userName;
+                    setting.Password = _password;
+                });
 
             File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));

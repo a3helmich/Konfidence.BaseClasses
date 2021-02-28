@@ -60,10 +60,13 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         [NotNull]
         private static IEnumerable<TableDataItem> MapSchemaTablesToTableDataItems([NotNull] IEnumerable<DataRow> schemaTables, List<IColumnDataItem> allColumnDataItems)
         {
-            var tableDataItems = schemaTables.Select(tableDataRow => BuildTableDataItem(tableDataRow, allColumnDataItems));
+            var tableDataItems = schemaTables
+                .Select(tableDataRow => BuildTableDataItem(tableDataRow, allColumnDataItems))
+                .ToList();
 
-             return tableDataItems.Where(tableDataItem => !tableDataItem.Name.Equals("dtproperties", StringComparison.OrdinalIgnoreCase) 
-                                                          && !tableDataItem.Name.StartsWith("sys", StringComparison.OrdinalIgnoreCase));
+            return tableDataItems.Where(tableDataItem =>
+                !tableDataItem.Name.Equals("dtproperties", StringComparison.OrdinalIgnoreCase) && !tableDataItem.Name.StartsWith("sys", StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
 
         [NotNull]
@@ -75,11 +78,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             var columnDataItems = allColumnDataItems.Where(x => x.TableName == name).ToList();
 
-            var indexedColumnDataItem = columnDataItems.First(columnDataItem => columnDataItem.IsPrimaryKey);
+            var indexedColumnDataItem = columnDataItems.FirstOrDefault(columnDataItem => columnDataItem.IsPrimaryKey);
 
-            var primaryKey = indexedColumnDataItem.Name;
+            var primaryKey = indexedColumnDataItem?.Name ?? string.Empty;
 
-            var primaryKeyDataType = indexedColumnDataItem.DataType;
+            var primaryKeyDataType = indexedColumnDataItem?.DataType ?? string.Empty;
 
             var guidColumn = columnDataItems
                 .Find(columnDataItem => columnDataItem.IsGuidField &&
