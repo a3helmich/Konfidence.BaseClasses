@@ -84,18 +84,21 @@ namespace ClientSettingsUpdater
                     if (setting.UserName.IsAssigned())
                     {
                         Debug.WriteLine($"========= already assigned: {setting.Server}, {setting.UserName}, {setting.Password}");
-                        Console.WriteLine($"========= already assigned: {setting.Server}, {setting.UserName}, {setting.Password}");
 
                         return;
                     }
 
-                    if (_server.IsAssigned() && setting.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
+                    if (_server.IsAssigned())
                     {
-                        setting.UserName = _userName;
-                        setting.Password = _password;
+                        if (setting.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
+                        {
+                            setting.UserName = _userName;
+                            setting.Password = _password;
 
-                        Debug.WriteLine($"========= server: {setting.Server}, {setting.UserName}, {setting.Password}");
-                        Console.WriteLine($"========= server: {setting.Server}, {setting.UserName}, {setting.Password}");
+                            Debug.WriteLine($"========= server: {setting.Server}, {setting.UserName}, {setting.Password}");
+                        }
+
+                        Debug.WriteLine($"========= skipped for server{_server}: {setting.Server}, {setting.UserName}, {setting.Password}");
 
                         return;
                     }
@@ -103,8 +106,7 @@ namespace ClientSettingsUpdater
                     setting.UserName = _userName;
                     setting.Password = _password;
 
-                    Debug.WriteLine($"========= only username: {setting.Server}, {setting.UserName}, {setting.Password}");
-                    Console.WriteLine($"========= only username: {setting.Server}, {setting.UserName}, {setting.Password}");
+                    Debug.WriteLine($"========= no server: {setting.Server}, {setting.UserName}, {setting.Password}");
                 });
 
             File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,
