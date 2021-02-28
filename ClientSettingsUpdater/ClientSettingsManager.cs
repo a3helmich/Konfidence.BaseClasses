@@ -42,7 +42,7 @@ namespace ClientSettingsUpdater
 
             if (!DependencyInjectionFactory.TryProcessArgument(Argument.Server, args, out _server))
             {
-                Environment.Exit(5);
+               // not required
             }
         }
 
