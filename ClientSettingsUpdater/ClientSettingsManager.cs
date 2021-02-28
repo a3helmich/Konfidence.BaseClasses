@@ -83,30 +83,16 @@ namespace ClientSettingsUpdater
                 {
                     if (setting.UserName.IsAssigned())
                     {
-                        Console.WriteLine($"========= already assigned: {setting.Server}, {setting.UserName}, {setting.Password}");
-
                         return;
                     }
 
-                    if (_server.IsAssigned())
+                    if (_server.IsAssigned() && !setting.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
                     {
-                        if (setting.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
-                        {
-                            setting.UserName = _userName;
-                            setting.Password = _password;
-
-                            Console.WriteLine($"========= server: {setting.Server}, {setting.UserName}, {setting.Password}");
-                        }
-
-                        Console.WriteLine($"========= skipped for server{_server}: {setting.Server}, {setting.UserName}, {setting.Password}");
-
                         return;
                     }
 
                     setting.UserName = _userName;
                     setting.Password = _password;
-
-                    Console.WriteLine($"========= no server: {setting.Server}, {setting.UserName}, {setting.Password}");
                 });
 
             File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,
