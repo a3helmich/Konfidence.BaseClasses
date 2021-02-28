@@ -73,7 +73,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
+            target.Tables.Should().HaveCount(7); // TestClassGenerator has 7 tables
         }
 
         [TestMethod, TestCategory("DatabaseStructure")]
@@ -98,7 +98,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.Tables.Should().HaveCount(6); // TestClassGenerator heeft nu 6 tabellen
+            target.Tables.Should().HaveCount(7); // TestClassGenerator heeft nu 6 tabellen
 
             target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
         }
