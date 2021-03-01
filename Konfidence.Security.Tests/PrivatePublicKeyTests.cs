@@ -25,7 +25,7 @@ namespace Konfidence.Security.Tests
 
             var publicKey2 = ppk2.PublicKey;
 
-            Assert.AreEqual(publicKey1, publicKey2, "Encryption Store niet opgeslagen");
+            publicKey2.Should().Be(publicKey1, "Encryption Store niet opgeslagen");
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace Konfidence.Security.Tests
 
             arrayList.Should().NotBeNull();
             resultString.Should().NotBeNullOrWhiteSpace();
-            Assert.AreEqual(resultString, testString, false, "encoding/decoding failed");
+            testString.Should().Be(resultString, "encoding/decoding failed");
         }
     }
 }

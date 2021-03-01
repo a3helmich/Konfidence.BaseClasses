@@ -12,10 +12,10 @@ namespace ClientSettingsUpdater
 {
     internal class ClientSettingsManager
     {
-        private string _configFolder;
-        private string _userName;
-        private string _password;
-        private string _server = string.Empty;
+        private readonly string _configFolder;
+        private readonly string _userName;
+        private readonly string _password;
+        private readonly string _server;
 
         public ClientSettingsManager([NotNull] string[] args)
         {
@@ -25,24 +25,24 @@ namespace ClientSettingsUpdater
             }
 
             // location, username, password
-            if (!DependencyInjectionFactory.TryProcessArgument(Argument.ConfigFileFolder, args, out _configFolder))
+            if (!args.TryParseArgument(Argument.ConfigFileFolder, out _configFolder))
             {
                 Environment.Exit(1);
             }
 
-            if (!DependencyInjectionFactory.TryProcessArgument(Argument.UserName, args, out _userName))
+            if (!args.TryParseArgument(Argument.UserName, out _userName))
             {
                 Environment.Exit(2);
             }
 
-            if (!DependencyInjectionFactory.TryProcessArgument(Argument.Password, args, out _password))
+            if (!args.TryParseArgument(Argument.Password, out _password))
             {
                 Environment.Exit(3);
             }
 
-            if (!DependencyInjectionFactory.TryProcessArgument(Argument.Server, args, out _server))
+            if (!args.TryParseArgument(Argument.Server, out _server))
             {
-               // not required
+               // not a required field
             }
         }
 

@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace Konfidence.Base
 {
     [UsedImplicitly]
-    public static class BaseExtender
+    public static class BaseExtensions
     {
         [ContractAnnotation("assignedObject:null => false")]
         public static bool IsAssigned(this object assignedObject)

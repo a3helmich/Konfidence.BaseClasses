@@ -43,12 +43,12 @@ namespace Konfidence.SqlHostProvider
 
             if (args.Any())
             {
-                if (TryProcessArgument(Argument.ConfigFileFolder, args, out var commandLineArgument))
+                if (args.TryParseArgument(Argument.ConfigFileFolder, out var commandLineArgument))
                 {
                     commandLineArguments.Add($"DataConfiguration:{Argument.ConfigFileFolder}={commandLineArgument}");
                 }
 
-                if (TryProcessArgument(Argument.DefaultDatabase, args, out commandLineArgument))
+                if (args.TryParseArgument(Argument.DefaultDatabase, out commandLineArgument))
                 {
                     commandLineArguments.Add($"DataConfiguration:{Argument.DefaultDatabase}={commandLineArgument}");
                 }
@@ -70,11 +70,11 @@ namespace Konfidence.SqlHostProvider
             return services.BuildServiceProvider();
         }
 
-        public static bool TryProcessArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
+        public static bool TryParseArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
         {
             commandLineArgument = string.Empty;
 
-            var arg = @"--" + argument;
+            var arg = argument.ToString().Length == 1 ? @"-" + argument : @"--" + argument;
 
             var executeArg = args
                 .Where(x => x.StartsWith(arg, StringComparison.OrdinalIgnoreCase))
@@ -92,6 +92,5 @@ namespace Konfidence.SqlHostProvider
 
             return true;
         }
-
     }
 }

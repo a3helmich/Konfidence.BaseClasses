@@ -62,11 +62,11 @@ namespace Konfidence.TestTools
                     connection = connections.First();
                 }
 
-                SetDatabaseSecurityToActiveConfiguration(connection.UserName, connection.Password, connectionName);
+                SaveDatabaseSecurityToActiveConfiguration(connection.UserName, connection.Password, connectionName);
             }
         }
 
-        private static void SetDatabaseSecurityToActiveConfiguration(string userName, string password, string connectionName)
+        private static void SaveDatabaseSecurityToActiveConfiguration(string userName, string password, string connectionName)
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 

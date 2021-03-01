@@ -14,7 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 {
-    [TestClass]
+    [TestClass, TestCategory("SqlServer")]
     public class SqlServerCheckTests
     {
         [ClassInitialize]
@@ -26,7 +26,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestDatabase");
         }
 
-        [TestMethod, TestCategory("SqlServer")]
+        [TestMethod]
         public void When_VerifyDatabaseServer_With_invalid_database_Should_return_DoesNotExist()
         {
             // Arrange
@@ -60,7 +60,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             action.Should().Throw<SqlClientException>().WithMessage("Database TestDatabase does not exist");
         }
 
-        [TestMethod, TestCategory("SqlServer")]
+        [TestMethod]
         public void When_VerifyDatabaseServer_With_valid_database_Should_return_Ok()
         {
             // Arrange
@@ -94,7 +94,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             result.Should().BeTrue();
         }
 
-        [TestMethod, TestCategory("SqlServer")]
+        [TestMethod]
         public void When_TryFindDatabase_With_valid_database_and_no_username_or_password_Should_return_Ok()
         {
             // Arrange
@@ -110,7 +110,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             action.Should().Throw<SqlClientException>().WithMessage("no password or username provided");
         }
 
-        [TestMethod, TestCategory("SqlServer")]
+        [TestMethod]
         public void When_VerifyDatabaseServer_With_inValid_sqlserver_Should_Return_database_server_not_found()
         {
             // Arrange
@@ -125,7 +125,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             action.Should().Throw<ConnectionFailureException>().WithMessage("Failed to connect to server does_not_exists.");
         }
 
-        [TestMethod, TestCategory("SqlServer")]
+        [TestMethod]
         public void When_VerifyDatabaseServer_With_inValid_sqlserver_and_no_username_and_no_password_Should_Return_database_server_not_found()
         {
             // Arrange
