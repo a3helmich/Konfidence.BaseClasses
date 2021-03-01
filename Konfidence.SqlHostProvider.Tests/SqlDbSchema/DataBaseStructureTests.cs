@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 {
-    [TestClass]
+    [TestClass, TestCategory("DatabaseStructure")]
     public class DatabaseStructureTest
     {
         [ClassInitialize]
@@ -26,7 +26,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("hMailServer");
         }
 
-        [TestMethod, TestCategory("DatabaseStructure")]
+        [TestMethod]
         public void When_BuildStructure_of_hMailServer_Should_generate_structure()
         {
             // arrange
@@ -51,7 +51,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.Should().HaveCount(34); // hmailserver contains 34 tables
         }
 
-        [TestMethod, TestCategory("DatabaseStructure")]
+        [TestMethod]
         public void BuildStructureTest()
         {
             // arrange
@@ -76,7 +76,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.Should().HaveCount(7); // TestClassGenerator has 7 tables
         }
 
-        [TestMethod, TestCategory("DatabaseStructure")]
+        [TestMethod]
         public void BuildStructureWithDifferentConnectionNameTest()
         {
             // arrange
@@ -103,7 +103,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
         }
 
-        [TestMethod, TestCategory("DatabaseStructure")]
+        [TestMethod]
         public void BuildStructureWithBlockedHackersConnectionName()
         {
             // arrange
@@ -128,7 +128,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
         }
 
-        [TestMethod, TestCategory("DatabaseStructure")]
+        [TestMethod]
         public void BuildStructureWithDBMenuConnectionName()
         {
             // arrange

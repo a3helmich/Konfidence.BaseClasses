@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 namespace Konfidence.Base
 {
     [UsedImplicitly]
-    public static class StringExtender
+    public static class StringExtensions
     {
         [NotNull]
         [UsedImplicitly]

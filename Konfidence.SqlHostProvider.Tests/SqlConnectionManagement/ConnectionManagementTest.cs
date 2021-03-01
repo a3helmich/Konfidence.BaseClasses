@@ -11,12 +11,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlConnectionManagement
     [TestClass]
     public class ConnectionManagementTest
     {
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext _)
-        {
-        }
-
-        [TestMethod, TestCategory("DatabaseStructure")]
+        [TestMethod]
         public void When_ConfigureSettings_read_with_multiple_connections_Should_set_them_all_in_ClientConfig()
         {
             // arrange

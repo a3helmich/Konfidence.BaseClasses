@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Konfidence.Security.Encryption;
 using Moq;
@@ -22,7 +23,7 @@ namespace Konfidence.Security.Tests
             var maxKeySize = keyEncryption.KeySize;
 
             // assert
-            Assert.AreEqual(1024, maxKeySize);
+            maxKeySize.Should().Be(1024);
         }
 
         [TestMethod]
@@ -39,7 +40,7 @@ namespace Konfidence.Security.Tests
             var maxKeySize = keyEncryption.KeySize;
 
             // assert
-            Assert.AreEqual(384, maxKeySize);
+            maxKeySize.Should().Be(384);
         }
     }
 }

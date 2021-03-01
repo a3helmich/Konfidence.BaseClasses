@@ -10,7 +10,7 @@ namespace Konfidence.MenuClasses.Tests
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
-    [TestClass]
+    [TestClass, TestCategory("MenuItem")]
     public class MenuItemTest
     {
         [ClassInitialize]
@@ -21,7 +21,7 @@ namespace Konfidence.MenuClasses.Tests
             SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItem()
         {
             var dataItem = new Bl.MenuDataItem(2);
@@ -29,7 +29,7 @@ namespace Konfidence.MenuClasses.Tests
             dataItem.Should().NotBeNull();
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetTwoSingleMenuItem()
         {
             var dataItem1 = new Bl.MenuDataItem(1);
@@ -39,7 +39,7 @@ namespace Konfidence.MenuClasses.Tests
             dataItem2.Should().NotBeNull();
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItemList()
         {
             var list = Bl.MenuDataItem.GetListByMenuId(1);
@@ -49,7 +49,7 @@ namespace Konfidence.MenuClasses.Tests
             list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItemByFindId()
         {
             var list = Bl.MenuDataItem.GetListByMenuId(1);
@@ -59,7 +59,7 @@ namespace Konfidence.MenuClasses.Tests
             itemById?.NodeId.Should().Be(2);
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItemByFindIsSelected()
         {
             var list = Bl.MenuDataItem.GetListByMenuId(1);
@@ -69,7 +69,7 @@ namespace Konfidence.MenuClasses.Tests
             itemById?.MenuId.Should().Be(1);
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItemByFindIsEditing()
         {
             var list = Bl.MenuDataItem.GetListByMenuId(1);
@@ -79,7 +79,7 @@ namespace Konfidence.MenuClasses.Tests
             itemById?.MenuId.Should().Be(1);
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItemByFindCurrent()
         {
             var list = Bl.MenuDataItem.GetListByMenuId(1);
@@ -89,7 +89,7 @@ namespace Konfidence.MenuClasses.Tests
             itemById?.MenuId.Should().Be(1);
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItemHasCurrent()
         {
             var list = Bl.MenuDataItem.GetListByMenuId(1);
@@ -101,7 +101,7 @@ namespace Konfidence.MenuClasses.Tests
             itemHasCurrent.Should().BeTrue();
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetSingleMenuItemHasCurrentMenuId2()
         {
             var list = Bl.MenuDataItem.GetListByMenuId(2);
@@ -113,7 +113,7 @@ namespace Konfidence.MenuClasses.Tests
             itemHasCurrent.Should().BeFalse();
         }
 
-        [TestMethod, TestCategory("MenuItem")]
+        [TestMethod]
         public void GetParentMenuItem()
         {
             var test = new Bl.MenuDataItem(1);

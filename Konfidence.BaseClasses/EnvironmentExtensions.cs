@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Konfidence.Base
 {
-    public static class EnvironmentExtender
+    public static class EnvironmentExtensions
     {
         public static bool TryGetEnvironmentVariable(this string environmentVariable, out string value)
         {
