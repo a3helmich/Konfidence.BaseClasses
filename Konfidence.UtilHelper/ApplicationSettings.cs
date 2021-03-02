@@ -2,23 +2,17 @@ using System.IO;
 using System.Xml;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.DesignPatterns.Singleton;
 
 namespace Konfidence.UtilHelper
 {
-    /// <summary>
-    /// Summary description for ApplicationSettings.
-    /// </summary>
-    /// 
-
-    public interface IApplicationSettings : ISingleton
+    public interface IApplicationSettings //: ISingleton
     {
         string GetStringValue(string keyName);
         void SetStringValue(string keyName, string keyValue);
         void Flush();
     }
 
-    public sealed class ApplicationSettingsFactory : SingletonFactory
+    public static class ApplicationSettingsFactory 
     {
         private static string _rootPath = string.Empty;
 
@@ -44,27 +38,20 @@ namespace Konfidence.UtilHelper
         [CanBeNull]
         public static IApplicationSettings ApplicationSettings(string application)
         {
-            var applicationSettings = GetInstance(typeof(ApplicationSettings)) as ApplicationSettings;
-
-            if (applicationSettings.IsAssigned())
+            var applicationSettings = new ApplicationSettings   //GetInstance(typeof(ApplicationSettings)) as ApplicationSettings;
             {
-                applicationSettings.Application = application;
-                applicationSettings.RootPath = _rootPath;
+                Application = application, 
+                RootPath = _rootPath
+            }; 
 
-                return applicationSettings;
-            }
 
-            return null;
-        }
-
-        private ApplicationSettingsFactory()
-        {
+            return applicationSettings;
         }
     }
 
     internal class ApplicationSettings : IApplicationSettings
     {
-        private readonly XmlDocument _xmlDocument = new XmlDocument();
+        private readonly XmlDocument _xmlDocument = new();
         private XmlNodeList _elementList;
         private string _fileName = string.Empty;
 

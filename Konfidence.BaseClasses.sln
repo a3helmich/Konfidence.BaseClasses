@@ -47,15 +47,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseThreadClasse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.UtilHelper", "Konfidence.UtilHelper\Konfidence.UtilHelper.csproj", "{95E6C8C5-C551-4E40-99AE-D08C3379810A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.DesignPatterns", "Konfidence.Designpatterns\Konfidence.DesignPatterns.csproj", "{59B289A1-DD87-4F00-9859-0CC0C2F67BF4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{7253F59F-834C-4A49-B93D-AC2DF2536E36}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseWindowForms", "Konfidence.BaseWindowForms\Konfidence.BaseWindowForms.csproj", "{74C04717-4CDC-4FBE-944E-D83CB58DCD69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSettingsUpdater", "ClientSettingsUpdater\ClientSettingsUpdater.csproj", "{687CFA15-FB09-46FC-8769-2B5C4494080D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientSettingsUpdater", "ClientSettingsUpdater\ClientSettingsUpdater.csproj", "{687CFA15-FB09-46FC-8769-2B5C4494080D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestByHandApp", "TestByHandApp\TestByHandApp.csproj", "{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestByHandApp", "TestByHandApp\TestByHandApp.csproj", "{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,10 +125,6 @@ Global
 		{95E6C8C5-C551-4E40-99AE-D08C3379810A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95E6C8C5-C551-4E40-99AE-D08C3379810A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95E6C8C5-C551-4E40-99AE-D08C3379810A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59B289A1-DD87-4F00-9859-0CC0C2F67BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59B289A1-DD87-4F00-9859-0CC0C2F67BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59B289A1-DD87-4F00-9859-0CC0C2F67BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59B289A1-DD87-4F00-9859-0CC0C2F67BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7253F59F-834C-4A49-B93D-AC2DF2536E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7253F59F-834C-4A49-B93D-AC2DF2536E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7253F59F-834C-4A49-B93D-AC2DF2536E36}.Release|Any CPU.ActiveCfg = Release|Any CPU

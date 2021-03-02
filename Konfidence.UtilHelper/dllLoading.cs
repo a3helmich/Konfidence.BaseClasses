@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Konfidence.UtilHelper
 {
-    class Dll
+    internal class Dll
     {
         /// <summary>
         /// To load the dll - dllFilePath dosen't have to be const - so I can read path from registry
