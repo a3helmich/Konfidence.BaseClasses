@@ -54,7 +54,7 @@ namespace Konfidence.MenuClasses.Tests
         {
             var list = Bl.MenuDataItem.GetListByMenuId(1);
 
-            var itemById = list.FindById("2");
+            var itemById = list.FindById(2);
 
             itemById?.NodeId.Should().Be(2);
         }

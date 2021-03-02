@@ -12,15 +12,15 @@ namespace DbMenuClasses
         public partial class TestIntDataItem : BaseDataItem
         {
             // field definitions
-            internal const string ID = "Id";
-            internal const string TESTINTID = "TestIntId";
-            internal const string TESTTINYINT = "testTinyInt";
-            internal const string TESTBIGINT = "testBigInt";
-            internal const string TESTINT = "testInt";
-            internal const string TESTNTEXT = "testNtext";
-            internal const string SYSINSERTTIME = "SysInsertTime";
-            internal const string SYSUPDATETIME = "SysUpdateTime";
-            internal const string SYSLOCK = "SysLock";
+            private const string ID = "Id";
+            private const string TESTINTID = "TestIntId";
+            private const string TESTTINYINT = "testTinyInt";
+            private const string TESTBIGINT = "testBigInt";
+            private const string TESTINT = "testInt";
+            private const string TESTNTEXT = "testNtext";
+            private const string SYSINSERTTIME = "SysInsertTime";
+            private const string SYSUPDATETIME = "SysUpdateTime";
+            private const string SYSLOCK = "SysLock";
 
             // stored procedures
             private const string TESTINT_GETROW = "gen_TestInt_GetRow";
@@ -30,7 +30,7 @@ namespace DbMenuClasses
             private const string TESTINT_GETLIST = "gen_TestInt_GetList";
 
             // property storage
-            private Guid _TestIntId = Guid.NewGuid();
+            private Guid _TestIntId = Guid.Empty;
             private byte _testTinyInt = 0;
             private long _testBigInt = 0;
             private int _testInt = 0;
@@ -41,53 +41,23 @@ namespace DbMenuClasses
 
             private static IBaseClient _client;
 
-            #region generated properties
+            // generated properties
 
-            public Guid TestIntId
-            {
-                get { return _TestIntId; }
-            }
+            public Guid TestIntId => _TestIntId;
 
-            public byte testTinyInt
-            {
-                get { return _testTinyInt; }
-                set { _testTinyInt = value; }
-            }
+            public byte testTinyInt { get => _testTinyInt; set => _testTinyInt = value; }
 
-            public long testBigInt
-            {
-                get { return _testBigInt; }
-                set { _testBigInt = value; }
-            }
+            public long testBigInt { get => _testBigInt; set => _testBigInt = value; }
 
-            public int testInt
-            {
-                get { return _testInt; }
-                set { _testInt = value; }
-            }
+            public int testInt { get => _testInt; set => _testInt = value; }
 
-            public string testNtext
-            {
-                get { return _testNtext; }
-                set { _testNtext = value; }
-            }
+            public string testNtext { get => _testNtext; set => _testNtext = value; }
 
-            public DateTime SysInsertTime
-            {
-                get { return _SysInsertTime; }
-            }
+            public DateTime SysInsertTime => _SysInsertTime;
 
-            public DateTime SysUpdateTime
-            {
-                get { return _SysUpdateTime; }
-            }
+            public DateTime SysUpdateTime => _SysUpdateTime;
 
-            public string SysLock
-            {
-                get { return _SysLock; }
-                set { _SysLock = value; }
-            }
-            #endregion generated properties
+            public string SysLock { get => _SysLock; set => _SysLock = value; }
 
             static TestIntDataItem()
             {
@@ -106,7 +76,7 @@ namespace DbMenuClasses
 
             public TestIntDataItem(Guid testintId) : this()
             {
-                GetItem(TESTINT_GETROWBYGUID, testintId);
+                GetItem(testintId);
             }
 
             public override void InitializeDataItem()
@@ -121,46 +91,46 @@ namespace DbMenuClasses
                 GetStoredProcedure = TESTINT_GETROW;
                 DeleteStoredProcedure = TESTINT_DELETEROW;
                 SaveStoredProcedure = TESTINT_SAVEROW;
+                GetByGuidStoredProcedure = TESTINT_GETROWBYGUID;
 
                 base.InitializeDataItem();
-
             }
 
             protected override void GetAutoUpdateData()
             {
-                GetAutoUpdateField(TESTINTID, out _TestIntId);
-                GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
-                GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
+                this.GetAutoUpdateField(TESTINTID, ref _TestIntId);
+                this.GetAutoUpdateField(SYSINSERTTIME, ref _SysInsertTime);
+                this.GetAutoUpdateField(SYSUPDATETIME, ref _SysUpdateTime);
             }
 
             public override void GetData(IDataReader dataReader)
             {
-                GetField(TESTINTID, dataReader, out _TestIntId);
-                GetField(TESTTINYINT, dataReader, out _testTinyInt);
-                GetField(TESTBIGINT, dataReader, out _testBigInt);
-                GetField(TESTINT, dataReader, out _testInt);
-                GetField(TESTNTEXT, dataReader, out _testNtext);
-                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
-                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
-                GetField(SYSLOCK, dataReader, out _SysLock);
+                dataReader.GetField(TESTINTID, out _TestIntId);
+                dataReader.GetField(TESTTINYINT, out _testTinyInt);
+                dataReader.GetField(TESTBIGINT, out _testBigInt);
+                dataReader.GetField(TESTINT, out _testInt);
+                dataReader.GetField(TESTNTEXT, out _testNtext);
+                dataReader.GetField(SYSINSERTTIME, out _SysInsertTime);
+                dataReader.GetField(SYSUPDATETIME, out _SysUpdateTime);
+                dataReader.GetField(SYSLOCK, out _SysLock);
             }
 
             protected override void SetData()
             {
                 base.SetData();
 
-                SetField(TESTTINYINT, _testTinyInt);
-                SetField(TESTBIGINT, _testBigInt);
-                SetField(TESTINT, _testInt);
-                SetField(TESTNTEXT, _testNtext);
-                SetField(SYSLOCK, _SysLock);
+                this.SetField(TESTTINYINT, _testTinyInt);
+                this.SetField(TESTBIGINT, _testBigInt);
+                this.SetField(TESTINT, _testInt);
+                this.SetField(TESTNTEXT, _testNtext);
+                this.SetField(SYSLOCK, _SysLock);
             }
 
             public static List<TestIntDataItem> GetList()
             {
                 var testintList = new List<TestIntDataItem>();
 
-                _client.BuildItemList(testintList, TestIntDataItem.TESTINT_GETLIST);
+                _client.BuildItemList(testintList, TESTINT_GETLIST);
 
                 return testintList;
             }

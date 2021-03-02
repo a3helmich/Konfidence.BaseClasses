@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Data;
+using System.Xml;
 using JetBrains.Annotations;
 
 namespace Konfidence.BaseData
 {
-    [UsedImplicitly]
-    internal static class DataReaderExtensions
+    [UsedImplicitly(ImplicitUseTargetFlags.Members)]
+    public static class DataReaderExtensions
     {
-        private static byte _byteZero = 0;
+        private static byte _byteZero;
 
         public static void GetField([NotNull] this IDataReader dataReader, [NotNull] string fieldName, out byte field)
         {
@@ -63,6 +64,13 @@ namespace Konfidence.BaseData
             var fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
             field = dataReader.IsDBNull(fieldOrdinal) ? string.Empty : dataReader.GetString(fieldOrdinal);
+        }
+
+        public static void GetField([NotNull] this IDataReader dataReader, [NotNull] string fieldName, [NotNull] ref XmlDocument field)
+        {
+            dataReader.GetField(fieldName, out string xmlString);
+
+            field.LoadXml(xmlString);
         }
 
         public static void GetField([NotNull] this IDataReader dataReader, [NotNull] string fieldName, out DateTime field)

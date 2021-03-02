@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 
 namespace Konfidence.DataBaseInterface
@@ -10,10 +9,6 @@ namespace Konfidence.DataBaseInterface
 
         Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
 
-        string GuidIdField { get; }
-
-        Guid GuidIdValue { get; }
-
         bool IsSelected { get; set; }
 
         bool IsEditing { get; set; }
@@ -23,6 +18,8 @@ namespace Konfidence.DataBaseInterface
         string DeleteStoredProcedure { get; set; }
 
         string SaveStoredProcedure { get; set; }
+
+        string GetByGuidStoredProcedure { get; set; }
 
         void InitializeDataItem();
 

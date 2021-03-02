@@ -68,12 +68,13 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
             var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.GetId());
 
             // assert
-            copyTestIntDataItem.Id.Should().Be(testIntDataItem.Id);
+            copyTestIntDataItem.GetId().Should().Be(testIntDataItem.GetId());
             copyTestIntDataItem.TestIntId.Should().Be(testIntDataItem.TestIntId);
 
             copyTestIntDataItem.testTinyInt.Should().Be(111);
             copyTestIntDataItem.testInt.Should().Be(1111);
             copyTestIntDataItem.testBigInt.Should().Be(11111);
+
         }
 
         [TestMethod]
@@ -89,7 +90,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
 
             testIntDataItem.Save();
 
-            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id)
+            var copyTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.GetId())
             {
                 testTinyInt = 222, 
                 testInt = 2222, 
@@ -99,15 +100,37 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
             copyTestIntDataItem.Save();
 
             // act
-            var updateTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.Id);
+            var updateTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.GetId());
 
             // assert
             updateTestIntDataItem.TestIntId.Should().Be(testIntDataItem.TestIntId);
-            updateTestIntDataItem.Id.Should().Be(testIntDataItem.Id);
+            updateTestIntDataItem.GetId().Should().Be(testIntDataItem.GetId());
 
             updateTestIntDataItem.testTinyInt.Should().Be(222);
             updateTestIntDataItem.testInt.Should().Be(2222);
             updateTestIntDataItem.testBigInt.Should().Be(22222);
+        }
+
+        [TestMethod]
+        public void When_TestIntDataItem_is_Created_and_updated_when_queried_should_return_guidFields()
+        {
+            // arrange
+            var testIntDataItem = new Bl.TestIntDataItem
+            {
+                testTinyInt = 11,
+                testInt = 1111,
+                testBigInt = 11111
+            };
+
+            testIntDataItem.Save();
+
+            // act
+            var updateTestIntDataItem = new Bl.TestIntDataItem(testIntDataItem.GetId());
+            var updateTestIntGuidDataItem = new Bl.TestIntDataItem(updateTestIntDataItem.TestIntId);
+
+            // assert
+            updateTestIntGuidDataItem.TestIntId.Should().Be(updateTestIntDataItem.TestIntId);
+            updateTestIntGuidDataItem.GetId().Should().Be(updateTestIntDataItem.GetId());
         }
     }
 }
