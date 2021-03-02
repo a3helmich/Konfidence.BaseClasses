@@ -117,13 +117,12 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         // TODO : internal
         public override void GetData([NotNull] IDataReader dataReader)
         {
-            GetField("Name", dataReader, out string name);
-            GetField("tableName", dataReader, out string tableName);
-            GetField("Default_object_id", dataReader, out int defaultObjectId);
-            GetField("Is_Computed", dataReader, out bool isComputed);
-            //GetField("column_id", dataReader, out int ordinalPosition);
-            GetField("datatype", dataReader, out string dataType);
-            GetField("max_length", dataReader, out short characterMaximumLengthInt);
+            dataReader.GetField("Name", out string name);
+            dataReader.GetField("tableName", out string tableName);
+            dataReader.GetField("Default_object_id", out int defaultObjectId);
+            dataReader.GetField("Is_Computed", out bool isComputed);
+            dataReader.GetField("datatype", out string dataType);
+            dataReader.GetField("max_length", out short characterMaximumLengthInt);
 
             Name = name;
             TableName = tableName;

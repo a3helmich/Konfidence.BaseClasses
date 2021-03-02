@@ -10,45 +10,30 @@ namespace DbMenuClasses
 {
     public partial class Bl
     {
-        public partial interface IMenuDataItem : IBaseDataItem
-        {
-
-        }
-
-        public IMenuDataItem GetMenuDataItem()
-        {
-            return new MenuDataItem();
-        }
-
-        public List<MenuDataItem> GetMenuDataList()
-        {
-            return MenuDataItem.GetList();
-        }
-
-        public partial class MenuDataItem : BaseDataItem, IMenuDataItem
+        public partial class MenuDataItem : BaseDataItem
         {
             // field definitions
-            internal const string NODEID = "NodeId";
-            internal const string PARENTNODEID = "ParentNodeId";
-            internal const string URL = "Url";
-            internal const string APPLICATIONID = "ApplicationId";
-            internal const string ISROOT = "IsRoot";
-            internal const string ISVISIBLE = "IsVisible";
-            internal const string MENUID = "MenuId";
-            internal const string ISLOGONVISIBLE = "IsLogonVisible";
-            internal const string ISADMINISTRATOR = "IsAdministrator";
-            internal const string ISNOTLOGONVISIBLE = "IsNotLogonVisible";
-            internal const string ISLOCALVISIBLE = "IsLocalVisible";
-            internal const string SYSINSERTTIME = "SysInsertTime";
-            internal const string SYSUPDATETIME = "SysUpdateTime";
-            internal const string SYSLOCK = "SysLock";
+            private const string NODEID = "NodeId";
+            private const string PARENTNODEID = "ParentNodeId";
+            private const string URL = "Url";
+            private const string APPLICATIONID = "ApplicationId";
+            private const string ISROOT = "IsRoot";
+            private const string ISVISIBLE = "IsVisible";
+            private const string MENUID = "MenuId";
+            private const string ISLOGONVISIBLE = "IsLogonVisible";
+            private const string ISADMINISTRATOR = "IsAdministrator";
+            private const string ISNOTLOGONVISIBLE = "IsNotLogonVisible";
+            private const string ISLOCALVISIBLE = "IsLocalVisible";
+            private const string SYSINSERTTIME = "SysInsertTime";
+            private const string SYSUPDATETIME = "SysUpdateTime";
+            private const string SYSLOCK = "SysLock";
 
             // stored procedures
             private const string MENU_GETROW = "gen_Menu_GetRow";
             private const string MENU_SAVEROW = "gen_Menu_SaveRow";
             private const string MENU_DELETEROW = "gen_Menu_DeleteRow";
             private const string MENU_GETLIST = "gen_Menu_GetList";
-            internal const string MENU_GETLISTBY_MENUID = "gen_Menu_GetListByMenuId";
+            private const string MENU_GETLISTBY_MENUID = "gen_Menu_GetListByMenuId";
 
             // property storage
             private int _ParentNodeId = 0;
@@ -69,89 +54,34 @@ namespace DbMenuClasses
 
             private static IBaseClient _client;
 
-            #region generated properties
-            // id storage
-            public int NodeId
-            {
-                get { return Id; }
-            }
+            // generated properties
+            public int NodeId => GetId();
 
-            public int ParentNodeId
-            {
-                get { return _ParentNodeId; }
-                set { _ParentNodeId = value; }
-            }
+            public int ParentNodeId { get => _ParentNodeId; set => _ParentNodeId = value; }
 
-            public string Url
-            {
-                get { return _Url; }
-                set { _Url = value; }
-            }
+            public string Url { get => _Url; set => _Url = value; }
 
-            public string ApplicationId
-            {
-                get { return _ApplicationId; }
-                set { _ApplicationId = value; }
-            }
+            public string ApplicationId { get => _ApplicationId; set => _ApplicationId = value; }
 
-            public bool IsRoot
-            {
-                get { return _IsRoot; }
-                set { _IsRoot = value; }
-            }
+            public bool IsRoot { get => _IsRoot; set => _IsRoot = value; }
 
-            public bool IsVisible
-            {
-                get { return _IsVisible; }
-                set { _IsVisible = value; }
-            }
+            public bool IsVisible { get => _IsVisible; set => _IsVisible = value; }
 
-            public int MenuId
-            {
-                get { return _MenuId; }
-                set { _MenuId = value; }
-            }
+            public int MenuId { get => _MenuId; set => _MenuId = value; }
 
-            public bool IsLogonVisible
-            {
-                get { return _IsLogonVisible; }
-                set { _IsLogonVisible = value; }
-            }
+            public bool IsLogonVisible { get => _IsLogonVisible; set => _IsLogonVisible = value; }
 
-            public bool IsAdministrator
-            {
-                get { return _IsAdministrator; }
-                set { _IsAdministrator = value; }
-            }
+            public bool IsAdministrator { get => _IsAdministrator; set => _IsAdministrator = value; }
 
-            public bool IsNotLogonVisible
-            {
-                get { return _IsNotLogonVisible; }
-                set { _IsNotLogonVisible = value; }
-            }
+            public bool IsNotLogonVisible { get => _IsNotLogonVisible; set => _IsNotLogonVisible = value; }
 
-            public bool IsLocalVisible
-            {
-                get { return _IsLocalVisible; }
-                set { _IsLocalVisible = value; }
-            }
+            public bool IsLocalVisible { get => _IsLocalVisible; set => _IsLocalVisible = value; }
 
-            public DateTime SysInsertTime
-            {
-                get { return _SysInsertTime; }
-            }
+            public DateTime SysInsertTime => _SysInsertTime;
 
-            public DateTime SysUpdateTime
-            {
-                get { return _SysUpdateTime; }
-            }
+            public DateTime SysUpdateTime => _SysUpdateTime;
 
-            public string SysLock
-            {
-                get { return _SysLock; }
-                set { _SysLock = value; }
-            }
-            #endregion generated properties
+            public string SysLock { get => _SysLock; set => _SysLock = value; }
 
             public MenuTextDataItem MenuText => _MenuText ?? (_MenuText = MenuTextDataItem.GetByNodeId(NodeId));
 
@@ -182,54 +112,53 @@ namespace DbMenuClasses
                 SaveStoredProcedure = MENU_SAVEROW;
 
                 base.InitializeDataItem();
-
             }
 
             protected override void GetAutoUpdateData()
             {
-                GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
-                GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
+                this.GetAutoUpdateField(SYSINSERTTIME, ref _SysInsertTime);
+                this.GetAutoUpdateField(SYSUPDATETIME, ref _SysUpdateTime);
             }
 
             public override void GetData(IDataReader dataReader)
             {
-                GetField(PARENTNODEID, dataReader, out _ParentNodeId);
-                GetField(URL, dataReader, out _Url);
-                GetField(APPLICATIONID, dataReader, out _ApplicationId);
-                GetField(ISROOT, dataReader, out _IsRoot);
-                GetField(ISVISIBLE, dataReader, out _IsVisible);
-                GetField(MENUID, dataReader, out _MenuId);
-                GetField(ISLOGONVISIBLE, dataReader, out _IsLogonVisible);
-                GetField(ISADMINISTRATOR, dataReader, out _IsAdministrator);
-                GetField(ISNOTLOGONVISIBLE, dataReader, out _IsNotLogonVisible);
-                GetField(ISLOCALVISIBLE, dataReader, out _IsLocalVisible);
-                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
-                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
-                GetField(SYSLOCK, dataReader, out _SysLock);
+                dataReader.GetField(PARENTNODEID, out _ParentNodeId);
+                dataReader.GetField(URL, out _Url);
+                dataReader.GetField(APPLICATIONID, out _ApplicationId);
+                dataReader.GetField(ISROOT, out _IsRoot);
+                dataReader.GetField(ISVISIBLE, out _IsVisible);
+                dataReader.GetField(MENUID, out _MenuId);
+                dataReader.GetField(ISLOGONVISIBLE, out _IsLogonVisible);
+                dataReader.GetField(ISADMINISTRATOR, out _IsAdministrator);
+                dataReader.GetField(ISNOTLOGONVISIBLE, out _IsNotLogonVisible);
+                dataReader.GetField(ISLOCALVISIBLE, out _IsLocalVisible);
+                dataReader.GetField(SYSINSERTTIME, out _SysInsertTime);
+                dataReader.GetField(SYSUPDATETIME, out _SysUpdateTime);
+                dataReader.GetField(SYSLOCK, out _SysLock);
             }
 
             protected override void SetData()
             {
                 base.SetData();
 
-                SetField(PARENTNODEID, _ParentNodeId);
-                SetField(URL, _Url);
-                SetField(APPLICATIONID, _ApplicationId);
-                SetField(ISROOT, _IsRoot);
-                SetField(ISVISIBLE, _IsVisible);
-                SetField(MENUID, _MenuId);
-                SetField(ISLOGONVISIBLE, _IsLogonVisible);
-                SetField(ISADMINISTRATOR, _IsAdministrator);
-                SetField(ISNOTLOGONVISIBLE, _IsNotLogonVisible);
-                SetField(ISLOCALVISIBLE, _IsLocalVisible);
-                SetField(SYSLOCK, _SysLock);
+                this.SetField(PARENTNODEID, _ParentNodeId);
+                this.SetField(URL, _Url);
+                this.SetField(APPLICATIONID, _ApplicationId);
+                this.SetField(ISROOT, _IsRoot);
+                this.SetField(ISVISIBLE, _IsVisible);
+                this.SetField(MENUID, _MenuId);
+                this.SetField(ISLOGONVISIBLE, _IsLogonVisible);
+                this.SetField(ISADMINISTRATOR, _IsAdministrator);
+                this.SetField(ISNOTLOGONVISIBLE, _IsNotLogonVisible);
+                this.SetField(ISLOCALVISIBLE, _IsLocalVisible);
+                this.SetField(SYSLOCK, _SysLock);
             }
 
             public static List<MenuDataItem> GetList()
             {
                 var menuList = new List<MenuDataItem>();
 
-                _client.BuildItemList(menuList, MenuDataItem.MENU_GETLIST);
+                _client.BuildItemList(menuList, MENU_GETLIST);
 
                 return menuList;
             }
@@ -240,7 +169,7 @@ namespace DbMenuClasses
 
                 var spParameterList = new List<ISpParameterData>();
 
-                spParameterList.SetParameter(MenuDataItem.MENUID, menuid);
+                spParameterList.SetParameter(MENUID, menuid);
 
                 _client.BuildItemList(menuList, MENU_GETLISTBY_MENUID, spParameterList);
 

@@ -29,9 +29,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         // TODO: internal
         public override void GetData([NotNull] IDataReader dataReader)
         {
-            GetField(SqlConstant.ConstraintNameField, dataReader, out string constraintName);
-            GetField(SqlConstant.ConstraintTypeField, dataReader, out string constraintType);
-            GetField(SqlConstant.ConstraintTableNameField, dataReader, out string tableName);
+            dataReader.GetField(SqlConstant.ConstraintNameField,  out string constraintName);
+            dataReader.GetField(SqlConstant.ConstraintTypeField, out string constraintType);
+            dataReader.GetField(SqlConstant.ConstraintTableNameField, out string tableName);
 
             ConstraintName = constraintName;
             ConstraintType = constraintType;

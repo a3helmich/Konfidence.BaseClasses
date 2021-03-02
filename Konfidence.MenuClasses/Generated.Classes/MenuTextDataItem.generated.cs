@@ -12,14 +12,14 @@ namespace DbMenuClasses
         public partial class MenuTextDataItem : BaseDataItem
         {
             // field definitions
-            internal const string NODEID = "NodeId";
-            internal const string LANGUAGE = "Language";
-            internal const string MENUTEXT = "MenuText";
-            internal const string DESCRIPTION = "Description";
-            internal const string SYSINSERTTIME = "SysInsertTime";
-            internal const string SYSUPDATETIME = "SysUpdateTime";
-            internal const string SYSLOCK = "SysLock";
-            internal const string MENUID = "MenuId";
+            private const string NODEID = "NodeId";
+            private const string LANGUAGE = "Language";
+            private const string MENUTEXT = "MenuText";
+            private const string DESCRIPTION = "Description";
+            private const string SYSINSERTTIME = "SysInsertTime";
+            private const string SYSUPDATETIME = "SysUpdateTime";
+            private const string SYSLOCK = "SysLock";
+            private const string MENUID = "MenuId";
 
             // stored procedures
             private const string MENUTEXT_GETROW = "gen_MenuText_GetRow";
@@ -39,52 +39,22 @@ namespace DbMenuClasses
 
             private static IBaseClient _client;
 
-            #region generated properties
-            // id storage
-            public int NodeId
-            {
-                get { return Id; }
-            }
+            // generated properties
+            public int NodeId => GetId();
 
-            public string Language
-            {
-                get { return _Language; }
-            }
+            public string Language => _Language;
 
-            public string MenuText
-            {
-                get { return _MenuText; }
-                set { _MenuText = value; }
-            }
+            public string MenuText { get => _MenuText; set => _MenuText = value; }
 
-            public string Description
-            {
-                get { return _Description; }
-                set { _Description = value; }
-            }
+            public string Description { get => _Description; set => _Description = value; }
 
-            public DateTime SysInsertTime
-            {
-                get { return _SysInsertTime; }
-            }
+            public DateTime SysInsertTime => _SysInsertTime;
 
-            public DateTime SysUpdateTime
-            {
-                get { return _SysUpdateTime; }
-            }
+            public DateTime SysUpdateTime => _SysUpdateTime;
 
-            public string SysLock
-            {
-                get { return _SysLock; }
-                set { _SysLock = value; }
-            }
+            public string SysLock { get => _SysLock; set => _SysLock = value; }
 
-            public int MenuId
-            {
-                get { return _MenuId; }
-                set { _MenuId = value; }
-            }
-            #endregion generated properties
+            public int MenuId { get => _MenuId; set => _MenuId = value; }
 
             static MenuTextDataItem()
             {
@@ -114,42 +84,41 @@ namespace DbMenuClasses
                 SaveStoredProcedure = MENUTEXT_SAVEROW;
 
                 base.InitializeDataItem();
-
             }
 
             protected override void GetAutoUpdateData()
             {
-                GetAutoUpdateField(LANGUAGE, out _Language);
-                GetAutoUpdateField(SYSINSERTTIME, out _SysInsertTime);
-                GetAutoUpdateField(SYSUPDATETIME, out _SysUpdateTime);
+                this.GetAutoUpdateField(LANGUAGE, ref _Language);
+                this.GetAutoUpdateField(SYSINSERTTIME, ref _SysInsertTime);
+                this.GetAutoUpdateField(SYSUPDATETIME, ref _SysUpdateTime);
             }
 
             public override void GetData(IDataReader dataReader)
             {
-                GetField(LANGUAGE, dataReader, out _Language);
-                GetField(MENUTEXT, dataReader, out _MenuText);
-                GetField(DESCRIPTION, dataReader, out _Description);
-                GetField(SYSINSERTTIME, dataReader, out _SysInsertTime);
-                GetField(SYSUPDATETIME, dataReader, out _SysUpdateTime);
-                GetField(SYSLOCK, dataReader, out _SysLock);
-                GetField(MENUID, dataReader, out _MenuId);
+                dataReader.GetField(LANGUAGE, out _Language);
+                dataReader.GetField(MENUTEXT, out _MenuText);
+                dataReader.GetField(DESCRIPTION, out _Description);
+                dataReader.GetField(SYSINSERTTIME, out _SysInsertTime);
+                dataReader.GetField(SYSUPDATETIME, out _SysUpdateTime);
+                dataReader.GetField(SYSLOCK, out _SysLock);
+                dataReader.GetField(MENUID, out _MenuId);
             }
 
             protected override void SetData()
             {
                 base.SetData();
 
-                SetField(MENUTEXT, _MenuText);
-                SetField(DESCRIPTION, _Description);
-                SetField(SYSLOCK, _SysLock);
-                SetField(MENUID, _MenuId);
+                this.SetField(MENUTEXT, _MenuText);
+                this.SetField(DESCRIPTION, _Description);
+                this.SetField(SYSLOCK, _SysLock);
+                this.SetField(MENUID, _MenuId);
             }
 
             public static List<MenuTextDataItem> GetList()
             {
                 var menutextList = new List<MenuTextDataItem>();
 
-                _client.BuildItemList(menutextList, MenuTextDataItem.MENUTEXT_GETLIST);
+                _client.BuildItemList(menutextList, MENUTEXT_GETLIST);
 
                 return menutextList;
             }

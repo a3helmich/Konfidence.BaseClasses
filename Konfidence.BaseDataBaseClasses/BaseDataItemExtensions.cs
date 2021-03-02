@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -10,31 +9,9 @@ namespace Konfidence.BaseData
     public static class BaseDataItemExtensions
     {
         [CanBeNull]
-        public static T FindById<T>([NotNull] this IList<T> baseDataItems, string textId) where T : class, IBaseDataItem
-        {
-            if (Guid.TryParse(textId, out var guidId))
-            {
-                return baseDataItems.FindById(guidId);
-            }
-
-            if (int.TryParse(textId, out var id))
-            {
-                return baseDataItems.FindById(id);
-            }
-
-            return null;
-        }
-
-        [CanBeNull]
         public static T FindById<T>([NotNull] this IList<T> baseDataItems, int id) where T : class, IBaseDataItem
         {
             return baseDataItems.FirstOrDefault(x => x.GetId() == id);
-        }
-
-        [CanBeNull]
-        public static T FindById<T>([NotNull] this IList<T> baseDataItems, Guid guidId) where T : class, IBaseDataItem
-        {
-            return baseDataItems.FirstOrDefault(x => x.GuidIdValue == guidId);
         }
 
         [CanBeNull]
@@ -85,36 +62,21 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, string idText, string isEditingText) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, int id, string isEditingText) where T : class, IBaseDataItem
         {
             bool.TryParse(isEditingText, out var isEditing);
 
-            if (Guid.TryParse(idText, out var guidId))
-            {
-                baseDataItems.SetSelected(guidId, isEditing);
-
-                return;
-            }
-
-            if (int.TryParse(idText, out var id))
-            {
-                baseDataItems.SetSelected(id, isEditing);
-            }
+            baseDataItems.SetSelected(id, isEditing);
         }
 
         [UsedImplicitly]
-        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, string idText) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, int id) where T : class, IBaseDataItem
         {
-            if (Guid.TryParse(idText, out var guidId))
-            {
-                baseDataItems.SetSelected(guidId, false);
+            var baseDataItem = baseDataItems.FindById(id);
 
-                return;
-            }
-
-            if (int.TryParse(idText, out var id))
+            if (baseDataItem.IsAssigned())
             {
-                baseDataItems.SetSelected(id);
+                baseDataItem.IsSelected = true;
             }
         }
 
@@ -127,41 +89,24 @@ namespace Konfidence.BaseData
             }
         }
 
-        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, int id, bool isEditing = false) where T : class, IBaseDataItem
-        {
-            baseDataItems.SetSelected(id, Guid.Empty, isEditing);
-        }
-
-        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, Guid guidId, bool isEditing) where T : class, IBaseDataItem
-        {
-            baseDataItems.SetSelected(0, guidId, isEditing);
-        }
-
-        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, int id, Guid guidId, bool isEditing) where T : class, IBaseDataItem
+        public static void SetSelected<T>([NotNull] this IList<T> baseDataItems, int id, bool isEditing) where T : class, IBaseDataItem
         {
             if (baseDataItems.Any())
             {
-                foreach (var dataItem in baseDataItems)
+                foreach (var baseDataItem in baseDataItems)
                 {
-                    dataItem.IsSelected = false;
+                    baseDataItem.IsSelected = false;
                 }
 
-                if (id < 1 && !guidId.IsAssigned())
-                {
-                    baseDataItems[0].IsSelected = true;
-                }
-                else
-                {
-                    var dataItem = id > 0 ? baseDataItems.FindById(id) : baseDataItems.FindById(guidId);
+                var selectedDataItem = baseDataItems.FindById(id);
 
-                    if (!dataItem.IsAssigned())
-                    {
-                        return;
-                    }
-
-                    dataItem.IsSelected = true;
-                    dataItem.IsEditing = isEditing;
+                if (!selectedDataItem.IsAssigned())
+                {
+                    return;
                 }
+
+                selectedDataItem.IsSelected = true;
+                selectedDataItem.IsEditing = isEditing;
             }
         }
 
@@ -175,7 +120,7 @@ namespace Konfidence.BaseData
             }
 
             dataItem.IsSelected = false;
-            dataItem.IsEditing = true; // nieuw
+            dataItem.IsEditing = true; 
         }
 
         [UsedImplicitly]
@@ -183,7 +128,7 @@ namespace Konfidence.BaseData
         {
             if (dataItem.IsAssigned())
             {
-                dataItem.IsEditing = true; // nieuw
+                dataItem.IsEditing = true; 
             }
         }
 
@@ -199,7 +144,7 @@ namespace Konfidence.BaseData
 
             baseDataItems.SetSelected(dataItem.GetId());
 
-            dataItem.IsEditing = false; // nieuw
+            dataItem.IsEditing = false; 
         }
 
         [UsedImplicitly]

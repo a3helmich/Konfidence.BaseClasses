@@ -20,12 +20,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (dataItem.AutoIdField.Equals(string.Empty))
             {
-                throw new Exception("AutoIdField not provided");
+                throw new Exception("AutoIdField not generated");
             }
 
             if (dataItem.SaveStoredProcedure.Equals(string.Empty))
             {
-                throw new Exception("StoredProcedure not provided");
+                throw new Exception("SaveStoredProcedure not generated");
             }
 
             _repository.ExecuteSaveStoredProcedure(dataItem);
@@ -35,7 +35,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!dataItem.GetStoredProcedure.IsAssigned())
             {
-                throw new Exception("GetStoredProcedure not provided");
+                throw new Exception("GetStoredProcedure not generated");
             }
 
             _repository.ExecuteGetStoredProcedure(dataItem);
@@ -45,7 +45,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!storedProcedure.IsAssigned())
             {
-                throw new Exception("GetStoredProcedure not provided");
+                throw new Exception("GetStoredProcedure not generetad");
             }
 
             _repository.ExecuteGetByStoredProcedure(dataItem, storedProcedure);
@@ -55,7 +55,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!getListStoredProcedure.IsAssigned())
             {
-                throw new Exception("GetListStoredProcedure not provided");
+                throw new Exception("GetListStoredProcedure not generated");
             }
 
             _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, this);
@@ -65,7 +65,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!getListStoredProcedure.IsAssigned())
             {
-                throw new Exception("GetListStoredProcedure not provided");
+                throw new Exception("GetListStoredProcedure not generated");
             }
 
             _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, spParameters, this);
@@ -75,7 +75,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             if (!dataItem.DeleteStoredProcedure.IsAssigned())
             {
-                throw new Exception("DeleteStoredProcedure not provided");
+                throw new Exception("DeleteStoredProcedure not generated");
             }
 
             _repository.ExecuteDeleteStoredProcedure(dataItem);
