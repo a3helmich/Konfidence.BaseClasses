@@ -9,10 +9,6 @@ namespace Konfidence.DataBaseInterface
 
         Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
 
-        bool IsSelected { get; set; }
-
-        bool IsEditing { get; set; }
-
         string GetStoredProcedure { get; set; }
 
         string DeleteStoredProcedure { get; set; }

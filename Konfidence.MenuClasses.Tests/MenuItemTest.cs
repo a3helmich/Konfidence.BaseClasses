@@ -59,59 +59,59 @@ namespace Konfidence.MenuClasses.Tests
             itemById?.NodeId.Should().Be(2);
         }
 
-        [TestMethod]
-        public void GetSingleMenuItemByFindIsSelected()
-        {
-            var list = Bl.MenuDataItem.GetListByMenuId(1);
+        //[TestMethod]
+        //public void GetSingleMenuItemByFindIsSelected()
+        //{
+        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
 
-            var itemById = list.FindByIsSelected();
+        //    var itemById = list.FindByIsSelected();
 
-            itemById?.MenuId.Should().Be(1);
-        }
+        //    itemById?.MenuId.Should().Be(1);
+        //}
 
-        [TestMethod]
-        public void GetSingleMenuItemByFindIsEditing()
-        {
-            var list = Bl.MenuDataItem.GetListByMenuId(1);
+        //[TestMethod]
+        //public void GetSingleMenuItemByFindIsEditing()
+        //{
+        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
 
-            var itemById = list.FindByIsEditing();
+        //    var itemById = list.FindByIsEditing();
 
-            itemById?.MenuId.Should().Be(1);
-        }
+        //    itemById?.MenuId.Should().Be(1);
+        //}
 
-        [TestMethod]
-        public void GetSingleMenuItemByFindCurrent()
-        {
-            var list = Bl.MenuDataItem.GetListByMenuId(1);
+        //[TestMethod]
+        //public void GetSingleMenuItemByFindCurrent()
+        //{
+        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
 
-            var itemById = list.FindCurrent();
+        //    var itemById = list.FindCurrent();
 
-            itemById?.MenuId.Should().Be(1);
-        }
+        //    itemById?.MenuId.Should().Be(1);
+        //}
 
-        [TestMethod]
-        public void GetSingleMenuItemHasCurrent()
-        {
-            var list = Bl.MenuDataItem.GetListByMenuId(1);
+        //[TestMethod]
+        //public void GetSingleMenuItemHasCurrent()
+        //{
+        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
 
-            var _ = list.FindCurrent();
+        //    var _ = list.FindCurrent();
 
-            var itemHasCurrent = list.HasCurrent();
+        //    var itemHasCurrent = list.HasCurrent();
 
-            itemHasCurrent.Should().BeTrue();
-        }
+        //    itemHasCurrent.Should().BeTrue();
+        //}
 
-        [TestMethod]
-        public void GetSingleMenuItemHasCurrentMenuId2()
-        {
-            var list = Bl.MenuDataItem.GetListByMenuId(2);
+        //[TestMethod]
+        //public void GetSingleMenuItemHasCurrentMenuId2()
+        //{
+        //    var list = Bl.MenuDataItem.GetListByMenuId(2);
 
-            var _ = list.FindCurrent();
+        //    var _ = list.FindCurrent();
 
-            var itemHasCurrent = list.HasCurrent();
+        //    var itemHasCurrent = list.HasCurrent();
 
-            itemHasCurrent.Should().BeFalse();
-        }
+        //    itemHasCurrent.Should().BeFalse();
+        //}
 
         [TestMethod]
         public void GetParentMenuItem()

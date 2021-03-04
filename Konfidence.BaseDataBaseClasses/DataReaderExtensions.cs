@@ -10,6 +10,11 @@ namespace Konfidence.BaseData
     {
         private static byte _byteZero;
 
+        static DataReaderExtensions()
+        {
+            _byteZero = 0;
+        }
+
         public static void GetField([NotNull] this IDataReader dataReader, [NotNull] string fieldName, out byte field)
         {
             var fieldOrdinal = dataReader.GetOrdinal(fieldName);
