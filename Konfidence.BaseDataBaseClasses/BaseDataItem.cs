@@ -11,11 +11,6 @@ namespace Konfidence.BaseData
 {
     public abstract class BaseDataItem : IBaseDataItem
     {
-        [UsedImplicitly]
-        public const string BaseLanguage = "NL";
-
-        public bool WithLanguage;
-
         private bool _isInitialized;
 
         private IBaseClient _client;
@@ -38,9 +33,6 @@ namespace Konfidence.BaseData
 
         protected BaseDataItem()
         {
-            WithLanguage = false;
-            IsSelected = false;
-            IsEditing = false;
             _isInitialized = false;
 
             SpParameterData = new List<ISpParameterData>();
@@ -60,10 +52,6 @@ namespace Konfidence.BaseData
 
             set => _client = value;
         }
-
-        public bool IsSelected { get; set; }
-
-        public bool IsEditing { get; set; }
 
         public void GetKey(IDataReader dataReader)
         {
