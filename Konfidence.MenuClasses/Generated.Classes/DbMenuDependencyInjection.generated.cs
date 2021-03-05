@@ -3,11 +3,11 @@ using Konfidence.SqlHostProvider;
 
 namespace DbMenuClasses
 {
-    public partial class Bl
+    public partial class Dl
     {
         internal static IServiceProvider _serviceProvider;
 
-        static Bl()
+        static Dl()
         {
             _serviceProvider = DependencyInjectionFactory.ConfigureDependencyInjection("--DefaultDatabase=DbMenu");
         }

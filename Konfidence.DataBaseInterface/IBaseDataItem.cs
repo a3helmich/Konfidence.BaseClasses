@@ -5,6 +5,8 @@ namespace Konfidence.DataBaseInterface
 {
     public interface IBaseDataItem
     {
+        string GuidIdField { get; set; }
+
         string AutoIdField { get; set; }
 
         Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
@@ -25,8 +27,6 @@ namespace Konfidence.DataBaseInterface
 
         void Delete();
 
-        void LoadDataItem();
-
         int GetId();
 
         void SetId(int id);
@@ -36,5 +36,7 @@ namespace Konfidence.DataBaseInterface
         void GetData(IDataReader dataReader);
 
         List<ISpParameterData> GetParameterObjects();
+
+        bool IsNew { get; }
     }
 }

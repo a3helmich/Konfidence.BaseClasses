@@ -8,7 +8,7 @@ using Konfidence.DataBaseInterface;
 
 namespace DbMenuClasses
 {
-    public partial class Bl
+    public partial class Dl
     {
         public partial class MenuDataItem : BaseDataItem
         {

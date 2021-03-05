@@ -3,7 +3,6 @@ using DbMenuClasses;
 using FluentAssertions;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Konfidence.BaseData;
 
 namespace Konfidence.MenuClasses.Tests
 {
@@ -48,70 +47,6 @@ namespace Konfidence.MenuClasses.Tests
 
             list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
         }
-
-        [TestMethod]
-        public void GetSingleMenuItemByFindId()
-        {
-            var list = Bl.MenuDataItem.GetListByMenuId(1);
-
-            var itemById = list.FindById(2);
-
-            itemById?.NodeId.Should().Be(2);
-        }
-
-        //[TestMethod]
-        //public void GetSingleMenuItemByFindIsSelected()
-        //{
-        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
-
-        //    var itemById = list.FindByIsSelected();
-
-        //    itemById?.MenuId.Should().Be(1);
-        //}
-
-        //[TestMethod]
-        //public void GetSingleMenuItemByFindIsEditing()
-        //{
-        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
-
-        //    var itemById = list.FindByIsEditing();
-
-        //    itemById?.MenuId.Should().Be(1);
-        //}
-
-        //[TestMethod]
-        //public void GetSingleMenuItemByFindCurrent()
-        //{
-        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
-
-        //    var itemById = list.FindCurrent();
-
-        //    itemById?.MenuId.Should().Be(1);
-        //}
-
-        //[TestMethod]
-        //public void GetSingleMenuItemHasCurrent()
-        //{
-        //    var list = Bl.MenuDataItem.GetListByMenuId(1);
-
-        //    var _ = list.FindCurrent();
-
-        //    var itemHasCurrent = list.HasCurrent();
-
-        //    itemHasCurrent.Should().BeTrue();
-        //}
-
-        //[TestMethod]
-        //public void GetSingleMenuItemHasCurrentMenuId2()
-        //{
-        //    var list = Bl.MenuDataItem.GetListByMenuId(2);
-
-        //    var _ = list.FindCurrent();
-
-        //    var itemHasCurrent = list.HasCurrent();
-
-        //    itemHasCurrent.Should().BeFalse();
-        //}
 
         [TestMethod]
         public void GetParentMenuItem()

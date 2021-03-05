@@ -7,7 +7,7 @@ using Konfidence.DataBaseInterface;
 
 namespace DbMenuClasses
 {
-    public partial class Bl
+    public partial class Dl
     {
         public partial class MenuTextDataItem : BaseDataItem
         {
@@ -127,7 +127,7 @@ namespace DbMenuClasses
             {
                 MenuTextDataItem menutextDataItem = new MenuTextDataItem();
 
-                menutextDataItem.SetParameter(NODEID, nodeid);
+                menutextDataItem.SetField(NODEID, nodeid);
 
                 menutextDataItem.GetItemBy(MENUTEXT_GETROWBY_NODEID);
 
