@@ -6,7 +6,7 @@ namespace TestByHandApp
     {
         static void Main(string[] args)
         {
-            var menuDataItems = Bl.MenuDataItem.GetList();
+            var menuDataItems = Dl.MenuDataItem.GetList();
         }
     }
 }

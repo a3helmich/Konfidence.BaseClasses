@@ -49,7 +49,6 @@ namespace Konfidence.BaseData.Sp
             _typeMap[typeof(DateTime?)] = DbType.DateTime;
             _typeMap[typeof(DateTimeOffset?)] = DbType.DateTimeOffset;
             _typeMap[typeof(TimeSpan?)] = DbType.Time;
-            //typeMap[typeof(System.Data.Linq.Binary)] = DbType.Binary;
         }
 
         public static void SetParameter<T>([NotNull] this List<ISpParameterData> spParameterData, string parameterName, T value) 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Sp;
@@ -11,23 +12,23 @@ namespace Konfidence.BaseData
 {
     public abstract class BaseDataItem : IBaseDataItem
     {
-        private bool _isInitialized;
-
-        private IBaseClient _client;
+        private readonly bool _isInitialized;
 
         internal List<ISpParameterData> SpParameterData { get; }
 
-        protected internal string GuidIdField { get; set; } = string.Empty;
+        public string GuidIdField { get; set; } = string.Empty;
+
+        public string AutoIdField { get; set; } = string.Empty;
 
         private int _id;
 
         public Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
 
-        public string AutoIdField { get; set; } = string.Empty;
-
         public void SetId(int id) => _id = id;
 
         public int GetId() => _id;
+
+        protected IBaseClient Client { get; set; }
 
         public List<ISpParameterData> GetParameterObjects() => SpParameterData;
 
@@ -39,28 +40,20 @@ namespace Konfidence.BaseData
             AutoUpdateFieldDictionary = new Dictionary<string, ISpParameterData>();
 
             InternalInitializeDataItem();
-        }
 
-        protected IBaseClient Client
-        {
-            get
-            {
-                Debug.WriteLine($"get _client{GetType().FullName}");
-
-                return _client;
-            }
-
-            set => _client = value;
+            _isInitialized = true;
         }
 
         public void GetKey(IDataReader dataReader)
         {
-            if (AutoIdField.Length > 0)
+            if (AutoIdField.Length <= 0)
             {
-                dataReader.GetField(AutoIdField, out int id);
-
-                _id = id;
+                return;
             }
+
+            dataReader.GetField(AutoIdField, out int id);
+
+            _id = id;
         }
 
         [CanBeNull]
@@ -94,12 +87,8 @@ namespace Konfidence.BaseData
         [UsedImplicitly]
         public bool IsNew => _id == 0;
 
-        public void LoadDataItem()
+        public virtual void InitializeDataItem()
         {
-            if (GetStoredProcedure.IsAssigned())
-            {
-                GetItem(_id);
-            }
         }
 
         private void InternalInitializeDataItem()
@@ -107,28 +96,26 @@ namespace Konfidence.BaseData
             if (!_isInitialized)
             {
                 InitializeDataItem();
-
-                _isInitialized = true;
             }
-        }
-
-        public virtual void InitializeDataItem()
-        {
         }
 
         protected void GetItem()
         {
+            Debug.WriteLine($"Client.GetItem(this) : this={GetType().FullName}");
+
             Client.GetItem(this);
         }
 
         protected void GetItemBy([NotNull] string storedProcedure)
         {
+            Debug.WriteLine($"Client.GetItemBy(this, {storedProcedure}) : this={GetType().FullName}");
+
             Client.GetItemBy(this, storedProcedure);
         }
 
-        protected void GetItem(int autoKeyId)
+        protected void GetItem(int id)
         {
-            this.SetField(AutoIdField, autoKeyId);
+            this.SetField(AutoIdField, id);
 
             GetItem();
         }
@@ -148,6 +135,8 @@ namespace Konfidence.BaseData
                 return;
             }
 
+            Debug.WriteLine($"Client.Save(this) : this={GetType().FullName}");
+
             Client.Save(this);
 
             GetAutoUpdateData();
@@ -155,6 +144,8 @@ namespace Konfidence.BaseData
 
         public void Delete()
         {
+            Debug.WriteLine($"Client.Delete(this) : this={GetType().FullName}");
+
             Client.Delete(this);
 
             _id = 0;
@@ -169,14 +160,9 @@ namespace Konfidence.BaseData
         }
 
         [NotNull]
-        internal List<ISpParameterData> SetParameterData()
+        private List<ISpParameterData> SetParameterData()
         {
-            var parameterObjectList = new List<ISpParameterData>();
-
-            foreach (var parameterObject in SpParameterData)
-            {
-                parameterObjectList.Add(parameterObject);
-            }
+            var parameterObjectList = SpParameterData.ToList();
 
             SpParameterData.Clear();
 
