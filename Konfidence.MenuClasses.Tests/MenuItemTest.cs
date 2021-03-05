@@ -23,7 +23,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod]
         public void GetSingleMenuItem()
         {
-            var dataItem = new Bl.MenuDataItem(2);
+            var dataItem = new Dl.MenuDataItem(2);
 
             dataItem.Should().NotBeNull();
         }
@@ -31,8 +31,8 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod]
         public void GetTwoSingleMenuItem()
         {
-            var dataItem1 = new Bl.MenuDataItem(1);
-            var dataItem2 = new Bl.MenuDataItem(2);
+            var dataItem1 = new Dl.MenuDataItem(1);
+            var dataItem2 = new Dl.MenuDataItem(2);
 
             dataItem1.Should().NotBeNull();
             dataItem2.Should().NotBeNull();
@@ -41,7 +41,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod]
         public void GetSingleMenuItemList()
         {
-            var list = Bl.MenuDataItem.GetListByMenuId(1);
+            var list = Dl.MenuDataItem.GetListByMenuId(1);
 
             list.Should().HaveCount(9, "list should contain 9 menu items");
 
@@ -51,7 +51,7 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod]
         public void GetParentMenuItem()
         {
-            var test = new Bl.MenuDataItem(1);
+            var test = new Dl.MenuDataItem(1);
 
             test.Should().NotBeNull();
         }
@@ -60,7 +60,7 @@ namespace Konfidence.MenuClasses.Tests
         public void When_Table_Test1_is_retrieved_and_table_does_contain_data_Should_return_GuidIdField()
         {
             // arrange
-            var testIntDataItemList = Bl.TestIntDataItem.GetList();
+            var testIntDataItemList = Dl.TestIntDataItem.GetList();
 
             // act
             var testIntDataItem = testIntDataItemList.First();
