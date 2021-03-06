@@ -6,6 +6,15 @@ namespace Konfidence.Base
 {
     public static class CommandLineArgumentExtensions
     {
+        /// <summary>
+        /// Intended to be used together with the configuration argument line parser.
+        /// This is not a full fledged argument parser.
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="argument"></param>
+        /// <param name="commandLineArgument"></param>
+        /// <param name="stringComparison"></param>
+        /// <returns></returns>
         [UsedImplicitly]
         public static bool TryParseArgument([NotNull] this string[] args, [NotNull] Enum argument, [NotNull] out string commandLineArgument, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
         {

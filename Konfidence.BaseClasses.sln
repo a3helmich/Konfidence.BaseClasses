@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{20287813-52A4-4043-ABC8-3013F4701774}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseUserControlHelpers", "Konfidence.BaseUserControlHelpers\Konfidence.BaseUserControlHelpers.csproj", "{3B1C6A3A-F7E2-4B44-ADD4-254C18C1DC75}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.MenuClasses", "Konfidence.MenuClasses\Konfidence.MenuClasses.csproj", "{84C8CCF5-457D-4685-89AF-30DAD037BC2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{AE05D666-5600-4C5A-A903-038C94787EB4}"
@@ -32,8 +30,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Integration.Tests", "Konfidence.BaseDatabaseClasses.Integration.Tests\Konfidence.BaseDatabaseClasses.Integration.Tests.csproj", "{5A793535-B73E-49DD-B329-131F9DA971DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Tests", "Konfidence.BaseDatabaseClasses.Tests\Konfidence.BaseDatabaseClasses.Tests.csproj", "{76862657-1597-4BA2-BD11-4344AEBD1D32}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseUserControlHelpers.Tests", "Konfidence.BaseUserControlHelpers.Tests\Konfidence.BaseUserControlHelpers.Tests.csproj", "{E8033AAE-D35B-44B7-869B-E27526718BA6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.MenuClasses.Tests", "Konfidence.MenuClasses.Tests\Konfidence.MenuClasses.Tests.csproj", "{8255D86B-6377-406C-832A-1CDDC6BD61FE}"
 EndProject
@@ -48,8 +44,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.UtilHelper", "Konfidence.UtilHelper\Konfidence.UtilHelper.csproj", "{95E6C8C5-C551-4E40-99AE-D08C3379810A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Mail", "Konfidence.Mail\Konfidence.Mail.csproj", "{7253F59F-834C-4A49-B93D-AC2DF2536E36}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseWindowForms", "Konfidence.BaseWindowForms\Konfidence.BaseWindowForms.csproj", "{74C04717-4CDC-4FBE-944E-D83CB58DCD69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientSettingsUpdater", "ClientSettingsUpdater\ClientSettingsUpdater.csproj", "{687CFA15-FB09-46FC-8769-2B5C4494080D}"
 EndProject
@@ -81,10 +75,6 @@ Global
 		{20287813-52A4-4043-ABC8-3013F4701774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20287813-52A4-4043-ABC8-3013F4701774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20287813-52A4-4043-ABC8-3013F4701774}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B1C6A3A-F7E2-4B44-ADD4-254C18C1DC75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B1C6A3A-F7E2-4B44-ADD4-254C18C1DC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B1C6A3A-F7E2-4B44-ADD4-254C18C1DC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B1C6A3A-F7E2-4B44-ADD4-254C18C1DC75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84C8CCF5-457D-4685-89AF-30DAD037BC2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84C8CCF5-457D-4685-89AF-30DAD037BC2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84C8CCF5-457D-4685-89AF-30DAD037BC2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -97,10 +87,6 @@ Global
 		{76862657-1597-4BA2-BD11-4344AEBD1D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76862657-1597-4BA2-BD11-4344AEBD1D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76862657-1597-4BA2-BD11-4344AEBD1D32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8033AAE-D35B-44B7-869B-E27526718BA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8033AAE-D35B-44B7-869B-E27526718BA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8033AAE-D35B-44B7-869B-E27526718BA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8033AAE-D35B-44B7-869B-E27526718BA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8255D86B-6377-406C-832A-1CDDC6BD61FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8255D86B-6377-406C-832A-1CDDC6BD61FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8255D86B-6377-406C-832A-1CDDC6BD61FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -129,10 +115,6 @@ Global
 		{7253F59F-834C-4A49-B93D-AC2DF2536E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7253F59F-834C-4A49-B93D-AC2DF2536E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7253F59F-834C-4A49-B93D-AC2DF2536E36}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74C04717-4CDC-4FBE-944E-D83CB58DCD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74C04717-4CDC-4FBE-944E-D83CB58DCD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74C04717-4CDC-4FBE-944E-D83CB58DCD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74C04717-4CDC-4FBE-944E-D83CB58DCD69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{687CFA15-FB09-46FC-8769-2B5C4494080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -148,7 +130,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5A793535-B73E-49DD-B329-131F9DA971DB} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{76862657-1597-4BA2-BD11-4344AEBD1D32} = {AE05D666-5600-4C5A-A903-038C94787EB4}
-		{E8033AAE-D35B-44B7-869B-E27526718BA6} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{8255D86B-6377-406C-832A-1CDDC6BD61FE} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{9055CC5D-FD7D-4748-8968-98EFF6B98803} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{FAF276FC-1E51-43E6-A4F3-D83D667E5160} = {AE05D666-5600-4C5A-A903-038C94787EB4}
