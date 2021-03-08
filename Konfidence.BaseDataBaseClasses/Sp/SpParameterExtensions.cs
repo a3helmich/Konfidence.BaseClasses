@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 
 namespace Konfidence.BaseData.Sp
 {

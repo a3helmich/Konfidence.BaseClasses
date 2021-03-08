@@ -5,8 +5,9 @@ using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
+using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,7 @@ namespace Konfidence.SqlHostProvider
         {
             return new ConfigurationBuilder()
                 .SetBasePath(GetApplicationPath())
-                .AddJsonFile(@"ClientSettings.json", true)
+                .AddJsonFile(SqlConnectionConstants.DefaultConfigFileName, true)
                 .AddCommandLine(args)
                 .Build();
         }
@@ -68,29 +69,6 @@ namespace Konfidence.SqlHostProvider
                 .AddSingleton<IClientConfig>(clientConfig);
 
             return services.BuildServiceProvider();
-        }
-
-        public static bool TryParseArgument(Argument argument, [NotNull] IEnumerable<string> args, [NotNull] out string commandLineArgument)
-        {
-            commandLineArgument = string.Empty;
-
-            var arg = argument.ToString().Length == 1 ? @"-" + argument : @"--" + argument;
-
-            var executeArg = args
-                .Where(x => x.StartsWith(arg, StringComparison.OrdinalIgnoreCase))
-                .Select(x => x.TrimStartIgnoreCase(arg, true))
-                .Where(x => x.StartsWith(" ") || x.TrimStart().StartsWith("=") || x.TrimStart().StartsWith(":"))
-                .Select(x => x.TrimStart().TrimStart("=").TrimStart(":"))
-                .ToList();
-
-            if (!executeArg.Any())
-            {
-                return false;
-            }
-
-            commandLineArgument = executeArg.First();
-
-            return true;
         }
     }
 }

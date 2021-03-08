@@ -4,7 +4,7 @@ using System.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Konfidence.BaseData;
 using Konfidence.BaseData.Sp;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 
 namespace DbMenuClasses
 {

@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema

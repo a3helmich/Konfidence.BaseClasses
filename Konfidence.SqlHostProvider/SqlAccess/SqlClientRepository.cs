@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 

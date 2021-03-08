@@ -7,7 +7,7 @@ namespace Konfidence.Base
     public static class CommandLineArgumentExtensions
     {
         /// <summary>
-        /// Intended to be used together with the configuration argument line parser.
+        /// Intended to be used together with the configuration argument line parser for dependency injection.
         /// This is not a full fledged argument parser.
         /// </summary>
         /// <param name="args"></param>

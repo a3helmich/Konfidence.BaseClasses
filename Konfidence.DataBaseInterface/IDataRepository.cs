@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace Konfidence.DataBaseInterface
+namespace Konfidence.DatabaseInterface
 {
     internal interface IDataRepository
     {

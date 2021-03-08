@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider;
 using Konfidence.SqlHostProvider.SqlAccess;
+using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Newtonsoft.Json;
 
 namespace ClientSettingsUpdater
@@ -16,6 +17,7 @@ namespace ClientSettingsUpdater
         private readonly string _userName;
         private readonly string _password;
         private readonly string _server;
+        private readonly string _configFileName;
 
         public ClientSettingsManager([NotNull] string[] args)
         {
@@ -42,7 +44,12 @@ namespace ClientSettingsUpdater
 
             if (!args.TryParseArgument(Argument.Server, out _server))
             {
-               // not a required field
+                _server = string.Empty; // not required
+            }
+
+            if (!args.TryParseArgument(Argument.ConfigFileName, out _configFileName))
+            {
+                _configFileName = SqlConnectionConstants.DefaultConfigFileName;
             }
         }
 
@@ -53,7 +60,7 @@ namespace ClientSettingsUpdater
                 Environment.Exit(6);
             }
 
-            var clientSettingsFileNames = Directory.GetFiles(_configFolder, "clientsettings.json", SearchOption.AllDirectories);
+            var clientSettingsFileNames = Directory.GetFiles(_configFolder, _configFileName, SearchOption.AllDirectories);
 
             if (!clientSettingsFileNames.Any())
             {

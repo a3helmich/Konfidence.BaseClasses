@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using JetBrains.Annotations;
 
-namespace Konfidence.DataBaseInterface
+namespace Konfidence.DatabaseInterface
 {
     public interface IBaseClient
     {

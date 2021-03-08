@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Konfidence.BaseData;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 
 namespace DbMenuClasses
 {

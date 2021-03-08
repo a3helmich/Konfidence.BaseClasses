@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Konfidence.DataBaseInterface
+namespace Konfidence.DatabaseInterface
 {
     public interface ISpParameterData 
     {
