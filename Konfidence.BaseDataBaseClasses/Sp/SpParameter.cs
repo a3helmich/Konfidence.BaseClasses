@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 
 namespace Konfidence.BaseData.Sp
 {

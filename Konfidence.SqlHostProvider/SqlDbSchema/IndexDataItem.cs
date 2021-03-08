@@ -3,7 +3,7 @@ using System.Data;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.BaseData;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {

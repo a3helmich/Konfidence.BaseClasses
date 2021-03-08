@@ -1,4 +1,4 @@
-﻿using Konfidence.DataBaseInterface;
+﻿using Konfidence.DatabaseInterface;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {

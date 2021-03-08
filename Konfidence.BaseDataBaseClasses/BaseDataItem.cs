@@ -6,7 +6,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData.Sp;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 
 namespace Konfidence.BaseData
 {

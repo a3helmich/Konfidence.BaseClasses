@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using JetBrains.Annotations;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema

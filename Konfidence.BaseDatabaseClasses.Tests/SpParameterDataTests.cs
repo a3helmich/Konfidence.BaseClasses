@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using FluentAssertions;
 using Konfidence.BaseData.Sp;
-using Konfidence.DataBaseInterface;
+using Konfidence.DatabaseInterface;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.BaseDatabaseClasses.Tests
