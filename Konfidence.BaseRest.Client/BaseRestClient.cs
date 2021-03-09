@@ -1,0 +1,73 @@
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using JetBrains.Annotations;
+using Konfidence.Base;
+using Newtonsoft.Json;
+using RestSharp;
+
+namespace Konfidence.BaseRest.Client
+{
+    public class BaseRestClient : IBaseRestClient
+    {
+        internal IRestClient RestClient { get; }
+
+        internal string Route { get; }
+
+        public BaseRestClient(IRestClient restClient, [NotNull] IRestClientConfig clientConfig)
+        {
+            RestClient = restClient;
+
+            Route = clientConfig.Route;
+
+            RestClient.BaseUrl = clientConfig.BaseUri();
+        }
+
+        public async Task<T> PostAsync<T>(string relativePath, object requestObject, [CanBeNull] Dictionary<string, string> headerParameters = null) where T : new()
+        {
+            return await ExecuteMethodAsync<T>(relativePath, Method.POST, requestObject, headerParameters);
+        }
+
+        public async Task<T> GetAsync<T>(string relativePath) where T : new()
+        {
+            return await ExecuteMethodAsync<T>(relativePath, Method.GET);
+        }
+
+        private async Task<T> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, [CanBeNull] object requestObject = null, [CanBeNull] Dictionary<string, string> headerParameters = null) where T : new()
+        {
+            var request = new RestRequest
+            {
+                Resource = relativePath,
+                RequestFormat = DataFormat.Json,
+                Method = httpMethod,
+            };
+
+            if (requestObject.IsAssigned())
+            {
+                request.AddJsonBody(requestObject);
+            }
+
+            if (headerParameters.IsAssigned())
+            {
+                foreach (var kvp in headerParameters)
+                {
+                    request.AddHeader(kvp.Key, kvp.Value);
+                }
+            }
+
+            var response = await RestClient.ExecuteAsync<T>(request);
+
+            if (response.ResponseStatus == ResponseStatus.Error)
+            {
+                throw response.ErrorException;
+            }
+
+            if (!response.Content.IsAssigned() || response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return new T();
+            }
+
+            return JsonConvert.DeserializeObject<T>(response.Content);
+        }
+    }
+}
