@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Text;
 using JetBrains.Annotations;
 using Konfidence.DatabaseInterface;
-using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     [UsedImplicitly]
-    internal class DatabaseStructure : IDatabaseStructure
+    internal class DatabaseStructureX : IDatabaseStructure
     {
         public List<ITableDataItem> Tables { get; }
 
@@ -20,7 +20,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private readonly List<IIndexDataItem> _allIndexDataItems;
 
-        public DatabaseStructure(IBaseClient client)
+        public DatabaseStructureX(IBaseClient client)
         {
             _client = client;
 
@@ -36,13 +36,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             Debug.WriteLine("DatabaseStructure enter BuildStructure()");
 
-            DeleteStoredProcedures();
-
-            Debug.WriteLine("DatabaseStructure between DeleteStoredProcedures() - CreateStoredProcedures()");
-
-            CreateStoredProcedures();
-
-            Debug.WriteLine("DatabaseStructure between CreateStoredProcedures() -  DeleteStoredProcedures()");
+            Initialize();
 
             _allPrimaryKeyDataItems.AddRange(PrimaryKeyDataItem.GetList(_client));
 
@@ -55,6 +49,19 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             DeleteStoredProcedures();
 
             Debug.WriteLine("DatabaseStructure exit BuildStructure()");
+        }
+
+        private void Initialize()
+        {
+            Tables.Clear();
+
+            _allPrimaryKeyDataItems.Clear();
+            _allIndexDataItems.Clear();
+            _allColumnDataItems.Clear();
+
+            DeleteStoredProcedures();
+
+            CreateStoredProcedures();
         }
 
         private void CreateStoredProcedures()
