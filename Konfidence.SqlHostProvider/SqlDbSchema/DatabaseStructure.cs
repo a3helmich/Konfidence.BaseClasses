@@ -8,7 +8,7 @@ using Konfidence.DatabaseInterface;
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     [UsedImplicitly]
-    internal class DatabaseStructureX : IDatabaseStructure
+    internal class DatabaseStructure : IDatabaseStructure
     {
         public List<ITableDataItem> Tables { get; }
 
@@ -20,7 +20,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private readonly List<IIndexDataItem> _allIndexDataItems;
 
-        public DatabaseStructureX(IBaseClient client)
+        public DatabaseStructure(IBaseClient client)
         {
             _client = client;
 
