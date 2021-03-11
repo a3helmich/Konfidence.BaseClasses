@@ -63,7 +63,7 @@ namespace Konfidence.SqlHostProvider
 
             // client classes
             services
-                .AddSingleton<IDatabaseStructure, DatabaseStructure>()
+                .AddSingleton<IDatabaseStructure, DatabaseStructureX>()
                 .AddSingleton<IBaseClient, SqlClient>()
                 .AddSingleton<IDataRepository, SqlClientRepository>()
                 .AddSingleton<IClientConfig>(clientConfig);
