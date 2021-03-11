@@ -42,7 +42,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
@@ -67,7 +67,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
@@ -92,7 +92,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
@@ -119,7 +119,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
@@ -144,7 +144,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             // act
             target.BuildStructure();
@@ -169,7 +169,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -199,7 +199,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -229,7 +229,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -259,7 +259,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -315,7 +315,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -342,7 +342,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 
-            IDatabaseStructure target = new DatabaseStructureX(client);
+            IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
@@ -364,7 +364,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Should().NotBeNull();
-            target.Should().BeOfType<DatabaseStructureX>();
+            target.Should().BeOfType<DatabaseStructure>();
         }
 
         [TestMethod]
@@ -387,7 +387,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             // assert
             target.Should().NotBeNull();
-            target.Should().BeOfType<DatabaseStructureX>();
+            target.Should().BeOfType<DatabaseStructure>();
         }
 
         [TestMethod]
