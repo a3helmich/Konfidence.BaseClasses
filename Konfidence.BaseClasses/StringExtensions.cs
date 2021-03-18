@@ -95,6 +95,34 @@ namespace Konfidence.Base
                 : fromString;
         }
 
+        [NotNull]
+        [UsedImplicitly]
+        public static string InitLowerCase(this string word)
+        {
+            if (word.IsAssigned())
+            {
+                word = $"{char.ToLowerInvariant(word[0])}{word.Substring(1)}";
+
+                return word;
+            }
+
+            return string.Empty;
+        }
+
+        [NotNull]
+        [UsedImplicitly]
+        public static string InitUpperCase(this string word)
+        {
+            if (word.IsAssigned())
+            {
+                word = $"{char.ToUpperInvariant(word[0])}{word.Substring(1)}";
+
+                return word;
+            }
+
+            return string.Empty;
+        }
+
         [UsedImplicitly]
         public static decimal ToDecimal(this string decimalString, decimal defaultValue = 0)
         {
