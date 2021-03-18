@@ -1,28 +1,36 @@
 {
+  "VersionId": 7,
   "Database": "DbMenu",
   "DevelopmentServer": "konfidence2",
   "DeploymentServer": "",
-  "TargetProjectDirectory": "Konfidence.MenuClasses",
-  "TargetProjectName": "Konfidence.MenuClasses",
   "SolutionDirectory": "C:\\Projects\\Konfidence\\BaseClasses",
-  "OneToOneItems": [
+  "ProjectDirectory": "Konfidence.MenuClasses",
+  "ProjectName": "Konfidence.MenuClasses",
+  "ProjectNamespace": "DbMenuClasses",
+  "RestServiceDirectory": "DbMenuServer.RestApi",
+  "RestServiceClientDirectory": "DbMenuServer.RestApi.Client",
+  "AddSystemColumns": true,
+  "InRoot": false,
+  "IncludeTableModels": [],
+  "OneToOneModels": [
     {
-      "Name": "Menu",
+      "TableName": "Menu",
       "ChildTable": {
-        "Name": "MenuText"
+        "TableName": "MenuText"
       },
       "Fields": [
         "NodeId"
       ]
     }
   ],
-  "GetListBy": [
+  "OneToManyModels": [],
+  "GetByModels": [],
+  "GetListByModels": [
     {
-      "Name": "Menu",
+      "TableName": "Menu",
       "Fields": [
         "MenuId"
       ]
     }
-  ],
-  "DataBaseExplicit": false
+  ]
 }
