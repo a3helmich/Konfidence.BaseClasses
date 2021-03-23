@@ -11,12 +11,7 @@ namespace Konfidence.Security.Encryption
         private bool _disposed;
 
         private RSACryptoServiceProvider _tempRsaProvider;
-        private int _tempKeySize;
 
-        // _MaxBytes schijnt uit te vinden te zijn, maar is een beetje vreemd, heb onderstussen het een en ander 
-        // uitgezocht, maar de maximum datasize = keysize lijkt niet waar te zijn heb voorlopig gekozen voor halverwege 
-        // de keysize, dit lijkt te voldoen, moet verder uitgezocht.
-        //NB nov 2012: zal wel iets te maken hebben met de encoding van de string (onebyte/twobyte).
         private int _maxBytesServer; 
 
         public RSACryptoServiceProvider RsaProvider { get; private set; }
@@ -86,8 +81,6 @@ namespace Konfidence.Security.Encryption
                 if (!_tempRsaProvider.IsAssigned())
                 {
                     _tempRsaProvider = keySizeServer == 0 ? new RSACryptoServiceProvider() : new RSACryptoServiceProvider(keySizeServer);
-
-                    _tempKeySize = _tempRsaProvider.KeySize;
                 }
 
                 return _tempRsaProvider;

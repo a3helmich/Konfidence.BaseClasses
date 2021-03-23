@@ -1,5 +1,4 @@
 ﻿using Konfidence.Security.Encryption;
-using JetBrains.Annotations;
 
 namespace Konfidence.Security
 {

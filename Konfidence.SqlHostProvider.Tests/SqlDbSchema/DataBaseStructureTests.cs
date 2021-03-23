@@ -177,7 +177,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetJoinedFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("NaamOmschrijving");
@@ -207,7 +207,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetUnderscoreFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetJoinedUnderscoreFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
@@ -237,7 +237,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetCommaFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetFieldNamesAsArguments(columnNameList);
 
             // assert
             columnString.Should().Be("Naam, Omschrijving");
@@ -267,7 +267,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             var columnNameList = new List<string> { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetTypedCommaFieldNames(columnNameList);
+            var columnString = table.ColumnDataItems.GetFieldNamesAsParameters(columnNameList);
 
             // assert
             columnString.Should().Be("string naam, string omschrijving");

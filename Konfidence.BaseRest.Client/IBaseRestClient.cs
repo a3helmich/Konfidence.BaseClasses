@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace Konfidence.BaseRest.Client
 {
@@ -15,7 +16,8 @@ namespace Konfidence.BaseRest.Client
         /// <param name="relativePath"></param>
         /// <param name="requestObject"></param>
         /// <param name="headerParameters"></param>
-        /// <returns></returns>
+        /// <returns>T</returns>
+        [UsedImplicitly]
         Task<T> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string> headerParameters = null) where T : new();
 
         /// <summary>
@@ -23,8 +25,8 @@ namespace Konfidence.BaseRest.Client
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="relativePath"></param>
-        /// <returns></returns>
-
+        /// <returns>T</returns>
+        [UsedImplicitly]
         Task<T> GetAsync<T>(string relativePath) where T : new();
     }
 }

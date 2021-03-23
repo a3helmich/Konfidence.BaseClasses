@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 
 namespace Konfidence.BaseData
 {
-    public static class BaseDataItemAutoUpdateFieldExtensions
+    public static class AutoUpdateFieldExtensions
     {
         [UsedImplicitly]
         public static void GetAutoUpdateField([NotNull] this BaseDataItem baseDataItem, [NotNull] string fieldName, ref byte fieldValue)

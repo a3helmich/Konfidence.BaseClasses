@@ -2,7 +2,7 @@
 {
     public abstract class ThreadAction
     {
-        private static readonly object LockObject = new object();
+        private static readonly object LockObject = new();
 
         internal bool IsAlive { get; private set; }
 

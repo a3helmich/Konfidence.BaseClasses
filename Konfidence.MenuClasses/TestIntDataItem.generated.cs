@@ -9,7 +9,7 @@ namespace DbMenuClasses
 {
     public partial class Dl
     {
-        public partial class TestIntDataItem : BaseDataItem
+        public class TestIntDataItem : BaseDataItem
         {
             // field definitions
             private const string ID = "Id";

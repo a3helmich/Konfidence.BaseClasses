@@ -8,6 +8,7 @@ using RestSharp;
 
 namespace Konfidence.BaseRest.Client
 {
+    [UsedImplicitly]
     public class BaseRestClient : IBaseRestClient
     {
         internal IRestClient RestClient { get; }
@@ -62,9 +63,9 @@ namespace Konfidence.BaseRest.Client
                 throw response.ErrorException;
             }
 
-            if (!response.Content.IsAssigned() || response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.NotFound)
+            if (!response.Content.IsAssigned() && response.StatusCode != HttpStatusCode.OK)
             {
-                return new T();
+                return default;
             }
 
             return JsonConvert.DeserializeObject<T>(response.Content);

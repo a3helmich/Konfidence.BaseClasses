@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Konfidence.DatabaseInterface
 {
-    internal interface IDataRepository
+    public interface IDataRepository
     {
         DataTable GetSchemaObject(string collection);
 

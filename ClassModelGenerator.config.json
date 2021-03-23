@@ -10,7 +10,7 @@
   "RestServiceDirectory": "DbMenuServer.RestApi",
   "RestServiceClientDirectory": "DbMenuServer.RestApi.Client",
   "AddSystemColumns": true,
-  "InRoot": false,
+  "InRoot": true,
   "IncludeTableModels": [],
   "OneToOneModels": [
     {

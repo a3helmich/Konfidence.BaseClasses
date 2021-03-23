@@ -10,7 +10,7 @@ namespace DbMenuClasses
 {
     public partial class Dl
     {
-        public partial class MenuDataItem : BaseDataItem
+        public class MenuDataItem : BaseDataItem
         {
             // field definitions
             private const string NODEID = "NodeId";
