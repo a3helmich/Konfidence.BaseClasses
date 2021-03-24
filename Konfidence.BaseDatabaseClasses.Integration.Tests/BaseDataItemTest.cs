@@ -34,6 +34,23 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
             }
         }
 
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            var testIntDataItemList = Dl.TestIntDataItem
+                .GetList()
+                .Where(x => x.GetId() > 1)
+                .ToList();
+
+            if (testIntDataItemList.Any())
+            {
+                foreach (var intDataItem in testIntDataItemList)
+                {
+                    intDataItem.Delete();
+                }
+            }
+        }
+
         [TestMethod]
         public void TestIntDataItemShouldReturnShortAndLong()
         {
