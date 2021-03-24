@@ -73,7 +73,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.Tables.Should().HaveCount(7); // TestClassGenerator has 7 tables
+            target.Tables.Should().HaveCount(8); // TestClassGenerator has 7 tables
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             // assert
-            target.Tables.Should().HaveCount(7); // TestClassGenerator heeft nu 6 tabellen
+            target.Tables.Should().HaveCount(8); // TestClassGenerator heeft nu 6 tabellen
 
             target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
         }
@@ -140,7 +140,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
                 throw new Exception("clientconfig not returned by dependency injection");
             }
 
-            clientConfig.DefaultDatabase = "DbMenu";
+            clientConfig.DefaultDatabase = "TestClassGenerator";
 
             var client = new SqlClient(new SqlClientRepository(clientConfig));
 

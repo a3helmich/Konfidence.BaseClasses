@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using DbMenuClasses;
 using FluentAssertions;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClasses;
 
 namespace Konfidence.BaseDatabaseClasses.Integration.Tests
 {
@@ -14,7 +14,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestClassGenerator");
         }
 
         [TestInitialize]

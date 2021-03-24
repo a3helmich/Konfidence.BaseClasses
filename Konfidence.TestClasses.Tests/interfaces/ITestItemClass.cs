@@ -1,4 +1,4 @@
-﻿namespace Konfidence.MenuClasses.Tests.interfaces
+﻿namespace Konfidence.TestClasses.Tests.interfaces
 {
     public interface ITestItemClass
     {

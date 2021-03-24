@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.Security\Konfidence.Security.csproj" />
-    <ProjectReference Include="..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />
     <ProjectReference Include="..\Konfidence.TestTools\Konfidence.TestTools.csproj" />
   </ItemGroup>
 

@@ -134,14 +134,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
             RemoveConnectionStringPart(connectionStringParts, "Integrated Security");
 
-            var connectionString = string.Join(";", connectionStringParts);
-
-            if (connectionStringSettings.ConnectionString == connectionString)
-            {
-                return config;
-            }
-
-            connectionStringSettings.ConnectionString = connectionString;
+            connectionStringSettings.ConnectionString = string.Join(";", connectionStringParts);
 
             ConfigurationManager.RefreshSection("connectionStrings");
 

@@ -29,8 +29,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Tests", "Konfidence.BaseDatabaseClasses.Tests\Konfidence.BaseDatabaseClasses.Tests.csproj", "{76862657-1597-4BA2-BD11-4344AEBD1D32}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.MenuClasses.Tests", "Konfidence.MenuClasses.Tests\Konfidence.MenuClasses.Tests.csproj", "{8255D86B-6377-406C-832A-1CDDC6BD61FE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Security.Tests", "Konfidence.Security.Tests\Konfidence.Security.Tests.csproj", "{9055CC5D-FD7D-4748-8968-98EFF6B98803}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider.Tests", "Konfidence.SqlHostProvider.Tests\Konfidence.SqlHostProvider.Tests.csproj", "{FAF276FC-1E51-43E6-A4F3-D83D667E5160}"
@@ -48,6 +46,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestByHandApp", "TestByHandApp\TestByHandApp.csproj", "{2CFB0201-0A93-4384-BD3C-546EF66CB0B9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseRest.Client", "Konfidence.BaseRest.Client\Konfidence.BaseRest.Client.csproj", "{ED7FFF5E-56BF-4B71-A1C7-C66202CFDD4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.TestClasses", "Konfidence.TestClasses\Konfidence.TestClasses.csproj", "{C75C5853-9352-4FFC-BB6C-05A23F1E095D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.TestClasses.Tests", "Konfidence.TestClasses.Tests\Konfidence.TestClasses.Tests.csproj", "{B7530A18-6DBE-4340-852E-ACBE78B44A2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +85,6 @@ Global
 		{76862657-1597-4BA2-BD11-4344AEBD1D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76862657-1597-4BA2-BD11-4344AEBD1D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76862657-1597-4BA2-BD11-4344AEBD1D32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8255D86B-6377-406C-832A-1CDDC6BD61FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8255D86B-6377-406C-832A-1CDDC6BD61FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8255D86B-6377-406C-832A-1CDDC6BD61FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8255D86B-6377-406C-832A-1CDDC6BD61FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9055CC5D-FD7D-4748-8968-98EFF6B98803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9055CC5D-FD7D-4748-8968-98EFF6B98803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9055CC5D-FD7D-4748-8968-98EFF6B98803}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -123,6 +121,14 @@ Global
 		{ED7FFF5E-56BF-4B71-A1C7-C66202CFDD4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED7FFF5E-56BF-4B71-A1C7-C66202CFDD4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED7FFF5E-56BF-4B71-A1C7-C66202CFDD4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75C5853-9352-4FFC-BB6C-05A23F1E095D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75C5853-9352-4FFC-BB6C-05A23F1E095D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75C5853-9352-4FFC-BB6C-05A23F1E095D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75C5853-9352-4FFC-BB6C-05A23F1E095D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7530A18-6DBE-4340-852E-ACBE78B44A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7530A18-6DBE-4340-852E-ACBE78B44A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7530A18-6DBE-4340-852E-ACBE78B44A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7530A18-6DBE-4340-852E-ACBE78B44A2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,10 +136,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5A793535-B73E-49DD-B329-131F9DA971DB} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{76862657-1597-4BA2-BD11-4344AEBD1D32} = {AE05D666-5600-4C5A-A903-038C94787EB4}
-		{8255D86B-6377-406C-832A-1CDDC6BD61FE} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{9055CC5D-FD7D-4748-8968-98EFF6B98803} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{FAF276FC-1E51-43E6-A4F3-D83D667E5160} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{2CFB0201-0A93-4384-BD3C-546EF66CB0B9} = {AE05D666-5600-4C5A-A903-038C94787EB4}
+		{B7530A18-6DBE-4340-852E-ACBE78B44A2E} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B102BFD-CA61-4D89-A274-368CA1DF0437}

@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Linq;
-using DbMenuClasses;
 using FluentAssertions;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClasses;
 
-namespace Konfidence.MenuClasses.Tests
+namespace Konfidence.TestClasses.Tests
 {
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
     [TestClass, TestCategory("MenuItem")]
-    public class MenuItemTest
+    public class TestClassTest
     {
         [ClassInitialize]
         public static void ClassInitialize(TestContext _)
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestClassGenerator");
         }
 
         [TestMethod]
         public void GetSingleMenuItem()
         {
-            var dataItem = new Dl.MenuDataItem(2);
+            var dataItem = new Dl.Test2DataItem(2);
 
             dataItem.Should().NotBeNull();
         }
@@ -32,8 +32,8 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod]
         public void GetTwoSingleMenuItem()
         {
-            var dataItem1 = new Dl.MenuDataItem(1);
-            var dataItem2 = new Dl.MenuDataItem(2);
+            var dataItem1 = new Dl.Test2DataItem(1);
+            var dataItem2 = new Dl.Test2DataItem(2);
 
             dataItem1.Should().NotBeNull();
             dataItem2.Should().NotBeNull();
@@ -42,17 +42,17 @@ namespace Konfidence.MenuClasses.Tests
         [TestMethod]
         public void GetSingleMenuItemList()
         {
-            var list = Dl.MenuDataItem.GetListByMenuId(1);
+            var list = Dl.TestIntDataItem.GetList();
 
-            list.Should().HaveCount(9, "list should contain 9 menu items");
+            list.Should().HaveCount(1, "list should contain 1 menu items");
 
-            list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
+            //list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
         }
 
         [TestMethod]
         public void GetParentMenuItem()
         {
-            var test = new Dl.MenuDataItem(1);
+            var test = new Dl.Test2DataItem(1);
 
             test.Should().NotBeNull();
         }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Konfidence.MenuClasses.Tests.interfaces;
+using Konfidence.TestClasses.Tests.interfaces;
 
-namespace Konfidence.MenuClasses.Tests.objects
+namespace Konfidence.TestClasses.Tests.objects
 {
     public class CallTestItemListClass
     {
