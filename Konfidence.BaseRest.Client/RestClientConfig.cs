@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Konfidence.BaseRest.Client
 {
+    [UsedImplicitly]
     public class RestClientConfig : IRestClientConfig
     {
         public int PortNr { get; set; }

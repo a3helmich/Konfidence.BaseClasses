@@ -14,12 +14,15 @@ namespace Konfidence.DatabaseInterface
 
         void Delete(IBaseDataItem dataItem);
 
+        [UsedImplicitly]
         int ExecuteCommand(string storedProcedure, List<ISpParameterData> parameterObjectList);
 
         int ExecuteTextCommand(string textCommand);
 
+        [UsedImplicitly]
         bool TableExists(string tableName);
 
+        [UsedImplicitly]
         bool ViewExists(string viewName);
 
         bool StoredProcedureExists(string storedPprocedureName);

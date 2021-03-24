@@ -8,7 +8,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     public static class ColumnDataExtensions
     {
         [NotNull]
-        public static string GetFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetJoinedFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
@@ -18,7 +18,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        public static string GetUnderscoreFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetJoinedUnderscoreFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
@@ -28,7 +28,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        public static string GetCommaFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetFieldNamesAsArguments([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
@@ -38,7 +38,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         [NotNull]
-        public static string GetTypedCommaFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetFieldNamesAsParameters([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))

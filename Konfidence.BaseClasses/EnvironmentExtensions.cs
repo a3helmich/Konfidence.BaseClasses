@@ -5,6 +5,7 @@ namespace Konfidence.Base
 {
     public static class EnvironmentExtensions
     {
+        // this should be Linux proof
         public static bool TryGetEnvironmentVariable(this string environmentVariable, out string value)
         {
             string key;

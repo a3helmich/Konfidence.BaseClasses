@@ -1,4 +1,5 @@
-﻿using DbMenuClasses;
+﻿
+using TestClasses;
 
 namespace TestByHandApp
 {
@@ -6,7 +7,21 @@ namespace TestByHandApp
     {
         static void Main(string[] args)
         {
-            var menuDataItems = Dl.MenuDataItem.GetList();
+            var test = new Dl.Test1DataItem();
+
+            test.Save();
+            test = new Dl.Test1DataItem();
+            test.Save();
+            test = new Dl.Test1DataItem();
+            test.Save();
+            test = new Dl.Test1DataItem();
+            test.Save();
+            test = new Dl.Test1DataItem();
+            test.Save();
+
+            var menuDataItems = Dl.Test1DataItem.GetList();
+
+            menuDataItems.ForEach(menu => menu.Delete());
         }
     }
 }

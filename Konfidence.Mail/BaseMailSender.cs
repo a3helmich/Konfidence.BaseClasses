@@ -56,7 +56,7 @@ namespace Konfidence.Mail
 			{
 				smtpClient.Send(mailMessage);
 			}
-			catch  // TODO: if this happens then try to figure out why sending fails
+			catch  
 			{
 				return false;
 			}

@@ -2,14 +2,14 @@
   "LogLevel": "Information",
   //"LogLevel": "Verbose",
   "DataConfiguration": {
-    "DefaultDatabase": "DbMenu",
+    "DefaultDatabase": "TestClassGenerator",
     "LogLevel": "Verbose",
     "UseEnvironmentSetting": true,
     "Connections": [
       {
-        "ConnectionName": "DbMenu",
+        "ConnectionName": "TestClassGenerator",
         "Server": "konfidence2",
-        "Database": "DbMenu",
+        "Database": "TestClassGenerator",
         "UserName": "",
         "Password": ""
       }

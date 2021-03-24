@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClassGeneratorConfig", "ClassGeneratorConfig", "{36786862-305D-446D-8B01-BDAC2476260C}"
+	ProjectSection(SolutionItems) = preProject
+		ClassModelGenerator.config.json = ClassModelGenerator.config.json
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indy.Sockets", "Indy.Sockets\Indy.Sockets.csproj", "{9056B78B-6C53-4CBC-9426-58F6C3A95AA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.MenuClasses", "Konfidence.MenuClasses\Konfidence.MenuClasses.csproj", ""
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{9056B78B-6C53-4CBC-9426-58F6C3A95AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9056B78B-6C53-4CBC-9426-58F6C3A95AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9056B78B-6C53-4CBC-9426-58F6C3A95AA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		.Debug|Any CPU.Build.0 = Debug|Any CPU
+		.Release|Any CPU.ActiveCfg = Release|Any CPU
+		.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using DbMenuClasses;
 using FluentAssertions;
 using Konfidence.TestTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClasses;
 
 namespace Konfidence.BaseDatabaseClasses.Integration.Tests
 {
@@ -14,11 +14,28 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
-            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("DbMenu");
+            SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestClassGenerator");
         }
 
         [TestInitialize]
         public void TestInitialize()
+        {
+            var testIntDataItemList = Dl.TestIntDataItem
+                .GetList()
+                .Where(x => x.GetId() > 1)
+                .ToList();
+
+            if (testIntDataItemList.Any())
+            {
+                foreach (var intDataItem in testIntDataItemList)
+                {
+                    intDataItem.Delete();
+                }
+            }
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
         {
             var testIntDataItemList = Dl.TestIntDataItem
                 .GetList()
