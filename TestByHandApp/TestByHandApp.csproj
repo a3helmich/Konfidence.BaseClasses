@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="SqlClientSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{20287813-52A4-4043-ABC8-3013F4701774}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.MenuClasses", "Konfidence.MenuClasses\Konfidence.MenuClasses.csproj", "{84C8CCF5-457D-4685-89AF-30DAD037BC2C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{AE05D666-5600-4C5A-A903-038C94787EB4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Integration.Tests", "Konfidence.BaseDatabaseClasses.Integration.Tests\Konfidence.BaseDatabaseClasses.Integration.Tests.csproj", "{5A793535-B73E-49DD-B329-131F9DA971DB}"
@@ -77,10 +75,6 @@ Global
 		{20287813-52A4-4043-ABC8-3013F4701774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20287813-52A4-4043-ABC8-3013F4701774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20287813-52A4-4043-ABC8-3013F4701774}.Release|Any CPU.Build.0 = Release|Any CPU
-		{84C8CCF5-457D-4685-89AF-30DAD037BC2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84C8CCF5-457D-4685-89AF-30DAD037BC2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84C8CCF5-457D-4685-89AF-30DAD037BC2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84C8CCF5-457D-4685-89AF-30DAD037BC2C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A793535-B73E-49DD-B329-131F9DA971DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A793535-B73E-49DD-B329-131F9DA971DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A793535-B73E-49DD-B329-131F9DA971DB}.Release|Any CPU.ActiveCfg = Release|Any CPU

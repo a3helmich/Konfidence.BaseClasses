@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\Konfidence.DataBaseInterface\IDataRepository.cs" Link="IDataRepository.cs" />
+    <Compile Include="..\Konfidence.DataBaseInterface\IDataRepository.cs" Link="SqlAccess\IDataRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

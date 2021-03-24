@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.MenuClasses\Konfidence.MenuClasses.csproj" />
     <ProjectReference Include="..\Konfidence.TestTools\Konfidence.TestTools.csproj" />
   </ItemGroup>
 
