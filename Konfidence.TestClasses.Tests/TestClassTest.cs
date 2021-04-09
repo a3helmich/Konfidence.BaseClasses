@@ -22,7 +22,7 @@ namespace Konfidence.TestClasses.Tests
         }
 
         [TestMethod]
-        public void GetSingleMenuItem()
+        public void GetSingleItem()
         {
             var dataItem = new Dl.Test2DataItem(2);
 
@@ -30,7 +30,7 @@ namespace Konfidence.TestClasses.Tests
         }
 
         [TestMethod]
-        public void GetTwoSingleMenuItem()
+        public void GetTwoSingleItem()
         {
             var dataItem1 = new Dl.Test2DataItem(1);
             var dataItem2 = new Dl.Test2DataItem(2);
@@ -40,17 +40,7 @@ namespace Konfidence.TestClasses.Tests
         }
 
         [TestMethod]
-        public void GetSingleMenuItemList()
-        {
-            var list = Dl.TestIntDataItem.GetList();
-
-            list.Should().HaveCount(1, "list should contain 1 menu items");
-
-            //list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
-        }
-
-        [TestMethod]
-        public void GetParentMenuItem()
+        public void GetParentItem()
         {
             var test = new Dl.Test2DataItem(1);
 
@@ -72,7 +62,7 @@ namespace Konfidence.TestClasses.Tests
             testIntDataItem.GuidIdField.Should().NotBeEmpty();
         }
         [TestMethod]
-        public void When_Retrieving_data_with_invalid_key_Should_return_null()
+        public void When_Retrieving_data_with_invalid_key_Should_return_NewItem()
         {
             // arrange
             var testIntDataItemList = Dl.TestIntDataItem.GetList();
