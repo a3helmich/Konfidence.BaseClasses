@@ -44,9 +44,7 @@ namespace Konfidence.TestClasses.Tests
         {
             var list = Dl.TestIntDataItem.GetList();
 
-            list.Should().HaveCount(1, "list should contain 1 menu items");
-
-            //list[3].MenuText.MenuText.Should().Be("Wijzigen van mijn persoonsgegevens");
+            list.Should().HaveCount(2, "list should contain 2 menu items");
         }
 
         [TestMethod]
