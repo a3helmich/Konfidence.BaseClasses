@@ -40,14 +40,6 @@ namespace Konfidence.TestClasses.Tests
         }
 
         [TestMethod]
-        public void GetSingleItemList()
-        {
-            var list = Dl.TestIntDataItem.GetList();
-
-            list.Should().HaveCount(1, "list should contain 1 test items");
-        }
-
-        [TestMethod]
         public void GetParentItem()
         {
             var test = new Dl.Test2DataItem(1);
@@ -70,7 +62,7 @@ namespace Konfidence.TestClasses.Tests
             testIntDataItem.GuidIdField.Should().NotBeEmpty();
         }
         [TestMethod]
-        public void When_Retrieving_data_with_invalid_key_Should_return_null()
+        public void When_Retrieving_data_with_invalid_key_Should_return_NewItem()
         {
             // arrange
             var testIntDataItemList = Dl.TestIntDataItem.GetList();
