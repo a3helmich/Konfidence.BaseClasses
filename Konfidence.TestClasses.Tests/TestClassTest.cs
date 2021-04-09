@@ -22,7 +22,7 @@ namespace Konfidence.TestClasses.Tests
         }
 
         [TestMethod]
-        public void GetSingleMenuItem()
+        public void GetSingleItem()
         {
             var dataItem = new Dl.Test2DataItem(2);
 
@@ -30,7 +30,7 @@ namespace Konfidence.TestClasses.Tests
         }
 
         [TestMethod]
-        public void GetTwoSingleMenuItem()
+        public void GetTwoSingleItem()
         {
             var dataItem1 = new Dl.Test2DataItem(1);
             var dataItem2 = new Dl.Test2DataItem(2);
@@ -40,15 +40,15 @@ namespace Konfidence.TestClasses.Tests
         }
 
         [TestMethod]
-        public void GetSingleMenuItemList()
+        public void GetSingleItemList()
         {
             var list = Dl.TestIntDataItem.GetList();
 
-            list.Should().HaveCount(2, "list should contain 2 menu items");
+            list.Should().HaveCount(1, "list should contain 1 test items");
         }
 
         [TestMethod]
-        public void GetParentMenuItem()
+        public void GetParentItem()
         {
             var test = new Dl.Test2DataItem(1);
 
