@@ -22,12 +22,12 @@ namespace Konfidence.Mail
         }
 
 	    [UsedImplicitly]
-		public bool SendEmail(string toEmailAddress, string subject, string mailBody)
+		public bool SendEmail([NotNull] string toEmailAddress, string subject, [NotNull] string mailBody)
 		{
 			return SendEmail(toEmailAddress, subject, mailBody, true, string.Empty);
 		}
 		
-		public bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml, string fileName)
+		public bool SendEmail([NotNull] string toEmailAddress, string subject, [NotNull] string mailBody, bool bodyIsHtml, string fileName)
 		{
 		    var mailFrom = new MailAddress(_fromAddress);
 			var mailTo = new MailAddress(toEmailAddress);

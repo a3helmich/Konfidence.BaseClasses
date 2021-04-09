@@ -99,33 +99,30 @@ namespace Konfidence.Base
         [UsedImplicitly]
         public static string InitLowerCase(this string word)
         {
-            if (word.IsAssigned())
-            {
-                word = $"{char.ToLowerInvariant(word[0])}{word.Substring(1)}";
-
-                return word;
-            }
-
-            return string.Empty;
+            return word.IsAssigned() ? $"{char.ToLowerInvariant(word[0])}{word.Substring(1)}" : string.Empty;
         }
 
         [NotNull]
         [UsedImplicitly]
         public static string InitUpperCase(this string word)
         {
-            if (word.IsAssigned())
-            {
-                word = $"{char.ToUpperInvariant(word[0])}{word.Substring(1)}";
+            return word.IsAssigned() ? $"{char.ToUpperInvariant(word[0])}{word.Substring(1)}" : string.Empty;
+        }
 
-                return word;
-            }
-
-            return string.Empty;
+        [UsedImplicitly]
+        public static bool Contains([NotNull] this string word, [NotNull] string contains, StringComparison stringComparison)
+        {
+            return word.IsAssigned() && word.IndexOf(contains, stringComparison) >= 0;
         }
 
         [UsedImplicitly]
         public static decimal ToDecimal(this string decimalString, decimal defaultValue = 0)
         {
+            if (!decimalString.IsAssigned())
+            {
+                return defaultValue;
+            }
+
             if (decimalString.IndexOf('.') < 0 && decimalString.IndexOf(',') >= 0)
             {
                 decimalString = decimalString.Replace(',', '.');

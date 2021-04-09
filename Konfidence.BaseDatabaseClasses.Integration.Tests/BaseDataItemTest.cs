@@ -25,13 +25,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
                 .Where(x => x.GetId() > 1)
                 .ToList();
 
-            if (testIntDataItemList.Any())
-            {
-                foreach (var intDataItem in testIntDataItemList)
-                {
-                    intDataItem.Delete();
-                }
-            }
+            testIntDataItemList.ForEach(item => item.Delete());
         }
 
         [TestCleanup]
@@ -42,13 +36,7 @@ namespace Konfidence.BaseDatabaseClasses.Integration.Tests
                 .Where(x => x.GetId() > 1)
                 .ToList();
 
-            if (testIntDataItemList.Any())
-            {
-                foreach (var intDataItem in testIntDataItemList)
-                {
-                    intDataItem.Delete();
-                }
-            }
+            testIntDataItemList.ForEach(item => item.Delete());
         }
 
         [TestMethod]
