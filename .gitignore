@@ -15,3 +15,4 @@ packages/*
 **/coverage.cobertura.xml
 **/*.coverage
 **/*.nupkg
+**/*.snupkg

@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>2021.1.46</Version>
+    <Version>2021.1.47</Version>
     
     <Authors>Konfidence in it</Authors>
     <Copyright>Konfidence in it 2021.</Copyright>
@@ -17,6 +17,15 @@
     <PackageOutputPath>$(SolutionDir)nuget</PackageOutputPath>
 
     <PackageTags>Konfidence;baseclasses</PackageTags>
-    <Description>Konfidence</Description>
+    <Description>Konfidence helper classess for Konfidence tools and software</Description>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/a3helmich/Konfidence.BaseClasses</PackageProjectUrl>
+
+    <RepositoryUrl>https://github.com/a3helmich/Konfidence.BaseClasses</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 </Project>

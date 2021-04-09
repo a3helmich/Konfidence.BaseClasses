@@ -7,21 +7,13 @@
     <AssemblyName>Konfidence.BaseClasses</AssemblyName>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;RELEASE;NETCOREAPP;NETCOREAPP2_1;JETBRAINS_ANNOTATIONS</DefineConstants>
+    <Title>Konfidence baseclasses</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;NETCOREAPP;NETCOREAPP2_1;JETBRAINS_ANNOTATIONS</DefineConstants>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove=".vs\**" />
-    <EmbeddedResource Remove=".vs\**" />
-    <None Remove=".vs\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2020.3.0" />
