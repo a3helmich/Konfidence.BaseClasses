@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Konfidence.TestTools\Konfidence.TestTools.csproj" />
     <ProjectReference Include="..\Konfidence.TestClasses\Konfidence.TestClasses.csproj" />
-    <ProjectReference Include="..\Konfidence.TestTools\Konfidence.TestTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>
