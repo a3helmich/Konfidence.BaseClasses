@@ -3,8 +3,8 @@
 *.ncb
 *.suo
 *.ri
-*/bin/*
-*/obj/*
+**/bin/*
+**/obj/*
 packages/*
 **/.vs/*
 **/App.debug.config
