@@ -36,7 +36,7 @@ Integration tests running against SQl server will fail until a test database set
 ### Konfidence.BaseClasses package is available on [nuget.org](https://www.nuget.org/packages/Konfidence.BaseClasses). 
 
 ### Konfidence.BaseDataBaseClasses
-- Some classes that make CRUD on SQL with the enterprise libraries realy easy, without the strong dependencies included in the EntityFramework, only usefull with my ClassGenerator. Also referenced by the Konfidence.SqlHostProvider package.
+- Some classes that make CRUD on SQL with the enterprise libraries really easy, without the strong dependencies included in the EntityFramework, only usefull with my ClassGenerator. Also referenced by the Konfidence.SqlHostProvider package.
 
 ### Konfidence.BaseRest.Client
 - Client for basic Restservice access. Using the RestSharp client. Used by my ClassGenerator.
