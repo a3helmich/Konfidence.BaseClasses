@@ -1,14 +1,14 @@
 # Konfidence.BaseClasses 
 This is a collection of dotnet library projects I use for the software I develop, containing shortcuts or base implementations that make developing and maintaining software a lot easier.
   
-# Using the libraries: 
-All projects generate a .nupkg on build. These can be used to inlcude in your software projects. Most libraries are build for **netstandard2.0** and **net5.0**.
+# Using the Libraries
+All projects generate a .nupkg on build. These can be used to include in your software projects. Most libraries are build for **netstandard2.0** and **net5.0**.
 
 # Build and Test
 
 - Clone Konfidence.BaseClasses
 - Open  Konfidence.BaseClasses.sln in visual studio
-- build the solution
+- Build the solution
 
 All tests can either be run in visual studio, with dotnet test konfidence.baseclasses.sln or dotnet test [testprojectname].tests.csproj. 
 
@@ -33,7 +33,7 @@ Integration tests running against SQl server will fail until a test database set
 	- Contains(..) with specified casing type
 	- ToDecimal(), parse a string into a decimal
   
-this package is available on [nuget.org](https://www.nuget.org/packages/Konfidence.BaseClasses). 
+### Konfidence.BaseClasses package is available on [nuget.org](https://www.nuget.org/packages/Konfidence.BaseClasses). 
 
 ### Konfidence.BaseDataBaseClasses
 - Some classes that make CRUD on SQL with the enterprise libraries realy easy, without the strong dependencies included in the EntityFramework, only usefull with my ClassGenerator. Also referenced by the Konfidence.SqlHostProvider package.
