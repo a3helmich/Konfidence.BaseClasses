@@ -1,2 +1,0 @@
-C:\Projects\Konfidence\BaseClasses\Konfidence.SqlHostProvider.Tests\Konfidence.SqlHostProvider.Tests.csproj
-	 - C:\Projects\Konfidence\BaseClasses\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj
