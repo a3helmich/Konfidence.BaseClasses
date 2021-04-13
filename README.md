@@ -67,4 +67,4 @@ Prepares the configuration of a unittest with live access to SqlServer. Since do
 Some obsolete classes. Technical debt :(   
 
 ### Tools/ClientSettingsUpdater
-For me: updates the SqlClientSettings.json in a buildpipeline, keeping secrets out of the git repository.
+For me: updates the SqlClientSettings.json in a buildpipeline, keeping secrets out of the git repository. Packed as installable dotnet tool.
