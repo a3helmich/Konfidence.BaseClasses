@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using JetBrains.Annotations;
 
 namespace Konfidence.DatabaseInterface
 {
@@ -10,19 +9,16 @@ namespace Konfidence.DatabaseInterface
 
         void GetItem(IBaseDataItem dataItem);
 
-        void GetItemBy(IBaseDataItem dataItem, [NotNull] string storedProcedure);
+        void GetItemBy(IBaseDataItem dataItem, string storedProcedure);
 
         void Delete(IBaseDataItem dataItem);
 
-        [UsedImplicitly]
         int ExecuteCommand(string storedProcedure, List<ISpParameterData> parameterObjectList);
 
         int ExecuteTextCommand(string textCommand);
 
-        [UsedImplicitly]
         bool TableExists(string tableName);
 
-        [UsedImplicitly]
         bool ViewExists(string viewName);
 
         bool StoredProcedureExists(string storedPprocedureName);

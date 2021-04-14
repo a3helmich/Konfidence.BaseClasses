@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Konfidence.TestTools
 {
@@ -46,11 +46,11 @@ namespace Konfidence.TestTools
         {
             if ("ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) && File.Exists(fileName))
             {
-                var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
+                var clientSettings = JsonSerializer.Deserialize<ClientSettings>(File.ReadAllText(fileName));
 
-                var connections = clientSettings.DataConfiguration.Connections;
+                var connections = clientSettings?.DataConfiguration.Connections;
 
-                if (!connections.Any())
+                if (!connections.IsAssigned() || !connections.Any())
                 {
                     return;
                 }
