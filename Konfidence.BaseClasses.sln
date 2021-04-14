@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ClassModelGenerator.config.json = ClassModelGenerator.config.json
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
-		Indy.Sockets.sln = Indy.Sockets.sln
+		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 		..\SqlClientSettings.json = ..\SqlClientSettings.json
 	EndProjectSection
@@ -54,6 +54,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Tests", "Test\Konfidence.BaseDatabaseClasses.Tests\Konfidence.BaseDatabaseClasses.Tests.csproj", "{D5932518-4099-4749-9BE5-CBBD5B4E14D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Integration.Tests", "Test\Konfidence.BaseDatabaseClasses.Integration.Tests\Konfidence.BaseDatabaseClasses.Integration.Tests.csproj", "{71FFB837-A28C-4F6E-8928-05217E1CA303}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2CC07503-FF58-43E0-BCEB-69F7E4D28E3E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
