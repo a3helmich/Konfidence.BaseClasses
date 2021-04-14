@@ -12,7 +12,7 @@ All projects generate a .nupkg on build. These can be used to include in your so
 
 All tests can either be run in visual studio, with dotnet test konfidence.baseclasses.sln or dotnet test [testprojectname].tests.csproj. 
 
-Integration tests running against SQl server will fail until a test database setup is made available.
+Integration tests running against SQL server will fail until a test database setup is made available.
 
 # Libraries
 

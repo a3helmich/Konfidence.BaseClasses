@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using System.Text.Json;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Newtonsoft.Json;
 using RestSharp;
 
 namespace Konfidence.BaseRest.Client
@@ -24,16 +24,19 @@ namespace Konfidence.BaseRest.Client
             RestClient.BaseUrl = clientConfig.BaseUri();
         }
 
+        [ItemCanBeNull]
         public async Task<T> PostAsync<T>(string relativePath, object requestObject, [CanBeNull] Dictionary<string, string> headerParameters = null) where T : new()
         {
             return await ExecuteMethodAsync<T>(relativePath, Method.POST, requestObject, headerParameters);
         }
 
+        [ItemCanBeNull]
         public async Task<T> GetAsync<T>(string relativePath) where T : new()
         {
             return await ExecuteMethodAsync<T>(relativePath, Method.GET);
         }
 
+        [ItemCanBeNull]
         private async Task<T> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, [CanBeNull] object requestObject = null, [CanBeNull] Dictionary<string, string> headerParameters = null) where T : new()
         {
             var request = new RestRequest
@@ -68,7 +71,7 @@ namespace Konfidence.BaseRest.Client
                 return default;
             }
 
-            return JsonConvert.DeserializeObject<T>(response.Content);
+            return JsonSerializer.Deserialize<T>(response.Content);
         }
     }
 }
