@@ -60,7 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2CC075
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses.Data", "Konfidence.BaseClasses.Data\Konfidence.BaseClasses.Data.csproj", "{004EB454-BA6B-4AF2-A8C3-08802F752B13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses.Code", "Konfidence.BaseClasses.Data\Konfidence.BaseClasses.Code.csproj", "{004EB454-BA6B-4AF2-A8C3-08802F752B13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
