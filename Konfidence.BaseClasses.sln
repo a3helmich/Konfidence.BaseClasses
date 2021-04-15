@@ -60,6 +60,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2CC075
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseClasses.Data", "Konfidence.BaseClasses.Data\Konfidence.BaseClasses.Data.csproj", "{004EB454-BA6B-4AF2-A8C3-08802F752B13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{71FFB837-A28C-4F6E-8928-05217E1CA303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71FFB837-A28C-4F6E-8928-05217E1CA303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71FFB837-A28C-4F6E-8928-05217E1CA303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{004EB454-BA6B-4AF2-A8C3-08802F752B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{004EB454-BA6B-4AF2-A8C3-08802F752B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{004EB454-BA6B-4AF2-A8C3-08802F752B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{004EB454-BA6B-4AF2-A8C3-08802F752B13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
