@@ -71,7 +71,7 @@ namespace Konfidence.BaseRest.Client
                 return default;
             }
 
-            return JsonSerializer.Deserialize<T>(response.Content);
+            return JsonSerializer.Deserialize<T>(response.Content, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         }
     }
 }
