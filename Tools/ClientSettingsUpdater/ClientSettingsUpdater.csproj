@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Konfidence.Mail\Konfidence.Mail.csproj" />
     <ProjectReference Include="..\..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />
   </ItemGroup>
 

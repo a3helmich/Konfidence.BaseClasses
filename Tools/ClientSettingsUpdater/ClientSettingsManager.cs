@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
+using Konfidence.Mail;
 using Konfidence.SqlHostProvider;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
@@ -19,8 +20,6 @@ namespace ClientSettingsUpdater
         public readonly string Server;
         public readonly string ConfigFileName;
         public readonly string MailServer;
-
-        internal const string DefaultMailServerConfigFileName = "MailClientSettings.json";
 
         public ClientSettingsManager([NotNull] string[] args, IErrorExiter errorExiter)
         {
@@ -69,7 +68,7 @@ namespace ClientSettingsUpdater
 
                 if (MailServer.IsAssigned())
                 {
-                    ConfigFileName = DefaultMailServerConfigFileName;
+                    ConfigFileName = MailConstants.DefaultMailServerConfigFileName;
                 }
             }
         }
