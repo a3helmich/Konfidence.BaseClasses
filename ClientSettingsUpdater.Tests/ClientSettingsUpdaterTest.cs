@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Konfidence.Mail;
 using Konfidence.SqlHostProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -222,7 +223,7 @@ namespace ClientSettingsUpdater.Tests
 
         private static MailAccounts ReadMailConfig()
         {
-            return JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(ClientSettingsManager.DefaultMailServerConfigFileName));
+            return JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(MailConstants.DefaultMailServerConfigFileName));
         }
     }
 }
