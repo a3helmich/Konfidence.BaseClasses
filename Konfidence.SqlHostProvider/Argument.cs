@@ -1,4 +1,6 @@
-﻿namespace Konfidence.SqlHostProvider
+﻿using Konfidence.Base;
+
+namespace Konfidence.SqlHostProvider
 {
     public enum Argument
     {
@@ -7,6 +9,7 @@
         UserName = 2,
         Password = 3,
         Server = 4,
-        ConfigFileName = 5
+        ConfigFileName = 5, 
+        MailServer = 6
     }
 }

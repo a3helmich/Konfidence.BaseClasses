@@ -7,7 +7,7 @@ namespace ClientSettingsUpdater
     {
         static void Main([NotNull] string[] args)
         {
-            var clientSettingsManager = new ClientSettingsManager(args);
+            var clientSettingsManager = new ClientSettingsManager(args, new ErrorExiter());
 
             clientSettingsManager.Execute();
         }

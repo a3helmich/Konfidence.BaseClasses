@@ -13,61 +13,82 @@ namespace ClientSettingsUpdater
 {
     internal class ClientSettingsManager
     {
-        private readonly string _configFolder;
-        private readonly string _userName;
-        private readonly string _password;
-        private readonly string _server;
-        private readonly string _configFileName;
+        public readonly string ConfigFolder;
+        public readonly string UserName;
+        public readonly string Password;
+        public readonly string Server;
+        public readonly string ConfigFileName;
+        public readonly string MailServer;
 
-        public ClientSettingsManager([NotNull] string[] args)
+        internal const string DefaultMailServerConfigFileName = "MailClientSettings.json";
+
+        public ClientSettingsManager([NotNull] string[] args, IErrorExiter errorExiter)
         {
             if (!args.Any())
             {
-                Environment.Exit(4);
+                errorExiter.Exit(4);
+
+                return;
             }
 
             // location, username, password
-            if (!args.TryParseArgument(Argument.ConfigFileFolder, out _configFolder))
+            if (!args.TryParseArgument(Argument.ConfigFileFolder, out ConfigFolder))
             {
-                Environment.Exit(1);
+                errorExiter.Exit(1);
+
+                return;
             }
 
-            if (!args.TryParseArgument(Argument.UserName, out _userName))
+            if (!args.TryParseArgument(Argument.UserName, out UserName))
             {
-                Environment.Exit(2);
+                errorExiter.Exit(2);
+
+                return;
             }
 
-            if (!args.TryParseArgument(Argument.Password, out _password))
+            if (!args.TryParseArgument(Argument.Password, out Password))
             {
-                Environment.Exit(3);
+                errorExiter.Exit(3);
+
+                return;
             }
 
-            if (!args.TryParseArgument(Argument.Server, out _server))
+            if (!args.TryParseArgument(Argument.Server, out Server))
             {
-                _server = string.Empty; // not required
+                Server = string.Empty; // not required
             }
 
-            if (!args.TryParseArgument(Argument.ConfigFileName, out _configFileName))
+            if (!args.TryParseArgument(Argument.MailServer, out MailServer))
             {
-                _configFileName = SqlConnectionConstants.DefaultConfigFileName;
+                MailServer = string.Empty; // not required
+            }
+
+            if (!args.TryParseArgument(Argument.ConfigFileName, out ConfigFileName))
+            {
+                ConfigFileName = SqlConnectionConstants.DefaultConfigFileName;
+
+                if (MailServer.IsAssigned())
+                {
+                    ConfigFileName = DefaultMailServerConfigFileName;
+                }
             }
         }
 
         public void Execute()
         {
-            if (!Directory.Exists(_configFolder))
+            if (!Directory.Exists(ConfigFolder))
             {
                 Environment.Exit(6);
             }
 
-            var clientSettingsFileNames = Directory.GetFiles(_configFolder, _configFileName, SearchOption.AllDirectories);
+            var clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
 
             if (!clientSettingsFileNames.Any())
             {
                 Environment.Exit(7);
             }
 
-            var fullFolderName = Path.GetFullPath(_configFolder);
+            var fullFolderName = Path.GetFullPath(ConfigFolder);
 
             Debug.WriteLine($"Location: {fullFolderName}");
             Console.WriteLine($"Location: {fullFolderName}");
@@ -77,11 +98,55 @@ namespace ClientSettingsUpdater
                 Debug.WriteLine($"File: {clientSettingsFileName}");
                 Console.WriteLine($"File: {clientSettingsFileName}");
 
+                if (MailServer.IsAssigned())
+                {
+                    UpdateMailServerFile(clientSettingsFileName);
+
+                    continue;
+                }
+
                 UpdateFile(clientSettingsFileName);
             }
         }
 
-        private void UpdateFile([NotNull] string fileName)
+        private void UpdateMailServerFile([NotNull] string fileName)
+        {
+            var clientSettings = JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(fileName));
+
+            clientSettings.Accounts
+                .ForEach(setting =>
+                {
+                    if (setting.UserName.IsAssigned())
+                    {
+                        return;
+                    }
+
+                    if (MailServer.IsAssigned() && !setting.Server.Equals(MailServer, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return;
+                    }
+
+                    setting.UserName = UserName;
+                    setting.Password = Password;
+                });
+
+            if (clientSettings.Accounts.All(x => x.UserName != UserName))
+            {
+                var account = new MailAccount
+                {
+                    Server = MailServer,
+                    UserName = UserName,
+                    Password = Password
+                };
+
+                clientSettings.Accounts.Add(account);
+            }
+
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+        }
+
+        private void UpdateFile([NotNull] string fileName) 
         {
             var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
@@ -93,13 +158,13 @@ namespace ClientSettingsUpdater
                         return;
                     }
 
-                    if (_server.IsAssigned() && !setting.Server.Equals(_server, StringComparison.OrdinalIgnoreCase))
+                    if (Server.IsAssigned() && !setting.Server.Equals(Server, StringComparison.OrdinalIgnoreCase))
                     {
                         return;
                     }
 
-                    setting.UserName = _userName;
-                    setting.Password = _password;
+                    setting.UserName = UserName;
+                    setting.Password = Password;
                 });
 
             File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,

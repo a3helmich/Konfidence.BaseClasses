@@ -1,6 +1,6 @@
 ﻿namespace Konfidence.SqlHostProvider.SqlAccess
 {
-    public class ConfigConnectionString
+    public class ConfigConnectionString 
     {
         public string Server { get; set; } = string.Empty;
 

@@ -122,7 +122,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             Func<Task> action = async () => await SqlServerInstance.VerifyDatabaseServer(sqlServerName, userName, password);
 
             // Assert
-            action.Should().Throw<ConnectionFailureException>().WithMessage("Failed to connect to server does_not_exists.");
+            action.Should().ThrowAsync<ConnectionFailureException>().WithMessage("Failed to connect to server does_not_exists.");
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
             Func<Task> action = async () => await SqlServerInstance.VerifyDatabaseServer(sqlServerName, userName, password);
 
             // Assert
-            action.Should().Throw<ConnectionFailureException>().WithMessage("Failed to connect to server does_not_exists.");
+            action.Should().ThrowAsync<ConnectionFailureException>().WithMessage("Failed to connect to server does_not_exists.");
         }
     }
 }
