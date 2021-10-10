@@ -60,6 +60,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2CC075
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSettingsUpdater.Tests", "ClientSettingsUpdater.Tests\ClientSettingsUpdater.Tests.csproj", "{62020D65-5793-46FA-A45D-69CFBEF8F5BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{71FFB837-A28C-4F6E-8928-05217E1CA303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71FFB837-A28C-4F6E-8928-05217E1CA303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71FFB837-A28C-4F6E-8928-05217E1CA303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62020D65-5793-46FA-A45D-69CFBEF8F5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62020D65-5793-46FA-A45D-69CFBEF8F5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62020D65-5793-46FA-A45D-69CFBEF8F5BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62020D65-5793-46FA-A45D-69CFBEF8F5BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +157,7 @@ Global
 		{EF2F9DBD-2435-4379-9024-5531F587539C} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{D5932518-4099-4749-9BE5-CBBD5B4E14D6} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{71FFB837-A28C-4F6E-8928-05217E1CA303} = {AE05D666-5600-4C5A-A903-038C94787EB4}
+		{62020D65-5793-46FA-A45D-69CFBEF8F5BF} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B102BFD-CA61-4D89-A274-368CA1DF0437}
