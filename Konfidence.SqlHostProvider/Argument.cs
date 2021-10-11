@@ -10,6 +10,7 @@ namespace Konfidence.SqlHostProvider
         Password = 3,
         Server = 4,
         ConfigFileName = 5, 
-        MailServer = 6
+        MailServer = 6,
+        Verbose = 7
     }
 }

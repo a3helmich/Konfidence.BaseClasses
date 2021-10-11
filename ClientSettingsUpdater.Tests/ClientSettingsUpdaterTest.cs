@@ -174,7 +174,14 @@ namespace ClientSettingsUpdater.Tests
             var errorExiterMock = new Mock<IErrorExiter>();
 
             // act
-            var clientSettingsManager = new ClientSettingsManager(new[] { $"--{Argument.ConfigFileFolder}=.", $"--{Argument.MailServer}=mailserver", $"--{Argument.UserName}=Adrie", $"--{Argument.Password}=geheim" }, errorExiterMock.Object);
+            var clientSettingsManager = new ClientSettingsManager(new[]
+            {
+                $"--{Argument.ConfigFileFolder}=.", 
+                $"--{Argument.MailServer}=mailserver", 
+                $"--{Argument.UserName}=Adrie", 
+                $"--{Argument.Password}=geheim", 
+                $"--{Argument.Verbose}=verbose"
+            }, errorExiterMock.Object);
 
             // assert
             errorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
