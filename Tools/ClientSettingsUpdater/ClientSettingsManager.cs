@@ -100,6 +100,8 @@ namespace ClientSettingsUpdater
 
             if (!clientSettingsFileNames.Any())
             {
+                Console.WriteLine($"config file not found: '{ConfigFileName}'");
+
                 _errorExiter.Exit(7);
             }
 
