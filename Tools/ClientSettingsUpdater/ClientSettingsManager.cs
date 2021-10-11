@@ -14,7 +14,10 @@ namespace ClientSettingsUpdater
 {
     internal class ClientSettingsManager
     {
-        public readonly string ConfigFolder;
+        private readonly IErrorExiter _errorExiter;
+        private readonly bool _verbose;
+
+            public readonly string ConfigFolder;
         public readonly string UserName;
         public readonly string Password;
         public readonly string Server;
@@ -23,31 +26,38 @@ namespace ClientSettingsUpdater
 
         public ClientSettingsManager([NotNull] string[] args, IErrorExiter errorExiter)
         {
+            _errorExiter = errorExiter;
+
             if (!args.Any())
             {
-                errorExiter.Exit(4);
+                _errorExiter.Exit(4);
 
                 return;
+            }
+
+            if (args.TryParseArgument(Argument.ConfigFileFolder, out var verbose))
+            {
+                _verbose = !string.IsNullOrWhiteSpace(verbose);
             }
 
             // location, username, password
             if (!args.TryParseArgument(Argument.ConfigFileFolder, out ConfigFolder))
             {
-                errorExiter.Exit(1);
+                _errorExiter.Exit(1);
 
                 return;
             }
 
             if (!args.TryParseArgument(Argument.UserName, out UserName))
             {
-                errorExiter.Exit(2);
+                _errorExiter.Exit(2);
 
                 return;
             }
 
             if (!args.TryParseArgument(Argument.Password, out Password))
             {
-                errorExiter.Exit(3);
+                _errorExiter.Exit(3);
 
                 return;
             }
@@ -71,20 +81,26 @@ namespace ClientSettingsUpdater
                     ConfigFileName = MailConstants.DefaultMailServerConfigFileName;
                 }
             }
+
+            if (_verbose)
+            {
+                Console.WriteLine($"configFolder: '{ConfigFolder}'");
+                Console.WriteLine($"current directory: '{Directory.GetCurrentDirectory()}'");
+            }
         }
 
         public void Execute()
         {
             if (!Directory.Exists(ConfigFolder))
             {
-                Environment.Exit(6);
+                _errorExiter.Exit(6);
             }
 
             var clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
 
             if (!clientSettingsFileNames.Any())
             {
-                Environment.Exit(7);
+                _errorExiter.Exit(7);
             }
 
             var fullFolderName = Path.GetFullPath(ConfigFolder);
