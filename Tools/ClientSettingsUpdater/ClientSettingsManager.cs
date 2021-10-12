@@ -35,6 +35,8 @@ namespace ClientSettingsUpdater
                 return;
             }
 
+            Console.WriteLine($"content: {string.Join('-',args)}");
+
             if (args.TryParseArgument(Argument.ConfigFileFolder, out var verbose))
             {
                 _verbose = !string.IsNullOrWhiteSpace(verbose);
