@@ -31,8 +31,6 @@ namespace Konfidence.SqlHostProvider
             var assembly = Assembly.GetCallingAssembly();
             var directoryName = Path.GetDirectoryName(assembly.Location) ?? string.Empty;
 
-            Console.WriteLine($"SqlHostProvider.DependencyInjectionFactory.GetApplicationPath: '{directoryName}'");
-
             return directoryName;
         }
 
