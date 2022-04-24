@@ -13,7 +13,5 @@ namespace Konfidence.BaseRest.Client
         string Route { get; set; }
 
         Uri BaseUri();
-
-        Uri Host();
     }
 }

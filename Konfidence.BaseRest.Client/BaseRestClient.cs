@@ -11,29 +11,25 @@ namespace Konfidence.BaseRest.Client
     [UsedImplicitly]
     public class BaseRestClient : IBaseRestClient
     {
-        internal IRestClient RestClient { get; }
+        private RestClient RestClient { get; }
 
-        internal string Route { get; }
-
-        public BaseRestClient(IRestClient restClient, [NotNull] IRestClientConfig clientConfig)
+        public BaseRestClient([NotNull] IRestClientConfig clientConfig)
         {
-            RestClient = restClient;
+            var restClientOptions = new RestClientOptions(clientConfig.BaseUri());
 
-            Route = clientConfig.Route;
-
-            RestClient.BaseUrl = clientConfig.BaseUri();
+            RestClient = new RestClient(restClientOptions);
         }
 
         [ItemCanBeNull]
         public async Task<T> PostAsync<T>(string relativePath, object requestObject, [CanBeNull] Dictionary<string, string> headerParameters = null) where T : new()
         {
-            return await ExecuteMethodAsync<T>(relativePath, Method.POST, requestObject, headerParameters);
+            return await ExecuteMethodAsync<T>(relativePath, Method.Post, requestObject, headerParameters);
         }
 
         [ItemCanBeNull]
         public async Task<T> GetAsync<T>(string relativePath) where T : new()
         {
-            return await ExecuteMethodAsync<T>(relativePath, Method.GET);
+            return await ExecuteMethodAsync<T>(relativePath, Method.Get);
         }
 
         [ItemCanBeNull]
@@ -63,6 +59,11 @@ namespace Konfidence.BaseRest.Client
 
             if (response.ResponseStatus == ResponseStatus.Error)
             {
+                if (!response.ErrorException.IsAssigned())
+                {
+                    return default;
+                }
+
                 throw response.ErrorException;
             }
 
@@ -71,7 +72,7 @@ namespace Konfidence.BaseRest.Client
                 return default;
             }
 
-            return JsonSerializer.Deserialize<T>(response.Content, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+            return JsonSerializer.Deserialize<T>(response.Content??string.Empty, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         }
     }
 }
