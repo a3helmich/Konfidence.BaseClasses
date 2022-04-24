@@ -29,7 +29,7 @@ namespace Konfidence.BaseRest.Client
         }
 
         [NotNull]
-        public Uri Host()
+        private Uri Host()
         {
             const string prefix = @"http";
 
