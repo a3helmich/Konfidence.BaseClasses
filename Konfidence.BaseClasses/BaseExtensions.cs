@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
 namespace Konfidence.Base
@@ -7,7 +8,7 @@ namespace Konfidence.Base
     public static class BaseExtensions
     {
         [ContractAnnotation("assignedObject:null => false")]
-        public static bool IsAssigned(this object assignedObject)
+        public static bool IsAssigned([NotNullWhen(true)] this object assignedObject)
         {
             if (assignedObject is string assignedString)
             {
@@ -35,14 +36,14 @@ namespace Konfidence.Base
 
         [UsedImplicitly]
         [ContractAnnotation("line:null => true")]
-        public static bool IsEof(this string line)
+        public static bool IsEof([NotNullWhen(true)] this string line)
         {
             return line == null;
         }
 
         [UsedImplicitly]
         [ContractAnnotation("assignedGuid:null => false")]
-        public static bool IsGuid(this string assignedGuid)
+        public static bool IsGuid([NotNullWhen(true)] this string assignedGuid)
         {
             return Guid.TryParse(assignedGuid, out _);
         }

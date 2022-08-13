@@ -6,8 +6,9 @@
     <Copyright>Konfidence in it 2022.</Copyright>
     <Company>Konfidence in it</Company>
     <AssemblyCompany>Konfidence in it</AssemblyCompany>
-    
-    <LangVersion>latest</LangVersion>
+
+		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
 
     <ComVisible>False</ComVisible>
     <CLSCompliant>False</CLSCompliant>

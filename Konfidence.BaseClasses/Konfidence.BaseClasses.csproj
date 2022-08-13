@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+    <!--<TargetFrameworks>net5.0;net6.0</TargetFrameworks>-->
+    <LangVersion>latest</LangVersion>
 
-    <RootNamespace>Konfidence.Base</RootNamespace>
+		<RootNamespace>Konfidence.Base</RootNamespace>
     <AssemblyName>Konfidence.BaseClasses</AssemblyName>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
