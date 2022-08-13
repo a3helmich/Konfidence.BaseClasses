@@ -64,7 +64,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
             return false;
         }
 
-        internal static bool TryFindDatabase(string databaseServerName, string databaseName, [NotNull] string userName, [NotNull] string password)
+        internal static bool TryFindDatabase(string databaseServerName, string databaseName, string userName, string password)
         {
             if (!userName.IsAssigned() || !password.IsAssigned())
             {

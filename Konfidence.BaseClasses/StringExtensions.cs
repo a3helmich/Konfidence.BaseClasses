@@ -9,9 +9,8 @@ namespace Konfidence.Base
     [UsedImplicitly]
     public static class StringExtensions
     {
-        [NotNull]
         [UsedImplicitly]
-        public static string TrimStart(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        public static string TrimStart(this string line, string trimPart, bool leaveWhiteSpace = false)
         {
             if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.StartsWith(trimPart))
             {
@@ -26,9 +25,8 @@ namespace Konfidence.Base
             return line;
         }
 
-        [NotNull]
         [UsedImplicitly]
-        public static string TrimStartIgnoreCase(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        public static string TrimStartIgnoreCase(this string line, string trimPart, bool leaveWhiteSpace = false)
         {
             if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.StartsWith(trimPart, StringComparison.CurrentCultureIgnoreCase))
             {
@@ -43,9 +41,8 @@ namespace Konfidence.Base
             return line;
         }
 
-        [NotNull]
         [UsedImplicitly]
-        public static string TrimEnd(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        public static string TrimEnd(this string line, string trimPart, bool leaveWhiteSpace = false)
         {
             if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.EndsWith(trimPart))
             {
@@ -60,9 +57,8 @@ namespace Konfidence.Base
             return line;
         }
 
-        [NotNull]
         [UsedImplicitly]
-        public static string TrimEndIgnoreCase(this string line, [NotNull] string trimPart, bool leaveWhiteSpace = false)
+        public static string TrimEndIgnoreCase(this string line, string trimPart, bool leaveWhiteSpace = false)
         {
             if (trimPart.IsAssigned() && line.Length >= trimPart.Length && line.EndsWith(trimPart, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -77,16 +73,14 @@ namespace Konfidence.Base
             return line;
         }
 
-        [NotNull]
         [UsedImplicitly]
-        public static List<string> TrimList([NotNull] this IEnumerable<string> lines)
+        public static List<string> TrimList(this IEnumerable<string> lines)
         {
             return lines.Select(x => x.Trim()).ToList();
         }
 
-        [NotNull]
         [UsedImplicitly]
-        public static string ReplaceIgnoreCase([NotNull] this string fromString, [NotNull] string oldValue, string newValue)
+        public static string ReplaceIgnoreCase(this string fromString, string oldValue, string newValue)
         {
             var replaceFromIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
 
@@ -95,14 +89,12 @@ namespace Konfidence.Base
                 : fromString;
         }
 
-        [NotNull]
         [UsedImplicitly]
         public static string InitLowerCase(this string word)
         {
             return word.IsAssigned() ? $"{char.ToLowerInvariant(word[0])}{word.Substring(1)}" : string.Empty;
         }
 
-        [NotNull]
         [UsedImplicitly]
         public static string InitUpperCase(this string word)
         {
@@ -110,7 +102,7 @@ namespace Konfidence.Base
         }
 
         [UsedImplicitly]
-        public static bool Contains([NotNull] this string word, [NotNull] string contains, StringComparison stringComparison)
+        public static bool Contains(this string word, string contains, StringComparison stringComparison)
         {
             return word.IsAssigned() && word.IndexOf(contains, stringComparison) >= 0;
         }

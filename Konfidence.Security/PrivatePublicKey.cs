@@ -14,21 +14,19 @@ namespace Konfidence.Security
         {
             ApplicationName = applicationName;
 
-            using (var encryption = new KeyEncryption(ApplicationName))
-            {
-                PublicKey = encryption.PublicKey;
-                PrivateKey = encryption.PrivateKey;
-            }
+            using var encryption = new KeyEncryption(ApplicationName);
+
+            PublicKey = encryption.PublicKey;
+            PrivateKey = encryption.PrivateKey;
         }
 
         public bool DeleteEncryptionStore()
         {
             try
             {
-                using (var clientKeyEncryption = new KeyEncryption(ApplicationName))
-                {
-                    clientKeyEncryption.Delete();
-                }
+                using var clientKeyEncryption = new KeyEncryption(ApplicationName);
+
+                clientKeyEncryption.Delete();
             }
             catch
             {

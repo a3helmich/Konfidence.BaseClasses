@@ -60,7 +60,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             ConfigurationManager.RefreshSection("connectionStrings");
         }
 
-        private static void SetConnectionStringPart([NotNull] List<string> connectionStringParts, string parameter, string value)
+        private static void SetConnectionStringPart(List<string> connectionStringParts, string parameter, string value)
         {
             if (!value.IsAssigned())
             {
@@ -68,17 +68,21 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             }
 
             var connectionPart = connectionStringParts
-                .FirstOrDefault(x => x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) && x.TrimStartIgnoreCase(parameter).StartsWith("="));
+                .FirstOrDefault(x =>
+                    x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
+                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
 
             connectionStringParts.Remove(connectionPart);
 
             connectionStringParts.Add($"{parameter}={value}");
         }
 
-        private static void RemoveConnectionStringPart([NotNull] List<string> connectionStringParts, string parameter)
+        private static void RemoveConnectionStringPart(List<string> connectionStringParts, string parameter)
         {
             var connectionPart = connectionStringParts
-                .FirstOrDefault(x => x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) && x.TrimStartIgnoreCase(parameter).StartsWith("="));
+                .FirstOrDefault(x =>
+                    x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
+                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
 
             connectionStringParts.Remove(connectionPart);
         }
@@ -92,7 +96,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
             var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
-            if (!clientSettings.DataConfiguration.Connections.Any())
+            if (!clientSettings.IsAssigned() || !clientSettings.DataConfiguration.IsAssigned() || !clientSettings.DataConfiguration.Connections.Any())
             {
                 return;
             }
@@ -109,7 +113,6 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             }
         }
 
-        [NotNull]
         internal static Configuration SetDatabaseSecurityInMemory(string userName, string password, string connectionName)
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

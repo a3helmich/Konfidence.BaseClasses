@@ -19,6 +19,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
     {
         [UsedImplicitly] public LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
 
-        public DataConfiguration DataConfiguration { get; set; }
+        public DataConfiguration? DataConfiguration { get; set; }
     }
 }

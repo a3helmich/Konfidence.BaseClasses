@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -25,7 +24,6 @@ namespace Konfidence.SqlHostProvider
                 .Build();
         }
 
-        [NotNull]
         private static string GetApplicationPath()
         {
             var assembly = Assembly.GetCallingAssembly();
@@ -34,8 +32,7 @@ namespace Konfidence.SqlHostProvider
             return directoryName;
         }
 
-        [NotNull]
-        public static IServiceProvider ConfigureDependencyInjection([NotNull] params string[] args)
+        public static IServiceProvider ConfigureDependencyInjection(params string[] args)
         {
             var services = new ServiceCollection();
 

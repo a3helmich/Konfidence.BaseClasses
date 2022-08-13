@@ -7,23 +7,27 @@ namespace Konfidence.UtilHelper
 {
     public class BaseXmlDocument : XmlDocument
     {
-        public XmlElement Root { get; private set; }
+        public XmlElement? Root { get; private set; }
 
         public string FileName { get; private set; } = string.Empty;
 
         public string PathName { get; private set; } = string.Empty;
 
-        public string NeedRootNameSpaceUri { get; private set; }
+        public string NeedRootNameSpaceUri { get; private set; } = string.Empty;
 
-        public XmlNamespaceManager XmlNamespaceManager { get; private set; }
+        public XmlNamespaceManager? XmlNamespaceManager { get; private set; }
 
         public override void Load(string filename)
         {
             FileName = filename;
 
-            PathName = Path.GetDirectoryName(filename) + @"\";
+            PathName = Path.GetDirectoryName(FileName) ?? string.Empty;
 
-            base.Load(filename);
+            PathName += PathName.EndsWith(Path.DirectorySeparatorChar)
+                ? string.Empty
+                : Path.DirectorySeparatorChar.ToString();
+
+            base.Load(PathName + FileName);
 
             PostLoad();
         }
@@ -72,11 +76,16 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        public void GetAttributeValue([NotNull] string nodeName, string attributeName, out string value)
+        public void GetAttributeValue(string nodeName, string attributeName, out string value)
         {
-            var valueNode = Root.SelectSingleNode(nodeName);
+            value = string.Empty;
 
-            GetAttributeValue(valueNode, attributeName, out value);
+            var valueNode = Root?.SelectSingleNode(nodeName);
+
+            if (valueNode.IsAssigned())
+            {
+                GetAttributeValue(valueNode, attributeName, out value);
+            }
         }
 
         public void GetAttributeValue(XmlNode valueNode, string attributeName, out string value)
@@ -104,12 +113,17 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        public void GetValue([NotNull] string nodeName, [NotNull] out string value)
+        public void GetValue(string nodeName, out string value)
         {
-            GetValue(Root, nodeName, out value);
+            value = string.Empty;
+
+            if (Root.IsAssigned())
+            {
+                GetValue(Root, nodeName, out value);
+            }
         }
 
-        public void GetValue([NotNull] XmlNode node,[NotNull] string nodeName, [NotNull] out string value)
+        public void GetValue(XmlNode node,string nodeName, out string value)
         {
             value = string.Empty;
 
@@ -122,12 +136,17 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        public void GetValue([NotNull] string nodeName, out bool value)
+        public void GetValue(string nodeName, out bool value)
         {
-            GetValue(Root, nodeName, out value);
+            value = false;
+
+            if (Root.IsAssigned())
+            {
+                GetValue(Root, nodeName, out value);
+            }
         }
 
-        public void GetValue([NotNull] XmlNode node,[NotNull] string nodeName, out bool value)
+        public void GetValue(XmlNode node,string nodeName, out bool value)
         {
             var valueNode = node.SelectSingleNode(nodeName);
 
@@ -144,8 +163,7 @@ namespace Konfidence.UtilHelper
             }
         }
 
-        [NotNull]
-        public XmlNode SetValue([NotNull] XmlNode parentNode, [NotNull] string name, [NotNull] string value)
+        public XmlNode SetValue(XmlNode parentNode, string name, string value)
         {
             var childElement = parentNode.SelectSingleNode(name);
 
@@ -162,14 +180,17 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        [NotNull]
-        public XmlNode SetValue([NotNull] string name, [NotNull] string value)
+        public XmlNode? SetValue(string name, string value)
         {
-            return SetValue(Root, name, value);
+            if (Root.IsAssigned())
+            {
+                return SetValue(Root, name, value);
+            }
+
+            return null;
         }
 
-        [NotNull]
-        public XmlNode GetNode([NotNull] XmlNode parentNode, [NotNull] string name)
+        public XmlNode GetNode(XmlNode parentNode, string name)
         {
             var childElement = parentNode.SelectSingleNode(name);
 
@@ -186,16 +207,19 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        [NotNull]
-        public XmlNode GetNode([NotNull] string name)
+        public XmlNode? GetNode(string name)
         {
+            if (!Root.IsAssigned())
+            {
+                return null;
+            }
+
             return GetNode(Root, name);
         }
 
-        [NotNull]
-        protected XmlNode AddNode([NotNull] XmlDocument xmlDocument, [NotNull] string field, string value)
+        protected XmlNode AddNode(XmlDocument xmlDocument, string field, string value)
         {
-            XmlNode root = xmlDocument.DocumentElement;
+            XmlNode? root = xmlDocument.DocumentElement;
 
             XmlNode newNode = xmlDocument.CreateElement(field);
 
@@ -213,7 +237,7 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        protected void AddNode([NotNull] XmlDocument registrationXml, [NotNull] string field, [NotNull] XmlDocument xmlDocument)
+        protected void AddNode(XmlDocument registrationXml, string field, XmlDocument xmlDocument)
         {
             var subDocumentNode = AddNode(registrationXml, field, string.Empty);
 
@@ -221,9 +245,9 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        protected void AddNode(XmlDocument registrationXml, [NotNull] XmlDocument xmlDocument)
+        protected void AddNode(XmlDocument registrationXml, XmlDocument xmlDocument)
         {
-            XmlNode root = xmlDocument.DocumentElement;
+            XmlNode? root = xmlDocument.DocumentElement;
 
             if (!root.IsAssigned()) 
             {

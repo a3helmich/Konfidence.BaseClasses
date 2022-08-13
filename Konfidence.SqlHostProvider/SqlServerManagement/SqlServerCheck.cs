@@ -12,14 +12,14 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
     public class SqlServerCheck
     {
         [UsedImplicitly]
-        public static bool VerifyDatabaseServer([NotNull] Database databaseInstance, int timeOut = 3000)
+        public static bool VerifyDatabaseServer(Database databaseInstance, int timeOut = 3000)
         {
             var serverName = string.Empty;
             var connectionName = string.Empty;
             var userName = string.Empty;
             var password = string.Empty;
 
-            IDbConnection sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
+            IDbConnection? sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
 
             if (sqlConnection.IsAssigned())
             {

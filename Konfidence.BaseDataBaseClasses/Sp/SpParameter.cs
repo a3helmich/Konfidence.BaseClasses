@@ -9,9 +9,9 @@ namespace Konfidence.BaseData.Sp
 
         public DbType DbType { get; set; }
 
-        public object Value { get; set; }
+        public object? Value { get; set; }
 
-        public SpParameter(string parameterName, DbType dbType, object value)
+        public SpParameter(string parameterName, DbType dbType, object? value)
         {
             ParameterName = parameterName;
             DbType = dbType;

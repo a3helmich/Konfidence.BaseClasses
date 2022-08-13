@@ -7,7 +7,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 {
     internal static class ClientConfigExtensions
     {
-        public static void SetSqlApplicationSettings([NotNull] this ClientConfig clientConfig)
+        public static void SetSqlApplicationSettings(this ClientConfig clientConfig)
         {
             if (!clientConfig.DefaultDatabase.IsAssigned())
             {
@@ -29,8 +29,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        [CanBeNull]
-        public static ConfigConnectionString GetConfigConnection([NotNull] this IClientConfig clientConfig)
+        public static ConfigConnectionString? GetConfigConnection(this IClientConfig clientConfig)
         {
             var connection = clientConfig
                 .Connections

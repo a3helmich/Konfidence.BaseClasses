@@ -14,8 +14,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string TableName { get; set; } = string.Empty;
 
-        [NotNull]
-        internal static List<IPrimaryKeyDataItem> GetList([NotNull] IBaseClient client)
+        internal static List<IPrimaryKeyDataItem> GetList(IBaseClient client)
         {
             var primaryKeyDataItems = new List<PrimaryKeyDataItem>();
 
@@ -27,7 +26,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO: internal
-        public override void GetData([NotNull] IDataReader dataReader)
+        public override void GetData(IDataReader dataReader)
         {
             dataReader.GetField(SqlConstant.ConstraintNameField,  out string constraintName);
             dataReader.GetField(SqlConstant.ConstraintTypeField, out string constraintType);

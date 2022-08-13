@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Reflection;
 using System.Runtime.Versioning;
-using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.Security
 {
     internal class SecurityConfiguration : ISecurityConfiguration
     {
-        private string _framework;
+        private string? _framework;
 
         public PlatformID OSVersionPlatform { get; set; }
 
-        [CanBeNull] public string Framework { get; set; }
+        public string? Framework { get; set; }
 
         internal SecurityConfiguration()
         {
@@ -20,8 +19,7 @@ namespace Konfidence.Security
             Framework = GetFramework();
         }
 
-        [CanBeNull]
-        private string GetFramework()
+        private string? GetFramework()
         {
             if (!_framework.IsAssigned())
             {

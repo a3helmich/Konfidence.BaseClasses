@@ -14,7 +14,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public List<ConfigConnectionString> Connections { get; set; } = new();
 
-        public ClientConfig([NotNull] IConfiguration configuration)
+        public ClientConfig(IConfiguration configuration)
         {
             var section = configuration.GetSection(@"DataConfiguration");
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.DatabaseInterface;
 
@@ -9,7 +8,7 @@ namespace Konfidence.BaseData.Sp
 {
     public static class SpParameterExtensions
     {
-        [NotNull] private static readonly Dictionary<Type, DbType> _typeMap = new();
+        private static readonly Dictionary<Type, DbType> _typeMap = new();
 
         static SpParameterExtensions()
         {
@@ -51,12 +50,12 @@ namespace Konfidence.BaseData.Sp
             _typeMap[typeof(TimeSpan?)] = DbType.Time;
         }
 
-        public static void SetParameter<T>([NotNull] this List<ISpParameterData> spParameterData, string parameterName, T value) 
+        public static void SetParameter<T>(this List<ISpParameterData> spParameterData, string parameterName, T value) 
         {
             spParameterData.AddInParameter(parameterName, _typeMap[typeof(T)], value);
         }
 
-        public static void SetParameter([NotNull] this List<ISpParameterData> spParameterData, string parameterName, Guid guidValue)
+        public static void SetParameter(this List<ISpParameterData> spParameterData, string parameterName, Guid guidValue)
         {
             if (guidValue.IsAssigned())
             {
@@ -68,7 +67,7 @@ namespace Konfidence.BaseData.Sp
             spParameterData.AddInParameter(parameterName, _typeMap[typeof(Guid)], null);
         }
 
-        public static void SetParameter([NotNull] this List<ISpParameterData> spParameterData, string parameterName, DateTime dateTimeValue)
+        public static void SetParameter(this List<ISpParameterData> spParameterData, string parameterName, DateTime dateTimeValue)
         {
             if (dateTimeValue.IsAssigned())
             {
@@ -80,7 +79,7 @@ namespace Konfidence.BaseData.Sp
             spParameterData.AddInParameter(parameterName, _typeMap[typeof(DateTime)], null);
         }
 
-        public static void SetParameter([NotNull] this List<ISpParameterData> spParameterData, string parameterName, TimeSpan timeSpan)
+        public static void SetParameter(this List<ISpParameterData> spParameterData, string parameterName, TimeSpan timeSpan)
         {
             if (timeSpan.IsAssigned())
             {
@@ -96,7 +95,7 @@ namespace Konfidence.BaseData.Sp
             spParameterData.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], null);
         }
 
-        private static void AddInParameter([NotNull] this List<ISpParameterData> spParameterData, string field, DbType dbType, object value)
+        private static void AddInParameter(this List<ISpParameterData> spParameterData, string field, DbType dbType, object? value)
         {
             spParameterData.Add(new SpParameter(field, dbType, value));
         }

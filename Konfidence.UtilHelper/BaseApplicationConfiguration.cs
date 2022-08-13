@@ -11,10 +11,10 @@ namespace Konfidence.UtilHelper
     [UsedImplicitly]
     public class BaseApplicationConfiguration
     {
-        private XmlDocument _configuration;
-        private XmlNode _root;
+        private XmlDocument? _configuration;
+        private XmlNode? _root;
 
-        protected string ConfigFileName { get; }
+        private readonly string ConfigFileName;
 
         public BaseApplicationConfiguration(string configFileName)
         {
@@ -46,15 +46,14 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         public void Save()
         {
-            _configuration.Save(ConfigFileName);
+            _configuration?.Save(ConfigFileName);
         }
 
-        [NotNull]
-        protected string GetNodeValue([NotNull] string name)
+        protected string GetNodeValue(string name)
         {
             var nodeValue = string.Empty;
 
-            var xmlNode = _root.SelectSingleNode(name);
+            var xmlNode = _root?.SelectSingleNode(name);
 
             if (xmlNode.IsAssigned())
             {
@@ -65,11 +64,11 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        protected bool GetBoolNodeValue([NotNull] string name)
+        protected bool GetBoolNodeValue(string name)
         {
             var nodeValue = false;
 
-            var xmlNode = _root.SelectSingleNode(name);
+            var xmlNode = _root?.SelectSingleNode(name);
 
             if (xmlNode.IsAssigned())
             {
@@ -80,8 +79,7 @@ namespace Konfidence.UtilHelper
         }
 
         [UsedImplicitly]
-        [NotNull]
-        protected ArrayList GetArrayListNodeValue([NotNull] string name)
+        protected ArrayList GetArrayListNodeValue(string name)
         {
             var arrayArrayList = new ArrayList();
             var arrayByteListNodeValue = new ArrayList();
@@ -120,31 +118,37 @@ namespace Konfidence.UtilHelper
             return arrayArrayList;
         }
 
-        protected void SetNodeValue([NotNull] string name, string value)
+        protected void SetNodeValue(string name, string value)
         {
-            var valueNode = _root.SelectSingleNode(name);
+            var valueNode = _root?.SelectSingleNode(name);
 
             // Create the node if it doens't exist yet
             if (!valueNode.IsAssigned())
             {
-                valueNode = _configuration.CreateNode(XmlNodeType.Element, name, null);
+                valueNode = _configuration?.CreateNode(XmlNodeType.Element, name, null);
 
-                _root.AppendChild(valueNode);
+                if (valueNode.IsAssigned())
+                {
+                    _root?.AppendChild(valueNode);
+                }
             }
 
-            // remove the node if the assigned value is null or empty
-            if (!value.IsAssigned())
+            if (valueNode.IsAssigned())
             {
-                _root.RemoveChild(valueNode);
-            }
-            else
-            {
-                valueNode.InnerText = value;
+                // remove the node if the assigned value is null or empty
+                if (!value.IsAssigned())
+                {
+                    _root?.RemoveChild(valueNode);
+                }
+                else
+                {
+                    valueNode.InnerText = value;
+                }
             }
         }
 
         [UsedImplicitly]
-        protected void SetNodeValue([NotNull] string name, bool value)
+        protected void SetNodeValue(string name, bool value)
         {
             SetNodeValue(name, value.ToString());
         }
@@ -156,7 +160,7 @@ namespace Konfidence.UtilHelper
         /// <param name="name"></param>
         /// <param name="value"></param>
         [UsedImplicitly]
-        protected void SetNodeValue([NotNull] string name, ArrayList value)
+        protected void SetNodeValue(string name, ArrayList value)
         {
             var joinedArray = string.Empty;
 

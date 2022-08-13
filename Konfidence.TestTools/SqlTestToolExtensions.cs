@@ -48,7 +48,7 @@ namespace Konfidence.TestTools
             {
                 var clientSettings = JsonSerializer.Deserialize<ClientSettings>(File.ReadAllText(fileName));
 
-                var connections = clientSettings?.DataConfiguration.Connections;
+                var connections = clientSettings?.DataConfiguration?.Connections;
 
                 if (!connections.IsAssigned() || !connections.Any())
                 {
@@ -85,7 +85,7 @@ namespace Konfidence.TestTools
                 return;
             }
 
-            var connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).TrimList();
+            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).TrimList();
 
             SetConnectionStringPart(connectionStringParts, "User ID", userName);
 
@@ -95,14 +95,14 @@ namespace Konfidence.TestTools
 
             RemoveConnectionStringPart(connectionStringParts, "Integrated Security");
 
-            connectionStringSettings.ConnectionString = string.Join(";", connectionStringParts);
+            connectionStringSettings.ConnectionString = string.Join(";" , connectionStringParts);
 
             config.Save(ConfigurationSaveMode.Modified);
 
             ConfigurationManager.RefreshSection("connectionStrings");
         }
 
-        private static void SetConnectionStringPart([NotNull] List<string> connectionStringParts, string parameter, string value)
+        private static void SetConnectionStringPart(List<string> connectionStringParts, string parameter, string value)
         {
             if (!value.IsAssigned())
             {
@@ -110,17 +110,21 @@ namespace Konfidence.TestTools
             }
 
             var connectionPart = connectionStringParts
-                .FirstOrDefault(x => x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) && x.TrimStartIgnoreCase(parameter).StartsWith("="));
+                .FirstOrDefault(x =>
+                    x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
+                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
 
             connectionStringParts.Remove(connectionPart);
 
             connectionStringParts.Add($"{parameter}={value}");
         }
 
-        private static void RemoveConnectionStringPart([NotNull] List<string> connectionStringParts, string parameter)
+        private static void RemoveConnectionStringPart(List<string> connectionStringParts, string parameter)
         {
             var connectionPart = connectionStringParts
-                .FirstOrDefault(x => x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) && x.TrimStartIgnoreCase(parameter).StartsWith("="));
+                .FirstOrDefault(x =>
+                    x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
+                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
 
             connectionStringParts.Remove(connectionPart);
         }

@@ -7,12 +7,12 @@ using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
 {
-    public class Decoder : IDisposable
+    public sealed class Decoder : IDisposable
     {
-        private KeyEncryption _decoder;
+        private readonly KeyEncryption _decoder;
         private bool _disposed;
 
-        public Decoder([NotNull] string privateKey)
+        public Decoder(string privateKey)
         {
             _disposed = false;
 
@@ -21,9 +21,14 @@ namespace Konfidence.Security.Encryption
             _decoder.ReadKey(privateKey);
         }
 
-        [NotNull]
-        public string Decrypt([NotNull] List<List<byte>> encryptedData)
+        [UsedImplicitly]
+        public string Decrypt(List<List<byte>> encryptedData)
         {
+            if (!_decoder.RsaProvider.IsAssigned())
+            {
+                return string.Empty;
+            }
+
             var asciiEncoding = new ASCIIEncoding();
             var encryptedDataList = new ArrayList();
             var rawData = new StringBuilder();
@@ -45,8 +50,6 @@ namespace Konfidence.Security.Encryption
             return rawData.ToString();
         }
 
-        #region IDisposable Members
-
         public void Dispose()
         {
             Dispose(true);
@@ -54,22 +57,23 @@ namespace Konfidence.Security.Encryption
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
 
             if (!_disposed)
             {
+                return;
+            }
+
+            if (disposing)
+            {
                 if (_decoder.IsAssigned())
                 {
-                    _decoder.Dispose(); // resources vrijgeven.
-
-                    _decoder = null;
+                    _decoder.Dispose();
                 }
             }
+
             _disposed = true;
-
         }
-
-        #endregion
     }
 }

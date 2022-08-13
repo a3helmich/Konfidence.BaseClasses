@@ -25,7 +25,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public bool HasGuidId { get; }
 
-        public TableDataItem(string catalog, string name, [NotNull] List<IColumnDataItem> columnDataItems, string primaryKey, string primaryKeyDataType, string guidIdField, bool hasGuidId)
+        public TableDataItem(string catalog, string name, List<IColumnDataItem> columnDataItems, string primaryKey, string primaryKeyDataType, string guidIdField, bool hasGuidId)
         {
             Catalog = catalog;
             Name = name;
@@ -41,8 +41,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             ColumnDataItems = columnDataItems;
         }
 
-        [NotNull]
-        internal static List<ITableDataItem> GetList([NotNull] IBaseClient client, List<IColumnDataItem> allColumnDataItems)
+        internal static List<ITableDataItem> GetList(IBaseClient client, List<IColumnDataItem> allColumnDataItems)
         {
             var tableDataItems = new List<ITableDataItem>();
 
@@ -57,8 +56,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return tableDataItems;
         }
 
-        [NotNull]
-        private static IEnumerable<TableDataItem> MapSchemaTablesToTableDataItems([NotNull] IEnumerable<DataRow> schemaTables, List<IColumnDataItem> allColumnDataItems)
+        private static IEnumerable<TableDataItem> MapSchemaTablesToTableDataItems(IEnumerable<DataRow> schemaTables, List<IColumnDataItem> allColumnDataItems)
         {
             var tableDataItems = schemaTables
                 .Select(tableDataRow => BuildTableDataItem(tableDataRow, allColumnDataItems))
@@ -69,12 +67,11 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 .ToList();
         }
 
-        [NotNull]
-        private static TableDataItem BuildTableDataItem([NotNull] DataRow tableDataRow, [NotNull] List<IColumnDataItem> allColumnDataItems)
+        private static TableDataItem BuildTableDataItem(DataRow tableDataRow, List<IColumnDataItem> allColumnDataItems)
         {
-            var catalog = tableDataRow["TABLE_CATALOG"].ToString();
+            string catalog = tableDataRow["TABLE_CATALOG"].ToString() ?? string.Empty;
 
-            var name = tableDataRow["TABLE_NAME"].ToString();
+            var name = tableDataRow["TABLE_NAME"].ToString() ?? string.Empty;
 
             var columnDataItems = allColumnDataItems.Where(x => x.TableName == name).ToList();
 
@@ -91,7 +88,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             var hasGuidId = guidColumn.IsAssigned();
 
-            var guidIdField = hasGuidId ? guidColumn.Name : string.Empty;
+            var guidIdField = hasGuidId ? guidColumn?.Name ?? string.Empty : string.Empty;
 
             return new TableDataItem(catalog, name, columnDataItems, primaryKey, primaryKeyDataType, guidIdField, hasGuidId); 
         }

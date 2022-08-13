@@ -8,6 +8,6 @@ namespace Konfidence.DatabaseInterface
 
         DbType DbType { get; set; }
 
-        object Value { get; set; }
+        object? Value { get; set; }
     }
 }
