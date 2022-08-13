@@ -1,38 +1,35 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Security.Cryptography;
-using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
 {
-    public class KeyEncryption : IDisposable
+    public sealed class KeyEncryption : IDisposable
     {
         private bool _disposed;
 
-        private RSACryptoServiceProvider _tempRsaProvider;
+        private RSACryptoServiceProvider? _tempRsaProvider;
 
         private int _maxBytesServer; 
 
-        public RSACryptoServiceProvider RsaProvider { get; private set; }
+        public RSACryptoServiceProvider? RsaProvider { get; private set; }
 
-        [NotNull] public string PublicKey => RsaProviderToXmlString(false);
+        public string PublicKey => RsaProviderToXmlString(false);
 
-        [NotNull] public string PrivateKey => RsaProviderToXmlString(true);
+        public string PrivateKey => RsaProviderToXmlString(true);
 
-        [UsedImplicitly]
         public int KeySize => TempKeyContainer.KeySize;
 
         public int PackageSize => _maxBytesServer / 2;
 
         private readonly ISecurityConfiguration _securityConfiguration;
 
-        [NotNull]
         private string RsaProviderToXmlString(bool includePrivateParameters)
         {
             try
             {
-                return RsaProvider.ToXmlString(includePrivateParameters);
+                return RsaProvider?.ToXmlString(includePrivateParameters)??string.Empty;
             }
             catch (PlatformNotSupportedException ex)
             {
@@ -42,7 +39,7 @@ namespace Konfidence.Security.Encryption
 
         public KeyEncryption(string containerName) : this(containerName, null) { }
 
-        internal KeyEncryption(string containerName, [CanBeNull] ISecurityConfiguration securityConfiguration)
+        internal KeyEncryption(string containerName, ISecurityConfiguration? securityConfiguration)
         {
             _securityConfiguration = securityConfiguration ?? new SecurityConfiguration();
 
@@ -71,7 +68,6 @@ namespace Konfidence.Security.Encryption
             Debug.WriteLine("Encryption: Utilhelper.ServerKeyEncryption(...) gotcontainer");
         }
 
-        [NotNull]
         private RSACryptoServiceProvider TempKeyContainer
         {
             get
@@ -113,7 +109,6 @@ namespace Konfidence.Security.Encryption
             return _maxBytesServer * 8;
         }
 
-        [NotNull]
         private static CspParameters GetCspParameters(string containerName)
         {
             var cp = new CspParameters {KeyContainerName = containerName};
@@ -217,13 +212,16 @@ namespace Konfidence.Security.Encryption
             }
         }
 
-        public void ReadKey([NotNull] string key)
+        public void ReadKey(string key)
         {
+            if (!RsaProvider.IsAssigned())
+            {
+                return;
+            }
+
             RsaProvider.FromXmlString(key);
             _maxBytesServer = RsaProvider.KeySize / 8;
         }
-
-        #region IDisposable Members
 
         public void Dispose()
         {
@@ -232,22 +230,23 @@ namespace Konfidence.Security.Encryption
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
 
-            if (!_disposed)
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
             {
                 if (RsaProvider.IsAssigned())
                 {
-                    RsaProvider.Clear(); // resources vrijgeven.
-
-                    RsaProvider = null;
+                    RsaProvider.Clear();
                 }
             }
+
             _disposed = true;
-
         }
-
-        #endregion
     }
 }

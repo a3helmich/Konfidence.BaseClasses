@@ -32,8 +32,8 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsPrimaryKey = isPrimaryKey;
         }
 
-        [NotNull]
-        internal static List<IIndexDataItem> GetList([NotNull] IBaseClient client, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
+        [UsedImplicitly]
+        internal static List<IIndexDataItem> GetList(IBaseClient client, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
         {
             var indexDataItems = new List<IIndexDataItem>();
 
@@ -47,24 +47,22 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return indexDataItems;
         }
 
-        [NotNull]
-        private static List<IIndexDataItem> MapSchemaIndexesToIndexDataItems([NotNull] List<DataRow> schemaIndexes, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
+        private static List<IIndexDataItem> MapSchemaIndexesToIndexDataItems(List<DataRow> schemaIndexes, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
         {
             return schemaIndexes.Select(indexDataRow => BuildIndexDataItem(indexDataRow, allPrimaryKeyDataItems)).ToList();
         }
 
-        [NotNull]
-        private static IIndexDataItem BuildIndexDataItem([NotNull] DataRow indexDataRow, [NotNull] List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
+        private static IIndexDataItem BuildIndexDataItem(DataRow indexDataRow, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
         {
-            var catalog = indexDataRow["TABLE_CATALOG"].ToString();
+            string catalog = indexDataRow["TABLE_CATALOG"].ToString() ?? string.Empty;
 
-            var tableName = indexDataRow["TABLE_NAME"].ToString();
+            string tableName = indexDataRow["TABLE_NAME"].ToString() ?? string.Empty;
 
-            var contraintName = indexDataRow["CONSTRAINT_NAME"].ToString();
+            string contraintName = indexDataRow["CONSTRAINT_NAME"].ToString() ?? string.Empty;
 
-            var indexName = indexDataRow["COLUMN_NAME"].ToString();
+            string indexName = indexDataRow["COLUMN_NAME"].ToString() ?? string.Empty;
 
-            var isPrimaryKey = allPrimaryKeyDataItems.Any(primaryKeyDataItems => primaryKeyDataItems.ConstraintName == contraintName);
+            bool isPrimaryKey = allPrimaryKeyDataItems.Any(primaryKeyDataItems => primaryKeyDataItems.ConstraintName == contraintName);
 
             return new IndexDataItem(catalog, tableName, indexName, contraintName, isPrimaryKey);
         }

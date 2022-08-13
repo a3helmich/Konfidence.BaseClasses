@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.Security.Encryption
 {
-    public class Encoder : IDisposable
+    public sealed class Encoder : IDisposable
     {
-        private KeyEncryption _encoder;
+        private readonly KeyEncryption _encoder;
         private bool _disposed;
 
-        public Encoder([NotNull] string publicKey)
+        public Encoder(string publicKey)
         {
             _disposed = false;
 
@@ -21,17 +20,14 @@ namespace Konfidence.Security.Encryption
             _encoder.ReadKey(publicKey);
         }
 
-        public int KeySize => _encoder.RsaProvider.KeySize;
+        public int KeySize => _encoder.RsaProvider?.KeySize??-1;
 
-        [CanBeNull]
-        public List<List<byte>> Encrypt(string rawData)
+        public List<List<byte>>? Encrypt(string rawData)
         {
-            List<List<byte>> byteList = null;
+            List<List<byte>> byteList = new List<List<byte>>();
 
             if (rawData.IsAssigned())
             {
-                byteList = new List<List<byte>>();
-
                 var partialString = rawData;
 
                 while (partialString.Length > _encoder.PackageSize)
@@ -46,7 +42,7 @@ namespace Konfidence.Security.Encryption
                 byteList.Add(GetEncryptedDataBlock(partialString));
             }
 
-            if (byteList.IsAssigned())
+            if (byteList.Any())
             {
                 return byteList.ToList();
             }
@@ -54,9 +50,12 @@ namespace Konfidence.Security.Encryption
             return null;
         }
 
-        [NotNull]
-        private List<byte> GetEncryptedDataBlock([NotNull] string partialString)
+        private List<byte> GetEncryptedDataBlock(string partialString)
         {
+            if (!_encoder.RsaProvider.IsAssigned())
+            {
+                return new List<byte>();
+            }
             var asciiEncoding = new ASCIIEncoding();
 
             var byteData = asciiEncoding.GetBytes(partialString);
@@ -66,13 +65,10 @@ namespace Konfidence.Security.Encryption
             return encryptedData.ToList();
         }
 
-        [NotNull]
-        private static string GetNextPartialString([NotNull] string fullString, int packageSize)
+        private static string GetNextPartialString(string fullString, int packageSize)
         {
             return fullString.Substring(packageSize, fullString.Length - packageSize);
         }
-
-        #region IDisposable Members
 
         public void Dispose()
         {
@@ -81,22 +77,23 @@ namespace Konfidence.Security.Encryption
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
 
-            if (!_disposed)
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
             {
                 if (_encoder.IsAssigned())
                 {
                     _encoder.Dispose(); 
-
-                    _encoder = null;
                 }
             }
+
             _disposed = true;
-
         }
-
-        #endregion
     }
 }

@@ -88,8 +88,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsGuidField = false;
         }
 
-        [NotNull]
-        internal static List<IColumnDataItem> GetList([NotNull] IBaseClient client, [NotNull] List<IIndexDataItem> allIndexDataItems)
+        internal static List<IColumnDataItem> GetList(IBaseClient client, List<IIndexDataItem> allIndexDataItems)
         {
             var columnDataItems = new List<ColumnDataItem>();
 
@@ -115,7 +114,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         }
 
         // TODO : internal
-        public override void GetData([NotNull] IDataReader dataReader)
+        public override void GetData(IDataReader dataReader)
         {
             dataReader.GetField("Name", out string name);
             dataReader.GetField("tableName", out string tableName);
@@ -143,7 +142,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsGuidField = SqlDataType.Equals("uniqueidentifier", StringComparison.InvariantCultureIgnoreCase);
         }
 
-        [NotNull]
         private static string GetDataType(string dataType)
         {
             dataType = dataType.ToLower();
@@ -191,7 +189,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return dataType;
         }
 
-        [NotNull]
         private string GetDbDataType(string dataType)
         {
             if (dataType.Equals("int", StringComparison.InvariantCultureIgnoreCase))
@@ -229,7 +226,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return dataType;
         }
 
-        [NotNull]
         private static string GetDefaultPropertyValue(string dataType, string newValue)
         {
             var defaultPropertyValuelinePart = string.Empty;

@@ -1,6 +1,5 @@
 using System.IO;
 using System.Xml;
-using JetBrains.Annotations;
 using Konfidence.Base;
 
 namespace Konfidence.UtilHelper
@@ -8,13 +7,17 @@ namespace Konfidence.UtilHelper
     internal class ApplicationSettings : IApplicationSettings
     {
         private readonly XmlDocument _xmlDocument = new();
-        private XmlNodeList _elementList;
+        private XmlNodeList? _elementList;
         private string _fileName = string.Empty;
 
-        internal string Application;
+        private readonly string Application;
         internal string RootPath = string.Empty;
 
-        [NotNull]
+        public ApplicationSettings(string application)
+        {
+            Application = application;
+        }
+
         private XmlNodeList ElementList
         {
             get
@@ -38,7 +41,6 @@ namespace Konfidence.UtilHelper
             }
         }
 
-        [NotNull]
         public string GetStringValue(string keyName)
         {
             foreach (XmlNode xmlNode in ElementList)
@@ -63,9 +65,9 @@ namespace Konfidence.UtilHelper
             _xmlDocument.Save(_fileName);
         }
 
-        public void SetStringValue([NotNull] string keyName, [NotNull] string keyValue)
+        public void SetStringValue(string keyName, string keyValue)
         {
-            XmlNode keyNode = null;
+            XmlNode? keyNode = null;
 
             foreach (XmlNode xmlNode in ElementList)
             {

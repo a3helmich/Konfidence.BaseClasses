@@ -6,6 +6,6 @@ namespace Konfidence.Security
     {
         PlatformID OSVersionPlatform { get; set; }
 
-        string Framework { get; set; }
+        string? Framework { get; set; }
     }
 }

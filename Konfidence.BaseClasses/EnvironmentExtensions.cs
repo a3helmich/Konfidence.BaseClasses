@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Konfidence.Base
@@ -8,38 +10,51 @@ namespace Konfidence.Base
         // this should be Linux proof
         public static bool TryGetEnvironmentVariable(this string environmentVariable, out string value)
         {
-            string key;
+            value = Environment
+                .GetEnvironmentVariables(EnvironmentVariableTarget.User)
+                .GetValue(environmentVariable);
 
-            var environmentVariables = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.User);
-
-            if ((key = environmentVariables.Keys.Cast<string>().ToList().FirstOrDefault(x => x.Equals(environmentVariable, StringComparison.OrdinalIgnoreCase))) != null)
+            if (value.IsAssigned())
             {
-                value = (string)environmentVariables[key];
-
                 return true;
             }
 
-            environmentVariables = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Machine);
+            value = Environment
+                .GetEnvironmentVariables(EnvironmentVariableTarget.Machine)
+                .GetValue(environmentVariable);
 
-            if ((key = environmentVariables.Keys.Cast<string>().ToList().FirstOrDefault(x => x.Equals(environmentVariable, StringComparison.OrdinalIgnoreCase))) != null)
+            if (value.IsAssigned())
             {
-                value = (string)environmentVariables[key];
-
                 return true;
             }
 
-            environmentVariables = Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Process);
+            value = Environment
+                .GetEnvironmentVariables(EnvironmentVariableTarget.Process)
+                .GetValue(environmentVariable);
 
-            if ((key = environmentVariables.Keys.Cast<string>().ToList().FirstOrDefault(x => x.Equals(environmentVariable, StringComparison.OrdinalIgnoreCase))) != null)
+            return value.IsAssigned();
+        }
+
+        private static string GetValue(this IDictionary environmentVariables, string environmentVariable)
+        {
+            List<string> keys = environmentVariables.Keys.OfType<string>().ToList();
+
+            if (keys.Any())
             {
-                value = (string)environmentVariables[key];
+                string key = keys.FirstOrDefault(x => x.Equals(environmentVariable, StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
 
-                return true;
+                if (key.IsAssigned())
+                {
+                    string? stringValue = (string?)environmentVariables[key];
+
+                    if (stringValue.IsAssigned())
+                    {
+                        return stringValue;
+                    }
+                }
             }
 
-            value = string.Empty;
-
-            return false;
+            return string.Empty;
         }
     }
 }

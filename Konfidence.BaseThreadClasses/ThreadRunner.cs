@@ -6,14 +6,14 @@ namespace Konfidence.BaseThreadClasses
 {
     internal class ThreadRunner<TAction> where TAction : ThreadAction, new()
     {
-        private Thread internalThread;
+        private Thread? internalThread;
         private readonly ThreadManager<TAction> _threadManager;
 
         private int _sleepTime = 3;
         private SleepUnit _sleepUnit = SleepUnit.Seconds;
         private bool _isAlive;
 
-        internal bool IsRunning => internalThread.IsAlive && (ThreadAction.IsAlive || _isAlive);
+        internal bool IsRunning => internalThread.IsAssigned() && internalThread.IsAlive && (ThreadAction.IsAlive || _isAlive);
 
         internal ThreadRunner(ThreadManager<TAction> threadManager)
         {
@@ -51,7 +51,7 @@ namespace Konfidence.BaseThreadClasses
 
         private void SleepThread(int sleepTime, SleepUnit sleepUnit)
         {
-            if (internalThread.IsAlive && !ThreadAction.IsAlive)
+            if (internalThread.IsAssigned() && internalThread.IsAlive && !ThreadAction.IsAlive)
             {
                 var timeSpan = new TimeSpan(0, 0, 0, 4);
 

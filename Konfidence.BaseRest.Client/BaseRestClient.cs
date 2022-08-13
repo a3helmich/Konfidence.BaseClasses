@@ -13,27 +13,24 @@ namespace Konfidence.BaseRest.Client
     {
         private RestClient RestClient { get; }
 
-        public BaseRestClient([NotNull] IRestClientConfig clientConfig)
+        public BaseRestClient(IRestClientConfig clientConfig)
         {
             var restClientOptions = new RestClientOptions(clientConfig.BaseUri());
 
             RestClient = new RestClient(restClientOptions);
         }
 
-        [ItemCanBeNull]
-        public async Task<T> PostAsync<T>(string relativePath, object requestObject, [CanBeNull] Dictionary<string, string> headerParameters = null) where T : new()
+        public async Task<T?> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string>? headerParameters = null) where T : new()
         {
             return await ExecuteMethodAsync<T>(relativePath, Method.Post, requestObject, headerParameters);
         }
 
-        [ItemCanBeNull]
-        public async Task<T> GetAsync<T>(string relativePath) where T : new()
+        public async Task<T?> GetAsync<T>(string relativePath) where T : new()
         {
             return await ExecuteMethodAsync<T>(relativePath, Method.Get);
         }
 
-        [ItemCanBeNull]
-        private async Task<T> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, [CanBeNull] object requestObject = null, [CanBeNull] Dictionary<string, string> headerParameters = null) where T : new()
+        private async Task<T?> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, object? requestObject = null, Dictionary<string, string>? headerParameters = null) where T : new()
         {
             var request = new RestRequest
             {

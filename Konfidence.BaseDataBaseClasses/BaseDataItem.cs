@@ -28,7 +28,7 @@ namespace Konfidence.BaseData
 
         public int GetId() => _id;
 
-        protected IBaseClient Client { get; set; }
+        protected IBaseClient? Client { get; set; }
 
         public List<ISpParameterData> GetParameterObjects() => SpParameterData;
 
@@ -56,8 +56,7 @@ namespace Konfidence.BaseData
             _id = id;
         }
 
-        [CanBeNull]
-        internal object GetAutoUpdateField([NotNull] string fieldName)
+        internal object? GetAutoUpdateField(string fieldName)
         {
             if (AutoUpdateFieldDictionary.TryGetValue(fieldName, out var parameterData) && parameterData.IsAssigned())
             {
@@ -68,7 +67,7 @@ namespace Konfidence.BaseData
         }
 
         [UsedImplicitly]
-        protected internal void AddAutoUpdateField([NotNull] string fieldName, DbType fieldType)
+        protected internal void AddAutoUpdateField(string fieldName, DbType fieldType)
         {
             if (!AutoUpdateFieldDictionary.ContainsKey(fieldName))
             {
@@ -103,14 +102,14 @@ namespace Konfidence.BaseData
         {
             Debug.WriteLine($"Client.GetItem(this) : this={GetType().FullName}");
 
-            Client.GetItem(this);
+            Client?.GetItem(this);
         }
 
-        protected void GetItemBy([NotNull] string storedProcedure)
+        protected void GetItemBy(string storedProcedure)
         {
             Debug.WriteLine($"Client.GetItemBy(this, {storedProcedure}) : this={GetType().FullName}");
 
-            Client.GetItemBy(this, storedProcedure);
+            Client?.GetItemBy(this, storedProcedure);
         }
 
         protected void GetItem(int id)
@@ -137,7 +136,7 @@ namespace Konfidence.BaseData
 
             Debug.WriteLine($"Client.Save(this) : this={GetType().FullName}");
 
-            Client.Save(this);
+            Client?.Save(this);
 
             GetAutoUpdateData();
         }
@@ -146,12 +145,11 @@ namespace Konfidence.BaseData
         {
             Debug.WriteLine($"Client.Delete(this) : this={GetType().FullName}");
 
-            Client.Delete(this);
+            Client?.Delete(this);
 
             _id = 0;
         }
 
-        [NotNull]
         public List<ISpParameterData> SetItemData()
         {
             SetData();
@@ -159,7 +157,6 @@ namespace Konfidence.BaseData
             return SetParameterData();
         }
 
-        [NotNull]
         private List<ISpParameterData> SetParameterData()
         {
             var parameterObjectList = SpParameterData.ToList();

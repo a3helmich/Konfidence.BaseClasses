@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Konfidence.SqlHostProvider.SqlConnectionManagement
+﻿namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 {
     public class SqlConnectionConstants
     {

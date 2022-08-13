@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.Mail;
 using Konfidence.SqlHostProvider;
@@ -17,14 +16,14 @@ namespace ClientSettingsUpdater
         private readonly IErrorExiter _errorExiter;
         private readonly bool _verbose;
 
-            public readonly string ConfigFolder;
-        public readonly string UserName;
-        public readonly string Password;
-        public readonly string Server;
-        public readonly string ConfigFileName;
-        public readonly string MailServer;
+        public readonly string ConfigFolder = string.Empty;
+        public readonly string UserName = string.Empty;
+        public readonly string Password = string.Empty;
+        public readonly string Server = string.Empty;
+        public readonly string ConfigFileName = string.Empty;
+        public readonly string MailServer = string.Empty;
 
-        public ClientSettingsManager([NotNull] string[] args, IErrorExiter errorExiter)
+        public ClientSettingsManager(string[] args, IErrorExiter errorExiter)
         {
             _errorExiter = errorExiter;
 
@@ -128,7 +127,7 @@ namespace ClientSettingsUpdater
             }
         }
 
-        private void UpdateMailServerFile([NotNull] string fileName)
+        private void UpdateMailServerFile(string fileName)
         {
             var clientSettings = JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(fileName));
 
@@ -165,11 +164,11 @@ namespace ClientSettingsUpdater
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
         }
 
-        private void UpdateFile([NotNull] string fileName) 
+        private void UpdateFile(string fileName) 
         {
             var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
-            clientSettings.DataConfiguration.Connections
+            clientSettings?.DataConfiguration?.Connections
                 .ForEach(setting =>
                 {
                     if (setting.UserName.IsAssigned())

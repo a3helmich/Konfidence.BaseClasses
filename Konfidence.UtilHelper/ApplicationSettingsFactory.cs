@@ -7,7 +7,6 @@ namespace Konfidence.UtilHelper
         private static string _rootPath = string.Empty;
 
         [UsedImplicitly]
-        [CanBeNull]
         public static IApplicationSettings ApplicationSettings(string application, string rootPath)
         {
             _rootPath = rootPath;
@@ -25,12 +24,10 @@ namespace Konfidence.UtilHelper
             return ApplicationSettings(application);
         }
 
-        [CanBeNull]
         public static IApplicationSettings ApplicationSettings(string application)
         {
-            var applicationSettings = new ApplicationSettings   //GetInstance(typeof(ApplicationSettings)) as ApplicationSettings;
+            var applicationSettings = new ApplicationSettings(application)
             {
-                Application = application, 
                 RootPath = _rootPath
             }; 
 

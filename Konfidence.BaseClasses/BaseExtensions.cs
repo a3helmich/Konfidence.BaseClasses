@@ -2,6 +2,8 @@
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
+#nullable disable
+
 namespace Konfidence.Base
 {
     [UsedImplicitly]
@@ -15,7 +17,7 @@ namespace Konfidence.Base
                 return !string.IsNullOrWhiteSpace(assignedString);
             }
 
-            return assignedObject != null;
+            return assignedObject is not null;
         }
 
         public static bool IsAssigned(this DateTime assignedTime)
@@ -38,7 +40,7 @@ namespace Konfidence.Base
         [ContractAnnotation("line:null => true")]
         public static bool IsEof([NotNullWhen(true)] this string line)
         {
-            return line == null;
+            return line is null;
         }
 
         [UsedImplicitly]

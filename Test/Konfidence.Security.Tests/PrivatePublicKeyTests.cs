@@ -42,7 +42,7 @@ namespace Konfidence.Security.Tests
 
             var ppk = new PrivatePublicKey(APPLICATION_NAME);
 
-            List<List<byte>> arrayList;
+            List<List<byte>>? arrayList;
 
             using (var encoder = new Encoder(ppk.PublicKey))
             {

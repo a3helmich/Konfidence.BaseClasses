@@ -1,6 +1,4 @@
-﻿using Konfidence.Base;
-
-namespace Konfidence.SqlHostProvider
+﻿namespace Konfidence.SqlHostProvider
 {
     public enum Argument
     {

@@ -7,8 +7,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
     public static class ColumnDataExtensions
     {
-        [NotNull]
-        public static string GetJoinedFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetJoinedFieldNames(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
@@ -17,8 +16,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return string.Join("", fieldNames);
         }
 
-        [NotNull]
-        public static string GetJoinedUnderscoreFieldNames([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetJoinedUnderscoreFieldNames(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
@@ -27,8 +25,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return string.Join("_", fieldNames).ToUpperInvariant();
         }
 
-        [NotNull]
-        public static string GetFieldNamesAsArguments([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetFieldNamesAsArguments(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
@@ -37,8 +34,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return string.Join(", ", fieldNames);
         }
 
-        [NotNull]
-        public static string GetFieldNamesAsParameters([NotNull] this List<IColumnDataItem> columnDataItems, [NotNull] List<string> fieldNameList)
+        public static string GetFieldNamesAsParameters(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
             var fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
@@ -47,16 +43,15 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return string.Join(", ", fieldNames);
         }
 
-        [CanBeNull]
         [UsedImplicitly]
-        public static IColumnDataItem Find([NotNull] this List<IColumnDataItem> columnDataItems, string columnName)
+        public static IColumnDataItem? Find(this List<IColumnDataItem> columnDataItems, string columnName)
         {
             return columnDataItems.FirstOrDefault(columnDataItem =>
                 columnDataItem.Name.Equals(columnName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         [UsedImplicitly]
-        public static bool HasDefaultValueFields([NotNull] this List<IColumnDataItem> columnDataItems)
+        public static bool HasDefaultValueFields(this List<IColumnDataItem> columnDataItems)
         {
             return columnDataItems.Any(columnDataItem => 
                 columnDataItem.IsAutoUpdated || columnDataItem.IsComputed || columnDataItem.IsDefaulted);

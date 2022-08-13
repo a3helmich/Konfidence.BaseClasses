@@ -1,11 +1,8 @@
-﻿using System;
-using JetBrains.Annotations;
-
-namespace ClientSettingsUpdater
+﻿namespace ClientSettingsUpdater
 {
-    class Program
+    static class Program
     {
-        static void Main([NotNull] string[] args)
+        static void Main(string[] args)
         {
             var clientSettingsManager = new ClientSettingsManager(args, new ErrorExiter());
 

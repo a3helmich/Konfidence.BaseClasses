@@ -11,12 +11,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
     {
         private readonly IDataRepository _repository;
 
-        public SqlClient([NotNull] IDataRepository sqlClientRepository) 
+        public SqlClient(IDataRepository sqlClientRepository) 
         {
             _repository = sqlClientRepository;
         }
 
-        public void Save([NotNull] IBaseDataItem dataItem)
+        public void Save(IBaseDataItem dataItem)
         {
             if (dataItem.AutoIdField.Equals(string.Empty))
             {
@@ -31,7 +31,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteSaveStoredProcedure(dataItem);
         }
 
-        public void GetItem([NotNull] IBaseDataItem dataItem)
+        public void GetItem(IBaseDataItem dataItem)
         {
             if (!dataItem.GetStoredProcedure.IsAssigned())
             {
@@ -41,7 +41,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteGetStoredProcedure(dataItem);
         }
 
-        public void GetItemBy([NotNull] IBaseDataItem dataItem, string storedProcedure)
+        public void GetItemBy(IBaseDataItem dataItem, string storedProcedure)
         {
             if (!storedProcedure.IsAssigned())
             {
@@ -51,7 +51,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteGetByStoredProcedure(dataItem, storedProcedure);
         }
 
-        public void BuildItemList<T>([NotNull] IList<T> baseDataItemList, [NotNull] string getListStoredProcedure) where T : IBaseDataItem, new()
+        public void BuildItemList<T>(IList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem, new()
         {
             if (!getListStoredProcedure.IsAssigned())
             {
@@ -61,7 +61,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, this);
         }
 
-        public void BuildItemList<T>([NotNull] IList<T> baseDataItemList, [NotNull] string getListStoredProcedure, IList<ISpParameterData> spParameters) where T : IBaseDataItem, new()
+        public void BuildItemList<T>(IList<T> baseDataItemList, string getListStoredProcedure, IList<ISpParameterData> spParameters) where T : IBaseDataItem, new()
         {
             if (!getListStoredProcedure.IsAssigned())
             {
@@ -71,7 +71,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _repository.ExecuteGetListStoredProcedure(baseDataItemList, getListStoredProcedure, spParameters, this);
         }
 
-        public void Delete([NotNull] IBaseDataItem dataItem)
+        public void Delete(IBaseDataItem dataItem)
         {
             if (!dataItem.DeleteStoredProcedure.IsAssigned())
             {
@@ -106,7 +106,6 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             return _repository.ObjectExists(storedProcedureName, "Procedures");
         }
 
-        [NotNull]
         public DataTable GetSchemaObject(string collection)
         {
             return _repository.GetSchemaObject(collection);

@@ -9,26 +9,24 @@ namespace Konfidence.BaseRest.Client
     {
         public int PortNr { get; set; }
 
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
 
-        public string BaseRoute { get; set; }
+        public string BaseRoute { get; set; } = string.Empty;
 
-        public string Route { get; set; }
+        public string Route { get; set; } = string.Empty;
 
-        public RestClientConfig([NotNull] IConfiguration configuration)
+        public RestClientConfig(IConfiguration configuration)
         {
             var section = configuration.GetSection(@"WebHost");
 
             section.Bind(this);
         }
 
-        [NotNull]
         public Uri BaseUri()
         {
             return new($"{Host()}{BaseRoute}/{Route}");
         }
 
-        [NotNull]
         private Uri Host()
         {
             const string prefix = @"http";

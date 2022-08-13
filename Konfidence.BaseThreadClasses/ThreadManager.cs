@@ -9,9 +9,9 @@ namespace Konfidence.BaseThreadClasses
 
     public class ThreadManager<TAction> where TAction : ThreadAction, new()
     {
-        private InitializeAction<TAction> _initializeAction;
-        private BeforeExecute<TAction> _beforeExecuteAction;
-        private AfterExecute<TAction> _afterExecuteAction;
+        private InitializeAction<TAction>? _initializeAction;
+        private BeforeExecute<TAction>? _beforeExecuteAction;
+        private AfterExecute<TAction>? _afterExecuteAction;
 
         private ThreadRunner<TAction> ThreadRunner { get; }
 
@@ -23,7 +23,6 @@ namespace Konfidence.BaseThreadClasses
         }
 
         [UsedImplicitly]
-        [NotNull]
         public ThreadManager<TAction> SetInitializeAction(InitializeAction<TAction> initializeAction)
         {
             _initializeAction = initializeAction;
@@ -32,7 +31,6 @@ namespace Konfidence.BaseThreadClasses
         }
 
         [UsedImplicitly]
-        [NotNull]
         public ThreadManager<TAction> SetBeforeExecuteAction(BeforeExecute<TAction> beforeExecuteAction)
         {
             _beforeExecuteAction = beforeExecuteAction;
@@ -41,7 +39,6 @@ namespace Konfidence.BaseThreadClasses
         }
 
         [UsedImplicitly]
-        [NotNull]
         public ThreadManager<TAction> SetAfterExecuteAction(AfterExecute<TAction> afterExecuteAction)
         {
             _afterExecuteAction = afterExecuteAction;

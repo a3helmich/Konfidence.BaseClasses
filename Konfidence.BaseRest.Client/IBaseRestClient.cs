@@ -18,7 +18,7 @@ namespace Konfidence.BaseRest.Client
         /// <param name="headerParameters"></param>
         /// <returns>T</returns>
         [UsedImplicitly]
-        Task<T> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string> headerParameters = null) where T : new();
+        Task<T?> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string>? headerParameters = null) where T : new();
 
         /// <summary>
         /// Do a GET request
@@ -27,6 +27,6 @@ namespace Konfidence.BaseRest.Client
         /// <param name="relativePath"></param>
         /// <returns>T</returns>
         [UsedImplicitly]
-        Task<T> GetAsync<T>(string relativePath) where T : new();
+        Task<T?> GetAsync<T>(string relativePath) where T : new();
     }
 }

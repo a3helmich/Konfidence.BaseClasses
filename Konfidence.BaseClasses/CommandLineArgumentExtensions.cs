@@ -16,7 +16,7 @@ namespace Konfidence.Base
         /// <param name="stringComparison"></param>
         /// <returns>bool</returns>
         [UsedImplicitly]
-        public static bool TryParseArgument([NotNull] this string[] args, [NotNull] Enum argument, [NotNull] out string commandLineArgument, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
+        public static bool TryParseArgument(this string[] args, Enum argument, out string commandLineArgument, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
         {
             commandLineArgument = string.Empty;
 
