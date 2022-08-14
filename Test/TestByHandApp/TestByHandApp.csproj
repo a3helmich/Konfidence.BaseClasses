@@ -6,13 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Konfidence.TestClasses\Konfidence.TestClasses.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="SqlClientSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Konfidence.Integration.TestClasses\Konfidence.Integration.TestClasses.csproj" />
+	</ItemGroup>
 </Project>

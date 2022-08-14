@@ -18,17 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Konfidence.TestTools\Konfidence.TestTools.csproj" />
-    <ProjectReference Include="..\Konfidence.TestClasses\Konfidence.TestClasses.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="SqlClientSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Tools\Konfidence.TestTools\Konfidence.TestTools.csproj" />
+	  <ProjectReference Include="..\Konfidence.Integration.TestClasses\Konfidence.Integration.TestClasses.csproj" />
+	</ItemGroup>
 </Project>
