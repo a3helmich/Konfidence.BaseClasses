@@ -21,11 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Konfidence.Security\Konfidence.Security.csproj" />
-    <ProjectReference Include="..\..\Konfidence.TestTools\Konfidence.TestTools.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+    <ProjectReference Include="..\..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />
+    <ProjectReference Include="..\..\Tools\Konfidence.TestTools\Konfidence.TestTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,4 +30,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+	</ItemGroup>
 </Project>
