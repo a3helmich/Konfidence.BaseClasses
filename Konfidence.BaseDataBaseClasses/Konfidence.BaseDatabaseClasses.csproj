@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
-    <ProjectReference Include="..\Konfidence.DataBaseInterface\Konfidence.DatabaseInterface.csproj" />
+    <ProjectReference Include="..\Konfidence.DataBaseInterface\Konfidence.DatabaseInterfaceXXX.csproj" />
   </ItemGroup>
 
 </Project>
