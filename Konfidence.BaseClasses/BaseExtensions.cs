@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
-#nullable disable
 
 namespace Konfidence.Base
 {
@@ -10,8 +9,10 @@ namespace Konfidence.Base
     public static class BaseExtensions
     {
         [ContractAnnotation("assignedObject:null => false")]
+#nullable disable
         public static bool IsAssigned([NotNullWhen(true)] this object assignedObject)
         {
+#nullable restore
             if (assignedObject is string assignedString)
             {
                 return !string.IsNullOrWhiteSpace(assignedString);
@@ -38,15 +39,19 @@ namespace Konfidence.Base
 
         [UsedImplicitly]
         [ContractAnnotation("line:null => true")]
+#nullable disable
         public static bool IsEof([NotNullWhen(true)] this string line)
         {
+#nullable restore
             return line is null;
         }
 
         [UsedImplicitly]
         [ContractAnnotation("assignedGuid:null => false")]
+#nullable disable
         public static bool IsGuid([NotNullWhen(true)] this string assignedGuid)
         {
+#nullable restore
             return Guid.TryParse(assignedGuid, out _);
         }
 
