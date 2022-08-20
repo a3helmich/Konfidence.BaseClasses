@@ -40,7 +40,7 @@ namespace Konfidence.Base
         [UsedImplicitly]
         [ContractAnnotation("line:null => true")]
 #nullable disable
-        public static bool IsEof([NotNullWhen(true)] this string line)
+        public static bool IsEof([NotNullWhen(false)] this string line)
         {
 #nullable restore
             return line is null;
