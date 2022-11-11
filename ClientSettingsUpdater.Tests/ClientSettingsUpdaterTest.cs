@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Konfidence.Base;
 using Konfidence.Mail;
 using Konfidence.SqlHostProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -213,6 +214,10 @@ namespace ClientSettingsUpdater.Tests
             // assert
             errorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
 
+            mailConfig.Should().NotBeNull();
+
+            Assert.IsNotNull(mailConfig);
+
             mailConfig.Accounts.Should().HaveCountGreaterOrEqualTo(2);
             var account1 = mailConfig.Accounts.FirstOrDefault(x => x.UserName == "Adrie");
             var account2 = mailConfig.Accounts.FirstOrDefault(x => x.UserName == "A3");
@@ -228,7 +233,7 @@ namespace ClientSettingsUpdater.Tests
             account2?.Password.Should().Be("geheim");
         }
 
-        private static MailAccounts ReadMailConfig()
+        private static MailAccounts? ReadMailConfig()
         {
             return JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(MailConstants.DefaultMailServerConfigFileName));
         }

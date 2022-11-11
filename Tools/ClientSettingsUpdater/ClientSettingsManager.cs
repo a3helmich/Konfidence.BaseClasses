@@ -131,6 +131,11 @@ namespace ClientSettingsUpdater
         {
             var clientSettings = JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(fileName));
 
+            if (!clientSettings.IsAssigned())
+            {
+                return;
+            }
+
             clientSettings.Accounts
                 .ForEach(setting =>
                 {
