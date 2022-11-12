@@ -2,7 +2,7 @@
 This is a collection of dotnet library projects I use for the software I develop, containing shortcuts or base implementations that make developing and maintaining software a lot easier.
   
 # Using the Libraries
-All projects generate a .nupkg on build. These can be used to include in your software projects. Most libraries are build for **netstandard2.0**, **net5.0** and **net6.0**. Support for **netstandard2.0** is only available in versions upto 2022.1.x, after that only support for **net5.0** and **net6.0** is included.
+All projects generate a .nupkg on build. These can be used to include in your software projects. Most libraries are build for **net6.0** and **net7.0**. Support for **netstandard2.0** is only available in versions upto 2022.1.x, after that only support for **net5.0** and **net6.0** is included.
 
 # Build and Test
 
