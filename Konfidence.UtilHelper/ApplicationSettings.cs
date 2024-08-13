@@ -91,7 +91,7 @@ namespace Konfidence.UtilHelper
 
                 keyNode.InnerText = keyValue;
 
-                var root = _xmlDocument.DocumentElement;
+                XmlElement? root = _xmlDocument.DocumentElement;
 
                 if (root.IsAssigned())
                 {

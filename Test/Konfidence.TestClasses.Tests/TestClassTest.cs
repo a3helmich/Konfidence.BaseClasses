@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Konfidence.TestTools;
@@ -24,7 +25,7 @@ namespace Konfidence.TestClasses.Tests
         [TestMethod]
         public void GetSingleItem()
         {
-            var dataItem = new Dl.Test2DataItem(2);
+            Dl.Test2DataItem? dataItem = new Dl.Test2DataItem(2);
 
             dataItem.Should().NotBeNull();
         }
@@ -32,8 +33,8 @@ namespace Konfidence.TestClasses.Tests
         [TestMethod]
         public void GetTwoSingleItem()
         {
-            var dataItem1 = new Dl.Test2DataItem(1);
-            var dataItem2 = new Dl.Test2DataItem(2);
+            Dl.Test2DataItem? dataItem1 = new Dl.Test2DataItem(1);
+            Dl.Test2DataItem? dataItem2 = new Dl.Test2DataItem(2);
 
             dataItem1.Should().NotBeNull();
             dataItem2.Should().NotBeNull();
@@ -42,7 +43,7 @@ namespace Konfidence.TestClasses.Tests
         [TestMethod]
         public void GetParentItem()
         {
-            var test = new Dl.Test2DataItem(1);
+            Dl.Test2DataItem? test = new Dl.Test2DataItem(1);
 
             test.Should().NotBeNull();
         }
@@ -51,10 +52,10 @@ namespace Konfidence.TestClasses.Tests
         public void When_Table_Test1_is_retrieved_and_table_does_contain_data_Should_return_GuidIdField()
         {
             // arrange
-            var testIntDataItemList = Dl.TestIntDataItem.GetList();
+            List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
 
             // act
-            var testIntDataItem = testIntDataItemList.First();
+            Dl.TestIntDataItem? testIntDataItem = testIntDataItemList.First();
 
             // assert
             testIntDataItem.TestIntId.Should().NotBeEmpty();
@@ -65,8 +66,8 @@ namespace Konfidence.TestClasses.Tests
         public void When_Retrieving_data_with_invalid_key_Should_return_NewItem()
         {
             // arrange
-            var testIntDataItemList = Dl.TestIntDataItem.GetList();
-            var id = Guid.NewGuid();
+            List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
+            Guid id = Guid.NewGuid();
 
             while (testIntDataItemList.Any(x => x.TestIntId == id))
             {
@@ -74,7 +75,7 @@ namespace Konfidence.TestClasses.Tests
             }
 
             // act
-            var testIntDataItem = new Dl.TestIntDataItem(id);
+            Dl.TestIntDataItem? testIntDataItem = new Dl.TestIntDataItem(id);
 
             // assert
             testIntDataItem.IsNew.Should().BeTrue();

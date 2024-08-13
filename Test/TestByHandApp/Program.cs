@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using TestClasses;
 
 namespace TestByHandApp
@@ -7,7 +8,7 @@ namespace TestByHandApp
     {
         static void Main(string[] args)
         {
-            var test = new Dl.Test1DataItem();
+            Dl.Test1DataItem? test = new Dl.Test1DataItem();
 
             test.Save();
             test = new Dl.Test1DataItem();
@@ -19,7 +20,7 @@ namespace TestByHandApp
             test = new Dl.Test1DataItem();
             test.Save();
 
-            var menuDataItems = Dl.Test1DataItem.GetList();
+            List<Dl.Test1DataItem>? menuDataItems = Dl.Test1DataItem.GetList();
 
             menuDataItems.ForEach(menu => menu.Delete());
         }

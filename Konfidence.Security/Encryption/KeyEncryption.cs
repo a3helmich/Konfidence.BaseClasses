@@ -45,7 +45,7 @@ namespace Konfidence.Security.Encryption
 
             _maxBytesServer = GetMaxKeySize() / 8;
 
-            var isTemporary = false;
+            bool isTemporary = false;
 
             if (!containerName.IsAssigned())
             {
@@ -72,7 +72,7 @@ namespace Konfidence.Security.Encryption
         {
             get
             {
-                var keySizeServer = GetMaxKeySize();
+                int keySizeServer = GetMaxKeySize();
 
                 if (!_tempRsaProvider.IsAssigned())
                 {
@@ -88,9 +88,9 @@ namespace Konfidence.Security.Encryption
             // at first I wanted to remove redundant keys etc. but keeping them in 
             // store is faster for non-key generating actions. like here, but also for encoding and decoding
             // Rsa.PersistKeyInCsp = false;  // don't want to keep this in storage
-            var keyContainer = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider? keyContainer = new RSACryptoServiceProvider();
 
-            var legalKeySize = keyContainer.LegalKeySizes[0];
+            KeySizes? legalKeySize = keyContainer.LegalKeySizes[0];
 
             switch (_securityConfiguration.OSVersionPlatform)
             {
@@ -111,7 +111,7 @@ namespace Konfidence.Security.Encryption
 
         private static CspParameters GetCspParameters(string containerName)
         {
-            var cp = new CspParameters {KeyContainerName = containerName};
+            CspParameters? cp = new CspParameters {KeyContainerName = containerName};
 
             cp.Flags |= CspProviderFlags.UseMachineKeyStore;
 
@@ -127,7 +127,7 @@ namespace Konfidence.Security.Encryption
             // - if the Encryption is temporary, make sure it is not persistend
             try
             {
-                var cp = GetCspParameters(containerName);
+                CspParameters? cp = GetCspParameters(containerName);
 
                 if (!RsaProvider.IsAssigned())
                 {

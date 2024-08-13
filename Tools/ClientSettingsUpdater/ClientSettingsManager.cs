@@ -36,7 +36,7 @@ namespace ClientSettingsUpdater
 
             Console.WriteLine($"content: {string.Join('-',args)}");
 
-            if (args.TryParseArgument(Argument.ConfigFileFolder, out var verbose))
+            if (args.TryParseArgument(Argument.ConfigFileFolder, out string? verbose))
             {
                 _verbose = !string.IsNullOrWhiteSpace(verbose);
             }
@@ -97,7 +97,7 @@ namespace ClientSettingsUpdater
                 _errorExiter.Exit(6);
             }
 
-            var clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
+            string[]? clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
 
             if (!clientSettingsFileNames.Any())
             {
@@ -106,12 +106,12 @@ namespace ClientSettingsUpdater
                 _errorExiter.Exit(7);
             }
 
-            var fullFolderName = Path.GetFullPath(ConfigFolder);
+            string? fullFolderName = Path.GetFullPath(ConfigFolder);
 
             Debug.WriteLine($"Location: {fullFolderName}");
             Console.WriteLine($"Location: {fullFolderName}");
 
-            foreach (var clientSettingsFileName in clientSettingsFileNames)
+            foreach (string? clientSettingsFileName in clientSettingsFileNames)
             {
                 Debug.WriteLine($"File: {clientSettingsFileName}");
                 Console.WriteLine($"File: {clientSettingsFileName}");
@@ -129,7 +129,7 @@ namespace ClientSettingsUpdater
 
         private void UpdateMailServerFile(string fileName)
         {
-            var clientSettings = JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(fileName));
+            MailAccounts? clientSettings = JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(fileName));
 
             if (!clientSettings.IsAssigned())
             {
@@ -155,7 +155,7 @@ namespace ClientSettingsUpdater
 
             if (clientSettings.Accounts.All(x => x.UserName != UserName))
             {
-                var account = new MailAccount
+                MailAccount? account = new MailAccount
                 {
                     Server = MailServer,
                     UserName = UserName,
@@ -171,7 +171,7 @@ namespace ClientSettingsUpdater
 
         private void UpdateFile(string fileName) 
         {
-            var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
+            ClientSettings? clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
             clientSettings?.DataConfiguration?.Connections
                 .ForEach(setting =>

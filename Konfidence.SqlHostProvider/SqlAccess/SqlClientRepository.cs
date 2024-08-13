@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
@@ -24,29 +25,29 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             Debug.WriteLine($"SqlClientRepository GetDatabase, default database: '{_clientConfig.DefaultDatabase}'");
 
-            var connection = _clientConfig.GetConfigConnection();
+            ConfigConnectionString? connection = _clientConfig.GetConfigConnection();
 
             if (!connection.IsAssigned())
             {
                 return new DatabaseProviderFactory().CreateDefault();
             }
 
-            var config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
             return new DatabaseProviderFactory(config.GetSection).Create(connection.ConnectionName);
         }
 
         public DataTable GetSchemaObject(string collection)
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbConnection = database.CreateConnection())
+            using (DbConnection? dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
-                using (var schemaTable = dbConnection.GetSchema(collection))
+                using (DataTable? schemaTable = dbConnection.GetSchema(collection))
                 {
-                    var dataTable = schemaTable.Copy();
+                    DataTable? dataTable = schemaTable.Copy();
 
                     return dataTable;
                 }
@@ -55,11 +56,11 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public int ExecuteCommandStoredProcedure(string saveStoredProcedure, List<ISpParameterData> parameterObjectList)
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
+            using (DbCommand? dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
             {
-                foreach (var parameterObject in parameterObjectList)
+                foreach (ISpParameterData? parameterObject in parameterObjectList)
                 {
                     database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
                 }
@@ -70,9 +71,9 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteSaveStoredProcedure(IBaseDataItem dataItem)
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
+            using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
                 SetParameterData(dataItem, database, dbCommand);
 
@@ -84,13 +85,13 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetStoredProcedure(IBaseDataItem dataItem)
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbCommand = database.GetStoredProcCommand(dataItem.GetStoredProcedure))
+            using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.GetStoredProcedure))
             {
                 SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
 
-                using (var dataReader = database.ExecuteReader(dbCommand))
+                using (IDataReader? dataReader = database.ExecuteReader(dbCommand))
                 {
                     if (dataReader.Read())
                     {
@@ -103,13 +104,13 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetByStoredProcedure(IBaseDataItem dataItem, string storedProcedure)
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbCommand = database.GetStoredProcCommand(storedProcedure))
+            using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
                 SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
 
-                using (var dataReader = database.ExecuteReader(dbCommand))
+                using (IDataReader? dataReader = database.ExecuteReader(dbCommand))
                 {
                     if (dataReader.Read())
                     {
@@ -127,17 +128,17 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, IList<ISpParameterData> spParameters, IBaseClient baseClient) where T : IBaseDataItem, new()
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbCommand = database.GetStoredProcCommand(storedProcedure))
+            using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
                 SetParameterData(spParameters, database, dbCommand);
 
-                using (var dataReader = database.ExecuteReader(dbCommand))
+                using (IDataReader? dataReader = database.ExecuteReader(dbCommand))
                 {
                     while (dataReader.Read())
                     {
-                        var dataItem = new T(); // dependency resolver
+                        T? dataItem = new T(); // dependency resolver
 
                         dataItem.InitializeDataItem();
 
@@ -152,16 +153,16 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteDeleteStoredProcedure(IBaseDataItem dataItem)
         {
-            var id = dataItem.GetId();
+            int id = dataItem.GetId();
 
             if (id == 0)
             {
                 return;
             }
 
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbCommand = database.GetStoredProcCommand(dataItem.DeleteStoredProcedure))
+            using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.DeleteStoredProcedure))
             {
                 database.AddInParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, dataItem.GetId());
 
@@ -171,22 +172,22 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public int ExecuteTextCommandQuery(string textCommand)
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
             return database.ExecuteNonQuery(CommandType.Text, textCommand);
         }
 
         public bool ObjectExists(string objectName, string collection)
         {
-            var database = GetDatabase();
+            Database? database = GetDatabase();
 
-            using (var dbConnection = database.CreateConnection())
+            using (DbConnection? dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
-                using (var schemaTable = dbConnection.GetSchema(collection))
+                using (DataTable? schemaTable = dbConnection.GetSchema(collection))
                 {
-                    var rows = schemaTable
+                    IEnumerable<DataRow>? rows = schemaTable
                         .Rows
                         .OfType<DataRow>();
                     return rows
@@ -202,14 +203,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.GetId());
 
             // fields changing at the database side
-            foreach (var parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
+            foreach (ISpParameterData? parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
             {
                 database.AddParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, ParameterDirection.InputOutput,
                     parameterObject.ParameterName, DataRowVersion.Proposed, parameterObject.Value);
             }
 
             // all the other fields
-            foreach (var parameterObject in dataItem.SetItemData())
+            foreach (ISpParameterData? parameterObject in dataItem.SetItemData())
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
@@ -219,9 +220,9 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             dataItem.SetId((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));
 
-            foreach (var kvp in dataItem.AutoUpdateFieldDictionary)
+            foreach (KeyValuePair<string, ISpParameterData> kvp in dataItem.AutoUpdateFieldDictionary)
             {
-                var fieldValue = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
+                object? fieldValue = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
 
                 if (DBNull.Value.Equals(fieldValue))
                 {
@@ -236,7 +237,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         private static void SetParameterData(IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
         {
-            foreach (var parameterObject in parameterObjectList)
+            foreach (ISpParameterData? parameterObject in parameterObjectList)
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }

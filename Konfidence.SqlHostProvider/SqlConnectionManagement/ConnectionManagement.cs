@@ -16,9 +16,9 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
         [UsedImplicitly]
         public static void SetActiveConnection(string connectionName)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration? config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            var databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
+            DatabaseSettings? databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
 
             if (!databaseSettings.IsAssigned())
             {
@@ -35,9 +35,9 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
         [UsedImplicitly]
         public static void SetApplicationDatabase(string database, string server, string connectionName)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration? config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            var connectionStringSettings = config.ConnectionStrings
+            ConnectionStringSettings? connectionStringSettings = config.ConnectionStrings
                 .ConnectionStrings
                 .Cast<ConnectionStringSettings>()
                 .FirstOrDefault(x => x.Name == connectionName);
@@ -47,7 +47,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return;
             }
 
-            var connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).TrimList();
+            List<string>? connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).TrimList();
 
             SetConnectionStringPart(connectionStringParts, "Database", database);
 
@@ -67,7 +67,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return;
             }
 
-            var connectionPart = connectionStringParts
+            string? connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
@@ -79,7 +79,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
         private static void RemoveConnectionStringPart(List<string> connectionStringParts, string parameter)
         {
-            var connectionPart = connectionStringParts
+            string? connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
@@ -89,23 +89,23 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
         internal static void CopySqlSecurityToClientConfig(IClientConfig clientConfig)
         {
-            if (!"ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) || !File.Exists(fileName))
+            if (!"ClientConfigLocation".TryGetEnvironmentVariable(out string? fileName) || !File.Exists(fileName))
             {
                 return;
             }
 
-            var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
+            ClientSettings? clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
 
             if (!clientSettings.IsAssigned() || !clientSettings.DataConfiguration.IsAssigned() || !clientSettings.DataConfiguration.Connections.Any())
             {
                 return;
             }
 
-            foreach (var clientSetting in clientSettings.DataConfiguration.Connections)
+            foreach (ConfigConnectionString? clientSetting in clientSettings.DataConfiguration.Connections)
             {
-                var clientConfigConnections = clientConfig.Connections.Where(x => x.Server == clientSetting.Server);
+                IEnumerable<ConfigConnectionString>? clientConfigConnections = clientConfig.Connections.Where(x => x.Server == clientSetting.Server);
 
-                foreach (var clientConfigConnection in clientConfigConnections)
+                foreach (ConfigConnectionString? clientConfigConnection in clientConfigConnections)
                 {
                     clientConfigConnection.UserName = clientSetting.UserName;
                     clientConfigConnection.Password = clientSetting.Password;
@@ -115,9 +115,9 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
         internal static Configuration SetDatabaseSecurityInMemory(string userName, string password, string connectionName)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration? config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            var connectionStringSettings = config.ConnectionStrings
+            ConnectionStringSettings? connectionStringSettings = config.ConnectionStrings
                 .ConnectionStrings
                 .Cast<ConnectionStringSettings>()
                 .FirstOrDefault(x => x.Name == connectionName);
@@ -127,7 +127,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return config;
             }
 
-            var connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).TrimList();
+            List<string>? connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).TrimList();
 
             SetConnectionStringPart(connectionStringParts, "User ID", userName);
 

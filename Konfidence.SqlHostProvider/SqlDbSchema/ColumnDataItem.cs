@@ -90,9 +90,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<IColumnDataItem> GetList(IBaseClient client, List<IIndexDataItem> allIndexDataItems)
         {
-            var columnDataItems = new List<ColumnDataItem>();
+            List<ColumnDataItem>? columnDataItems = new List<ColumnDataItem>();
 
-            var spParameterData = new List<ISpParameterData>();
+            List<ISpParameterData>? spParameterData = new List<ISpParameterData>();
 
             client.BuildItemList(columnDataItems, SpName.GetColumnList, spParameterData);
 
@@ -228,7 +228,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private static string GetDefaultPropertyValue(string dataType, string newValue)
         {
-            var defaultPropertyValuelinePart = string.Empty;
+            string? defaultPropertyValuelinePart = string.Empty;
 
             switch (dataType)
             {

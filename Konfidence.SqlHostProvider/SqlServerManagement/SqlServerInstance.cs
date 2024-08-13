@@ -18,7 +18,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
 
         private static async Task<bool> PingSqlServerVersionAsync(string databaseServerName, string userName, string password)
         {
-            var task = new Task<bool>(() => PingSqlServerVersion(databaseServerName, userName, password));
+            Task<bool>? task = new Task<bool>(() => PingSqlServerVersion(databaseServerName, userName, password));
 
             task.Start();
 
@@ -71,7 +71,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
                 throw new SqlClientException("no password or username provided");
             }
 
-            var serverConnection = new ServerConnection(databaseServerName, userName, password)
+            ServerConnection? serverConnection = new ServerConnection(databaseServerName, userName, password)
             {
                 LoginSecure = false
             };

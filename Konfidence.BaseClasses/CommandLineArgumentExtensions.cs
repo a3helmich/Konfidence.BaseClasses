@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 
@@ -25,14 +26,14 @@ public static class CommandLineArgumentExtensions
             return false;
         }
 
-        var arg = $"-{argument}";
+        string? arg = $"-{argument}";
 
         if (arg.Length > 2)
         {
             arg = $"-{arg}";
         }
 
-        var argumentValues = args
+        List<string>? argumentValues = args
             .Where(x => x.StartsWith(arg, stringComparison))
             .Select(x => x.TrimStartIgnoreCase(arg, true))
             .Where(x => x.StartsWith(" ") || x.TrimStart().StartsWith("=") || x.TrimStart().StartsWith(":"))

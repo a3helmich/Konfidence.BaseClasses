@@ -13,14 +13,14 @@ namespace Konfidence.Security.Tests
         public void MaxKey_WinNT_WithEmptyContainerName_ShouldGive_1024_AsMaxKeySize()
         {
             // arrange
-            var configurationMock = new Mock<ISecurityConfiguration>();
+            Mock<ISecurityConfiguration>? configurationMock = new Mock<ISecurityConfiguration>();
 
             configurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32NT);
 
-            using var keyEncryption = new KeyEncryption(string.Empty, configurationMock.Object);
+            using KeyEncryption? keyEncryption = new KeyEncryption(string.Empty, configurationMock.Object);
 
             // act
-            var maxKeySize = keyEncryption.KeySize;
+            int maxKeySize = keyEncryption.KeySize;
 
             // assert
             maxKeySize.Should().Be(1024);
@@ -30,14 +30,14 @@ namespace Konfidence.Security.Tests
         public void MaxKey_Win32_WithEmptyContainerName_ShouldGive_384_AsMaxKeySize()
         {
             // arrange
-            var configurationMock = new Mock<ISecurityConfiguration>();
+            Mock<ISecurityConfiguration>? configurationMock = new Mock<ISecurityConfiguration>();
 
             configurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32Windows);
 
-            using var keyEncryption = new KeyEncryption(string.Empty, configurationMock.Object);
+            using KeyEncryption? keyEncryption = new KeyEncryption(string.Empty, configurationMock.Object);
 
             // act
-            var maxKeySize = keyEncryption.KeySize;
+            int maxKeySize = keyEncryption.KeySize;
 
             // assert
             maxKeySize.Should().Be(384);

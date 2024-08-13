@@ -14,7 +14,7 @@ namespace Konfidence.Security
         {
             ApplicationName = applicationName;
 
-            using var encryption = new KeyEncryption(ApplicationName);
+            using KeyEncryption? encryption = new KeyEncryption(ApplicationName);
 
             PublicKey = encryption.PublicKey;
             PrivateKey = encryption.PrivateKey;
@@ -24,7 +24,7 @@ namespace Konfidence.Security
         {
             try
             {
-                using var clientKeyEncryption = new KeyEncryption(ApplicationName);
+                using KeyEncryption? clientKeyEncryption = new KeyEncryption(ApplicationName);
 
                 clientKeyEncryption.Delete();
             }

@@ -15,10 +15,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlConnectionManagement
         public void When_ConfigureSettings_read_with_multiple_connections_Should_set_them_all_in_ClientConfig()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
 
             // act
-            var clientConfig = di.GetService<IClientConfig>();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             // assert
             if (!clientConfig.IsAssigned())

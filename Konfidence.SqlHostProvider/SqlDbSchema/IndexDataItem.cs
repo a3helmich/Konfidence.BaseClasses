@@ -35,9 +35,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         [UsedImplicitly]
         internal static List<IIndexDataItem> GetList(IBaseClient client, List<IPrimaryKeyDataItem> allPrimaryKeyDataItems)
         {
-            var indexDataItems = new List<IIndexDataItem>();
+            List<IIndexDataItem>? indexDataItems = new List<IIndexDataItem>();
 
-            var schemaIndexes = client
+            List<DataRow>? schemaIndexes = client
                 .GetSchemaObject("IndexColumns")
                 .AsEnumerable()
                 .ToList();

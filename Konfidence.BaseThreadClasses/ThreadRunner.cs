@@ -53,7 +53,7 @@ namespace Konfidence.BaseThreadClasses
         {
             if (internalThread.IsAssigned() && internalThread.IsAlive && !ThreadAction.IsAlive)
             {
-                var timeSpan = new TimeSpan(0, 0, 0, 4);
+                TimeSpan timeSpan = new TimeSpan(0, 0, 0, 4);
 
                 switch (sleepUnit)
                 {

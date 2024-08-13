@@ -14,7 +14,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 return;
             }
 
-            var connection = clientConfig.Connections.FirstOrDefault(x => x.ConnectionName == clientConfig.DefaultDatabase);
+            ConfigConnectionString? connection = clientConfig.Connections.FirstOrDefault(x => x.ConnectionName == clientConfig.DefaultDatabase);
 
             if (connection.IsAssigned())
             {
@@ -31,7 +31,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public static ConfigConnectionString? GetConfigConnection(this IClientConfig clientConfig)
         {
-            var connection = clientConfig
+            ConfigConnectionString? connection = clientConfig
                 .Connections
                 .FirstOrDefault(x =>
                     clientConfig.DefaultDatabase.IsAssigned() && x.ConnectionName == clientConfig.DefaultDatabase);

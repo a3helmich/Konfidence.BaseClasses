@@ -80,7 +80,7 @@ namespace Konfidence.UtilHelper
         {
             value = string.Empty;
 
-            var valueNode = Root?.SelectSingleNode(nodeName);
+            XmlNode? valueNode = Root?.SelectSingleNode(nodeName);
 
             if (valueNode.IsAssigned())
             {
@@ -97,14 +97,14 @@ namespace Konfidence.UtilHelper
                 return;
             }
 
-            var attributes = valueNode.Attributes;
+            XmlAttributeCollection? attributes = valueNode.Attributes;
 
             if (!attributes.IsAssigned())
             {
                 return;
             }
 
-            var attribute = attributes[attributeName];
+            XmlAttribute? attribute = attributes[attributeName];
 
             if (attribute.IsAssigned())
             {
@@ -127,7 +127,7 @@ namespace Konfidence.UtilHelper
         {
             value = string.Empty;
 
-            var valueNode = node.SelectSingleNode(nodeName);
+            XmlNode? valueNode = node.SelectSingleNode(nodeName);
 
             if (valueNode.IsAssigned())
             {
@@ -148,7 +148,7 @@ namespace Konfidence.UtilHelper
 
         public void GetValue(XmlNode node,string nodeName, out bool value)
         {
-            var valueNode = node.SelectSingleNode(nodeName);
+            XmlNode? valueNode = node.SelectSingleNode(nodeName);
 
             value = false;
 
@@ -157,7 +157,7 @@ namespace Konfidence.UtilHelper
                 return;
             }
 
-            if (bool.TryParse(valueNode.InnerText, out var outvalue))
+            if (bool.TryParse(valueNode.InnerText, out bool outvalue))
             {
                 value = outvalue;
             }
@@ -165,7 +165,7 @@ namespace Konfidence.UtilHelper
 
         public XmlNode SetValue(XmlNode parentNode, string name, string value)
         {
-            var childElement = parentNode.SelectSingleNode(name);
+            XmlNode? childElement = parentNode.SelectSingleNode(name);
 
             if (!childElement.IsAssigned())
             {
@@ -192,7 +192,7 @@ namespace Konfidence.UtilHelper
 
         public XmlNode GetNode(XmlNode parentNode, string name)
         {
-            var childElement = parentNode.SelectSingleNode(name);
+            XmlNode? childElement = parentNode.SelectSingleNode(name);
 
             if (childElement.IsAssigned())
             {
@@ -239,7 +239,7 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected void AddNode(XmlDocument registrationXml, string field, XmlDocument xmlDocument)
         {
-            var subDocumentNode = AddNode(registrationXml, field, string.Empty);
+            XmlNode? subDocumentNode = AddNode(registrationXml, field, string.Empty);
 
             subDocumentNode.InnerXml = xmlDocument.InnerXml;
         }
@@ -254,7 +254,7 @@ namespace Konfidence.UtilHelper
                 return;
             }
 
-            var subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
+            XmlNode? subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
 
             subDocumentNode.InnerXml = root.InnerXml;
         }

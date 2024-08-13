@@ -9,7 +9,7 @@ namespace Konfidence.TestClasses.Tests.objects
 
         public void MethodOne()
         {
-            foreach (var testItem in TestItemList)
+            foreach (ITestItemClass? testItem in TestItemList)
             {
                 testItem.MethodOne();
             }
@@ -17,7 +17,7 @@ namespace Konfidence.TestClasses.Tests.objects
 
         public void MethodTwo()
         {
-            var testList = new List<ITestItemClass>();
+            List<ITestItemClass>? testList = new List<ITestItemClass>();
 
             testList.AddItem();
         }
