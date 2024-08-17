@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DatabaseInterface;
@@ -43,7 +42,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<ITableDataItem> GetList(IBaseClient client, List<IColumnDataItem> allColumnDataItems)
         {
-            List<ITableDataItem>? tableDataItems = new List<ITableDataItem>();
+            List<ITableDataItem>? tableDataItems = new();
 
             List<DataRow>? schemaTables = client
                 .GetSchemaObject("Tables")

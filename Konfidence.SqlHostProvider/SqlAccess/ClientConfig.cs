@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 
 namespace Konfidence.SqlHostProvider.SqlAccess

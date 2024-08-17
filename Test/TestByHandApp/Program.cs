@@ -8,7 +8,7 @@ namespace TestByHandApp
     {
         static void Main(string[] args)
         {
-            Dl.Test1DataItem? test = new Dl.Test1DataItem();
+            Dl.Test1DataItem? test = new();
 
             test.Save();
             test = new Dl.Test1DataItem();

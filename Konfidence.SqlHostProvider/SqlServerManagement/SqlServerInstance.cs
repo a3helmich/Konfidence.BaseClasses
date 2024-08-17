@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.Exceptions;
 using Microsoft.SqlServer.Management.Common;
@@ -18,7 +17,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
 
         private static async Task<bool> PingSqlServerVersionAsync(string databaseServerName, string userName, string password)
         {
-            Task<bool>? task = new Task<bool>(() => PingSqlServerVersion(databaseServerName, userName, password));
+            Task<bool>? task = new(() => PingSqlServerVersion(databaseServerName, userName, password));
 
             task.Start();
 
@@ -71,7 +70,7 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
                 throw new SqlClientException("no password or username provided");
             }
 
-            ServerConnection? serverConnection = new ServerConnection(databaseServerName, userName, password)
+            ServerConnection? serverConnection = new(databaseServerName, userName, password)
             {
                 LoginSecure = false
             };

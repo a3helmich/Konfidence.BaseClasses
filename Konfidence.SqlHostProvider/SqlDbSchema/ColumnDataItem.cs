@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
-using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DatabaseInterface;
 using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
@@ -90,9 +89,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<IColumnDataItem> GetList(IBaseClient client, List<IIndexDataItem> allIndexDataItems)
         {
-            List<ColumnDataItem>? columnDataItems = new List<ColumnDataItem>();
+            List<ColumnDataItem>? columnDataItems = new();
 
-            List<ISpParameterData>? spParameterData = new List<ISpParameterData>();
+            List<ISpParameterData>? spParameterData = new();
 
             client.BuildItemList(columnDataItems, SpName.GetColumnList, spParameterData);
 

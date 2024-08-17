@@ -15,8 +15,8 @@ namespace Konfidence.TestTools
                 return false;
             }
 
-            FileInfo? file1Info = new FileInfo(file1);
-            FileInfo? file2Info = new FileInfo(file2);
+            FileInfo? file1Info = new(file1);
+            FileInfo? file2Info = new(file2);
 
             if (file1Info.Length != file2Info.Length)
             {
@@ -51,8 +51,8 @@ namespace Konfidence.TestTools
                 return false;
             }
 
-            FileInfo? file1Info = new FileInfo(file1);
-            FileInfo? file2Info = new FileInfo(file2);
+            FileInfo? file1Info = new(file1);
+            FileInfo? file2Info = new(file2);
 
             if (file1Info.Length != file2Info.Length)
             {

@@ -77,7 +77,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private void CreateSPTablePrimaryKey_GetList(string storedProcedure)
         {
-            StringBuilder? sb = new StringBuilder();
+            StringBuilder? sb = new();
 
             sb.AppendLine($"CREATE PROCEDURE [dbo].[{storedProcedure}]");
             sb.AppendLine("AS BEGIN");
@@ -92,7 +92,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private void CreateSPColumns_GetList(string storedProcedure)
         {
-            StringBuilder? sb = new StringBuilder();
+            StringBuilder? sb = new();
 
             sb.AppendLine($"CREATE PROCEDURE [dbo].[{storedProcedure}]");
             sb.AppendLine("AS BEGIN");
@@ -111,7 +111,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             Debug.WriteLine("deleteSp entry");
 
-            StringBuilder? sb = new StringBuilder();
+            StringBuilder? sb = new();
 
             sb.AppendLine($"DROP PROCEDURE [dbo].[{storedProcedure}]");
 

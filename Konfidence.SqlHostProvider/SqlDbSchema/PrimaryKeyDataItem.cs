@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using JetBrains.Annotations;
 using Konfidence.BaseData;
 using Konfidence.DatabaseInterface;
 
@@ -16,9 +15,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<IPrimaryKeyDataItem> GetList(IBaseClient client)
         {
-            List<PrimaryKeyDataItem>? primaryKeyDataItems = new List<PrimaryKeyDataItem>();
+            List<PrimaryKeyDataItem>? primaryKeyDataItems = new();
 
-            List<ISpParameterData>? spParameterData = new List<ISpParameterData>();
+            List<ISpParameterData>? spParameterData = new();
 
             client.BuildItemList(primaryKeyDataItems, SpName.GetTablePrimaryKeyList, spParameterData);
 

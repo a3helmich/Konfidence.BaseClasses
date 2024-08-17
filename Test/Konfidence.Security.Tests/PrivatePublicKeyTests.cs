@@ -17,11 +17,11 @@ namespace Konfidence.Security.Tests
         [TestMethod]
         public void RetrieveCreatedKeyTest()
         {
-            PrivatePublicKey? ppk1 = new PrivatePublicKey(APPLICATION_NAME);
+            PrivatePublicKey? ppk1 = new(APPLICATION_NAME);
 
             string? publicKey1 = ppk1.PublicKey;
 
-            PrivatePublicKey? ppk2 = new PrivatePublicKey(APPLICATION_NAME);
+            PrivatePublicKey? ppk2 = new(APPLICATION_NAME);
 
             string? publicKey2 = ppk2.PublicKey;
 
@@ -40,18 +40,18 @@ namespace Konfidence.Security.Tests
             testString += "-3teststring om te decoden encoden 1234567890";
             testString += "-4teststring om te decoden encoden 1234567890";
 
-            PrivatePublicKey? ppk = new PrivatePublicKey(APPLICATION_NAME);
+            PrivatePublicKey? ppk = new(APPLICATION_NAME);
 
             List<List<byte>>? arrayList;
 
-            using (Encoder? encoder = new Encoder(ppk.PublicKey))
+            using (Encoder? encoder = new(ppk.PublicKey))
             {
                 arrayList = encoder.Encrypt(testString);
             }
 
             if (arrayList.IsAssigned())
             {
-                using Decoder? decoder = new Decoder(ppk.PrivateKey);
+                using Decoder? decoder = new(ppk.PrivateKey);
 
                 resultString = decoder.Decrypt(arrayList);
             }

@@ -88,7 +88,7 @@ namespace Konfidence.Security.Encryption
             // at first I wanted to remove redundant keys etc. but keeping them in 
             // store is faster for non-key generating actions. like here, but also for encoding and decoding
             // Rsa.PersistKeyInCsp = false;  // don't want to keep this in storage
-            RSACryptoServiceProvider? keyContainer = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider? keyContainer = new();
 
             KeySizes? legalKeySize = keyContainer.LegalKeySizes[0];
 
@@ -111,7 +111,7 @@ namespace Konfidence.Security.Encryption
 
         private static CspParameters GetCspParameters(string containerName)
         {
-            CspParameters? cp = new CspParameters {KeyContainerName = containerName};
+            CspParameters? cp = new() {KeyContainerName = containerName};
 
             cp.Flags |= CspProviderFlags.UseMachineKeyStore;
 

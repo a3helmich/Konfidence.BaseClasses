@@ -26,7 +26,7 @@ namespace Konfidence.UtilHelper
 
         public static IApplicationSettings ApplicationSettings(string application)
         {
-            ApplicationSettings? applicationSettings = new ApplicationSettings(application)
+            ApplicationSettings? applicationSettings = new(application)
             {
                 RootPath = _rootPath
             }; 

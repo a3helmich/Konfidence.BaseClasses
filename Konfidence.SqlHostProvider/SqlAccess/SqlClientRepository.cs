@@ -138,7 +138,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 {
                     while (dataReader.Read())
                     {
-                        T? dataItem = new T(); // dependency resolver
+                        T? dataItem = new(); // dependency resolver
 
                         dataItem.InitializeDataItem();
 
