@@ -24,7 +24,7 @@ namespace Konfidence.Security.Encryption
 
         public List<List<byte>>? Encrypt(string rawData)
         {
-            List<List<byte>> byteList = new List<List<byte>>();
+            List<List<byte>> byteList = new();
 
             if (rawData.IsAssigned())
             {
@@ -56,7 +56,7 @@ namespace Konfidence.Security.Encryption
             {
                 return new List<byte>();
             }
-            ASCIIEncoding? asciiEncoding = new ASCIIEncoding();
+            ASCIIEncoding? asciiEncoding = new();
 
             byte[]? byteData = asciiEncoding.GetBytes(partialString);
 

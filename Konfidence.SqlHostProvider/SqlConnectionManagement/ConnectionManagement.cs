@@ -7,7 +7,6 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
-using Newtonsoft.Json;
 
 namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 {
@@ -94,9 +93,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return;
             }
 
-            ClientSettings? clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
-
-            if (!clientSettings.IsAssigned() || !clientSettings.DataConfiguration.IsAssigned() || !clientSettings.DataConfiguration.Connections.Any())
+            if (!File.ReadAllText(fileName).Deserialize(out ClientSettings? clientSettings) || !clientSettings.DataConfiguration.IsAssigned() || !clientSettings.DataConfiguration.Connections.Any())
             {
                 return;
             }

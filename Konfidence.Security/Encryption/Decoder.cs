@@ -29,9 +29,9 @@ namespace Konfidence.Security.Encryption
                 return string.Empty;
             }
 
-            ASCIIEncoding? asciiEncoding = new ASCIIEncoding();
-            ArrayList? encryptedDataList = new ArrayList();
-            StringBuilder? rawData = new StringBuilder();
+            ASCIIEncoding? asciiEncoding = new();
+            ArrayList? encryptedDataList = new();
+            StringBuilder? rawData = new();
 
             foreach (List<byte>? objectItem in encryptedData)
             {

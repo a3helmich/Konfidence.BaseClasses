@@ -50,7 +50,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 
             Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
-            DatabaseProviderFactory? databaseProviderFactory = new DatabaseProviderFactory(config.GetSection);
+            DatabaseProviderFactory? databaseProviderFactory = new(config.GetSection);
 
             Database? database = databaseProviderFactory.Create("TestDatabase");
 
@@ -84,7 +84,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 
             Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
-            DatabaseProviderFactory? databaseProviderFactory = new DatabaseProviderFactory(config.GetSection);
+            DatabaseProviderFactory? databaseProviderFactory = new(config.GetSection);
 
             Database? database = databaseProviderFactory.Create("TestClassGenerator");
 

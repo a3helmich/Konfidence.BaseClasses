@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
 

@@ -34,11 +34,11 @@ namespace Konfidence.SqlHostProvider
 
         public static IServiceProvider ConfigureDependencyInjection(params string[] args)
         {
-            ServiceCollection? services = new ServiceCollection();
+            ServiceCollection? services = new();
 
             services.AddSingleton(services);
 
-            List<string>? commandLineArguments = new List<string>();
+            List<string>? commandLineArguments = new();
 
             if (args.Any())
             {
@@ -55,7 +55,7 @@ namespace Konfidence.SqlHostProvider
 
             IConfigurationRoot? configuration = GetConfigurationRoot(commandLineArguments.ToArray());
 
-            ClientConfig? clientConfig = new ClientConfig(configuration);
+            ClientConfig? clientConfig = new(configuration);
 
             clientConfig.SetSqlApplicationSettings();
 

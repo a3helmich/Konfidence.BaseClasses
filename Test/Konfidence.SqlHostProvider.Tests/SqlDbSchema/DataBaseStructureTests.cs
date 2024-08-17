@@ -40,7 +40,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "hMailServer";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -65,7 +65,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -90,7 +90,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -117,7 +117,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "BlockedHackers";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -142,7 +142,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -167,14 +167,14 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
             ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
-            List<string>? columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
             string? columnString = table.ColumnDataItems.GetJoinedFieldNames(columnNameList);
@@ -197,14 +197,14 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
             ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
-            List<string>? columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
             string? columnString = table.ColumnDataItems.GetJoinedUnderscoreFieldNames(columnNameList);
@@ -227,14 +227,14 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
             ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
-            List<string>? columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
             string? columnString = table.ColumnDataItems.GetFieldNamesAsArguments(columnNameList);
@@ -257,14 +257,14 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
             ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
-            List<string>? columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
             string? columnString = table.ColumnDataItems.GetFieldNamesAsParameters(columnNameList);
@@ -277,7 +277,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetFirstField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            List<string>? columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
             string? columnString = columnNameList.Any() ? columnNameList.First() : string.Empty;
@@ -290,7 +290,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetLastField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            List<string>? columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
             string? columnString = columnNameList.Any() ? columnNameList.Last() : string.Empty;
@@ -313,7 +313,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -340,7 +340,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            SqlClient? client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 

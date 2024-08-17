@@ -21,7 +21,7 @@ namespace Konfidence.TestTools
 
             DatabaseSettings? databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
 
-            DatabaseSettings? databaseSettingsCopy = new DatabaseSettings { DefaultDatabase = databaseSettings?.DefaultDatabase };
+            DatabaseSettings? databaseSettingsCopy = new() { DefaultDatabase = databaseSettings?.DefaultDatabase };
 
             Configuration? activeConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 

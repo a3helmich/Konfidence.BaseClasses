@@ -81,8 +81,8 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected ArrayList GetArrayListNodeValue(string name)
         {
-            ArrayList? arrayArrayList = new ArrayList();
-            ArrayList? arrayByteListNodeValue = new ArrayList();
+            ArrayList? arrayArrayList = new();
+            ArrayList? arrayByteListNodeValue = new();
 
             string? joinedArray = GetNodeValue(name);
 
@@ -90,7 +90,7 @@ namespace Konfidence.UtilHelper
             {
                 if (joinedArray.IsAssigned())
                 {
-                    ArrayList? arrayListNodeValue = new ArrayList();
+                    ArrayList? arrayListNodeValue = new();
 
                     string[]? splitArray = joinedArray.Split(' ');
 
@@ -166,7 +166,7 @@ namespace Konfidence.UtilHelper
 
             if (value.IsAssigned())
             {
-                ArrayList? stringArrayList = new ArrayList();
+                ArrayList? stringArrayList = new();
 
                 foreach (byte[] byteArray in value)
                 {
