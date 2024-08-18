@@ -17,7 +17,7 @@ Integration tests running against SQL server will fail until a test database set
 # Libraries
 
 ### Konfidence.BaseClasses
-- Some extensions to make reading some constructs more fluent
+- Some extensions to make reading some patterns more fluent
 	- when objects/string/guid/datatime/timespan assignments are actually assigned, .IsAssigned()
 	- eof for stream reading, .IsEof()
 	- string is a guid, .IsGuid()
@@ -25,6 +25,7 @@ Integration tests running against SQL server will fail until a test database set
 	- earliest and latest time on a day, .StartOfDayTime(), .EndOfDayTime()
 - CommandLineArgument parser: Meant for the configuration argument line parser used with MS dependency injection.
 - Environment Variable getter: unified(user, machine, process). Should work on both Windows and Linux.
+- default configured Json serializer/deserializer, based on System.Text.Json.
 - Some (unexpected) fast string extensions
 	- TrimStart(..), TrimStartIgnoreCase(..), TrimEnd(..), TrimEndIgnoreCase(..)
 	- TrimList()
@@ -33,7 +34,7 @@ Integration tests running against SQL server will fail until a test database set
 	- Contains(..) with specified casing type
 	- ToDecimal(), parse a string into a decimal
   
-### Konfidence.BaseClasses package is available on [nuget.org](https://www.nuget.org/packages/Konfidence.BaseClasses). 
+### The Konfidence.BaseClasses package is available on [nuget.org](https://www.nuget.org/packages/Konfidence.BaseClasses). 
 
 ### Konfidence.BaseDataBaseClasses
 - Some classes that make CRUD on SQL with the enterprise libraries really easy, without the strong dependencies included in the EntityFramework, only usefull with my ClassGenerator. Also referenced by the Konfidence.SqlHostProvider package.
