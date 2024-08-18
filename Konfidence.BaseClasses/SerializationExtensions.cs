@@ -8,12 +8,20 @@ namespace Konfidence.Base
     {
         public static string Serialize<T>(this T toSerializeDto)
         {
-            return System.Text.Json.JsonSerializer.Serialize(toSerializeDto, new JsonSerializerOptions { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+            JsonStringEnumConverter stringEnumConverter = new();
+
+            JsonSerializerOptions serializationOptions = new() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, Converters = { stringEnumConverter } };
+
+            return JsonSerializer.Serialize(toSerializeDto, serializationOptions);
         }
 
         public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto)
         {
-            deserializedDto = System.Text.Json.JsonSerializer.Deserialize<T>(toDeserializeDto, new JsonSerializerOptions { AllowTrailingCommas = true });
+            JsonStringEnumConverter stringEnumConverter = new();
+
+            JsonSerializerOptions serializationOptions = new() { AllowTrailingCommas = true, Converters = { stringEnumConverter } };
+
+            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, serializationOptions);
 
             return deserializedDto.IsAssigned();
         }
