@@ -30,8 +30,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_BuildStructure_of_hMailServer_Should_generate_structure()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -40,7 +40,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "hMailServer";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -55,8 +55,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureTest()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -65,7 +65,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -80,8 +80,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureWithDifferentConnectionNameTest()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -90,7 +90,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -107,8 +107,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureWithBlockedHackersConnectionName()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -117,7 +117,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "BlockedHackers";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -132,8 +132,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void BuildStructureWithDBMenuConnectionName()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -142,7 +142,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
@@ -157,8 +157,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -167,17 +167,17 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
-            var table = target.Tables.First(x => x.Name == "Test5");
-            var columnNameList = new List<string> { "naam", "Omschrijving" };
+            ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetJoinedFieldNames(columnNameList);
+            string? columnString = table.ColumnDataItems.GetJoinedFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("NaamOmschrijving");
@@ -187,8 +187,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetUnderscoreFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -197,17 +197,17 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
-            var table = target.Tables.First(x => x.Name == "Test5");
-            var columnNameList = new List<string> { "naam", "Omschrijving" };
+            ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetJoinedUnderscoreFieldNames(columnNameList);
+            string? columnString = table.ColumnDataItems.GetJoinedUnderscoreFieldNames(columnNameList);
 
             // assert
             columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
@@ -217,8 +217,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -227,17 +227,17 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
-            var table = target.Tables.First(x => x.Name == "Test5");
-            var columnNameList = new List<string> { "naam", "Omschrijving" };
+            ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetFieldNamesAsArguments(columnNameList);
+            string? columnString = table.ColumnDataItems.GetFieldNamesAsArguments(columnNameList);
 
             // assert
             columnString.Should().Be("Naam, Omschrijving");
@@ -247,8 +247,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetTypedCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -257,17 +257,17 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
-            var table = target.Tables.First(x => x.Name == "Test5");
-            var columnNameList = new List<string> { "naam", "Omschrijving" };
+            ITableDataItem? table = target.Tables.First(x => x.Name == "Test5");
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
-            var columnString = table.ColumnDataItems.GetFieldNamesAsParameters(columnNameList);
+            string? columnString = table.ColumnDataItems.GetFieldNamesAsParameters(columnNameList);
 
             // assert
             columnString.Should().Be("string naam, string omschrijving");
@@ -277,10 +277,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetFirstField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
-            var columnString = columnNameList.Any() ? columnNameList.First() : string.Empty;
+            string? columnString = columnNameList.Any() ? columnNameList.First() : string.Empty;
 
             // assert
             columnString.Should().Be("naam");
@@ -290,10 +290,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetLastField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            var columnNameList = new List<string> { "naam", "Omschrijving" };
+            List<string>? columnNameList = new() { "naam", "Omschrijving" };
 
             // act
-            var columnString = columnNameList.Any() ? columnNameList.Last() : string.Empty;
+            string? columnString = columnNameList.Any() ? columnNameList.Last() : string.Empty;
 
             // assert
             columnString.Should().Be("Omschrijving");
@@ -303,8 +303,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_TableExists_is_executed_and_table_exists_Should_return_true()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -313,14 +313,14 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
             // act
-            var tableExists = client.TableExists("Test1");
+            bool tableExists = client.TableExists("Test1");
 
             // assert
             tableExists.Should().BeTrue();
@@ -330,8 +330,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_TableExists_is_executed_and_table_does_notexists_Should_return_false()
         {
             // arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -340,14 +340,14 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            var client = new SqlClient(new SqlClientRepository(clientConfig));
+            SqlClient? client = new(new SqlClientRepository(clientConfig));
 
             IDatabaseStructure target = new DatabaseStructure(client);
 
             target.BuildStructure();
 
             // act
-            var tableExists = client.TableExists("Test666");
+            bool tableExists = client.TableExists("Test666");
 
             // assert
             tableExists.Should().BeFalse();
@@ -357,10 +357,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_should_return_DatabaseStructure_Of_defaultDb()
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IServiceProvider? dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
             // act
-            var target = dependencyProvider.GetService<IDatabaseStructure>();
+            IDatabaseStructure? target = dependencyProvider.GetService<IDatabaseStructure>();
 
             // assert
             target.Should().NotBeNull();
@@ -380,10 +380,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_With_DbMenu_Should_return_DatabaseStructure_of_DbMenu(string param, string delim, string value)
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection($"{param}{delim}{value}");
+            IServiceProvider? dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection($"{param}{delim}{value}");
 
             // act
-            var target = dependencyProvider.GetService<IDatabaseStructure>();
+            IDatabaseStructure? target = dependencyProvider.GetService<IDatabaseStructure>();
 
             // assert
             target.Should().NotBeNull();
@@ -394,10 +394,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_should_return_commandlinearguments()
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(@"--ConfigFileFolder=some\location\");
+            IServiceProvider? dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(@"--ConfigFileFolder=some\location\");
 
             // act
-            var target = dependencyProvider.GetService<IClientConfig>();
+            IClientConfig? target = dependencyProvider.GetService<IClientConfig>();
 
             // assert
             target.Should().NotBeNull();
@@ -409,10 +409,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_DependecyInjection_is_used_should_have_UseEnvironmentSetting_set_to_true()
         {
             // arrange
-            var dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IServiceProvider? dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
             // act
-            var target = dependencyProvider.GetService<IClientConfig>();
+            IClientConfig? target = dependencyProvider.GetService<IClientConfig>();
 
             // assert
             target.Should().NotBeNull();

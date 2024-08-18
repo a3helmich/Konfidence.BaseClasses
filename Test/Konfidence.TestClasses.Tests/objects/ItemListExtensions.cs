@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using Konfidence.TestClasses.Tests.interfaces;
 
 namespace Konfidence.TestClasses.Tests.objects

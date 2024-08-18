@@ -82,7 +82,7 @@ public static class StringExtensions
     [UsedImplicitly]
     public static string ReplaceIgnoreCase(this string fromString, string oldValue, string newValue)
     {
-        var replaceFromIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
+        int replaceFromIndex = fromString.IndexOf(oldValue, StringComparison.OrdinalIgnoreCase);
 
         return replaceFromIndex > -1
             ? $"{fromString.Substring(0, replaceFromIndex)}{newValue}{fromString.Substring(replaceFromIndex + oldValue.Length)}"
@@ -120,7 +120,7 @@ public static class StringExtensions
             decimalString = decimalString.Replace(',', '.');
         }
 
-        if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out var returnValue))
+        if (decimal.TryParse(decimalString, NumberStyles.Currency, CultureInfo.InvariantCulture, out decimal returnValue))
         {
             return returnValue;
         }

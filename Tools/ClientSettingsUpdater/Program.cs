@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            var clientSettingsManager = new ClientSettingsManager(args, new ErrorExiter());
+            ClientSettingsManager? clientSettingsManager = new(args, new ErrorExiter());
 
             clientSettingsManager.Execute();
         }

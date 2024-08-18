@@ -51,9 +51,9 @@ namespace Konfidence.UtilHelper
 
         protected string GetNodeValue(string name)
         {
-            var nodeValue = string.Empty;
+            string? nodeValue = string.Empty;
 
-            var xmlNode = _root?.SelectSingleNode(name);
+            XmlNode? xmlNode = _root?.SelectSingleNode(name);
 
             if (xmlNode.IsAssigned())
             {
@@ -66,9 +66,9 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected bool GetBoolNodeValue(string name)
         {
-            var nodeValue = false;
+            bool nodeValue = false;
 
-            var xmlNode = _root?.SelectSingleNode(name);
+            XmlNode? xmlNode = _root?.SelectSingleNode(name);
 
             if (xmlNode.IsAssigned())
             {
@@ -81,18 +81,18 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected ArrayList GetArrayListNodeValue(string name)
         {
-            var arrayArrayList = new ArrayList();
-            var arrayByteListNodeValue = new ArrayList();
+            ArrayList? arrayArrayList = new();
+            ArrayList? arrayByteListNodeValue = new();
 
-            var joinedArray = GetNodeValue(name);
+            string? joinedArray = GetNodeValue(name);
 
             try
             {
                 if (joinedArray.IsAssigned())
                 {
-                    var arrayListNodeValue = new ArrayList();
+                    ArrayList? arrayListNodeValue = new();
 
-                    var splitArray = joinedArray.Split(' ');
+                    string[]? splitArray = joinedArray.Split(' ');
 
                     arrayListNodeValue.AddRange(splitArray);
 
@@ -101,7 +101,7 @@ namespace Konfidence.UtilHelper
                         arrayByteListNodeValue.Add(Convert.ToByte(byteString));
                     }
                 }
-                var arrayByteListNode = arrayByteListNodeValue.ToArray(typeof(byte)) as byte[];
+                byte[]? arrayByteListNode = arrayByteListNodeValue.ToArray(typeof(byte)) as byte[];
 
                 if (arrayByteListNode.IsAssigned())
                 {
@@ -120,7 +120,7 @@ namespace Konfidence.UtilHelper
 
         protected void SetNodeValue(string name, string value)
         {
-            var valueNode = _root?.SelectSingleNode(name);
+            XmlNode? valueNode = _root?.SelectSingleNode(name);
 
             // Create the node if it doens't exist yet
             if (!valueNode.IsAssigned())
@@ -162,21 +162,21 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected void SetNodeValue(string name, ArrayList value)
         {
-            var joinedArray = string.Empty;
+            string? joinedArray = string.Empty;
 
             if (value.IsAssigned())
             {
-                var stringArrayList = new ArrayList();
+                ArrayList? stringArrayList = new();
 
                 foreach (byte[] byteArray in value)
                 {
-                    foreach (var byteChar in byteArray)
+                    foreach (byte byteChar in byteArray)
                     {
                         stringArrayList.Add(byteChar.ToString(CultureInfo.InvariantCulture));
                     }
                 }
 
-                var stringArray = stringArrayList.ToArray(typeof(string)) as string[];
+                string[]? stringArray = stringArrayList.ToArray(typeof(string)) as string[];
 
                 if (stringArray.IsAssigned())
                 {

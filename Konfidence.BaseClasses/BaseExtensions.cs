@@ -79,7 +79,7 @@ public static class BaseExtensions
     [UsedImplicitly]
     public static DateTime StartOfDayTime(this DateTime dateTime)
     {
-        var afterMidnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
+        DateTime afterMidnight = new(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
 
         return afterMidnight;
     }
@@ -87,7 +87,7 @@ public static class BaseExtensions
     [UsedImplicitly]
     public static DateTime EndOfDayTime(this DateTime dateTime)
     {
-        var midnight = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Utc);
+        DateTime midnight = new(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Utc);
 
         return midnight;
     }

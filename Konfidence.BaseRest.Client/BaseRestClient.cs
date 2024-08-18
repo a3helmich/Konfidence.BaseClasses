@@ -15,7 +15,7 @@ namespace Konfidence.BaseRest.Client
 
         public BaseRestClient(IRestClientConfig clientConfig)
         {
-            var restClientOptions = new RestClientOptions(clientConfig.BaseUri());
+            RestClientOptions? restClientOptions = new(clientConfig.BaseUri());
 
             RestClient = new RestClient(restClientOptions);
         }
@@ -32,7 +32,7 @@ namespace Konfidence.BaseRest.Client
 
         private async Task<T?> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, object? requestObject = null, Dictionary<string, string>? headerParameters = null) where T : new()
         {
-            var request = new RestRequest
+            RestRequest? request = new()
             {
                 Resource = relativePath,
                 RequestFormat = DataFormat.Json,
@@ -46,13 +46,13 @@ namespace Konfidence.BaseRest.Client
 
             if (headerParameters.IsAssigned())
             {
-                foreach (var kvp in headerParameters)
+                foreach (KeyValuePair<string, string> kvp in headerParameters)
                 {
                     request.AddHeader(kvp.Key, kvp.Value);
                 }
             }
 
-            var response = await RestClient.ExecuteAsync<T>(request);
+            RestResponse<T>? response = await RestClient.ExecuteAsync<T>(request);
 
             if (response.ResponseStatus == ResponseStatus.Error)
             {

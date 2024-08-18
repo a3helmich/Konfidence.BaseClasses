@@ -14,43 +14,43 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
         [UsedImplicitly]
         public static bool VerifyDatabaseServer(Database databaseInstance, int timeOut = 3000)
         {
-            var serverName = string.Empty;
-            var connectionName = string.Empty;
-            var userName = string.Empty;
-            var password = string.Empty;
+            string? serverName = string.Empty;
+            string? connectionName = string.Empty;
+            string? userName = string.Empty;
+            string? password = string.Empty;
 
             IDbConnection? sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
 
             if (sqlConnection.IsAssigned())
             {
-                var connectionParameters = sqlConnection.ConnectionString.Split(';'); 
+                string[]? connectionParameters = sqlConnection.ConnectionString.Split(';'); 
 
-                foreach(var param in connectionParameters)
+                foreach(string? param in connectionParameters)
                 {
                     if (param.StartsWith("server=", StringComparison.OrdinalIgnoreCase))
                     {
-                        var paramParts = param.Split('=');
+                        string[]? paramParts = param.Split('=');
 
                         serverName = paramParts[1];
                     }
 
                     if (param.StartsWith("database=", StringComparison.OrdinalIgnoreCase))
                     {
-                        var paramParts = param.Split('=');
+                        string[]? paramParts = param.Split('=');
 
                         connectionName = paramParts[1];
                     }
 
                     if (param.StartsWith("user id=", StringComparison.OrdinalIgnoreCase))
                     {
-                        var paramParts = param.Split('=');
+                        string[]? paramParts = param.Split('=');
 
                         userName = paramParts[1];
                     }
 
                     if (param.StartsWith("password=", StringComparison.OrdinalIgnoreCase))
                     {
-                        var paramParts = param.Split('=');
+                        string[]? paramParts = param.Split('=');
 
                         password = paramParts[1];
                     }

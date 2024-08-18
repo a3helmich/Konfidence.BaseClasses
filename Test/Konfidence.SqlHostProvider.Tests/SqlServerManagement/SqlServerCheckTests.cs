@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Konfidence.Base;
@@ -30,8 +31,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_invalid_database_Should_return_DoesNotExist()
         {
             // Arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -40,18 +41,18 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 
             clientConfig.DefaultDatabase = "TestDatabase";
 
-            var connection = clientConfig.GetConfigConnection();
+            ConfigConnectionString? connection = clientConfig.GetConfigConnection();
 
             if (!connection.IsAssigned())
             {
                 throw new Exception("connection not returned by configuration");
             }
 
-            var config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
-            var databaseProviderFactory = new DatabaseProviderFactory(config.GetSection);
+            DatabaseProviderFactory? databaseProviderFactory = new(config.GetSection);
 
-            var database = databaseProviderFactory.Create("TestDatabase");
+            Database? database = databaseProviderFactory.Create("TestDatabase");
 
             // Act 
             Action action = () => SqlServerCheck.VerifyDatabaseServer(database, 1000); 
@@ -64,8 +65,8 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_valid_database_Should_return_Ok()
         {
             // Arrange
-            var di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            var clientConfig = di.GetService<IClientConfig>();
+            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
             {
@@ -74,21 +75,21 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
 
             clientConfig.DefaultDatabase = "TestClassGenerator";
 
-            var connection = clientConfig.GetConfigConnection();
+            ConfigConnectionString? connection = clientConfig.GetConfigConnection();
 
             if (!connection.IsAssigned())
             {
                 throw new Exception("connection not returned by configuration");
             }
 
-            var config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
-            var databaseProviderFactory = new DatabaseProviderFactory(config.GetSection);
+            DatabaseProviderFactory? databaseProviderFactory = new(config.GetSection);
 
-            var database = databaseProviderFactory.Create("TestClassGenerator");
+            Database? database = databaseProviderFactory.Create("TestClassGenerator");
 
             // Act 
-            var result = SqlServerCheck.VerifyDatabaseServer(database, 1000);
+            bool result = SqlServerCheck.VerifyDatabaseServer(database, 1000);
 
             // Assert
             result.Should().BeTrue();
@@ -98,10 +99,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_TryFindDatabase_With_valid_database_and_no_username_or_password_Should_return_Ok()
         {
             // Arrange
-            var serverName = "konfidence2";
-            var database = "TestClassGenerator";
-            var userName = string.Empty;
-            var password = string.Empty;
+            string? serverName = "konfidence2";
+            string? database = "TestClassGenerator";
+            string? userName = string.Empty;
+            string? password = string.Empty;
 
             // Act 
             Action action = () => SqlServerInstance.TryFindDatabase(serverName, database, userName, password);
@@ -114,9 +115,9 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_inValid_sqlserver_Should_Return_database_server_not_found()
         {
             // Arrange
-            var sqlServerName = "does_not_exists";
-            var userName = "nobody";
-            var password = "none";
+            string? sqlServerName = "does_not_exists";
+            string? userName = "nobody";
+            string? password = "none";
 
             // Act 
             Func<Task> action = async () => await SqlServerInstance.VerifyDatabaseServer(sqlServerName, userName, password);
@@ -129,9 +130,9 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_inValid_sqlserver_and_no_username_and_no_password_Should_Return_database_server_not_found()
         {
             // Arrange
-            var sqlServerName = "does_not_exists";
-            var userName = string.Empty;
-            var password = string.Empty;
+            string? sqlServerName = "does_not_exists";
+            string? userName = string.Empty;
+            string? password = string.Empty;
 
             // Act 
             Func<Task> action = async () => await SqlServerInstance.VerifyDatabaseServer(sqlServerName, userName, password);

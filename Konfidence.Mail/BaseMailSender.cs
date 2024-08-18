@@ -29,11 +29,11 @@ namespace Konfidence.Mail
 		
 		public bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml, string fileName)
 		{
-		    var mailFrom = new MailAddress(_fromAddress);
-			var mailTo = new MailAddress(toEmailAddress);
+		    MailAddress? mailFrom = new(_fromAddress);
+			MailAddress? mailTo = new(toEmailAddress);
 
-			var mailMessage = new MailMessage(mailFrom, mailTo);
-			var smtpClient = new SmtpClient(_mailHost);
+			MailMessage? mailMessage = new(mailFrom, mailTo);
+			SmtpClient? smtpClient = new(_mailHost);
 
 			mailMessage.Body = mailBody;
 			mailMessage.IsBodyHtml = bodyIsHtml;
@@ -42,12 +42,12 @@ namespace Konfidence.Mail
 
             if (fileName.IsAssigned())
             {
-                var attachment = new Attachment(fileName);
+                Attachment? attachment = new(fileName);
 
                 mailMessage.Attachments.Add(attachment);
             }
 
-			var basicAuthenticationInfo = new NetworkCredential(_mailUser, _mailPassword);
+			NetworkCredential? basicAuthenticationInfo = new(_mailUser, _mailPassword);
 
 			smtpClient.UseDefaultCredentials = false;
 			smtpClient.Credentials = basicAuthenticationInfo;

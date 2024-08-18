@@ -5,11 +5,11 @@ namespace Konfidence.TestClasses.Tests.objects
 {
     public class CallTestItemListClass
     {
-        protected List<ITestItemClass> TestItemList { get; } = new List<ITestItemClass>();
+        protected List<ITestItemClass> TestItemList { get; } = new();
 
         public void MethodOne()
         {
-            foreach (var testItem in TestItemList)
+            foreach (ITestItemClass? testItem in TestItemList)
             {
                 testItem.MethodOne();
             }
@@ -17,7 +17,7 @@ namespace Konfidence.TestClasses.Tests.objects
 
         public void MethodTwo()
         {
-            var testList = new List<ITestItemClass>();
+            List<ITestItemClass>? testList = new();
 
             testList.AddItem();
         }

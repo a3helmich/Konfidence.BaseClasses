@@ -16,13 +16,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_GuidValue_Added_To_ListOfIDbParameterObjects_Should_Contain_Guid_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
-            var testValue = Guid.NewGuid();
+            List<ISpParameterData>? dbParameterData = new();
+            Guid testValue = Guid.NewGuid();
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -36,13 +36,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_EmptyGuidValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
-            var testValue = Guid.Empty;
+            List<ISpParameterData>? dbParameterData = new();
+            Guid testValue = Guid.Empty;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -56,13 +56,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_IntValue_Added_To_ListOfIDbParameterObjects_Should_Contain_int_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
+            List<ISpParameterData>? dbParameterData = new();
             const int testValue = 1234;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -76,13 +76,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_LongValue_Added_To_ListOfIDbParameterObjects_Should_Contain_long_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
+            List<ISpParameterData>? dbParameterData = new();
             const long testValue = 1234;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -96,13 +96,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_ShortValue_Added_To_ListOfIDbParameterObjects_Should_Contain_short_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
+            List<ISpParameterData>? dbParameterData = new();
             const short testValue = 1234;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -116,13 +116,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_DateTimeValue_Added_To_ListOfIDbParameterObjects_Should_Contain_datetime_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
-            var testValue = DateTime.Now;
+            List<ISpParameterData>? dbParameterData = new();
+            DateTime testValue = DateTime.Now;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -136,13 +136,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_DateTimeMinValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
-            var testValue = DateTime.MinValue;
+            List<ISpParameterData>? dbParameterData = new();
+            DateTime testValue = DateTime.MinValue;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -156,14 +156,14 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_TimeSpanValue_Added_To_ListOfIDbParameterObjects_Should_Contain_time_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
-            var testValue = DateTime.Today - DateTime.Today.AddHours(-2).AddSeconds(-22);
-            var timeValue = DateTime.Today.AddHours(2).AddSeconds(22);
+            List<ISpParameterData>? dbParameterData = new();
+            TimeSpan testValue = DateTime.Today - DateTime.Today.AddHours(-2).AddSeconds(-22);
+            DateTime timeValue = DateTime.Today.AddHours(2).AddSeconds(22);
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -177,13 +177,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_TimeSpanMinValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
-            var testValue = TimeSpan.MinValue;
+            List<ISpParameterData>? dbParameterData = new();
+            TimeSpan testValue = TimeSpan.MinValue;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);
@@ -198,13 +198,13 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_BoolValue_Added_To_ListOfIDbParameterObjects_Should_Contain_bool_DBParameterObject()
         {
             // arrange
-            var dbParameterData = new List<ISpParameterData>();
+            List<ISpParameterData>? dbParameterData = new();
             const bool testValue = true;
 
             // act
             dbParameterData.SetParameter("TestField", testValue);
 
-            var field = dbParameterData.First();
+            ISpParameterData? field = dbParameterData.First();
 
             // assert
             dbParameterData.Should().HaveCount(1);

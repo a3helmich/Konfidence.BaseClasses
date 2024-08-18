@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
@@ -16,7 +15,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public ClientConfig(IConfiguration configuration)
         {
-            var section = configuration.GetSection(@"DataConfiguration");
+            IConfigurationSection? section = configuration.GetSection(@"DataConfiguration");
 
             section.Bind(this);
         }

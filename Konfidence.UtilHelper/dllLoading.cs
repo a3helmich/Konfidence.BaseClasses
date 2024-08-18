@@ -55,11 +55,11 @@ namespace Konfidence.UtilHelper
         /// </exception>
         public static IntPtr LoadWin32Library(string dllFilePath)
         {
-            var moduleHandle = LoadLibraryEx(dllFilePath, IntPtr.Zero, LOAD_WITH_ALTERED_SEARCH_PATH);
+            IntPtr moduleHandle = LoadLibraryEx(dllFilePath, IntPtr.Zero, LOAD_WITH_ALTERED_SEARCH_PATH);
             if (moduleHandle == IntPtr.Zero)
             {
                 // I'm gettin last dll error
-                var errorCode = Marshal.GetLastWin32Error();
+                int errorCode = Marshal.GetLastWin32Error();
                 throw new ApplicationException(
                     $"There was an error during dll loading : {dllFilePath}, error - {errorCode}"
                 );
@@ -101,8 +101,8 @@ namespace Konfidence.UtilHelper
         {
             if (_myDll == IntPtr.Zero)
                 InitializeMyDll();
-            var pProc = Dll.GetProcAddress(_myDll , "CallingFunctionNameFromCallingDllFile");
-            var cpv = (DllFunctionDelegate)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DllFunctionDelegate));
+            IntPtr pProc = Dll.GetProcAddress(_myDll , "CallingFunctionNameFromCallingDllFile");
+            DllFunctionDelegate? cpv = (DllFunctionDelegate)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DllFunctionDelegate));
             // Now i'm calling delegate, with is calling function from dll file 
             return cpv(1, "Test");
         }

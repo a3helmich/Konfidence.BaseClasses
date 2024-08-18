@@ -17,13 +17,13 @@ namespace Konfidence.TestTools
     {
         public static void CopySqlSettingsToActiveConfiguration()
         {
-            var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetCallingAssembly().Location);
+            Configuration? config = ConfigurationManager.OpenExeConfiguration(Assembly.GetCallingAssembly().Location);
 
-            var databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
+            DatabaseSettings? databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
 
-            var databaseSettingsCopy = new DatabaseSettings { DefaultDatabase = databaseSettings?.DefaultDatabase };
+            DatabaseSettings? databaseSettingsCopy = new() { DefaultDatabase = databaseSettings?.DefaultDatabase };
 
-            var activeConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration? activeConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             activeConfig.Sections.Remove("dataConfiguration");
 
@@ -44,18 +44,18 @@ namespace Konfidence.TestTools
 
         public static void CopySqlSecurityToActiveConfiguration(string connectionName)
         {
-            if ("ClientConfigLocation".TryGetEnvironmentVariable(out var fileName) && File.Exists(fileName))
+            if ("ClientConfigLocation".TryGetEnvironmentVariable(out string? fileName) && File.Exists(fileName))
             {
-                var clientSettings = JsonSerializer.Deserialize<ClientSettings>(File.ReadAllText(fileName));
+                ClientSettings? clientSettings = JsonSerializer.Deserialize<ClientSettings>(File.ReadAllText(fileName));
 
-                var connections = clientSettings?.DataConfiguration?.Connections;
+                List<ConfigConnectionString>? connections = clientSettings?.DataConfiguration?.Connections;
 
                 if (!connections.IsAssigned() || !connections.Any())
                 {
                     return;
                 }
 
-                var connection = connections.FirstOrDefault(c => c.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase));
+                ConfigConnectionString? connection = connections.FirstOrDefault(c => c.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase));
 
                 if (!connection.IsAssigned())
                 {
@@ -68,14 +68,14 @@ namespace Konfidence.TestTools
 
         private static void SaveDatabaseSecurityToActiveConfiguration(string userName, string password, string connectionName)
         {
-            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration? config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
             if (!userName.IsAssigned() || !password.IsAssigned())
             {
                 return;
             }
 
-            var connectionStringSettings = config.ConnectionStrings
+            ConnectionStringSettings? connectionStringSettings = config.ConnectionStrings
                 .ConnectionStrings
                 .Cast<ConnectionStringSettings>()
                 .FirstOrDefault(x => x.Name == connectionName);
@@ -109,7 +109,7 @@ namespace Konfidence.TestTools
                 return;
             }
 
-            var connectionPart = connectionStringParts
+            string? connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
@@ -121,7 +121,7 @@ namespace Konfidence.TestTools
 
         private static void RemoveConnectionStringPart(List<string> connectionStringParts, string parameter)
         {
-            var connectionPart = connectionStringParts
+            string? connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;

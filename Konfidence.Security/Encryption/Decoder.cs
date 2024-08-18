@@ -29,18 +29,18 @@ namespace Konfidence.Security.Encryption
                 return string.Empty;
             }
 
-            var asciiEncoding = new ASCIIEncoding();
-            var encryptedDataList = new ArrayList();
-            var rawData = new StringBuilder();
+            ASCIIEncoding? asciiEncoding = new();
+            ArrayList? encryptedDataList = new();
+            StringBuilder? rawData = new();
 
-            foreach (var objectItem in encryptedData)
+            foreach (List<byte>? objectItem in encryptedData)
             {
                 encryptedDataList.Add(objectItem);
             }
 
             foreach (List<byte> byteData in encryptedDataList)
             {
-                var decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
+                byte[]? decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
 
                 rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
             }

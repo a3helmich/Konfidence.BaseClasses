@@ -7,7 +7,6 @@ using Konfidence.Mail;
 using Konfidence.SqlHostProvider;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
-using Newtonsoft.Json;
 
 namespace ClientSettingsUpdater
 {
@@ -36,7 +35,7 @@ namespace ClientSettingsUpdater
 
             Console.WriteLine($"content: {string.Join('-',args)}");
 
-            if (args.TryParseArgument(Argument.ConfigFileFolder, out var verbose))
+            if (args.TryParseArgument(Argument.ConfigFileFolder, out string? verbose))
             {
                 _verbose = !string.IsNullOrWhiteSpace(verbose);
             }
@@ -97,7 +96,7 @@ namespace ClientSettingsUpdater
                 _errorExiter.Exit(6);
             }
 
-            var clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
+            string[]? clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
 
             if (!clientSettingsFileNames.Any())
             {
@@ -106,12 +105,12 @@ namespace ClientSettingsUpdater
                 _errorExiter.Exit(7);
             }
 
-            var fullFolderName = Path.GetFullPath(ConfigFolder);
+            string? fullFolderName = Path.GetFullPath(ConfigFolder);
 
             Debug.WriteLine($"Location: {fullFolderName}");
             Console.WriteLine($"Location: {fullFolderName}");
 
-            foreach (var clientSettingsFileName in clientSettingsFileNames)
+            foreach (string? clientSettingsFileName in clientSettingsFileNames)
             {
                 Debug.WriteLine($"File: {clientSettingsFileName}");
                 Console.WriteLine($"File: {clientSettingsFileName}");
@@ -129,9 +128,7 @@ namespace ClientSettingsUpdater
 
         private void UpdateMailServerFile(string fileName)
         {
-            var clientSettings = JsonConvert.DeserializeObject<MailAccounts>(File.ReadAllText(fileName));
-
-            if (!clientSettings.IsAssigned())
+            if (!File.ReadAllText(fileName).Deserialize(out MailAccounts? clientSettings))
             {
                 return;
             }
@@ -155,7 +152,7 @@ namespace ClientSettingsUpdater
 
             if (clientSettings.Accounts.All(x => x.UserName != UserName))
             {
-                var account = new MailAccount
+                MailAccount? account = new()
                 {
                     Server = MailServer,
                     UserName = UserName,
@@ -165,15 +162,17 @@ namespace ClientSettingsUpdater
                 clientSettings.Accounts.Add(account);
             }
 
-            File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,
-                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+            File.WriteAllText(fileName, clientSettings.Serialize());
         }
 
         private void UpdateFile(string fileName) 
         {
-            var clientSettings = JsonConvert.DeserializeObject<ClientSettings>(File.ReadAllText(fileName));
+            if (!File.ReadAllText(fileName).Deserialize(out ClientSettings? clientSettings))
+            {
+                return;
+            }
 
-            clientSettings?.DataConfiguration?.Connections
+            clientSettings.DataConfiguration?.Connections
                 .ForEach(setting =>
                 {
                     if (setting.UserName.IsAssigned())
@@ -190,8 +189,7 @@ namespace ClientSettingsUpdater
                     setting.Password = Password;
                 });
 
-            File.WriteAllText(fileName, JsonConvert.SerializeObject(clientSettings, Formatting.Indented,
-                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
+            File.WriteAllText(fileName, clientSettings.Serialize());
         }
     }
 }

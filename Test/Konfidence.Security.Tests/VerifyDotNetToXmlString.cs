@@ -32,11 +32,11 @@ namespace Konfidence.Security.Tests
         {
             // Create the CspParameters object and set the key container   
             // name used to store the RSA key pair.  
-            var cp = new CspParameters {KeyContainerName = ContainerName};
+            CspParameters? cp = new() {KeyContainerName = ContainerName};
 
             // Create a new instance of RSACryptoServiceProvider that accesses  
             // the key container MyKeyContainerName.  
-            var rsa = new RSACryptoServiceProvider(cp);
+            RSACryptoServiceProvider? rsa = new(cp);
 
             // Display the key information to the console.  
             Debug.WriteLine("Key added to container: \n  {0}", rsa.ToXmlString(true));
@@ -46,11 +46,11 @@ namespace Konfidence.Security.Tests
         {
             // Create the CspParameters object and set the key container   
             // name used to store the RSA key pair.  
-            var cp = new CspParameters {KeyContainerName = ContainerName};
+            CspParameters? cp = new() {KeyContainerName = ContainerName};
 
             // Create a new instance of RSACryptoServiceProvider that accesses  
             // the key container MyKeyContainerName.  
-            var rsa = new RSACryptoServiceProvider(cp);
+            RSACryptoServiceProvider? rsa = new(cp);
 
             // Display the key information to the console.  
             Debug.WriteLine("Key retrieved from container : \n {0}", rsa.ToXmlString(true));
@@ -60,11 +60,11 @@ namespace Konfidence.Security.Tests
         {
             // Create the CspParameters object and set the key container   
             // name used to store the RSA key pair.  
-            var cp = new CspParameters {KeyContainerName = ContainerName};
+            CspParameters? cp = new() {KeyContainerName = ContainerName};
 
             // Create a new instance of RSACryptoServiceProvider that accesses  
             // the key container.  
-            var rsa = new RSACryptoServiceProvider(cp)
+            RSACryptoServiceProvider? rsa = new(cp)
             {
                 // Delete the key entry in the container.  
                 PersistKeyInCsp = false

@@ -9,7 +9,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
     {
         public static string GetJoinedFieldNames(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
-            var fieldNames = columnDataItems
+            IEnumerable<string>? fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
                 .Select(columnDataItem => columnDataItem.Name);
 
@@ -18,7 +18,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public static string GetJoinedUnderscoreFieldNames(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
-            var fieldNames = columnDataItems
+            IEnumerable<string>? fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
                 .Select(columnDataItem => columnDataItem.Name);
 
@@ -27,7 +27,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public static string GetFieldNamesAsArguments(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
-            var fieldNames = columnDataItems
+            IEnumerable<string>? fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
                 .Select(columnDataItem => columnDataItem.Name);
 
@@ -36,7 +36,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public static string GetFieldNamesAsParameters(this List<IColumnDataItem> columnDataItems, List<string> fieldNameList)
         {
-            var fieldNames = columnDataItems
+            IEnumerable<string>? fieldNames = columnDataItems
                 .Where(columnDataItem => fieldNameList.Any(fieldName => fieldName.Equals(columnDataItem.Name, StringComparison.OrdinalIgnoreCase)))
                 .Select(columnDataItem => $"{columnDataItem.DataType} {columnDataItem.Name.ToLowerInvariant()}");
 

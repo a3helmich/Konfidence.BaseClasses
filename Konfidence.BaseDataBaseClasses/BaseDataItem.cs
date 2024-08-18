@@ -58,7 +58,7 @@ namespace Konfidence.BaseData
 
         internal object? GetAutoUpdateField(string fieldName)
         {
-            if (AutoUpdateFieldDictionary.TryGetValue(fieldName, out var parameterData) && parameterData.IsAssigned())
+            if (AutoUpdateFieldDictionary.TryGetValue(fieldName, out ISpParameterData? parameterData) && parameterData.IsAssigned())
             {
                 return parameterData.Value;
             }
@@ -159,7 +159,7 @@ namespace Konfidence.BaseData
 
         private List<ISpParameterData> SetParameterData()
         {
-            var parameterObjectList = SpParameterData.ToList();
+            List<ISpParameterData>? parameterObjectList = SpParameterData.ToList();
 
             SpParameterData.Clear();
 

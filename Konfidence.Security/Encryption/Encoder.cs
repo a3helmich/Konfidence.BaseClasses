@@ -24,15 +24,15 @@ namespace Konfidence.Security.Encryption
 
         public List<List<byte>>? Encrypt(string rawData)
         {
-            List<List<byte>> byteList = new List<List<byte>>();
+            List<List<byte>> byteList = new();
 
             if (rawData.IsAssigned())
             {
-                var partialString = rawData;
+                string? partialString = rawData;
 
                 while (partialString.Length > _encoder.PackageSize)
                 {
-                    var partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
+                    string? partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
 
                     byteList.Add(GetEncryptedDataBlock(partialStringBlock));
 
@@ -56,11 +56,11 @@ namespace Konfidence.Security.Encryption
             {
                 return new List<byte>();
             }
-            var asciiEncoding = new ASCIIEncoding();
+            ASCIIEncoding? asciiEncoding = new();
 
-            var byteData = asciiEncoding.GetBytes(partialString);
+            byte[]? byteData = asciiEncoding.GetBytes(partialString);
 
-            var encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
+            byte[]? encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
 
             return encryptedData.ToList();
         }

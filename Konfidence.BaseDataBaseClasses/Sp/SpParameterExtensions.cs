@@ -83,7 +83,7 @@ namespace Konfidence.BaseData.Sp
         {
             if (timeSpan.IsAssigned())
             {
-                var dateTime = DateTime.Today;
+                DateTime dateTime = DateTime.Today;
 
                 dateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
 

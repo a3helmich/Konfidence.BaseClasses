@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DatabaseInterface;
@@ -43,9 +42,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<ITableDataItem> GetList(IBaseClient client, List<IColumnDataItem> allColumnDataItems)
         {
-            var tableDataItems = new List<ITableDataItem>();
+            List<ITableDataItem>? tableDataItems = new();
 
-            var schemaTables = client
+            List<DataRow>? schemaTables = client
                 .GetSchemaObject("Tables")
                 .AsEnumerable()
                 .Where(dataRow => dataRow["TABLE_TYPE"].Equals("BASE TABLE"))
@@ -58,7 +57,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private static IEnumerable<TableDataItem> MapSchemaTablesToTableDataItems(IEnumerable<DataRow> schemaTables, List<IColumnDataItem> allColumnDataItems)
         {
-            var tableDataItems = schemaTables
+            List<TableDataItem>? tableDataItems = schemaTables
                 .Select(tableDataRow => BuildTableDataItem(tableDataRow, allColumnDataItems))
                 .ToList();
 
@@ -71,24 +70,24 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             string catalog = tableDataRow["TABLE_CATALOG"].ToString() ?? string.Empty;
 
-            var name = tableDataRow["TABLE_NAME"].ToString() ?? string.Empty;
+            string? name = tableDataRow["TABLE_NAME"].ToString() ?? string.Empty;
 
-            var columnDataItems = allColumnDataItems.Where(x => x.TableName == name).ToList();
+            List<IColumnDataItem>? columnDataItems = allColumnDataItems.Where(x => x.TableName == name).ToList();
 
-            var indexedColumnDataItem = columnDataItems.FirstOrDefault(columnDataItem => columnDataItem.IsPrimaryKey);
+            IColumnDataItem? indexedColumnDataItem = columnDataItems.FirstOrDefault(columnDataItem => columnDataItem.IsPrimaryKey);
 
-            var primaryKey = indexedColumnDataItem?.Name ?? string.Empty;
+            string? primaryKey = indexedColumnDataItem?.Name ?? string.Empty;
 
-            var primaryKeyDataType = indexedColumnDataItem?.DataType ?? string.Empty;
+            string? primaryKeyDataType = indexedColumnDataItem?.DataType ?? string.Empty;
 
-            var guidColumn = columnDataItems
+            IColumnDataItem? guidColumn = columnDataItems
                 .Find(columnDataItem => columnDataItem.IsGuidField &&
                                         columnDataItem.Name.Equals($"{name}Id",
                                             StringComparison.InvariantCultureIgnoreCase));
 
-            var hasGuidId = guidColumn.IsAssigned();
+            bool hasGuidId = guidColumn.IsAssigned();
 
-            var guidIdField = hasGuidId ? guidColumn?.Name ?? string.Empty : string.Empty;
+            string? guidIdField = hasGuidId ? guidColumn?.Name ?? string.Empty : string.Empty;
 
             return new TableDataItem(catalog, name, columnDataItems, primaryKey, primaryKeyDataType, guidIdField, hasGuidId); 
         }
