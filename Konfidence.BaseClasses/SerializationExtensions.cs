@@ -10,7 +10,12 @@ namespace Konfidence.Base
         {
             JsonStringEnumConverter stringEnumConverter = new();
 
-            JsonSerializerOptions serializationOptions = new() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, Converters = { stringEnumConverter } };
+            JsonSerializerOptions serializationOptions = new()
+            {
+                WriteIndented = true, 
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, 
+                Converters = { stringEnumConverter }
+            };
 
             return JsonSerializer.Serialize(toSerializeDto, serializationOptions);
         }
@@ -19,7 +24,12 @@ namespace Konfidence.Base
         {
             JsonStringEnumConverter stringEnumConverter = new();
 
-            JsonSerializerOptions serializationOptions = new() { AllowTrailingCommas = true, Converters = { stringEnumConverter } };
+            JsonSerializerOptions serializationOptions = new()
+            {
+                AllowTrailingCommas = true, 
+                ReadCommentHandling = JsonCommentHandling.Skip, 
+                Converters = { stringEnumConverter }
+            };
 
             deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, serializationOptions);
 
