@@ -63,7 +63,7 @@ public static class BaseExtensions
             return false;
         }
 
-        if (long.TryParse(numericString, out _))
+        if (ulong.TryParse(numericString.TrimStart('-'), out _))
         {
             return true;
         }
