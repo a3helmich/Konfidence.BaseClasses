@@ -24,7 +24,7 @@ namespace Konfidence.Security.Encryption
 
         public List<List<byte>>? Encrypt(string rawData)
         {
-            List<List<byte>> byteList = new();
+            List<List<byte>> byteList = [];
 
             if (rawData.IsAssigned())
             {

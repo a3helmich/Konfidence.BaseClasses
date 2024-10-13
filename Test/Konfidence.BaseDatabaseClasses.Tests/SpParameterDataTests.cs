@@ -16,7 +16,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_GuidValue_Added_To_ListOfIDbParameterObjects_Should_Contain_Guid_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             Guid testValue = Guid.NewGuid();
 
             // act
@@ -36,7 +36,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_EmptyGuidValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             Guid testValue = Guid.Empty;
 
             // act
@@ -56,7 +56,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_IntValue_Added_To_ListOfIDbParameterObjects_Should_Contain_int_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             const int testValue = 1234;
 
             // act
@@ -76,7 +76,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_LongValue_Added_To_ListOfIDbParameterObjects_Should_Contain_long_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             const long testValue = 1234;
 
             // act
@@ -96,7 +96,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_ShortValue_Added_To_ListOfIDbParameterObjects_Should_Contain_short_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             const short testValue = 1234;
 
             // act
@@ -116,7 +116,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_DateTimeValue_Added_To_ListOfIDbParameterObjects_Should_Contain_datetime_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             DateTime testValue = DateTime.Now;
 
             // act
@@ -136,7 +136,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_DateTimeMinValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             DateTime testValue = DateTime.MinValue;
 
             // act
@@ -156,7 +156,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_TimeSpanValue_Added_To_ListOfIDbParameterObjects_Should_Contain_time_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             TimeSpan testValue = DateTime.Today - DateTime.Today.AddHours(-2).AddSeconds(-22);
             DateTime timeValue = DateTime.Today.AddHours(2).AddSeconds(22);
 
@@ -177,7 +177,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_TimeSpanMinValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             TimeSpan testValue = TimeSpan.MinValue;
 
             // act
@@ -198,7 +198,7 @@ namespace Konfidence.BaseDatabaseClasses.Tests
         public void When_BoolValue_Added_To_ListOfIDbParameterObjects_Should_Contain_bool_DBParameterObject()
         {
             // arrange
-            List<ISpParameterData> dbParameterData = new();
+            List<ISpParameterData> dbParameterData = [];
             const bool testValue = true;
 
             // act

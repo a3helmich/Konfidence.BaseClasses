@@ -5,7 +5,7 @@ namespace Konfidence.TestClasses.Tests.objects
 {
     public class CallTestItemListClass
     {
-        protected List<ITestItemClass> TestItemList { get; } = new();
+        protected List<ITestItemClass> TestItemList { get; } = [];
 
         public void MethodOne()
         {
@@ -17,7 +17,7 @@ namespace Konfidence.TestClasses.Tests.objects
 
         public void MethodTwo()
         {
-            List<ITestItemClass> testList = new();
+            List<ITestItemClass> testList = [];
 
             testList.AddItem();
         }

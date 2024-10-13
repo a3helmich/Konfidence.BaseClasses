@@ -174,7 +174,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
-            List<string> columnNameList = new() { "naam", "Omschrijving" };
+            List<string> columnNameList = ["naam", "Omschrijving"];
 
             // act
             string columnString = table.ColumnDataItems.GetJoinedFieldNames(columnNameList);
@@ -204,7 +204,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
-            List<string> columnNameList = new() { "naam", "Omschrijving" };
+            List<string> columnNameList = ["naam", "Omschrijving"];
 
             // act
             string columnString = table.ColumnDataItems.GetJoinedUnderscoreFieldNames(columnNameList);
@@ -234,7 +234,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
-            List<string> columnNameList = new() { "naam", "Omschrijving" };
+            List<string> columnNameList = ["naam", "Omschrijving"];
 
             // act
             string columnString = table.ColumnDataItems.GetFieldNamesAsArguments(columnNameList);
@@ -264,7 +264,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.BuildStructure();
 
             ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
-            List<string> columnNameList = new() { "naam", "Omschrijving" };
+            List<string> columnNameList = ["naam", "Omschrijving"];
 
             // act
             string columnString = table.ColumnDataItems.GetFieldNamesAsParameters(columnNameList);
@@ -277,7 +277,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetFirstField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            List<string> columnNameList = new() { "naam", "Omschrijving" };
+            List<string> columnNameList = ["naam", "Omschrijving"];
 
             // act
             string columnString = columnNameList.Any() ? columnNameList.First() : string.Empty;
@@ -290,7 +290,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
         public void When_GetLastField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
         {
             // arrange
-            List<string> columnNameList = new() { "naam", "Omschrijving" };
+            List<string> columnNameList = ["naam", "Omschrijving"];
 
             // act
             string columnString = columnNameList.Any() ? columnNameList.Last() : string.Empty;
