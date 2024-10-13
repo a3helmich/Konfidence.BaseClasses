@@ -38,7 +38,7 @@ namespace Konfidence.SqlHostProvider
 
             services.AddSingleton(services);
 
-            List<string> commandLineArguments = new();
+            List<string> commandLineArguments = [];
 
             if (args.Any())
             {

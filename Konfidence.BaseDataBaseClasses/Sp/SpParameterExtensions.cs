@@ -8,7 +8,7 @@ namespace Konfidence.BaseData.Sp
 {
     public static class SpParameterExtensions
     {
-        private static readonly Dictionary<Type, DbType> _typeMap = new();
+        private static readonly Dictionary<Type, DbType> _typeMap = [];
 
         static SpParameterExtensions()
         {

@@ -11,7 +11,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public bool UseEnvironmentSetting { get; set; } = false;
 
-        public List<ConfigConnectionString> Connections { get; set; } = new();
+        public List<ConfigConnectionString> Connections { get; set; } = [];
 
         public ClientConfig(IConfiguration configuration)
         {

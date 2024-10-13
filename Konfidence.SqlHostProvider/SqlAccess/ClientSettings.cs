@@ -12,7 +12,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         [UsedImplicitly] public string DefaultDatabase { get; set; } = string.Empty;
 
-        public List<ConfigConnectionString> Connections { get; set; } = new();
+        public List<ConfigConnectionString> Connections { get; set; } = [];
     }
 
     public class ClientSettings

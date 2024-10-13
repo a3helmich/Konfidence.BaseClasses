@@ -42,7 +42,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<ITableDataItem> GetList(IBaseClient client, List<IColumnDataItem> allColumnDataItems)
         {
-            List<ITableDataItem> tableDataItems = new();
+            List<ITableDataItem> tableDataItems = [];
 
             List<DataRow> schemaTables = client
                 .GetSchemaObject("Tables")

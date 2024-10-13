@@ -89,9 +89,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<IColumnDataItem> GetList(IBaseClient client, List<IIndexDataItem> allIndexDataItems)
         {
-            List<ColumnDataItem> columnDataItems = new();
+            List<ColumnDataItem> columnDataItems = [];
 
-            List<ISpParameterData> spParameterData = new();
+            List<ISpParameterData> spParameterData = [];
 
             client.BuildItemList(columnDataItems, SpName.GetColumnList, spParameterData);
 
