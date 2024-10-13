@@ -239,7 +239,7 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected void AddNode(XmlDocument registrationXml, string field, XmlDocument xmlDocument)
         {
-            XmlNode? subDocumentNode = AddNode(registrationXml, field, string.Empty);
+            XmlNode subDocumentNode = AddNode(registrationXml, field, string.Empty);
 
             subDocumentNode.InnerXml = xmlDocument.InnerXml;
         }
@@ -254,7 +254,7 @@ namespace Konfidence.UtilHelper
                 return;
             }
 
-            XmlNode? subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
+            XmlNode subDocumentNode = AddNode(registrationXml, root.Name, string.Empty);
 
             subDocumentNode.InnerXml = root.InnerXml;
         }

@@ -42,9 +42,9 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         internal static List<ITableDataItem> GetList(IBaseClient client, List<IColumnDataItem> allColumnDataItems)
         {
-            List<ITableDataItem>? tableDataItems = new();
+            List<ITableDataItem> tableDataItems = new();
 
-            List<DataRow>? schemaTables = client
+            List<DataRow> schemaTables = client
                 .GetSchemaObject("Tables")
                 .AsEnumerable()
                 .Where(dataRow => dataRow["TABLE_TYPE"].Equals("BASE TABLE"))
@@ -57,7 +57,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         private static IEnumerable<TableDataItem> MapSchemaTablesToTableDataItems(IEnumerable<DataRow> schemaTables, List<IColumnDataItem> allColumnDataItems)
         {
-            List<TableDataItem>? tableDataItems = schemaTables
+            List<TableDataItem> tableDataItems = schemaTables
                 .Select(tableDataRow => BuildTableDataItem(tableDataRow, allColumnDataItems))
                 .ToList();
 
@@ -70,15 +70,15 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         {
             string catalog = tableDataRow["TABLE_CATALOG"].ToString() ?? string.Empty;
 
-            string? name = tableDataRow["TABLE_NAME"].ToString() ?? string.Empty;
+            string name = tableDataRow["TABLE_NAME"].ToString() ?? string.Empty;
 
-            List<IColumnDataItem>? columnDataItems = allColumnDataItems.Where(x => x.TableName == name).ToList();
+            List<IColumnDataItem> columnDataItems = allColumnDataItems.Where(x => x.TableName == name).ToList();
 
             IColumnDataItem? indexedColumnDataItem = columnDataItems.FirstOrDefault(columnDataItem => columnDataItem.IsPrimaryKey);
 
-            string? primaryKey = indexedColumnDataItem?.Name ?? string.Empty;
+            string primaryKey = indexedColumnDataItem?.Name ?? string.Empty;
 
-            string? primaryKeyDataType = indexedColumnDataItem?.DataType ?? string.Empty;
+            string primaryKeyDataType = indexedColumnDataItem?.DataType ?? string.Empty;
 
             IColumnDataItem? guidColumn = columnDataItems
                 .Find(columnDataItem => columnDataItem.IsGuidField &&
@@ -87,7 +87,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             bool hasGuidId = guidColumn.IsAssigned();
 
-            string? guidIdField = hasGuidId ? guidColumn?.Name ?? string.Empty : string.Empty;
+            string guidIdField = hasGuidId ? guidColumn?.Name ?? string.Empty : string.Empty;
 
             return new TableDataItem(catalog, name, columnDataItems, primaryKey, primaryKeyDataType, guidIdField, hasGuidId); 
         }

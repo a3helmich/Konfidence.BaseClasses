@@ -29,9 +29,9 @@ namespace Konfidence.Security.Encryption
                 return string.Empty;
             }
 
-            ASCIIEncoding? asciiEncoding = new();
-            ArrayList? encryptedDataList = new();
-            StringBuilder? rawData = new();
+            ASCIIEncoding asciiEncoding = new();
+            ArrayList encryptedDataList = new();
+            StringBuilder rawData = new();
 
             foreach (List<byte>? objectItem in encryptedData)
             {
@@ -40,7 +40,7 @@ namespace Konfidence.Security.Encryption
 
             foreach (List<byte> byteData in encryptedDataList)
             {
-                byte[]? decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
+                byte[] decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
 
                 rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
             }

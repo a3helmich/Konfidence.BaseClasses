@@ -17,7 +17,7 @@ namespace Konfidence.TestClasses.Tests.objects
 
         public void MethodTwo()
         {
-            List<ITestItemClass>? testList = new();
+            List<ITestItemClass> testList = new();
 
             testList.AddItem();
         }

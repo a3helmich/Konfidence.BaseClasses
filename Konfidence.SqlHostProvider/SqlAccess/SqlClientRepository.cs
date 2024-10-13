@@ -32,22 +32,22 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 return new DatabaseProviderFactory().CreateDefault();
             }
 
-            Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            Configuration config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
             return new DatabaseProviderFactory(config.GetSection).Create(connection.ConnectionName);
         }
 
         public DataTable GetSchemaObject(string collection)
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbConnection? dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
-                using (DataTable? schemaTable = dbConnection.GetSchema(collection))
+                using (DataTable schemaTable = dbConnection.GetSchema(collection))
                 {
-                    DataTable? dataTable = schemaTable.Copy();
+                    DataTable dataTable = schemaTable.Copy();
 
                     return dataTable;
                 }
@@ -56,7 +56,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public int ExecuteCommandStoredProcedure(string saveStoredProcedure, List<ISpParameterData> parameterObjectList)
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
             {
@@ -71,7 +71,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteSaveStoredProcedure(IBaseDataItem dataItem)
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
@@ -85,7 +85,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetStoredProcedure(IBaseDataItem dataItem)
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.GetStoredProcedure))
             {
@@ -104,7 +104,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetByStoredProcedure(IBaseDataItem dataItem, string storedProcedure)
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
@@ -128,7 +128,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, IList<ISpParameterData> spParameters, IBaseClient baseClient) where T : IBaseDataItem, new()
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
@@ -138,7 +138,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 {
                     while (dataReader.Read())
                     {
-                        T? dataItem = new(); // dependency resolver
+                        T dataItem = new(); // dependency resolver
 
                         dataItem.InitializeDataItem();
 
@@ -160,7 +160,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 return;
             }
 
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.DeleteStoredProcedure))
             {
@@ -172,22 +172,22 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public int ExecuteTextCommandQuery(string textCommand)
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             return database.ExecuteNonQuery(CommandType.Text, textCommand);
         }
 
         public bool ObjectExists(string objectName, string collection)
         {
-            Database? database = GetDatabase();
+            Database database = GetDatabase();
 
             using (DbConnection? dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
-                using (DataTable? schemaTable = dbConnection.GetSchema(collection))
+                using (DataTable schemaTable = dbConnection.GetSchema(collection))
                 {
-                    IEnumerable<DataRow>? rows = schemaTable
+                    IEnumerable<DataRow> rows = schemaTable
                         .Rows
                         .OfType<DataRow>();
                     return rows

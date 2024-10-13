@@ -15,8 +15,8 @@ namespace Konfidence.TestTools
                 return false;
             }
 
-            FileInfo? file1Info = new(file1);
-            FileInfo? file2Info = new(file2);
+            FileInfo file1Info = new(file1);
+            FileInfo file2Info = new(file2);
 
             if (file1Info.Length != file2Info.Length)
             {
@@ -25,8 +25,8 @@ namespace Konfidence.TestTools
 
             Assert.IsTrue(file1Info.Length < 100000, "Files are too big");
 
-            byte[]? file1ByteList = File.ReadAllBytes(file1);
-            byte[]? file2ByteList = File.ReadAllBytes(file2);
+            byte[] file1ByteList = File.ReadAllBytes(file1);
+            byte[] file2ByteList = File.ReadAllBytes(file2);
 
             int byteIndex = 0;
 
@@ -51,8 +51,8 @@ namespace Konfidence.TestTools
                 return false;
             }
 
-            FileInfo? file1Info = new(file1);
-            FileInfo? file2Info = new(file2);
+            FileInfo file1Info = new(file1);
+            FileInfo file2Info = new(file2);
 
             if (file1Info.Length != file2Info.Length)
             {
@@ -61,8 +61,8 @@ namespace Konfidence.TestTools
 
             Assert.IsTrue(file1Info.Length < 100000, "Files are too big");
 
-            byte[]? file1ByteList = File.ReadAllBytes(file1);
-            byte[]? file2ByteList = File.ReadAllBytes(file2);
+            byte[] file1ByteList = File.ReadAllBytes(file1);
+            byte[] file2ByteList = File.ReadAllBytes(file2);
 
             int byteIndex = 0;
             while (byteIndex < file1Info.Length)

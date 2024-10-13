@@ -102,7 +102,7 @@ namespace Konfidence.UtilHelper
             if (_myDll == IntPtr.Zero)
                 InitializeMyDll();
             IntPtr pProc = Dll.GetProcAddress(_myDll , "CallingFunctionNameFromCallingDllFile");
-            DllFunctionDelegate? cpv = (DllFunctionDelegate)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DllFunctionDelegate));
+            DllFunctionDelegate cpv = (DllFunctionDelegate)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DllFunctionDelegate));
             // Now i'm calling delegate, with is calling function from dll file 
             return cpv(1, "Test");
         }

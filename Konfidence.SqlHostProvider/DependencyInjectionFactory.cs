@@ -26,19 +26,19 @@ namespace Konfidence.SqlHostProvider
 
         private static string GetApplicationPath()
         {
-            Assembly? assembly = Assembly.GetCallingAssembly();
-            string? directoryName = Path.GetDirectoryName(assembly.Location) ?? string.Empty;
+            Assembly assembly = Assembly.GetCallingAssembly();
+            string directoryName = Path.GetDirectoryName(assembly.Location) ?? string.Empty;
 
             return directoryName;
         }
 
         public static IServiceProvider ConfigureDependencyInjection(params string[] args)
         {
-            ServiceCollection? services = new();
+            ServiceCollection services = new();
 
             services.AddSingleton(services);
 
-            List<string>? commandLineArguments = new();
+            List<string> commandLineArguments = new();
 
             if (args.Any())
             {
@@ -53,9 +53,9 @@ namespace Konfidence.SqlHostProvider
                 }
             }
 
-            IConfigurationRoot? configuration = GetConfigurationRoot(commandLineArguments.ToArray());
+            IConfigurationRoot configuration = GetConfigurationRoot(commandLineArguments.ToArray());
 
-            ClientConfig? clientConfig = new(configuration);
+            ClientConfig clientConfig = new(configuration);
 
             clientConfig.SetSqlApplicationSettings();
 

@@ -25,7 +25,7 @@ namespace Konfidence.TestClasses.Tests
         [TestMethod]
         public void GetSingleItem()
         {
-            Dl.Test2DataItem? dataItem = new(2);
+            Dl.Test2DataItem dataItem = new(2);
 
             dataItem.Should().NotBeNull();
         }
@@ -33,8 +33,8 @@ namespace Konfidence.TestClasses.Tests
         [TestMethod]
         public void GetTwoSingleItem()
         {
-            Dl.Test2DataItem? dataItem1 = new(1);
-            Dl.Test2DataItem? dataItem2 = new(2);
+            Dl.Test2DataItem dataItem1 = new(1);
+            Dl.Test2DataItem dataItem2 = new(2);
 
             dataItem1.Should().NotBeNull();
             dataItem2.Should().NotBeNull();
@@ -43,7 +43,7 @@ namespace Konfidence.TestClasses.Tests
         [TestMethod]
         public void GetParentItem()
         {
-            Dl.Test2DataItem? test = new(1);
+            Dl.Test2DataItem test = new(1);
 
             test.Should().NotBeNull();
         }
@@ -55,7 +55,7 @@ namespace Konfidence.TestClasses.Tests
             List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
 
             // act
-            Dl.TestIntDataItem? testIntDataItem = testIntDataItemList.First();
+            Dl.TestIntDataItem testIntDataItem = testIntDataItemList.First();
 
             // assert
             testIntDataItem.TestIntId.Should().NotBeEmpty();
@@ -75,7 +75,7 @@ namespace Konfidence.TestClasses.Tests
             }
 
             // act
-            Dl.TestIntDataItem? testIntDataItem = new(id);
+            Dl.TestIntDataItem testIntDataItem = new(id);
 
             // assert
             testIntDataItem.IsNew.Should().BeTrue();
