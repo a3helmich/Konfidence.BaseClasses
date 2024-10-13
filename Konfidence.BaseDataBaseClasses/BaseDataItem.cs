@@ -159,7 +159,7 @@ namespace Konfidence.BaseData
 
         private List<ISpParameterData> SetParameterData()
         {
-            List<ISpParameterData>? parameterObjectList = SpParameterData.ToList();
+            List<ISpParameterData> parameterObjectList = SpParameterData.ToList();
 
             SpParameterData.Clear();
 

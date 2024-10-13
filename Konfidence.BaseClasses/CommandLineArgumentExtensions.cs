@@ -26,14 +26,14 @@ public static class CommandLineArgumentExtensions
             return false;
         }
 
-        string? arg = $"-{argument}";
+        string arg = $"-{argument}";
 
         if (arg.Length > 2)
         {
             arg = $"-{arg}";
         }
 
-        List<string>? argumentValues = args
+        List<string> argumentValues = args
             .Where(x => x.StartsWith(arg, stringComparison))
             .Select(x => x.TrimStartIgnoreCase(arg, true))
             .Where(x => x.StartsWith(" ") || x.TrimStart().StartsWith("=") || x.TrimStart().StartsWith(":"))

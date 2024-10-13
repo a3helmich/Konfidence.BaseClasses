@@ -74,6 +74,7 @@ public static class StringExtensions
     }
 
     [UsedImplicitly]
+    [Obsolete("This is there for triming the results of a pre .net5 string.Split method => use StringSplitOptions.TrimEntries instead")]
     public static List<string> TrimList(this IEnumerable<string> lines)
     {
         return lines.Select(x => x.Trim()).ToList();

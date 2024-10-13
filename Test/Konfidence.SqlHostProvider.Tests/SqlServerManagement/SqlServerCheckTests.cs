@@ -31,7 +31,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_invalid_database_Should_return_DoesNotExist()
         {
             // Arrange
-            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
             IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
@@ -48,9 +48,9 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
                 throw new Exception("connection not returned by configuration");
             }
 
-            Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            Configuration config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
-            DatabaseProviderFactory? databaseProviderFactory = new(config.GetSection);
+            DatabaseProviderFactory databaseProviderFactory = new(config.GetSection);
 
             Database? database = databaseProviderFactory.Create("TestDatabase");
 
@@ -65,7 +65,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_valid_database_Should_return_Ok()
         {
             // Arrange
-            IServiceProvider? di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
             IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
             if (!clientConfig.IsAssigned())
@@ -82,9 +82,9 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
                 throw new Exception("connection not returned by configuration");
             }
 
-            Configuration? config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            Configuration config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
 
-            DatabaseProviderFactory? databaseProviderFactory = new(config.GetSection);
+            DatabaseProviderFactory databaseProviderFactory = new(config.GetSection);
 
             Database? database = databaseProviderFactory.Create("TestClassGenerator");
 
@@ -99,10 +99,10 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_TryFindDatabase_With_valid_database_and_no_username_or_password_Should_return_Ok()
         {
             // Arrange
-            string? serverName = "konfidence2";
-            string? database = "TestClassGenerator";
-            string? userName = string.Empty;
-            string? password = string.Empty;
+            string serverName = "konfidence2";
+            string database = "TestClassGenerator";
+            string userName = string.Empty;
+            string password = string.Empty;
 
             // Act 
             Action action = () => SqlServerInstance.TryFindDatabase(serverName, database, userName, password);
@@ -115,9 +115,9 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_inValid_sqlserver_Should_Return_database_server_not_found()
         {
             // Arrange
-            string? sqlServerName = "does_not_exists";
-            string? userName = "nobody";
-            string? password = "none";
+            string sqlServerName = "does_not_exists";
+            string userName = "nobody";
+            string password = "none";
 
             // Act 
             Func<Task> action = async () => await SqlServerInstance.VerifyDatabaseServer(sqlServerName, userName, password);
@@ -130,9 +130,9 @@ namespace Konfidence.SqlHostProvider.Tests.SqlServerManagement
         public void When_VerifyDatabaseServer_With_inValid_sqlserver_and_no_username_and_no_password_Should_Return_database_server_not_found()
         {
             // Arrange
-            string? sqlServerName = "does_not_exists";
-            string? userName = string.Empty;
-            string? password = string.Empty;
+            string sqlServerName = "does_not_exists";
+            string userName = string.Empty;
+            string password = string.Empty;
 
             // Act 
             Func<Task> action = async () => await SqlServerInstance.VerifyDatabaseServer(sqlServerName, userName, password);

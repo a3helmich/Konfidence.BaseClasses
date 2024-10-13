@@ -28,11 +28,11 @@ namespace Konfidence.Security.Encryption
 
             if (rawData.IsAssigned())
             {
-                string? partialString = rawData;
+                string partialString = rawData;
 
                 while (partialString.Length > _encoder.PackageSize)
                 {
-                    string? partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
+                    string partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
 
                     byteList.Add(GetEncryptedDataBlock(partialStringBlock));
 
@@ -56,11 +56,11 @@ namespace Konfidence.Security.Encryption
             {
                 return new List<byte>();
             }
-            ASCIIEncoding? asciiEncoding = new();
+            ASCIIEncoding asciiEncoding = new();
 
-            byte[]? byteData = asciiEncoding.GetBytes(partialString);
+            byte[] byteData = asciiEncoding.GetBytes(partialString);
 
-            byte[]? encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
+            byte[] encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
 
             return encryptedData.ToList();
         }

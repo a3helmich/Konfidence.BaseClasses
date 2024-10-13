@@ -21,7 +21,7 @@ namespace Konfidence.TestTools
 
             DatabaseSettings? databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
 
-            DatabaseSettings? databaseSettingsCopy = new() { DefaultDatabase = databaseSettings?.DefaultDatabase };
+            DatabaseSettings databaseSettingsCopy = new() { DefaultDatabase = databaseSettings?.DefaultDatabase };
 
             Configuration? activeConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
@@ -85,7 +85,7 @@ namespace Konfidence.TestTools
                 return;
             }
 
-            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).TrimList();
+            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split([ ';' ], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
 
             SetConnectionStringPart(connectionStringParts, "User ID", userName);
 
@@ -109,7 +109,7 @@ namespace Konfidence.TestTools
                 return;
             }
 
-            string? connectionPart = connectionStringParts
+            string connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
@@ -121,7 +121,7 @@ namespace Konfidence.TestTools
 
         private static void RemoveConnectionStringPart(List<string> connectionStringParts, string parameter)
         {
-            string? connectionPart = connectionStringParts
+            string connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;

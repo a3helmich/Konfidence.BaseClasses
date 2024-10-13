@@ -17,7 +17,7 @@ namespace Konfidence.BaseRest.Client
 
         public RestClientConfig(IConfiguration configuration)
         {
-            IConfigurationSection? section = configuration.GetSection(@"WebHost");
+            IConfigurationSection section = configuration.GetSection(@"WebHost");
 
             section.Bind(this);
         }

@@ -96,7 +96,7 @@ namespace ClientSettingsUpdater
                 _errorExiter.Exit(6);
             }
 
-            string[]? clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
+            string[] clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
 
             if (!clientSettingsFileNames.Any())
             {
@@ -105,7 +105,7 @@ namespace ClientSettingsUpdater
                 _errorExiter.Exit(7);
             }
 
-            string? fullFolderName = Path.GetFullPath(ConfigFolder);
+            string fullFolderName = Path.GetFullPath(ConfigFolder);
 
             Debug.WriteLine($"Location: {fullFolderName}");
             Console.WriteLine($"Location: {fullFolderName}");
@@ -152,7 +152,7 @@ namespace ClientSettingsUpdater
 
             if (clientSettings.Accounts.All(x => x.UserName != UserName))
             {
-                MailAccount? account = new()
+                MailAccount account = new()
                 {
                     Server = MailServer,
                     UserName = UserName,

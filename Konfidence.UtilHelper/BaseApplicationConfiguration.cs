@@ -51,7 +51,7 @@ namespace Konfidence.UtilHelper
 
         protected string GetNodeValue(string name)
         {
-            string? nodeValue = string.Empty;
+            string nodeValue = string.Empty;
 
             XmlNode? xmlNode = _root?.SelectSingleNode(name);
 
@@ -81,18 +81,18 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected ArrayList GetArrayListNodeValue(string name)
         {
-            ArrayList? arrayArrayList = new();
-            ArrayList? arrayByteListNodeValue = new();
+            ArrayList arrayArrayList = new();
+            ArrayList arrayByteListNodeValue = new();
 
-            string? joinedArray = GetNodeValue(name);
+            string joinedArray = GetNodeValue(name);
 
             try
             {
                 if (joinedArray.IsAssigned())
                 {
-                    ArrayList? arrayListNodeValue = new();
+                    ArrayList arrayListNodeValue = new();
 
-                    string[]? splitArray = joinedArray.Split(' ');
+                    string[] splitArray = joinedArray.Split(' ');
 
                     arrayListNodeValue.AddRange(splitArray);
 
@@ -110,9 +110,7 @@ namespace Konfidence.UtilHelper
             }
             catch (Exception)
             {
-                // hier kom je o.a. terecht als de arraystring geen arraystring is.
-                // op dit moment gebeurt dit als de password string verkeerd wordt aangepast.
-                // ff niks
+                 // NOP
             }
 
             return arrayArrayList;
@@ -162,11 +160,11 @@ namespace Konfidence.UtilHelper
         [UsedImplicitly]
         protected void SetNodeValue(string name, ArrayList value)
         {
-            string? joinedArray = string.Empty;
+            string joinedArray = string.Empty;
 
             if (value.IsAssigned())
             {
-                ArrayList? stringArrayList = new();
+                ArrayList stringArrayList = new();
 
                 foreach (byte[] byteArray in value)
                 {

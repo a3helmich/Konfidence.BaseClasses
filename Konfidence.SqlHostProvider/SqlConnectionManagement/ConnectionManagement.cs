@@ -46,7 +46,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return;
             }
 
-            List<string>? connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries).TrimList();
+            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split([';'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.RemoveEmptyEntries).ToList();
 
             SetConnectionStringPart(connectionStringParts, "Database", database);
 
@@ -66,7 +66,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return;
             }
 
-            string? connectionPart = connectionStringParts
+            string connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
@@ -78,7 +78,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
         private static void RemoveConnectionStringPart(List<string> connectionStringParts, string parameter)
         {
-            string? connectionPart = connectionStringParts
+            string connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
                     x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
@@ -100,7 +100,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 
             foreach (ConfigConnectionString? clientSetting in clientSettings.DataConfiguration.Connections)
             {
-                IEnumerable<ConfigConnectionString>? clientConfigConnections = clientConfig.Connections.Where(x => x.Server == clientSetting.Server);
+                IEnumerable<ConfigConnectionString> clientConfigConnections = clientConfig.Connections.Where(x => x.Server == clientSetting.Server);
 
                 foreach (ConfigConnectionString? clientConfigConnection in clientConfigConnections)
                 {
@@ -124,7 +124,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                 return config;
             }
 
-            List<string>? connectionStringParts = connectionStringSettings.ConnectionString.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).TrimList();
+            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split([ ';' ], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
 
             SetConnectionStringPart(connectionStringParts, "User ID", userName);
 
