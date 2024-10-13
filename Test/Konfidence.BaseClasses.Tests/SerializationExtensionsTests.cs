@@ -16,7 +16,7 @@ public class SerializationExtensionsTests
         // arrange
         ClientSettings clientSettings = new()
         {
-            DataConfiguration = new DataConfiguration { Connections = [] }
+            DataConfiguration = new DataConfiguration { Connections = [new ConfigConnectionString()] }
         };
 
         string clientSettingsSerialised = clientSettings.Serialize();
