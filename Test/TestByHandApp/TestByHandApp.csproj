@@ -16,6 +16,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Azure.Core" Version="1.44.1" />
+	  <PackageReference Include="Azure.Identity" Version="1.13.1" />
+	  <PackageReference Include="System.Formats.Asn1" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\Konfidence.Integration.TestClasses\Konfidence.Integration.TestClasses.csproj" />
 	</ItemGroup>
 </Project>
