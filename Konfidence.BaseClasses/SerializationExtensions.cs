@@ -6,32 +6,36 @@ namespace Konfidence.Base
 {
     public static class SerializationExtensions
     {
-        public static string Serialize<T>(this T toSerializeDto)
+        private static readonly JsonSerializerOptions _serializationOptions;
+        private static readonly JsonSerializerOptions _deserializationOptions;
+
+        static SerializationExtensions()
         {
             JsonStringEnumConverter stringEnumConverter = new();
 
-            JsonSerializerOptions serializationOptions = new()
+            _serializationOptions = new JsonSerializerOptions
             {
-                WriteIndented = true, 
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, 
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 Converters = { stringEnumConverter }
             };
 
-            return JsonSerializer.Serialize(toSerializeDto, serializationOptions);
+            _deserializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
+            {
+                AllowTrailingCommas = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                Converters = { stringEnumConverter }
+            };
+        }
+
+        public static string Serialize<T>(this T toSerializeDto)
+        {
+            return JsonSerializer.Serialize(toSerializeDto, _serializationOptions);
         }
 
         public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto)
         {
-            JsonStringEnumConverter stringEnumConverter = new();
-
-            JsonSerializerOptions serializationOptions = new()
-            {
-                AllowTrailingCommas = true, 
-                ReadCommentHandling = JsonCommentHandling.Skip, 
-                Converters = { stringEnumConverter }
-            };
-
-            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, serializationOptions);
+            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _deserializationOptions);
 
             return deserializedDto.IsAssigned();
         }
