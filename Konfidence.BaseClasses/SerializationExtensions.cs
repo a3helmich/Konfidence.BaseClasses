@@ -8,6 +8,7 @@ namespace Konfidence.Base
     {
         private static readonly JsonSerializerOptions _serializationOptions;
         private static readonly JsonSerializerOptions _deserializationOptions;
+        private static readonly JsonSerializerOptions _caseSensitiveDeserializationOptions;
 
         static SerializationExtensions()
         {
@@ -26,6 +27,14 @@ namespace Konfidence.Base
                 ReadCommentHandling = JsonCommentHandling.Skip,
                 Converters = { stringEnumConverter }
             };
+
+            _caseSensitiveDeserializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
+            {
+                AllowTrailingCommas = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                Converters = { stringEnumConverter },
+                PropertyNameCaseInsensitive = false
+            };
         }
 
         public static string Serialize<T>(this T toSerializeDto)
@@ -33,8 +42,15 @@ namespace Konfidence.Base
             return JsonSerializer.Serialize(toSerializeDto, _serializationOptions);
         }
 
-        public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto)
+        public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
         {
+            if (caseSensitive)
+            {
+                deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _caseSensitiveDeserializationOptions);
+
+                return deserializedDto.IsAssigned();
+            }
+
             deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _deserializationOptions);
 
             return deserializedDto.IsAssigned();
