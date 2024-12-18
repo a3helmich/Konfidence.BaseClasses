@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Konfidence.Tasks;
+namespace Konfidence.Base;
 
 public static class TaskExtensions
 {
