@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using JetBrains.Annotations;
 
 namespace Konfidence.Base;
@@ -28,6 +30,40 @@ public static class FilePathExtensions
             {
                 fullFileName = combinedFileName;
 
+                return true;
+            }
+
+            baseOffset = Path.Combine(baseOffset, offSetInc);
+
+            currentDepth = baseOffset.Split([Path.DirectorySeparatorChar], StringSplitOptions.RemoveEmptyEntries).Length;
+        }
+
+        return false;
+    }
+
+    [UsedImplicitly]
+    public static bool TryFindFileIncludingSubFolders(
+        this string fileName,
+        out List<string> fullFileNames,
+        int maxDepth = 5)
+    {
+        fullFileNames = [];
+
+        string baseOffset = $"..{Path.DirectorySeparatorChar}";
+        string offSetInc = baseOffset;
+
+        int currentDepth = 0;
+
+        while (currentDepth <= maxDepth)
+        {
+            string fullPath = Path.GetFullPath(baseOffset);
+
+            var allFiles = Directory.EnumerateFiles(fullPath, fileName, SearchOption.AllDirectories).ToArray();
+
+            fullFileNames.AddRange(allFiles.Where(x => x.EndsWith(fileName)));
+
+            if (fullFileNames.Any())
+            {
                 return true;
             }
 
