@@ -25,4 +25,10 @@
     <ProjectReference Include="..\..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\TestTryFindFile.txt">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

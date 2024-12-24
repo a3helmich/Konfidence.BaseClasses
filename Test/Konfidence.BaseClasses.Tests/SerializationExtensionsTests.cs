@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
