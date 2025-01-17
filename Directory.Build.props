@@ -16,7 +16,9 @@
     <CLSCompliant>False</CLSCompliant>
     <AssemblyCulture>en</AssemblyCulture>
 
-    <Product>Konfidence Base Classes</Product>
+	  <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+
+		<Product>Konfidence Base Classes</Product>
 
     <PackageTags>Konfidence;baseclasses</PackageTags>
     <Description>Konfidence helper classess for Konfidence tools and software</Description>
