@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>2025.0.1</Version>
+    <Version>2025.0.2</Version>
     
     <Authors>Adrie Helmich</Authors>
     <Copyright>Konfidence in it 2024.</Copyright>
@@ -16,7 +16,9 @@
     <CLSCompliant>False</CLSCompliant>
     <AssemblyCulture>en</AssemblyCulture>
 
-    <Product>Konfidence Base Classes</Product>
+	  <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+
+		<Product>Konfidence Base Classes</Product>
 
     <PackageTags>Konfidence;baseclasses</PackageTags>
     <Description>Konfidence helper classess for Konfidence tools and software</Description>
