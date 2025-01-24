@@ -26,6 +26,11 @@ public static class BaseExtensions
         return assignedTime > DateTime.MinValue && assignedTime < DateTime.MaxValue;
     }
 
+    public static bool IsAssigned(this DateOnly assignedTime)
+    {
+        return assignedTime > DateOnly.MinValue && assignedTime < DateOnly.MaxValue;
+    }
+
     public static bool IsAssigned(this TimeSpan assignedTime)
     {
         return assignedTime > TimeSpan.MinValue && assignedTime < TimeSpan.MaxValue;
