@@ -21,19 +21,24 @@ public static class BaseExtensions
         return assignedObject is not null;
     }
 
-    public static bool IsAssigned(this DateTime assignedTime)
+    public static bool IsAssigned(this DateTime assignedDateTime)
     {
-        return assignedTime > DateTime.MinValue && assignedTime < DateTime.MaxValue;
+        return assignedDateTime > DateTime.MinValue && assignedDateTime < DateTime.MaxValue;
     }
 
-    public static bool IsAssigned(this DateOnly assignedTime)
+    public static bool IsAssigned(this DateOnly assignedDate)
     {
-        return assignedTime > DateOnly.MinValue && assignedTime < DateOnly.MaxValue;
+        return assignedDate > DateOnly.MinValue && assignedDate < DateOnly.MaxValue;
     }
 
-    public static bool IsAssigned(this TimeSpan assignedTime)
+    public static bool IsAssigned(this TimeSpan assignedTimeSpan)
     {
-        return assignedTime > TimeSpan.MinValue && assignedTime < TimeSpan.MaxValue;
+        return assignedTimeSpan > TimeSpan.MinValue && assignedTimeSpan < TimeSpan.MaxValue;
+    }
+
+    public static bool IsAssigned(this DateTimeOffset assignedDateTimeOffset)
+    {
+        return assignedDateTimeOffset > DateTimeOffset.MinValue && assignedDateTimeOffset < DateTimeOffset.MaxValue;
     }
 
     [ContractAnnotation("assignedGuid:null => false")]
