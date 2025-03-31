@@ -43,6 +43,11 @@ public static class DateTimeExtensions
         return TimeOnly.FromDateTime(dateTimeOffset.DateTime);
     }
 
+    public static DateTime ToDateTime(this DateOnly date)
+    {
+        return date.ToDateTime(TimeOnly.MinValue);
+    }
+
     public static DateOnly ToFirstDayInMonth(this DateOnly date)
     {
         return new DateOnly(date.Year, date.Month, 1);
