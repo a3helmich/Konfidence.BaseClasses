@@ -24,14 +24,16 @@ public static class SerializationExtensions
         {
             WriteIndented = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            Converters = { stringEnumConverter }
+            Converters = { stringEnumConverter },
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
         };
 
         _deserializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
-            Converters = { stringEnumConverter }
+            Converters = { stringEnumConverter },
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
         };
 
         _caseSensitiveDeserializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
@@ -39,6 +41,7 @@ public static class SerializationExtensions
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
             Converters = { stringEnumConverter },
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
             PropertyNameCaseInsensitive = false
         };
     }
