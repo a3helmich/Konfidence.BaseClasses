@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,5 +36,31 @@ public class SerializationExtensionsTests
         clientSettingsDeserialized.LogLevel.Should().Be(LogEventLevel.Information);
         clientSettingsDeserialized.DataConfiguration.Should().NotBeNull();
         clientSettingsDeserialized.DataConfiguration!.Connections.Should().HaveCount(1);
+    }
+
+    private class TestClass
+    {
+        public double Value { get; set; }
+    }
+
+    [TestMethod]
+    public void Deserialize_of_NaN_is_Configured()
+    {
+        // arrange
+        string json = "{ \"Value\": \"NaN\" }";
+
+        // act
+        bool serializationResult = json.Deserialize(out TestClass? testClass);
+
+        // assert
+        serializationResult.Should().BeTrue();
+        testClass.Should().NotBeNull();
+
+        if (!testClass.IsAssigned())
+        {
+            return;
+        }
+
+        testClass.Value.Should().Be(double.NaN);
     }
 }
