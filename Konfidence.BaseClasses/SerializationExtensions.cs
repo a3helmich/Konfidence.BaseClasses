@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Konfidence.Base.JsonConverters;
 
 namespace Konfidence.Base;
 
@@ -19,29 +20,27 @@ public static class SerializationExtensions
     static SerializationExtensions()
     {
         JsonStringEnumConverter stringEnumConverter = new();
+        DoubleNaNConverter doubleNaNConverter = new();
 
         _serializationOptions = new JsonSerializerOptions
         {
             WriteIndented = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            Converters = { stringEnumConverter },
-            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+            Converters = { stringEnumConverter, doubleNaNConverter }
         };
 
         _deserializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
-            Converters = { stringEnumConverter },
-            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+            Converters = { stringEnumConverter, doubleNaNConverter }
         };
 
         _caseSensitiveDeserializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             AllowTrailingCommas = true,
             ReadCommentHandling = JsonCommentHandling.Skip,
-            Converters = { stringEnumConverter },
-            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
+            Converters = { stringEnumConverter, doubleNaNConverter },
             PropertyNameCaseInsensitive = false
         };
     }
