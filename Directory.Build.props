@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
-    <Version>2025.0.12</Version>
+    <Version>2025.0.13</Version>
     
     <Authors>Adrie Helmich</Authors>
-    <Copyright>Konfidence in it 2024.</Copyright>
+    <Copyright>Konfidence in it 2025.</Copyright>
     <Company>Konfidence in it</Company>
     <AssemblyCompany>Konfidence in it</AssemblyCompany>
 

@@ -10,13 +10,13 @@ public class BaseViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     [UsedImplicitly]
-    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    public void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     [UsedImplicitly]
-    protected bool SetField<T>(
+    public bool SetField<T>(
         ref T field,
         T value,
         [CallerMemberName] string? propertyName = null)
