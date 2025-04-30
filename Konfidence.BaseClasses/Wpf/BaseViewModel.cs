@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace Konfidence.Base.Wpf;
 
-public sealed class BaseViewModel : INotifyPropertyChanged
+public class BaseViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 
