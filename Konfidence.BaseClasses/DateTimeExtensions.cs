@@ -38,9 +38,19 @@ public static class DateTimeExtensions
         return DateOnly.FromDateTime(dateTimeOffset.DateTime);
     }
 
+    public static DateOnly ToDateOnly(this DateTime dateTime)
+    {
+        return DateOnly.FromDateTime(dateTime);
+    }
+
     public static TimeOnly ToTimeOnly(this DateTimeOffset dateTimeOffset)
     {
         return TimeOnly.FromDateTime(dateTimeOffset.DateTime);
+    }
+
+    public static TimeOnly ToTimeOnly(this DateTime dateTime)
+    {
+        return TimeOnly.FromDateTime(dateTime);
     }
 
     public static DateTime ToDateTime(this DateOnly date)
