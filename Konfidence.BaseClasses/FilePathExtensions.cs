@@ -106,4 +106,14 @@ public static class FilePathExtensions
 
         return false;
     }
+    
+    public static bool ValidateDirectory(this string path)
+    {
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        return Directory.Exists(path);
+    }
 }
