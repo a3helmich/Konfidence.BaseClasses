@@ -9,23 +9,34 @@ namespace Konfidence.Base;
 public static class DateTimeExtensions
 {
     [UsedImplicitly]
-    public static DateTimeOffset DateToDateTimeOffset(
+    public static DateTimeOffset ToDateTimeOffset(
         this string dateTime,
         TimeZoneInfo timeZoneInfo)
     {
-        return DateTime.TryParseExact(dateTime, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out DateTime resultDateTime)
-            ? new DateTimeOffset(resultDateTime.Ticks, timeZoneInfo.BaseUtcOffset)
+        if (DateTime.TryParseExact(dateTime, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out DateTime resultDateTime))
+        {
+            return new DateTimeOffset(resultDateTime.Ticks, timeZoneInfo.BaseUtcOffset);
+        }
+        
+        return DateTime.TryParse(dateTime, CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out resultDateTime) 
+            ? new DateTimeOffset(resultDateTime.Ticks, timeZoneInfo.BaseUtcOffset) 
             : DateTimeOffset.MinValue;
     }
 
     [UsedImplicitly]
-    public static DateTimeOffset DateTimeToDateTimeOffset(
-        this string dateTime,
+    public static DateTimeOffset ToDateTimeOffset(
+        this DateOnly date,
         TimeZoneInfo timeZoneInfo)
     {
-        return DateTime.TryParse(dateTime, CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out DateTime resultDateTime) 
-            ? new DateTimeOffset(resultDateTime.Ticks, timeZoneInfo.BaseUtcOffset) 
-            : DateTimeOffset.MinValue;
+        return new DateTimeOffset(date.ToDateTime().Ticks, timeZoneInfo.BaseUtcOffset);
+    }
+
+    [UsedImplicitly]
+    public static DateTimeOffset ToDateTimeOffset(
+        this DateTime dateTime,
+        TimeZoneInfo timeZoneInfo)
+    {
+        return new DateTimeOffset(dateTime.Ticks, timeZoneInfo.BaseUtcOffset);
     }
 
     [UsedImplicitly]
