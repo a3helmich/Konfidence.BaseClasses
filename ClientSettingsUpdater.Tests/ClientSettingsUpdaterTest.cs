@@ -86,7 +86,7 @@ namespace ClientSettingsUpdater.Tests
             Mock<IErrorExiter> errorExiterMock = new();
 
             // act
-            ClientSettingsManager clientSettingsManager = new(Array.Empty<string>(), errorExiterMock.Object);
+            ClientSettingsManager clientSettingsManager = new([], errorExiterMock.Object);
 
             // assert
             errorExiterMock.Verify(x => x.Exit(4), Times.Once);
@@ -216,7 +216,7 @@ namespace ClientSettingsUpdater.Tests
 
             Assert.IsNotNull(mailConfig);
 
-            mailConfig.Accounts.Should().HaveCountGreaterOrEqualTo(2);
+            mailConfig.Accounts.Should().HaveCountGreaterThanOrEqualTo(2);
             MailAccount? account1 = mailConfig.Accounts.FirstOrDefault(x => x.UserName == "Adrie");
             MailAccount? account2 = mailConfig.Accounts.FirstOrDefault(x => x.UserName == "A3");
 
