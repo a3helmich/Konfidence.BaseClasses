@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -12,14 +11,16 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
     public class SqlServerCheck
     {
         [UsedImplicitly]
-        public static bool VerifyDatabaseServer(Database databaseInstance, int timeOut = 3000)
+        public static bool VerifyDatabaseServer(Database databaseInstance)
         {
             string serverName = string.Empty;
             string connectionName = string.Empty;
             string userName = string.Empty;
             string password = string.Empty;
 
-            IDbConnection? sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
+            // changing to Microsoft.Data.SqlClient in future releases, breaks the unit test with timings going on forever
+
+            SqlConnection? sqlConnection = databaseInstance.CreateConnection() as SqlConnection;
 
             if (sqlConnection.IsAssigned())
             {

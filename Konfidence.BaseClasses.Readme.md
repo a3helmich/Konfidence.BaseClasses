@@ -18,5 +18,6 @@
 	- Contains(..) with specified casing type
 	- ToDecimal(), parse a string into a decimal
  
+- currently targets net9.0 and net10.0
 ### The Konfidence.BaseClasses repo is available on [github.com](https://github.com/a3helmich/Konfidence.BaseClasses).
 

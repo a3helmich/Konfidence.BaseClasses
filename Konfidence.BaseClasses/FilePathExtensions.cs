@@ -110,7 +110,7 @@ public static class FilePathExtensions
     [UsedImplicitly]
     public static bool ValidateDirectory(this string path)
     {
-        if (!Directory.Exists(path))
+        if (!Directory.Exists(path) && path.IsAssigned())
         {
             try
             {
@@ -121,6 +121,6 @@ public static class FilePathExtensions
             }
         }
 
-        return Directory.Exists(path);
+        return path.IsAssigned() && Directory.Exists(path);
     }
 }
