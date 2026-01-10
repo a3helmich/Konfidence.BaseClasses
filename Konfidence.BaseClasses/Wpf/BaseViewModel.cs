@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
@@ -7,11 +8,33 @@ namespace Konfidence.Base.Wpf;
 
 public class BaseViewModel : INotifyPropertyChanged
 {
+    private int _suppressNotifications;
+
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    [UsedImplicitly]
+    protected bool IsNotificationSuppressed => _suppressNotifications > 0;
+
+    [UsedImplicitly]
+    protected IDisposable SuppressNotifications()
+    {
+        _suppressNotifications++;
+        return new NotificationScope(this);
+    }
+
+    private void ResumeNotifications()
+    {
+        _suppressNotifications--;
+    }
 
     [UsedImplicitly]
     public void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
+        if (IsNotificationSuppressed)
+        {
+            return;
+        }
+
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
@@ -31,5 +54,14 @@ public class BaseViewModel : INotifyPropertyChanged
         OnPropertyChanged(propertyName);
 
         return true;
+    }
+
+    private sealed class NotificationScope : IDisposable
+    {
+        private readonly BaseViewModel _owner;
+
+        public NotificationScope(BaseViewModel owner) => _owner = owner;
+
+        public void Dispose() => _owner.ResumeNotifications();
     }
 }
