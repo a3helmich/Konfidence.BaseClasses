@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
-    <Version>2025.1.01</Version>
+    <Version>2026.0.01</Version>
     
     <Authors>Adrie Helmich</Authors>
-    <Copyright>Konfidence in it 2025.</Copyright>
+    <Copyright>Konfidence in it 2026.</Copyright>
     <Company>Konfidence in it</Company>
     <AssemblyCompany>Konfidence in it</AssemblyCompany>
 		<TargetFrameworks>net9.0;net10.0</TargetFrameworks>
