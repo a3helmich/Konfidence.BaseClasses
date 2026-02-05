@@ -19,6 +19,7 @@ public class BaseViewModel : INotifyPropertyChanged
     protected IDisposable SuppressNotifications()
     {
         _suppressNotifications++;
+
         return new NotificationScope(this);
     }
 
