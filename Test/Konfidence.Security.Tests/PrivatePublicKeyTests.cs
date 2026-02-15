@@ -25,7 +25,10 @@ namespace Konfidence.Security.Tests
 
             string publicKey2 = ppk2.PublicKey;
 
-            publicKey2.Should().Be(publicKey1, "Encryption Store niet opgeslagen");
+            ppk1.DeleteEncryptionStore();
+            ppk2.DeleteEncryptionStore();
+
+            publicKey2.Should().Be(publicKey1, "Encryption not stored in Store");
         }
 
         [TestMethod]
