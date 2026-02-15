@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using System.Text.Json;
 using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
-using System.Text.Json;
 
 namespace Konfidence.TestTools
 {
@@ -85,7 +85,7 @@ namespace Konfidence.TestTools
                 return;
             }
 
-            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split([ ';' ], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split([';'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
 
             SetConnectionStringPart(connectionStringParts, "User ID", userName);
 
@@ -95,7 +95,7 @@ namespace Konfidence.TestTools
 
             RemoveConnectionStringPart(connectionStringParts, "Integrated Security");
 
-            connectionStringSettings.ConnectionString = string.Join(";" , connectionStringParts);
+            connectionStringSettings.ConnectionString = string.Join(";", connectionStringParts);
 
             config.Save(ConfigurationSaveMode.Modified);
 
@@ -112,7 +112,7 @@ namespace Konfidence.TestTools
             string connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
-                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
+                    x.TrimStartIgnoreCase(parameter).StartsWith('=')) ?? string.Empty;
 
             connectionStringParts.Remove(connectionPart);
 
@@ -124,7 +124,7 @@ namespace Konfidence.TestTools
             string connectionPart = connectionStringParts
                 .FirstOrDefault(x =>
                     x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
-                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
+                    x.TrimStartIgnoreCase(parameter).StartsWith('=')) ?? string.Empty;
 
             connectionStringParts.Remove(connectionPart);
         }
