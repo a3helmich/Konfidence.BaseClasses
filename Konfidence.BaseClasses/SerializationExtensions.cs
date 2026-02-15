@@ -10,6 +10,7 @@ using CsvHelper.Configuration;
 
 namespace Konfidence.Base;
 
+// ReSharper disable UnusedMember.Global
 public static class SerializationExtensions
 {
     private static readonly JsonSerializerOptions _serializationOptions;
@@ -76,5 +77,15 @@ public static class SerializationExtensions
         deserializedDto = csvReader.GetRecords<T>().ToList();
 
         return deserializedDto.Any();
+    }
+
+
+    // TODO : Consider using a more efficient cloning method if TT is known to be a reference type and supports ICloneable or similar.
+    //        use a deep clone library like Force.deepCloner or FastDeepCloner if performance is a concern.
+    public static T Clone<T>(this T data)
+    {
+        return data.Serialize().Deserialize(out T? clonedData)
+            ? clonedData
+            : data;
     }
 }
