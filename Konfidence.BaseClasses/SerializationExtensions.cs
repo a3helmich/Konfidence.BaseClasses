@@ -8,6 +8,7 @@ using CsvHelper.Configuration;
 
 namespace Konfidence.Base;
 
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
@@ -30,8 +31,14 @@ public static class SerializationExtensions
             {
                 foreach (JsonPropertyInfo property in typeInfo.Properties)
                 {
-                    // Override ignore behavior (if the property is present in metadata)
-                    property.ShouldSerialize = static (_, _) => true;
+                    // Only flip properties that were annotated with [JsonIgnore] / [JsonIgnore(...)]
+                    if (property.AttributeProvider is MemberInfo member &&
+                        member.IsDefined(typeof(JsonIgnoreAttribute), inherit: true))
+                    {
+                        // In .NET 10, "ignore" is effectively expressed via ShouldSerialize / accessors.
+                        // For serialization-only: force "should serialize" to true.
+                        property.ShouldSerialize = static (_, _) => true;
+                    }
                 }
             });
 
