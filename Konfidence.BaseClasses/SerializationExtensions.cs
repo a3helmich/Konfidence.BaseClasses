@@ -3,12 +3,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using CsvHelper;
 using CsvHelper.Configuration;
 
 namespace Konfidence.Base;
+
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 
 // ReSharper disable UnusedMember.Global
 public static class SerializationExtensions
@@ -17,6 +19,25 @@ public static class SerializationExtensions
     private static readonly JsonSerializerOptions _deserializationOptions;
     private static readonly JsonSerializerOptions _caseSensitiveDeserializationOptions;
     private static readonly JsonSerializerOptions _cloneOptions;
+
+    private static class JsonOptionsFactory
+    {
+        public static DefaultJsonTypeInfoResolver CreateIncludingIgnoredPropertiesResolver()
+        {
+            DefaultJsonTypeInfoResolver resolver = new();
+
+            resolver.Modifiers.Add(static typeInfo =>
+            {
+                foreach (JsonPropertyInfo property in typeInfo.Properties)
+                {
+                    // Override ignore behavior (if the property is present in metadata)
+                    property.ShouldSerialize = static (_, _) => true;
+                }
+            });
+
+            return resolver;
+        }
+    }
 
     static SerializationExtensions()
     {
@@ -47,7 +68,8 @@ public static class SerializationExtensions
         _cloneOptions = new JsonSerializerOptions
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            Converters = { stringEnumConverter }
+            Converters = { stringEnumConverter },
+            TypeInfoResolver = JsonOptionsFactory.CreateIncludingIgnoredPropertiesResolver()
         };
     }
 
@@ -88,6 +110,7 @@ public static class SerializationExtensions
 
     private static string CloneSerialize<T>(this T toSerializeDto)
     {
+        //_cloneOptions.TypeInfoResolver
         return JsonSerializer.Serialize(toSerializeDto, _cloneOptions);
     }
 
