@@ -17,6 +17,7 @@ using System.Text.Json.Serialization.Metadata;
 public static class SerializationExtensions
 {
     private static readonly JsonSerializerOptions _serializationOptions;
+    private static readonly JsonSerializerOptions _serializationCompressedOptions;
     private static readonly JsonSerializerOptions _deserializationOptions;
     private static readonly JsonSerializerOptions _caseSensitiveDeserializationOptions;
     private static readonly JsonSerializerOptions _cloneOptions;
@@ -57,6 +58,13 @@ public static class SerializationExtensions
             Converters = { stringEnumConverter }
         };
 
+        _serializationCompressedOptions = new JsonSerializerOptions
+        {
+            WriteIndented = false,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Converters = { stringEnumConverter }
+        };
+
         _deserializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             AllowTrailingCommas = true,
@@ -80,9 +88,11 @@ public static class SerializationExtensions
         };
     }
 
-    public static string Serialize<T>(this T toSerializeDto)
+    public static string Serialize<T>(this T toSerializeDto, bool withCompression = false)
     {
-        return JsonSerializer.Serialize(toSerializeDto, _serializationOptions);
+        return JsonSerializer.Serialize(toSerializeDto, withCompression
+            ? _serializationCompressedOptions
+            : _serializationOptions);
     }
 
     public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
