@@ -24,9 +24,9 @@ namespace Konfidence.SqlHostProvider.SqlServerManagement
 
             if (sqlConnection.IsAssigned())
             {
-                string[] connectionParameters = sqlConnection.ConnectionString.Split(';'); 
+                string[] connectionParameters = sqlConnection.ConnectionString.Split(';');
 
-                foreach(string? param in connectionParameters)
+                foreach (string param in connectionParameters)
                 {
                     if (param.StartsWith("server=", StringComparison.OrdinalIgnoreCase))
                     {

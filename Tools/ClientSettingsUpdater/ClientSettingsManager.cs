@@ -33,9 +33,9 @@ namespace ClientSettingsUpdater
                 return;
             }
 
-            Console.WriteLine($"content: {string.Join('-',args)}");
+            Console.WriteLine($"content: {string.Join('-', args)}");
 
-            if (args.TryParseArgument(Argument.ConfigFileFolder, out string? verbose))
+            if (args.TryParseArgument(Argument.ConfigFileFolder, out string verbose))
             {
                 _verbose = !string.IsNullOrWhiteSpace(verbose);
             }
@@ -110,7 +110,7 @@ namespace ClientSettingsUpdater
             Debug.WriteLine($"Location: {fullFolderName}");
             Console.WriteLine($"Location: {fullFolderName}");
 
-            foreach (string? clientSettingsFileName in clientSettingsFileNames)
+            foreach (string clientSettingsFileName in clientSettingsFileNames)
             {
                 Debug.WriteLine($"File: {clientSettingsFileName}");
                 Console.WriteLine($"File: {clientSettingsFileName}");
@@ -165,7 +165,7 @@ namespace ClientSettingsUpdater
             File.WriteAllText(fileName, clientSettings.Serialize());
         }
 
-        private void UpdateFile(string fileName) 
+        private void UpdateFile(string fileName)
         {
             if (!File.ReadAllText(fileName).Deserialize(out ClientSettings? clientSettings))
             {

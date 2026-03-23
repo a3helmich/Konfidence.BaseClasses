@@ -44,7 +44,7 @@ namespace Konfidence.TestTools
 
         public static void CopySqlSecurityToActiveConfiguration(string connectionName)
         {
-            if ("ClientConfigLocation".TryGetEnvironmentVariable(out string? fileName) && File.Exists(fileName))
+            if ("ClientConfigLocation".TryGetEnvironmentVariable(out string fileName) && File.Exists(fileName))
             {
                 ClientSettings? clientSettings = JsonSerializer.Deserialize<ClientSettings>(File.ReadAllText(fileName));
 

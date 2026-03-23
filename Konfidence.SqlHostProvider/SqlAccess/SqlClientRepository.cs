@@ -60,7 +60,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
             {
-                foreach (ISpParameterData? parameterObject in parameterObjectList)
+                foreach (ISpParameterData parameterObject in parameterObjectList)
                 {
                     database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
                 }
@@ -191,7 +191,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                         .Rows
                         .OfType<DataRow>();
                     return rows
-                        .Any(x => (x[2].ToString()??string.Empty).Equals(objectName, StringComparison.OrdinalIgnoreCase));
+                        .Any(x => (x[2].ToString() ?? string.Empty).Equals(objectName, StringComparison.OrdinalIgnoreCase));
                 }
             }
         }
@@ -203,14 +203,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 dataItem.AutoIdField, DataRowVersion.Proposed, dataItem.GetId());
 
             // fields changing at the database side
-            foreach (ISpParameterData? parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
+            foreach (ISpParameterData parameterObject in dataItem.AutoUpdateFieldDictionary.Values)
             {
                 database.AddParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, ParameterDirection.InputOutput,
                     parameterObject.ParameterName, DataRowVersion.Proposed, parameterObject.Value);
             }
 
             // all the other fields
-            foreach (ISpParameterData? parameterObject in dataItem.SetItemData())
+            foreach (ISpParameterData parameterObject in dataItem.SetItemData())
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
@@ -237,7 +237,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         private static void SetParameterData(IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
         {
-            foreach (ISpParameterData? parameterObject in parameterObjectList)
+            foreach (ISpParameterData parameterObject in parameterObjectList)
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
