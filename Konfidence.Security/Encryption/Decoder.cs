@@ -33,7 +33,7 @@ namespace Konfidence.Security.Encryption
             ArrayList encryptedDataList = new();
             StringBuilder rawData = new();
 
-            foreach (List<byte>? objectItem in encryptedData)
+            foreach (List<byte> objectItem in encryptedData)
             {
                 encryptedDataList.Add(objectItem);
             }

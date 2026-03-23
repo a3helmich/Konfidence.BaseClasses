@@ -9,7 +9,7 @@ namespace Konfidence.TestClasses.Tests.objects
 
         public void MethodOne()
         {
-            foreach (ITestItemClass? testItem in TestItemList)
+            foreach (ITestItemClass testItem in TestItemList)
             {
                 testItem.MethodOne();
             }

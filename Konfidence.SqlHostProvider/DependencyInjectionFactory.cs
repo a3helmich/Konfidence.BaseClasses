@@ -42,7 +42,7 @@ namespace Konfidence.SqlHostProvider
 
             if (args.Any())
             {
-                if (args.TryParseArgument(Argument.ConfigFileFolder, out string? commandLineArgument))
+                if (args.TryParseArgument(Argument.ConfigFileFolder, out string commandLineArgument))
                 {
                     commandLineArguments.Add($"DataConfiguration:{Argument.ConfigFileFolder}={commandLineArgument}");
                 }
