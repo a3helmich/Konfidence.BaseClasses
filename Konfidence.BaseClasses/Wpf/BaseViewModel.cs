@@ -68,7 +68,13 @@ public class BaseViewModel : INotifyPropertyChanged
             return false;
         }
 
+        T oldValue = field;
+
+        field = value;
+
         OnPropertyChanged(propertyName);
+
+        field = oldValue;
 
         return true;
     }
