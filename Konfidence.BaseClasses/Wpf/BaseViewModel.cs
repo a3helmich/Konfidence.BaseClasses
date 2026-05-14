@@ -57,6 +57,22 @@ public class BaseViewModel : INotifyPropertyChanged
         return true;
     }
 
+    [UsedImplicitly]
+    public bool SetFrozenField<T>(
+        ref T field,
+        T value,
+        [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value))
+        {
+            return false;
+        }
+
+        OnPropertyChanged(propertyName);
+
+        return true;
+    }
+
     private sealed class NotificationScope : IDisposable
     {
         private readonly BaseViewModel _owner;

@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 
-
 namespace Konfidence.Base;
 
 [UsedImplicitly]
@@ -21,21 +20,19 @@ public static class BaseExtensions
         return assignedObject is not null;
     }
 
-    public static bool IsAssigned(this DateTime assignedDateTime)
-    {
-        return assignedDateTime > DateTime.MinValue && assignedDateTime < DateTime.MaxValue;
-    }
-
+    [UsedImplicitly]
     public static bool IsAssigned(this DateOnly assignedDate)
     {
         return assignedDate > DateOnly.MinValue && assignedDate < DateOnly.MaxValue;
     }
 
+    [UsedImplicitly]
     public static bool IsAssigned(this TimeSpan assignedTimeSpan)
     {
         return assignedTimeSpan > TimeSpan.MinValue && assignedTimeSpan < TimeSpan.MaxValue;
     }
 
+    [UsedImplicitly]
     public static bool IsAssigned(this DateTimeOffset assignedDateTimeOffset)
     {
         return assignedDateTimeOffset > DateTimeOffset.MinValue && assignedDateTimeOffset < DateTimeOffset.MaxValue;
@@ -78,27 +75,31 @@ public static class BaseExtensions
             return true;
         }
 
-        if (double.TryParse(numericString, out _))
+        return double.TryParse(numericString, out _) || decimal.TryParse(numericString, out _);
+    }
+
+    extension(DateTime dateTime)
+    {
+        [UsedImplicitly]
+        public DateTime StartOfDayTime()
         {
-            return true;
+            DateTime afterMidnight = new(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
+
+            return afterMidnight;
         }
 
-        return decimal.TryParse(numericString, out _);
-    }
+        [UsedImplicitly]
+        public DateTime EndOfDayTime()
+        {
+            DateTime midnight = new(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Utc);
 
-    [UsedImplicitly]
-    public static DateTime StartOfDayTime(this DateTime dateTime)
-    {
-        DateTime afterMidnight = new(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
+            return midnight;
+        }
 
-        return afterMidnight;
-    }
-
-    [UsedImplicitly]
-    public static DateTime EndOfDayTime(this DateTime dateTime)
-    {
-        DateTime midnight = new(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, DateTimeKind.Utc);
-
-        return midnight;
+        [UsedImplicitly]
+        public bool IsAssigned()
+        {
+            return dateTime > DateTime.MinValue && dateTime < DateTime.MaxValue;
+        }
     }
 }
