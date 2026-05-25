@@ -15,11 +15,11 @@ public static class DateTimeExtensions
     {
         if (DateTime.TryParseExact(dateTime, "yyyy-MM-dd", CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out DateTime resultDateTime))
         {
-            return new DateTimeOffset(resultDateTime.Ticks, timeZoneInfo.BaseUtcOffset);
+            return resultDateTime.ToDateTimeOffset(timeZoneInfo);
         }
-        
-        return DateTime.TryParse(dateTime, CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out resultDateTime) 
-            ? new DateTimeOffset(resultDateTime.Ticks, timeZoneInfo.BaseUtcOffset) 
+
+        return DateTime.TryParse(dateTime, CultureInfo.CurrentCulture, DateTimeStyles.NoCurrentDateDefault, out resultDateTime)
+            ? resultDateTime.ToDateTimeOffset(timeZoneInfo)
             : DateTimeOffset.MinValue;
     }
 
@@ -28,7 +28,9 @@ public static class DateTimeExtensions
         this DateOnly date,
         TimeZoneInfo timeZoneInfo)
     {
-        return new DateTimeOffset(date.ToDateTime().Ticks, timeZoneInfo.BaseUtcOffset);
+        DateTime onDateTime = date.ToDateTime();
+
+        return new DateTimeOffset(onDateTime.Ticks, timeZoneInfo.GetUtcOffset(onDateTime));
     }
 
     [UsedImplicitly]
@@ -36,7 +38,7 @@ public static class DateTimeExtensions
         this DateTime dateTime,
         TimeZoneInfo timeZoneInfo)
     {
-        return new DateTimeOffset(dateTime.Ticks, timeZoneInfo.BaseUtcOffset);
+        return new DateTimeOffset(dateTime.Ticks, timeZoneInfo.GetUtcOffset(dateTime));
     }
 
     [UsedImplicitly]
