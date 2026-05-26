@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -96,6 +97,20 @@ public static class SerializationExtensions
     }
 
     public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
+    {
+        if (caseSensitive)
+        {
+            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _caseSensitiveDeserializationOptions);
+
+            return deserializedDto.IsAssigned();
+        }
+
+        deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _deserializationOptions);
+
+        return deserializedDto.IsAssigned();
+    }
+
+    public static bool Deserialize<T>(this ReadOnlySpan<byte> toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
     {
         if (caseSensitive)
         {
