@@ -89,11 +89,21 @@ public static class SerializationExtensions
         };
     }
 
-    public static string Serialize<T>(this T toSerializeDto, bool withCompression = false)
+    extension<T>(T toSerializeDto)
     {
-        return JsonSerializer.Serialize(toSerializeDto, withCompression
-            ? _serializationCompressedOptions
-            : _serializationOptions);
+        public byte[] SerializeBytes(bool withCompression = false)
+        {
+            return JsonSerializer.SerializeToUtf8Bytes(toSerializeDto, withCompression
+                ? _serializationCompressedOptions
+                : _serializationOptions);
+        }
+
+        public string Serialize(bool withCompression = false)
+        {
+            return JsonSerializer.Serialize(toSerializeDto, withCompression
+                ? _serializationCompressedOptions
+                : _serializationOptions);
+        }
     }
 
     public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
