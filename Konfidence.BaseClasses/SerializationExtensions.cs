@@ -104,71 +104,91 @@ public static class SerializationExtensions
                 ? _serializationCompressedOptions
                 : _serializationOptions);
         }
-    }
 
-    public static bool Deserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
-    {
-        if (caseSensitive)
+        private string CloneSerialize()
         {
-            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _caseSensitiveDeserializationOptions);
-
-            return deserializedDto.IsAssigned();
+            //_cloneOptions.TypeInfoResolver
+            return JsonSerializer.Serialize(toSerializeDto, _cloneOptions);
         }
 
-        deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _deserializationOptions);
-
-        return deserializedDto.IsAssigned();
+        public T Clone()
+        {
+            return toSerializeDto.CloneSerialize().CloneDeserialize(out T? clonedData)
+                ? clonedData
+                : toSerializeDto;
+        }
     }
 
     public static bool Deserialize<T>(this ReadOnlySpan<byte> toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
     {
-        if (caseSensitive)
+        deserializedDto = default;
+
+        try
         {
-            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _caseSensitiveDeserializationOptions);
+            if (caseSensitive)
+            {
+                deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _caseSensitiveDeserializationOptions);
+
+                return deserializedDto.IsAssigned();
+            }
+
+            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _deserializationOptions);
+
+            return deserializedDto.IsAssigned();
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    extension(string toDeserializeDto)
+    {
+        public bool DeserializeCsv<T>(out List<T> deserializedDto)
+        {
+            CsvConfiguration config = new(CultureInfo.InvariantCulture)
+            {
+                PrepareHeaderForMatch = args => args.Header.ToLower()
+            };
+
+            using CsvReader csvReader = new(new StringReader(toDeserializeDto), config);
+
+            deserializedDto = csvReader.GetRecords<T>().ToList();
+
+            return deserializedDto.Any();
+        }
+
+        private bool CloneDeserialize<T>([NotNullWhen(true)] out T? deserializedDto)
+        {
+            deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _cloneOptions);
 
             return deserializedDto.IsAssigned();
         }
 
-        deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _deserializationOptions);
-
-        return deserializedDto.IsAssigned();
-    }
-
-    public static bool DeserializeCsv<T>(
-        this string toDeserializeDto,
-        out List<T> deserializedDto)
-    {
-        CsvConfiguration config = new(CultureInfo.InvariantCulture)
+        public bool Deserialize<T>([NotNullWhen(true)] out T? deserializedDto, bool caseSensitive = false)
         {
-            PrepareHeaderForMatch = args => args.Header.ToLower()
-        };
+            deserializedDto = default;
 
-        using CsvReader csvReader = new(new StringReader(toDeserializeDto), config);
+            try
+            {
+                if (caseSensitive)
+                {
+                    deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _caseSensitiveDeserializationOptions);
 
-        deserializedDto = csvReader.GetRecords<T>().ToList();
+                    return deserializedDto.IsAssigned();
+                }
 
-        return deserializedDto.Any();
-    }
+                deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _deserializationOptions);
 
-    private static string CloneSerialize<T>(this T toSerializeDto)
-    {
-        //_cloneOptions.TypeInfoResolver
-        return JsonSerializer.Serialize(toSerializeDto, _cloneOptions);
-    }
-
-    private static bool CloneDeserialize<T>(this string toDeserializeDto, [NotNullWhen(true)] out T? deserializedDto)
-    {
-        deserializedDto = JsonSerializer.Deserialize<T>(toDeserializeDto, _cloneOptions);
-
-        return deserializedDto.IsAssigned();
+                return deserializedDto.IsAssigned();
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
     // TODO : Consider using a more efficient cloning method if TT is known to be a reference type and supports ICloneable or similar.
     //        use a deep clone library like Force.deepCloner or FastDeepCloner if performance is a concern.
-    public static T Clone<T>(this T data)
-    {
-        return data.CloneSerialize().CloneDeserialize(out T? clonedData)
-            ? clonedData
-            : data;
-    }
 }
