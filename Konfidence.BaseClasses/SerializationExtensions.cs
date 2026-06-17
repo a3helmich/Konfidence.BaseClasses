@@ -146,16 +146,25 @@ public static class SerializationExtensions
     {
         public bool DeserializeCsv<T>(out List<T> deserializedDto)
         {
-            CsvConfiguration config = new(CultureInfo.InvariantCulture)
+            deserializedDto = [];
+
+            try
             {
-                PrepareHeaderForMatch = args => args.Header.ToLower()
-            };
+                CsvConfiguration config = new(CultureInfo.InvariantCulture)
+                {
+                    PrepareHeaderForMatch = args => args.Header.ToLower()
+                };
 
-            using CsvReader csvReader = new(new StringReader(toDeserializeDto), config);
+                using CsvReader csvReader = new(new StringReader(toDeserializeDto), config);
 
-            deserializedDto = csvReader.GetRecords<T>().ToList();
+                deserializedDto = csvReader.GetRecords<T>().ToList();
 
-            return deserializedDto.Any();
+                return deserializedDto.Any();
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private bool CloneDeserialize<T>([NotNullWhen(true)] out T? deserializedDto)

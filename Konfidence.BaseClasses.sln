@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11505.172 d18.3
+VisualStudioVersion = 18.3.11505.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseClasses", "Konfidence.BaseClasses\Konfidence.BaseClasses.csproj", "{E13A1158-20B9-4C50-A63E-A2F4296C752E}"
 EndProject
@@ -10,12 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.EditorConfig = .EditorConfig
 		.gitattribute = .gitattribute
 		.gitignore = .gitignore
-		ClassModelGenerator.config.json = ClassModelGenerator.config.json
-		Directory.Build.props = Directory.Build.props
 		Konfidence.BaseClasses.Readme.md = Konfidence.BaseClasses.Readme.md
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
-		..\SqlClientSettings.json = ..\SqlClientSettings.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses", "Konfidence.BaseDataBaseClasses\Konfidence.BaseDatabaseClasses.csproj", "{3C54A77F-ABD5-4BB0-80E4-6417008E189A}"
@@ -64,6 +61,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Integration.TestClasses", "Test\Konfidence.Integration.TestClasses\Konfidence.Integration.TestClasses.csproj", "{436E7954-4A38-4A22-9323-385FF227AF4F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseClasses.Tests", "Test\Konfidence.BaseClasses.Tests\Konfidence.BaseClasses.Tests.csproj", "{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{7DD83A46-7588-4BC5-B0ED-C1FFCCDBC764}"
+	ProjectSection(SolutionItems) = preProject
+		ClassModelGenerator.config.json = ClassModelGenerator.config.json
+		Directory.Build.props = Directory.Build.props
+		..\SqlClientSettings.json = ..\SqlClientSettings.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
