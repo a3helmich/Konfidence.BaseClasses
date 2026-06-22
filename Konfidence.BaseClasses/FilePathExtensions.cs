@@ -108,7 +108,7 @@ public static class FilePathExtensions
     }
 
     [UsedImplicitly]
-    public static bool ValidateDirectory(this string path)
+    public static bool TryCreateAndValidateDirectory(this string path)
     {
         if (!Directory.Exists(path) && path.IsAssigned())
         {
