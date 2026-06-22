@@ -29,7 +29,7 @@ public class FilePathExtensionsTests
             Directory.Delete(_testFolder);
         }
     }
-    
+
     [TestMethod]
     public void WhenTryFindFile_ShouldNotFindFileInSubFolder()
     {
@@ -66,7 +66,7 @@ public class FilePathExtensionsTests
         // arrange
 
         // act
-        bool isValidDirectory = _testFolder.ValidateDirectory();
+        bool isValidDirectory = _testFolder.TryCreateAndValidateDirectory();
 
         // assert
         isValidDirectory.Should().BeTrue();
@@ -79,7 +79,7 @@ public class FilePathExtensionsTests
         // arrange
 
         // act
-        bool isValidDirectory = _testInvalidFolder.ValidateDirectory();
+        bool isValidDirectory = _testInvalidFolder.TryCreateAndValidateDirectory();
 
         // assert
         isValidDirectory.Should().BeFalse();
