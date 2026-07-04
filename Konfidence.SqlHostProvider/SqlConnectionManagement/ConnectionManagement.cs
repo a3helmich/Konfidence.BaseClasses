@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
+using Konfidence.SqlDataAccess;
 using Konfidence.SqlHostProvider.SqlAccess;
-using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
 
 namespace Konfidence.SqlHostProvider.SqlConnectionManagement
 {
@@ -59,7 +59,7 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             ConfigurationManager.RefreshSection("connectionStrings");
         }
 
-        private static void SetConnectionStringPart(List<string> connectionStringParts, string parameter, string value)
+        internal static void SetConnectionStringPart(List<string> connectionStringParts, string parameter, string value)
         {
             if (!value.IsAssigned())
             {
@@ -74,16 +74,6 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
             connectionStringParts.Remove(connectionPart);
 
             connectionStringParts.Add($"{parameter}={value}");
-        }
-
-        private static void RemoveConnectionStringPart(List<string> connectionStringParts, string parameter)
-        {
-            string connectionPart = connectionStringParts
-                .FirstOrDefault(x =>
-                    x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
-                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
-
-            connectionStringParts.Remove(connectionPart);
         }
 
         internal static void CopySqlSecurityToClientConfig(IClientConfig clientConfig)
@@ -108,37 +98,6 @@ namespace Konfidence.SqlHostProvider.SqlConnectionManagement
                     clientConfigConnection.Password = clientSetting.Password;
                 }
             }
-        }
-
-        internal static Configuration SetDatabaseSecurityInMemory(string userName, string password, string connectionName)
-        {
-            Configuration? config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            ConnectionStringSettings? connectionStringSettings = config.ConnectionStrings
-                .ConnectionStrings
-                .Cast<ConnectionStringSettings>()
-                .FirstOrDefault(x => x.Name == connectionName);
-
-            if (!userName.IsAssigned() || !password.IsAssigned() || !connectionStringSettings.IsAssigned())
-            {
-                return config;
-            }
-
-            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split([';'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
-
-            SetConnectionStringPart(connectionStringParts, "User ID", userName);
-
-            SetConnectionStringPart(connectionStringParts, "Password", password);
-
-            SetConnectionStringPart(connectionStringParts, "Persist Security Info", "True");
-
-            RemoveConnectionStringPart(connectionStringParts, "Integrated Security");
-
-            connectionStringSettings.ConnectionString = string.Join(";", connectionStringParts);
-
-            ConfigurationManager.RefreshSection("connectionStrings");
-
-            return config;
         }
     }
 }

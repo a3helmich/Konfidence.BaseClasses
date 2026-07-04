@@ -7,8 +7,8 @@ using System.Reflection;
 using System.Text.Json;
 using JetBrains.Annotations;
 using Konfidence.Base;
+using Konfidence.SqlDataAccess;
 using Konfidence.SqlHostProvider.SqlAccess;
-using Microsoft.Practices.EnterpriseLibrary.Data.Configuration;
 
 namespace Konfidence.TestTools
 {

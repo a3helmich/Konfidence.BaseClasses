@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Security", "Konfidence.Security\Konfidence.Security.csproj", "{20287813-52A4-4043-ABC8-3013F4701774}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlDataAccess", "Konfidence.SqlDataAccess\Konfidence.SqlDataAccess.csproj", "{BDF47A0E-6D30-4A14-8A2D-2B17ADA9EC00}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Tests", ".Tests", "{AE05D666-5600-4C5A-A903-038C94787EB4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseThreadClasses", "Konfidence.BaseThreadClasses\Konfidence.BaseThreadClasses.csproj", "{C2231079-3640-4C1B-868E-37FCA3591E96}"
@@ -42,6 +44,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.TestClasses.Tests", "Test\Konfidence.TestClasses.Tests\Konfidence.TestClasses.Tests.csproj", "{77A58886-B7F9-4F5E-8088-57DB54799C43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider.Tests", "Test\Konfidence.SqlHostProvider.Tests\Konfidence.SqlHostProvider.Tests.csproj", "{A719BAEF-F3F3-4BA6-8C09-6F4CCBC04193}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlDataAccess.Tests", "Test\Konfidence.SqlDataAccess.Tests\Konfidence.SqlDataAccess.Tests.csproj", "{0837A45E-0B70-4A81-9602-CF023A56C8F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Security.Tests", "Test\Konfidence.Security.Tests\Konfidence.Security.Tests.csproj", "{EF2F9DBD-2435-4379-9024-5531F587539C}"
 EndProject
@@ -95,6 +99,14 @@ Global
 		{20287813-52A4-4043-ABC8-3013F4701774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20287813-52A4-4043-ABC8-3013F4701774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20287813-52A4-4043-ABC8-3013F4701774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDF47A0E-6D30-4A14-8A2D-2B17ADA9EC00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF47A0E-6D30-4A14-8A2D-2B17ADA9EC00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF47A0E-6D30-4A14-8A2D-2B17ADA9EC00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF47A0E-6D30-4A14-8A2D-2B17ADA9EC00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0837A45E-0B70-4A81-9602-CF023A56C8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0837A45E-0B70-4A81-9602-CF023A56C8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0837A45E-0B70-4A81-9602-CF023A56C8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0837A45E-0B70-4A81-9602-CF023A56C8F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2231079-3640-4C1B-868E-37FCA3591E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2231079-3640-4C1B-868E-37FCA3591E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2231079-3640-4C1B-868E-37FCA3591E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -171,6 +183,7 @@ Global
 		{53752CB0-A328-4026-885E-3E6987B683DF} = {658C19AA-3C4B-4420-B432-65638F83EE57}
 		{436E7954-4A38-4A22-9323-385FF227AF4F} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E} = {AE05D666-5600-4C5A-A903-038C94787EB4}
+		{0837A45E-0B70-4A81-9602-CF023A56C8F7} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B102BFD-CA61-4D89-A274-368CA1DF0437}

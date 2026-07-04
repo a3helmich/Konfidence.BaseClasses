@@ -44,7 +44,7 @@ Integration tests running against SQL server will fail until a test database set
 ### The Konfidence.BaseClasses package is available on [nuget.org](https://www.nuget.org/packages/Konfidence.BaseClasses). 
 
 ### Konfidence.BaseDataBaseClasses
-- Some classes that make CRUD on SQL with the enterprise libraries really easy, without the strong dependencies included in the EntityFramework, only usefull with my ClassGenerator. Also referenced by the Konfidence.SqlHostProvider package.
+- Some classes that make CRUD on SQL really easy, without the strong dependencies included in the EntityFramework, only usefull with my ClassGenerator. Also referenced by the Konfidence.SqlHostProvider package.
 - `BaseDataItem`: abstract base for generated data items, tracking its own id/guid key, stored-procedure names (get/save/delete/get-by-guid) and the parameter list to send to the database, delegating actual reads/writes to an injected `IBaseClient`.
 - `FieldExtensions`/`AutoUpdateFieldExtensions`: typed `SetField(..)` overloads (int, guid, string, decimal, DateTime, TimeSpan, ...) that register stored-procedure parameters on a `BaseDataItem`, plus tracking of server-generated/auto-update fields.
 - `DataReaderExtensions`: typed `IDataReader.GetField(..)` helpers used while mapping a row back onto a data item.
@@ -82,8 +82,14 @@ Integration tests running against SQL server will fail until a test database set
 - `Encryption/KeyEncryption`: does the actual RSA key generation and reading, and the secured local storage read/write/delete.
 - `ISecurityConfiguration`/`SecurityConfiguration`: configuration for where/how keys are stored.
 
+### Konfidence.SqlDataAccess
+A small, focused replacement for the SQL access parts of `EnterpriseLibrary.Data.NetCore` (the old Enterprise Library Data Access Application Block), built directly on `Microsoft.Data.SqlClient`. Exists so `Konfidence.SqlHostProvider` no longer depends on that ~15-year-old, largely frozen package (which itself dragged in the deprecated `System.Data.SqlClient`).
+- `SqlDatabase` + `SqlDatabaseFactory`: a stateless, connection-string-driven executor (`CreateConnection`, `GetStoredProcCommand`, `AddInParameter`/`AddParameter`, `ExecuteNonQuery`, `ExecuteReader`, `GetParameterValue`) mirroring the narrow slice of EL's `Database` API that was actually used, including its connection-lifecycle behavior (`ExecuteReader` uses `CommandBehavior.CloseConnection` so callers can rely on disposing the reader to also close the connection).
+- `DatabaseSettings`: a drop-in `ConfigurationSection` replacement for EL's `DatabaseSettings`, read from `app.config`'s `<dataConfiguration defaultDatabase="..." />` section.
+- Has no dependency on `Konfidence.SqlHostProvider` or any other Konfidence package — the dependency only flows one way.
+
 ### Konfidence.SqlHostProvider
-Provides MS Sql database access, based on the enterprise libaries. Configured with app.config and SqlClientSettings.json. Allows manipulation of app.config settings directly or in memory. Can return a DatabaseStructure, which describes a database. Its tables, columns, types and some constraints. Used by my ClassGenerator and its generated artifacts.
+Provides MS Sql database access, now via `Konfidence.SqlDataAccess`/`Microsoft.Data.SqlClient` instead of the old enterprise libraries. Configured with app.config and SqlClientSettings.json. Allows manipulation of app.config settings directly or in memory. Can return a DatabaseStructure, which describes a database. Its tables, columns, types and some constraints. Used by my ClassGenerator and its generated artifacts.
 - `DependencyInjectionFactory`: builds an `IServiceProvider` wired up with `SqlClient`, `SqlClientRepository`, `DatabaseStructure` and `IClientConfig`, reading configuration from `SqlClientSettings.json` plus command-line overrides (config folder / default database).
 - `SqlAccess/SqlClient` + `SqlClientRepository`: implement `IBaseClient`/`IDataRepository` against MS SQL, executing the get/save/delete/list stored procedures and schema-existence checks generated for a data item.
 - `SqlAccess/ClientConfig` + `ClientConfigExtensions`/`ClientSettings`/`ConfigConnectionString`: connection configuration bound from `SqlClientSettings.json`, including reading/writing settings straight from/to `app.config`.
@@ -110,3 +116,4 @@ For me: updates the SqlClientSettings.json in a buildpipeline, keeping secrets o
 ### Test
 Per-library unit test projects (`Konfidence.*.Tests`) plus `Test/TestByHandApp`, a small manual/exploratory console app for ad-hoc verification against a live SQL Server.
 - `Konfidence.TestClasses.Tests`: integration tests that run ClassGenerator-generated `Dl.*DataItem` classes (from `Konfidence.Integration.TestClasses`) against a live SQL Server, using `Konfidence.TestTools` to wire up the test configuration/security settings.
+- `Konfidence.SqlDataAccess.Tests`: fast unit tests for `SqlDatabase`/`SqlDatabaseFactory`/`DatabaseSettings` — no live SQL Server needed.

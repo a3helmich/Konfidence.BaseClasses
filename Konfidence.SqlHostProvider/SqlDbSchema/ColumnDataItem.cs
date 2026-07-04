@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using Konfidence.BaseData;
 using Konfidence.DatabaseInterface;
-using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
 
 namespace Konfidence.SqlHostProvider.SqlDbSchema
 {
@@ -95,19 +94,23 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
             client.BuildItemList(columnDataItems, SpName.GetColumnList, spParameterData);
 
-            columnDataItems
-                .Where(x => x.Name.Equals("syslock", StringComparison.OrdinalIgnoreCase))
-                .ForEach(x => x.IsLockInfo = true);
+            foreach (ColumnDataItem columnDataItem in columnDataItems.Where(x => x.Name.Equals("syslock", StringComparison.OrdinalIgnoreCase)))
+            {
+                columnDataItem.IsLockInfo = true;
+            }
 
-            columnDataItems
-                .Where(x => x.Name.Equals("sysupdatetime", StringComparison.OrdinalIgnoreCase))
-                .ForEach(x => x.IsAutoUpdated = true);
+            foreach (ColumnDataItem columnDataItem in columnDataItems.Where(x => x.Name.Equals("sysupdatetime", StringComparison.OrdinalIgnoreCase)))
+            {
+                columnDataItem.IsAutoUpdated = true;
+            }
 
-            allIndexDataItems
+            foreach (ColumnDataItem columnDataItem in allIndexDataItems
                 .Where(indexDataItem => indexDataItem.IsPrimaryKey)
                 .SelectMany(indexDataItem => columnDataItems
-                    .Where(columnDataItem => columnDataItem.Name == indexDataItem.IndexName && columnDataItem.TableName == indexDataItem.TableName))
-                .ForEach(x => x.IsPrimaryKey = true);
+                    .Where(columnDataItem => columnDataItem.Name == indexDataItem.IndexName && columnDataItem.TableName == indexDataItem.TableName)))
+            {
+                columnDataItem.IsPrimaryKey = true;
+            }
 
             return new List<IColumnDataItem>(columnDataItems);
         }

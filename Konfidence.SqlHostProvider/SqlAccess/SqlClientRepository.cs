@@ -7,8 +7,8 @@ using System.Diagnostics;
 using System.Linq;
 using Konfidence.Base;
 using Konfidence.DatabaseInterface;
-using Konfidence.SqlHostProvider.SqlConnectionManagement;
-using Microsoft.Practices.EnterpriseLibrary.Data;
+using Konfidence.SqlDataAccess;
+using Microsoft.Data.SqlClient;
 
 namespace Konfidence.SqlHostProvider.SqlAccess
 {
@@ -21,7 +21,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             _clientConfig = clientConfig;
         }
 
-        private Database GetDatabase()
+        internal SqlDatabase GetDatabase()
         {
             Debug.WriteLine($"SqlClientRepository GetDatabase, default database: '{_clientConfig.DefaultDatabase}'");
 
@@ -29,17 +29,58 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             if (!connection.IsAssigned())
             {
-                return new DatabaseProviderFactory().CreateDefault();
+                return GetDefaultDatabase();
             }
 
-            Configuration config = ConnectionManagement.SetDatabaseSecurityInMemory(connection.UserName, connection.Password, connection.ConnectionName);
+            return SqlDatabaseFactory.Create(BuildConnectionString(connection));
+        }
 
-            return new DatabaseProviderFactory(config.GetSection).Create(connection.ConnectionName);
+        internal static string BuildConnectionString(ConfigConnectionString connection)
+        {
+            SqlConnectionStringBuilder builder = new()
+            {
+                DataSource = connection.Server,
+                InitialCatalog = connection.Database
+            };
+
+            if (connection.UserName.IsAssigned() && connection.Password.IsAssigned())
+            {
+                builder.UserID = connection.UserName;
+                builder.Password = connection.Password;
+                builder.PersistSecurityInfo = true;
+                builder.IntegratedSecurity = false;
+
+                return builder.ConnectionString;
+            }
+
+            builder.IntegratedSecurity = true;
+
+            return builder.ConnectionString;
+        }
+
+        private static SqlDatabase GetDefaultDatabase()
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            DatabaseSettings? databaseSettings = config.Sections["dataConfiguration"] as DatabaseSettings;
+
+            string? defaultDatabaseName = databaseSettings?.DefaultDatabase;
+
+            ConnectionStringSettings? connectionStringSettings = defaultDatabaseName.IsAssigned()
+                ? config.ConnectionStrings.ConnectionStrings[defaultDatabaseName]
+                : null;
+
+            if (connectionStringSettings is null)
+            {
+                throw new InvalidOperationException("No connection could be resolved: no matching connection was found in configuration, and no default database connection string is configured in app.config.");
+            }
+
+            return SqlDatabaseFactory.Create(connectionStringSettings.ConnectionString);
         }
 
         public DataTable GetSchemaObject(string collection)
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbConnection? dbConnection = database.CreateConnection())
             {
@@ -56,7 +97,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public int ExecuteCommandStoredProcedure(string saveStoredProcedure, List<ISpParameterData> parameterObjectList)
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
             {
@@ -71,7 +112,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteSaveStoredProcedure(IBaseDataItem dataItem)
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
@@ -85,7 +126,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetStoredProcedure(IBaseDataItem dataItem)
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.GetStoredProcedure))
             {
@@ -104,7 +145,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetByStoredProcedure(IBaseDataItem dataItem, string storedProcedure)
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
@@ -128,7 +169,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public void ExecuteGetListStoredProcedure<T>(IList<T> baseDataItemList, string storedProcedure, IList<ISpParameterData> spParameters, IBaseClient baseClient) where T : IBaseDataItem, new()
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
@@ -160,7 +201,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
                 return;
             }
 
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.DeleteStoredProcedure))
             {
@@ -172,14 +213,14 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
         public int ExecuteTextCommandQuery(string textCommand)
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             return database.ExecuteNonQuery(CommandType.Text, textCommand);
         }
 
         public bool ObjectExists(string objectName, string collection)
         {
-            Database database = GetDatabase();
+            SqlDatabase database = GetDatabase();
 
             using (DbConnection? dbConnection = database.CreateConnection())
             {
@@ -196,7 +237,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData(IBaseDataItem dataItem, Database database, DbCommand dbCommand)
+        private static void SetParameterData(IBaseDataItem dataItem, SqlDatabase database, DbCommand dbCommand)
         {
             // autoidfield
             database.AddParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, ParameterDirection.InputOutput,
@@ -216,7 +257,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void GetParameterData(IBaseDataItem dataItem, Database database, DbCommand dbCommand)
+        private static void GetParameterData(IBaseDataItem dataItem, SqlDatabase database, DbCommand dbCommand)
         {
             dataItem.SetId((int)database.GetParameterValue(dbCommand, dataItem.AutoIdField));
 
@@ -235,7 +276,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData(IList<ISpParameterData> parameterObjectList, Database database, DbCommand dbCommand)
+        private static void SetParameterData(IList<ISpParameterData> parameterObjectList, SqlDatabase database, DbCommand dbCommand)
         {
             foreach (ISpParameterData parameterObject in parameterObjectList)
             {
