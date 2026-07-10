@@ -38,6 +38,7 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet nuget locals all --clear'
+  condition: eq(variables['Build.Reason'], 'Schedule')
   inputs:
     command: custom
     custom: nuget
@@ -75,7 +76,7 @@ steps:
 - task: CmdLine@2
   displayName: 'update sql clientsettings konfidence3'
   inputs:
-    script: 'clientsettingsupdater --ConfigFileFolder=. --UserName=$(SqlUser) --Password=$(SqlPassword) --Server=konfidence3'
+    script: 'clientsettingsupdater --ConfigFileFolder=. --UserName=$(SqlUser) --Password=$(SqlPasswordKonfidence3) --Server=konfidence3'
     workingDirectory: ''
     failOnStderr: false
 
