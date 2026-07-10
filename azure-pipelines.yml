@@ -1,0 +1,131 @@
+name: $(date:yyyyMMdd)$(rev:.r)
+
+trigger: none
+
+schedules:
+- cron: '30 22 * * *'  # 00:30 W. Europe Standard Time (UTC+1)
+  displayName: nightly build
+  branches:
+    include:
+    - develop
+  always: true
+
+resources:
+  repositories:
+  - repository: templates
+    type: git
+    name: Konfidence/yaml.Templates
+    ref: refs/heads/develop
+
+variables:
+- template: ComputeVersion.yml@templates
+  parameters:
+    majorVersion: 3
+- name: BuildConfiguration
+  value: release
+- name: BuildPlatform
+  value: 'any cpu'
+- group: SqlSecurity
+- group: nuget.org-apikeys
+
+pool:
+  name: Default
+
+steps:
+- checkout: self
+  clean: true
+  fetchDepth: 0
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet nuget locals all --clear'
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'locals all --clear'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '**\Konfidence.BaseClasses.sln'
+    feedsToUse: config
+    nugetConfigPath: .nuget/NuGet.Config
+    verbosityRestore: Normal
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**\Konfidence.BaseClasses.sln'
+    arguments: '-c $(BuildConfiguration) --no-restore /p:Version=$(year).$(majorVersion).$(minorVersion)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet tool install ClientSettingsUpdater'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'update -g ClientSettingsUpdater --add-source .\nuget'
+
+- task: CmdLine@2
+  displayName: 'update sql clientsettings konfidence2'
+  inputs:
+    script: 'clientsettingsupdater --ConfigFileFolder=. --UserName=$(SqlUser) --Password=$(SqlPassword) --Server=konfidence2'
+    workingDirectory: ''
+    failOnStderr: false
+
+- task: CmdLine@2
+  displayName: 'update sql clientsettings konfidence3'
+  inputs:
+    script: 'clientsettingsupdater --ConfigFileFolder=. --UserName=$(SqlUser) --Password=$(SqlPassword) --Server=konfidence3'
+    workingDirectory: ''
+    failOnStderr: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test BaseClasses'
+  inputs:
+    command: test
+    projects: '**\Konfidence.BaseClasses.sln'
+    arguments: '-c $(BuildConfiguration) --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings coverlet.runsettings'
+    publishTestResults: true
+
+- template: GenerateAndPublishCodeCoverage.yml@templates
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  condition: eq(variables['Build.Reason'], 'PullRequest')
+  inputs:
+    command: pack
+    packagesToPack: '**\Konfidence.BaseClasses.sln'
+    configurationToPack: '$(BuildConfiguration)'
+    outputDir: '$(Build.ArtifactStagingDirectory)'
+    nobuild: true
+    includesymbols: true
+    verbosityPack: Normal
+    buildProperties: 'Version=$(year).$(majorVersion).$(minorVersion)'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: \\konfidence8\publish'
+  condition: eq(variables['Build.Reason'], 'PullRequest')
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)'
+    Contents: '**'
+    TargetFolder: '\\konfidence8\publish'
+    CleanTargetFolder: false
+    OverWrite: true
+    flattenFolders: false
+    preserveTimestamp: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish nuget.org package'
+  condition: eq(variables['Build.Reason'], 'PullRequest')
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push $(Build.ArtifactStagingDirectory)\Konfidence.BaseClasses.*.nupkg -s https://api.nuget.org/v3/index.json -k $(NuGetApiKey) --skip-duplicate'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish nuget.org symbols'
+  condition: eq(variables['Build.Reason'], 'PullRequest')
+  inputs:
+    command: custom
+    custom: nuget
+    arguments: 'push $(Build.ArtifactStagingDirectory)\Konfidence.BaseClasses.*.snupkg -s https://api.nuget.org/v3/index.json -k $(NuGetApiKey) --skip-duplicate'
