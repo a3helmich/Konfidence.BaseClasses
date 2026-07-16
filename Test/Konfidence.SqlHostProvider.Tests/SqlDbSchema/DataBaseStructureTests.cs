@@ -76,7 +76,7 @@ namespace Konfidence.SqlHostProvider.Tests.SqlDbSchema
             target.Tables.Should().HaveCount(8); // TestClassGenerator has 7 tables
         }
 
-        [Ignore("for yml update")]
+        //[Ignore("for yml update")]
         [TestMethod]
         public void BuildStructureWithDifferentConnectionNameTest()
         {
