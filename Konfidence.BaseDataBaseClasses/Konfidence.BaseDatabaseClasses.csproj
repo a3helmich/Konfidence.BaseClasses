@@ -3,8 +3,6 @@
   <PropertyGroup>
     <RootNamespace>Konfidence.BaseData</RootNamespace>
     <AssemblyName>Konfidence.BaseDatabaseClasses</AssemblyName>
-
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

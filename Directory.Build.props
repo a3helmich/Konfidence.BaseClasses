@@ -33,6 +33,8 @@
 
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
   </PropertyGroup>
 	<!--<ItemGroup>
 		<None Include="$(SolutionDir)readme.md" Pack="true" PackagePath="\"/>

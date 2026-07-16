@@ -4,8 +4,6 @@
 		<RootNamespace>Konfidence.Base</RootNamespace>
     <AssemblyName>Konfidence.BaseClasses</AssemblyName>
 
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-
     <Title>Konfidence baseclasses</Title>
 	
 	  <PackageReadmeFile>Konfidence.BaseClasses.Readme.md</PackageReadmeFile>
