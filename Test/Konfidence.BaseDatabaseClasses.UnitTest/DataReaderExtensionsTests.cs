@@ -12,7 +12,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest;
 public class DataReaderExtensionsTests
 {
     [TestMethod]
-    public void GetField_decimal_With_value_Should_return_value()
+    public void GetField_DecimalWithValue_ReturnsValue()
     {
         // Arrange
         Mock<IDataReader> dataReaderMock = new();
@@ -28,7 +28,7 @@ public class DataReaderExtensionsTests
     }
 
     [TestMethod]
-    public void GetField_decimal_With_DBNull_Should_return_zero()
+    public void GetField_DecimalWithDBNull_ReturnsZero()
     {
         // Arrange
         Mock<IDataReader> dataReaderMock = new();
@@ -43,7 +43,7 @@ public class DataReaderExtensionsTests
     }
 
     [TestMethod]
-    public void GetField_XmlDocument_Should_load_xml_from_string_field()
+    public void GetField_XmlDocument_LoadsXmlFromStringField()
     {
         // Arrange
         Mock<IDataReader> dataReaderMock = new();
@@ -61,7 +61,7 @@ public class DataReaderExtensionsTests
     }
 
     [TestMethod]
-    public void GetField_TimeSpan_With_value_Should_return_value()
+    public void GetField_TimeSpanWithValue_ReturnsValue()
     {
         // Arrange
         Mock<IDataReader> dataReaderMock = new();
@@ -78,7 +78,7 @@ public class DataReaderExtensionsTests
     }
 
     [TestMethod]
-    public void GetField_TimeSpan_With_DBNull_Should_return_MinValue()
+    public void GetField_TimeSpanWithDBNull_ReturnsMinValue()
     {
         // Arrange
         Mock<IDataReader> dataReaderMock = new();

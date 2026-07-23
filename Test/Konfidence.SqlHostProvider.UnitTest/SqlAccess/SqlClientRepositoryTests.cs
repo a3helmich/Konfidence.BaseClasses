@@ -31,7 +31,7 @@ public class SqlClientRepositoryTests
     }
 
     [TestMethod]
-    public void BuildConnectionString_Should_map_Server_and_Database_to_DataSource_and_InitialCatalog()
+    public void BuildConnectionString_Always_MapsServerAndDatabaseToDataSourceAndInitialCatalog()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -47,7 +47,7 @@ public class SqlClientRepositoryTests
     }
 
     [TestMethod]
-    public void BuildConnectionString_With_credentials_Should_use_SqlAuthentication()
+    public void BuildConnectionString_WithCredentials_UsesSqlAuthentication()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -67,7 +67,7 @@ public class SqlClientRepositoryTests
     }
 
     [TestMethod]
-    public void BuildConnectionString_Without_credentials_Should_use_IntegratedSecurity()
+    public void BuildConnectionString_WithoutCredentials_UsesIntegratedSecurity()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -84,7 +84,7 @@ public class SqlClientRepositoryTests
     }
 
     [TestMethod]
-    public void GetDatabase_With_no_matching_connection_Should_fall_back_to_app_config_default_database()
+    public void GetDatabase_WithNoMatchingConnection_FallsBackToAppConfigDefaultDatabase()
     {
         // Arrange
         SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
@@ -106,7 +106,7 @@ public class SqlClientRepositoryTests
     }
 
     [TestMethod]
-    public void GetDatabase_With_no_matching_connection_and_no_app_config_default_Should_throw()
+    public void GetDatabase_WithNoMatchingConnectionAndNoAppConfigDefault_Throws()
     {
         // Arrange
         SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
@@ -134,7 +134,7 @@ public class SqlClientRepositoryTests
     }
 
     [TestMethod]
-    public void ExecuteDeleteStoredProcedure_With_id_zero_Should_return_without_touching_the_database()
+    public void ExecuteDeleteStoredProcedure_WithIdZero_ReturnsWithoutTouchingTheDatabase()
     {
         // Arrange
         ClientConfig clientConfig = new(new ConfigurationBuilder().Build());

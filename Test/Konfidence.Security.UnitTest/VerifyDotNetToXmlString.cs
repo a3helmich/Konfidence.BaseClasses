@@ -10,7 +10,7 @@ namespace Konfidence.Security.UnitTest
     public class VerifyDotNetToXmlString
     {
         [TestMethod]
-        public void When_Example_Executed_Should_work()
+        public void KeyContainer_CreateRetrieveAndDelete_Succeeds()
         {
             // Create a key and save it in a container.  
             GenKey_SaveInContainer("MyKeyContainer");

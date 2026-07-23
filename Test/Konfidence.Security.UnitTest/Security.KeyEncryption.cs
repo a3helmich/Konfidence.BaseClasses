@@ -10,7 +10,7 @@ namespace Konfidence.Security.UnitTest
     public class KeyEncryptionTests
     {
         [TestMethod]
-        public void MaxKey_WinNT_WithEmptyContainerName_ShouldGive_1024_AsMaxKeySize()
+        public void KeySize_WinNTWithEmptyContainerName_Returns1024()
         {
             // arrange
             Mock<ISecurityConfiguration> configurationMock = new();
@@ -27,7 +27,7 @@ namespace Konfidence.Security.UnitTest
         }
 
         [TestMethod]
-        public void MaxKey_Win32_WithEmptyContainerName_ShouldGive_384_AsMaxKeySize()
+        public void KeySize_Win32WithEmptyContainerName_Returns384()
         {
             // arrange
             Mock<ISecurityConfiguration> configurationMock = new();

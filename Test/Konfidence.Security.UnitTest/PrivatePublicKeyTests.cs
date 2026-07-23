@@ -15,7 +15,7 @@ namespace Konfidence.Security.UnitTest
         private const string APPLICATION_NAME = "TestRegistration";
 
         [TestMethod]
-        public void RetrieveCreatedKeyTest()
+        public void Constructor_CalledTwice_ReturnsSamePublicKeyFromStore()
         {
             PrivatePublicKey ppk1 = new(APPLICATION_NAME);
 
@@ -32,7 +32,7 @@ namespace Konfidence.Security.UnitTest
         }
 
         [TestMethod]
-        public void EncodeDecodeTest()
+        public void Encrypt_ThenDecrypt_RoundTripsOriginalString()
         {
             // this is only testing the encode decode functionality : NOT the encryption/decryption class!
             string resultString = string.Empty;

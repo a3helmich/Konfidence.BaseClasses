@@ -22,7 +22,7 @@ public class ColumnDataExtensionsTests
     }
 
     [TestMethod]
-    public void Find_With_matching_column_name_Should_return_column()
+    public void Find_WithMatchingColumnName_ReturnsColumn()
     {
         // Arrange
         List<IColumnDataItem> columnDataItems = [CreateColumnMock("Naam").Object, CreateColumnMock("Omschrijving").Object];
@@ -36,7 +36,7 @@ public class ColumnDataExtensionsTests
     }
 
     [TestMethod]
-    public void Find_With_no_matching_column_name_Should_return_null()
+    public void Find_WithNoMatchingColumnName_ReturnsNull()
     {
         // Arrange
         List<IColumnDataItem> columnDataItems = [CreateColumnMock("Naam").Object];
@@ -49,7 +49,7 @@ public class ColumnDataExtensionsTests
     }
 
     [TestMethod]
-    public void HasDefaultValueFields_With_no_special_columns_Should_return_false()
+    public void HasDefaultValueFields_WithNoSpecialColumns_ReturnsFalse()
     {
         // Arrange
         List<IColumnDataItem> columnDataItems = [CreateColumnMock("Naam").Object];
@@ -62,7 +62,7 @@ public class ColumnDataExtensionsTests
     }
 
     [TestMethod]
-    public void HasDefaultValueFields_With_autoUpdated_column_Should_return_true()
+    public void HasDefaultValueFields_WithAutoUpdatedColumn_ReturnsTrue()
     {
         // Arrange
         List<IColumnDataItem> columnDataItems = [CreateColumnMock("Naam", isAutoUpdated: true).Object];
@@ -75,7 +75,7 @@ public class ColumnDataExtensionsTests
     }
 
     [TestMethod]
-    public void HasDefaultValueFields_With_computed_column_Should_return_true()
+    public void HasDefaultValueFields_WithComputedColumn_ReturnsTrue()
     {
         // Arrange
         List<IColumnDataItem> columnDataItems = [CreateColumnMock("Naam", isComputed: true).Object];
@@ -88,7 +88,7 @@ public class ColumnDataExtensionsTests
     }
 
     [TestMethod]
-    public void HasDefaultValueFields_With_defaulted_column_Should_return_true()
+    public void HasDefaultValueFields_WithDefaultedColumn_ReturnsTrue()
     {
         // Arrange
         List<IColumnDataItem> columnDataItems = [CreateColumnMock("Naam", isDefaulted: true).Object];

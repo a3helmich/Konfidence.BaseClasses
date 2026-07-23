@@ -23,7 +23,7 @@ namespace Konfidence.TestClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void GetSingleItem()
+        public void Constructor_WithExistingId_ReturnsItem()
         {
             Dl.Test2DataItem dataItem = new(2);
 
@@ -31,7 +31,7 @@ namespace Konfidence.TestClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void GetTwoSingleItem()
+        public void Constructor_WithTwoExistingIds_ReturnsBothItems()
         {
             Dl.Test2DataItem dataItem1 = new(1);
             Dl.Test2DataItem dataItem2 = new(2);
@@ -41,7 +41,7 @@ namespace Konfidence.TestClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void GetParentItem()
+        public void Constructor_WithParentId_ReturnsItem()
         {
             Dl.Test2DataItem test = new(1);
 
@@ -49,7 +49,7 @@ namespace Konfidence.TestClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void When_Table_Test1_is_retrieved_and_table_does_contain_data_Should_return_GuidIdField()
+        public void GetList_ExistingData_ReturnsGuidIdField()
         {
             // arrange
             List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
@@ -63,7 +63,7 @@ namespace Konfidence.TestClasses.IntegrationTest
             testIntDataItem.GuidIdField.Should().NotBeEmpty();
         }
         [TestMethod]
-        public void When_Retrieving_data_with_invalid_key_Should_return_NewItem()
+        public void Constructor_WithInvalidKey_ReturnsNewItem()
         {
             // arrange
             List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();

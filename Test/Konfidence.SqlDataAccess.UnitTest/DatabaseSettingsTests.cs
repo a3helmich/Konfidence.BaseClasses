@@ -7,7 +7,7 @@ namespace Konfidence.SqlDataAccess.UnitTest;
 public class DatabaseSettingsTests
 {
     [TestMethod]
-    public void DefaultDatabase_Should_round_trip_get_and_set()
+    public void DefaultDatabase_GetAndSet_RoundTrips()
     {
         // Arrange
         DatabaseSettings databaseSettings = new();
@@ -20,7 +20,7 @@ public class DatabaseSettingsTests
     }
 
     [TestMethod]
-    public void DefaultDatabase_Should_default_to_empty()
+    public void DefaultDatabase_WhenUnset_DefaultsToEmpty()
     {
         // Arrange
         DatabaseSettings databaseSettings = new();

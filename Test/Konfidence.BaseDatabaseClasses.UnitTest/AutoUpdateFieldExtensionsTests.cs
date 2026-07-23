@@ -20,7 +20,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_byte_Should_return_stored_value()
+    public void GetAutoUpdateField_Byte_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -35,7 +35,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_short_Should_return_stored_value()
+    public void GetAutoUpdateField_Short_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -50,7 +50,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_int_Should_return_stored_value()
+    public void GetAutoUpdateField_Int_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -65,7 +65,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_long_Should_return_stored_value()
+    public void GetAutoUpdateField_Long_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -80,7 +80,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_string_Should_return_stored_value()
+    public void GetAutoUpdateField_String_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -95,7 +95,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_bool_Should_return_stored_value()
+    public void GetAutoUpdateField_Bool_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -110,7 +110,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_TimeSpan_Should_return_stored_value()
+    public void GetAutoUpdateField_TimeSpan_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -126,7 +126,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_decimal_Should_return_stored_value()
+    public void GetAutoUpdateField_Decimal_ReturnsStoredValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -141,7 +141,7 @@ public class AutoUpdateFieldExtensionsTests
     }
 
     [TestMethod]
-    public void GetAutoUpdateField_With_unregistered_field_Should_leave_value_unchanged()
+    public void GetAutoUpdateField_WithUnregisteredField_LeavesValueUnchanged()
     {
         // Arrange
         TestDataItem dataItem = new();

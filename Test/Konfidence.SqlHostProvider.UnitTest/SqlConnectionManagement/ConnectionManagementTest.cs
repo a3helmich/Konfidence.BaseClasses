@@ -19,7 +19,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
     public class ConnectionManagementTest
     {
         [TestMethod]
-        public void When_ConfigureSettings_read_with_multiple_connections_Should_set_them_all_in_ClientConfig()
+        public void ConfigureDependencyInjection_WithMultipleConnections_SetsThemAllInClientConfig()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -38,7 +38,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void SetConnectionStringPart_With_no_existing_part_Should_add_the_part()
+        public void SetConnectionStringPart_WithNoExistingPart_AddsThePart()
         {
             // Arrange
             List<string> connectionStringParts = ["Server=konfidence2"];
@@ -51,7 +51,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void SetConnectionStringPart_With_existing_part_Should_replace_the_part()
+        public void SetConnectionStringPart_WithExistingPart_ReplacesThePart()
         {
             // Arrange
             List<string> connectionStringParts = ["Server=konfidence2", "Database=OldDatabase"];
@@ -66,7 +66,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void SetConnectionStringPart_Is_case_insensitive_when_finding_the_existing_part()
+        public void SetConnectionStringPart_WhenFindingExistingPart_IsCaseInsensitive()
         {
             // Arrange
             List<string> connectionStringParts = ["database=OldDatabase"];
@@ -80,7 +80,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void SetConnectionStringPart_With_unassigned_value_Should_leave_parts_unchanged()
+        public void SetConnectionStringPart_WithUnassignedValue_LeavesPartsUnchanged()
         {
             // Arrange
             List<string> connectionStringParts = ["Server=konfidence2"];
@@ -93,7 +93,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void CopySqlSecurityToClientConfig_With_no_matching_server_Should_leave_connection_unchanged()
+        public void CopySqlSecurityToClientConfig_WithNoMatchingServer_LeavesConnectionUnchanged()
         {
             // Arrange
             // Note: deliberately does not touch the "ClientConfigLocation" environment variable — it can be set
@@ -113,7 +113,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void CopySqlSecurityToClientConfig_With_matching_server_Should_copy_UserName_and_Password()
+        public void CopySqlSecurityToClientConfig_WithMatchingServer_CopiesUserNameAndPassword()
         {
             // Arrange
             if (!"ClientConfigLocation".TryGetEnvironmentVariable(out string fileName) || !File.Exists(fileName))
@@ -143,7 +143,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void SetActiveConnection_Should_update_the_active_dataConfiguration_defaultDatabase()
+        public void SetActiveConnection_Always_UpdatesTheActiveDataConfigurationDefaultDatabase()
         {
             // Arrange
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
@@ -167,7 +167,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void SetApplicationDatabase_Should_update_the_matching_connectionString()
+        public void SetApplicationDatabase_Always_UpdatesTheMatchingConnectionString()
         {
             // Arrange
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
@@ -192,7 +192,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         }
 
         [TestMethod]
-        public void SetApplicationDatabase_With_no_matching_connectionName_Should_return_without_touching_configuration()
+        public void SetApplicationDatabase_WithNoMatchingConnectionName_ReturnsWithoutTouchingConfiguration()
         {
             // Arrange
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();

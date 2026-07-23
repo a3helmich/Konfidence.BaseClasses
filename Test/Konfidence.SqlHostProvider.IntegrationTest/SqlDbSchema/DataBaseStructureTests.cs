@@ -27,7 +27,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_BuildStructure_of_hMailServer_Should_generate_structure()
+        public void BuildStructure_HMailServerDatabase_GeneratesStructure()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -52,7 +52,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void BuildStructureTest()
+        public void BuildStructure_TestClassGeneratorDatabase_GeneratesStructure()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -77,7 +77,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void BuildStructureWithDifferentConnectionNameTest()
+        public void BuildStructure_SchemaDatabaseDevelopmentConnection_GeneratesStructure()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -104,7 +104,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void BuildStructureWithBlockedHackersConnectionName()
+        public void BuildStructure_BlockedHackersConnection_SetsPrimaryKey()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -129,7 +129,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void BuildStructureWithDBMenuConnectionName()
+        public void BuildStructure_DbMenuConnection_SetsHasGuidId()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -154,7 +154,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void GetJoinedFieldNames_MultipleColumns_ReturnsConcatenatedColumnNames()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -184,7 +184,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetUnderscoreFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void GetJoinedUnderscoreFieldNames_MultipleColumns_ReturnsUnderscoreConcatenatedColumnNames()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -214,7 +214,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void GetFieldNamesAsArguments_MultipleColumns_ReturnsCommaSeparatedColumnNames()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -244,7 +244,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetTypedCommaFields_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void GetFieldNamesAsParameters_MultipleColumns_ReturnsTypedParameterList()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -274,7 +274,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetFirstField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void GetFirstColumnName_MultipleColumns_ReturnsFirstName()
         {
             // arrange
             List<string> columnNameList = ["naam", "Omschrijving"];
@@ -287,7 +287,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_GetLastField_executed_on_table_Should_return_a_string_with_all_ColumnNames_concatenated()
+        public void GetLastColumnName_MultipleColumns_ReturnsLastName()
         {
             // arrange
             List<string> columnNameList = ["naam", "Omschrijving"];
@@ -300,7 +300,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_TableExists_is_executed_and_table_exists_Should_return_true()
+        public void TableExists_ExistingTable_ReturnsTrue()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -327,7 +327,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_TableExists_is_executed_and_table_does_notexists_Should_return_false()
+        public void TableExists_NonExistentTable_ReturnsFalse()
         {
             // arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -354,7 +354,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_DependecyInjection_is_used_should_return_DatabaseStructure_Of_defaultDb()
+        public void ConfigureDependencyInjection_Always_RegistersDatabaseStructureForDefaultDb()
         {
             // arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
@@ -377,7 +377,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         [DataRow("--DefaultDatabase", " : ", "DbMenu")]
         [DataRow("--DefaultDatabase", " ", "DbMenu")]
         [DataRow("--DefaultDatabase", "   ", "DbMenu")]
-        public void When_DependecyInjection_is_used_With_DbMenu_Should_return_DatabaseStructure_of_DbMenu(string param, string delim, string value)
+        public void ConfigureDependencyInjection_WithDbMenuArgument_RegistersDatabaseStructureForDbMenu(string param, string delim, string value)
         {
             // arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection($"{param}{delim}{value}");
@@ -391,7 +391,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_DependecyInjection_is_used_should_return_commandlinearguments()
+        public void ConfigureDependencyInjection_WithConfigFileFolderArgument_SetsConfigFileFolder()
         {
             // arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(@"--ConfigFileFolder=some\location\");
@@ -406,7 +406,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         }
 
         [TestMethod]
-        public void When_DependecyInjection_is_used_should_have_UseEnvironmentSetting_set_to_true()
+        public void ConfigureDependencyInjection_Always_SetsUseEnvironmentSettingToTrue()
         {
             // arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();

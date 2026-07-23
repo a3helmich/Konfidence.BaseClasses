@@ -9,7 +9,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlAccess;
 public class ClientConfigExtensionsTests
 {
     [TestMethod]
-    public void SetSqlApplicationSettings_With_no_DefaultDatabase_Should_return_without_touching_configuration()
+    public void SetSqlApplicationSettings_WithNoDefaultDatabase_ReturnsWithoutTouchingConfiguration()
     {
         // Arrange
         IConfigurationRoot configuration = new ConfigurationBuilder().Build();

@@ -10,7 +10,7 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlAccess;
 public class ClientSettingsTests
 {
     [TestMethod]
-    public void Deserialize_Should_populate_UseEnvironmentSetting_and_Connections()
+    public void Deserialize_Always_PopulatesUseEnvironmentSettingAndConnections()
     {
         // Arrange
         const string json = """
