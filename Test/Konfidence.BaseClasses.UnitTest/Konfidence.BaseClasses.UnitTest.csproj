@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+    <AssemblyAttribute Include="Microsoft.VisualStudio.TestTools.UnitTesting.DoNotParallelizeAttribute" />
   </ItemGroup>
 
 </Project>
