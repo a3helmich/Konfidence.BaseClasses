@@ -31,7 +31,7 @@ public class FilePathExtensionsTests
     }
 
     [TestMethod]
-    public void WhenTryFindFile_ShouldNotFindFileInSubFolder()
+    public void TryFindFile_FileNotInSubFolder_ReturnsFalse()
     {
         // arrange
         string testFile = "TestTryFindFile.txt";
@@ -45,7 +45,7 @@ public class FilePathExtensionsTests
     }
 
     [TestMethod]
-    public void WhenTryFindFile_ShouldFindFileInSubFolder()
+    public void TryFindFileIncludingSubFolders_FileInSubFolder_ReturnsTrue()
     {
         // arrange
         string testFile = "TestTryFindFile.txt";
@@ -61,7 +61,7 @@ public class FilePathExtensionsTests
     }
 
     [TestMethod]
-    public void WhenValidateDirectory_ThenIsCreated_ShouldExistsIsTrue()
+    public void TryCreateAndValidateDirectory_ValidPath_CreatesDirectory()
     {
         // arrange
 
@@ -74,7 +74,7 @@ public class FilePathExtensionsTests
     }
 
     [TestMethod]
-    public void WhenValidateDirectory_ThenCannotCreate_ShouldExistIsFalse()
+    public void TryCreateAndValidateDirectory_InvalidPath_ReturnsFalse()
     {
         // arrange
 

@@ -22,7 +22,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void GetStoredProcCommand_Should_set_CommandType_to_StoredProcedure()
+    public void GetStoredProcCommand_Always_SetsCommandTypeToStoredProcedure()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -35,7 +35,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void GetStoredProcCommand_Should_set_CommandText_to_given_name()
+    public void GetStoredProcCommand_Always_SetsCommandTextToGivenName()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -48,7 +48,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void AddInParameter_Should_add_parameter_with_name_type_and_value()
+    public void AddInParameter_Always_AddsParameterWithNameTypeAndValue()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -66,7 +66,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void AddInParameter_With_empty_string_value_Should_set_a_valid_Size()
+    public void AddInParameter_WithEmptyStringValue_SetsAValidSize()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -82,7 +82,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void AddInParameter_With_byte_array_value_Should_set_a_valid_Size()
+    public void AddInParameter_WithByteArrayValue_SetsAValidSize()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -98,7 +98,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void AddInParameter_With_char_value_Should_set_a_valid_Size()
+    public void AddInParameter_WithCharValue_SetsAValidSize()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -114,7 +114,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void AddInParameter_With_char_and_null_value_Should_set_a_valid_Size()
+    public void AddInParameter_WithCharAndNullValue_SetsAValidSize()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -130,7 +130,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void Simulated_TestIntDataItem_save_parameter_sequence_Should_have_valid_Size_for_all_string_parameters()
+    public void AddParameter_SimulatedTestIntDataItemSaveSequence_HasValidSizeForAllStringParameters()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -162,7 +162,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void AddInParameter_With_null_value_Should_add_DBNull_value()
+    public void AddInParameter_WithNullValue_AddsDBNullValue()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -176,7 +176,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void AddParameter_Should_set_direction_sourceColumn_and_sourceVersion()
+    public void AddParameter_Always_SetsDirectionSourceColumnAndSourceVersion()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -195,7 +195,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void GetParameterValue_Should_return_previously_set_value()
+    public void GetParameterValue_Always_ReturnsPreviouslySetValue()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -212,7 +212,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void CreateConnection_Should_return_connection_with_given_connectionString()
+    public void CreateConnection_Always_ReturnsConnectionWithGivenConnectionString()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -225,7 +225,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void BuildParameterName_Without_leading_at_Should_add_leading_at()
+    public void BuildParameterName_WithoutLeadingAt_AddsLeadingAt()
     {
         // Arrange
 
@@ -237,7 +237,7 @@ public class SqlDatabaseTests
     }
 
     [TestMethod]
-    public void BuildParameterName_With_leading_at_Should_leave_unchanged()
+    public void BuildParameterName_WithLeadingAt_LeavesUnchanged()
     {
         // Arrange
 

@@ -41,7 +41,7 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void TestIntDataItemShouldReturnShortAndLong()
+        public void GetList_ExistingItem_ReturnsShortAndLongFields()
         {
             // arrange
 
@@ -58,7 +58,7 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void When_TestIntDataItem_is_Created_when_queried_should_be_returned()
+        public void Constructor_WithSavedItem_ReturnsQueriedItem()
         {
             // arrange
             Dl.TestIntDataItem testIntDataItem = new()
@@ -84,7 +84,7 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void When_TestIntDataItem_is_Created_and_updated_when_queried_should_be_returned_and_updated()
+        public void Constructor_WithUpdatedItem_ReturnsUpdatedItem()
         {
             // arrange
             Dl.TestIntDataItem testIntDataItem = new()
@@ -118,7 +118,7 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         }
 
         [TestMethod]
-        public void When_TestIntDataItem_is_Created_and_updated_when_queried_should_return_guidFields()
+        public void Constructor_WithGuidId_ReturnsMatchingItem()
         {
             // arrange
             Dl.TestIntDataItem testIntDataItem = new()

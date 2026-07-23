@@ -8,7 +8,7 @@ namespace Konfidence.SqlDataAccess.UnitTest;
 public class SqlDatabaseFactoryTests
 {
     [TestMethod]
-    public void Create_With_null_connectionString_Should_throw()
+    public void Create_WithNullConnectionString_Throws()
     {
         // Arrange
         string? connectionString = null;
@@ -21,7 +21,7 @@ public class SqlDatabaseFactoryTests
     }
 
     [TestMethod]
-    public void Create_With_empty_connectionString_Should_throw()
+    public void Create_WithEmptyConnectionString_Throws()
     {
         // Arrange
 
@@ -33,7 +33,7 @@ public class SqlDatabaseFactoryTests
     }
 
     [TestMethod]
-    public void Create_With_whitespace_connectionString_Should_throw()
+    public void Create_WithWhitespaceConnectionString_Throws()
     {
         // Arrange
 
@@ -45,7 +45,7 @@ public class SqlDatabaseFactoryTests
     }
 
     [TestMethod]
-    public void Create_With_valid_connectionString_Should_return_SqlDatabase()
+    public void Create_WithValidConnectionString_ReturnsSqlDatabase()
     {
         // Arrange
         const string connectionString = "Data Source=konfidence2;Initial Catalog=TestClassGenerator;Integrated Security=True";

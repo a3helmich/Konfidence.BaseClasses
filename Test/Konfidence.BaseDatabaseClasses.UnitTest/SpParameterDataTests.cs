@@ -13,7 +13,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
     public class SpParameterObjectTests
     {
         [TestMethod]
-        public void When_GuidValue_Added_To_ListOfIDbParameterObjects_Should_Contain_Guid_DBParameterObject()
+        public void SetParameter_WithGuidValue_ContainsGuidParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -33,7 +33,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_EmptyGuidValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
+        public void SetParameter_WithEmptyGuidValue_ContainsNullParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -53,7 +53,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_IntValue_Added_To_ListOfIDbParameterObjects_Should_Contain_int_DBParameterObject()
+        public void SetParameter_WithIntValue_ContainsIntParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -73,7 +73,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_LongValue_Added_To_ListOfIDbParameterObjects_Should_Contain_long_DBParameterObject()
+        public void SetParameter_WithLongValue_ContainsLongParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -93,7 +93,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_ShortValue_Added_To_ListOfIDbParameterObjects_Should_Contain_short_DBParameterObject()
+        public void SetParameter_WithShortValue_ContainsShortParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -113,7 +113,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_DateTimeValue_Added_To_ListOfIDbParameterObjects_Should_Contain_datetime_DBParameterObject()
+        public void SetParameter_WithDateTimeValue_ContainsDateTimeParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -133,7 +133,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_DateTimeMinValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
+        public void SetParameter_WithDateTimeMinValue_ContainsNullParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -153,7 +153,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_TimeSpanValue_Added_To_ListOfIDbParameterObjects_Should_Contain_time_DBParameterObject()
+        public void SetParameter_WithTimeSpanValue_ContainsTimeParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -174,7 +174,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         }
 
         [TestMethod]
-        public void When_TimeSpanMinValue_Added_To_ListOfIDbParameterObjects_Should_Contain_null_DBParameterObject()
+        public void SetParameter_WithTimeSpanMinValue_ContainsNullParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];
@@ -195,7 +195,7 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
 
 
         [TestMethod]
-        public void When_BoolValue_Added_To_ListOfIDbParameterObjects_Should_Contain_bool_DBParameterObject()
+        public void SetParameter_WithBoolValue_ContainsBoolParameterObject()
         {
             // arrange
             List<ISpParameterData> dbParameterData = [];

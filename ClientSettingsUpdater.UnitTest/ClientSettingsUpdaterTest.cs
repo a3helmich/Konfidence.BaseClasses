@@ -14,7 +14,7 @@ namespace ClientSettingsUpdater.UnitTest
     public class ClientSettingsUpdaterTest
     {
         [TestMethod]
-        public void WhenExecute_WithCredentialsAndMissingConfigFolder_ShouldExitWith_1()
+        public void Constructor_WithCredentialsAndMissingConfigFolder_ExitsWith1()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -36,7 +36,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenExecute_WithConfigFolderAndMissingUsername_ShouldExitWith_2()
+        public void Constructor_WithConfigFolderAndMissingUsername_ExitsWith2()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -58,7 +58,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenExecute_WithConfigFolderAndMissingPassword_ShouldExitWith_3()
+        public void Constructor_WithConfigFolderAndMissingPassword_ExitsWith3()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -80,7 +80,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenExecute_WithNoParameters_ShouldExitWith_4()
+        public void Constructor_WithNoParameters_ExitsWith4()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -102,7 +102,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenExecute_WithConfigFolderAndCredentials_ShouldSetConfigFolder()
+        public void Constructor_WithConfigFolderAndCredentials_SetsConfigFolder()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -124,7 +124,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenExecute_WithConfigFileNameAndRequiredFields_ShouldSetConfigFileName()
+        public void Constructor_WithConfigFileNameAndRequiredFields_SetsConfigFileName()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -146,7 +146,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenExecute_WithServerAndRequiredFields_ShouldSqlSetServerConfig()
+        public void Constructor_WithServerAndRequiredFields_SetsServerConfig()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -168,7 +168,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenExecute_WithMailServerAndRequiredFields_ShouldSetMailConfigFile()
+        public void Constructor_WithMailServerAndRequiredFields_SetsMailConfigFile()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();
@@ -196,7 +196,7 @@ namespace ClientSettingsUpdater.UnitTest
         }
 
         [TestMethod]
-        public void WhenReadMailConfig_ShouldGetMailAccounts()
+        public void Execute_WithTwoMailAccounts_WritesBothAccountsToMailConfig()
         {
             // arrange
             Mock<IErrorExiter> errorExiterMock = new();

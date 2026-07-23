@@ -14,7 +14,7 @@ public class FieldExtensionsTests
     private sealed class TestDataItem : BaseDataItem;
 
     [TestMethod]
-    public void SetField_short_Should_add_parameter_with_Int16_type_and_value()
+    public void SetField_Short_AddsParameterWithInt16TypeAndValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -30,7 +30,7 @@ public class FieldExtensionsTests
     }
 
     [TestMethod]
-    public void SetField_bool_Should_add_parameter_with_Boolean_type_and_value()
+    public void SetField_Bool_AddsParameterWithBooleanTypeAndValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -46,7 +46,7 @@ public class FieldExtensionsTests
     }
 
     [TestMethod]
-    public void SetField_DateTime_Should_add_parameter_with_DateTime_type_and_value()
+    public void SetField_DateTime_AddsParameterWithDateTimeTypeAndValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -63,7 +63,7 @@ public class FieldExtensionsTests
     }
 
     [TestMethod]
-    public void SetField_TimeSpan_Should_add_parameter_with_Time_type_and_value()
+    public void SetField_TimeSpan_AddsParameterWithTimeTypeAndValue()
     {
         // Arrange
         TestDataItem dataItem = new();
@@ -81,7 +81,7 @@ public class FieldExtensionsTests
     }
 
     [TestMethod]
-    public void SetField_decimal_Should_add_parameter_with_Decimal_type_and_value()
+    public void SetField_Decimal_AddsParameterWithDecimalTypeAndValue()
     {
         // Arrange
         TestDataItem dataItem = new();

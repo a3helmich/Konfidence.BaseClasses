@@ -56,7 +56,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void Save_With_empty_AutoIdField_Should_throw()
+    public void Save_WithEmptyAutoIdField_Throws()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -70,7 +70,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void Save_With_empty_SaveStoredProcedure_Should_throw()
+    public void Save_WithEmptySaveStoredProcedure_Throws()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -85,7 +85,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void Save_With_valid_dataItem_Should_call_ExecuteSaveStoredProcedure()
+    public void Save_WithValidDataItem_CallsExecuteSaveStoredProcedure()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -101,7 +101,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void GetItem_With_empty_GetStoredProcedure_Should_throw()
+    public void GetItem_WithEmptyGetStoredProcedure_Throws()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -115,7 +115,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void GetItem_With_valid_dataItem_Should_call_ExecuteGetStoredProcedure()
+    public void GetItem_WithValidDataItem_CallsExecuteGetStoredProcedure()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -130,7 +130,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void GetItemBy_With_empty_storedProcedure_Should_throw()
+    public void GetItemBy_WithEmptyStoredProcedure_Throws()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -144,7 +144,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void GetItemBy_With_valid_storedProcedure_Should_call_ExecuteGetByStoredProcedure()
+    public void GetItemBy_WithValidStoredProcedure_CallsExecuteGetByStoredProcedure()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -158,7 +158,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void BuildItemList_With_empty_storedProcedure_Should_throw()
+    public void BuildItemList_WithEmptyStoredProcedure_Throws()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -172,7 +172,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void BuildItemList_With_valid_storedProcedure_Should_call_ExecuteGetListStoredProcedure()
+    public void BuildItemList_WithValidStoredProcedure_CallsExecuteGetListStoredProcedure()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -186,7 +186,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void BuildItemListWithParameters_With_empty_storedProcedure_Should_throw()
+    public void BuildItemListWithParameters_WithEmptyStoredProcedure_Throws()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -201,7 +201,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void BuildItemListWithParameters_With_valid_storedProcedure_Should_call_ExecuteGetListStoredProcedure()
+    public void BuildItemListWithParameters_WithValidStoredProcedure_CallsExecuteGetListStoredProcedure()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -216,7 +216,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void Delete_With_empty_DeleteStoredProcedure_Should_throw()
+    public void Delete_WithEmptyDeleteStoredProcedure_Throws()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -230,7 +230,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void Delete_With_valid_dataItem_Should_call_ExecuteDeleteStoredProcedure()
+    public void Delete_WithValidDataItem_CallsExecuteDeleteStoredProcedure()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -245,7 +245,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void ExecuteCommand_Should_return_repository_result()
+    public void ExecuteCommand_Always_ReturnsRepositoryResult()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -260,7 +260,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void ExecuteTextCommand_Should_return_repository_result()
+    public void ExecuteTextCommand_Always_ReturnsRepositoryResult()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -274,7 +274,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void TableExists_Should_call_ObjectExists_with_Tables_collection()
+    public void TableExists_Always_CallsObjectExistsWithTablesCollection()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -288,7 +288,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void ViewExists_Should_call_ObjectExists_with_Views_collection()
+    public void ViewExists_Always_CallsObjectExistsWithViewsCollection()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -302,7 +302,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void StoredProcedureExists_Should_call_ObjectExists_with_Procedures_collection()
+    public void StoredProcedureExists_Always_CallsObjectExistsWithProceduresCollection()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -316,7 +316,7 @@ public class SqlClientTests
     }
 
     [TestMethod]
-    public void GetSchemaObject_Should_return_repository_result()
+    public void GetSchemaObject_Always_ReturnsRepositoryResult()
     {
         // Arrange
         TestContext context = CreateContext();

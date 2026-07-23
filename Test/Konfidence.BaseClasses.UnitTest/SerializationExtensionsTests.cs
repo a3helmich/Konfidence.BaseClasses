@@ -11,7 +11,7 @@ namespace Konfidence.BaseClasses.UnitTest;
 public class SerializationExtensionsTests
 {
     [TestMethod]
-    public void ClientSettings_empty_serialization_Should_be_same_as_deserialized_ClientSettings()
+    public void Deserialize_SerializedClientSettings_RoundTripsSuccessfully()
     {
         // arrange
         ClientSettings clientSettings = new()
@@ -44,7 +44,7 @@ public class SerializationExtensionsTests
     }
 
     [TestMethod]
-    public void Deserialize_of_NaN_is_Configured()
+    public void Deserialize_NaNValue_ReturnsConfiguredDouble()
     {
         // arrange
         string json = "{ \"Value\": \"NaN\" }";
