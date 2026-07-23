@@ -12,16 +12,6 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlAccess;
 [TestClass]
 public class SqlClientTests
 {
-    private sealed record TestContext(SqlClient Client, Mock<IDataRepository> RepositoryMock);
-
-    private static TestContext CreateContext()
-    {
-        Mock<IDataRepository> repositoryMock = new();
-        SqlClient client = new(repositoryMock.Object);
-
-        return new TestContext(client, repositoryMock);
-    }
-
     private static Mock<IBaseDataItem> CreateDataItemMock()
     {
         Mock<IBaseDataItem> dataItemMock = new();
@@ -328,5 +318,29 @@ public class SqlClientTests
 
         // Assert
         result.Should().BeSameAs(schemaTable);
+    }
+
+    private sealed class TestContext
+    {
+        public TestContext(
+            SqlClient Client,
+            Mock<IDataRepository> RepositoryMock
+        )
+        {
+            this.Client = Client;
+            this.RepositoryMock = RepositoryMock;
+        }
+
+        public SqlClient Client { get; }
+
+        public Mock<IDataRepository> RepositoryMock { get; }
+    }
+
+    private static TestContext CreateContext()
+    {
+        Mock<IDataRepository> repositoryMock = new();
+        SqlClient client = new(repositoryMock.Object);
+
+        return new TestContext(client, repositoryMock);
     }
 }

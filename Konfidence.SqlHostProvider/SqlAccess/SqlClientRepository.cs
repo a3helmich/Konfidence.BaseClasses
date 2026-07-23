@@ -82,7 +82,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             SqlDatabase database = GetDatabase();
 
-            using (DbConnection? dbConnection = database.CreateConnection())
+            using (DbConnection dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
@@ -99,7 +99,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             SqlDatabase database = GetDatabase();
 
-            using (DbCommand? dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
+            using (DbCommand dbCommand = database.GetStoredProcCommand(saveStoredProcedure))
             {
                 foreach (ISpParameterData parameterObject in parameterObjectList)
                 {
@@ -114,7 +114,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             SqlDatabase database = GetDatabase();
 
-            using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
+            using (DbCommand dbCommand = database.GetStoredProcCommand(dataItem.SaveStoredProcedure))
             {
                 SetParameterData(dataItem, database, dbCommand);
 
@@ -128,11 +128,11 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             SqlDatabase database = GetDatabase();
 
-            using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.GetStoredProcedure))
+            using (DbCommand dbCommand = database.GetStoredProcCommand(dataItem.GetStoredProcedure))
             {
                 SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
 
-                using (IDataReader? dataReader = database.ExecuteReader(dbCommand))
+                using (IDataReader dataReader = database.ExecuteReader(dbCommand))
                 {
                     if (dataReader.Read())
                     {
@@ -147,11 +147,11 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             SqlDatabase database = GetDatabase();
 
-            using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
+            using (DbCommand dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
                 SetParameterData(dataItem.GetParameterObjects(), database, dbCommand);
 
-                using (IDataReader? dataReader = database.ExecuteReader(dbCommand))
+                using (IDataReader dataReader = database.ExecuteReader(dbCommand))
                 {
                     if (dataReader.Read())
                     {
@@ -171,11 +171,11 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             SqlDatabase database = GetDatabase();
 
-            using (DbCommand? dbCommand = database.GetStoredProcCommand(storedProcedure))
+            using (DbCommand dbCommand = database.GetStoredProcCommand(storedProcedure))
             {
                 SetParameterData(spParameters, database, dbCommand);
 
-                using (IDataReader? dataReader = database.ExecuteReader(dbCommand))
+                using (IDataReader dataReader = database.ExecuteReader(dbCommand))
                 {
                     while (dataReader.Read())
                     {
@@ -203,7 +203,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             SqlDatabase database = GetDatabase();
 
-            using (DbCommand? dbCommand = database.GetStoredProcCommand(dataItem.DeleteStoredProcedure))
+            using (DbCommand dbCommand = database.GetStoredProcCommand(dataItem.DeleteStoredProcedure))
             {
                 database.AddInParameter(dbCommand, dataItem.AutoIdField, DbType.Int32, dataItem.GetId());
 
@@ -222,7 +222,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
         {
             SqlDatabase database = GetDatabase();
 
-            using (DbConnection? dbConnection = database.CreateConnection())
+            using (DbConnection dbConnection = database.CreateConnection())
             {
                 dbConnection.Open();
 
@@ -263,7 +263,7 @@ namespace Konfidence.SqlHostProvider.SqlAccess
 
             foreach (KeyValuePair<string, ISpParameterData> kvp in dataItem.AutoUpdateFieldDictionary)
             {
-                object? fieldValue = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
+                object fieldValue = database.GetParameterValue(dbCommand, kvp.Value.ParameterName);
 
                 if (DBNull.Value.Equals(fieldValue))
                 {

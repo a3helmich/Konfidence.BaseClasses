@@ -13,7 +13,7 @@ public class SerializationExtensionsTests
     [TestMethod]
     public void Deserialize_SerializedClientSettings_RoundTripsSuccessfully()
     {
-        // arrange
+        // Arrange
         ClientSettings clientSettings = new()
         {
             DataConfiguration = new DataConfiguration { Connections = [new ConfigConnectionString()] }
@@ -21,10 +21,10 @@ public class SerializationExtensionsTests
 
         string clientSettingsSerialised = clientSettings.Serialize();
 
-        // act
+        // Act
         bool serializationResult = clientSettingsSerialised.Deserialize(out ClientSettings? clientSettingsDeserialized);
 
-        // assert
+        // Assert
         serializationResult.Should().BeTrue();
         clientSettingsDeserialized.Should().NotBeNull();
 
@@ -46,13 +46,13 @@ public class SerializationExtensionsTests
     [TestMethod]
     public void Deserialize_NaNValue_ReturnsConfiguredDouble()
     {
-        // arrange
+        // Arrange
         string json = "{ \"Value\": \"NaN\" }";
 
-        // act
+        // Act
         bool serializationResult = json.Deserialize(out TestClass? testClass);
 
-        // assert
+        // Assert
         serializationResult.Should().BeTrue();
         testClass.Should().NotBeNull();
 

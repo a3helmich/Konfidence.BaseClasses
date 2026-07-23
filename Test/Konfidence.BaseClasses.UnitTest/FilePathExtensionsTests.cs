@@ -33,13 +33,13 @@ public class FilePathExtensionsTests
     [TestMethod]
     public void TryFindFile_FileNotInSubFolder_ReturnsFalse()
     {
-        // arrange
+        // Arrange
         string testFile = "TestTryFindFile.txt";
 
-        // act
+        // Act
         bool searchResult = testFile.TryFindFile(out string? fullFileName);
 
-        // assert
+        // Assert
         searchResult.Should().BeFalse();
         fullFileName.Should().BeNullOrEmpty();
     }
@@ -47,13 +47,13 @@ public class FilePathExtensionsTests
     [TestMethod]
     public void TryFindFileIncludingSubFolders_FileInSubFolder_ReturnsTrue()
     {
-        // arrange
+        // Arrange
         string testFile = "TestTryFindFile.txt";
 
-        // act
+        // Act
         bool searchResult = testFile.TryFindFileIncludingSubFolders(out List<string> fullFileNames);
 
-        // assert
+        // Assert
         searchResult.Should().BeTrue();
 
         fullFileNames.Should().HaveCount(1);
@@ -63,12 +63,12 @@ public class FilePathExtensionsTests
     [TestMethod]
     public void TryCreateAndValidateDirectory_ValidPath_CreatesDirectory()
     {
-        // arrange
+        // Arrange
 
-        // act
+        // Act
         bool isValidDirectory = _testFolder.TryCreateAndValidateDirectory();
 
-        // assert
+        // Assert
         isValidDirectory.Should().BeTrue();
         Directory.Exists(_testFolder).Should().BeTrue();
     }
@@ -76,12 +76,12 @@ public class FilePathExtensionsTests
     [TestMethod]
     public void TryCreateAndValidateDirectory_InvalidPath_ReturnsFalse()
     {
-        // arrange
+        // Arrange
 
-        // act
+        // Act
         bool isValidDirectory = _testInvalidFolder.TryCreateAndValidateDirectory();
 
-        // assert
+        // Assert
         isValidDirectory.Should().BeFalse();
         Directory.Exists(_testInvalidFolder).Should().BeFalse();
     }

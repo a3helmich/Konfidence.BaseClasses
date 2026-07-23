@@ -15,7 +15,7 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
     public class DatabaseStructureTest
     {
         [ClassInitialize]
-        public static void ClassInitialize(TestContext _)
+        public static void ClassInitialize(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _)
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
 
@@ -29,340 +29,202 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         [TestMethod]
         public void BuildStructure_HMailServerDatabase_GeneratesStructure()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("hMailServer");
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
+            // Act
+            context.Target.BuildStructure();
 
-            clientConfig.DefaultDatabase = "hMailServer";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            // act
-            target.BuildStructure();
-
-            // assert
-            target.Tables.Should().HaveCount(34); // hmailserver contains 34 tables
+            // Assert
+            context.Target.Tables.Should().HaveCount(34); // hmailserver contains 34 tables
         }
 
         [TestMethod]
         public void BuildStructure_TestClassGeneratorDatabase_GeneratesStructure()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("TestClassGenerator");
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
+            // Act
+            context.Target.BuildStructure();
 
-            clientConfig.DefaultDatabase = "TestClassGenerator";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            // act
-            target.BuildStructure();
-
-            // assert
-            target.Tables.Should().HaveCount(8); // TestClassGenerator has 7 tables
+            // Assert
+            context.Target.Tables.Should().HaveCount(8); // TestClassGenerator has 7 tables
         }
 
         [TestMethod]
         public void BuildStructure_SchemaDatabaseDevelopmentConnection_GeneratesStructure()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("SchemaDatabaseDevelopment");
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
+            // Act
+            context.Target.BuildStructure();
 
-            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
+            // Assert
+            context.Target.Tables.Should().HaveCount(8); // TestClassGenerator heeft nu 6 tabellen
 
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            // act
-            target.BuildStructure();
-
-            // assert
-            target.Tables.Should().HaveCount(8); // TestClassGenerator heeft nu 6 tabellen
-
-            target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
+            context.Target.Tables.First(x => x.Name == "Test6").PrimaryKey.Should().Be("Test6Id");
         }
 
         [TestMethod]
         public void BuildStructure_BlockedHackersConnection_SetsPrimaryKey()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("BlockedHackers");
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
+            // Act
+            context.Target.BuildStructure();
 
-            clientConfig.DefaultDatabase = "BlockedHackers";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            // act
-            target.BuildStructure();
-
-            // assert
-            target.Tables.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
+            // Assert
+            context.Target.Tables.First(x => x.Name == "Blocked").PrimaryKey.Should().Be("BlockedId");
         }
 
         [TestMethod]
         public void BuildStructure_DbMenuConnection_SetsHasGuidId()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("TestClassGenerator");
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
+            // Act
+            context.Target.BuildStructure();
 
-            clientConfig.DefaultDatabase = "TestClassGenerator";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            // act
-            target.BuildStructure();
-
-            // assert
-            target.Tables.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
+            // Assert
+            context.Target.Tables.First(x => x.Name == "TestInt").HasGuidId.Should().BeTrue();
         }
 
         [TestMethod]
         public void GetJoinedFieldNames_MultipleColumns_ReturnsConcatenatedColumnNames()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("SchemaDatabaseDevelopment");
+            context.Target.BuildStructure();
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
-
-            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            target.BuildStructure();
-
-            ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
+            ITableDataItem table = context.Target.Tables.First(x => x.Name == "Test5");
             List<string> columnNameList = ["naam", "Omschrijving"];
 
-            // act
+            // Act
             string columnString = table.ColumnDataItems.GetJoinedFieldNames(columnNameList);
 
-            // assert
+            // Assert
             columnString.Should().Be("NaamOmschrijving");
         }
 
         [TestMethod]
         public void GetJoinedUnderscoreFieldNames_MultipleColumns_ReturnsUnderscoreConcatenatedColumnNames()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("SchemaDatabaseDevelopment");
+            context.Target.BuildStructure();
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
-
-            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            target.BuildStructure();
-
-            ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
+            ITableDataItem table = context.Target.Tables.First(x => x.Name == "Test5");
             List<string> columnNameList = ["naam", "Omschrijving"];
 
-            // act
+            // Act
             string columnString = table.ColumnDataItems.GetJoinedUnderscoreFieldNames(columnNameList);
 
-            // assert
+            // Assert
             columnString.Should().Be("Naam_Omschrijving".ToUpperInvariant());
         }
 
         [TestMethod]
         public void GetFieldNamesAsArguments_MultipleColumns_ReturnsCommaSeparatedColumnNames()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("SchemaDatabaseDevelopment");
+            context.Target.BuildStructure();
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
-
-            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            target.BuildStructure();
-
-            ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
+            ITableDataItem table = context.Target.Tables.First(x => x.Name == "Test5");
             List<string> columnNameList = ["naam", "Omschrijving"];
 
-            // act
+            // Act
             string columnString = table.ColumnDataItems.GetFieldNamesAsArguments(columnNameList);
 
-            // assert
+            // Assert
             columnString.Should().Be("Naam, Omschrijving");
         }
 
         [TestMethod]
         public void GetFieldNamesAsParameters_MultipleColumns_ReturnsTypedParameterList()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("SchemaDatabaseDevelopment");
+            context.Target.BuildStructure();
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
-
-            clientConfig.DefaultDatabase = "SchemaDatabaseDevelopment";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            target.BuildStructure();
-
-            ITableDataItem table = target.Tables.First(x => x.Name == "Test5");
+            ITableDataItem table = context.Target.Tables.First(x => x.Name == "Test5");
             List<string> columnNameList = ["naam", "Omschrijving"];
 
-            // act
+            // Act
             string columnString = table.ColumnDataItems.GetFieldNamesAsParameters(columnNameList);
 
-            // assert
+            // Assert
             columnString.Should().Be("string naam, string omschrijving");
         }
 
         [TestMethod]
         public void GetFirstColumnName_MultipleColumns_ReturnsFirstName()
         {
-            // arrange
+            // Arrange
             List<string> columnNameList = ["naam", "Omschrijving"];
 
-            // act
+            // Act
             string columnString = columnNameList.Any() ? columnNameList.First() : string.Empty;
 
-            // assert
+            // Assert
             columnString.Should().Be("naam");
         }
 
         [TestMethod]
         public void GetLastColumnName_MultipleColumns_ReturnsLastName()
         {
-            // arrange
+            // Arrange
             List<string> columnNameList = ["naam", "Omschrijving"];
 
-            // act
+            // Act
             string columnString = columnNameList.Any() ? columnNameList.Last() : string.Empty;
 
-            // assert
+            // Assert
             columnString.Should().Be("Omschrijving");
         }
 
         [TestMethod]
         public void TableExists_ExistingTable_ReturnsTrue()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("TestClassGenerator");
+            context.Target.BuildStructure();
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
+            // Act
+            bool tableExists = context.Client.TableExists("Test1");
 
-            clientConfig.DefaultDatabase = "TestClassGenerator";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            target.BuildStructure();
-
-            // act
-            bool tableExists = client.TableExists("Test1");
-
-            // assert
+            // Assert
             tableExists.Should().BeTrue();
         }
 
         [TestMethod]
         public void TableExists_NonExistentTable_ReturnsFalse()
         {
-            // arrange
-            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
-            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+            // Arrange
+            TestContext context = CreateContext("TestClassGenerator");
+            context.Target.BuildStructure();
 
-            if (!clientConfig.IsAssigned())
-            {
-                throw new Exception("clientconfig not returned by dependency injection");
-            }
+            // Act
+            bool tableExists = context.Client.TableExists("Test666");
 
-            clientConfig.DefaultDatabase = "TestClassGenerator";
-
-            SqlClient client = new(new SqlClientRepository(clientConfig));
-
-            DatabaseStructure target = new(client);
-
-            target.BuildStructure();
-
-            // act
-            bool tableExists = client.TableExists("Test666");
-
-            // assert
+            // Assert
             tableExists.Should().BeFalse();
         }
 
         [TestMethod]
         public void ConfigureDependencyInjection_Always_RegistersDatabaseStructureForDefaultDb()
         {
-            // arrange
+            // Arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
-            // act
+            // Act
             IDatabaseStructure? target = dependencyProvider.GetService<IDatabaseStructure>();
 
-            // assert
+            // Assert
             target.Should().NotBeNull();
             target.Should().BeOfType<DatabaseStructure>();
         }
@@ -379,13 +241,13 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         [DataRow("--DefaultDatabase", "   ", "DbMenu")]
         public void ConfigureDependencyInjection_WithDbMenuArgument_RegistersDatabaseStructureForDbMenu(string param, string delim, string value)
         {
-            // arrange
+            // Arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection($"{param}{delim}{value}");
 
-            // act
+            // Act
             IDatabaseStructure? target = dependencyProvider.GetService<IDatabaseStructure>();
 
-            // assert
+            // Assert
             target.Should().NotBeNull();
             target.Should().BeOfType<DatabaseStructure>();
         }
@@ -393,13 +255,13 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         [TestMethod]
         public void ConfigureDependencyInjection_WithConfigFileFolderArgument_SetsConfigFileFolder()
         {
-            // arrange
+            // Arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection(@"--ConfigFileFolder=some\location\");
 
-            // act
+            // Act
             IClientConfig? target = dependencyProvider.GetService<IClientConfig>();
 
-            // assert
+            // Assert
             target.Should().NotBeNull();
             target.Should().BeOfType<ClientConfig>();
             target?.ConfigFileFolder.Should().Be(@"some\location\");
@@ -408,16 +270,50 @@ namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema
         [TestMethod]
         public void ConfigureDependencyInjection_Always_SetsUseEnvironmentSettingToTrue()
         {
-            // arrange
+            // Arrange
             IServiceProvider dependencyProvider = DependencyInjectionFactory.ConfigureDependencyInjection();
 
-            // act
+            // Act
             IClientConfig? target = dependencyProvider.GetService<IClientConfig>();
 
-            // assert
+            // Assert
             target.Should().NotBeNull();
             target.Should().BeOfType<ClientConfig>();
             target?.UseEnvironmentSetting.Should().BeTrue();
+        }
+
+        private sealed class TestContext
+        {
+            public TestContext(
+                SqlClient Client,
+                DatabaseStructure Target
+            )
+            {
+                this.Client = Client;
+                this.Target = Target;
+            }
+
+            public SqlClient Client { get; }
+
+            public DatabaseStructure Target { get; }
+        }
+
+        private static TestContext CreateContext(string defaultDatabase)
+        {
+            IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
+            IClientConfig? clientConfig = di.GetService<IClientConfig>();
+
+            if (!clientConfig.IsAssigned())
+            {
+                throw new Exception("clientconfig not returned by dependency injection");
+            }
+
+            clientConfig.DefaultDatabase = defaultDatabase;
+
+            SqlClient client = new(new SqlClientRepository(clientConfig));
+            DatabaseStructure target = new(client);
+
+            return new TestContext(client, target);
         }
     }
 }

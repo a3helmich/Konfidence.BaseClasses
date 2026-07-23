@@ -43,12 +43,12 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         [TestMethod]
         public void GetList_ExistingItem_ReturnsShortAndLongFields()
         {
-            // arrange
+            // Arrange
 
-            // act
+            // Act
             List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
 
-            // assert
+            // Assert
             testIntDataItemList.Should().HaveCount(1);
             testIntDataItemList[0].testInt.Should().BeGreaterThan(1);
 
@@ -60,7 +60,7 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         [TestMethod]
         public void Constructor_WithSavedItem_ReturnsQueriedItem()
         {
-            // arrange
+            // Arrange
             Dl.TestIntDataItem testIntDataItem = new()
             {
                 testTinyInt = 111, 
@@ -70,10 +70,10 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
 
             testIntDataItem.Save();
 
-            // act
+            // Act
             Dl.TestIntDataItem copyTestIntDataItem = new(testIntDataItem.GetId());
 
-            // assert
+            // Assert
             copyTestIntDataItem.GetId().Should().Be(testIntDataItem.GetId());
             copyTestIntDataItem.TestIntId.Should().Be(testIntDataItem.TestIntId);
 
@@ -86,7 +86,7 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         [TestMethod]
         public void Constructor_WithUpdatedItem_ReturnsUpdatedItem()
         {
-            // arrange
+            // Arrange
             Dl.TestIntDataItem testIntDataItem = new()
             {
                 testTinyInt = 11, 
@@ -105,10 +105,10 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
 
             copyTestIntDataItem.Save();
 
-            // act
+            // Act
             Dl.TestIntDataItem updateTestIntDataItem = new(testIntDataItem.GetId());
 
-            // assert
+            // Assert
             updateTestIntDataItem.TestIntId.Should().Be(testIntDataItem.TestIntId);
             updateTestIntDataItem.GetId().Should().Be(testIntDataItem.GetId());
 
@@ -120,7 +120,7 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
         [TestMethod]
         public void Constructor_WithGuidId_ReturnsMatchingItem()
         {
-            // arrange
+            // Arrange
             Dl.TestIntDataItem testIntDataItem = new()
             {
                 testTinyInt = 11,
@@ -130,11 +130,11 @@ namespace Konfidence.BaseDatabaseClasses.IntegrationTest
 
             testIntDataItem.Save();
 
-            // act
+            // Act
             Dl.TestIntDataItem updateTestIntDataItem = new(testIntDataItem.GetId());
             Dl.TestIntDataItem updateTestIntGuidDataItem = new(updateTestIntDataItem.TestIntId);
 
-            // assert
+            // Assert
             updateTestIntGuidDataItem.TestIntId.Should().Be(updateTestIntDataItem.TestIntId);
             updateTestIntGuidDataItem.GetId().Should().Be(updateTestIntDataItem.GetId());
         }

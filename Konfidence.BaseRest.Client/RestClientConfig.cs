@@ -24,7 +24,7 @@ namespace Konfidence.BaseRest.Client
 
         public Uri BaseUri()
         {
-            return new($"{Host()}{BaseRoute}/{Route}");
+            return new Uri($"{Host()}{BaseRoute}/{Route}");
         }
 
         private Uri Host()

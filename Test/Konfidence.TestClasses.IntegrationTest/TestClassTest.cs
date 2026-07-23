@@ -51,13 +51,13 @@ namespace Konfidence.TestClasses.IntegrationTest
         [TestMethod]
         public void GetList_ExistingData_ReturnsGuidIdField()
         {
-            // arrange
+            // Arrange
             List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
 
-            // act
+            // Act
             Dl.TestIntDataItem testIntDataItem = testIntDataItemList.First();
 
-            // assert
+            // Assert
             testIntDataItem.TestIntId.Should().NotBeEmpty();
             testIntDataItem.AutoIdField.Should().NotBeEmpty();
             testIntDataItem.GuidIdField.Should().NotBeEmpty();
@@ -65,7 +65,7 @@ namespace Konfidence.TestClasses.IntegrationTest
         [TestMethod]
         public void Constructor_WithInvalidKey_ReturnsNewItem()
         {
-            // arrange
+            // Arrange
             List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
             Guid id = Guid.NewGuid();
 
@@ -74,10 +74,10 @@ namespace Konfidence.TestClasses.IntegrationTest
                 id = Guid.NewGuid();
             }
 
-            // act
+            // Act
             Dl.TestIntDataItem testIntDataItem = new(id);
 
-            // assert
+            // Assert
             testIntDataItem.IsNew.Should().BeTrue();
         }
     }

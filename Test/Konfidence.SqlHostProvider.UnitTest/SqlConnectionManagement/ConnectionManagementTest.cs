@@ -21,13 +21,13 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
         [TestMethod]
         public void ConfigureDependencyInjection_WithMultipleConnections_SetsThemAllInClientConfig()
         {
-            // arrange
+            // Arrange
             IServiceProvider di = DependencyInjectionFactory.ConfigureDependencyInjection();
 
-            // act
+            // Act
             IClientConfig? clientConfig = di.GetService<IClientConfig>();
 
-            // assert
+            // Assert
             if (!clientConfig.IsAssigned())
             {
                 throw new Exception("mayor fail");

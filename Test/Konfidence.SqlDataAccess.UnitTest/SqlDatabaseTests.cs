@@ -12,15 +12,6 @@ public class SqlDatabaseTests
 {
     private const string CONNECTION_STRING = "Data Source=konfidence2;Initial Catalog=TestClassGenerator;Integrated Security=True";
 
-    private sealed record TestContext(SqlDatabase Database);
-
-    private static TestContext CreateContext()
-    {
-        SqlDatabase database = SqlDatabaseFactory.Create(CONNECTION_STRING);
-
-        return new TestContext(database);
-    }
-
     [TestMethod]
     public void GetStoredProcCommand_Always_SetsCommandTypeToStoredProcedure()
     {
@@ -246,5 +237,24 @@ public class SqlDatabaseTests
 
         // Assert
         parameterName.Should().Be("@Id");
+    }
+
+    private sealed class TestContext
+    {
+        public TestContext(
+            SqlDatabase Database
+        )
+        {
+            this.Database = Database;
+        }
+
+        public SqlDatabase Database { get; }
+    }
+
+    private static TestContext CreateContext()
+    {
+        SqlDatabase database = SqlDatabaseFactory.Create(CONNECTION_STRING);
+
+        return new TestContext(database);
     }
 }
