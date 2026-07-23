@@ -94,6 +94,8 @@ namespace ClientSettingsUpdater
             if (!Directory.Exists(ConfigFolder))
             {
                 _errorExiter.Exit(6);
+
+                return;
             }
 
             string[] clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
@@ -103,6 +105,8 @@ namespace ClientSettingsUpdater
                 Console.WriteLine($"config file not found: '{ConfigFileName}'");
 
                 _errorExiter.Exit(7);
+
+                return;
             }
 
             string fullFolderName = Path.GetFullPath(ConfigFolder);

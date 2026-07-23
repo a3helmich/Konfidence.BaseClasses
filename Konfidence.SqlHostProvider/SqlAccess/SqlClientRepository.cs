@@ -276,14 +276,12 @@ namespace Konfidence.SqlHostProvider.SqlAccess
             }
         }
 
-        private static void SetParameterData(IList<ISpParameterData> parameterObjectList, SqlDatabase database, DbCommand dbCommand)
+        internal static void SetParameterData(IList<ISpParameterData> parameterObjectList, SqlDatabase database, DbCommand dbCommand)
         {
             foreach (ISpParameterData parameterObject in parameterObjectList)
             {
                 database.AddInParameter(dbCommand, parameterObject.ParameterName, parameterObject.DbType, parameterObject.Value);
             }
-
-            parameterObjectList.Clear();
         }
     }
 }

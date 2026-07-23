@@ -2,7 +2,7 @@
 {
     public abstract class ThreadAction
     {
-        private static readonly object LockObject = new();
+        private readonly object _lockObject = new();
 
         internal bool IsAlive { get; private set; }
 
@@ -10,12 +10,17 @@
         {
             IsAlive = true;
 
-            lock (LockObject)
+            try
             {
-                Execute();
+                lock (_lockObject)
+                {
+                    Execute();
+                }
             }
-
-            IsAlive = false;
+            finally
+            {
+                IsAlive = false;
+            }
         }
 
         protected abstract void Execute();

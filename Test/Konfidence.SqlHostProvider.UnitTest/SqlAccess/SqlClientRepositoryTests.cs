@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using FluentAssertions;
@@ -10,6 +11,7 @@ using Konfidence.TestTools;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Konfidence.SqlHostProvider.UnitTest.SqlAccess;
 
@@ -132,6 +134,31 @@ public class SqlClientRepositoryTests
 
         // Assert
         action.Should().NotThrow();
+    }
+
+    [TestMethod]
+    public void SetParameterData_Always_DoesNotClearTheCallerSuppliedList()
+    {
+        // Arrange
+        Mock<ISpParameterData> parameterMock = new();
+        parameterMock.Setup(x => x.ParameterName).Returns("Id");
+        parameterMock.Setup(x => x.DbType).Returns(DbType.Int32);
+        parameterMock.Setup(x => x.Value).Returns(1);
+
+        List<ISpParameterData> parameterObjectList = [parameterMock.Object];
+
+        SqlDatabase database = SqlDatabaseFactory.Create("Data Source=.;Initial Catalog=test;Integrated Security=True");
+
+        using DbCommand dbCommand = database.GetStoredProcCommand("SomeProcedure");
+
+        // Act
+        SqlClientRepository.SetParameterData(parameterObjectList, database, dbCommand);
+
+        // Assert
+        // Before the fix, SetParameterData() cleared the caller-supplied list as an undocumented
+        // side effect, so a list a caller intended to reuse across multiple calls would silently
+        // end up empty.
+        parameterObjectList.Should().HaveCount(1);
     }
 
     private sealed class FakeBaseDataItem : IBaseDataItem

@@ -12,8 +12,6 @@ namespace Konfidence.BaseData
 {
     public abstract class BaseDataItem : IBaseDataItem
     {
-        private readonly bool _isInitialized;
-
         internal List<ISpParameterData> SpParameterData { get; }
 
         public string GuidIdField { get; set; } = string.Empty;
@@ -30,18 +28,14 @@ namespace Konfidence.BaseData
 
         protected IBaseClient? Client { get; set; }
 
-        public List<ISpParameterData> GetParameterObjects() => SpParameterData;
+        public List<ISpParameterData> GetParameterObjects() => SetParameterData();
 
         protected BaseDataItem()
         {
-            _isInitialized = false;
-
             SpParameterData = new List<ISpParameterData>();
             AutoUpdateFieldDictionary = new Dictionary<string, ISpParameterData>();
 
-            InternalInitializeDataItem();
-
-            _isInitialized = true;
+            InitializeDataItem();
         }
 
         public void GetKey(IDataReader dataReader)
@@ -88,14 +82,6 @@ namespace Konfidence.BaseData
 
         public virtual void InitializeDataItem()
         {
-        }
-
-        private void InternalInitializeDataItem()
-        {
-            if (!_isInitialized)
-            {
-                InitializeDataItem();
-            }
         }
 
         protected void GetItem()
@@ -157,6 +143,9 @@ namespace Konfidence.BaseData
             return SetParameterData();
         }
 
+        // SetField() always appends rather than replacing, so SpParameterData must be reset here -
+        // otherwise reusing this instance for a second Save()/Get() call resends stale parameters
+        // alongside the new ones.
         private List<ISpParameterData> SetParameterData()
         {
             List<ISpParameterData> parameterObjectList = SpParameterData.ToList();

@@ -4,4 +4,8 @@
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Konfidence.UtilHelper.UnitTest" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using Konfidence.Base;
 
@@ -36,9 +37,9 @@ namespace Konfidence.BaseThreadClasses
                 {
                     ThreadAction.ExecuteAction();
                 }
-                catch
+                catch (Exception exception)
                 {
-                    // when the action throws an exception....
+                    Debug.WriteLine($"ThreadRunner action threw an exception: {exception}");
                 }
 
                 SleepThread(_sleepTime, _sleepUnit);
@@ -104,16 +105,7 @@ namespace Konfidence.BaseThreadClasses
 
         private void CleanupThread()
         {
-            try
-            {
-                internalThread = null;
-
-                GC.Collect(GC.MaxGeneration); 
-            }
-            catch 
-            {
-                // ReSharper disable once UnusedVariable
-            }
+            internalThread = null;
         }
     }
 }
