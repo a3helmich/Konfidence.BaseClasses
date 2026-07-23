@@ -15,16 +15,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithGuidValue_ContainsGuidParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             Guid testValue = Guid.NewGuid();
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -35,16 +35,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithEmptyGuidValue_ContainsNullParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             Guid testValue = Guid.Empty;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -55,16 +55,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithIntValue_ContainsIntParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             const int testValue = 1234;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -75,16 +75,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithLongValue_ContainsLongParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             const long testValue = 1234;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -95,16 +95,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithShortValue_ContainsShortParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             const short testValue = 1234;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -115,16 +115,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithDateTimeValue_ContainsDateTimeParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             DateTime testValue = DateTime.Now;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -135,16 +135,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithDateTimeMinValue_ContainsNullParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             DateTime testValue = DateTime.MinValue;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -155,17 +155,17 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithTimeSpanValue_ContainsTimeParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             TimeSpan testValue = DateTime.Today - DateTime.Today.AddHours(-2).AddSeconds(-22);
             DateTime timeValue = DateTime.Today.AddHours(2).AddSeconds(22);
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -176,16 +176,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithTimeSpanMinValue_ContainsNullParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             TimeSpan testValue = TimeSpan.MinValue;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();
@@ -197,16 +197,16 @@ namespace Konfidence.BaseDatabaseClasses.UnitTest
         [TestMethod]
         public void SetParameter_WithBoolValue_ContainsBoolParameterObject()
         {
-            // arrange
+            // Arrange
             List<ISpParameterData> dbParameterData = [];
             const bool testValue = true;
 
-            // act
+            // Act
             dbParameterData.SetParameter("TestField", testValue);
 
             ISpParameterData field = dbParameterData.First();
 
-            // assert
+            // Assert
             dbParameterData.Should().HaveCount(1);
 
             field.Should().NotBeNull();

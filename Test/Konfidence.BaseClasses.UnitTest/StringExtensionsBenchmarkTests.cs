@@ -12,14 +12,14 @@ namespace Konfidence.BaseClasses.UnitTest
         [Benchmark]
         public void InitUpperCaseBenchmark()
         {
-            // arrange
+            // Arrange
             const string word = "hello";
             const string expectedResult = "Hello";
 
-            // act
+            // Act
             string result = word.InitUpperCase();
 
-            // assert
+            // Assert
             result.Should().Be(expectedResult);
         }
 

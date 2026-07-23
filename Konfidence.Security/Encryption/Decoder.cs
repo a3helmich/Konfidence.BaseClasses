@@ -53,8 +53,6 @@ namespace Konfidence.Security.Encryption
         public void Dispose()
         {
             Dispose(true);
-
-            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)

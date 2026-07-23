@@ -16,13 +16,13 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithCredentialsAndMissingConfigFolder_ExitsWith1()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([$"-{Argument.Server}=Server"], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(1), Times.Once);
 
             clientSettingsManager.MailServer.Should().BeNullOrWhiteSpace();
@@ -38,13 +38,13 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithConfigFolderAndMissingUsername_ExitsWith2()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}=."], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(2), Times.Once);
 
             clientSettingsManager.MailServer.Should().BeNullOrWhiteSpace();
@@ -60,13 +60,13 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithConfigFolderAndMissingPassword_ExitsWith3()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}=.", $"--{Argument.UserName}=Adrie"], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(3), Times.Once);
 
             clientSettingsManager.MailServer.Should().BeNullOrWhiteSpace();
@@ -82,13 +82,13 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithNoParameters_ExitsWith4()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(4), Times.Once);
 
             clientSettingsManager.MailServer.Should().BeNullOrWhiteSpace();
@@ -104,13 +104,13 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithConfigFolderAndCredentials_SetsConfigFolder()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}=.", $"--{Argument.UserName}=Adrie", $"--{Argument.Password}=geheim"], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
 
             clientSettingsManager.MailServer.Should().BeNullOrWhiteSpace();
@@ -126,13 +126,13 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithConfigFileNameAndRequiredFields_SetsConfigFileName()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}=.", $"--{Argument.ConfigFileName}=test.json", $"--{Argument.UserName}=Adrie", $"--{Argument.Password}=geheim"], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
 
             clientSettingsManager.MailServer.Should().BeNullOrWhiteSpace();
@@ -148,13 +148,13 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithServerAndRequiredFields_SetsServerConfig()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}=.", $"--{Argument.Server}=server", $"--{Argument.UserName}=Adrie", $"--{Argument.Password}=geheim"], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
 
             clientSettingsManager.MailServer.Should().BeNullOrWhiteSpace();
@@ -170,10 +170,10 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Constructor_WithMailServerAndRequiredFields_SetsMailConfigFile()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
 
-            // act
+            // Act
             ClientSettingsManager clientSettingsManager = new([
                 $"--{Argument.ConfigFileFolder}=.", 
                 $"--{Argument.MailServer}=mailserver", 
@@ -182,7 +182,7 @@ namespace ClientSettingsUpdater.UnitTest
                 $"--{Argument.Verbose}=verbose"
             ], errorExiterMock.Object);
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
 
             clientSettingsManager.MailServer.Should().Be("mailserver");
@@ -198,25 +198,23 @@ namespace ClientSettingsUpdater.UnitTest
         [TestMethod]
         public void Execute_WithTwoMailAccounts_WritesBothAccountsToMailConfig()
         {
-            // arrange
+            // Arrange
             Mock<IErrorExiter> errorExiterMock = new();
             ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}=.", $"--{Argument.MailServer}=mail.konfidence.nl", $"--{Argument.UserName}=Adrie", $"--{Argument.Password}=geheim"], errorExiterMock.Object);
             clientSettingsManager.Execute();
 
             clientSettingsManager = new ClientSettingsManager([$"--{Argument.ConfigFileFolder}=.", $"--{Argument.MailServer}=mail.konfidence.nl", $"--{Argument.UserName}=A3", $"--{Argument.Password}=geheim"], errorExiterMock.Object);
 
-            // act
+            // Act
             clientSettingsManager.Execute();
             MailAccounts? mailConfig = ReadMailConfig();
 
-            // assert
+            // Assert
             errorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
 
             mailConfig.Should().NotBeNull();
 
-            Assert.IsNotNull(mailConfig);
-
-            mailConfig.Accounts.Should().HaveCountGreaterThanOrEqualTo(2);
+            mailConfig!.Accounts.Should().HaveCountGreaterThanOrEqualTo(2);
             MailAccount? account1 = mailConfig.Accounts.FirstOrDefault(x => x.UserName == "Adrie");
             MailAccount? account2 = mailConfig.Accounts.FirstOrDefault(x => x.UserName == "A3");
 

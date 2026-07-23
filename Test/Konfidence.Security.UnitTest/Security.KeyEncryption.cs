@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Konfidence.Security.Encryption;
@@ -12,35 +12,59 @@ namespace Konfidence.Security.UnitTest
         [TestMethod]
         public void KeySize_WinNTWithEmptyContainerName_Returns1024()
         {
-            // arrange
-            Mock<ISecurityConfiguration> configurationMock = new();
+            // Arrange
+            using TestContext context = CreateContext(PlatformID.Win32NT);
 
-            configurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32NT);
+            // Act
+            int maxKeySize = context.KeyEncryption.KeySize;
 
-            using KeyEncryption keyEncryption = new(string.Empty, configurationMock.Object);
-
-            // act
-            int maxKeySize = keyEncryption.KeySize;
-
-            // assert
+            // Assert
             maxKeySize.Should().Be(1024);
         }
 
         [TestMethod]
         public void KeySize_Win32WithEmptyContainerName_Returns384()
         {
-            // arrange
+            // Arrange
+            using TestContext context = CreateContext(PlatformID.Win32Windows);
+
+            // Act
+            int maxKeySize = context.KeyEncryption.KeySize;
+
+            // Assert
+            maxKeySize.Should().Be(384);
+        }
+
+        private sealed class TestContext : IDisposable
+        {
+            public TestContext(
+                KeyEncryption KeyEncryption,
+                Mock<ISecurityConfiguration> ConfigurationMock
+            )
+            {
+                this.KeyEncryption = KeyEncryption;
+                this.ConfigurationMock = ConfigurationMock;
+            }
+
+            public KeyEncryption KeyEncryption { get; }
+
+            public Mock<ISecurityConfiguration> ConfigurationMock { get; }
+
+            public void Dispose()
+            {
+                KeyEncryption.Dispose();
+            }
+        }
+
+        private static TestContext CreateContext(PlatformID platform)
+        {
             Mock<ISecurityConfiguration> configurationMock = new();
 
-            configurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32Windows);
+            configurationMock.Setup(x => x.OSVersionPlatform).Returns(platform);
 
-            using KeyEncryption keyEncryption = new(string.Empty, configurationMock.Object);
+            KeyEncryption keyEncryption = new(string.Empty, configurationMock.Object);
 
-            // act
-            int maxKeySize = keyEncryption.KeySize;
-
-            // assert
-            maxKeySize.Should().Be(384);
+            return new TestContext(keyEncryption, configurationMock);
         }
     }
 }

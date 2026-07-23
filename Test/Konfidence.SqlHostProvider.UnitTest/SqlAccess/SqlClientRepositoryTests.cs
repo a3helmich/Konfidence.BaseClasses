@@ -16,20 +16,6 @@ namespace Konfidence.SqlHostProvider.UnitTest.SqlAccess;
 [TestClass]
 public class SqlClientRepositoryTests
 {
-    private sealed record TestContext(ConfigConnectionString Connection);
-
-    private static TestContext CreateContext()
-    {
-        ConfigConnectionString connection = new()
-        {
-            Server = "konfidence2",
-            Database = "TestClassGenerator",
-            ConnectionName = "TestClassGenerator"
-        };
-
-        return new TestContext(connection);
-    }
-
     [TestMethod]
     public void BuildConnectionString_Always_MapsServerAndDatabaseToDataSourceAndInitialCatalog()
     {
@@ -167,5 +153,29 @@ public class SqlClientRepositoryTests
         public void GetData(IDataReader dataReader) { }
         public System.Collections.Generic.List<ISpParameterData> GetParameterObjects() => [];
         public bool IsNew => true;
+    }
+
+    private sealed class TestContext
+    {
+        public TestContext(
+            ConfigConnectionString Connection
+        )
+        {
+            this.Connection = Connection;
+        }
+
+        public ConfigConnectionString Connection { get; }
+    }
+
+    private static TestContext CreateContext()
+    {
+        ConfigConnectionString connection = new()
+        {
+            Server = "konfidence2",
+            Database = "TestClassGenerator",
+            ConnectionName = "TestClassGenerator"
+        };
+
+        return new TestContext(connection);
     }
 }
