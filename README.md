@@ -100,7 +100,7 @@ Provides MS Sql database access, now via `Konfidence.SqlDataAccess`/`Microsoft.D
 Prepares the configuration of a unittest with live access to SqlServer. Since dotnet, the location of the TestHost and where the tests are running are different. The app.config not being in the expected location is an issue.
 
 ### Konfidence.Integration.TestClasses
-Shared test fixtures/generated SQL used by the `*.Integration.Tests` projects that exercise `Konfidence.SqlHostProvider`/`Konfidence.BaseDataBaseClasses` against a real SQL Server instance.
+Shared test fixtures/generated SQL used by the `*.IntegrationTest` projects that exercise `Konfidence.SqlHostProvider`/`Konfidence.BaseDataBaseClasses` against a real SQL Server instance.
 
 ### Konfidence.UtilHelper
 Some obsolete classes. Technical debt :(
@@ -111,9 +111,10 @@ Some obsolete classes. Technical debt :(
 
 ### Tools/ClientSettingsUpdater
 For me: updates the SqlClientSettings.json in a buildpipeline, keeping secrets out of the git repository. Packed as installable dotnet tool.
-- `ClientSettingsUpdater.Tests`: unit tests for the `ClientSettingsManager` update logic.
+- `ClientSettingsUpdater.UnitTest`: unit tests for the `ClientSettingsManager` update logic.
 
 ### Test
-Per-library unit test projects (`Konfidence.*.Tests`) plus `Test/TestByHandApp`, a small manual/exploratory console app for ad-hoc verification against a live SQL Server.
-- `Konfidence.TestClasses.Tests`: integration tests that run ClassGenerator-generated `Dl.*DataItem` classes (from `Konfidence.Integration.TestClasses`) against a live SQL Server, using `Konfidence.TestTools` to wire up the test configuration/security settings.
-- `Konfidence.SqlDataAccess.Tests`: fast unit tests for `SqlDatabase`/`SqlDatabaseFactory`/`DatabaseSettings` — no live SQL Server needed.
+Per-library unit test projects (`Konfidence.*.UnitTest`) plus `Test/TestByHandApp`, a small manual/exploratory console app for ad-hoc verification against a live SQL Server.
+- `Konfidence.TestClasses.IntegrationTest`: integration tests that run ClassGenerator-generated `Dl.*DataItem` classes (from `Konfidence.Integration.TestClasses`) against a live SQL Server, using `Konfidence.TestTools` to wire up the test configuration/security settings.
+- `Konfidence.SqlDataAccess.UnitTest`: fast unit tests for `SqlDatabase`/`SqlDatabaseFactory`/`DatabaseSettings` — no live SQL Server needed.
+- `Konfidence.SqlHostProvider.UnitTest` / `Konfidence.SqlHostProvider.IntegrationTest`: the former holds fast mocked tests, the latter holds only the live-SQL-Server `DataBaseStructureTests.cs` (`TestCategory("DatabaseStructure")`).

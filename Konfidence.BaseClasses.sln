@@ -41,30 +41,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Tools", ".Tools", "{658C19
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestByHandApp", "Test\TestByHandApp\TestByHandApp.csproj", "{EE8C972B-9A60-4AC5-9792-ACF952EDF104}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.TestClasses.Tests", "Test\Konfidence.TestClasses.Tests\Konfidence.TestClasses.Tests.csproj", "{77A58886-B7F9-4F5E-8088-57DB54799C43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.TestClasses.IntegrationTest", "Test\Konfidence.TestClasses.IntegrationTest\Konfidence.TestClasses.IntegrationTest.csproj", "{77A58886-B7F9-4F5E-8088-57DB54799C43}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider.Tests", "Test\Konfidence.SqlHostProvider.Tests\Konfidence.SqlHostProvider.Tests.csproj", "{A719BAEF-F3F3-4BA6-8C09-6F4CCBC04193}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider.UnitTest", "Test\Konfidence.SqlHostProvider.UnitTest\Konfidence.SqlHostProvider.UnitTest.csproj", "{A719BAEF-F3F3-4BA6-8C09-6F4CCBC04193}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlDataAccess.Tests", "Test\Konfidence.SqlDataAccess.Tests\Konfidence.SqlDataAccess.Tests.csproj", "{0837A45E-0B70-4A81-9602-CF023A56C8F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlHostProvider.IntegrationTest", "Test\Konfidence.SqlHostProvider.IntegrationTest\Konfidence.SqlHostProvider.IntegrationTest.csproj", "{88040F5B-17B6-496B-B042-DC6C5DCD24A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Security.Tests", "Test\Konfidence.Security.Tests\Konfidence.Security.Tests.csproj", "{EF2F9DBD-2435-4379-9024-5531F587539C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.SqlDataAccess.UnitTest", "Test\Konfidence.SqlDataAccess.UnitTest\Konfidence.SqlDataAccess.UnitTest.csproj", "{0837A45E-0B70-4A81-9602-CF023A56C8F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Tests", "Test\Konfidence.BaseDatabaseClasses.Tests\Konfidence.BaseDatabaseClasses.Tests.csproj", "{D5932518-4099-4749-9BE5-CBBD5B4E14D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Security.UnitTest", "Test\Konfidence.Security.UnitTest\Konfidence.Security.UnitTest.csproj", "{EF2F9DBD-2435-4379-9024-5531F587539C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.Integration.Tests", "Test\Konfidence.BaseDatabaseClasses.Integration.Tests\Konfidence.BaseDatabaseClasses.Integration.Tests.csproj", "{71FFB837-A28C-4F6E-8928-05217E1CA303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.UnitTest", "Test\Konfidence.BaseDatabaseClasses.UnitTest\Konfidence.BaseDatabaseClasses.UnitTest.csproj", "{D5932518-4099-4749-9BE5-CBBD5B4E14D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseDatabaseClasses.IntegrationTest", "Test\Konfidence.BaseDatabaseClasses.IntegrationTest\Konfidence.BaseDatabaseClasses.IntegrationTest.csproj", "{71FFB837-A28C-4F6E-8928-05217E1CA303}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2CC07503-FF58-43E0-BCEB-69F7E4D28E3E}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientSettingsUpdater.Tests", "ClientSettingsUpdater.Tests\ClientSettingsUpdater.Tests.csproj", "{62020D65-5793-46FA-A45D-69CFBEF8F5BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientSettingsUpdater.UnitTest", "ClientSettingsUpdater.UnitTest\ClientSettingsUpdater.UnitTest.csproj", "{62020D65-5793-46FA-A45D-69CFBEF8F5BF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.TestTools", "Tools\Konfidence.TestTools\Konfidence.TestTools.csproj", "{53752CB0-A328-4026-885E-3E6987B683DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.Integration.TestClasses", "Test\Konfidence.Integration.TestClasses\Konfidence.Integration.TestClasses.csproj", "{436E7954-4A38-4A22-9323-385FF227AF4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseClasses.Tests", "Test\Konfidence.BaseClasses.Tests\Konfidence.BaseClasses.Tests.csproj", "{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseClasses.UnitTest", "Test\Konfidence.BaseClasses.UnitTest\Konfidence.BaseClasses.UnitTest.csproj", "{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{7DD83A46-7588-4BC5-B0ED-C1FFCCDBC764}"
 	ProjectSection(SolutionItems) = preProject
@@ -167,6 +169,10 @@ Global
 		{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88040F5B-17B6-496B-B042-DC6C5DCD24A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88040F5B-17B6-496B-B042-DC6C5DCD24A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88040F5B-17B6-496B-B042-DC6C5DCD24A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88040F5B-17B6-496B-B042-DC6C5DCD24A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -184,6 +190,7 @@ Global
 		{436E7954-4A38-4A22-9323-385FF227AF4F} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{7E57E6BD-6F4A-492A-BE88-4B86A4A46A2E} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 		{0837A45E-0B70-4A81-9602-CF023A56C8F7} = {AE05D666-5600-4C5A-A903-038C94787EB4}
+		{88040F5B-17B6-496B-B042-DC6C5DCD24A4} = {AE05D666-5600-4C5A-A903-038C94787EB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B102BFD-CA61-4D89-A274-368CA1DF0437}
