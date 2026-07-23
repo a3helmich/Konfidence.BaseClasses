@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using FluentAssertions;
 using Konfidence.Base;
@@ -58,6 +59,45 @@ public class FilePathExtensionsTests
 
         fullFileNames.Should().HaveCount(1);
         fullFileNames[0].Should().EndWith(testFile);
+    }
+
+    [TestMethod]
+    public void TryFindDirectory_DirectoryExistsOneLevelUp_ReturnsTrue()
+    {
+        // Arrange
+        string directoryName = $"TryFindDirectoryTest_{Guid.NewGuid():N}";
+        string parentDirectory = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), ".."));
+        string createdDirectory = Path.Combine(parentDirectory, directoryName);
+
+        Directory.CreateDirectory(createdDirectory);
+
+        try
+        {
+            // Act
+            bool searchResult = directoryName.TryFindDirectory(out string? fullDirectoryName);
+
+            // Assert
+            searchResult.Should().BeTrue();
+            fullDirectoryName.Should().EndWith(directoryName);
+        }
+        finally
+        {
+            Directory.Delete(createdDirectory);
+        }
+    }
+
+    [TestMethod]
+    public void TryFindDirectory_DirectoryDoesNotExist_ReturnsFalse()
+    {
+        // Arrange
+        string directoryName = $"NonExistentDirectory_{Guid.NewGuid():N}";
+
+        // Act
+        bool searchResult = directoryName.TryFindDirectory(out string? fullDirectoryName);
+
+        // Assert
+        searchResult.Should().BeFalse();
+        fullDirectoryName.Should().BeNull();
     }
 
     [TestMethod]

@@ -229,6 +229,49 @@ namespace ClientSettingsUpdater.UnitTest
             account2?.Password.Should().Be("geheim");
         }
 
+        [TestMethod]
+        public void Execute_WithNonExistentConfigFolder_ExitsWith6()
+        {
+            // Arrange
+            // The mocked IErrorExiter doesn't actually terminate the process (unlike the real
+            // Environment.Exit), so Execute() keeps running afterwards and hits a real
+            // DirectoryNotFoundException when it tries to enumerate the non-existent folder.
+            Mock<IErrorExiter> errorExiterMock = new();
+            string nonExistentFolder = Path.Combine(Path.GetTempPath(), $"NonExistentFolder_{Guid.NewGuid():N}");
+            ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}={nonExistentFolder}", $"--{Argument.UserName}=Adrie", $"--{Argument.Password}=geheim"], errorExiterMock.Object);
+
+            // Act
+            Action action = () => clientSettingsManager.Execute();
+
+            // Assert
+            action.Should().Throw<DirectoryNotFoundException>();
+            errorExiterMock.Verify(x => x.Exit(6), Times.Once);
+        }
+
+        [TestMethod]
+        public void Execute_WithNoMatchingConfigFile_ExitsWith7()
+        {
+            // Arrange
+            Mock<IErrorExiter> errorExiterMock = new();
+            string emptyFolder = Path.Combine(Path.GetTempPath(), $"EmptyFolder_{Guid.NewGuid():N}");
+            Directory.CreateDirectory(emptyFolder);
+
+            try
+            {
+                ClientSettingsManager clientSettingsManager = new([$"--{Argument.ConfigFileFolder}={emptyFolder}", $"--{Argument.ConfigFileName}=DoesNotExist.json", $"--{Argument.UserName}=Adrie", $"--{Argument.Password}=geheim"], errorExiterMock.Object);
+
+                // Act
+                clientSettingsManager.Execute();
+
+                // Assert
+                errorExiterMock.Verify(x => x.Exit(7), Times.Once);
+            }
+            finally
+            {
+                Directory.Delete(emptyFolder);
+            }
+        }
+
         private static MailAccounts? ReadMailConfig()
         {
             return File.ReadAllText(MailConstants.DefaultMailServerConfigFileName).Deserialize(out MailAccounts? mailAccounts) 

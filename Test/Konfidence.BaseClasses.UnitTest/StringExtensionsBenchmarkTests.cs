@@ -10,7 +10,7 @@ namespace Konfidence.BaseClasses.UnitTest
     public class StringExtensionsBenchmark
     {
         [Benchmark]
-        public void InitUpperCaseBenchmark()
+        public static void InitUpperCaseBenchmark()
         {
             // Arrange
             const string word = "hello";
@@ -26,7 +26,7 @@ namespace Konfidence.BaseClasses.UnitTest
         // Additional benchmarks can be added here
 
         [TestMethod]
-        [Ignore]
+        [Ignore("Only run manually")]
         public void RunBenchmark()
         {
             BenchmarkRunner.Run<StringExtensionsBenchmark>();

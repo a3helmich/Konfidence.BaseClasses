@@ -58,7 +58,7 @@ namespace Konfidence.Security.Encryption
         private void Dispose(bool disposing)
         {
 
-            if (!_disposed)
+            if (_disposed)
             {
                 return;
             }
