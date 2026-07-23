@@ -8,6 +8,7 @@
     <AssemblyCompany>Konfidence in it</AssemblyCompany>
 		<TargetFrameworks>net9.0;net10.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
+		<TestTfmsInParallel>false</TestTfmsInParallel>
 	  <Nullable>enable</Nullable>
 	  <ImplicitUsings>disable</ImplicitUsings>
 
