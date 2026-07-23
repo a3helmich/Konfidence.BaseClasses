@@ -62,7 +62,7 @@ namespace Konfidence.Mail
 			}
 			catch (Exception exception)
 			{
-				Debug.WriteLine($"BaseMailSender.SendEmail failed: {exception}");
+				Trace.WriteLine($"BaseMailSender.SendEmail failed: {exception}");
 
 				return false;
 			}

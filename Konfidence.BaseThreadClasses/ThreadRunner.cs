@@ -39,7 +39,7 @@ namespace Konfidence.BaseThreadClasses
                 }
                 catch (Exception exception)
                 {
-                    Debug.WriteLine($"ThreadRunner action threw an exception: {exception}");
+                    Trace.WriteLine($"ThreadRunner action threw an exception: {exception}");
                 }
 
                 SleepThread(_sleepTime, _sleepUnit);
