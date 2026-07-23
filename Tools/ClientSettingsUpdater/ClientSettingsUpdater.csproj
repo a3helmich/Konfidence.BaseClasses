@@ -19,4 +19,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="ClientSettingsUpdater.UnitTest" />
+  </ItemGroup>
+
 </Project>

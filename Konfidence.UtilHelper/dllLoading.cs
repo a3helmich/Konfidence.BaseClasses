@@ -8,11 +8,11 @@ namespace Konfidence.UtilHelper
     internal class Dll
     {
         /// <summary>
-        /// To load the dll - dllFilePath dosen't have to be const - so I can read path from registry
+        /// To load the dll - dllFilePath doesn't have to be const - so I can read path from registry
         /// </summary>
         /// <param name="dllFilePath">file path with file name</param>
         /// <param name="hFile">use IntPtr.Zero</param>
-        /// <param name="dwFlags">What will happend during loading dll
+        /// <param name="dwFlags">What will happen during loading dll
         /// <para>LOAD_LIBRARY_AS_DATAFILE</para>
         /// <para>DONT_RESOLVE_DLL_REFERENCES</para>
         /// <para>LOAD_WITH_ALTERED_SEARCH_PATH</para>
@@ -30,7 +30,7 @@ namespace Konfidence.UtilHelper
         [DllImport("kernel32.dll")]
         [UsedImplicitly]
         public static extern bool FreeLibrary(IntPtr dllPointer);
- 
+
         /// <summary>
         /// To get function pointer from loaded dll 
         /// </summary>
@@ -46,7 +46,7 @@ namespace Konfidence.UtilHelper
         private const uint LOAD_WITH_ALTERED_SEARCH_PATH = 0x00000008;
 
         /// <summary>
-        /// This will to load concret dll file
+        /// This will to load concrete dll file
         /// </summary>
         /// <param name="dllFilePath">Dll file path</param>
         /// <returns>Pointer to loaded dll</returns>
@@ -56,15 +56,18 @@ namespace Konfidence.UtilHelper
         public static IntPtr LoadWin32Library(string dllFilePath)
         {
             IntPtr moduleHandle = LoadLibraryEx(dllFilePath, IntPtr.Zero, LOAD_WITH_ALTERED_SEARCH_PATH);
-            if (moduleHandle == IntPtr.Zero)
+
+            if (moduleHandle != IntPtr.Zero)
             {
-                // I'm gettin last dll error
-                int errorCode = Marshal.GetLastWin32Error();
-                throw new ApplicationException(
-                    $"There was an error during dll loading : {dllFilePath}, error - {errorCode}"
-                );
+                return moduleHandle;
             }
-            return moduleHandle;
+
+            // I'm getting last dll error
+            int errorCode = Marshal.GetLastWin32Error();
+
+            throw new ApplicationException(
+                $"There was an error during dll loading : {dllFilePath}, error - {errorCode}"
+            );
         }
     }
 
@@ -74,14 +77,14 @@ namespace Konfidence.UtilHelper
     [UsedImplicitly]
     public class TestDll
     {
-        private static IntPtr _myDll ;
- 
-        public  static void InitializeMyDll()
+        private static IntPtr _myDll;
+
+        public static void InitializeMyDll()
         {
             try
             {
                 _myDll = Dll.LoadWin32Library("path to my dll with file path name");
-                // here you can add, dl version check
+                // here you can add, dll version check
             }
             catch (ApplicationException exc)
             {
@@ -90,18 +93,19 @@ namespace Konfidence.UtilHelper
                 throw;
             }
         }
- 
-// The last thing is to create delegate to calling function
- 
-// delegate must to have the same parameter then calling function (from dll)
+
+        // The last thing is to create delegate to calling function
+
+        // delegate must to have the same parameter then calling function (from dll)
         public delegate int DllFunctionDelegate(int a, string b);
-// public delegate RETURN_TYPE DllFunctionDelegate(int a, string b);
+
+        // public delegate RETURN_TYPE DllFunctionDelegate(int a, string b);
         public static int FunctionName(int a, string b)
-//public static RETURN_TYPE functionName(int a, string b)
+        //public static RETURN_TYPE functionName(int a, string b)
         {
             if (_myDll == IntPtr.Zero)
                 InitializeMyDll();
-            IntPtr pProc = Dll.GetProcAddress(_myDll , "CallingFunctionNameFromCallingDllFile");
+            IntPtr pProc = Dll.GetProcAddress(_myDll, "CallingFunctionNameFromCallingDllFile");
             DllFunctionDelegate cpv = (DllFunctionDelegate)Marshal.GetDelegateForFunctionPointer(pProc, typeof(DllFunctionDelegate));
             // Now i'm calling delegate, with is calling function from dll file 
             return cpv(1, "Test");
@@ -109,7 +113,6 @@ namespace Konfidence.UtilHelper
 
         // Now if you want to call dll function from program code use this
         // for ex. you want to call c++ function RETURN_TYPE CallingFunctionNameFromCallingDllFile(int nID, LPSTR lpstrName);
-
 
         [UsedImplicitly]
         private void Test()

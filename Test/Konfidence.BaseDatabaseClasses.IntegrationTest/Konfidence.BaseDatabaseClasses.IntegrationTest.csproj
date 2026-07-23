@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+		<TargetFrameworks>net10.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Castle.Core" Version="5.2.1" />
+		<PackageReference Include="coverlet.collector" Version="10.0.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="FluentAssertions" Version="8.10.0" />
+		<PackageReference Include="Moq" Version="4.20.72" />
+		<PackageReference Include="MSTest.TestAdapter" Version="4.3.0" />
+		<PackageReference Include="MSTest.TestFramework" Version="4.3.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="SqlClientSettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Tools\Konfidence.TestTools\Konfidence.TestTools.csproj" />
+		<ProjectReference Include="..\Konfidence.Integration.TestClasses\Konfidence.Integration.TestClasses.csproj" />
+	</ItemGroup>
+</Project>

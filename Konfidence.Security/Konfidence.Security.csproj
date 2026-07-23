@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Konfidence.Security.UnitTest" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
 </Project>
