@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -9,7 +11,7 @@ using RestSharp;
 namespace Konfidence.BaseRest.Client
 {
     [UsedImplicitly]
-    public class BaseRestClient : IBaseRestClient
+    public class BaseRestClient : IBaseRestClient, IDisposable
     {
         private RestClient RestClient { get; }
 
@@ -20,17 +22,22 @@ namespace Konfidence.BaseRest.Client
             RestClient = new RestClient(restClientOptions);
         }
 
-        public async Task<T?> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string>? headerParameters = null) where T : notnull, new()
+        public void Dispose()
         {
-            return await ExecuteMethodAsync<T>(relativePath, Method.Post, requestObject, headerParameters);
+            RestClient.Dispose();
         }
 
-        public async Task<T?> GetAsync<T>(string relativePath) where T : notnull, new()
+        public async Task<T?> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string>? headerParameters = null, CancellationToken cancellationToken = default) where T : notnull, new()
         {
-            return await ExecuteMethodAsync<T>(relativePath, Method.Get);
+            return await ExecuteMethodAsync<T>(relativePath, Method.Post, requestObject, headerParameters, cancellationToken);
         }
 
-        private async Task<T?> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, object? requestObject = null, Dictionary<string, string>? headerParameters = null) where T : notnull, new()
+        public async Task<T?> GetAsync<T>(string relativePath, CancellationToken cancellationToken = default) where T : notnull, new()
+        {
+            return await ExecuteMethodAsync<T>(relativePath, Method.Get, cancellationToken: cancellationToken);
+        }
+
+        private async Task<T?> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, object? requestObject = null, Dictionary<string, string>? headerParameters = null, CancellationToken cancellationToken = default) where T : notnull, new()
         {
             RestRequest request = new()
             {
@@ -52,9 +59,9 @@ namespace Konfidence.BaseRest.Client
                 }
             }
 
-            RestResponse<T> response = await RestClient.ExecuteAsync<T>(request);
+            RestResponse<T> response = await RestClient.ExecuteAsync<T>(request, cancellationToken);
 
-            if (response.ResponseStatus == ResponseStatus.Error)
+            if (response.ResponseStatus != ResponseStatus.Completed)
             {
                 if (!response.ErrorException.IsAssigned())
                 {

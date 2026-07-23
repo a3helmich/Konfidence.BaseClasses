@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using Konfidence.Base;
 using Konfidence.BaseData;
 using Konfidence.DatabaseInterface;
 
@@ -26,8 +27,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
 
         public string TableName { get; private set; } = string.Empty;
 
-        //private int _ordinalPosition;
-
         public string SqlDataType { get; private set; } = string.Empty;
 
         public string DataType { get; private set; } = string.Empty;
@@ -39,42 +38,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
         public string NewGuidPropertyValue { get; private set; } = string.Empty;
 
         public string CharacterMaximumLength { get; private set; } = string.Empty;
-
-        //        if (tableName.Equals(_TableName))
-        //        {
-        //            string columnName = dataRow["COLUMN_NAME"] as string;
-
-        //            columnDataItem = new ColumnDataItem(columnName);
-
-        //            string columnDefault = dataRow["COLUMN_DEFAULT"] as string;
-        //            string dataType = dataRow["DATA_TYPE"] as string;
-        //            string characterMaximumLength = string.Empty;
-        //            if (dataType.Equals("varchar") || dataType.Equals("char"))
-        //            {
-        //                int charLength = (int)dataRow["CHARACTER_MAXIMUM_LENGTH"];
-        //                characterMaximumLength = charLength.ToString();
-        //            }
-
-        //            columnDataItem.ColumnDefault = columnDefault;
-        //            columnDataItem.DataType = dataType;
-        //            columnDataItem.CharacterMaximumLength = characterMaximumLength;
-
-        //            /*
-        //            bool isNullable = (bool)dataRow["IS_NULLABLE"];
-        //            int characterMaximumLength = (int)dataRow["CHARACTER_MAXIMUM_LENGTH"];
-        //            int characterOctetLength = (int)dataRow["CHARACTER_OCTET_LENGTH"];
-        //            int numericPrecision = (int)dataRow["NUMERIC_PRECISION"];
-        //            int numericPrecisionRadix = (int)dataRow["NUMERIC_PRECISION_RADIX"];
-        //            int numericScale = (int)dataRow["NUMERIC_SCALE"];
-        //            int dateTimePrecision = (int)dataRow["DATETIME_PRECISION"];
-        //            string characterSetCatalog = dataRow["CHARACTER_SET_CATALOG"] as string;
-        //            string characterSetSchema = dataRow["CHARACTER_SET_SCHEMA"] as string;
-        //            string characterSetName = dataRow["CHARACTER_SET_NAME"] as string;
-        //            string collationCatalog = dataRow["COLLATION_CATALOG"] as string;
-
-        //            this.Add(columnDataItem);
-        //        }
-        //============================================   <<<<<<
 
         public ColumnDataItem()
         {
@@ -129,7 +92,6 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             TableName = tableName;
             IsDefaulted = defaultObjectId > 0;
             IsComputed = isComputed;
-            //_ordinalPosition = ordinalPosition;
             SqlDataType = dataType;
             CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
 
@@ -191,7 +153,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return dataType;
         }
 
-        private string GetDbDataType(string dataType)
+        internal string GetDbDataType(string dataType)
         {
             if (dataType.Equals("int", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -223,9 +185,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
                 dataType = "Boolean";
             }
 
-            dataType = char.ToUpper(dataType[0]) + dataType.TrimStart(dataType[0]);
-
-            return dataType;
+            return dataType.InitUpperCase();
         }
 
         private static string GetDefaultPropertyValue(string dataType, string newValue)

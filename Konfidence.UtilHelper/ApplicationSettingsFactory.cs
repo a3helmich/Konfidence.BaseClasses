@@ -2,37 +2,48 @@ using JetBrains.Annotations;
 
 namespace Konfidence.UtilHelper
 {
-    public static class ApplicationSettingsFactory 
+    public static class ApplicationSettingsFactory
     {
         private static string _rootPath = string.Empty;
 
         [UsedImplicitly]
         public static IApplicationSettings ApplicationSettings(string application, string rootPath)
         {
-            _rootPath = rootPath;
+            string normalizedRootPath = NormalizeRootPath(rootPath);
 
-            if (!_rootPath.EndsWith(@"\"))
-            {
-                _rootPath += @"\";
-            }
+            _rootPath = normalizedRootPath;
 
-            if (!_rootPath.EndsWith(@"settings\"))
-            {
-                _rootPath += @"settings\";
-            }
-
-            return ApplicationSettings(application);
+            return CreateApplicationSettings(application, normalizedRootPath);
         }
 
         public static IApplicationSettings ApplicationSettings(string application)
         {
-            ApplicationSettings applicationSettings = new(application)
+            return CreateApplicationSettings(application, _rootPath);
+        }
+
+        private static ApplicationSettings CreateApplicationSettings(string application, string rootPath)
+        {
+            return new ApplicationSettings(application)
             {
-                RootPath = _rootPath
-            }; 
+                RootPath = rootPath
+            };
+        }
 
+        private static string NormalizeRootPath(string rootPath)
+        {
+            string normalizedRootPath = rootPath;
 
-            return applicationSettings;
+            if (!normalizedRootPath.EndsWith(@"\"))
+            {
+                normalizedRootPath += @"\";
+            }
+
+            if (!normalizedRootPath.EndsWith(@"settings\"))
+            {
+                normalizedRootPath += @"settings\";
+            }
+
+            return normalizedRootPath;
         }
     }
 }

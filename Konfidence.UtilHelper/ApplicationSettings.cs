@@ -62,6 +62,8 @@ namespace Konfidence.UtilHelper
 
         public void Flush()
         {
+            _ = ElementList;
+
             _xmlDocument.Save(_fileName);
         }
 

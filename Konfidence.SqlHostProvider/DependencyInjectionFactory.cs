@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using Konfidence.Base;
 using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -24,12 +22,9 @@ namespace Konfidence.SqlHostProvider
                 .Build();
         }
 
-        private static string GetApplicationPath()
+        internal static string GetApplicationPath()
         {
-            Assembly assembly = Assembly.GetCallingAssembly();
-            string directoryName = Path.GetDirectoryName(assembly.Location) ?? string.Empty;
-
-            return directoryName;
+            return AppContext.BaseDirectory;
         }
 
         public static IServiceProvider ConfigureDependencyInjection(params string[] args)

@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using JetBrains.Annotations;
@@ -29,38 +31,41 @@ namespace Konfidence.Mail
 		
 		public bool SendEmail(string toEmailAddress, string subject, string mailBody, bool bodyIsHtml, string fileName)
 		{
-		    MailAddress mailFrom = new(_fromAddress);
-			MailAddress mailTo = new(toEmailAddress);
-
-			MailMessage mailMessage = new(mailFrom, mailTo);
-			SmtpClient smtpClient = new(_mailHost);
-
-			mailMessage.Body = mailBody;
-			mailMessage.IsBodyHtml = bodyIsHtml;
-
-			mailMessage.Subject = subject;
-
-            if (fileName.IsAssigned())
-            {
-                Attachment attachment = new(fileName);
-
-                mailMessage.Attachments.Add(attachment);
-            }
-
-			NetworkCredential basicAuthenticationInfo = new(_mailUser, _mailPassword);
-
-			smtpClient.UseDefaultCredentials = false;
-			smtpClient.Credentials = basicAuthenticationInfo;
-
 			try
 			{
+				MailAddress mailFrom = new(_fromAddress);
+				MailAddress mailTo = new(toEmailAddress);
+
+				using MailMessage mailMessage = new(mailFrom, mailTo)
+				{
+					Body = mailBody,
+					IsBodyHtml = bodyIsHtml,
+					Subject = subject
+				};
+
+				using Attachment? attachment = fileName.IsAssigned() ? new Attachment(fileName) : null;
+
+				if (attachment.IsAssigned())
+				{
+					mailMessage.Attachments.Add(attachment);
+				}
+
+				using SmtpClient smtpClient = new(_mailHost)
+				{
+					UseDefaultCredentials = false,
+					Credentials = new NetworkCredential(_mailUser, _mailPassword)
+				};
+
 				smtpClient.Send(mailMessage);
+
+				return true;
 			}
-			catch  
+			catch (Exception exception)
 			{
+				Trace.WriteLine($"BaseMailSender.SendEmail failed: {exception}");
+
 				return false;
 			}
-			return true;
 		}
 	}
 }
