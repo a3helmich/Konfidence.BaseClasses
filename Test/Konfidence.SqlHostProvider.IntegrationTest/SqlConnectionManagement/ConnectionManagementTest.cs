@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ConfigurationBuilder = Microsoft.Extensions.Configuration.ConfigurationBuilder;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
-namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement
+namespace Konfidence.SqlHostProvider.IntegrationTest.SqlConnectionManagement
 {
     [TestClass]
     public class ConnectionManagementTest

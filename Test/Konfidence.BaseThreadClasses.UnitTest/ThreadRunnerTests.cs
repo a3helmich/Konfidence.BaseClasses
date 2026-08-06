@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -72,15 +73,15 @@ public class ThreadRunnerTests
 
     private sealed class TestTraceListener : TraceListener
     {
-        private readonly List<string> _messages = [];
+        private readonly ConcurrentQueue<string> _messages = new();
 
-        public IReadOnlyList<string> Messages => _messages;
+        public IReadOnlyList<string> Messages => [.. _messages];
 
         public override void Write(string? message)
         {
             if (message is not null)
             {
-                _messages.Add(message);
+                _messages.Enqueue(message);
             }
         }
 
@@ -88,7 +89,7 @@ public class ThreadRunnerTests
         {
             if (message is not null)
             {
-                _messages.Add(message);
+                _messages.Enqueue(message);
             }
         }
     }
