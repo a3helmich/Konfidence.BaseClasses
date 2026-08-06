@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.SqlHostProvider.UnitTest;
+namespace Konfidence.SqlHostProvider.IntegrationTest;
 
 [TestClass]
 public class DependencyInjectionFactoryTests

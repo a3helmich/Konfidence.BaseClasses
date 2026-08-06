@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace Konfidence.SqlHostProvider.UnitTest.SqlAccess;
+namespace Konfidence.SqlHostProvider.IntegrationTest.SqlAccess;
 
 [TestClass]
 public class SqlClientRepositoryTests
