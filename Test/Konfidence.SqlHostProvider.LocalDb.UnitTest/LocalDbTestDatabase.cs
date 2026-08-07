@@ -21,6 +21,12 @@ namespace Konfidence.SqlHostProvider.LocalDb.UnitTest;
 /// TestTfmsInParallel=false only affects the `dotnet test` CLI's own cross-targeting dispatch, not
 /// e.g. ReSharper's/Visual Studio's independent test-runner process model), so per-process
 /// isolation is the only fully race-free option.
+///
+/// If the local SQL Server engine can't open the checked-in snapshot at all (e.g. it was created
+/// by a newer SQL Server release than the engine running these tests supports - database files
+/// are one-way forward-compatible only), setup failure is recorded here instead of thrown, and
+/// LocalDbTestBase.SkipIfSetupFailed() reports every test as Inconclusive with a clear reason
+/// instead of failing the whole assembly.
 /// </summary>
 [TestClass]
 public sealed class LocalDbTestDatabase
@@ -32,44 +38,54 @@ public sealed class LocalDbTestDatabase
 
     private static string? _workingDirectory;
 
+    internal static Exception? SetupFailure { get; private set; }
+
     [AssemblyInitialize]
     public static void AssemblyInitialize(TestContext _)
     {
-        _workingDirectory = Path.Combine(Path.GetTempPath(), "Konfidence.SqlHostProvider.LocalDb.UnitTest", Guid.NewGuid().ToString("N"));
-        Directory.CreateDirectory(_workingDirectory);
-
-        string sourceMdf = Path.Combine(AppContext.BaseDirectory, "TestData", "TestClassGenerator.mdf");
-        string sourceLdf = Path.Combine(AppContext.BaseDirectory, "TestData", "TestClassGenerator_log.ldf");
-
-        string mdfPath = Path.Combine(_workingDirectory, "TestClassGenerator.mdf");
-        string ldfPath = Path.Combine(_workingDirectory, "TestClassGenerator_log.ldf");
-
-        File.Copy(sourceMdf, mdfPath);
-        File.Copy(sourceLdf, ldfPath);
-
-        using (SqlConnection master = new(MasterConnectionString))
+        try
         {
-            master.Open();
+            _workingDirectory = Path.Combine(Path.GetTempPath(), "Konfidence.SqlHostProvider.LocalDb.UnitTest", Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(_workingDirectory);
 
-            using SqlCommand attachCommand = new(
-                $"""
-                 CREATE DATABASE [{DatabaseName}] ON PRIMARY (FILENAME = N'{mdfPath}')
-                 LOG ON (FILENAME = N'{ldfPath}')
-                 FOR ATTACH
-                 """,
-                master);
+            string sourceMdf = Path.Combine(AppContext.BaseDirectory, "TestData", "TestClassGenerator.mdf");
+            string sourceLdf = Path.Combine(AppContext.BaseDirectory, "TestData", "TestClassGenerator_log.ldf");
 
-            attachCommand.ExecuteNonQuery();
+            string mdfPath = Path.Combine(_workingDirectory, "TestClassGenerator.mdf");
+            string ldfPath = Path.Combine(_workingDirectory, "TestClassGenerator_log.ldf");
+
+            File.Copy(sourceMdf, mdfPath);
+            File.Copy(sourceLdf, ldfPath);
+
+            using (SqlConnection master = new(MasterConnectionString))
+            {
+                master.Open();
+
+                using SqlCommand attachCommand = new(
+                    $"""
+                     CREATE DATABASE [{DatabaseName}] ON PRIMARY (FILENAME = N'{mdfPath}')
+                     LOG ON (FILENAME = N'{ldfPath}')
+                     FOR ATTACH
+                     """,
+                    master);
+
+                attachCommand.ExecuteNonQuery();
+            }
+
+            RewriteConnectionSettings();
         }
-
-        RewriteConnectionSettings();
+        catch (Exception exception)
+        {
+            SetupFailure = exception;
+        }
     }
 
     [AssemblyCleanup]
     public static void AssemblyCleanup()
     {
-        using (SqlConnection master = new(MasterConnectionString))
+        if (SetupFailure is null)
         {
+            using SqlConnection master = new(MasterConnectionString);
             master.Open();
 
             using SqlCommand detachCommand = new(
@@ -112,5 +128,22 @@ public sealed class LocalDbTestDatabase
               """;
 
         File.WriteAllText(settingsPath, json);
+    }
+}
+
+/// <summary>
+/// Base class for test classes that depend on LocalDbTestDatabase's attached snapshot. Reports
+/// every test in a derived class as Inconclusive (not Failed) when the local SQL Server engine
+/// couldn't open the checked-in snapshot, instead of letting the whole assembly hard-fail.
+/// </summary>
+public abstract class LocalDbTestBase
+{
+    [TestInitialize]
+    public void SkipIfSetupFailed()
+    {
+        if (LocalDbTestDatabase.SetupFailure is { } failure)
+        {
+            Assert.Inconclusive($"Skipped: could not attach the LocalDB test database snapshot in this environment - {failure.Message}");
+        }
     }
 }
