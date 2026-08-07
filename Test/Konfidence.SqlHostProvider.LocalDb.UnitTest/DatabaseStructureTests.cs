@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Konfidence.SqlHostProvider.LocalDb.UnitTest;
 
 [TestClass]
-public class DatabaseStructureTests : LocalDbTestBase
+public class DatabaseStructureTests
 {
     [TestMethod]
     public void BuildStructure_TestClassGeneratorDatabase_GeneratesStructureForAllTables()
