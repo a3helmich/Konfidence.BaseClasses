@@ -8,4 +8,8 @@
     <InternalsVisibleTo Include="Konfidence.UtilHelper.UnitTest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
+  </ItemGroup>
+
 </Project>
