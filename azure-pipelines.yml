@@ -85,13 +85,14 @@ steps:
   inputs:
     command: test
     projects: '**\Konfidence.BaseClasses.sln'
-    # Konfidence.SqlHostProvider.LocalDb.UnitTest exists to give GitHub Actions SQL-touching
-    # coverage it otherwise can't reach (it excludes *.IntegrationTest.csproj, and this agent's
-    # Windows-service session can't run SQL Server LocalDB - see LocalDbTestDatabase.cs). This
-    # agent already covers that surface via the real *.IntegrationTest projects below, so the
-    # LocalDb project is filtered out here rather than made to pass under a constraint it can't
-    # meet.
-    arguments: '-c $(BuildConfiguration) --no-build --verbosity normal --filter "FullyQualifiedName!~SqlHostProvider.LocalDb.UnitTest" --collect:"XPlat Code Coverage" --settings coverlet.runsettings'
+    # The *.LocalDb.UnitTest projects (Konfidence.SqlHostProvider.LocalDb.UnitTest,
+    # Konfidence.BaseDatabaseClasses.LocalDb.UnitTest, Konfidence.TestClasses.LocalDb.UnitTest)
+    # exist to give GitHub Actions SQL-touching coverage it otherwise can't reach (it excludes
+    # *.IntegrationTest.csproj, and this agent's Windows-service session can't run SQL Server
+    # LocalDB - see LocalDbTestDatabase.cs in each project). This agent already covers that
+    # surface via the real *.IntegrationTest projects below, so LocalDb projects are filtered out
+    # here rather than made to pass under a constraint they can't meet.
+    arguments: '-c $(BuildConfiguration) --no-build --verbosity normal --filter "FullyQualifiedName!~LocalDb.UnitTest" --collect:"XPlat Code Coverage" --settings coverlet.runsettings'
     publishTestResults: true
 
 - template: GenerateAndPublishCodeCoverage.yml@templates
