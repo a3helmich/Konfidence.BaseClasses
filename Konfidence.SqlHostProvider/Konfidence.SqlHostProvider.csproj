@@ -16,6 +16,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Konfidence.SqlHostProvider.UnitTest" />
     <InternalsVisibleTo Include="Konfidence.SqlHostProvider.IntegrationTest" />
+    <InternalsVisibleTo Include="Konfidence.SqlHostProvider.LocalDb.UnitTest" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 

@@ -134,6 +134,89 @@ namespace Konfidence.Security.UnitTest
         }
 
         [TestMethod]
+        public void ReadKey_WhenProviderAssigned_LoadsTheGivenKey()
+        {
+            // Arrange
+            using TestContext source = CreateContext(PlatformID.Win32NT);
+            string sourcePrivateKey = source.KeyEncryption.PrivateKey;
+
+            using TestContext target = CreateContext(PlatformID.Win32NT);
+            _ = target.KeyEncryption.PublicKey;
+
+            // Act
+            target.KeyEncryption.ReadKey(sourcePrivateKey);
+
+            // Assert
+            target.KeyEncryption.PrivateKey.Should().Be(sourcePrivateKey);
+        }
+
+        [TestMethod]
+        public void Constructor_WithNamedContainer_CreatesAndPersistsAKey()
+        {
+            // Arrange
+            string containerName = $"KonfidenceTestContainer_{Guid.NewGuid():N}";
+            Mock<ISecurityConfiguration> configurationMock = new();
+            configurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32NT);
+
+            using KeyEncryption keyEncryption = new(containerName, configurationMock.Object);
+
+            try
+            {
+                // Act
+                string publicKey = keyEncryption.PublicKey;
+
+                // Assert
+                publicKey.Should().NotBeNullOrEmpty();
+                publicKey.Should().Contain("RSAKeyValue");
+            }
+            finally
+            {
+                keyEncryption.Delete();
+            }
+        }
+
+        [TestMethod]
+        public void Constructor_WithNamedContainerAndDifferentKeySizeThanExisting_RecreatesTheContainer()
+        {
+            // Arrange
+            string containerName = $"KonfidenceTestContainer_{Guid.NewGuid():N}";
+
+            Mock<ISecurityConfiguration> smallKeyConfigurationMock = new();
+            smallKeyConfigurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32Windows);
+
+            Mock<ISecurityConfiguration> largeKeyConfigurationMock = new();
+            largeKeyConfigurationMock.Setup(x => x.OSVersionPlatform).Returns(PlatformID.Win32NT);
+
+            using KeyEncryption first = new(containerName, smallKeyConfigurationMock.Object);
+            _ = first.PublicKey;
+
+            try
+            {
+                // Act
+                using KeyEncryption second = new(containerName, largeKeyConfigurationMock.Object);
+
+                try
+                {
+                    // Assert
+                    // Windows reuses an existing named key regardless of the requested size, so the
+                    // second construction's RsaProvider.KeySize (384, from the first instance) no
+                    // longer matches its own _maxBytesServer (computed from Win32NT), forcing the
+                    // delete-and-recreate branch in GetKeyContainer().
+                    second.RsaProvider.Should().NotBeNull();
+                    second.RsaProvider!.KeySize.Should().Be(1024);
+                }
+                finally
+                {
+                    second.Delete();
+                }
+            }
+            finally
+            {
+                first.Delete();
+            }
+        }
+
+        [TestMethod]
         public void Dispose_CalledTwice_DoesNotThrow()
         {
             // Arrange

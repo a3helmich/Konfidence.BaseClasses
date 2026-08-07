@@ -12,13 +12,15 @@ namespace Konfidence.Mail
 	{
         private readonly string _fromAddress;
         private readonly string _mailHost;
+        private readonly int _mailPort;
         private readonly string _mailUser;
         private readonly string _mailPassword;
 
-	    public BaseMailSender(string fromAddress, string mailHost, string mailUser, string mailPassword)
+	    public BaseMailSender(string fromAddress, string mailHost, string mailUser, string mailPassword, int mailPort = 25)
         {
             _fromAddress = fromAddress;
             _mailHost = mailHost;
+            _mailPort = mailPort;
             _mailUser = mailUser;
             _mailPassword = mailPassword;
         }
@@ -50,7 +52,7 @@ namespace Konfidence.Mail
 					mailMessage.Attachments.Add(attachment);
 				}
 
-				using SmtpClient smtpClient = new(_mailHost)
+				using SmtpClient smtpClient = new(_mailHost, _mailPort)
 				{
 					UseDefaultCredentials = false,
 					Credentials = new NetworkCredential(_mailUser, _mailPassword)

@@ -1,0 +1,15 @@
+{
+  "DataConfiguration": {
+    "DefaultDatabase": "TestClassGenerator",
+    "UseEnvironmentSetting": false,
+    "Connections": [
+      {
+        "ConnectionName": "TestClassGenerator",
+        "Server": "(localdb)\\MSSQLLocalDB",
+        "Database": "TestClassGenerator",
+        "UserName": "",
+        "Password": ""
+      }
+    ]
+  }
+}
