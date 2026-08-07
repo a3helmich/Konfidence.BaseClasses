@@ -106,7 +106,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             IsGuidField = SqlDataType.Equals("uniqueidentifier", StringComparison.InvariantCultureIgnoreCase);
         }
 
-        private static string GetDataType(string dataType)
+        internal static string GetDataType(string dataType)
         {
             dataType = dataType.ToLower();
 
@@ -188,7 +188,7 @@ namespace Konfidence.SqlHostProvider.SqlDbSchema
             return dataType.InitUpperCase();
         }
 
-        private static string GetDefaultPropertyValue(string dataType, string newValue)
+        internal static string GetDefaultPropertyValue(string dataType, string newValue)
         {
             string defaultPropertyValuelinePart = string.Empty;
 

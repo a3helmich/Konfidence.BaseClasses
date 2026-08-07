@@ -5,11 +5,13 @@ using System.Data.Common;
 using FluentAssertions;
 using Konfidence.DatabaseInterface;
 using Konfidence.SqlDataAccess;
+using Konfidence.SqlHostProvider;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Konfidence.TestTools;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -119,6 +121,59 @@ public class SqlClientRepositoryTests
         {
             SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
         }
+    }
+
+    [TestMethod]
+    public void GetDatabase_WithNoMatchingConnectionAndEmptyAppConfigDefault_Throws()
+    {
+        // Arrange
+        SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+        ConnectionManagement.SetActiveConnection(string.Empty);
+
+        ClientConfig clientConfig = new(new ConfigurationBuilder().Build())
+        {
+            DefaultDatabase = "AlsoNonExistentConnectionName"
+        };
+
+        SqlClientRepository repository = new(clientConfig);
+
+        try
+        {
+            // Act
+            Action action = () => repository.GetDatabase();
+
+            // Assert
+            action.Should().Throw<InvalidOperationException>().WithMessage("No connection could be resolved*");
+        }
+        finally
+        {
+            SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+        }
+    }
+
+    [TestMethod]
+    public void ExecuteCommandStoredProcedure_Always_ReturnsRowsAffected()
+    {
+        // Arrange
+        SqlTestToolExtensions.CopySqlSettingsToActiveConfiguration();
+        SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestClassGenerator");
+
+        IServiceProvider serviceProvider = DependencyInjectionFactory.ConfigureDependencyInjection("--DefaultDatabase=TestClassGenerator");
+        IClientConfig clientConfig = serviceProvider.GetRequiredService<IClientConfig>();
+        SqlClientRepository repository = new(clientConfig);
+
+        Mock<ISpParameterData> idParameterMock = new();
+        idParameterMock.Setup(x => x.ParameterName).Returns("Id");
+        idParameterMock.Setup(x => x.DbType).Returns(DbType.Int32);
+        idParameterMock.Setup(x => x.Value).Returns(int.MaxValue);
+
+        // Act
+        int rowsAffected = repository.ExecuteCommandStoredProcedure("gen_TestInt_DeleteRow", [idParameterMock.Object]);
+
+        // Assert
+        // No row exists with this Id, so nothing is actually deleted - this only confirms the
+        // stored procedure executes end-to-end and reports a rows-affected count.
+        rowsAffected.Should().Be(0);
     }
 
     [TestMethod]
