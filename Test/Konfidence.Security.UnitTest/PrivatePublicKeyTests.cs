@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.Security.Encryption;
@@ -12,16 +13,20 @@ namespace Konfidence.Security.UnitTest
     [TestClass]
     public class PrivatePublicKeyTest
     {
-        private const string APPLICATION_NAME = "TestRegistration";
-
         [TestMethod]
         public void Constructor_CalledTwice_ReturnsSamePublicKeyFromStore()
         {
-            PrivatePublicKey ppk1 = new(APPLICATION_NAME);
+            // Each test uses its own container name because CAPI key containers are persisted
+            // machine-wide by name - sharing a fixed name with another test method racing in
+            // parallel let one test's DeleteEncryptionStore() delete the key mid-sequence here,
+            // making ppk2 regenerate a different key instead of reusing ppk1's.
+            string applicationName = $"TestRegistration_{Guid.NewGuid():N}";
+
+            PrivatePublicKey ppk1 = new(applicationName);
 
             string publicKey1 = ppk1.PublicKey;
 
-            PrivatePublicKey ppk2 = new(APPLICATION_NAME);
+            PrivatePublicKey ppk2 = new(applicationName);
 
             string publicKey2 = ppk2.PublicKey;
 
@@ -43,7 +48,9 @@ namespace Konfidence.Security.UnitTest
             testString += "-3teststring om te decoden encoden 1234567890";
             testString += "-4teststring om te decoden encoden 1234567890";
 
-            PrivatePublicKey ppk = new(APPLICATION_NAME);
+            string applicationName = $"TestRegistration_{Guid.NewGuid():N}";
+
+            PrivatePublicKey ppk = new(applicationName);
 
             List<List<byte>>? arrayList;
 
