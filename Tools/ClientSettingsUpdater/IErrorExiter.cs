@@ -1,7 +1,6 @@
-﻿namespace ClientSettingsUpdater
+﻿namespace ClientSettingsUpdater;
+
+public interface IErrorExiter
 {
-    public interface IErrorExiter
-    {
-        public void Exit(int errorCode);
-    }
+    public void Exit(int errorCode);
 }

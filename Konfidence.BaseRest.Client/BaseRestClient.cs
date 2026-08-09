@@ -8,75 +8,74 @@ using JetBrains.Annotations;
 using Konfidence.Base;
 using RestSharp;
 
-namespace Konfidence.BaseRest.Client
+namespace Konfidence.BaseRest.Client;
+
+[UsedImplicitly]
+public class BaseRestClient : IBaseRestClient, IDisposable
 {
-    [UsedImplicitly]
-    public class BaseRestClient : IBaseRestClient, IDisposable
+    private RestClient RestClient { get; }
+
+    public BaseRestClient(IRestClientConfig clientConfig)
     {
-        private RestClient RestClient { get; }
+        RestClientOptions restClientOptions = new(clientConfig.BaseUri());
 
-        public BaseRestClient(IRestClientConfig clientConfig)
+        RestClient = new RestClient(restClientOptions);
+    }
+
+    public void Dispose()
+    {
+        RestClient.Dispose();
+    }
+
+    public async Task<T?> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string>? headerParameters = null, CancellationToken cancellationToken = default) where T : notnull, new()
+    {
+        return await ExecuteMethodAsync<T>(relativePath, Method.Post, requestObject, headerParameters, cancellationToken);
+    }
+
+    public async Task<T?> GetAsync<T>(string relativePath, CancellationToken cancellationToken = default) where T : notnull, new()
+    {
+        return await ExecuteMethodAsync<T>(relativePath, Method.Get, cancellationToken: cancellationToken);
+    }
+
+    private async Task<T?> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, object? requestObject = null, Dictionary<string, string>? headerParameters = null, CancellationToken cancellationToken = default) where T : notnull, new()
+    {
+        RestRequest request = new()
         {
-            RestClientOptions restClientOptions = new(clientConfig.BaseUri());
+            Resource = relativePath,
+            RequestFormat = DataFormat.Json,
+            Method = httpMethod,
+        };
 
-            RestClient = new RestClient(restClientOptions);
+        if (requestObject.IsAssigned())
+        {
+            request.AddJsonBody(requestObject);
         }
 
-        public void Dispose()
+        if (headerParameters.IsAssigned())
         {
-            RestClient.Dispose();
-        }
-
-        public async Task<T?> PostAsync<T>(string relativePath, object requestObject, Dictionary<string, string>? headerParameters = null, CancellationToken cancellationToken = default) where T : notnull, new()
-        {
-            return await ExecuteMethodAsync<T>(relativePath, Method.Post, requestObject, headerParameters, cancellationToken);
-        }
-
-        public async Task<T?> GetAsync<T>(string relativePath, CancellationToken cancellationToken = default) where T : notnull, new()
-        {
-            return await ExecuteMethodAsync<T>(relativePath, Method.Get, cancellationToken: cancellationToken);
-        }
-
-        private async Task<T?> ExecuteMethodAsync<T>(string relativePath, Method httpMethod, object? requestObject = null, Dictionary<string, string>? headerParameters = null, CancellationToken cancellationToken = default) where T : notnull, new()
-        {
-            RestRequest request = new()
+            foreach (KeyValuePair<string, string> kvp in headerParameters)
             {
-                Resource = relativePath,
-                RequestFormat = DataFormat.Json,
-                Method = httpMethod,
-            };
-
-            if (requestObject.IsAssigned())
-            {
-                request.AddJsonBody(requestObject);
+                request.AddHeader(kvp.Key, kvp.Value);
             }
+        }
 
-            if (headerParameters.IsAssigned())
-            {
-                foreach (KeyValuePair<string, string> kvp in headerParameters)
-                {
-                    request.AddHeader(kvp.Key, kvp.Value);
-                }
-            }
+        RestResponse<T> response = await RestClient.ExecuteAsync<T>(request, cancellationToken);
 
-            RestResponse<T> response = await RestClient.ExecuteAsync<T>(request, cancellationToken);
-
-            if (response.ResponseStatus != ResponseStatus.Completed)
-            {
-                if (!response.ErrorException.IsAssigned())
-                {
-                    return default;
-                }
-
-                throw response.ErrorException;
-            }
-
-            if (!response.Content.IsAssigned() && response.StatusCode != HttpStatusCode.OK)
+        if (response.ResponseStatus != ResponseStatus.Completed)
+        {
+            if (!response.ErrorException.IsAssigned())
             {
                 return default;
             }
 
-            return JsonSerializer.Deserialize<T>(response.Content ?? string.Empty, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+            throw response.ErrorException;
         }
+
+        if (!response.Content.IsAssigned() && response.StatusCode != HttpStatusCode.OK)
+        {
+            return default;
+        }
+
+        return JsonSerializer.Deserialize<T>(response.Content ?? string.Empty, new JsonSerializerOptions(JsonSerializerDefaults.Web));
     }
 }

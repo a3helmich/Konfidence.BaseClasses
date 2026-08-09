@@ -4,96 +4,95 @@ using System.Linq;
 using System.Text;
 using Konfidence.Base;
 
-namespace Konfidence.Security.Encryption
+namespace Konfidence.Security.Encryption;
+
+public sealed class Encoder : IDisposable
 {
-    public sealed class Encoder : IDisposable
+    private readonly KeyEncryption _encoder;
+    private bool _disposed;
+
+    public Encoder(string publicKey)
     {
-        private readonly KeyEncryption _encoder;
-        private bool _disposed;
+        _disposed = false;
 
-        public Encoder(string publicKey)
+        _encoder = new KeyEncryption(string.Empty);
+
+        _encoder.ReadKey(publicKey);
+    }
+
+    public int KeySize => _encoder.RsaProvider?.KeySize ?? -1;
+
+    public List<List<byte>>? Encrypt(string rawData)
+    {
+        List<List<byte>> byteList = [];
+
+        if (rawData.IsAssigned())
         {
-            _disposed = false;
+            string partialString = rawData;
 
-            _encoder = new KeyEncryption(string.Empty);
-
-            _encoder.ReadKey(publicKey);
-        }
-
-        public int KeySize => _encoder.RsaProvider?.KeySize??-1;
-
-        public List<List<byte>>? Encrypt(string rawData)
-        {
-            List<List<byte>> byteList = [];
-
-            if (rawData.IsAssigned())
+            while (partialString.Length > _encoder.PackageSize)
             {
-                string partialString = rawData;
+                string partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
 
-                while (partialString.Length > _encoder.PackageSize)
-                {
-                    string partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
+                byteList.Add(GetEncryptedDataBlock(partialStringBlock));
 
-                    byteList.Add(GetEncryptedDataBlock(partialStringBlock));
-
-                    partialString = GetNextPartialString(partialString, _encoder.PackageSize);
-                }
-
-                byteList.Add(GetEncryptedDataBlock(partialString));
+                partialString = GetNextPartialString(partialString, _encoder.PackageSize);
             }
 
-            if (byteList.Any())
-            {
-                return byteList.ToList();
-            }
-
-            return null;
+            byteList.Add(GetEncryptedDataBlock(partialString));
         }
 
-        private List<byte> GetEncryptedDataBlock(string partialString)
+        if (byteList.Any())
         {
-            if (!_encoder.RsaProvider.IsAssigned())
-            {
-                return new List<byte>();
-            }
-            ASCIIEncoding asciiEncoding = new();
-
-            byte[] byteData = asciiEncoding.GetBytes(partialString);
-
-            byte[] encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
-
-            return encryptedData.ToList();
+            return byteList.ToList();
         }
 
-        private static string GetNextPartialString(string fullString, int packageSize)
+        return null;
+    }
+
+    private List<byte> GetEncryptedDataBlock(string partialString)
+    {
+        if (!_encoder.RsaProvider.IsAssigned())
         {
-            return fullString.Substring(packageSize, fullString.Length - packageSize);
+            return new List<byte>();
         }
+        ASCIIEncoding asciiEncoding = new();
 
-        public void Dispose()
+        byte[] byteData = asciiEncoding.GetBytes(partialString);
+
+        byte[] encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
+
+        return encryptedData.ToList();
+    }
+
+    private static string GetNextPartialString(string fullString, int packageSize)
+    {
+        return fullString.Substring(packageSize, fullString.Length - packageSize);
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+
+        GC.SuppressFinalize(this);
+    }
+
+    private void Dispose(bool disposing)
+    {
+
+        if (_disposed)
         {
-            Dispose(true);
-
-            GC.SuppressFinalize(this);
+            return;
         }
 
-        private void Dispose(bool disposing)
+        if (disposing)
         {
-
-            if (_disposed)
+            if (_encoder.IsAssigned())
             {
-                return;
+                _encoder.Dispose();
             }
-
-            if (disposing)
-            {
-                if (_encoder.IsAssigned())
-                {
-                    _encoder.Dispose(); 
-                }
-            }
-
-            _disposed = true;
         }
+
+        _disposed = true;
     }
 }

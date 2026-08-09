@@ -1,13 +1,12 @@
 ﻿using System.Data;
 
-namespace Konfidence.DatabaseInterface
+namespace Konfidence.DatabaseInterface;
+
+public interface ISpParameterData
 {
-    public interface ISpParameterData 
-    {
-        string ParameterName { get; set; }
+    string ParameterName { get; set; }
 
-        DbType DbType { get; set; }
+    DbType DbType { get; set; }
 
-        object? Value { get; set; }
-    }
+    object? Value { get; set; }
 }

@@ -1,7 +1,6 @@
-﻿namespace Konfidence.Mail
+﻿namespace Konfidence.Mail;
+
+public static class MailConstants
 {
-    public static class MailConstants
-    {
-        public const string DefaultMailServerConfigFileName = "MailClientSettings.json";
-    }
+    public const string DefaultMailServerConfigFileName = "MailClientSettings.json";
 }

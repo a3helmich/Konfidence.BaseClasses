@@ -1,7 +1,6 @@
-﻿namespace Konfidence.TestClasses.IntegrationTest.interfaces
+﻿namespace Konfidence.TestClasses.IntegrationTest.interfaces;
+
+public interface ITestItemClass
 {
-    public interface ITestItemClass
-    {
-        void MethodOne(); 
-    }
+    void MethodOne();
 }

@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Konfidence.Security
-{
-    internal interface ISecurityConfiguration
-    {
-        PlatformID OSVersionPlatform { get; set; }
+namespace Konfidence.Security;
 
-        string? Framework { get; set; }
-    }
+internal interface ISecurityConfiguration
+{
+    PlatformID OSVersionPlatform { get; set; }
+
+    string? Framework { get; set; }
 }

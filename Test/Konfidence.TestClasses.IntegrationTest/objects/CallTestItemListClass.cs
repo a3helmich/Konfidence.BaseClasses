@@ -1,25 +1,24 @@
 ﻿using System.Collections.Generic;
 using Konfidence.TestClasses.IntegrationTest.interfaces;
 
-namespace Konfidence.TestClasses.IntegrationTest.objects
+namespace Konfidence.TestClasses.IntegrationTest.objects;
+
+public class CallTestItemListClass
 {
-    public class CallTestItemListClass
+    protected List<ITestItemClass> TestItemList { get; } = [];
+
+    public void MethodOne()
     {
-        protected List<ITestItemClass> TestItemList { get; } = [];
-
-        public void MethodOne()
+        foreach (ITestItemClass testItem in TestItemList)
         {
-            foreach (ITestItemClass testItem in TestItemList)
-            {
-                testItem.MethodOne();
-            }
+            testItem.MethodOne();
         }
+    }
 
-        public void MethodTwo()
-        {
-            List<ITestItemClass> testList = [];
+    public void MethodTwo()
+    {
+        List<ITestItemClass> testList = [];
 
-            testList.AddItem();
-        }
+        testList.AddItem();
     }
 }

@@ -1,39 +1,38 @@
 ﻿using Konfidence.Security.Encryption;
 
-namespace Konfidence.Security
+namespace Konfidence.Security;
+
+public class PrivatePublicKey
 {
-    public class PrivatePublicKey 
+    public string ApplicationName { get; }
+
+    public string PublicKey { get; }
+
+    public string PrivateKey { get; }
+
+    public PrivatePublicKey(string applicationName)
     {
-        public string ApplicationName { get; }
+        ApplicationName = applicationName;
 
-        public string PublicKey { get; }
+        using KeyEncryption encryption = new(ApplicationName);
 
-        public string PrivateKey { get; }
+        PublicKey = encryption.PublicKey;
+        PrivateKey = encryption.PrivateKey;
+    }
 
-        public PrivatePublicKey(string applicationName)
+    public bool DeleteEncryptionStore()
+    {
+        try
         {
-            ApplicationName = applicationName;
+            using KeyEncryption clientKeyEncryption = new(ApplicationName);
 
-            using KeyEncryption encryption = new(ApplicationName);
-
-            PublicKey = encryption.PublicKey;
-            PrivateKey = encryption.PrivateKey;
+            clientKeyEncryption.Delete();
+        }
+        catch
+        {
+            return false;
         }
 
-        public bool DeleteEncryptionStore()
-        {
-            try
-            {
-                using KeyEncryption clientKeyEncryption = new(ApplicationName);
-
-                clientKeyEncryption.Delete();
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
-        }
+        return true;
     }
 }

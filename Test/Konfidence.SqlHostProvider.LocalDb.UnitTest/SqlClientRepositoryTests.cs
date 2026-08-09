@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using FluentAssertions;
+using Konfidence.Base;
 using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,7 +49,7 @@ public class SqlClientRepositoryTests
 
         IClientConfig? clientConfig = dependencyProvider.GetService<IClientConfig>();
 
-        if (clientConfig is null)
+        if (!clientConfig.IsAssigned())
         {
             throw new InvalidOperationException("ClientConfig not returned by dependency injection");
         }

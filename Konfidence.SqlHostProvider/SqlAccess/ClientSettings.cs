@@ -2,23 +2,22 @@
 using JetBrains.Annotations;
 using Serilog.Events;
 
-namespace Konfidence.SqlHostProvider.SqlAccess
+namespace Konfidence.SqlHostProvider.SqlAccess;
+
+public class DataConfiguration
 {
-    public class DataConfiguration
-    {
-        [UsedImplicitly] public LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
+    [UsedImplicitly] public LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
 
-        [UsedImplicitly] public bool UseEnvironmentSetting { get; set; }
+    [UsedImplicitly] public bool UseEnvironmentSetting { get; set; }
 
-        [UsedImplicitly] public string DefaultDatabase { get; set; } = string.Empty;
+    [UsedImplicitly] public string DefaultDatabase { get; set; } = string.Empty;
 
-        public List<ConfigConnectionString> Connections { get; set; } = [];
-    }
+    public List<ConfigConnectionString> Connections { get; set; } = [];
+}
 
-    public class ClientSettings
-    {
-        [UsedImplicitly] public LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
+public class ClientSettings
+{
+    [UsedImplicitly] public LogEventLevel LogLevel { get; set; } = LogEventLevel.Information;
 
-        public DataConfiguration? DataConfiguration { get; set; }
-    }
+    public DataConfiguration? DataConfiguration { get; set; }
 }

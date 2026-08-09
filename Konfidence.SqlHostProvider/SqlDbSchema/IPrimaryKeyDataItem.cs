@@ -1,11 +1,10 @@
-﻿namespace Konfidence.SqlHostProvider.SqlDbSchema
-{
-    internal interface IPrimaryKeyDataItem
-    {
-        public string ConstraintName { get; set; }
+﻿namespace Konfidence.SqlHostProvider.SqlDbSchema;
 
-        public string ConstraintType { get; set; }
-        
-        public string TableName { get; set; }
-    }
+internal interface IPrimaryKeyDataItem
+{
+    public string ConstraintName { get; set; }
+
+    public string ConstraintType { get; set; }
+
+    public string TableName { get; set; }
 }

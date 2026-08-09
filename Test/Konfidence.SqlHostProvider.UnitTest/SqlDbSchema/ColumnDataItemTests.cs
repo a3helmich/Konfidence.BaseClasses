@@ -2,7 +2,7 @@ using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.SqlHostProvider.IntegrationTest.SqlDbSchema;
+namespace Konfidence.SqlHostProvider.UnitTest.SqlDbSchema;
 
 [TestClass]
 public class ColumnDataItemTests

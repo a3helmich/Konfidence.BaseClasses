@@ -3,93 +3,87 @@ using System.Data;
 using System.Xml;
 using JetBrains.Annotations;
 
-namespace Konfidence.BaseData
+namespace Konfidence.BaseData;
+
+[UsedImplicitly(ImplicitUseTargetFlags.Members)]
+public static class DataReaderExtensions
 {
-    [UsedImplicitly(ImplicitUseTargetFlags.Members)]
-    public static class DataReaderExtensions
+    private const byte ByteZero = 0;
+
+    public static void GetField(this IDataReader dataReader, string fieldName, out byte field)
     {
-        private static byte _byteZero;
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-        static DataReaderExtensions()
-        {
-            _byteZero = 0;
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? ByteZero : dataReader.GetByte(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out byte field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out short field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? _byteZero : dataReader.GetByte(fieldOrdinal);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? ByteZero : dataReader.GetInt16(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out short field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out int field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? _byteZero : dataReader.GetInt16(fieldOrdinal);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out int field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out long field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt32(fieldOrdinal);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out long field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out decimal field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetInt64(fieldOrdinal);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetDecimal(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out decimal field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out bool field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? 0 : dataReader.GetDecimal(fieldOrdinal);
-        }
+        field = !dataReader.IsDBNull(fieldOrdinal) && dataReader.GetBoolean(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out bool field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out Guid field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = !dataReader.IsDBNull(fieldOrdinal) && dataReader.GetBoolean(fieldOrdinal);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : dataReader.GetGuid(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out Guid field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out string field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? Guid.Empty : dataReader.GetGuid(fieldOrdinal);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? string.Empty : dataReader.GetString(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out string field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, ref XmlDocument field)
+    {
+        dataReader.GetField(fieldName, out string xmlString);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? string.Empty : dataReader.GetString(fieldOrdinal);
-        }
+        field.LoadXml(xmlString);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, ref XmlDocument field)
-        {
-            dataReader.GetField(fieldName, out string xmlString);
+    public static void GetField(this IDataReader dataReader, string fieldName, out DateTime field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field.LoadXml(xmlString);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : dataReader.GetDateTime(fieldOrdinal);
+    }
 
-        public static void GetField(this IDataReader dataReader, string fieldName, out DateTime field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
+    public static void GetField(this IDataReader dataReader, string fieldName, out TimeSpan field)
+    {
+        int fieldOrdinal = dataReader.GetOrdinal(fieldName);
 
-            field = dataReader.IsDBNull(fieldOrdinal) ? DateTime.MinValue : dataReader.GetDateTime(fieldOrdinal);
-        }
-
-        public static void GetField(this IDataReader dataReader, string fieldName, out TimeSpan field)
-        {
-            int fieldOrdinal = dataReader.GetOrdinal(fieldName);
-
-            field = dataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan)dataReader.GetValue(fieldOrdinal);
-        }
+        field = dataReader.IsDBNull(fieldOrdinal) ? TimeSpan.MinValue : (TimeSpan)dataReader.GetValue(fieldOrdinal);
     }
 }

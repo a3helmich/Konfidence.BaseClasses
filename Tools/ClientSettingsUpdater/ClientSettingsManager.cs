@@ -8,192 +8,191 @@ using Konfidence.SqlHostProvider;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
 
-namespace ClientSettingsUpdater
+namespace ClientSettingsUpdater;
+
+internal class ClientSettingsManager
 {
-    internal class ClientSettingsManager
+    private readonly IErrorExiter _errorExiter;
+    private readonly bool _verbose;
+
+    public readonly string ConfigFolder = string.Empty;
+    public readonly string UserName = string.Empty;
+    public readonly string Password = string.Empty;
+    public readonly string Server = string.Empty;
+    public readonly string ConfigFileName = string.Empty;
+    public readonly string MailServer = string.Empty;
+
+    public ClientSettingsManager(string[] args, IErrorExiter errorExiter)
     {
-        private readonly IErrorExiter _errorExiter;
-        private readonly bool _verbose;
+        _errorExiter = errorExiter;
 
-        public readonly string ConfigFolder = string.Empty;
-        public readonly string UserName = string.Empty;
-        public readonly string Password = string.Empty;
-        public readonly string Server = string.Empty;
-        public readonly string ConfigFileName = string.Empty;
-        public readonly string MailServer = string.Empty;
-
-        public ClientSettingsManager(string[] args, IErrorExiter errorExiter)
+        if (!args.Any())
         {
-            _errorExiter = errorExiter;
+            _errorExiter.Exit(4);
 
-            if (!args.Any())
+            return;
+        }
+
+        Console.WriteLine($"content: {string.Join('-', args)}");
+
+        if (args.TryParseArgument(Argument.Verbose, out string verbose))
+        {
+            _verbose = !string.IsNullOrWhiteSpace(verbose);
+        }
+
+        // location, username, password
+        if (!args.TryParseArgument(Argument.ConfigFileFolder, out ConfigFolder))
+        {
+            _errorExiter.Exit(1);
+
+            return;
+        }
+
+        if (!args.TryParseArgument(Argument.UserName, out UserName))
+        {
+            _errorExiter.Exit(2);
+
+            return;
+        }
+
+        if (!args.TryParseArgument(Argument.Password, out Password))
+        {
+            _errorExiter.Exit(3);
+
+            return;
+        }
+
+        if (!args.TryParseArgument(Argument.Server, out Server))
+        {
+            Server = string.Empty; // not required
+        }
+
+        if (!args.TryParseArgument(Argument.MailServer, out MailServer))
+        {
+            MailServer = string.Empty; // not required
+        }
+
+        if (!args.TryParseArgument(Argument.ConfigFileName, out ConfigFileName))
+        {
+            ConfigFileName = SqlConnectionConstants.DefaultConfigFileName;
+
+            if (MailServer.IsAssigned())
             {
-                _errorExiter.Exit(4);
+                ConfigFileName = MailConstants.DefaultMailServerConfigFileName;
+            }
+        }
 
-                return;
+        if (_verbose)
+        {
+            Console.WriteLine($"configFolder: '{ConfigFolder}'");
+            Console.WriteLine($"current directory: '{Directory.GetCurrentDirectory()}'");
+        }
+    }
+
+    public void Execute()
+    {
+        if (!Directory.Exists(ConfigFolder))
+        {
+            _errorExiter.Exit(6);
+
+            return;
+        }
+
+        string[] clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
+
+        if (!clientSettingsFileNames.Any())
+        {
+            Console.WriteLine($"config file not found: '{ConfigFileName}'");
+
+            _errorExiter.Exit(7);
+
+            return;
+        }
+
+        string fullFolderName = Path.GetFullPath(ConfigFolder);
+
+        Debug.WriteLine($"Location: {fullFolderName}");
+        Console.WriteLine($"Location: {fullFolderName}");
+
+        foreach (string clientSettingsFileName in clientSettingsFileNames)
+        {
+            Debug.WriteLine($"File: {clientSettingsFileName}");
+            Console.WriteLine($"File: {clientSettingsFileName}");
+
+            if (MailServer.IsAssigned())
+            {
+                UpdateMailServerFile(clientSettingsFileName);
+
+                continue;
             }
 
-            Console.WriteLine($"content: {string.Join('-', args)}");
+            UpdateFile(clientSettingsFileName);
+        }
+    }
 
-            if (args.TryParseArgument(Argument.ConfigFileFolder, out string verbose))
+    private void UpdateMailServerFile(string fileName)
+    {
+        if (!File.ReadAllText(fileName).Deserialize(out MailAccounts? clientSettings))
+        {
+            return;
+        }
+
+        clientSettings.Accounts
+            .ForEach(setting =>
             {
-                _verbose = !string.IsNullOrWhiteSpace(verbose);
-            }
-
-            // location, username, password
-            if (!args.TryParseArgument(Argument.ConfigFileFolder, out ConfigFolder))
-            {
-                _errorExiter.Exit(1);
-
-                return;
-            }
-
-            if (!args.TryParseArgument(Argument.UserName, out UserName))
-            {
-                _errorExiter.Exit(2);
-
-                return;
-            }
-
-            if (!args.TryParseArgument(Argument.Password, out Password))
-            {
-                _errorExiter.Exit(3);
-
-                return;
-            }
-
-            if (!args.TryParseArgument(Argument.Server, out Server))
-            {
-                Server = string.Empty; // not required
-            }
-
-            if (!args.TryParseArgument(Argument.MailServer, out MailServer))
-            {
-                MailServer = string.Empty; // not required
-            }
-
-            if (!args.TryParseArgument(Argument.ConfigFileName, out ConfigFileName))
-            {
-                ConfigFileName = SqlConnectionConstants.DefaultConfigFileName;
-
-                if (MailServer.IsAssigned())
+                if (setting.UserName.IsAssigned())
                 {
-                    ConfigFileName = MailConstants.DefaultMailServerConfigFileName;
+                    return;
                 }
-            }
 
-            if (_verbose)
-            {
-                Console.WriteLine($"configFolder: '{ConfigFolder}'");
-                Console.WriteLine($"current directory: '{Directory.GetCurrentDirectory()}'");
-            }
-        }
-
-        public void Execute()
-        {
-            if (!Directory.Exists(ConfigFolder))
-            {
-                _errorExiter.Exit(6);
-
-                return;
-            }
-
-            string[] clientSettingsFileNames = Directory.GetFiles(ConfigFolder, ConfigFileName, SearchOption.AllDirectories);
-
-            if (!clientSettingsFileNames.Any())
-            {
-                Console.WriteLine($"config file not found: '{ConfigFileName}'");
-
-                _errorExiter.Exit(7);
-
-                return;
-            }
-
-            string fullFolderName = Path.GetFullPath(ConfigFolder);
-
-            Debug.WriteLine($"Location: {fullFolderName}");
-            Console.WriteLine($"Location: {fullFolderName}");
-
-            foreach (string clientSettingsFileName in clientSettingsFileNames)
-            {
-                Debug.WriteLine($"File: {clientSettingsFileName}");
-                Console.WriteLine($"File: {clientSettingsFileName}");
-
-                if (MailServer.IsAssigned())
+                if (MailServer.IsAssigned() && !setting.Server.Equals(MailServer, StringComparison.OrdinalIgnoreCase))
                 {
-                    UpdateMailServerFile(clientSettingsFileName);
-
-                    continue;
+                    return;
                 }
 
-                UpdateFile(clientSettingsFileName);
-            }
-        }
+                setting.UserName = UserName;
+                setting.Password = Password;
+            });
 
-        private void UpdateMailServerFile(string fileName)
+        if (clientSettings.Accounts.All(x => x.UserName != UserName))
         {
-            if (!File.ReadAllText(fileName).Deserialize(out MailAccounts? clientSettings))
+            MailAccount account = new()
             {
-                return;
-            }
+                Server = MailServer,
+                UserName = UserName,
+                Password = Password
+            };
 
-            clientSettings.Accounts
-                .ForEach(setting =>
-                {
-                    if (setting.UserName.IsAssigned())
-                    {
-                        return;
-                    }
-
-                    if (MailServer.IsAssigned() && !setting.Server.Equals(MailServer, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return;
-                    }
-
-                    setting.UserName = UserName;
-                    setting.Password = Password;
-                });
-
-            if (clientSettings.Accounts.All(x => x.UserName != UserName))
-            {
-                MailAccount account = new()
-                {
-                    Server = MailServer,
-                    UserName = UserName,
-                    Password = Password
-                };
-
-                clientSettings.Accounts.Add(account);
-            }
-
-            File.WriteAllText(fileName, clientSettings.Serialize());
+            clientSettings.Accounts.Add(account);
         }
 
-        private void UpdateFile(string fileName)
+        File.WriteAllText(fileName, clientSettings.Serialize());
+    }
+
+    private void UpdateFile(string fileName)
+    {
+        if (!File.ReadAllText(fileName).Deserialize(out ClientSettings? clientSettings))
         {
-            if (!File.ReadAllText(fileName).Deserialize(out ClientSettings? clientSettings))
-            {
-                return;
-            }
-
-            clientSettings.DataConfiguration?.Connections
-                .ForEach(setting =>
-                {
-                    if (setting.UserName.IsAssigned())
-                    {
-                        return;
-                    }
-
-                    if (Server.IsAssigned() && !setting.Server.Equals(Server, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return;
-                    }
-
-                    setting.UserName = UserName;
-                    setting.Password = Password;
-                });
-
-            File.WriteAllText(fileName, clientSettings.Serialize());
+            return;
         }
+
+        clientSettings.DataConfiguration?.Connections
+            .ForEach(setting =>
+            {
+                if (setting.UserName.IsAssigned())
+                {
+                    return;
+                }
+
+                if (Server.IsAssigned() && !setting.Server.Equals(Server, StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
+                setting.UserName = UserName;
+                setting.Password = Password;
+            });
+
+        File.WriteAllText(fileName, clientSettings.Serialize());
     }
 }

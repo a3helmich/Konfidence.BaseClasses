@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace Konfidence.SqlHostProvider.SqlAccess
+namespace Konfidence.SqlHostProvider.SqlAccess;
+
+public interface IClientConfig
 {
-    public interface IClientConfig
-    {
-        string DefaultDatabase { get; set; }
+    string DefaultDatabase { get; set; }
 
-        string ConfigFileFolder { get; set; }
+    string ConfigFileFolder { get; set; }
 
-        bool UseEnvironmentSetting { get; set; }
+    bool UseEnvironmentSetting { get; set; }
 
-        List<ConfigConnectionString> Connections { get; set; }
-    }
+    List<ConfigConnectionString> Connections { get; set; }
 }

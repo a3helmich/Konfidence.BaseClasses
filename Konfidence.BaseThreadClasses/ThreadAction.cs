@@ -1,28 +1,27 @@
-﻿namespace Konfidence.BaseThreadClasses
+﻿namespace Konfidence.BaseThreadClasses;
+
+public abstract class ThreadAction
 {
-    public abstract class ThreadAction
+    private readonly object _lockObject = new();
+
+    internal bool IsAlive { get; private set; }
+
+    internal void ExecuteAction()
     {
-        private readonly object _lockObject = new();
+        IsAlive = true;
 
-        internal bool IsAlive { get; private set; }
-
-        internal void ExecuteAction()
+        try
         {
-            IsAlive = true;
-
-            try
+            lock (_lockObject)
             {
-                lock (_lockObject)
-                {
-                    Execute();
-                }
-            }
-            finally
-            {
-                IsAlive = false;
+                Execute();
             }
         }
-
-        protected abstract void Execute();
+        finally
+        {
+            IsAlive = false;
+        }
     }
+
+    protected abstract void Execute();
 }

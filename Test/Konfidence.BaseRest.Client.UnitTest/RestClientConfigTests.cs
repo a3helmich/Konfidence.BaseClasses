@@ -51,6 +51,50 @@ public class RestClientConfigTests
     }
 
     [TestMethod]
+    public void BaseUri_WithoutWebHostSection_ThrowsBecauseAddressIsEmpty()
+    {
+        // Arrange
+        // A missing WebHost section still constructs a RestClientConfig quite happily, so the
+        // misconfiguration only surfaces at the first BaseUri() call - there is no validation at
+        // bind time.
+        IConfiguration configuration = new ConfigurationBuilder().Build();
+
+        RestClientConfig clientConfig = new(configuration);
+
+        // Act
+        System.Action action = () => clientConfig.BaseUri();
+
+        // Assert
+        action.Should().Throw<System.UriFormatException>();
+    }
+
+    [TestMethod]
+    public void BaseUri_WithEmptyRoutes_ProducesTrailingDoubleSlash()
+    {
+        // Arrange
+        // BaseUri() concatenates "{Host()}{BaseRoute}/{Route}" and Host() already ends in a slash,
+        // so leaving both route segments unset yields a doubled separator rather than a clean host
+        // URI.
+        Dictionary<string, string?> settings = new()
+        {
+            ["WebHost:PortNr"] = "8080",
+            ["WebHost:Address"] = "localhost"
+        };
+
+        IConfiguration configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(settings)
+            .Build();
+
+        RestClientConfig clientConfig = new(configuration);
+
+        // Act
+        System.Uri result = clientConfig.BaseUri();
+
+        // Assert
+        result.AbsoluteUri.Should().Be("http://localhost:8080//");
+    }
+
+    [TestMethod]
     public void BaseUri_WithBoundValues_BuildsExpectedUri()
     {
         // Arrange

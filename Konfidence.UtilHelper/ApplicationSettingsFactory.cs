@@ -1,49 +1,48 @@
 using JetBrains.Annotations;
 
-namespace Konfidence.UtilHelper
+namespace Konfidence.UtilHelper;
+
+public static class ApplicationSettingsFactory
 {
-    public static class ApplicationSettingsFactory
+    private static string _rootPath = string.Empty;
+
+    [UsedImplicitly]
+    public static IApplicationSettings ApplicationSettings(string application, string rootPath)
     {
-        private static string _rootPath = string.Empty;
+        string normalizedRootPath = NormalizeRootPath(rootPath);
 
-        [UsedImplicitly]
-        public static IApplicationSettings ApplicationSettings(string application, string rootPath)
+        _rootPath = normalizedRootPath;
+
+        return CreateApplicationSettings(application, normalizedRootPath);
+    }
+
+    public static IApplicationSettings ApplicationSettings(string application)
+    {
+        return CreateApplicationSettings(application, _rootPath);
+    }
+
+    private static ApplicationSettings CreateApplicationSettings(string application, string rootPath)
+    {
+        return new ApplicationSettings(application)
         {
-            string normalizedRootPath = NormalizeRootPath(rootPath);
+            RootPath = rootPath
+        };
+    }
 
-            _rootPath = normalizedRootPath;
+    private static string NormalizeRootPath(string rootPath)
+    {
+        string normalizedRootPath = rootPath;
 
-            return CreateApplicationSettings(application, normalizedRootPath);
+        if (!normalizedRootPath.EndsWith(@"\"))
+        {
+            normalizedRootPath += @"\";
         }
 
-        public static IApplicationSettings ApplicationSettings(string application)
+        if (!normalizedRootPath.EndsWith(@"settings\"))
         {
-            return CreateApplicationSettings(application, _rootPath);
+            normalizedRootPath += @"settings\";
         }
 
-        private static ApplicationSettings CreateApplicationSettings(string application, string rootPath)
-        {
-            return new ApplicationSettings(application)
-            {
-                RootPath = rootPath
-            };
-        }
-
-        private static string NormalizeRootPath(string rootPath)
-        {
-            string normalizedRootPath = rootPath;
-
-            if (!normalizedRootPath.EndsWith(@"\"))
-            {
-                normalizedRootPath += @"\";
-            }
-
-            if (!normalizedRootPath.EndsWith(@"settings\"))
-            {
-                normalizedRootPath += @"settings\";
-            }
-
-            return normalizedRootPath;
-        }
+        return normalizedRootPath;
     }
 }
