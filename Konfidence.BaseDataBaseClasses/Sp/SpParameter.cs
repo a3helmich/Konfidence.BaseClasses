@@ -1,21 +1,20 @@
 ﻿using System.Data;
 using Konfidence.DatabaseInterface;
 
-namespace Konfidence.BaseData.Sp
+namespace Konfidence.BaseData.Sp;
+
+internal class SpParameter : ISpParameterData
 {
-    internal class SpParameter : ISpParameterData
+    public string ParameterName { get; set; }
+
+    public DbType DbType { get; set; }
+
+    public object? Value { get; set; }
+
+    public SpParameter(string parameterName, DbType dbType, object? value)
     {
-        public string ParameterName { get; set; }
-
-        public DbType DbType { get; set; }
-
-        public object? Value { get; set; }
-
-        public SpParameter(string parameterName, DbType dbType, object? value)
-        {
-            ParameterName = parameterName;
-            DbType = dbType;
-            Value = value;
-        }
+        ParameterName = parameterName;
+        DbType = dbType;
+        Value = value;
     }
 }

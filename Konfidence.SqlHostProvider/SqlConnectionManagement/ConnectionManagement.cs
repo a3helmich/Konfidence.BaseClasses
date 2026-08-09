@@ -8,95 +8,77 @@ using Konfidence.Base;
 using Konfidence.SqlDataAccess;
 using Konfidence.SqlHostProvider.SqlAccess;
 
-namespace Konfidence.SqlHostProvider.SqlConnectionManagement
+namespace Konfidence.SqlHostProvider.SqlConnectionManagement;
+
+public class ConnectionManagement
 {
-    public class ConnectionManagement
+    [UsedImplicitly]
+    public static void SetActiveConnection(string connectionName)
     {
-        [UsedImplicitly]
-        public static void SetActiveConnection(string connectionName)
+        new AppConfigApplicationConfigurationWriter().SetDefaultDatabase(connectionName);
+    }
+
+    [UsedImplicitly]
+    public static void SetApplicationDatabase(string database, string server, string connectionName)
+    {
+        new AppConfigApplicationConfigurationWriter().SetConnectionString(connectionName, database, server);
+    }
+
+    internal static void SetConnectionStringPart(List<string> connectionStringParts, string parameter, string value)
+    {
+        if (!value.IsAssigned())
         {
-            Configuration? config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            DatabaseSettings? databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
-
-            if (!databaseSettings.IsAssigned())
-            {
-                return;
-            }
-
-            databaseSettings.DefaultDatabase = connectionName;
-
-            config.Save(ConfigurationSaveMode.Modified);
-
-            ConfigurationManager.RefreshSection("dataConfiguration");
+            return;
         }
 
-        [UsedImplicitly]
-        public static void SetApplicationDatabase(string database, string server, string connectionName)
+        string connectionPart = connectionStringParts
+            .FirstOrDefault(x =>
+                x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
+                x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
+
+        connectionStringParts.Remove(connectionPart);
+
+        connectionStringParts.Add($"{parameter}={value}");
+    }
+
+    internal static void CopySqlSecurityToClientConfig(IClientConfig clientConfig)
+    {
+        CopySqlSecurityToClientConfig(clientConfig, new EnvironmentSqlSecurityFileLocator());
+    }
+
+    internal static void CopySqlSecurityToClientConfig(IClientConfig clientConfig, ISqlSecurityFileLocator securityFileLocator)
+    {
+        if (!securityFileLocator.TryGetSecurityFilePath(out string fileName))
         {
-            Configuration? config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            ConnectionStringSettings? connectionStringSettings = config.ConnectionStrings
-                .ConnectionStrings
-                .Cast<ConnectionStringSettings>()
-                .FirstOrDefault(x => x.Name == connectionName);
-
-            if (!connectionStringSettings.IsAssigned())
-            {
-                return;
-            }
-
-            List<string> connectionStringParts = connectionStringSettings.ConnectionString.Split([';'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            SetConnectionStringPart(connectionStringParts, "Database", database);
-
-            SetConnectionStringPart(connectionStringParts, "Server", server);
-
-            connectionStringSettings.ConnectionString = string.Join(";", connectionStringParts);
-
-            config.Save(ConfigurationSaveMode.Modified);
-
-            ConfigurationManager.RefreshSection("connectionStrings");
+            return;
         }
 
-        internal static void SetConnectionStringPart(List<string> connectionStringParts, string parameter, string value)
+        CopySqlSecurityToClientConfig(clientConfig, fileName);
+    }
+
+    // Kept separate from the locator above so the file handling can be exercised against a fixture
+    // path: the default locator reads an environment variable that TryGetEnvironmentVariable
+    // resolves User scope first, so a test process can neither redirect nor clear it.
+    internal static void CopySqlSecurityToClientConfig(IClientConfig clientConfig, string fileName)
+    {
+        if (!File.Exists(fileName))
         {
-            if (!value.IsAssigned())
-            {
-                return;
-            }
-
-            string connectionPart = connectionStringParts
-                .FirstOrDefault(x =>
-                    x.StartsWith(parameter, StringComparison.OrdinalIgnoreCase) &&
-                    x.TrimStartIgnoreCase(parameter).StartsWith("=")) ?? string.Empty;
-
-            connectionStringParts.Remove(connectionPart);
-
-            connectionStringParts.Add($"{parameter}={value}");
+            return;
         }
 
-        internal static void CopySqlSecurityToClientConfig(IClientConfig clientConfig)
+        if (!File.ReadAllText(fileName).Deserialize(out ClientSettings? clientSettings) || !clientSettings.DataConfiguration.IsAssigned() || !clientSettings.DataConfiguration.Connections.Any())
         {
-            if (!"ClientConfigLocation".TryGetEnvironmentVariable(out string fileName) || !File.Exists(fileName))
-            {
-                return;
-            }
+            return;
+        }
 
-            if (!File.ReadAllText(fileName).Deserialize(out ClientSettings? clientSettings) || !clientSettings.DataConfiguration.IsAssigned() || !clientSettings.DataConfiguration.Connections.Any())
-            {
-                return;
-            }
+        foreach (ConfigConnectionString clientSetting in clientSettings.DataConfiguration.Connections)
+        {
+            IEnumerable<ConfigConnectionString> clientConfigConnections = clientConfig.Connections.Where(x => x.Server == clientSetting.Server);
 
-            foreach (ConfigConnectionString clientSetting in clientSettings.DataConfiguration.Connections)
+            foreach (ConfigConnectionString clientConfigConnection in clientConfigConnections)
             {
-                IEnumerable<ConfigConnectionString> clientConfigConnections = clientConfig.Connections.Where(x => x.Server == clientSetting.Server);
-
-                foreach (ConfigConnectionString clientConfigConnection in clientConfigConnections)
-                {
-                    clientConfigConnection.UserName = clientSetting.UserName;
-                    clientConfigConnection.Password = clientSetting.Password;
-                }
+                clientConfigConnection.UserName = clientSetting.UserName;
+                clientConfigConnection.Password = clientSetting.Password;
             }
         }
     }

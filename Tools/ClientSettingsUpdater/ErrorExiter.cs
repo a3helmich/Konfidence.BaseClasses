@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
-namespace ClientSettingsUpdater
+namespace ClientSettingsUpdater;
+
+[ExcludeFromCodeCoverage]
+public class ErrorExiter : IErrorExiter
 {
-    public class ErrorExiter : IErrorExiter
+    public void Exit(int errorCode)
     {
-        public void Exit(int errorCode)
-        {
-            Environment.Exit(errorCode);
-        }
+        Environment.Exit(errorCode);
     }
 }

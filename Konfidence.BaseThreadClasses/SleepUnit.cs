@@ -1,14 +1,13 @@
 ﻿using JetBrains.Annotations;
 
-namespace Konfidence.BaseThreadClasses
+namespace Konfidence.BaseThreadClasses;
+
+public enum SleepUnit
 {
-    public enum SleepUnit
-    {
-        Daily = 1,
-        Hourly = 2,
-        Minutes = 3,
-        Seconds = 4,
-        [UsedImplicitly]
-        Unknown = 0
-    }
+    Daily = 1,
+    Hourly = 2,
+    Minutes = 3,
+    Seconds = 4,
+    [UsedImplicitly]
+    Unknown = 0
 }

@@ -4,7 +4,7 @@ using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.SqlHostProvider.IntegrationTest.SqlAccess;
+namespace Konfidence.SqlHostProvider.UnitTest.SqlAccess;
 
 [TestClass]
 public class ClientSettingsTests

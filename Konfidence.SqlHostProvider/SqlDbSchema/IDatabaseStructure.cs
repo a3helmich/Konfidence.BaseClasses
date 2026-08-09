@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Konfidence.SqlHostProvider.SqlDbSchema
-{
-    public interface IDatabaseStructure
-    {
-        List<ITableDataItem> Tables { get; }
+namespace Konfidence.SqlHostProvider.SqlDbSchema;
 
-        void BuildStructure();
-    }
+public interface IDatabaseStructure
+{
+    List<ITableDataItem> Tables { get; }
+
+    void BuildStructure();
 }

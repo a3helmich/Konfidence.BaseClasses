@@ -5,73 +5,72 @@ using System.Text;
 using JetBrains.Annotations;
 using Konfidence.Base;
 
-namespace Konfidence.Security.Encryption
+namespace Konfidence.Security.Encryption;
+
+public sealed class Decoder : IDisposable
 {
-    public sealed class Decoder : IDisposable
+    private readonly KeyEncryption _decoder;
+    private bool _disposed;
+
+    public Decoder(string privateKey)
     {
-        private readonly KeyEncryption _decoder;
-        private bool _disposed;
+        _disposed = false;
 
-        public Decoder(string privateKey)
+        _decoder = new KeyEncryption(string.Empty);
+
+        _decoder.ReadKey(privateKey);
+    }
+
+    [UsedImplicitly]
+    public string Decrypt(List<List<byte>> encryptedData)
+    {
+        if (!_decoder.RsaProvider.IsAssigned())
         {
-            _disposed = false;
-
-            _decoder = new KeyEncryption(string.Empty);
-
-            _decoder.ReadKey(privateKey);
+            return string.Empty;
         }
 
-        [UsedImplicitly]
-        public string Decrypt(List<List<byte>> encryptedData)
+        ASCIIEncoding asciiEncoding = new();
+        ArrayList encryptedDataList = new();
+        StringBuilder rawData = new();
+
+        foreach (List<byte> objectItem in encryptedData)
         {
-            if (!_decoder.RsaProvider.IsAssigned())
-            {
-                return string.Empty;
-            }
-
-            ASCIIEncoding asciiEncoding = new();
-            ArrayList encryptedDataList = new();
-            StringBuilder rawData = new();
-
-            foreach (List<byte> objectItem in encryptedData)
-            {
-                encryptedDataList.Add(objectItem);
-            }
-
-            foreach (List<byte> byteData in encryptedDataList)
-            {
-                byte[] decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
-
-                rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
-            }
-
-            encryptedDataList.Clear();
-
-            return rawData.ToString();
+            encryptedDataList.Add(objectItem);
         }
 
-        public void Dispose()
+        foreach (List<byte> byteData in encryptedDataList)
         {
-            Dispose(true);
+            byte[] decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
+
+            rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
         }
 
-        private void Dispose(bool disposing)
+        encryptedDataList.Clear();
+
+        return rawData.ToString();
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+    }
+
+    private void Dispose(bool disposing)
+    {
+
+        if (_disposed)
         {
-
-            if (_disposed)
-            {
-                return;
-            }
-
-            if (disposing)
-            {
-                if (_decoder.IsAssigned())
-                {
-                    _decoder.Dispose();
-                }
-            }
-
-            _disposed = true;
+            return;
         }
+
+        if (disposing)
+        {
+            if (_decoder.IsAssigned())
+            {
+                _decoder.Dispose();
+            }
+        }
+
+        _disposed = true;
     }
 }

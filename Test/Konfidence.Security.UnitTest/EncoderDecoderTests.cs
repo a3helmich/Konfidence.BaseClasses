@@ -98,6 +98,38 @@ public class EncoderDecoderTests
         action.Should().NotThrow();
     }
 
+    [TestMethod]
+    public void Dispose_EncoderDisposedTwice_DoesNotThrow()
+    {
+        // Arrange
+        // Only the Decoder had a repeat-dispose test, so the Encoder's own "_disposed" guard was
+        // never exercised - and it is a separate implementation, not shared code.
+        TestContext context = CreateContext();
+        context.Encoder.Dispose();
+
+        // Act
+        Action action = () => context.Encoder.Dispose();
+
+        // Assert
+        action.Should().NotThrow();
+    }
+
+    [TestMethod]
+    public void Encrypt_AfterDispose_ThrowsBecauseUnderlyingRsaProviderWasActuallyCleared()
+    {
+        // Arrange
+        // The Encoder counterpart of the Decoder's post-dispose test: disposing has to really
+        // release the RSA provider rather than just flipping a flag.
+        TestContext context = CreateContext();
+        context.Encoder.Dispose();
+
+        // Act
+        Action action = () => context.Encoder.Encrypt("teststring om te encoden");
+
+        // Assert
+        action.Should().Throw<ObjectDisposedException>();
+    }
+
     private sealed class TestContext
     {
         public TestContext(

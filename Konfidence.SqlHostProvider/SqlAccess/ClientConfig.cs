@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 
-namespace Konfidence.SqlHostProvider.SqlAccess
+namespace Konfidence.SqlHostProvider.SqlAccess;
+
+public class ClientConfig : IClientConfig
 {
-    public class ClientConfig : IClientConfig
+    public string DefaultDatabase { get; set; } = string.Empty;
+
+    public string ConfigFileFolder { get; set; } = string.Empty;
+
+    public bool UseEnvironmentSetting { get; set; } = false;
+
+    public List<ConfigConnectionString> Connections { get; set; } = [];
+
+    public ClientConfig(IConfiguration configuration)
     {
-        public string DefaultDatabase { get; set; } = string.Empty;
+        IConfigurationSection section = configuration.GetSection(@"DataConfiguration");
 
-        public string ConfigFileFolder { get; set; } = string.Empty;
-
-        public bool UseEnvironmentSetting { get; set; } = false;
-
-        public List<ConfigConnectionString> Connections { get; set; } = [];
-
-        public ClientConfig(IConfiguration configuration)
-        {
-            IConfigurationSection section = configuration.GetSection(@"DataConfiguration");
-
-            section.Bind(this);
-        }
+        section.Bind(this);
     }
 }

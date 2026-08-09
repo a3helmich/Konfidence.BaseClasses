@@ -1,7 +1,6 @@
-﻿namespace Konfidence.SqlHostProvider.SqlConnectionManagement
+﻿namespace Konfidence.SqlHostProvider.SqlConnectionManagement;
+
+public class SqlConnectionConstants
 {
-    public class SqlConnectionConstants
-    {
-        public const string DefaultConfigFileName = "SqlClientSettings.json";
-    }
+    public const string DefaultConfigFileName = "SqlClientSettings.json";
 }

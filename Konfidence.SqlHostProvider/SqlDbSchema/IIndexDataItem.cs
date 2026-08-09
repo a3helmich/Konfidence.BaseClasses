@@ -1,15 +1,14 @@
-﻿namespace Konfidence.SqlHostProvider.SqlDbSchema
+﻿namespace Konfidence.SqlHostProvider.SqlDbSchema;
+
+internal interface IIndexDataItem
 {
-    internal interface IIndexDataItem
-    {
-        string Catalog { get; }
+    string Catalog { get; }
 
-        string TableName { get; }
+    string TableName { get; }
 
-        string IndexName { get; }
+    string IndexName { get; }
 
-        string ContraintName { get; }
+    string ContraintName { get; }
 
-        bool IsPrimaryKey { get; }
-    }
+    bool IsPrimaryKey { get; }
 }

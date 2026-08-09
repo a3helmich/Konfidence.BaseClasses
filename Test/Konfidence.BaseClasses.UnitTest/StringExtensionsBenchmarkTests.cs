@@ -4,32 +4,31 @@ using FluentAssertions;
 using Konfidence.Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Konfidence.BaseClasses.UnitTest
+namespace Konfidence.BaseClasses.UnitTest;
+
+[TestClass]
+public class StringExtensionsBenchmark
 {
-    [TestClass]
-    public class StringExtensionsBenchmark
+    [Benchmark]
+    public static void InitUpperCaseBenchmark()
     {
-        [Benchmark]
-        public static void InitUpperCaseBenchmark()
-        {
-            // Arrange
-            const string word = "hello";
-            const string expectedResult = "Hello";
+        // Arrange
+        const string word = "hello";
+        const string expectedResult = "Hello";
 
-            // Act
-            string result = word.InitUpperCase();
+        // Act
+        string result = word.InitUpperCase();
 
-            // Assert
-            result.Should().Be(expectedResult);
-        }
+        // Assert
+        result.Should().Be(expectedResult);
+    }
 
-        // Additional benchmarks can be added here
+    // Additional benchmarks can be added here
 
-        [TestMethod]
-        [Ignore("Only run manually")]
-        public void RunBenchmark()
-        {
-            BenchmarkRunner.Run<StringExtensionsBenchmark>();
-        }
+    [TestMethod]
+    [Ignore("Only run manually")]
+    public void RunBenchmark()
+    {
+        BenchmarkRunner.Run<StringExtensionsBenchmark>();
     }
 }

@@ -1,42 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace Konfidence.DatabaseInterface
+namespace Konfidence.DatabaseInterface;
+
+public interface IBaseDataItem
 {
-    public interface IBaseDataItem
-    {
-        string GuidIdField { get; set; }
+    string GuidIdField { get; set; }
 
-        string AutoIdField { get; set; }
+    string AutoIdField { get; set; }
 
-        Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
+    Dictionary<string, ISpParameterData> AutoUpdateFieldDictionary { get; }
 
-        string GetStoredProcedure { get; set; }
+    string GetStoredProcedure { get; set; }
 
-        string DeleteStoredProcedure { get; set; }
+    string DeleteStoredProcedure { get; set; }
 
-        string SaveStoredProcedure { get; set; }
+    string SaveStoredProcedure { get; set; }
 
-        string GetByGuidStoredProcedure { get; set; }
+    string GetByGuidStoredProcedure { get; set; }
 
-        void InitializeDataItem();
+    void InitializeDataItem();
 
-        List<ISpParameterData> SetItemData();
+    List<ISpParameterData> SetItemData();
 
-        void Save();
+    void Save();
 
-        void Delete();
+    void Delete();
 
-        int GetId();
+    int GetId();
 
-        void SetId(int id);
+    void SetId(int id);
 
-        void GetKey(IDataReader dataReader);
+    void GetKey(IDataReader dataReader);
 
-        void GetData(IDataReader dataReader);
+    void GetData(IDataReader dataReader);
 
-        List<ISpParameterData> GetParameterObjects();
+    List<ISpParameterData> GetParameterObjects();
 
-        bool IsNew { get; }
-    }
+    bool IsNew { get; }
 }

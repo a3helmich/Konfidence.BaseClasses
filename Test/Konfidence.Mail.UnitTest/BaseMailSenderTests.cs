@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Konfidence.Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.Mail.UnitTest;
@@ -133,7 +134,7 @@ public class BaseMailSenderTests
                 {
                     string? line = await reader.ReadLineAsync();
 
-                    if (line is null)
+                    if (line.IsEof())
                     {
                         break;
                     }

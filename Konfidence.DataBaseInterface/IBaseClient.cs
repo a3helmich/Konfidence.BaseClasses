@@ -1,32 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace Konfidence.DatabaseInterface
+namespace Konfidence.DatabaseInterface;
+
+public interface IBaseClient
 {
-    public interface IBaseClient
-    {
-        void Save(IBaseDataItem dataItem);
+    void Save(IBaseDataItem dataItem);
 
-        void GetItem(IBaseDataItem dataItem);
+    void GetItem(IBaseDataItem dataItem);
 
-        void GetItemBy(IBaseDataItem dataItem, string storedProcedure);
+    void GetItemBy(IBaseDataItem dataItem, string storedProcedure);
 
-        void Delete(IBaseDataItem dataItem);
+    void Delete(IBaseDataItem dataItem);
 
-        int ExecuteCommand(string storedProcedure, List<ISpParameterData> parameterObjectList);
+    int ExecuteCommand(string storedProcedure, List<ISpParameterData> parameterObjectList);
 
-        int ExecuteTextCommand(string textCommand);
+    int ExecuteTextCommand(string textCommand);
 
-        bool TableExists(string tableName);
+    bool TableExists(string tableName);
 
-        bool ViewExists(string viewName);
+    bool ViewExists(string viewName);
 
-        bool StoredProcedureExists(string storedPprocedureName);
+    bool StoredProcedureExists(string storedPprocedureName);
 
-        DataTable GetSchemaObject(string objectType);
+    DataTable GetSchemaObject(string objectType);
 
-        void BuildItemList<T>(IList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem, new();
+    void BuildItemList<T>(IList<T> baseDataItemList, string getListStoredProcedure) where T : IBaseDataItem, new();
 
-        void BuildItemList<T>(IList<T> baseDataItemList, string getListStoredProcedure, IList<ISpParameterData> spParameters) where T : IBaseDataItem, new();
-    }
+    void BuildItemList<T>(IList<T> baseDataItemList, string getListStoredProcedure, IList<ISpParameterData> spParameters) where T : IBaseDataItem, new();
 }

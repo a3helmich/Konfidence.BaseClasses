@@ -1,12 +1,14 @@
-﻿namespace ClientSettingsUpdater
-{
-    static class Program
-    {
-        static void Main(string[] args)
-        {
-            ClientSettingsManager clientSettingsManager = new(args, new ErrorExiter());
+﻿using System.Diagnostics.CodeAnalysis;
 
-            clientSettingsManager.Execute();
-        }
+namespace ClientSettingsUpdater;
+
+[ExcludeFromCodeCoverage]
+static class Program
+{
+    static void Main(string[] args)
+    {
+        ClientSettingsManager clientSettingsManager = new(args, new ErrorExiter());
+
+        clientSettingsManager.Execute();
     }
 }

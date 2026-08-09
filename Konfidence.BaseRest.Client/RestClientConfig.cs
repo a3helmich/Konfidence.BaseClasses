@@ -2,36 +2,35 @@
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 
-namespace Konfidence.BaseRest.Client
+namespace Konfidence.BaseRest.Client;
+
+[UsedImplicitly]
+public class RestClientConfig : IRestClientConfig
 {
-    [UsedImplicitly]
-    public class RestClientConfig : IRestClientConfig
+    public int PortNr { get; set; }
+
+    public string Address { get; set; } = string.Empty;
+
+    public string BaseRoute { get; set; } = string.Empty;
+
+    public string Route { get; set; } = string.Empty;
+
+    public RestClientConfig(IConfiguration configuration)
     {
-        public int PortNr { get; set; }
+        IConfigurationSection section = configuration.GetSection(@"WebHost");
 
-        public string Address { get; set; } = string.Empty;
+        section.Bind(this);
+    }
 
-        public string BaseRoute { get; set; } = string.Empty;
+    public Uri BaseUri()
+    {
+        return new Uri($"{Host()}{BaseRoute}/{Route}");
+    }
 
-        public string Route { get; set; } = string.Empty;
+    private Uri Host()
+    {
+        const string prefix = @"http";
 
-        public RestClientConfig(IConfiguration configuration)
-        {
-            IConfigurationSection section = configuration.GetSection(@"WebHost");
-
-            section.Bind(this);
-        }
-
-        public Uri BaseUri()
-        {
-            return new Uri($"{Host()}{BaseRoute}/{Route}");
-        }
-
-        private Uri Host()
-        {
-            const string prefix = @"http";
-
-            return new Uri($"{prefix}://{Address}:{PortNr}");
-        }
+        return new Uri($"{prefix}://{Address}:{PortNr}");
     }
 }

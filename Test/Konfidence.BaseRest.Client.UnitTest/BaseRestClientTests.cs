@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -96,6 +97,60 @@ public class BaseRestClientTests
 
         // Assert
         result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public async Task GetAsync_WithOkStatusAndEmptyBody_ThrowsJsonException()
+    {
+        // Arrange
+        // The "no content" early return only fires when the status is *not* OK, so a 200 with an
+        // empty body falls through to JsonSerializer.Deserialize and fails there instead of
+        // returning default like the 404-with-no-content case does.
+        using TestHttpServer server = TestHttpServer.Start(context =>
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = 200;
+
+            return string.Empty;
+        });
+
+        Mock<IRestClientConfig> clientConfigMock = new();
+        clientConfigMock.Setup(x => x.BaseUri()).Returns(server.BaseUri);
+
+        using BaseRestClient client = new(clientConfigMock.Object);
+
+        // Act
+        Func<Task> action = () => client.GetAsync<TestResponse>("test");
+
+        // Assert
+        await action.Should().ThrowAsync<JsonException>();
+    }
+
+    [TestMethod]
+    public async Task GetAsync_WithNotFoundButJsonBody_StillDeserializesTheBody()
+    {
+        // Arrange
+        // The early return needs *both* an unassigned body and a non-OK status, so an error status
+        // that carries a payload is still deserialized into T rather than returning default.
+        using TestHttpServer server = TestHttpServer.Start(context =>
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = 404;
+
+            return """{"value":"not found"}""";
+        });
+
+        Mock<IRestClientConfig> clientConfigMock = new();
+        clientConfigMock.Setup(x => x.BaseUri()).Returns(server.BaseUri);
+
+        using BaseRestClient client = new(clientConfigMock.Object);
+
+        // Act
+        TestResponse? result = await client.GetAsync<TestResponse>("test");
+
+        // Assert
+        result.Should().NotBeNull();
+        result!.Value.Should().Be("not found");
     }
 
     [TestMethod]
