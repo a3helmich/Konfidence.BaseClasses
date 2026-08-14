@@ -63,7 +63,7 @@ public class ThreadRunnerTests
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(SleepUnit.Daily)]
     [DataRow(SleepUnit.Hourly)]
     [DataRow(SleepUnit.Minutes)]
