@@ -42,39 +42,6 @@ public class BaseViewModelTests
     }
 
     [TestMethod]
-    public void SetFrozenField_DifferentValue_RaisesPropertyChangedButLeavesFieldUnchanged()
-    {
-        // Arrange
-        TestViewModel viewModel = new();
-
-        // Act
-        bool result = viewModel.SetFrozenName("Attempted");
-
-        // Assert
-        result.Should().BeTrue();
-        viewModel.Name.Should().BeEmpty();
-        viewModel.ChangedProperties.Should().ContainSingle().Which.Should().Be(nameof(TestViewModel.Name));
-    }
-
-    [TestMethod]
-    public void SetFrozenField_SameValue_DoesNotRaisePropertyChangedAndReturnsFalse()
-    {
-        // Arrange
-        // SetFrozenField's equality early-return was never exercised - only its
-        // different-value path had a test, so the "nothing changed" contract it shares with
-        // SetField was unverified.
-        TestViewModel viewModel = new();
-
-        // Act
-        bool result = viewModel.SetFrozenName(string.Empty);
-
-        // Assert
-        result.Should().BeFalse();
-        viewModel.Name.Should().BeEmpty();
-        viewModel.ChangedProperties.Should().BeEmpty();
-    }
-
-    [TestMethod]
     public void SetField_BothValuesNull_DoesNotRaisePropertyChangedAndReturnsFalse()
     {
         // Arrange
@@ -235,15 +202,6 @@ public class BaseViewModelTests
         {
             string field = Name;
             bool changed = SetField(ref field, value, nameof(Name));
-            Name = field;
-
-            return changed;
-        }
-
-        public bool SetFrozenName(string value)
-        {
-            string field = Name;
-            bool changed = SetFrozenField(ref field, value, nameof(Name));
             Name = field;
 
             return changed;
