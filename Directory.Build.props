@@ -1,42 +1,42 @@
 <Project>
-  <PropertyGroup>
-    <Version>2026.4.1</Version>
-    
-    <Authors>Adrie Helmich</Authors>
-    <Copyright>Konfidence in it 2026.</Copyright>
-    <Company>Konfidence in it</Company>
-    <AssemblyCompany>Konfidence in it</AssemblyCompany>
+	<PropertyGroup>
+		<Version>2026.4.1</Version>
+
+		<Authors>Adrie Helmich</Authors>
+		<Copyright>Konfidence in it 2026.</Copyright>
+		<Company>Konfidence in it</Company>
+		<AssemblyCompany>Konfidence in it</AssemblyCompany>
 		<TargetFrameworks>net9.0;net10.0</TargetFrameworks>
-		<LangVersion>latest</LangVersion>
 		<TestTfmsInParallel>false</TestTfmsInParallel>
-	  <Nullable>enable</Nullable>
-	  <ImplicitUsings>disable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
 
-    <ComVisible>False</ComVisible>
-    <CLSCompliant>False</CLSCompliant>
-    <AssemblyCulture>en</AssemblyCulture>
+		<ComVisible>False</ComVisible>
+		<CLSCompliant>False</CLSCompliant>
+		<AssemblyCulture>en</AssemblyCulture>
 
-	  <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 
 		<Product>Konfidence Base Classes</Product>
 
-    <PackageTags>Konfidence;baseclasses</PackageTags>
-    <Description>Konfidence helper classess for Konfidence tools and software</Description>
+		<PackageTags>Konfidence;baseclasses</PackageTags>
+		<Description>Konfidence helper classess for Konfidence tools and software</Description>
 
-    <PackageOutputPath>$(SolutionDir)nuget</PackageOutputPath>
+		<PackageOutputPath>$(SolutionDir)nuget</PackageOutputPath>
 
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/a3helmich/Konfidence.BaseClasses</PackageProjectUrl>
-	  <!--<PackageReadmeFile>readme.md</PackageReadmeFile>-->
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/a3helmich/Konfidence.BaseClasses</PackageProjectUrl>
+		<!--<PackageReadmeFile>readme.md</PackageReadmeFile>-->
 
-    <RepositoryUrl>https://github.com/a3helmich/Konfidence.BaseClasses</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/a3helmich/Konfidence.BaseClasses</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
-  </PropertyGroup>
+		<GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+	</PropertyGroup>
 	<!--<ItemGroup>
 		<None Include="$(SolutionDir)readme.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>-->
