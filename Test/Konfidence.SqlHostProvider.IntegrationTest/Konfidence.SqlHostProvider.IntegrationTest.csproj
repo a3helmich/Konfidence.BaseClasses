@@ -6,7 +6,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Castle.Core" Version="5.2.1" />
 		<PackageReference Include="coverlet.collector" Version="10.0.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,12 +14,10 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
 		<PackageReference Include="Moq" Version="4.20.72" />
 		<PackageReference Include="MSTest" Version="4.3.3" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Konfidence.Security\Konfidence.Security.csproj" />
-		<ProjectReference Include="..\..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />
 		<ProjectReference Include="..\..\Tools\Konfidence.TestTools\Konfidence.TestTools.csproj" />
 	</ItemGroup>
 

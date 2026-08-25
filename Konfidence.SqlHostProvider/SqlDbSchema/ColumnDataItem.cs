@@ -49,13 +49,13 @@ public class ColumnDataItem : BaseDataItem, IColumnDataItem
         IsGuidField = false;
     }
 
-    internal static List<IColumnDataItem> GetList(IBaseClient client, List<IIndexDataItem> allIndexDataItems)
+    internal static List<IColumnDataItem> GetList(IBaseClient client, List<IIndexDataItem> allIndexDataItems, string storedProcedure)
     {
         List<ColumnDataItem> columnDataItems = [];
 
         List<ISpParameterData> spParameterData = [];
 
-        client.BuildItemList(columnDataItems, SpName.GetColumnList, spParameterData);
+        client.BuildItemList(columnDataItems, storedProcedure, spParameterData);
 
         foreach (ColumnDataItem columnDataItem in columnDataItems.Where(x => x.Name.Equals("syslock", StringComparison.OrdinalIgnoreCase)))
         {
