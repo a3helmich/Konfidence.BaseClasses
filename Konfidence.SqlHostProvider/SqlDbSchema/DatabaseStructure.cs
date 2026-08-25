@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using JetBrains.Annotations;
@@ -19,6 +20,8 @@ internal class DatabaseStructure : IDatabaseStructure
 
     private readonly List<IIndexDataItem> _allIndexDataItems;
 
+    private readonly SpName _spName = new();
+
     public DatabaseStructure(IBaseClient client)
     {
         _client = client;
@@ -37,15 +40,25 @@ internal class DatabaseStructure : IDatabaseStructure
 
         Initialize();
 
-        _allPrimaryKeyDataItems.AddRange(PrimaryKeyDataItem.GetList(_client));
+        // Everything from the first CREATE onwards runs under a finally, so the helper procedures
+        // are dropped even when introspection throws part-way through - otherwise a failed run
+        // leaves them behind in the caller's database.
+        try
+        {
+            CreateStoredProcedures();
 
-        _allIndexDataItems.AddRange(IndexDataItem.GetList(_client, _allPrimaryKeyDataItems));
+            _allPrimaryKeyDataItems.AddRange(PrimaryKeyDataItem.GetList(_client, _spName.GetTablePrimaryKeyList));
 
-        _allColumnDataItems.AddRange(ColumnDataItem.GetList(_client, _allIndexDataItems));
+            _allIndexDataItems.AddRange(IndexDataItem.GetList(_client, _allPrimaryKeyDataItems));
 
-        Tables.AddRange(TableDataItem.GetList(_client, _allColumnDataItems));
+            _allColumnDataItems.AddRange(ColumnDataItem.GetList(_client, _allIndexDataItems, _spName.GetColumnList));
 
-        DeleteStoredProcedures();
+            Tables.AddRange(TableDataItem.GetList(_client, _allColumnDataItems));
+        }
+        finally
+        {
+            DeleteStoredProcedures();
+        }
 
         Debug.WriteLine("DatabaseStructure exit BuildStructure()");
     }
@@ -57,22 +70,32 @@ internal class DatabaseStructure : IDatabaseStructure
         _allPrimaryKeyDataItems.Clear();
         _allIndexDataItems.Clear();
         _allColumnDataItems.Clear();
-
-        DeleteStoredProcedures();
-
-        CreateStoredProcedures();
     }
 
     private void CreateStoredProcedures()
     {
-        CreateSPTablePrimaryKey_GetList(SpName.GetTablePrimaryKeyList);
-        CreateSPColumns_GetList(SpName.GetColumnList);
+        CreateSPTablePrimaryKey_GetList(_spName.GetTablePrimaryKeyList);
+        CreateSPColumns_GetList(_spName.GetColumnList);
     }
 
     private void DeleteStoredProcedures()
     {
-        DeleteSp(SpName.GetTablePrimaryKeyList);
-        DeleteSp(SpName.GetColumnList);
+        // Each drop stands on its own: a failure dropping the first must not leave the second
+        // behind.
+        DeleteSpIgnoringFailure(_spName.GetTablePrimaryKeyList);
+        DeleteSpIgnoringFailure(_spName.GetColumnList);
+    }
+
+    private void DeleteSpIgnoringFailure(string storedProcedure)
+    {
+        try
+        {
+            DeleteSp(storedProcedure);
+        }
+        catch (Exception exception)
+        {
+            Debug.WriteLine($"deleteSp failed for {storedProcedure}: {exception}");
+        }
     }
 
     private void CreateSPTablePrimaryKey_GetList(string storedProcedure)

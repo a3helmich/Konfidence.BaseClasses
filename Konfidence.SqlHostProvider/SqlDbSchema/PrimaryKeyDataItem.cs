@@ -13,13 +13,13 @@ internal class PrimaryKeyDataItem : BaseDataItem, IPrimaryKeyDataItem
 
     public string TableName { get; set; } = string.Empty;
 
-    internal static List<IPrimaryKeyDataItem> GetList(IBaseClient client)
+    internal static List<IPrimaryKeyDataItem> GetList(IBaseClient client, string storedProcedure)
     {
         List<PrimaryKeyDataItem> primaryKeyDataItems = [];
 
         List<ISpParameterData> spParameterData = [];
 
-        client.BuildItemList(primaryKeyDataItems, SpName.GetTablePrimaryKeyList, spParameterData);
+        client.BuildItemList(primaryKeyDataItems, storedProcedure, spParameterData);
 
         return new List<IPrimaryKeyDataItem>(primaryKeyDataItems);
     }

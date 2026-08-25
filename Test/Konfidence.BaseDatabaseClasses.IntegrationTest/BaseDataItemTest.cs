@@ -18,26 +18,21 @@ public class BaseDataItemTest
         SqlTestToolExtensions.CopySqlSecurityToActiveConfiguration("TestClassGenerator");
     }
 
-    [TestInitialize]
-    public void TestInitialize()
-    {
-        List<Dl.TestIntDataItem> testIntDataItemList = Dl.TestIntDataItem
-            .GetList()
-            .Where(x => x.GetId() > 1)
-            .ToList();
+    // The TestInt table lives in the shared TestClassGenerator database, and the net9.0 and net10.0
+    // test hosts can run as concurrent processes under some runners. So this fixture only ever
+    // touches rows it created itself: deleting every row with Id > 1 - as it used to - also deleted
+    // rows another host still had in flight, and asserting on the row count failed whenever another
+    // host happened to have one open.
+    private const int BaselineId = 1;
 
-        testIntDataItemList.ForEach(item => item.Delete());
-    }
+    private readonly List<Dl.TestIntDataItem> _createdItems = [];
 
     [TestCleanup]
     public void TestCleanup()
     {
-        List<Dl.TestIntDataItem> testIntDataItemList = Dl.TestIntDataItem
-            .GetList()
-            .Where(x => x.GetId() > 1)
-            .ToList();
+        _createdItems.ForEach(item => item.Delete());
 
-        testIntDataItemList.ForEach(item => item.Delete());
+        _createdItems.Clear();
     }
 
     [TestMethod]
@@ -46,29 +41,21 @@ public class BaseDataItemTest
         // Arrange
 
         // Act
-        List<Dl.TestIntDataItem>? testIntDataItemList = Dl.TestIntDataItem.GetList();
+        List<Dl.TestIntDataItem> testIntDataItemList = Dl.TestIntDataItem.GetList();
 
         // Assert
-        testIntDataItemList.Should().HaveCount(1);
-        testIntDataItemList[0].testInt.Should().BeGreaterThan(1);
+        Dl.TestIntDataItem baselineItem = testIntDataItemList.Single(x => x.GetId() == BaselineId);
 
-        testIntDataItemList[0].testTinyInt.Should().Be(10);
-        testIntDataItemList[0].testInt.Should().Be(1000);
-        testIntDataItemList[0].testBigInt.Should().Be(100);
+        baselineItem.testTinyInt.Should().Be(10);
+        baselineItem.testInt.Should().Be(1000);
+        baselineItem.testBigInt.Should().Be(100);
     }
 
     [TestMethod]
     public void Constructor_WithSavedItem_ReturnsQueriedItem()
     {
         // Arrange
-        Dl.TestIntDataItem testIntDataItem = new()
-        {
-            testTinyInt = 111,
-            testInt = 1111,
-            testBigInt = 11111
-        };
-
-        testIntDataItem.Save();
+        Dl.TestIntDataItem testIntDataItem = SaveNewItem(111, 1111, 11111);
 
         // Act
         Dl.TestIntDataItem copyTestIntDataItem = new(testIntDataItem.GetId());
@@ -87,14 +74,7 @@ public class BaseDataItemTest
     public void Constructor_WithUpdatedItem_ReturnsUpdatedItem()
     {
         // Arrange
-        Dl.TestIntDataItem testIntDataItem = new()
-        {
-            testTinyInt = 11,
-            testInt = 1111,
-            testBigInt = 11111
-        };
-
-        testIntDataItem.Save();
+        Dl.TestIntDataItem testIntDataItem = SaveNewItem(11, 1111, 11111);
 
         Dl.TestIntDataItem copyTestIntDataItem = new(testIntDataItem.GetId())
         {
@@ -121,14 +101,7 @@ public class BaseDataItemTest
     public void Constructor_WithGuidId_ReturnsMatchingItem()
     {
         // Arrange
-        Dl.TestIntDataItem testIntDataItem = new()
-        {
-            testTinyInt = 11,
-            testInt = 1111,
-            testBigInt = 11111
-        };
-
-        testIntDataItem.Save();
+        Dl.TestIntDataItem testIntDataItem = SaveNewItem(11, 1111, 11111);
 
         // Act
         Dl.TestIntDataItem updateTestIntDataItem = new(testIntDataItem.GetId());
@@ -137,5 +110,21 @@ public class BaseDataItemTest
         // Assert
         updateTestIntGuidDataItem.TestIntId.Should().Be(updateTestIntDataItem.TestIntId);
         updateTestIntGuidDataItem.GetId().Should().Be(updateTestIntDataItem.GetId());
+    }
+
+    private Dl.TestIntDataItem SaveNewItem(byte testTinyInt, int testInt, long testBigInt)
+    {
+        Dl.TestIntDataItem testIntDataItem = new()
+        {
+            testTinyInt = testTinyInt,
+            testInt = testInt,
+            testBigInt = testBigInt
+        };
+
+        testIntDataItem.Save();
+
+        _createdItems.Add(testIntDataItem);
+
+        return testIntDataItem;
     }
 }
