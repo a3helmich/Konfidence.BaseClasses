@@ -15,9 +15,12 @@
 	- TrimList()
 	- ReplaceIgnoreCase(..)
 	- InitLowerCase(), InitUpperCase()
-	- Contains(..) with specified casing type
+	- Contains(..) with specified casing type — superseded by the framework's own `string.Contains(string, StringComparison)`, which wins overload resolution against an extension method of the same signature
 	- ToDecimal(), parse a string into a decimal
+- Wpf/BaseViewModel: an `INotifyPropertyChanged` base class with a `SetField(..)` change-detecting setter and a nesting `SuppressNotifications()` scope
  
 - currently targets net9.0 and net10.0
+
+**Breaking change in 2026.4**: `Wpf/BaseViewModel.SetFrozenField(..)` was removed.
 ### The Konfidence.BaseClasses repo is available on [github.com](https://github.com/a3helmich/Konfidence.BaseClasses).
 

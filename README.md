@@ -4,15 +4,28 @@ This is a collection of dotnet library projects I use for the software I develop
 # Using the Libraries
 All projects generate a .nupkg on build. These can be used to include in your software projects. Most libraries are build for **net9.0** and **net10.0**. Support for **netstandard2.0** is only available in versions upto 2022.1.x, after that only support for **net5.0** and **net6.0** is included.
 
+Versions are `year.major.minor` (CalVer-style). The **year** is the leading segment, so NuGet reads it as the semantic major — meaning the version appears to major-bump each January whether or not anything broke. The middle segment is the hand-maintained major, restarting at 1 each year and bumped mid-year only for a deliberate breaking change.
+
+# Breaking changes
+
+### 2026.4
+- `Wpf/BaseViewModel.SetFrozenField(..)` was removed. It raised `PropertyChanged` and then restored the field to its previous value — a "notify but do not actually change" setter. If you were relying on it to force a re-read of a bound property, raise the notification directly with `OnPropertyChanged(..)` instead.
+
 # Build and Test
 
 - Clone Konfidence.BaseClasses
 - Open  Konfidence.BaseClasses.sln in visual studio
 - Build the solution
 
-All tests can either be run in visual studio, with dotnet test konfidence.baseclasses.sln or dotnet test [testprojectname].tests.csproj. 
+All tests can either be run in visual studio, with dotnet test konfidence.baseclasses.sln or dotnet test [testprojectname].csproj. 
 
-Integration tests running against SQL server will fail until a test database setup is made available.
+The test projects fall into three groups:
+
+- `*.UnitTest` — no database, no network. Run anywhere.
+- `*.LocalDb.UnitTest` — attach a checked-in `TestClassGenerator.mdf` snapshot to SQL Server LocalDB, under a database name unique to the running process. These cover the SQL code paths without needing a reachable server, which is what lets GitHub Actions run them.
+- `*.IntegrationTest` — need a live SQL Server (`konfidence2`/`konfidence3`) and will fail until an equivalent test database setup is made available.
+
+A note if you run tests from a runner that executes the two target frameworks in parallel (ReSharper does; `dotnet test` does not, because `Directory.Build.props` sets `TestTfmsInParallel=false`): the `*.IntegrationTest` projects share one live database, so any test that assumes exclusive access to it will fail intermittently. The fixtures here are written to only ever touch rows they created themselves, and `DatabaseStructure` gives its helper stored procedures per-run names for the same reason.
 
 # Libraries
 
@@ -30,16 +43,16 @@ Integration tests running against SQL server will fail until a test database set
 - default configured Json serializer/deserializer, based on System.Text.Json.
 	- `Serialize(..)`/`SerializeBytes(..)` with an optional compact (non-indented) mode, enums written as strings.
 	- `Deserialize(..)` from `string` or `ReadOnlySpan<byte>`, with a case-sensitive option.
-	- `Clone()`: a JSON-roundtrip deep clone, including properties normally hidden by `[JsonIgnore]`.
+	- `Clone()`: a JSON-roundtrip deep clone. Note that `[JsonIgnore]` properties are **not** preserved: the clone options force those properties to be written, but the read side still honours `[JsonIgnore]` and drops them again, so a clone behaves like a plain serialize/deserialize round trip.
 	- `DeserializeCsv<T>(..)`, CSV-to-object-list parsing based on CsvHelper.
 - Some (unexpected) fast string extensions
 	- TrimStart(..), TrimStartIgnoreCase(..), TrimEnd(..), TrimEndIgnoreCase(..)
 	- TrimList()
 	- ReplaceIgnoreCase(..)
 	- InitLowerCase(), InitUpperCase()
-	- Contains(..) with specified casing type
+	- Contains(..) with specified casing type — superseded by the framework's own `string.Contains(string, StringComparison)`, which has the same signature and wins overload resolution against an extension method. Reachable only as `StringExtensions.Contains(value, ..)`; new code should just use the framework method.
 	- ToDecimal(), parse a string into a decimal
-- Wpf/BaseViewModel: a small `INotifyPropertyChanged` base class for WPF view models, with `SetField(..)`/`SetFrozenField(..)` change-detecting setters and a `SuppressNotifications()` scope to batch/mute property-changed events.
+- Wpf/BaseViewModel: a small `INotifyPropertyChanged` base class for WPF view models, with a `SetField(..)` change-detecting setter and a `SuppressNotifications()` scope to batch/mute property-changed events. Suppression nests: notifications resume only once the outermost scope is disposed. (`SetFrozenField(..)` was removed in **2026.4** — see *Breaking changes* above.)
   
 ### The Konfidence.BaseClasses package is available on [nuget.org](https://www.nuget.org/packages/Konfidence.BaseClasses). 
 
@@ -94,7 +107,7 @@ Provides MS Sql database access, now via `Konfidence.SqlDataAccess`/`Microsoft.D
 - `SqlAccess/SqlClient` + `SqlClientRepository`: implement `IBaseClient`/`IDataRepository` against MS SQL, executing the get/save/delete/list stored procedures and schema-existence checks generated for a data item.
 - `SqlAccess/ClientConfig` + `ClientConfigExtensions`/`ClientSettings`/`ConfigConnectionString`: connection configuration bound from `SqlClientSettings.json`, including reading/writing settings straight from/to `app.config`.
 - `SqlConnectionManagement/ConnectionManagement`: connection-string assembly and constants.
-- `SqlDbSchema/DatabaseStructure` (+ `TableDataItem`, `ColumnDataItem`, `PrimaryKeyDataItem`, `IndexDataItem`, `SpName`): reads a database's structure (tables, columns, types, primary keys, indexes) by temporarily installing and then removing helper stored procedures — the basis for the ClassGenerator's code generation.
+- `SqlDbSchema/DatabaseStructure` (+ `TableDataItem`, `ColumnDataItem`, `PrimaryKeyDataItem`, `IndexDataItem`, `SpName`): reads a database's structure (tables, columns, types, primary keys, indexes) by temporarily installing and then removing helper stored procedures — the basis for the ClassGenerator's code generation. Those helpers get a name unique to each run (`CG_..._{processId}_{guid}`) and are dropped in a `finally`, so two processes introspecting the same database concurrently cannot drop each other's procedures, and a failed run does not leave any behind.
 
 ### Konfidence.TestTools
 Prepares the configuration of a unittest with live access to SqlServer. Since dotnet, the location of the TestHost and where the tests are running are different. The app.config not being in the expected location is an issue.
@@ -116,5 +129,7 @@ For me: updates the SqlClientSettings.json in a buildpipeline, keeping secrets o
 ### Test
 Per-library unit test projects (`Konfidence.*.UnitTest`) plus `Test/TestByHandApp`, a small manual/exploratory console app for ad-hoc verification against a live SQL Server.
 - `Konfidence.TestClasses.IntegrationTest`: integration tests that run ClassGenerator-generated `Dl.*DataItem` classes (from `Konfidence.Integration.TestClasses`) against a live SQL Server, using `Konfidence.TestTools` to wire up the test configuration/security settings.
-- `Konfidence.SqlDataAccess.UnitTest`: fast unit tests for `SqlDatabase`/`SqlDatabaseFactory`/`DatabaseSettings` — no live SQL Server needed.
-- `Konfidence.SqlHostProvider.UnitTest` / `Konfidence.SqlHostProvider.IntegrationTest`: the former holds fast mocked tests, the latter holds only the live-SQL-Server `DataBaseStructureTests.cs` (`TestCategory("DatabaseStructure")`).
+- `Konfidence.SqlDataAccess.UnitTest`: fast unit tests for `SqlDatabase`/`SqlDatabaseFactory`/`DatabaseSettings`.
+- `Konfidence.SqlHostProvider.UnitTest`: mocked, database-free tests for `SqlClient`, `ClientConfig(Extensions)`, `ColumnData(Extensions)`, `DependencyInjectionFactory` and the file-handling half of `ConnectionManagement`.
+- `Konfidence.SqlHostProvider.IntegrationTest`: the live-SQL-Server tests — `DataBaseStructureTests`, connection resolution, and the stored-procedure save/get/get-by/get-list/delete round trips.
+- `*.LocalDb.UnitTest` (`Konfidence.SqlHostProvider`, `Konfidence.BaseDatabaseClasses`, `Konfidence.TestClasses`): the same kind of SQL coverage against a LocalDB-attached snapshot instead of a live server, so it runs on GitHub Actions. The Azure DevOps agent filters these out (`FullyQualifiedName!~LocalDb.UnitTest`) because its Windows-service session cannot run LocalDB; it relies on the `*.IntegrationTest` projects for that surface instead.
