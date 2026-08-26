@@ -89,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.TestClasses.Loca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.SqlHostProvider.UnitTest", "Test\Konfidence.SqlHostProvider.UnitTest\Konfidence.SqlHostProvider.UnitTest.csproj", "{DBDAFC1A-6A5B-454E-8915-AFC164D469CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konfidence.BaseDependencyInjection", "Konfidence.BaseDependencyInjection\Konfidence.BaseDependencyInjection.csproj", "{6AB8E567-A115-4927-945D-859244599C26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -459,6 +461,18 @@ Global
 		{DBDAFC1A-6A5B-454E-8915-AFC164D469CB}.Release|x64.Build.0 = Release|Any CPU
 		{DBDAFC1A-6A5B-454E-8915-AFC164D469CB}.Release|x86.ActiveCfg = Release|Any CPU
 		{DBDAFC1A-6A5B-454E-8915-AFC164D469CB}.Release|x86.Build.0 = Release|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Debug|x64.Build.0 = Debug|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Debug|x86.Build.0 = Debug|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Release|x64.ActiveCfg = Release|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Release|x64.Build.0 = Release|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Release|x86.ActiveCfg = Release|Any CPU
+		{6AB8E567-A115-4927-945D-859244599C26}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
