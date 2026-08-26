@@ -124,7 +124,7 @@ public class SolutionDocumentTests
     }
 
     [TestMethod]
-    public void Projects_WithASpaceInTheProjectName_ReadsTheNameIncorrectly()
+    public void Projects_WithASpaceInTheProjectName_ReadsTheFullName()
     {
         // Arrange
         TestContext context = CreateContext(SolutionWithSpacedName());
@@ -133,7 +133,8 @@ public class SolutionDocumentTests
         var project = context.Document.Projects.Single();
 
         // Assert
-        project.ProjectName.Should().NotBe("My Project");
+        project.ProjectName.Should().Be("My Project");
+        project.ProjectFile.Should().Be(@"My Project\My Project.csproj");
     }
 
     [TestMethod]
@@ -150,18 +151,34 @@ public class SolutionDocumentTests
     }
 
     [TestMethod]
-    public void Save_WithoutChanges_KeepsEveryLine()
+    public void Save_OfACanonicalSolution_KeepsEveryLine()
     {
         // Arrange
         TestContext context = CreateContext(TwoProjectSolution());
 
-        var before = File.ReadAllLines(context.SolutionFile);
+        context.Document.Save();
+
+        var canonical = File.ReadAllLines(context.SolutionFile);
+
+        // Act
+        SolutionDocument.GetSolutionDocument(context.SolutionFile).Save();
+
+        // Assert
+        File.ReadAllLines(context.SolutionFile).Should().Equal(canonical);
+    }
+
+    [TestMethod]
+    public void Save_OfASolutionMissingItsProjectConfigurations_WritesThem()
+    {
+        // Arrange
+        TestContext context = CreateContext(TwoProjectSolution());
 
         // Act
         context.Document.Save();
 
         // Assert
-        File.ReadAllLines(context.SolutionFile).Should().Equal(before);
+        File.ReadAllLines(context.SolutionFile).Should()
+            .Contain("\t\t{11111111-1111-1111-1111-111111111111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU");
     }
 
     private static string EmptySolution()

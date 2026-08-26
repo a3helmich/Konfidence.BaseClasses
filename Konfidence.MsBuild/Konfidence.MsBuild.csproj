@@ -5,6 +5,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.SolutionPersistence" Version="1.0.52" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Konfidence.UtilHelper\Konfidence.UtilHelper.csproj" />
 	</ItemGroup>
 
