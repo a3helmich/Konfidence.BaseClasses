@@ -9,8 +9,6 @@ public sealed class KeyEncryption : IDisposable
 {
     private bool _disposed;
 
-    private RSACryptoServiceProvider? _tempRsaProvider;
-
     private int _maxBytesServer;
 
     public RSACryptoServiceProvider? RsaProvider { get; private set; }
@@ -74,12 +72,12 @@ public sealed class KeyEncryption : IDisposable
         {
             int keySizeServer = GetMaxKeySize();
 
-            if (!_tempRsaProvider.IsAssigned())
+            if (!field.IsAssigned())
             {
-                _tempRsaProvider = keySizeServer == 0 ? new RSACryptoServiceProvider() : new RSACryptoServiceProvider(keySizeServer);
+                field = keySizeServer == 0 ? new RSACryptoServiceProvider() : new RSACryptoServiceProvider(keySizeServer);
             }
 
-            return _tempRsaProvider;
+            return field;
         }
     }
 
@@ -213,8 +211,6 @@ public sealed class KeyEncryption : IDisposable
     public void Dispose()
     {
         Dispose(true);
-
-        GC.SuppressFinalize(this);
     }
 
     private void Dispose(bool disposing)
