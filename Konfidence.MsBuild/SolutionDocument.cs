@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using JetBrains.Annotations;
 using Konfidence.Base;
 using Konfidence.MsBuild.Solution;
 using Microsoft.VisualStudio.SolutionPersistence;
@@ -16,22 +15,21 @@ namespace Konfidence.MsBuild
         private const string ConfigFolderPath = "/ClassGeneratorConfig/";
         private const string ConfigFileName = "ClassModelGenerator.config.json";
 
-        private string _solutionFile = string.Empty;
+        private readonly string _solutionFile;
 
-        private ISolutionSerializer _serializer;
+        private readonly ISolutionSerializer _serializer;
 
-        private SolutionModel _solutionModel;
+        private readonly SolutionModel _solutionModel;
 
         public int NumberOfSolutionProjects => HasSolutionItem ? Projects.Count + 1 : Projects.Count;
 
-        [NotNull]
         public SolutionProjectList Projects
         {
             get
             {
-                var projects = new SolutionProjectList();
+                SolutionProjectList projects = [];
 
-                foreach (var project in _solutionModel.SolutionProjects)
+                foreach (SolutionProjectModel project in _solutionModel.SolutionProjects)
                 {
                     projects.Add(new SolutionProject(project));
                 }
@@ -42,27 +40,19 @@ namespace Konfidence.MsBuild
 
         public bool HasSolutionItem => _solutionModel.SolutionFolders.Count > 0;
 
-        private SolutionDocument()
-        {
-        }
-
-        [NotNull]
-        public static SolutionDocument GetSolutionDocument(string solutionFile)
-        {
-            var newSolutionDocument = new SolutionDocument();
-
-            newSolutionDocument.Load(solutionFile);
-
-            return newSolutionDocument;
-        }
-
-        private void Load(string solutionFile)
+        private SolutionDocument(string solutionFile)
         {
             _solutionFile = solutionFile;
 
-            _serializer = SolutionSerializers.GetSerializerByMoniker(_solutionFile);
+            _serializer = SolutionSerializers.GetSerializerByMoniker(_solutionFile)
+                          ?? throw new NotSupportedException($"no solution serializer for '{_solutionFile}'");
 
             _solutionModel = RunSynchronous(() => _serializer.OpenAsync(_solutionFile, CancellationToken.None));
+        }
+
+        public static SolutionDocument GetSolutionDocument(string solutionFile)
+        {
+            return new SolutionDocument(solutionFile);
         }
 
         public void AddProjectFile(ProjectXmlDocument projectFile)
@@ -77,9 +67,9 @@ namespace Konfidence.MsBuild
             AddProjectEntry(projectFile);
         }
 
-        private bool CanAddProjectFile([NotNull] ProjectXmlDocument projectFile)
+        private bool CanAddProjectFile(ProjectXmlDocument projectFile)
         {
-            foreach (var project in Projects)
+            foreach (SolutionProject project in Projects)
             {
                 if (IsSameProject(projectFile, project))
                 {
@@ -90,7 +80,7 @@ namespace Konfidence.MsBuild
             return true;
         }
 
-        private static bool IsSameProject([NotNull] ProjectXmlDocument projectFile, [NotNull] SolutionProject project)
+        private static bool IsSameProject(ProjectXmlDocument projectFile, SolutionProject project)
         {
             if (projectFile.ProjectGuid.IsAssigned() && projectFile.ProjectGuid.Equals(project.ProjectGuid, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -107,7 +97,7 @@ namespace Konfidence.MsBuild
 
         private void AddDataItemGeneratorConfigFile()
         {
-            var configFolder = _solutionModel.FindFolder(ConfigFolderPath) ?? _solutionModel.AddFolder(ConfigFolderPath);
+            SolutionFolderModel configFolder = _solutionModel.FindFolder(ConfigFolderPath) ?? _solutionModel.AddFolder(ConfigFolderPath);
 
             if (ContainsDataItemGeneratorConfigFile(configFolder))
             {
@@ -117,14 +107,14 @@ namespace Konfidence.MsBuild
             configFolder.AddFile(ConfigFileName);
         }
 
-        private static bool ContainsDataItemGeneratorConfigFile([NotNull] SolutionFolderModel configFolder)
+        private static bool ContainsDataItemGeneratorConfigFile(SolutionFolderModel configFolder)
         {
             if (!configFolder.Files.IsAssigned())
             {
                 return false;
             }
 
-            foreach (var file in configFolder.Files)
+            foreach (string file in configFolder.Files)
             {
                 if (file.Equals(ConfigFileName, StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -135,16 +125,16 @@ namespace Konfidence.MsBuild
             return false;
         }
 
-        private void AddProjectEntry([NotNull] ProjectXmlDocument projectFile)
+        private void AddProjectEntry(ProjectXmlDocument projectFile)
         {
-            var relativeProjectFileName = projectFile.GetRelativeProjectFileName(SolutionPath);
+            string relativeProjectFileName = projectFile.GetRelativeProjectFileName(SolutionPath);
 
-            var project = _solutionModel.AddProject(relativeProjectFileName, null, null);
+            SolutionProjectModel project = _solutionModel.AddProject(relativeProjectFileName, null, null);
 
             SetProjectGuid(project, projectFile.ProjectGuid);
         }
 
-        private static void SetProjectGuid([NotNull] SolutionProjectModel project, string projectGuid)
+        private static void SetProjectGuid(SolutionProjectModel project, string projectGuid)
         {
             if (!projectGuid.IsAssigned())
             {
@@ -154,12 +144,11 @@ namespace Konfidence.MsBuild
             project.Id = Guid.Parse(projectGuid);
         }
 
-        [CanBeNull]
         protected string SolutionPath
         {
             get
             {
-                var solutionPath = Path.GetDirectoryName(_solutionFile);
+                string solutionPath = Path.GetDirectoryName(_solutionFile) ?? string.Empty;
 
                 if (solutionPath.IsAssigned() && !solutionPath.EndsWith(@"\"))
                 {
@@ -175,12 +164,12 @@ namespace Konfidence.MsBuild
             RunSynchronous(() => _serializer.SaveAsync(_solutionFile, _solutionModel, CancellationToken.None));
         }
 
-        private static T RunSynchronous<T>([NotNull] Func<Task<T>> operation)
+        private static T RunSynchronous<T>(Func<Task<T>> operation)
         {
             return Task.Run(operation).GetAwaiter().GetResult();
         }
 
-        private static void RunSynchronous([NotNull] Func<Task> operation)
+        private static void RunSynchronous(Func<Task> operation)
         {
             Task.Run(operation).GetAwaiter().GetResult();
         }
