@@ -13,7 +13,7 @@ public class BaseXmlDocument : XmlDocument
 
     public string PathName { get; private set; } = string.Empty;
 
-    public string NeedRootNameSpaceUri { get; private set; } = string.Empty;
+    private string NeedRootNameSpaceUri { get; set; } = string.Empty;
 
     public XmlNamespaceManager? XmlNamespaceManager { get; private set; }
 
