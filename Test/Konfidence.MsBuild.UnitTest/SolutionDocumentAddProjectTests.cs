@@ -173,7 +173,7 @@ public class SolutionDocumentAddProjectTests
         context.SavedLines().Should().Contain(line => line.Contains("\"Root.csproj\""));
     }
 
-    private ProjectXmlDocument WriteProjectInSolutionRoot()
+    private string WriteProjectInSolutionRoot()
     {
         string projectFile = Path.Combine(_folder, "Root.csproj");
 
@@ -184,10 +184,10 @@ public class SolutionDocumentAddProjectTests
             "  </PropertyGroup>",
             "</Project>"));
 
-        return ProjectXmlDocument.GetProjectXmlDocument(projectFile);
+        return projectFile;
     }
 
-    private ProjectXmlDocument WriteSdkProject()
+    private string WriteSdkProject()
     {
         Directory.CreateDirectory(Path.Combine(_folder, "Delta"));
 
@@ -200,7 +200,7 @@ public class SolutionDocumentAddProjectTests
             "  </PropertyGroup>",
             "</Project>"));
 
-        return ProjectXmlDocument.GetProjectXmlDocument(projectFile);
+        return projectFile;
     }
 
     private TestContext CreateContext()
@@ -237,7 +237,7 @@ public class SolutionDocumentAddProjectTests
 
         return new TestContext(
             SolutionDocument.GetSolutionDocument(solutionFile),
-            ProjectXmlDocument.GetProjectXmlDocument(projectFile),
+            projectFile,
             solutionFile);
     }
 
@@ -245,11 +245,11 @@ public class SolutionDocumentAddProjectTests
     {
         public SolutionDocument Document { get; }
 
-        public ProjectXmlDocument ProjectToAdd { get; }
+        public string ProjectToAdd { get; }
 
         public string SolutionFile { get; }
 
-        public TestContext(SolutionDocument document, ProjectXmlDocument projectToAdd, string solutionFile)
+        public TestContext(SolutionDocument document, string projectToAdd, string solutionFile)
         {
             Document = document;
             ProjectToAdd = projectToAdd;

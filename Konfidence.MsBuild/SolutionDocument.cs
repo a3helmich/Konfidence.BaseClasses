@@ -55,8 +55,10 @@ namespace Konfidence.MsBuild
             return new SolutionDocument(solutionFile);
         }
 
-        public void AddProjectFile(ProjectXmlDocument projectFile)
+        public void AddProjectFile(string projectFilePath)
         {
+            ProjectXmlDocument projectFile = ProjectXmlDocument.GetProjectXmlDocument(projectFilePath);
+
             if (!CanAddProjectFile(projectFile))
             {
                 return;
