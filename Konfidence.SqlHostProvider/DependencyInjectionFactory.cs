@@ -25,12 +25,8 @@ public class DependencyInjectionFactory
         return AppContext.BaseDirectory;
     }
 
-    public static IServiceProvider ConfigureDependencyInjection(params string[] args)
+    public static IConfigurationRoot BuildConfiguration(params string[] args)
     {
-        ServiceCollection services = new();
-
-        services.AddSingleton(services);
-
         List<string> commandLineArguments = [];
 
         if (args.Any())
@@ -46,9 +42,16 @@ public class DependencyInjectionFactory
             }
         }
 
-        IConfigurationRoot configuration = GetConfigurationRoot(commandLineArguments.ToArray());
+        return GetConfigurationRoot(commandLineArguments.ToArray());
+    }
 
-        services.AddSqlHostProviderServices(configuration);
+    public static IServiceProvider ConfigureDependencyInjection(params string[] args)
+    {
+        ServiceCollection services = new();
+
+        services.AddSingleton(services);
+
+        services.AddSqlHostProviderServices(BuildConfiguration(args));
 
         return services.BuildServiceProvider();
     }
