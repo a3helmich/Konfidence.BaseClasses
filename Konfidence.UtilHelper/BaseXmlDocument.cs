@@ -27,7 +27,7 @@ public class BaseXmlDocument : XmlDocument
             ? string.Empty
             : Path.DirectorySeparatorChar.ToString();
 
-        base.Load(PathName + FileName);
+        base.Load(FileName);
 
         PostLoad();
     }
