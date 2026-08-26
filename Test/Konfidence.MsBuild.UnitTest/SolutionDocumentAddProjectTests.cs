@@ -157,6 +157,36 @@ public class SolutionDocumentAddProjectTests
         context.SavedLines().Should().Contain($"\t\t{delta.ProjectGuid}.Debug|Any CPU.ActiveCfg = Debug|Any CPU");
     }
 
+    [TestMethod]
+    public void AddProjectFile_WithAProjectInTheSolutionRoot_WritesARelativeProjectPath()
+    {
+        // Arrange
+        TestContext context = CreateContext();
+
+        var rootProject = WriteProjectInSolutionRoot();
+
+        // Act
+        context.Document.AddProjectFile(rootProject);
+        context.Document.Save();
+
+        // Assert
+        context.SavedLines().Should().Contain(line => line.Contains("\"Root.csproj\""));
+    }
+
+    private ProjectXmlDocument WriteProjectInSolutionRoot()
+    {
+        string projectFile = Path.Combine(_folder, "Root.csproj");
+
+        File.WriteAllText(projectFile, string.Join(Environment.NewLine,
+            "<Project Sdk=\"Microsoft.NET.Sdk\">",
+            "  <PropertyGroup>",
+            "    <TargetFramework>net10.0</TargetFramework>",
+            "  </PropertyGroup>",
+            "</Project>"));
+
+        return ProjectXmlDocument.GetProjectXmlDocument(projectFile);
+    }
+
     private ProjectXmlDocument WriteSdkProject()
     {
         Directory.CreateDirectory(Path.Combine(_folder, "Delta"));

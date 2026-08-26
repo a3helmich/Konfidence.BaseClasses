@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Nullable>disable</Nullable>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -9,7 +9,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Konfidence.UtilHelper\Konfidence.UtilHelper.csproj" />
+		<ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
