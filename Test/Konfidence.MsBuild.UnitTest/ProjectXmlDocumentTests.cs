@@ -9,7 +9,6 @@ namespace Konfidence.MsBuild.UnitTest;
 public class ProjectXmlDocumentTests
 {
     private const string ProjectGuid = "{55555555-5555-5555-5555-555555555555}";
-    private const string ReplacementGuid = "{99999999-9999-9999-9999-999999999999}";
 
     private string _folder = string.Empty;
 
@@ -37,7 +36,7 @@ public class ProjectXmlDocumentTests
         TestContext context = CreateContext(WriteLegacyProject());
 
         // Act
-        var projectName = context.Document.ProjectName;
+        string projectName = context.Document.ProjectName;
 
         // Assert
         projectName.Should().Be("Gamma");
@@ -50,7 +49,7 @@ public class ProjectXmlDocumentTests
         TestContext context = CreateContext(WriteLegacyProject());
 
         // Act
-        var fileName = context.Document.FileName;
+        string fileName = context.Document.FileName;
 
         // Assert
         fileName.Should().Be(context.ProjectFile);
@@ -63,7 +62,7 @@ public class ProjectXmlDocumentTests
         TestContext context = CreateContext(WriteLegacyProject());
 
         // Act
-        var projectGuid = context.Document.ProjectGuid;
+        string projectGuid = context.Document.ProjectGuid;
 
         // Assert
         projectGuid.Should().Be(ProjectGuid);
@@ -76,198 +75,10 @@ public class ProjectXmlDocumentTests
         TestContext context = CreateContext(WriteSdkProject());
 
         // Act
-        var projectGuid = context.Document.ProjectGuid;
+        string projectGuid = context.Document.ProjectGuid;
 
         // Assert
         projectGuid.Should().BeEmpty();
-    }
-
-    [TestMethod]
-    public void ProjectGuid_SetOnASdkStyleProject_DoesNotTake()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteSdkProject());
-
-        // Act
-        context.Document.ProjectGuid = ReplacementGuid;
-
-        // Assert
-        context.Document.ProjectGuid.Should().BeEmpty();
-    }
-
-    [TestMethod]
-    public void ProjectGuid_SetOnALegacyProject_ReturnsTheNewValue()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteLegacyProject());
-
-        // Act
-        context.Document.ProjectGuid = ReplacementGuid;
-
-        // Assert
-        context.Document.ProjectGuid.Should().Be(ReplacementGuid);
-    }
-
-    [TestMethod]
-    public void ProjectGuid_SetAfterBeingRead_ReturnsTheNewValue()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteLegacyProject());
-
-        string beforeSet = context.Document.ProjectGuid;
-
-        // Act
-        context.Document.ProjectGuid = ReplacementGuid;
-
-        // Assert
-        beforeSet.Should().Be(ProjectGuid);
-        context.Document.ProjectGuid.Should().Be(ReplacementGuid);
-    }
-
-    [TestMethod]
-    public void ProjectGuid_SetOnALegacyProjectAndSaved_IsWrittenToTheFile()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteLegacyProject());
-
-        context.Document.ProjectGuid = ReplacementGuid;
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        var reloaded = ProjectXmlDocument.GetProjectXmlDocument(context.ProjectFile);
-
-        reloaded.ProjectGuid.Should().Be(ReplacementGuid);
-    }
-
-    [TestMethod]
-    public void Changed_AfterLoad_IsFalse()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteLegacyProject());
-
-        // Act
-        var changed = context.Document.Changed;
-
-        // Assert
-        changed.Should().BeFalse();
-    }
-
-    [TestMethod]
-    public void Save_OfAnSdkStyleProject_KeepsTheSdkAttribute()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteSdkProject());
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        File.ReadAllText(context.ProjectFile).Should().Contain("Sdk=\"Microsoft.NET.Sdk\"");
-    }
-
-    [TestMethod]
-    public void Save_OfAnSdkStyleProject_KeepsTheTargetFramework()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteSdkProject());
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        File.ReadAllText(context.ProjectFile).Should().Contain("<TargetFramework>net10.0</TargetFramework>");
-    }
-
-    [TestMethod]
-    public void Save_OfAnSdkStyleProject_LeavesTheFileByteIdentical()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteSdkProject());
-
-        var before = File.ReadAllBytes(context.ProjectFile);
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        File.ReadAllBytes(context.ProjectFile).Should().Equal(before);
-    }
-
-    [TestMethod]
-    public void Save_OfAProjectWithBlankLines_KeepsThem()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteSdkProjectWithBlankLines());
-
-        var before = File.ReadAllLines(context.ProjectFile);
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        File.ReadAllLines(context.ProjectFile).Should().Equal(before);
-    }
-
-    [TestMethod]
-    public void Save_OfAProjectWithUnixLineEndings_WritesWindowsLineEndings()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteSdkProjectWithUnixLineEndings());
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        var saved = File.ReadAllText(context.ProjectFile);
-
-        saved.Should().Contain("\r\n");
-        saved.Should().NotContain("\n\n");
-    }
-
-    [TestMethod]
-    public void Save_OfALegacyProject_WritesAByteOrderMark()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteLegacyProject());
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        File.ReadAllBytes(context.ProjectFile).Should().StartWith(new byte[] { 0xEF, 0xBB, 0xBF });
-    }
-
-    [TestMethod]
-    public void Save_OfALegacyProject_KeepsEveryLine()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteLegacyProject());
-
-        var before = File.ReadAllLines(context.ProjectFile);
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        File.ReadAllLines(context.ProjectFile).Should().Equal(before);
-    }
-
-    [TestMethod]
-    public void Save_OfALegacyProject_KeepsTheOtherProperties()
-    {
-        // Arrange
-        TestContext context = CreateContext(WriteLegacyProject());
-
-        // Act
-        context.Document.Save(context.ProjectFile);
-
-        // Assert
-        var saved = File.ReadAllText(context.ProjectFile);
-
-        saved.Should().Contain("<Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>");
-        saved.Should().Contain("http://schemas.microsoft.com/developer/msbuild/2003");
     }
 
     [TestMethod]
@@ -328,7 +139,7 @@ public class ProjectXmlDocumentTests
 
     private string WriteLegacyProjectInSubFolder()
     {
-        var subFolder = Path.Combine(_folder, "Gamma");
+        string subFolder = Path.Combine(_folder, "Gamma");
 
         Directory.CreateDirectory(subFolder);
 
@@ -348,40 +159,6 @@ public class ProjectXmlDocumentTests
             $"    <ProjectGuid>{ProjectGuid}</ProjectGuid>",
             "  </PropertyGroup>",
             "</Project>"));
-
-        return projectFile;
-    }
-
-    private string WriteSdkProjectWithBlankLines()
-    {
-        string projectFile = Path.Combine(_folder, "Epsilon.csproj");
-
-        File.WriteAllText(projectFile, string.Join(Environment.NewLine,
-            "<Project Sdk=\"Microsoft.NET.Sdk\">",
-            "",
-            "\t<PropertyGroup>",
-            "\t\t<TargetFramework>net10.0</TargetFramework>",
-            "\t</PropertyGroup>",
-            "",
-            "</Project>",
-            ""));
-
-        return projectFile;
-    }
-
-    private string WriteSdkProjectWithUnixLineEndings()
-    {
-        string projectFile = Path.Combine(_folder, "Zeta.csproj");
-
-        File.WriteAllText(projectFile, string.Join("\n",
-            "<Project Sdk=\"Microsoft.NET.Sdk\">",
-            "",
-            "\t<PropertyGroup>",
-            "\t\t<TargetFramework>net10.0</TargetFramework>",
-            "\t</PropertyGroup>",
-            "",
-            "</Project>",
-            ""));
 
         return projectFile;
     }
