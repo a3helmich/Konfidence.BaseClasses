@@ -73,8 +73,6 @@ public sealed class Encoder : IDisposable
     public void Dispose()
     {
         Dispose(true);
-
-        GC.SuppressFinalize(this);
     }
 
     private void Dispose(bool disposing)

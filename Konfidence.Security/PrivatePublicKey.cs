@@ -4,7 +4,7 @@ namespace Konfidence.Security;
 
 public class PrivatePublicKey
 {
-    public string ApplicationName { get; }
+    private string ApplicationName { get; }
 
     public string PublicKey { get; }
 
