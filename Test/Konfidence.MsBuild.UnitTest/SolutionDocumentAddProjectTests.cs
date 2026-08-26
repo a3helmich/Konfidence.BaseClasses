@@ -121,7 +121,7 @@ public class SolutionDocumentAddProjectTests
     }
 
     [TestMethod]
-    public void AddProjectFile_WithASdkStyleProject_WritesAnEmptyProjectGuid()
+    public void AddProjectFile_WithASdkStyleProject_WritesAGeneratedProjectGuid()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -133,11 +133,14 @@ public class SolutionDocumentAddProjectTests
         context.Document.Save();
 
         // Assert
-        context.SavedLines().Should().Contain(line => line.Contains("Delta") && line.EndsWith(", \"\""));
+        var delta = context.Document.Projects.Single(project => project.ProjectName.Equals("Delta"));
+
+        delta.ProjectGuid.Should().NotBe(Guid.Empty.ToString("B").ToUpperInvariant());
+        context.SavedLines().Should().Contain(line => line.Contains("Delta") && line.EndsWith($", \"{delta.ProjectGuid}\""));
     }
 
     [TestMethod]
-    public void AddProjectFile_WithASdkStyleProject_WritesConfigurationLinesWithoutAGuid()
+    public void AddProjectFile_WithASdkStyleProject_WritesConfigurationLinesWithThatGuid()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -149,7 +152,9 @@ public class SolutionDocumentAddProjectTests
         context.Document.Save();
 
         // Assert
-        context.SavedLines().Should().Contain("\t\t.Debug|Any CPU.ActiveCfg = Debug|Any CPU");
+        var delta = context.Document.Projects.Single(project => project.ProjectName.Equals("Delta"));
+
+        context.SavedLines().Should().Contain($"\t\t{delta.ProjectGuid}.Debug|Any CPU.ActiveCfg = Debug|Any CPU");
     }
 
     private ProjectXmlDocument WriteSdkProject()
