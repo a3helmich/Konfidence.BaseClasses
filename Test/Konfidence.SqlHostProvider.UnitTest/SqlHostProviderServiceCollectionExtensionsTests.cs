@@ -155,6 +155,69 @@ public class SqlHostProviderServiceCollectionExtensionsTests
         serviceProvider.GetService<IClientConfig>().Should().NotBeNull();
     }
 
+    [TestMethod]
+    public void BuildConfiguration_WithAConfigFileFolderArgument_MapsItIntoTheDataConfigurationSection()
+    {
+        // Arrange
+
+        // Act
+        IConfigurationRoot configuration = DependencyInjectionFactory.BuildConfiguration(@"--ConfigFileFolder=C:\Projects\Newsletter");
+
+        // Assert
+        configuration["DataConfiguration:ConfigFileFolder"].Should().Be(@"C:\Projects\Newsletter");
+    }
+
+    [TestMethod]
+    public void BuildConfiguration_WithADefaultDatabaseArgument_MapsItIntoTheDataConfigurationSection()
+    {
+        // Arrange
+
+        // Act
+        IConfigurationRoot configuration = DependencyInjectionFactory.BuildConfiguration("--DefaultDatabase=Newsletter");
+
+        // Assert
+        configuration["DataConfiguration:DefaultDatabase"].Should().Be("Newsletter");
+    }
+
+    [TestMethod]
+    public void BuildConfiguration_WithoutAnyArgument_StillReturnsAConfiguration()
+    {
+        // Arrange
+
+        // Act
+        IConfigurationRoot configuration = DependencyInjectionFactory.BuildConfiguration();
+
+        // Assert
+        configuration.Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void BuildConfiguration_WithAnUnrecognisedArgument_IgnoresIt()
+    {
+        // Arrange
+
+        // Act
+        IConfigurationRoot configuration = DependencyInjectionFactory.BuildConfiguration("--SomethingElse=value");
+
+        // Assert
+        configuration["DataConfiguration:SomethingElse"].Should().BeNull();
+    }
+
+    [TestMethod]
+    public void BuildConfiguration_WithBothArguments_MapsBoth()
+    {
+        // Arrange
+
+        // Act
+        IConfigurationRoot configuration = DependencyInjectionFactory.BuildConfiguration(
+            @"--ConfigFileFolder=C:\Projects\Newsletter",
+            "--DefaultDatabase=Newsletter");
+
+        // Assert
+        configuration["DataConfiguration:ConfigFileFolder"].Should().Be(@"C:\Projects\Newsletter");
+        configuration["DataConfiguration:DefaultDatabase"].Should().Be("Newsletter");
+    }
+
     private static TestContext CreateContext(Dictionary<string, string?>? settings = null)
     {
         IConfigurationRoot configuration = new ConfigurationBuilder()
