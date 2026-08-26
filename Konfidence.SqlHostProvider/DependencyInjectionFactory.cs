@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Konfidence.Base;
-using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
-using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -50,16 +48,7 @@ public class DependencyInjectionFactory
 
         IConfigurationRoot configuration = GetConfigurationRoot(commandLineArguments.ToArray());
 
-        ClientConfig clientConfig = new(configuration);
-
-        clientConfig.SetSqlApplicationSettings();
-
-        // client classes
-        services
-            .AddSingleton<IDatabaseStructure, DatabaseStructure>()
-            .AddSingleton<IBaseClient, SqlClient>()
-            .AddSingleton<IDataRepository, SqlClientRepository>()
-            .AddSingleton<IClientConfig>(clientConfig);
+        services.AddSqlHostProviderServices(configuration);
 
         return services.BuildServiceProvider();
     }
