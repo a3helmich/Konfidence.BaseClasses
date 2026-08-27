@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using System.Linq;
 using Konfidence.Base;
 using Konfidence.BaseData;
@@ -37,7 +36,7 @@ public class ColumnDataItem : BaseDataItem, IColumnDataItem
 
     public string NewGuidPropertyValue { get; private set; } = string.Empty;
 
-    public string CharacterMaximumLength { get; private set; } = string.Empty;
+    public int CharacterMaximumLength { get; private set; }
 
     public ColumnDataItem()
     {
@@ -93,7 +92,7 @@ public class ColumnDataItem : BaseDataItem, IColumnDataItem
         IsDefaulted = defaultObjectId > 0;
         IsComputed = isComputed;
         SqlDataType = dataType;
-        CharacterMaximumLength = characterMaximumLengthInt.ToString(CultureInfo.InvariantCulture);
+        CharacterMaximumLength = characterMaximumLengthInt;
 
         DataType = GetDataType(SqlDataType);
 

@@ -15,7 +15,7 @@ public interface IColumnDataItem : IBaseDataItem
     string DefaultPropertyValue { get; }
     string NewGuidPropertyValue { get; }
 
-    string CharacterMaximumLength { get; }
+    int CharacterMaximumLength { get; }
     string DataType { get; }
     string DbDataType { get; }
     string SqlDataType { get; }
