@@ -15,13 +15,13 @@ public class ConnectionManagement
     [UsedImplicitly]
     public static void SetActiveConnection(string connectionName)
     {
-        new AppConfigApplicationConfigurationWriter().SetDefaultDatabase(connectionName);
+        new ConnectionManager().SetActiveConnection(connectionName);
     }
 
     [UsedImplicitly]
     public static void SetApplicationDatabase(string database, string server, string connectionName)
     {
-        new AppConfigApplicationConfigurationWriter().SetConnectionString(connectionName, database, server);
+        new ConnectionManager().SetApplicationDatabase(database, server, connectionName);
     }
 
     internal static void SetConnectionStringPart(List<string> connectionStringParts, string parameter, string value)

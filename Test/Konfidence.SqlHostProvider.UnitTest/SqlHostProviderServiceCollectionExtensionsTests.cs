@@ -4,6 +4,7 @@ using System.Linq;
 using FluentAssertions;
 using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
+using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,19 @@ namespace Konfidence.SqlHostProvider.UnitTest;
 [TestClass]
 public class SqlHostProviderServiceCollectionExtensionsTests
 {
+    [TestMethod]
+    public void AddSqlHostProviderServices_Always_RegistersTheConnectionManagement()
+    {
+        // Arrange
+        TestContext context = CreateContext();
+
+        // Act
+        context.Services.AddSqlHostProviderServices(context.Configuration);
+
+        // Assert
+        context.DescriptorFor<IConnectionManagement>().ImplementationType.Should().Be<ConnectionManager>();
+    }
+
     [TestMethod]
     public void AddSqlHostProviderServices_Always_RegistersTheDatabaseStructure()
     {
@@ -113,7 +127,7 @@ public class SqlHostProviderServiceCollectionExtensionsTests
     }
 
     [TestMethod]
-    public void AddSqlHostProviderServices_Always_RegistersOnlyTheFourClientServices()
+    public void AddSqlHostProviderServices_Always_RegistersOnlyTheClientServices()
     {
         // Arrange
         TestContext context = CreateContext();
@@ -124,6 +138,7 @@ public class SqlHostProviderServiceCollectionExtensionsTests
         // Assert
         context.Services.Select(descriptor => descriptor.ServiceType).Should().BeEquivalentTo(
         [
+            typeof(IConnectionManagement),
             typeof(IDatabaseStructure),
             typeof(IBaseClient),
             typeof(IDataRepository),
