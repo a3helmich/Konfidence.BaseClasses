@@ -1,5 +1,6 @@
 using Konfidence.DatabaseInterface;
 using Konfidence.SqlHostProvider.SqlAccess;
+using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Konfidence.SqlHostProvider.SqlDbSchema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ public static class SqlHostProviderServiceCollectionExtensions
         clientConfig.SetSqlApplicationSettings();
 
         return services
+            .AddSingleton<IConnectionManagement, ConnectionManager>()
             .AddSingleton<IDatabaseStructure, DatabaseStructure>()
             .AddSingleton<IBaseClient, SqlClient>()
             .AddSingleton<IDataRepository, SqlClientRepository>()
