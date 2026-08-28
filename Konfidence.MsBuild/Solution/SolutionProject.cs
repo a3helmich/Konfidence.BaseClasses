@@ -1,22 +1,21 @@
 using Microsoft.VisualStudio.SolutionPersistence.Model;
 
-namespace Konfidence.MsBuild.Solution
+namespace Konfidence.MsBuild.Solution;
+
+public class SolutionProject
 {
-    public class SolutionProject
+    public string ProjectFile { get; }
+
+    public string ProjectName { get; }
+
+    public string ProjectGuid { get; }
+
+    internal SolutionProject(SolutionProjectModel project)
     {
-        public string ProjectFile { get; }
+        ProjectFile = project.FilePath;
 
-        public string ProjectName { get; }
+        ProjectName = project.ActualDisplayName;
 
-        public string ProjectGuid { get; }
-
-        internal SolutionProject(SolutionProjectModel project)
-        {
-            ProjectFile = project.FilePath;
-
-            ProjectName = project.ActualDisplayName;
-
-            ProjectGuid = project.Id.ToString("B").ToUpperInvariant();
-        }
+        ProjectGuid = project.Id.ToString("B").ToUpperInvariant();
     }
 }

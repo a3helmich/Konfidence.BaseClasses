@@ -3,55 +3,54 @@ using System.Linq;
 using System.Xml.Linq;
 using Konfidence.Base;
 
-namespace Konfidence.MsBuild
+namespace Konfidence.MsBuild;
+
+internal class ProjectXmlDocument
 {
-    internal class ProjectXmlDocument
+    private const string PropertyGroupName = "PropertyGroup";
+    private const string ProjectGuidName = "ProjectGuid";
+
+    private readonly XDocument _projectDocument;
+
+    public string FileName { get; }
+
+    public string ProjectName => Path.GetFileNameWithoutExtension(FileName);
+
+    public string ProjectGuid => ReadProjectGuid();
+
+    private string ReadProjectGuid()
     {
-        private const string PropertyGroupName = "PropertyGroup";
-        private const string ProjectGuidName = "ProjectGuid";
+        XElement? projectGuidElement = FindProjectGuidElement();
 
-        private readonly XDocument _projectDocument;
+        return projectGuidElement.IsAssigned() ? projectGuidElement.Value : string.Empty;
+    }
 
-        public string FileName { get; }
+    private XElement? FindProjectGuidElement()
+    {
+        return _projectDocument.Root?
+            .Elements().Where(element => element.Name.LocalName.Equals(PropertyGroupName))
+            .Elements().FirstOrDefault(element => element.Name.LocalName.Equals(ProjectGuidName));
+    }
 
-        public string ProjectName => Path.GetFileNameWithoutExtension(FileName);
-
-        public string ProjectGuid => ReadProjectGuid();
-
-        private string ReadProjectGuid()
+    public string GetRelativeProjectFileName(string basePath)
+    {
+        if (!basePath.IsAssigned())
         {
-            XElement? projectGuidElement = FindProjectGuidElement();
-
-            return projectGuidElement.IsAssigned() ? projectGuidElement.Value : string.Empty;
+            return Path.GetFileName(FileName);
         }
 
-        private XElement? FindProjectGuidElement()
-        {
-            return _projectDocument.Root?
-                .Elements().Where(element => element.Name.LocalName.Equals(PropertyGroupName))
-                .Elements().FirstOrDefault(element => element.Name.LocalName.Equals(ProjectGuidName));
-        }
+        return Path.GetRelativePath(basePath, FileName);
+    }
 
-        public string GetRelativeProjectFileName(string basePath)
-        {
-            if (!basePath.IsAssigned())
-            {
-                return Path.GetFileName(FileName);
-            }
+    private ProjectXmlDocument(string projectFile)
+    {
+        FileName = projectFile;
 
-            return Path.GetRelativePath(basePath, FileName);
-        }
+        _projectDocument = XDocument.Load(projectFile, LoadOptions.PreserveWhitespace);
+    }
 
-        private ProjectXmlDocument(string projectFile)
-        {
-            FileName = projectFile;
-
-            _projectDocument = XDocument.Load(projectFile, LoadOptions.PreserveWhitespace);
-        }
-
-        public static ProjectXmlDocument GetProjectXmlDocument(string projectFile)
-        {
-            return new ProjectXmlDocument(projectFile);
-        }
+    public static ProjectXmlDocument GetProjectXmlDocument(string projectFile)
+    {
+        return new ProjectXmlDocument(projectFile);
     }
 }
