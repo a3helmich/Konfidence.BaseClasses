@@ -77,13 +77,13 @@ public class SolutionDocumentGetByDirectoryAndNameTests
     }
 
     [TestMethod]
-    public void GetSolutionDocument_WithNeitherFilePresent_ThrowsPointingAtTheSlnCandidate()
+    public void GetSolutionDocument_WithNeitherFilePresent_ThrowsPointingAtTheSlnxCandidate()
     {
         // Arrange / Act
         Action getSolutionDocument = () => SolutionDocument.GetSolutionDocument(_folder, SolutionName);
 
         // Assert
-        getSolutionDocument.Should().Throw<FileNotFoundException>().WithMessage($"*{SolutionName}.sln*");
+        getSolutionDocument.Should().Throw<FileNotFoundException>().WithMessage($"*{SolutionName}.slnx*");
     }
 
     [TestMethod]
@@ -110,6 +110,42 @@ public class SolutionDocumentGetByDirectoryAndNameTests
 
         // Assert
         solution.Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void ResolveSolutionFilePath_WithASlnFileOnDisk_ReturnsItsFullPath()
+    {
+        // Arrange
+        WriteSlnFile();
+
+        // Act
+        string solutionFilePath = SolutionDocument.ResolveSolutionFilePath(_folder, SolutionName);
+
+        // Assert
+        solutionFilePath.Should().Be(SolutionFilePath(".sln"));
+    }
+
+    [TestMethod]
+    public void ResolveSolutionFilePath_WithNoSlnButASlnxFileOnDisk_ReturnsTheSlnxFullPath()
+    {
+        // Arrange
+        WriteSlnxFile();
+
+        // Act
+        string solutionFilePath = SolutionDocument.ResolveSolutionFilePath(_folder, SolutionName);
+
+        // Assert
+        solutionFilePath.Should().Be(SolutionFilePath(".slnx"));
+    }
+
+    [TestMethod]
+    public void ResolveSolutionFilePath_WithNeitherFilePresent_GuessesTheSlnxCandidate()
+    {
+        // Arrange / Act
+        string solutionFilePath = SolutionDocument.ResolveSolutionFilePath(_folder, SolutionName);
+
+        // Assert
+        solutionFilePath.Should().Be(SolutionFilePath(".slnx"));
     }
 
     private void WriteSlnFile()
