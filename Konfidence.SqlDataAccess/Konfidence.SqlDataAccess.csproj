@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageReadmeFile>Konfidence.SqlDataAccess.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.11" />
@@ -8,6 +12,11 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Konfidence.SqlDataAccess.UnitTest" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.SqlDataAccess.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

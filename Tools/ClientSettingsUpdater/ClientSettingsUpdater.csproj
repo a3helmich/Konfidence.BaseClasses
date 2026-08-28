@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <PackAsTool>true</PackAsTool>
+    <PackageReadmeFile>ClientSettingsUpdater.Readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,6 +22,11 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="ClientSettingsUpdater.UnitTest" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../../ClientSettingsUpdater.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

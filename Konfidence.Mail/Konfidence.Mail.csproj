@@ -1,7 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageReadmeFile>Konfidence.Mail.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.Mail.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

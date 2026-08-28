@@ -61,6 +61,17 @@ steps:
     projects: '**\Konfidence.BaseClasses.sln'
     arguments: '-c $(BuildConfiguration) --no-restore /p:Version=$(year).$(majorVersion).$(minorVersion)'
 
+# .\nuget is filled by the build step above, not by the dotnet pack step further down:
+# Directory.Build.props sets GeneratePackageOnBuild for Release plus
+# PackageOutputPath=$(SolutionDir)nuget, so building the solution in release already produces every
+# package there. This step installs ClientSettingsUpdater (PackAsTool) from that folder so the two
+# steps below it can write the SQL credentials the tests need.
+# So the solution is packaged twice per run, deliberately: once at build time for this folder, and
+# once via dotnet pack into the artifact staging directory for publishing. They cannot be collapsed
+# as things stand - dotnet pack only runs for PullRequest builds, while this step runs on every
+# build including the nightly, so pointing --add-source at the staging directory would break the
+# nightly. Only ClientSettingsUpdater is actually needed here; the other packages in .\nuget are
+# incidental. Accepted as-is: the cost is a few seconds and some disk.
 - task: DotNetCoreCLI@2
   displayName: 'dotnet tool install ClientSettingsUpdater'
   inputs:
