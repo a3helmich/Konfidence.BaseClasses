@@ -66,7 +66,11 @@ public class SolutionDocument
         return new SolutionDocument(ResolveSolutionFilePath(solutionDirectory, solutionName));
     }
 
-    private static string ResolveSolutionFilePath(string solutionDirectory, string solutionName)
+    /// <summary>
+    /// The resolution GetSolutionDocument(directory, name) applies, exposed on its own for a caller
+    /// that needs the resolved path without opening the solution.
+    /// </summary>
+    public static string ResolveSolutionFilePath(string solutionDirectory, string solutionName)
     {
         if (HasSolutionExtension(solutionName))
         {
