@@ -12,6 +12,10 @@ namespace Konfidence.MsBuild;
 
 public class SolutionDocument
 {
+    private const string SolutionExtension = ".sln";
+
+    private const string SolutionXmlExtension = ".slnx";
+
     private readonly string _solutionFile;
 
     private readonly ISolutionSerializer _serializer;
@@ -50,6 +54,34 @@ public class SolutionDocument
     public static SolutionDocument GetSolutionDocument(string solutionFile)
     {
         return new SolutionDocument(solutionFile);
+    }
+
+    /// <summary>
+    /// Resolves the solution file from a directory and a name, trying .sln first and falling back
+    /// to .slnx when no .sln file exists. The name may already carry either extension, in which case
+    /// it is used as given.
+    /// </summary>
+    public static SolutionDocument GetSolutionDocument(string solutionDirectory, string solutionName)
+    {
+        return new SolutionDocument(ResolveSolutionFilePath(solutionDirectory, solutionName));
+    }
+
+    private static string ResolveSolutionFilePath(string solutionDirectory, string solutionName)
+    {
+        if (HasSolutionExtension(solutionName))
+        {
+            return Path.Combine(solutionDirectory, solutionName);
+        }
+
+        string slnFilePath = Path.Combine(solutionDirectory, $"{solutionName}{SolutionExtension}");
+
+        return File.Exists(slnFilePath) ? slnFilePath : Path.Combine(solutionDirectory, $"{solutionName}{SolutionXmlExtension}");
+    }
+
+    private static bool HasSolutionExtension(string solutionName)
+    {
+        return solutionName.EndsWith(SolutionExtension, StringComparison.OrdinalIgnoreCase)
+               || solutionName.EndsWith(SolutionXmlExtension, StringComparison.OrdinalIgnoreCase);
     }
 
     public void AddProjectFile(string projectFilePath)
