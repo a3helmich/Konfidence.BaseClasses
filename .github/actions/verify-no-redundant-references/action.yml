@@ -1,0 +1,51 @@
+name: Verify no redundant references
+description: >-
+  Fails the job when Konfidence.Project-References reports project or package references a project
+  already gets another way - through a project it references, or through another package.
+
+inputs:
+  solution:
+    description: >-
+      Solution to scan, without extension. Leave empty to let the tool look for a solution named
+      after the working folder - which on a runner is the repository name, so usually pass this.
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    # Updated rather than installed so every run uses the current version; "dotnet tool update -g"
+    # installs it when absent.
+    #
+    # The tool always exits 0 - its entry point is an async Task Main with no return value - so it
+    # cannot fail a job by itself. What it does do is write redundant.txt when it finds something
+    # and delete a stale one when the solution is clean, so the file's existence is the signal, and
+    # turning that into a failure is this action's whole job.
+    #
+    # The report is written to the current working directory, which for a composite action is the
+    # workspace root.
+    - shell: pwsh
+      run: |
+        dotnet tool update -g Konfidence.Project-References
+
+        $solution = '${{ inputs.solution }}'
+
+        if ($solution) {
+          Project-References --Solution=$solution
+        }
+        else {
+          Project-References
+        }
+
+        if (-not (Test-Path redundant.txt)) {
+          Write-Host 'No redundant project or package references.'
+          exit 0
+        }
+
+        Write-Host '::group::redundant.txt'
+        Get-Content redundant.txt
+        Write-Host '::endgroup::'
+
+        Write-Host '::error::Redundant project/package references found - see the redundant.txt group in this log. Remove them, or keep a deliberately pinned package reference and re-run.'
+
+        exit 1

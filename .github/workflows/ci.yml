@@ -87,6 +87,15 @@ jobs:
         }
         reportgenerator -reports:TestResults/**/coverage.cobertura.xml -targetdir:CodeCoverage "-reporttypes:HtmlInline_AzurePipelines;Cobertura"
 
+    # Runs only on pull requests: this is a merge gate, so it reports while a change can still be
+    # revised rather than after it has landed. The Pages steps below are push-only, so the two never
+    # run in the same job and a finding here cannot hold up the coverage report.
+    - name: Check for redundant project/package references
+      if: github.event_name == 'pull_request'
+      uses: ./.github/actions/verify-no-redundant-references
+      with:
+        solution: Konfidence.BaseClasses
+
     - name: Configure Pages
       if: github.event_name == 'push'
       uses: actions/configure-pages@v6
