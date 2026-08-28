@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageReadmeFile>Konfidence.BaseThreadClasses.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>TRACE;RELEASE;NETCOREAPP;NETCOREAPP2_1;JETBRAINS_ANNOTATIONS</DefineConstants>
   </PropertyGroup>
@@ -14,6 +18,11 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Konfidence.BaseThreadClasses.UnitTest" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.BaseThreadClasses.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

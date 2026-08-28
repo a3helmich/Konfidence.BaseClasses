@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageReadmeFile>Konfidence.TestTools.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MSTest.TestFramework" Version="4.3.3" />
   </ItemGroup>
@@ -11,4 +15,9 @@
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../Konfidence.TestTools.Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<PropertyGroup>
+		<PackageReadmeFile>Konfidence.Security.Readme.md</PackageReadmeFile>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0|AnyCPU'">
 		<NoWarn>1701;1702;CA1416</NoWarn>
 	</PropertyGroup>
@@ -23,6 +27,11 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Konfidence.Security.UnitTest" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.Security.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

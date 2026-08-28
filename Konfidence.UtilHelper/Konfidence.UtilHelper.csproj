@@ -1,11 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageReadmeFile>Konfidence.UtilHelper.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="Konfidence.UtilHelper.UnitTest" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.UtilHelper.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

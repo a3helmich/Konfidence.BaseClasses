@@ -1,4 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageReadmeFile>Konfidence.DatabaseInterface.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.DatabaseInterface.Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>

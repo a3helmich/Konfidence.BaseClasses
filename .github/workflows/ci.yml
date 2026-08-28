@@ -1,0 +1,113 @@
+# GitHub Actions CI, running on the GitHub mirror of this repository. The repository itself lives on
+# the on-prem Azure DevOps server; azure-pipelines-github.yml pushes every branch to
+# github.com/a3helmich/Konfidence.BaseClasses nightly, and that push is what triggers this workflow.
+# Azure DevOps does not execute .github/workflows, so the two CI systems never collide.
+#
+# This is not a duplicate of azure-pipelines.yml. It is the only place the *.LocalDb.UnitTest
+# projects actually run: the Azure agent filters them out with
+# "FullyQualifiedName!~LocalDb.UnitTest" because its Windows-service session cannot run SQL Server
+# LocalDB, while a windows-latest runner can. Disable this workflow and those tests run nowhere in
+# CI. Conversely it skips the *.IntegrationTest projects, which need the internal SQL Servers.
+#
+# Note for the mirror: GitHub rejects a token-authenticated push that touches .github/workflows
+# unless the token has the "workflow" scope. The mirror step runs with continueOnError, so a
+# rejection is silent - a green build that simply did not mirror.
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch: {}
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      checks: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v6
+      with:
+        dotnet-version: |
+          9.0.x
+          10.0.x
+        cache: true
+        cache-dependency-path: '**/*.csproj'
+
+    - name: Cache ReportGenerator tool
+      uses: actions/cache@v6
+      with:
+        path: ~/.dotnet/tools
+        key: reportgenerator-${{ runner.os }}
+
+    - name: dotnet restore
+      run: dotnet restore Konfidence.BaseClasses.sln
+
+    - name: dotnet build
+      run: dotnet build Konfidence.BaseClasses.sln -c Release --no-restore
+
+    - name: dotnet test (unit tests only)
+      shell: pwsh
+      run: |
+        $failed = $false
+        Get-ChildItem -Recurse -Filter *.UnitTest.csproj | ForEach-Object {
+          Write-Host "Testing $($_.FullName)"
+          dotnet test $_.FullName -c Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --settings coverlet.runsettings --results-directory TestResults --logger "trx;LogFileName=$($_.BaseName).trx"
+          if ($LASTEXITCODE -ne 0) { $failed = $true }
+        }
+        if ($failed) { exit 1 }
+
+    - name: Report test results
+      if: always()
+      uses: dorny/test-reporter@v3
+      with:
+        name: Unit test results
+        path: 'TestResults/**/*.trx'
+        reporter: dotnet-trx
+
+    - name: Generate coverage report
+      if: always()
+      shell: pwsh
+      run: |
+        if (-not (Get-Command reportgenerator -ErrorAction SilentlyContinue)) {
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+        }
+        reportgenerator -reports:TestResults/**/coverage.cobertura.xml -targetdir:CodeCoverage "-reporttypes:HtmlInline_AzurePipelines;Cobertura"
+
+    - name: Configure Pages
+      if: github.event_name == 'push'
+      uses: actions/configure-pages@v6
+
+    - name: Upload coverage report to Pages
+      if: github.event_name == 'push'
+      uses: actions/upload-pages-artifact@v5
+      with:
+        path: CodeCoverage
+
+  deploy-pages:
+    if: github.event_name == 'push'
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v5

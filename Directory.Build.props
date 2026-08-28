@@ -30,7 +30,6 @@
 
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/a3helmich/Konfidence.BaseClasses</PackageProjectUrl>
-		<!--<PackageReadmeFile>readme.md</PackageReadmeFile>-->
 
 		<RepositoryUrl>https://github.com/a3helmich/Konfidence.BaseClasses</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
@@ -38,9 +37,12 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
+		<!-- The condition keeps local Debug builds from packaging. Note that the release build
+		     pipeline depends on this being on for Release: its "dotnet tool install
+		     ClientSettingsUpdater" step installs from the nuget folder (PackageOutputPath above),
+		     which is only populated because building Release already packs. Removing or
+		     narrowing this breaks that step, and with it the SQL tests needing the credentials
+		     it writes - the later dotnet pack step writes elsewhere and does not fill it. -->
 		<GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
 	</PropertyGroup>
-	<!--<ItemGroup>
-		<None Include="$(SolutionDir)readme.md" Pack="true" PackagePath="\"/>
-	</ItemGroup>-->
 </Project>

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <RootNamespace>Konfidence.BaseData</RootNamespace>
     <AssemblyName>Konfidence.BaseDatabaseClasses</AssemblyName>
+    <PackageReadmeFile>Konfidence.BaseDatabaseClasses.Readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,11 @@
     <InternalsVisibleTo Include="Konfidence.BaseDatabaseClasses.UnitTest" />
     <InternalsVisibleTo Include="Konfidence.MenuClasses.Tests" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.BaseDatabaseClasses.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

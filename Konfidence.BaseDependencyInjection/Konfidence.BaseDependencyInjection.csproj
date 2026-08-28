@@ -1,8 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <PackageReadmeFile>Konfidence.BaseDependencyInjection.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="../Konfidence.BaseDependencyInjection.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
