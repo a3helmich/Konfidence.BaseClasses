@@ -108,6 +108,19 @@ public class SolutionDocumentAddProjectTests
     }
 
     [TestMethod]
+    public void AddProjectFile_AddsNoSolutionFolder()
+    {
+        // Arrange
+        TestContext context = CreateContext();
+
+        // Act
+        context.Document.AddProjectFile(context.ProjectToAdd);
+
+        // Assert
+        context.Document.HasSolutionItem.Should().BeFalse();
+    }
+
+    [TestMethod]
     public void AddProjectFile_WithANewProject_KeepsTheExistingProjects()
     {
         // Arrange

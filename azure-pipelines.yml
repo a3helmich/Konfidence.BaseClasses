@@ -117,7 +117,16 @@ steps:
   condition: eq(variables['Build.Reason'], 'PullRequest')
   inputs:
     SourceFolder: '$(Build.ArtifactStagingDirectory)'
-    Contents: '**'
+    # Everything except Konfidence.BaseClasses, which goes to nuget.org in the two steps below.
+    # Publishing it to both meant the same version existed on the internal share and on nuget.org;
+    # consumers now get it from nuget.org only. The exclusions deliberately mirror the globs those
+    # push steps use, so the two stay in step - if one changes, change the other.
+    # Versions already on the share are left alone (CleanTargetFolder is false), so anything pinned
+    # to an older Konfidence.BaseClasses still restores from there.
+    Contents: |
+      **
+      !Konfidence.BaseClasses.*.nupkg
+      !Konfidence.BaseClasses.*.snupkg
     TargetFolder: '\\konfidence8\publish'
     CleanTargetFolder: false
     OverWrite: true
