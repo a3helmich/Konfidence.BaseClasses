@@ -24,7 +24,6 @@
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 
-
   <ItemGroup>
     <None Include="../Konfidence.SqlHostProvider.Readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>

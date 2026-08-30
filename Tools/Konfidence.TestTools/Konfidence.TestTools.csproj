@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageReadmeFile>Konfidence.TestTools.Readme.md</PackageReadmeFile>
+	  <RootNamespace>Konfidence.TesTools</RootNamespace>
+	  <AssemblyName>Konfidence.TestTools</AssemblyName>
+	  <PackageReadmeFile>Konfidence.TestTools.Readme.md</PackageReadmeFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MSTest" Version="4.3.3" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />

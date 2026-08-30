@@ -19,7 +19,7 @@ public static class SqlTestToolExtensions
     {
         Configuration? config = ConfigurationManager.OpenExeConfiguration(Assembly.GetCallingAssembly().Location);
 
-        DatabaseSettings? databaseSettings = config.Sections[@"dataConfiguration"] as DatabaseSettings;
+        DatabaseSettings? databaseSettings = config.Sections["dataConfiguration"] as DatabaseSettings;
 
         DatabaseSettings databaseSettingsCopy = new() { DefaultDatabase = databaseSettings?.DefaultDatabase };
 
@@ -44,26 +44,28 @@ public static class SqlTestToolExtensions
 
     public static void CopySqlSecurityToActiveConfiguration(string connectionName)
     {
-        if ("ClientConfigLocation".TryGetEnvironmentVariable(out string fileName) && File.Exists(fileName))
+        if (!"ClientConfigLocation".TryGetEnvironmentVariable(out string fileName) || !File.Exists(fileName))
         {
-            ClientSettings? clientSettings = JsonSerializer.Deserialize<ClientSettings>(File.ReadAllText(fileName));
-
-            List<ConfigConnectionString>? connections = clientSettings?.DataConfiguration?.Connections;
-
-            if (!connections.IsAssigned() || !connections.Any())
-            {
-                return;
-            }
-
-            ConfigConnectionString? connection = connections.FirstOrDefault(c => c.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase));
-
-            if (!connection.IsAssigned())
-            {
-                connection = connections.First();
-            }
-
-            SaveDatabaseSecurityToActiveConfiguration(connection.UserName, connection.Password, connectionName);
+            return;
         }
+
+        ClientSettings? clientSettings = JsonSerializer.Deserialize<ClientSettings>(File.ReadAllText(fileName));
+
+        List<ConfigConnectionString>? connections = clientSettings?.DataConfiguration?.Connections;
+
+        if (!connections.IsAssigned() || !connections.Any())
+        {
+            return;
+        }
+
+        ConfigConnectionString? connection = connections.FirstOrDefault(c => c.ConnectionName.Equals(connectionName, StringComparison.OrdinalIgnoreCase));
+
+        if (!connection.IsAssigned())
+        {
+            connection = connections.First();
+        }
+
+        SaveDatabaseSecurityToActiveConfiguration(connection.UserName, connection.Password, connectionName);
     }
 
     private static void SaveDatabaseSecurityToActiveConfiguration(string userName, string password, string connectionName)

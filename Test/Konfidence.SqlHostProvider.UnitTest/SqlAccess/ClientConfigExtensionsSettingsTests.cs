@@ -1,5 +1,3 @@
-using System.Linq;
-using FluentAssertions;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
