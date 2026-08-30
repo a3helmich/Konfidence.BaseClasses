@@ -3,12 +3,6 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="10.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Konfidence.SqlHostProvider\Konfidence.SqlHostProvider.csproj" />
   </ItemGroup>
 

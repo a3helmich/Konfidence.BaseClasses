@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using JetBrains.Annotations;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Konfidence.TestTools;
 
@@ -23,7 +22,10 @@ public static class FileCompareTool
             return false;
         }
 
-        Assert.IsTrue(file1Info.Length < 100000, "Files are too big");
+        if (file1Info.Length >= 10000)
+        {
+            return false;
+        }
 
         byte[] file1ByteList = File.ReadAllBytes(file1);
         byte[] file2ByteList = File.ReadAllBytes(file2);
@@ -59,7 +61,10 @@ public static class FileCompareTool
             return false;
         }
 
-        Assert.IsTrue(file1Info.Length < 100000, "Files are too big");
+        if (file1Info.Length >= 10000)
+        {
+            return false;
+        }
 
         byte[] file1ByteList = File.ReadAllBytes(file1);
         byte[] file2ByteList = File.ReadAllBytes(file2);
