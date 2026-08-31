@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using JetBrains.Annotations;
 using Konfidence.Base;
-using Konfidence.SqlDataAccess;
 using Konfidence.SqlHostProvider.SqlAccess;
 
 namespace Konfidence.SqlHostProvider.SqlConnectionManagement;

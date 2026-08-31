@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
-using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using ConfigurationBuilder = Microsoft.Extensions.Configuration.ConfigurationBuilder;
 
 namespace Konfidence.SqlHostProvider.UnitTest.SqlConnectionManagement;
