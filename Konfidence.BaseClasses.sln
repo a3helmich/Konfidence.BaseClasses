@@ -68,6 +68,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Konfidence.BaseClasses.Unit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{7DD83A46-7588-4BC5-B0ED-C1FFCCDBC764}"
 	ProjectSection(SolutionItems) = preProject
+		azure-pipelines-github.yml = azure-pipelines-github.yml
+		azure-pipelines.yml = azure-pipelines.yml
 		ClassModelGenerator.config.json = ClassModelGenerator.config.json
 		Directory.Build.props = Directory.Build.props
 		..\SqlClientSettings.json = ..\SqlClientSettings.json

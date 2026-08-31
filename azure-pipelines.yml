@@ -20,7 +20,7 @@ resources:
 variables:
 - template: ComputeVersion.yml@templates
   parameters:
-    majorVersion: 4
+    majorVersion: 5
 - name: BuildConfiguration
   value: release
 - name: BuildPlatform

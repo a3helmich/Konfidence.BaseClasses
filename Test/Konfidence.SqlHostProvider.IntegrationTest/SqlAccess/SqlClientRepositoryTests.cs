@@ -5,7 +5,6 @@ using System.Data.Common;
 using FluentAssertions;
 using Konfidence.DatabaseInterface;
 using Konfidence.SqlDataAccess;
-using Konfidence.SqlHostProvider;
 using Konfidence.SqlHostProvider.SqlAccess;
 using Konfidence.SqlHostProvider.SqlConnectionManagement;
 using Konfidence.TestTools;
