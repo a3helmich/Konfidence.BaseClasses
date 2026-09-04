@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
 using Konfidence.DatabaseInterface;
@@ -53,7 +54,7 @@ internal class DatabaseStructure : IDatabaseStructure
 
             _allColumnDataItems.AddRange(ColumnDataItem.GetList(_client, _allIndexDataItems, _spName.GetColumnList));
 
-            Tables.AddRange(TableDataItem.GetList(_client, _allColumnDataItems));
+            Tables.AddRange(TableDataItem.GetList(_client, _allColumnDataItems).OrderBy(x => x.Name));
         }
         finally
         {
