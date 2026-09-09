@@ -13,6 +13,7 @@ The `Konfidence.BaseClasses` package is on [nuget.org](https://www.nuget.org/pac
 | [Konfidence.BaseRest.Client](#konfidencebaserestclient) | Basic REST service access on top of RestSharp |
 | [Konfidence.BaseThreadClasses](#konfidencebasethreadclasses) | A manage-run-action pattern for simple threading |
 | [Konfidence.DataBaseInterface](#konfidencedatabaseinterface) | The contracts shared between the data and SQL libraries |
+| [Konfidence.Logging](#konfidencelogging) | Serilog-backed application logging abstraction and DI wiring |
 | [Konfidence.Mail](#konfidencemail) | Base SMTP client implementation |
 | [Konfidence.Security](#konfidencesecurity) | RSA key creation/storage, encoding and decoding |
 | [Konfidence.SqlDataAccess](#konfidencesqldataaccess) | Focused replacement for the Enterprise Library data block |
@@ -121,6 +122,15 @@ Interfacing between Konfidence.BaseDataBaseClasses and Konfidence.SqlHostProvide
 - `IBaseClient` — the CRUD contract a data item talks to (get/save/delete/get-list, plus table/view/stored-procedure existence checks)
 - `IDataRepository` — the lower-level contract that actually executes stored procedures and text commands against ADO.NET (`IDataReader`/`DataTable`), implemented by `Konfidence.SqlHostProvider`
 - `IBaseDataItem` / `ISpParameterData` — the shape of a data item and of a single stored-procedure parameter, so the two libraries can reference each other without a hard dependency
+
+### Konfidence.Logging
+
+Serilog-backed application logging abstraction. Provides a small, mockable `IApplicationLogger` facade over Serilog, with sensible console/file/debug sink defaults and dependency-injection wiring.
+
+- `IApplicationLogger` / `IApplicationLoggerFactory` — the mockable logging facade consumers depend on; `Error`, `Verbose`, `Information` (each with `[CallerMemberName]` and optional `LogAction`/object payload) and `InformationRaw`
+- `ApplicationLoggerFactory` — creates `IApplicationLogger` instances, and builds fully configured Serilog loggers (`GetFileOnlyLogger` for a lightweight file-only logger, plus internal helpers for the full console/file/debug application logger)
+- `LogAction` — enum for common start/stop/exception logging phases, rendered into log messages
+- `LoggingDependencyInjectionExtensions.AddLoggingServices(..)` — registers `IApplicationLoggerFactory`/`IApplicationLogger` in an `IServiceCollection` and configures the static `Serilog.Log.Logger`
 
 ### Konfidence.Mail
 
