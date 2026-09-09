@@ -11,6 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattribute = .gitattribute
 		.gitignore = .gitignore
 		Konfidence.BaseClasses.Readme.md = Konfidence.BaseClasses.Readme.md
+		Konfidence.BaseDependencyInjection.Readme.md = Konfidence.BaseDependencyInjection.Readme.md
+		Konfidence.BaseRest.Client.Readme.md = Konfidence.BaseRest.Client.Readme.md
+		Konfidence.BaseThreadClasses.Readme.md = Konfidence.BaseThreadClasses.Readme.md
+		Konfidence.DatabaseInterface.Readme.md = Konfidence.DatabaseInterface.Readme.md
+		Konfidence.Mail.Readme.md = Konfidence.Mail.Readme.md
+		Konfidence.MsBuild.Readme.md = Konfidence.MsBuild.Readme.md
+		Konfidence.Security.Readme.md = Konfidence.Security.Readme.md
+		Konfidence.SqlDataAccess.Readme.md = Konfidence.SqlDataAccess.Readme.md
+		Konfidence.SqlHostProvider.Readme.md = Konfidence.SqlHostProvider.Readme.md
+		Konfidence.TestTools.Readme.md = Konfidence.TestTools.Readme.md
+		Konfidence.UtilHelper.Readme.md = Konfidence.UtilHelper.Readme.md
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
