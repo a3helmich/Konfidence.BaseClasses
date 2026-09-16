@@ -50,7 +50,7 @@ steps:
   displayName: 'dotnet restore'
   inputs:
     command: restore
-    projects: '**\Konfidence.BaseClasses.sln'
+    projects: '**\Konfidence.BaseClasses.slnx'
     feedsToUse: config
     nugetConfigPath: .nuget/NuGet.Config
     verbosityRestore: Normal
@@ -58,7 +58,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
-    projects: '**\Konfidence.BaseClasses.sln'
+    projects: '**\Konfidence.BaseClasses.slnx'
     arguments: '-c $(BuildConfiguration) --no-restore /p:Version=$(year).$(majorVersion).$(minorVersion)'
 
 # .\nuget is filled by the build step above, not by the dotnet pack step further down:
@@ -97,7 +97,7 @@ steps:
   displayName: 'dotnet test BaseClasses'
   inputs:
     command: test
-    projects: '**\Konfidence.BaseClasses.sln'
+    projects: '**\Konfidence.BaseClasses.slnx'
     # The *.LocalDb.UnitTest projects (Konfidence.SqlHostProvider.LocalDb.UnitTest,
     # Konfidence.BaseDatabaseClasses.LocalDb.UnitTest, Konfidence.TestClasses.LocalDb.UnitTest)
     # exist to give GitHub Actions SQL-touching coverage it otherwise can't reach (it excludes
@@ -119,7 +119,7 @@ steps:
   condition: eq(variables['Build.Reason'], 'PullRequest')
   inputs:
     command: pack
-    packagesToPack: '**\Konfidence.BaseClasses.sln'
+    packagesToPack: '**\Konfidence.BaseClasses.slnx'
     configurationToPack: '$(BuildConfiguration)'
     outputDir: '$(Build.ArtifactStagingDirectory)'
     nobuild: true

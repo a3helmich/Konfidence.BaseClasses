@@ -43,10 +43,10 @@ Versions are `year.major.minor`, CalVer-style:
 ## Build and test
 
 1. Clone Konfidence.BaseClasses
-2. Open `Konfidence.BaseClasses.sln` in Visual Studio
+2. Open `Konfidence.BaseClasses.slnx` in Visual Studio
 3. Build the solution
 
-Tests run from Visual Studio, or with `dotnet test Konfidence.BaseClasses.sln`, or per project with `dotnet test [testprojectname].csproj`.
+Tests run from Visual Studio, or with `dotnet test Konfidence.BaseClasses.slnx`, or per project with `dotnet test [testprojectname].csproj`.
 
 The test projects come in three kinds:
 

@@ -1,0 +1,77 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/.build/">
+    <File Path="../SqlClientSettings.json" />
+    <File Path="azure-pipelines-github.yml" />
+    <File Path="azure-pipelines.yml" />
+    <File Path="ClassModelGenerator.config.json" />
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/.nuget/">
+    <File Path=".nuget/NuGet.Config" />
+  </Folder>
+  <Folder Name="/.Tests/">
+    <Project Path="ClientSettingsUpdater.UnitTest/ClientSettingsUpdater.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.BaseClasses.UnitTest/Konfidence.BaseClasses.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.BaseDatabaseClasses.IntegrationTest/Konfidence.BaseDatabaseClasses.IntegrationTest.csproj" />
+    <Project Path="Test/Konfidence.BaseDatabaseClasses.LocalDb.UnitTest/Konfidence.BaseDatabaseClasses.LocalDb.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.BaseDatabaseClasses.UnitTest/Konfidence.BaseDatabaseClasses.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.BaseRest.Client.UnitTest/Konfidence.BaseRest.Client.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.BaseThreadClasses.UnitTest/Konfidence.BaseThreadClasses.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.Integration.TestClasses/Konfidence.Integration.TestClasses.csproj" />
+    <Project Path="Test/Konfidence.Mail.UnitTest/Konfidence.Mail.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.Security.UnitTest/Konfidence.Security.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.SqlDataAccess.UnitTest/Konfidence.SqlDataAccess.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.SqlHostProvider.IntegrationTest/Konfidence.SqlHostProvider.IntegrationTest.csproj" />
+    <Project Path="Test/Konfidence.SqlHostProvider.LocalDb.UnitTest/Konfidence.SqlHostProvider.LocalDb.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.SqlHostProvider.UnitTest/Konfidence.SqlHostProvider.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.TestClasses.IntegrationTest/Konfidence.TestClasses.IntegrationTest.csproj" />
+    <Project Path="Test/Konfidence.TestClasses.LocalDb.UnitTest/Konfidence.TestClasses.LocalDb.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.UtilHelper.UnitTest/Konfidence.UtilHelper.UnitTest.csproj" />
+    <Project Path="Test/TestByHandApp/TestByHandApp.csproj" />
+  </Folder>
+  <Folder Name="/.Tools/">
+    <Project Path="Tools/ClientSettingsUpdater/ClientSettingsUpdater.csproj" />
+    <Project Path="Tools/Konfidence.TestTools/Konfidence.TestTools.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".EditorConfig" />
+    <File Path=".gitattribute" />
+    <File Path=".gitignore" />
+    <File Path="Konfidence.BaseClasses.Readme.md" />
+    <File Path="Konfidence.BaseDependencyInjection.Readme.md" />
+    <File Path="Konfidence.BaseRest.Client.Readme.md" />
+    <File Path="Konfidence.BaseThreadClasses.Readme.md" />
+    <File Path="Konfidence.DatabaseInterface.Readme.md" />
+    <File Path="Konfidence.Mail.Readme.md" />
+    <File Path="Konfidence.MsBuild.Readme.md" />
+    <File Path="Konfidence.Security.Readme.md" />
+    <File Path="Konfidence.SqlDataAccess.Readme.md" />
+    <File Path="Konfidence.SqlHostProvider.Readme.md" />
+    <File Path="Konfidence.TestTools.Readme.md" />
+    <File Path="Konfidence.UtilHelper.Readme.md" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Test/">
+    <Project Path="Test/Konfidence.Logging.UnitTest/Konfidence.Logging.UnitTest.csproj" />
+    <Project Path="Test/Konfidence.MsBuild.UnitTest/Konfidence.MsBuild.UnitTest.csproj" />
+  </Folder>
+  <Project Path="Konfidence.BaseClasses/Konfidence.BaseClasses.csproj" />
+  <Project Path="Konfidence.BaseDataBaseClasses/Konfidence.BaseDatabaseClasses.csproj" />
+  <Project Path="Konfidence.BaseDependencyInjection/Konfidence.BaseDependencyInjection.csproj" />
+  <Project Path="Konfidence.BaseRest.Client/Konfidence.BaseRest.Client.csproj" />
+  <Project Path="Konfidence.BaseThreadClasses/Konfidence.BaseThreadClasses.csproj" />
+  <Project Path="Konfidence.DataBaseInterface/Konfidence.DatabaseInterface.csproj" />
+  <Project Path="Konfidence.Logging/Konfidence.Logging.csproj" />
+  <Project Path="Konfidence.Mail/Konfidence.Mail.csproj" />
+  <Project Path="Konfidence.MsBuild/Konfidence.MsBuild.csproj" />
+  <Project Path="Konfidence.Security/Konfidence.Security.csproj" />
+  <Project Path="Konfidence.SqlDataAccess/Konfidence.SqlDataAccess.csproj" />
+  <Project Path="Konfidence.SqlHostProvider/Konfidence.SqlHostProvider.csproj" />
+  <Project Path="Konfidence.UtilHelper/Konfidence.UtilHelper.csproj" />
+</Solution>

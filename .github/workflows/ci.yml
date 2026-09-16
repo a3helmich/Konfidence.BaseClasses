@@ -54,10 +54,10 @@ jobs:
         key: reportgenerator-${{ runner.os }}
 
     - name: dotnet restore
-      run: dotnet restore Konfidence.BaseClasses.sln
+      run: dotnet restore Konfidence.BaseClasses.slnx
 
     - name: dotnet build
-      run: dotnet build Konfidence.BaseClasses.sln -c Release --no-restore
+      run: dotnet build Konfidence.BaseClasses.slnx -c Release --no-restore
 
     - name: dotnet test (unit tests only)
       shell: pwsh
