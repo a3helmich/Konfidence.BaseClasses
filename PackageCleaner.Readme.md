@@ -7,8 +7,12 @@ Part of the [Konfidence.BaseClasses](https://github.com/a3helmich/Konfidence.Bas
 ## Installing
 
 ```
-dotnet tool install -g PackageCleaner
+dotnet tool update -g PackageCleaner --add-source \\konfidence8\publish
 ```
+
+The nightly build publishes it to that share along with the other packages, so `update` installs it the
+first time and refreshes it afterwards. `PackageCleanerKeepList.json` travels inside the package, so an
+installed tool already knows which older years to spare.
 
 ## Using it
 
@@ -18,7 +22,8 @@ packagecleaner --PackageFolder=\\konfidence8\publish --Apply=true
 ```
 
 - `--PackageFolder` — folder holding the `.nupkg`/`.snupkg` files (required)
-- `--KeepFile` — a JSON file naming older package years to spare, see below
+- `--KeepFile` — a JSON file naming older package years to spare, see below. Defaults to the
+  `PackageCleanerKeepList.json` shipped alongside the tool, so it normally needs no value
 - `--Apply=true` — actually remove the files. Without it the tool only reports what it would remove
 - `--Verbose=true` — also list every file removed, and every package left untouched
 
@@ -77,18 +82,23 @@ the last, so it reaches much further back than the packages still in active use.
 ```
 
 Every version in a listed year survives. Package ids are matched ignoring case, and a package with no
-entry is pruned normally. `PackageCleanerKeepList.json` next to the tool's sources is the list for
-`\\konfidence8\publish`, derived from the exact versions the repositories there still pin:
+entry is pruned normally.
+
+`PackageCleanerKeepList.json` is the list for `\\konfidence8\publish`, derived from the exact versions
+the repositories there still pin. It is packed into the tool, so an installed `packagecleaner` picks it
+up from its own folder with nothing to pass:
 
 ```
-packagecleaner --PackageFolder=\\konfidence8\publish --KeepFile=PackageCleanerKeepList.json
+packagecleaner --PackageFolder=\\konfidence8\publish
 ```
 
-The tool reports what the list spared, and names any entry that matched no file on the share so it can
-be pruned once the repository needing it has moved on.
+`--KeepFile` overrides that default, for a different folder or a list being tried out. The tool prints
+which file it used and what the list spared, and names any entry that matched no file on the share so
+it can be pruned once the repository needing it has moved on.
 
-**A keep file that is missing or unparseable stops the run with exit code `3`.** It exists to protect
-versions something is still pinned to, so a mistyped path must not quietly become a full prune.
+**A `--KeepFile` that is missing or unparseable stops the run with exit code `3`.** It exists to protect
+versions something is still pinned to, so a mistyped path must not quietly become a full prune. The
+packaged default is treated more leniently: if it is absent nothing is excluded, and the tool says so.
 
 ### Keeping the list honest
 

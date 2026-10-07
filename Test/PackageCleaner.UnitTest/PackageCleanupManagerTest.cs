@@ -10,6 +10,7 @@ public class PackageCleanupManagerTest
 {
     private const string PackageFolder = @"\\server\publish";
     private const string KeepFile = @"C:\keep\PackageCleanerKeepList.json";
+    private const string DefaultKeepFile = @"C:\tools\packagecleaner\PackageCleanerKeepList.json";
 
     private const string KeepFileContent = """
         {
@@ -329,6 +330,45 @@ public class PackageCleanupManagerTest
     }
 
     [TestMethod]
+    public void Execute_WithoutAKeepFileArgument_UsesTheOneShippedAlongsideTheTool()
+    {
+        // Arrange
+        TestContext context = CreateContext(ApplyingArgs(), packageFileNames:
+        [
+            "Konfidence.SqlHostProvider.2021.1.49.nupkg",
+            "Konfidence.SqlHostProvider.2024.1.5.nupkg",
+            "Konfidence.SqlHostProvider.2026.5.6.nupkg"
+        ], defaultKeepFileContent: KeepFileContent);
+
+        // Act
+        context.PackageCleanupManager.Execute();
+
+        // Assert
+        context.PackageCleanupManager.KeepFile.Should().Be(DefaultKeepFile);
+
+        context.DeletedFileNames.Should().BeEquivalentTo("Konfidence.SqlHostProvider.2024.1.5.nupkg");
+    }
+
+    [TestMethod]
+    public void Execute_WithoutAKeepFileAnywhere_ExcludesNothingAndKeepsGoing()
+    {
+        // Arrange
+        TestContext context = CreateContext(ApplyingArgs(), packageFileNames:
+        [
+            "Konfidence.SqlHostProvider.2021.1.49.nupkg",
+            "Konfidence.SqlHostProvider.2026.5.6.nupkg"
+        ]);
+
+        // Act
+        context.PackageCleanupManager.Execute();
+
+        // Assert
+        context.ErrorExiterMock.Verify(x => x.Exit(It.IsAny<int>()), Times.Never);
+
+        context.DeletedFileNames.Should().BeEquivalentTo("Konfidence.SqlHostProvider.2021.1.49.nupkg");
+    }
+
+    [TestMethod]
     public void Execute_WithAnUnreadableKeepFile_ExitsWith3AndRemovesNothing()
     {
         // Arrange
@@ -358,7 +398,7 @@ public class PackageCleanupManagerTest
     }
 
     private static TestContext CreateContext(string[] args, IReadOnlyList<string>? packageFileNames = null,
-        string keepFileContent = "")
+        string keepFileContent = "", string defaultKeepFileContent = "")
     {
         Mock<IPackageFileStore> packageFileStoreMock = new();
         Mock<IErrorExiter> errorExiterMock = new();
@@ -368,11 +408,14 @@ public class PackageCleanupManagerTest
         packageFileStoreMock.Setup(x => x.FolderExists(PackageFolder)).Returns(true);
         packageFileStoreMock.Setup(x => x.FileExists(KeepFile)).Returns(keepFileContent.Length > 0);
         packageFileStoreMock.Setup(x => x.ReadAllText(KeepFile)).Returns(keepFileContent);
+        packageFileStoreMock.Setup(x => x.FileExists(DefaultKeepFile)).Returns(defaultKeepFileContent.Length > 0);
+        packageFileStoreMock.Setup(x => x.ReadAllText(DefaultKeepFile)).Returns(defaultKeepFileContent);
         packageFileStoreMock.Setup(x => x.GetPackageFileNames(PackageFolder)).Returns(packageFileNames ?? []);
         packageFileStoreMock.Setup(x => x.Delete(PackageFolder, It.IsAny<string>()))
             .Callback((string _, string fileName) => deletedFileNames.Add(fileName));
 
-        PackageCleanupManager packageCleanupManager = new(args, packageFileStoreMock.Object, errorExiterMock.Object);
+        PackageCleanupManager packageCleanupManager =
+            new(args, packageFileStoreMock.Object, errorExiterMock.Object, DefaultKeepFile);
 
         return new TestContext(packageCleanupManager, packageFileStoreMock, errorExiterMock, deletedFileNames);
     }
