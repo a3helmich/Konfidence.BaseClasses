@@ -32,11 +32,13 @@
     <Project Path="Test/Konfidence.TestClasses.IntegrationTest/Konfidence.TestClasses.IntegrationTest.csproj" />
     <Project Path="Test/Konfidence.TestClasses.LocalDb.UnitTest/Konfidence.TestClasses.LocalDb.UnitTest.csproj" />
     <Project Path="Test/Konfidence.UtilHelper.UnitTest/Konfidence.UtilHelper.UnitTest.csproj" />
+    <Project Path="Test/PackageCleaner.UnitTest/PackageCleaner.UnitTest.csproj" />
     <Project Path="Test/TestByHandApp/TestByHandApp.csproj" />
   </Folder>
   <Folder Name="/.Tools/">
     <Project Path="Tools/ClientSettingsUpdater/ClientSettingsUpdater.csproj" />
     <Project Path="Tools/Konfidence.TestTools/Konfidence.TestTools.csproj" />
+    <Project Path="Tools/PackageCleaner/PackageCleaner.csproj" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".EditorConfig" />

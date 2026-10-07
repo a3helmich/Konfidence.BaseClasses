@@ -157,8 +157,7 @@ public class SpParameterObjectTests
     {
         // Arrange
         List<ISpParameterData> dbParameterData = [];
-        TimeSpan testValue = DateTime.Today - DateTime.Today.AddHours(-2).AddSeconds(-22);
-        DateTime timeValue = DateTime.Today.AddHours(2).AddSeconds(22);
+        TimeSpan testValue = new(2, 0, 22);
 
         // Act
         dbParameterData.SetParameter("TestField", testValue);
@@ -170,7 +169,24 @@ public class SpParameterObjectTests
 
         field.Should().NotBeNull();
         field.DbType.Should().Be(DbType.Time);
-        field.Value.Should().Be(timeValue);
+        field.Value.Should().Be(testValue);
+    }
+
+    [TestMethod]
+    public void SetParameter_WithTimeSpanOverADay_KeepsTheDaysComponent()
+    {
+        // Arrange
+        List<ISpParameterData> dbParameterData = [];
+        TimeSpan testValue = new(2, 3, 4, 5);
+
+        // Act
+        dbParameterData.SetParameter("TestField", testValue);
+
+        ISpParameterData field = dbParameterData.First();
+
+        // Assert
+        field.DbType.Should().Be(DbType.Time);
+        field.Value.Should().Be(testValue);
     }
 
     [TestMethod]

@@ -22,6 +22,7 @@ The `Konfidence.BaseClasses` package is on [nuget.org](https://www.nuget.org/pac
 | [Konfidence.Integration.TestClasses](#konfidenceintegrationtestclasses) | Shared generated test fixtures |
 | [Konfidence.UtilHelper](#konfidenceutilhelper) | Obsolete classes. Technical debt :( |
 | [Tools/ClientSettingsUpdater](#toolsclientsettingsupdater) | Keeps SQL secrets out of the repository, as a dotnet tool |
+| [Tools/PackageCleaner](#toolspackagecleaner) | Prunes last year's packages from a publish folder, as a dotnet tool |
 | [Test](#test) | The test projects |
 
 ## Using the libraries
@@ -187,6 +188,12 @@ Some obsolete classes. Technical debt :(
 For me: updates the `SqlClientSettings.json` in a build pipeline, keeping secrets out of the git repository. Packed as an installable dotnet tool.
 
 - `ClientSettingsUpdater.UnitTest` — unit tests for the `ClientSettingsManager` update logic
+
+### Tools/PackageCleaner
+
+For me: prunes the `\\konfidence8\publish` share, which every build has been adding to since 2020. Per package id, it keeps the most recent year that package has and removes every earlier year, so no package is ever emptied. `--KeepFile` spares older years that something is still pinned to; `PackageCleanerKeepList.json` holds that list for this share. Reports what it would remove unless `--Apply=true` is passed. Packed as an installable dotnet tool, and run by hand only — deliberately not wired into any pipeline.
+
+- `PackageCleaner.UnitTest` — unit tests for the retention rule and the package file name parsing
 
 ### Test
 

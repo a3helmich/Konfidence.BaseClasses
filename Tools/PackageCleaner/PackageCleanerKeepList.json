@@ -1,0 +1,39 @@
+{
+  "Keep": {
+    "Konfidence.BaseClasses": [
+      2021,
+      2022
+    ],
+    "Konfidence.BaseDatabaseClasses": [
+      2021,
+      2022
+    ],
+    "Konfidence.BaseThreadClasses": [
+      2022
+    ],
+    "Konfidence.BaseUserControlHelpers": [
+      2021
+    ],
+    "Konfidence.DatabaseInterface": [
+      2021,
+      2022
+    ],
+    "Konfidence.Mail": [
+      2022
+    ],
+    "Konfidence.MenuClasses": [
+      2021
+    ],
+    "Konfidence.SqlHostProvider": [
+      2021,
+      2022
+    ],
+    "Konfidence.TestTools": [
+      2024
+    ],
+    "Konfidence.UtilHelper": [
+      2021,
+      2022
+    ]
+  }
+}
