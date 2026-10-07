@@ -18,7 +18,11 @@ internal class PackageCleanupManager
     public readonly string KeepFile = string.Empty;
     public readonly bool Apply;
 
-    public PackageCleanupManager(string[] args, IPackageFileStore packageFileStore, IErrorExiter errorExiter)
+    private readonly bool _keepFileWasSpecified;
+    private bool _keepListIsInUse;
+
+    public PackageCleanupManager(string[] args, IPackageFileStore packageFileStore, IErrorExiter errorExiter,
+        string defaultKeepFile)
     {
         _packageFileStore = packageFileStore;
         _errorExiter = errorExiter;
@@ -33,9 +37,11 @@ internal class PackageCleanupManager
             Apply = apply.Equals(Enabled, StringComparison.OrdinalIgnoreCase);
         }
 
-        if (!args.TryParseArgument(Argument.KeepFile, out KeepFile))
+        _keepFileWasSpecified = args.TryParseArgument(Argument.KeepFile, out KeepFile);
+
+        if (!_keepFileWasSpecified)
         {
-            KeepFile = string.Empty;
+            KeepFile = defaultKeepFile;
         }
 
         if (!args.TryParseArgument(Argument.PackageFolder, out PackageFolder))
@@ -105,8 +111,6 @@ internal class PackageCleanupManager
         Remove(removablePackageFiles);
     }
 
-    // A keep file that cannot be read must stop the run: it exists to protect older years that
-    // something is still pinned to, and carrying on without it would delete exactly those.
     private bool TryGetKeepList([NotNullWhen(true)] out KeepList? keepList)
     {
         keepList = KeepList.Empty;
@@ -118,9 +122,7 @@ internal class PackageCleanupManager
 
         if (!_packageFileStore.FileExists(KeepFile))
         {
-            Console.WriteLine($"keep file not found: '{KeepFile}'");
-
-            return false;
+            return AcceptMissingKeepFile();
         }
 
         if (!KeepList.TryParse(_packageFileStore.ReadAllText(KeepFile), out keepList))
@@ -129,6 +131,26 @@ internal class PackageCleanupManager
 
             return false;
         }
+
+        _keepListIsInUse = true;
+
+        return true;
+    }
+
+    // A keep file named on the command line must stop the run when it is not there: it exists to
+    // protect older years that something is still pinned to, and carrying on without it would delete
+    // exactly those. The copy shipped alongside the tool is only the default, so its absence means no
+    // exclusions rather than a mistake.
+    private bool AcceptMissingKeepFile()
+    {
+        if (_keepFileWasSpecified)
+        {
+            Console.WriteLine($"keep file not found: '{KeepFile}'");
+
+            return false;
+        }
+
+        Console.WriteLine($"no keep file alongside the tool, nothing is excluded: '{KeepFile}'");
 
         return true;
     }
@@ -163,7 +185,7 @@ internal class PackageCleanupManager
 
     private void ReportKeepList(KeepList keepList, List<PackageFile> packageFiles, List<PackageFile> keptByKeepList)
     {
-        if (!KeepFile.IsAssigned())
+        if (!_keepListIsInUse)
         {
             return;
         }
