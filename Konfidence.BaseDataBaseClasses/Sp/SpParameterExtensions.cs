@@ -83,11 +83,7 @@ public static class SpParameterExtensions
     {
         if (timeSpan.IsAssigned())
         {
-            DateTime dateTime = DateTime.Today;
-
-            dateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
-
-            spParameterData.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], dateTime);
+            spParameterData.AddInParameter(parameterName, _typeMap[typeof(TimeSpan)], timeSpan);
 
             return;
         }

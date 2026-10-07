@@ -165,13 +165,13 @@ public class FieldExtensionsTests
     }
 
     [TestMethod]
-    public void SetField_ZeroTimeSpan_AddsParameterWithMidnightTodayRatherThanNull()
+    public void SetField_ZeroTimeSpan_AddsParameterWithZeroRatherThanNull()
     {
         // Arrange
         // The three "unassigned becomes null" overloads are not consistent with each other:
         // Guid.Empty and DateTime.MinValue both null out, but TimeSpan.Zero is a legitimate
-        // in-range value, so it converts to midnight today like any other time-of-day. A caller
-        // treating "default(TimeSpan)" as "no value" would silently write midnight instead.
+        // in-range value and is written as zero. A caller treating "default(TimeSpan)" as
+        // "no value" gets zero, not null.
         TestDataItem dataItem = new();
 
         // Act
@@ -181,7 +181,7 @@ public class FieldExtensionsTests
         ISpParameterData parameter = dataItem.GetParameterObjects().Single();
 
         parameter.DbType.Should().Be(DbType.Time);
-        parameter.Value.Should().Be(DateTime.Today);
+        parameter.Value.Should().Be(TimeSpan.Zero);
     }
 
     [TestMethod]
@@ -222,8 +222,7 @@ public class FieldExtensionsTests
     {
         // Arrange
         TestDataItem dataItem = new();
-        TimeSpan value = DateTime.Today - DateTime.Today.AddHours(-2).AddSeconds(-22);
-        DateTime timeValue = DateTime.Today.AddHours(2).AddSeconds(22);
+        TimeSpan value = new(2, 0, 22);
 
         // Act
         dataItem.SetField("Field", value);
@@ -232,7 +231,7 @@ public class FieldExtensionsTests
         ISpParameterData parameter = dataItem.GetParameterObjects().Single();
 
         parameter.DbType.Should().Be(DbType.Time);
-        parameter.Value.Should().Be(timeValue);
+        parameter.Value.Should().Be(value);
     }
 
     [TestMethod]

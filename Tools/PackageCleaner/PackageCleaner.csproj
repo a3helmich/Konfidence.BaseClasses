@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <PackAsTool>true</PackAsTool>
+    <PackageReadmeFile>PackageCleaner.Readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Konfidence.BaseClasses\Konfidence.BaseClasses.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PackageCleanerKeepList.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="PackageCleaner.UnitTest" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../PackageCleaner.Readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
