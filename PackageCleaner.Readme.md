@@ -10,9 +10,10 @@ Part of the [Konfidence.BaseClasses](https://github.com/a3helmich/Konfidence.Bas
 dotnet tool update -g PackageCleaner --add-source \\konfidence8\publish
 ```
 
-The nightly build publishes it to that share along with the other packages, so `update` installs it the
-first time and refreshes it afterwards. `PackageCleanerKeepList.json` travels inside the package, so an
-installed tool already knows which older years to spare.
+The pull request build publishes it to that share along with the other packages — the nightly build
+compiles and tests but does not pack — so `update` installs it the first time and refreshes it
+afterwards. `PackageCleanerKeepList.json` travels inside the package, so an installed tool already knows
+which older years to spare.
 
 ## Using it
 
