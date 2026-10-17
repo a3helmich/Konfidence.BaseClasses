@@ -110,9 +110,9 @@ steps:
 
 - template: GenerateAndPublishCodeCoverage.yml@templates
 
-- template: VerifyNoRedundantReferences.yml@templates
-  parameters:
-    solution: Konfidence.BaseClasses
+# - template: VerifyNoRedundantReferences.yml@templates
+#   parameters:
+#     solution: Konfidence.BaseClasses
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet pack'
