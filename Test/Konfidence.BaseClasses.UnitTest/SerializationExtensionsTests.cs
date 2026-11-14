@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
+using CsvHelper;
 using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -11,7 +12,7 @@ using Serilog.Events;
 namespace Konfidence.BaseClasses.UnitTest;
 
 [TestClass]
-public class SerializationExtensionsTests
+public partial class SerializationExtensionsTests
 {
     [TestMethod]
     public void Deserialize_SerializedClientSettings_RoundTripsSuccessfully()
@@ -92,7 +93,8 @@ public class SerializationExtensionsTests
         public List<string> Items { get; set; } = [];
     }
 
-    private class CsvRow
+    [CsvRecord]
+    public partial class CsvRow
     {
         public string Name { get; set; } = string.Empty;
 
@@ -329,9 +331,8 @@ public class SerializationExtensionsTests
     public void DeserializeCsv_MalformedCsv_ReturnsFalse()
     {
         // Arrange
-        // An unterminated quoted field is invalid CSV that CsvHelper's default (strict) mode
-        // throws on while reading, not just something it parses into an empty result - this is
-        // the only way to reach the catch block, distinct from the header-only "no rows" case.
+        // MalformedData is configured to Throw, so an unterminated quoted field reaches the catch
+        // block instead of being recovered into a record.
         string csv = "Name,Age\r\n\"Alice,30\r\n";
 
         // Act
