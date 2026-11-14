@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using CsvHelper;
-using CsvHelper.Configuration;
 
 namespace Konfidence.Base;
 
@@ -144,18 +144,35 @@ public static class SerializationExtensions
 
     extension(string toDeserializeDto)
     {
+        /// <summary>
+        /// Deserializes CSV rows into source-generated CsvHelper record types.
+        /// </summary>
+        /// <remarks>
+        /// <typeparamref name="T"/> must be an accessible partial type marked with
+        /// <see cref="CsvRecordAttribute"/>.
+        /// </remarks>
         public bool DeserializeCsv<T>(out List<T> deserializedDto)
         {
             deserializedDto = [];
 
+            if (!Attribute.IsDefined(typeof(T), typeof(CsvRecordAttribute)))
+            {
+                Trace.TraceWarning(
+                    "DeserializeCsv<{0}> requires a type with a CsvHelper [CsvRecord] mapping.",
+                    typeof(T).FullName);
+                return false;
+            }
+
             try
             {
-                CsvConfiguration config = new(CultureInfo.InvariantCulture)
+                CsvReaderOptions options = CsvReaderOptions.Default with
                 {
-                    PrepareHeaderForMatch = args => args.Header.ToLower()
+                    FormatProvider = CultureInfo.InvariantCulture,
+                    NormalizeHeaderName = static header => header.ToLowerInvariant(),
+                    MalformedData = CsvMalformedDataHandling.Throw
                 };
 
-                using CsvReader csvReader = new(new StringReader(toDeserializeDto), config);
+                using CsvReader csvReader = CsvReader.Create(new StringReader(toDeserializeDto), options);
 
                 deserializedDto = csvReader.GetRecords<T>().ToList();
 

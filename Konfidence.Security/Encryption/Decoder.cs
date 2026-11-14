@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using JetBrains.Annotations;
 using Konfidence.Base;
@@ -40,7 +41,7 @@ public sealed class Decoder : IDisposable
 
         foreach (List<byte> byteData in encryptedDataList)
         {
-            byte[] decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), false);
+            byte[] decryptedByteData = _decoder.RsaProvider.Decrypt(byteData.ToArray(), RSAEncryptionPadding.Pkcs1);
 
             rawData = rawData.Append(asciiEncoding.GetString(decryptedByteData));
         }

@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
-		<!--<TargetFrameworks>net10.0</TargetFrameworks>-->
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0|AnyCPU'">
@@ -26,7 +25,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="MSTest" Version="4.5.1" />
+		<PackageReference Include="MSTest" Version="4.5.3" />
 		<PackageReference Include="FluentAssertions" Version="8.11.0" />
 		<PackageReference Include="Moq" Version="4.21.0" />
 	</ItemGroup>

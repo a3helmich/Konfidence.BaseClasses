@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CsvHelper;
 using FluentAssertions;
 using Konfidence.Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,9 +9,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Konfidence.BaseClasses.UnitTest;
 
 [TestClass]
-public class SerializationExtensionsMoreTests
+public partial class SerializationExtensionsMoreTests
 {
-    private sealed class Dto
+    [CsvRecord]
+    public sealed partial class Dto
     {
         public string Name { get; set; } = string.Empty;
 

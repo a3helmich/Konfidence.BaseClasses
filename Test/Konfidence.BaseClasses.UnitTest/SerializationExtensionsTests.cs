@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Text.Json.Serialization;
+using CsvHelper;
 using FluentAssertions;
 using Konfidence.Base;
 using Konfidence.SqlHostProvider.SqlAccess;
@@ -11,7 +14,7 @@ using Serilog.Events;
 namespace Konfidence.BaseClasses.UnitTest;
 
 [TestClass]
-public class SerializationExtensionsTests
+public partial class SerializationExtensionsTests
 {
     [TestMethod]
     public void Deserialize_SerializedClientSettings_RoundTripsSuccessfully()
@@ -92,11 +95,25 @@ public class SerializationExtensionsTests
         public List<string> Items { get; set; } = [];
     }
 
-    private class CsvRow
+    [CsvRecord]
+    public partial class CsvRow
     {
         public string Name { get; set; } = string.Empty;
 
         public int Age { get; set; }
+    }
+
+    [CsvRecord]
+    public partial class CsvGeneratedRow
+    {
+        public string Name { get; set; } = string.Empty;
+
+        public int Age { get; set; }
+    }
+
+    public class UnmappedCsvRow
+    {
+        public string Name { get; set; } = string.Empty;
     }
 
     [TestMethod]
@@ -312,6 +329,47 @@ public class SerializationExtensionsTests
     }
 
     [TestMethod]
+    public void DeserializeCsv_ValidCsv_ReturnsRecordsForCsvGeneratedType()
+    {
+        // Arrange
+        string csv = "Name,Age\r\nAlice,30\r\n";
+
+        // Act
+        bool result = csv.DeserializeCsv(out List<CsvGeneratedRow> rows);
+
+        // Assert
+        result.Should().BeTrue();
+        rows.Should().ContainSingle();
+        rows[0].Name.Should().Be("Alice");
+        rows[0].Age.Should().Be(30);
+    }
+
+    [TestMethod]
+    public void DeserializeCsv_UnmappedType_WritesWarningAndReturnsFalse()
+    {
+        // Arrange
+        using StringWriter warningOutput = new();
+        using TextWriterTraceListener listener = new(warningOutput);
+        Trace.Listeners.Add(listener);
+
+        try
+        {
+            // Act
+            bool result = "Name\r\nAlice\r\n".DeserializeCsv(out List<UnmappedCsvRow> rows);
+            listener.Flush();
+
+            // Assert
+            result.Should().BeFalse();
+            rows.Should().BeEmpty();
+            warningOutput.ToString().Should().Contain("[CsvRecord]");
+        }
+        finally
+        {
+            Trace.Listeners.Remove(listener);
+        }
+    }
+
+    [TestMethod]
     public void DeserializeCsv_HeaderOnlyCsv_ReturnsFalse()
     {
         // Arrange
@@ -329,9 +387,8 @@ public class SerializationExtensionsTests
     public void DeserializeCsv_MalformedCsv_ReturnsFalse()
     {
         // Arrange
-        // An unterminated quoted field is invalid CSV that CsvHelper's default (strict) mode
-        // throws on while reading, not just something it parses into an empty result - this is
-        // the only way to reach the catch block, distinct from the header-only "no rows" case.
+        // MalformedData is configured to Throw, so an unterminated quoted field reaches the catch
+        // block instead of being recovered into a record.
         string csv = "Name,Age\r\n\"Alice,30\r\n";
 
         // Act
