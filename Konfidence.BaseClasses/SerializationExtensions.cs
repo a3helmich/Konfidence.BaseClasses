@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -153,6 +154,14 @@ public static class SerializationExtensions
         public bool DeserializeCsv<T>(out List<T> deserializedDto)
         {
             deserializedDto = [];
+
+            if (!Attribute.IsDefined(typeof(T), typeof(CsvRecordAttribute)))
+            {
+                Trace.TraceWarning(
+                    "DeserializeCsv<{0}> requires a type with a CsvHelper [CsvRecord] mapping.",
+                    typeof(T).FullName);
+                return false;
+            }
 
             try
             {

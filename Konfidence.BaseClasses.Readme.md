@@ -7,7 +7,7 @@ Part of the [Konfidence.BaseClasses](https://github.com/a3helmich/Konfidence.Bas
 ## What is in it
 
 - **Fluent checks** — `.IsAssigned()`, `.IsEof()`, `.IsGuid()`, `.IsNumeric()`, `.StartOfDayTime()`, `.EndOfDayTime()`
-- **JSON and CSV** — a default-configured System.Text.Json serializer/deserializer, a JSON-roundtrip `Clone()`, and `DeserializeCsv<T>(..)` based on CsvHelper
+- **JSON and CSV** — a default-configured System.Text.Json serializer/deserializer, a JSON-roundtrip `Clone()`, and `DeserializeCsv<T>(..)` based on CsvHelper; CSV DTOs must be accessible partial types marked with `[CsvRecord]`
 - **String extensions** — trimming (with and without case sensitivity), `ReplaceIgnoreCase(..)`, `InitLowerCase()`/`InitUpperCase()`, `ToDecimal()`
 - **File paths** — walk up parent directories to find a file or folder
 - **Command line arguments** — a small parser for the configuration argument line used with MS dependency injection

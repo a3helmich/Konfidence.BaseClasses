@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Text.Json.Serialization;
 using CsvHelper;
@@ -99,6 +101,19 @@ public partial class SerializationExtensionsTests
         public string Name { get; set; } = string.Empty;
 
         public int Age { get; set; }
+    }
+
+    [CsvRecord]
+    public partial class CsvGeneratedRow
+    {
+        public string Name { get; set; } = string.Empty;
+
+        public int Age { get; set; }
+    }
+
+    public class UnmappedCsvRow
+    {
+        public string Name { get; set; } = string.Empty;
     }
 
     [TestMethod]
@@ -311,6 +326,47 @@ public partial class SerializationExtensionsTests
         rows[0].Age.Should().Be(30);
         rows[1].Name.Should().Be("Bob");
         rows[1].Age.Should().Be(25);
+    }
+
+    [TestMethod]
+    public void DeserializeCsv_ValidCsv_ReturnsRecordsForCsvGeneratedType()
+    {
+        // Arrange
+        string csv = "Name,Age\r\nAlice,30\r\n";
+
+        // Act
+        bool result = csv.DeserializeCsv(out List<CsvGeneratedRow> rows);
+
+        // Assert
+        result.Should().BeTrue();
+        rows.Should().ContainSingle();
+        rows[0].Name.Should().Be("Alice");
+        rows[0].Age.Should().Be(30);
+    }
+
+    [TestMethod]
+    public void DeserializeCsv_UnmappedType_WritesWarningAndReturnsFalse()
+    {
+        // Arrange
+        using StringWriter warningOutput = new();
+        using TextWriterTraceListener listener = new(warningOutput);
+        Trace.Listeners.Add(listener);
+
+        try
+        {
+            // Act
+            bool result = "Name\r\nAlice\r\n".DeserializeCsv(out List<UnmappedCsvRow> rows);
+            listener.Flush();
+
+            // Assert
+            result.Should().BeFalse();
+            rows.Should().BeEmpty();
+            warningOutput.ToString().Should().Contain("[CsvRecord]");
+        }
+        finally
+        {
+            Trace.Listeners.Remove(listener);
+        }
     }
 
     [TestMethod]

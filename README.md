@@ -75,7 +75,7 @@ The test projects come in three kinds:
 - `Serialize(..)` / `SerializeBytes(..)` — with an optional compact (non-indented) mode; enums written as strings
 - `Deserialize(..)` — from `string` or `ReadOnlySpan<byte>`, with a case-sensitive option
 - `Clone()` — a JSON-roundtrip deep clone. Note `[JsonIgnore]` properties are **not** preserved: they are forced into the written JSON but the read side still honours `[JsonIgnore]` and drops them, so a clone behaves like a plain serialize/deserialize round trip
-- `DeserializeCsv<T>(..)` — CSV-to-object-list parsing, based on CsvHelper
+- `DeserializeCsv<T>(..)` — CSV-to-object-list parsing, based on CsvHelper 34; DTOs must be accessible partial types marked with `[CsvRecord]`
 
 **String extensions**, unexpectedly fast:
 
