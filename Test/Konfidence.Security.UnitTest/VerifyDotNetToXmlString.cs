@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,72 +9,64 @@ namespace Konfidence.Security.UnitTest;
 
 [TestClass]
 [ExcludeFromCodeCoverage]
+[SupportedOSPlatform("windows")]
 public class VerifyDotNetToXmlString
 {
     [TestMethod]
     public void KeyContainer_CreateRetrieveAndDelete_Succeeds()
     {
-        // Create a key and save it in a container.  
-        GenKey_SaveInContainer("MyKeyContainer");
-
-        // Retrieve the key from the container.  
-        GetKeyFromContainer("MyKeyContainer");
-
-        // Delete the key from the container.  
-        DeleteKeyFromContainer("MyKeyContainer");
-
-        // Create a key and save it in a container.  
-        GenKey_SaveInContainer("MyKeyContainer");
-
-        // Delete the key from the container.  
-        DeleteKeyFromContainer("MyKeyContainer");
-    }
-
-    private static void GenKey_SaveInContainer(string ContainerName)
-    {
-        // Create the CspParameters object and set the key container   
-        // name used to store the RSA key pair.  
-        CspParameters cp = new() { KeyContainerName = ContainerName };
-
-        // Create a new instance of RSACryptoServiceProvider that accesses  
-        // the key container MyKeyContainerName.  
-        RSACryptoServiceProvider rsa = new(cp);
-
-        // Display the key information to the console.  
-        Debug.WriteLine("Key added to container: \n  {0}", rsa.ToXmlString(true));
-    }
-
-    private static void GetKeyFromContainer(string ContainerName)
-    {
-        // Create the CspParameters object and set the key container   
-        // name used to store the RSA key pair.  
-        CspParameters cp = new() { KeyContainerName = ContainerName };
-
-        // Create a new instance of RSACryptoServiceProvider that accesses  
-        // the key container MyKeyContainerName.  
-        RSACryptoServiceProvider rsa = new(cp);
-
-        // Display the key information to the console.  
-        Debug.WriteLine("Key retrieved from container : \n {0}", rsa.ToXmlString(true));
-    }
-
-    private static void DeleteKeyFromContainer(string ContainerName)
-    {
-        // Create the CspParameters object and set the key container   
-        // name used to store the RSA key pair.  
-        CspParameters cp = new() { KeyContainerName = ContainerName };
-
-        // Create a new instance of RSACryptoServiceProvider that accesses  
-        // the key container.  
-        RSACryptoServiceProvider rsa = new(cp)
+        if (!OperatingSystem.IsWindows())
         {
-            // Delete the key entry in the container.  
+            Assert.Inconclusive("CSP key containers are only supported on Windows.");
+            return;
+        }
+
+        string containerName = $"KonfidenceSecurityTest_{Guid.NewGuid():N}";
+
+        try
+        {
+            GenKey_SaveInContainer(containerName);
+            GetKeyFromContainer(containerName);
+            DeleteKeyFromContainer(containerName);
+
+            GenKey_SaveInContainer(containerName);
+            DeleteKeyFromContainer(containerName);
+        }
+        finally
+        {
+            DeleteKeyFromContainer(containerName);
+        }
+    }
+
+    private static void GenKey_SaveInContainer(string containerName)
+    {
+        CspParameters cspParameters = new() { KeyContainerName = containerName };
+
+        using RSACryptoServiceProvider rsa = new(cspParameters);
+
+        Debug.WriteLine("Key added to container: {0}", containerName);
+    }
+
+    private static void GetKeyFromContainer(string containerName)
+    {
+        CspParameters cspParameters = new() { KeyContainerName = containerName };
+
+        using RSACryptoServiceProvider rsa = new(cspParameters);
+
+        Debug.WriteLine("Key retrieved from container: {0}", containerName);
+    }
+
+    private static void DeleteKeyFromContainer(string containerName)
+    {
+        CspParameters cspParameters = new() { KeyContainerName = containerName };
+
+        using RSACryptoServiceProvider rsa = new(cspParameters)
+        {
             PersistKeyInCsp = false
         };
 
-        // Call Clear to release resources and delete the key from the container.  
         rsa.Clear();
 
-        Debug.WriteLine("Key deleted.");
+        Debug.WriteLine("Key deleted from container: {0}", containerName);
     }
 }

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <RootNamespace>Konfidence.TesTools</RootNamespace>
 	  <AssemblyName>Konfidence.TestTools</AssemblyName>
 	  <PackageReadmeFile>Konfidence.TestTools.Readme.md</PackageReadmeFile>
   </PropertyGroup>

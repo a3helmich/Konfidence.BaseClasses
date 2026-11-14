@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using Konfidence.Base;
 
@@ -32,7 +33,7 @@ public sealed class Encoder : IDisposable
 
             while (partialString.Length > _encoder.PackageSize)
             {
-                string partialStringBlock = partialString.Substring(0, _encoder.PackageSize);
+                string partialStringBlock = partialString[.._encoder.PackageSize];
 
                 byteList.Add(GetEncryptedDataBlock(partialStringBlock));
 
@@ -60,14 +61,14 @@ public sealed class Encoder : IDisposable
 
         byte[] byteData = asciiEncoding.GetBytes(partialString);
 
-        byte[] encryptedData = _encoder.RsaProvider.Encrypt(byteData, false);
+        byte[] encryptedData = _encoder.RsaProvider.Encrypt(byteData, RSAEncryptionPadding.Pkcs1);
 
         return encryptedData.ToList();
     }
 
     private static string GetNextPartialString(string fullString, int packageSize)
     {
-        return fullString.Substring(packageSize, fullString.Length - packageSize);
+        return fullString[packageSize..];
     }
 
     public void Dispose()

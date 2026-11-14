@@ -152,7 +152,7 @@ public static class SerializationExtensions
             {
                 CsvConfiguration config = new(CultureInfo.InvariantCulture)
                 {
-                    PrepareHeaderForMatch = args => args.Header.ToLower()
+                    PrepareHeaderForMatch = args => args.Header.ToLowerInvariant()
                 };
 
                 using CsvReader csvReader = new(new StringReader(toDeserializeDto), config);

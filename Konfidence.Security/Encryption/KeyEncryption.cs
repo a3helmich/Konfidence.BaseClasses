@@ -107,17 +107,13 @@ public sealed class KeyEncryption : IDisposable
         return _maxBytesServer * 8;
     }
 
-    private static CspParameters GetCspParameters(string containerName)
-    {
-        CspParameters cp = new() { KeyContainerName = containerName };
-
-        cp.Flags |= CspProviderFlags.UseMachineKeyStore;
-
-        return cp;
-    }
-
     private void GetKeyContainer(string containerName)
     {
+        if (!OperatingSystem.IsWindows())
+        {
+            throw new PlatformNotSupportedException("Named RSA key containers are only supported on Windows.");
+        }
+
         // - if this is a clientsize Encryption determine maximum keysize
         // - get the serviceprovider
         // - if the serviceprovider allready exists, with the wrong keysize, delete the serviceprovider
@@ -125,7 +121,8 @@ public sealed class KeyEncryption : IDisposable
         // - if the Encryption is temporary, make sure it is not persistend
         try
         {
-            CspParameters cp = GetCspParameters(containerName);
+            CspParameters cp = new() { KeyContainerName = containerName };
+            cp.Flags |= CspProviderFlags.UseMachineKeyStore;
 
             if (!RsaProvider.IsAssigned())
             {
